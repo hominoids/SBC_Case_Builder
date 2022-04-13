@@ -1375,8 +1375,7 @@ module hk_vu8m(brackets) {
         translate([3.76 + lcd_space[0], 9               ,    -1]) cylinder(r=1.3, h=5);
         translate([3.76               , 9 + lcd_space[1],    -1]) cylinder(r=1.3, h=5);
         translate([3.76 + lcd_space[0], 9 + lcd_space[1],    -1]) cylinder(r=1.3, h=5);
-
-        // 8x holes in body
+    // 8x holes in body
         translate([  44.5,              4.5, -1]) cylinder(d=hole, h=5);
         translate([  51.5,              4.5, -1]) cylinder(d=hole, h=5);
         translate([ 183.5,              4.5, -1]) cylinder(d=hole, h=5);
@@ -1387,14 +1386,13 @@ module hk_vu8m(brackets) {
         translate([ 190.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
 
     }
-        // 4x standoffs
+    // 4x standoffs
         color([0.6,0.6,0.6]) {
             translate([  44.5,              4.5, 0]) standoff(spacer_size);
             translate([ 183.5,              4.5, 0]) standoff(spacer_size);
             translate([  44.5, body_size[1]-4.5, 0]) standoff(spacer_size);
             translate([ 183.5, body_size[1]-4.5, 0]) standoff(spacer_size);
         }
-
     // LCD panel
     color([0.6, 0.6, 0.65])
         translate([3.76, 9, body_size[2]-lcd_size[2]]+lcd_clearance)
@@ -1404,11 +1402,7 @@ module hk_vu8m(brackets) {
     // It's actually thinner and glued, but for the sake of simplicity...
     color([0.2, 0.2, 0.2], 0.9)
     translate([0.86, 1.38, body_size[2] + 0.01])
-    difference(){
-        slab(glass_size, rb);
-        //translate([11.26, 11.28, -1]) cube(view_size);
-
-    }
+    slab(glass_size, rb);
 
     // PCB stub
     color([0.1,0.1,0.1])
@@ -1419,7 +1413,6 @@ module hk_vu8m(brackets) {
     if(brackets) {
         translate([44.5 - 7.5,   body_size[1]/2 + m1_screw_spacing/2 - 7.5, - spacer_size[1] - 2]) u_bracket();
         translate([44.5 - 7.5,   body_size[1]/2 - m1_screw_spacing/2 + 7.5, - spacer_size[1] - 2 + 1.93]) rotate([180,0,0]) u_bracket();
-
 
     //Screws
         color([0.1,0.1,0.1]) {
