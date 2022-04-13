@@ -391,10 +391,10 @@ module standoff(stand_off){
     difference (){ 
         union () { 
             if(style == 0 && reverse == 0) {
-                rotate([0,0,30]) cylinder(d=radius,h=height,$fn=6);
+                rotate([0,0,30]) cylinder(d=radius*2/sqrt(3),h=height,$fn=6);
             }
             if(style == 0 && reverse == 1) {
-                translate([0,0,-height]) rotate([0,0,30]) cylinder(d=radius,h=height,$fn=6);
+                translate([0,0,-height]) rotate([0,0,30]) cylinder(d=radius*2/sqrt(3),h=height,$fn=6);
             }
             if(style == 1 && reverse == 0) {
                 cylinder(d=radius,h=height,$fn=90);
