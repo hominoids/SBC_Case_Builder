@@ -40,7 +40,7 @@
     20220406 version 1.2.2 hk_wb2(), hk_vu7c(gpio_ext, tabs), hdmi_a(), header_f(pins, height), pcb_pad(pads), 
                            embelished boom_speaker(), changed boom_speaker_holder(style, tolerance), added boom_speaker_strap(),
                            adjusted access_port(), access_cover(), added @mctom's hk_vu8m(bracket), u_bracket(), spacer()
-    2022xxxx version 1.2.x Nightly Not Released
+    2022xxxx version 1.2.x added hdd35_25holder(length)
     
     place(x,y,z,size_x,size_y,rotation,side)
     add(type,loc_x,loc_y,loc_z,size_x,size_y,size_z,rotation,face,side,case_z,data_1,data_2,data_3,data_4)
@@ -70,6 +70,7 @@
     hd_bottom_holes(hd,orientation,position,side,thick)
     hd25(height)
     hd35()
+    hdd35_25holder(length)
     hk_wb2()
     hc4_oled()
     h2_netcard()
@@ -1129,6 +1130,94 @@ module hd35() {
         // connector opening
         color("LightSlateGray",.6) translate([hd35_x-5,11,-1]) cube([5+adjust,32,5+adjust]);
 
+    }
+}
+
+
+/* 3.5" hdd to 2.5" hdd holder */
+module hdd35_25holder(length) {
+    wallthick = 3;
+    floorthick = 2;
+    hd35_x = length;                    // 145mm for 3.5" drive
+    hd35_y = 101.6;
+    hd35_z = 12;
+    hd25_x = 100;
+    hd25_y = 69.85;
+    hd25_z = 9.5;
+    hd25_xloc = 2;                     // or (hd35_x-hd25_x)/2
+    hd25_yloc = (hd35_y-hd25_y)/2;
+    hd25_zloc = 9.5;
+    adjust = .1;    
+    $fn=90;
+    difference() {
+        union() {
+            difference() {
+                translate([(hd35_x/2),(hd35_y/2),(hd35_z/2)])         
+                    cube_fillet_inside([hd35_x,hd35_y,hd35_z], 
+                        vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);      
+                translate([(hd35_x/2),(hd35_y/2),(hd35_z/2)+floorthick])           
+                    cube_fillet_inside([hd35_x-(wallthick*2),hd35_y-(wallthick*2),hd35_z], 
+                        vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
+                   
+                // end trim
+                translate([-adjust,5,wallthick+2]) cube([wallthick+(adjust*2),hd35_y-10,10]);
+                translate([hd35_x-wallthick-adjust,5,wallthick+2]) cube([wallthick+(adjust*2),hd35_y-10,10]);
+                
+                // bottom vents
+                for ( r=[15:40:hd35_x-40]) {
+                    for (c=[25:4:75]) {
+                        translate ([r,c,-adjust]) cube([35,2,wallthick+(adjust*2)]);
+                    }
+                }       
+            }
+            // 2.5 hdd bottom support
+            translate([9.4+hd25_xloc,4.07+hd25_yloc,floorthick-adjust]) cylinder(d=8,h=4);
+            translate([86+hd25_xloc,4.07+hd25_yloc,floorthick-adjust]) cylinder(d=8,h=4);
+            translate([86+hd25_xloc,65.79+hd25_yloc,floorthick-adjust]) cylinder(d=8,h=4);
+            translate([9.4+hd25_xloc,65.79+hd25_yloc,floorthick-adjust]) cylinder(d=8,h=4);
+        
+        // side nut holder support    
+        translate([16,wallthick-adjust,7]) rotate([-90,0,0]) cylinder(d=10,h=3);
+        translate([76,wallthick-adjust,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
+            if(length >= 120) {
+                translate([117.5,wallthick-adjust,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
+                translate([117.5,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+            }
+        translate([76,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+        translate([16,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+        
+        // bottom-side support
+        translate([wallthick,wallthick,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
+        translate([wallthick,hd35_y-wallthick+adjust,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
+         
+        }
+        // bottom screw holes
+        translate([9.4+hd25_xloc,4.07+hd25_yloc,-adjust]) cylinder(d=3,h=(floorthick*3)+(adjust*2));
+        translate([86+hd25_xloc,4.07+hd25_yloc,-adjust]) cylinder(d=3,h=(floorthick*3)+(adjust*2));
+        translate([86+hd25_xloc,65.79+hd25_yloc,-adjust]) cylinder(d=3,h=(floorthick*3)+(adjust*2));
+        translate([9.4+hd25_xloc,65.79+hd25_yloc,-adjust]) cylinder(d=3,h=(floorthick*3)+(adjust*2));
+        
+         // countersink holes
+        translate([9.4+hd25_xloc,4.07+hd25_yloc,-adjust]) cylinder(d1=6.5, d2=3, h=3);
+        translate([86+hd25_xloc,4.07+hd25_yloc,-adjust]) cylinder(d1=6.5, d2=3, h=3);
+        translate([86+hd25_xloc,65.79+hd25_yloc,-adjust]) cylinder(d1=6.5, d2=3, h=3);
+        translate([9.4+hd25_xloc,65.79+hd25_yloc,-adjust]) cylinder(d1=6.5, d2=3, h=3);
+       
+        // side screw holes
+        translate([16,-adjust,7]) rotate([-90,0,0]) cylinder(d=3.6,h=7);
+        translate([76,-adjust,7]) rotate([-90,0,0])  cylinder(d=3.6,h=7);
+        translate([117.5,-adjust,7]) rotate([-90,0,0])  cylinder(d=3.6,h=7);
+        translate([117.5,hd35_y+adjust,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
+        translate([76,hd35_y+adjust,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
+        translate([16,hd35_y+adjust,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
+        
+        // side nut trap    
+        translate([16,wallthick-adjust,7]) rotate([-90,0,0]) cylinder(r=3.30,h=5,$fn=6);
+        translate([76,wallthick-adjust,7]) rotate([-90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([117.5,wallthick-adjust,7]) rotate([-90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([117.5,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([76,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([16,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
     }
 }
 
