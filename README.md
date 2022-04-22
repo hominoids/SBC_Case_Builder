@@ -8,6 +8,8 @@ to automatically generate cases based on the data for any given SBC contained wi
 
 License: GPLv3.
 
+![Image](SBC_Case_Builder_Cases.gif)
+
 ### Notes
 
   More information can be found at this [Hard Kernel forum thread](https://forum.odroid.com/viewtopic.php?f=53&t=43948)
