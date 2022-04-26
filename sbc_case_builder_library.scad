@@ -391,7 +391,7 @@ module slot(hole,length,depth) {
 
 
 /* standoff module
-    standoff(standoff[radius,height,holesize,supportsize,supportheight,sink,style,i_dia,i_depth])
+    standoff(standoff[radius,height,holesize,supportsize,supportheight,sink,style,reverse,insert_e,i_dia,i_depth])
         sink=0 none
         sink=1 countersink
         sink=2 recessed hole
@@ -1445,14 +1445,14 @@ module hk_vu8m(brackets) {
     body_size  = [    198,     133,                1.93];
     glass_size = [ 195.73,  131.14,                1.60];
     lcd_size   = [ 184.63,  114.94, body_size[2] + 0.40];
-    view_size  = [ 173.23,  108.64,                   3];
+    view_size  = [ 173.23,  108.64,                   .25];
 
     rb = 5.25;   // body edge radius
 
     lcd_clearance = [0.15, 0.1, 0];
     pcb_size = [14,24,1.6];
     hole = 4.31;
-    spacer_size = [5.5, 6, 2.5, 0, 0, 0, 1, 1, 0, 0, 0, 0];
+    spacer_size = [5.5, 6, 2.5, 5.5, 1, 0, 1, 1, 0, 0, 0];
 
     // "body"
     color([0.1,0.1,0.1])
@@ -1490,8 +1490,13 @@ module hk_vu8m(brackets) {
     // Front glass
     // It's actually thinner and glued, but for the sake of simplicity...
     color([0.2, 0.2, 0.2], 0.9)
-    translate([0.86, 1.38, body_size[2] + 0.01])
-    slab(glass_size, rb);
+        translate([0.86, 1.38, body_size[2] + 0.01])
+            slab(glass_size, rb);
+
+    // view area
+    color("dimgrey", 0.9)
+        translate([(glass_size[0]-view_size[0])/2, (glass_size[1]-view_size[1])/2, body_size[2] + glass_size[2]- 0.01])
+            slab(view_size, .1);
 
     // PCB stub
     color([0.1,0.1,0.1])
@@ -1501,7 +1506,7 @@ module hk_vu8m(brackets) {
     //Brackets
     if(brackets) {
         translate([44.5 - 7.5,   body_size[1]/2 + m1_screw_spacing/2 - 7.5, - spacer_size[1] - 2]) u_bracket();
-        translate([44.5 - 7.5,   body_size[1]/2 - m1_screw_spacing/2 + 7.5, - spacer_size[1] - 2 + 1.93]) rotate([180,0,0]) u_bracket();
+        translate([44.5 - 7.5,   body_size[1]/2 - m1_screw_spacing/2 + 7.5, - spacer_size[1] - 2 + 1.93]) rotate([180,0,0])                                         u_bracket();
 
     //Screws
         color([0.1,0.1,0.1]) {
