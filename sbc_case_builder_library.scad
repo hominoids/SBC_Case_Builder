@@ -1445,7 +1445,7 @@ module hk_vu8m(brackets) {
     body_size  = [    198,     133,                1.93];
     glass_size = [ 195.73,  131.14,                1.60];
     lcd_size   = [ 184.63,  114.94, body_size[2] + 0.40];
-    view_size  = [ 173.23,  108.64,                   .25];
+    view_size  = [ 173.23,  108.64,                  .1];
 
     rb = 5.25;   // body edge radius
 
@@ -1506,7 +1506,7 @@ module hk_vu8m(brackets) {
     //Brackets
     if(brackets) {
         translate([44.5 - 7.5,   body_size[1]/2 + m1_screw_spacing/2 - 7.5, - spacer_size[1] - 2]) u_bracket();
-        translate([44.5 - 7.5,   body_size[1]/2 - m1_screw_spacing/2 + 7.5, - spacer_size[1] - 2 + 1.93]) rotate([180,0,0])                                         u_bracket();
+        translate([44.5 - 7.5,   body_size[1]/2 - m1_screw_spacing/2 + 7.5, - spacer_size[1] - 2 + 1.93]) rotate([180,0,0]) u_bracket();
 
     //Screws
         color([0.1,0.1,0.1]) {
