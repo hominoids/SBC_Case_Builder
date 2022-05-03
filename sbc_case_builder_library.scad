@@ -1502,6 +1502,15 @@ module hk_vu8m(brackets) {
     color([0.1,0.1,0.1])
         translate([20.5, 24.5, -3])
             cube(pcb_size);
+    color("dimgrey")
+        translate([22.5, 26.5, -2])
+            cube([8,16,3]);
+    color([0.1,0.1,0.1])
+        translate([12, 21, -2])
+            cube([7,7,1.6]);
+    color([0.1,0.1,0.1])
+        translate([10, 34, -2])
+            cube([4,10,1.6]);
 
     //Brackets
     if(brackets) {
