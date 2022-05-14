@@ -16,17 +16,18 @@
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
     20190214 Version 1.0.0  SBC Model Framework
-    20190218 Version 1.0.1  Added HK Odroid n2 as "n2"
+    20190218 Version 1.0.1  Added HK Odroid-N2 as "n2"
     20200425 Version 1.0.2  Added AtomicPi as "atomicpi"
                             Added Nvidia JetsonNano as "jetsonnano"
-                            Updated Odroid n2 sbc data
-                            Updated Odroid h2 sbc data
-                            Added Odroid c4 as"c4"
+                            Updated Odroid-N2 sbc data
+                            Updated Odroid-H2 sbc data
+                            Added Odroid-C4 as"c4"
                             Added oem heatsinks
-                            Added Odroid xu4q as "xu4q"
-    20200725 Version 1.0.3  Added Odroid n2+ and heatsink
-    20201021 Version 1.0.4  Added HK Odroid hc4 as "hc4"
+                            Added Odroid-XU4Q as "xu4q"
+    20200725 Version 1.0.3  Added Odroid-N2+ and heatsink
+    20201021 Version 1.0.4  Added HK Odroid-HC4 as "hc4"
     20220202 Version 1.0.5  Added HK Show2 as "show2"
+    20220413 Version 1.0.6  Added Odroid-M1 as "m1"
     
     USE: sbc(model)
              model = "c1+","c2","c4","xu4","xu4q","mc1","hc1","hc4","n1","n2","n2+","h2"
@@ -185,7 +186,27 @@ module sbc(model) {
             if (loc_x!=0 || loc_y!=0) {
                 heatsink(loc_x,loc_y,rotation,side,type,pcbsize_z,sbc_data[s[0]][39]);
             }   
-        }   
+        }
+        if (class == "pcie") {
+            if(loc_x!=0 || loc_y!=0) {
+                pcie(loc_x, loc_y, rotation, side, type, pcbsize_z);
+            }
+        }
+        if (class == "jst_ph") {
+            if(loc_x!=0 || loc_y!=0) {
+                jst_ph(loc_x, loc_y, rotation, side, type, pcbsize_z);
+            }
+        }
+        if (class == "cm_holder") {
+            if(loc_x!=0 || loc_y!=0) {
+                cm_holder(loc_x, loc_y, rotation, side, type, pcbsize_z);
+            }
+        }
+        if (class == "cm") {
+            if(loc_x!=0 || loc_y!=0) {
+                cm(loc_x, loc_y, rotation, side, type, pcbsize_z);
+            }
+        }
     }
 }   
   

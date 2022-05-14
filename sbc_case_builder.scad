@@ -41,7 +41,7 @@ use <./lib/fillets.scad>;
 include <./lib/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-case_name = "c4_tray_boombox";                      // case_name to load from sbc_case_builder.cfg
+case_name = "rockpro64_shell";                      // case_name to load from sbc_case_builder.cfg
 view = "model";                                     // viewing mode "platter", "model", "debug"
 
 highlight = false;                                  // enable highlight for subtarctive geometry (true or false)
@@ -584,12 +584,12 @@ module case_bottom(case_design) {
                         pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                         pcb_hole_size = sbc_data[s[0]][i+2];
                         if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
-                            translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adjust),0])
-                                cube([2,gap+.6,bottom_standoff[1]]);
+                            translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adjust)-1,0])
+                                cube([2,gap+1.6,bottom_standoff[1]]);
                         }
                         if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
                             translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adjust,0])
-                                cube([2,gap+1,bottom_standoff[1]]);
+                                cube([2,gap+1.6,bottom_standoff[1]]);
                         }
                     }
                 }
@@ -923,12 +923,12 @@ module case_top(case_design) {
                             pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                             pcb_hole_size = sbc_data[s[0]][i+2];
                             if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
-                                translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-.4,
-                                    -top_height-bottom_height]) cube([2,gap+.6,top_standoff[1]]);
+                                translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
+                                    -top_height-bottom_height]) cube([2,gap+1.6,top_standoff[1]]);
                             }
                             if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
                                 translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,
-                                    -top_height-bottom_height]) cube([2,gap+.6,top_standoff[1]]);
+                                    -top_height-bottom_height]) cube([2,gap+1.6,top_standoff[1]]);
                             }
                         }
                     }
@@ -1450,8 +1450,8 @@ module open_io() {
         if(side == "top" && class == "gpio" && type == "header_40" && rotation == 90) {
             if(gpio_opening == "vent") {
                 for(r=[loc_y-2:4:50+loc_y]) {
-                    translate([width-(2*wallthick)-adjust,depth+15-r,bottom_height+2]) 
-                        rotate([0,0,0]) cube([2,wallthick+(2*adjust),top_height-floorthick-4]);
+                    translate([width-2*(wallthick+gap)-adjust,depth-r,bottom_height+2]) 
+                        rotate([0,0,0]) cube([6,wallthick+(2*adjust),top_height-floorthick-7]);
                 }
             }
             if(gpio_opening == "open") {

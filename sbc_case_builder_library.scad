@@ -1436,6 +1436,7 @@ module hk_vu7c(gpio_ext, tabs) {
     translate([59,52.69,-1.59]) ic(9);
 }
 
+
 // hk vu8m lcd display
 module hk_vu8m(brackets) {
     $fn = 90;    
@@ -2340,11 +2341,11 @@ module hdmi_open() {
     
     union() { 
         difference() {
-            translate([.25,-5,1]) cube([15, 11.5, 5.5]);
+            translate([.25,-5,1]) cube([15, 8, 5.5]);
             translate([0.5,-5.2,.5]) rotate ([-90,0,0]) cylinder(d=3, h=13.5,$fn=30);
             translate([15,-5.2,.5]) rotate ([-90,0,0]) cylinder(d=3, h=13.5,$fn=30);
             }
-        translate([2,-5,.5]) cube([11.5, 11.5, .5]);
+        translate([2,-5,.5]) cube([11.5, 8, .5]);
         }
     }       
 
@@ -2353,8 +2354,8 @@ module microusb_open() {
     
     translate([0,0,.5])rotate([90,0,0])
     hull() {
-        translate([6,1.5,-5]) cylinder(d=3,h=10);
-        translate([1,1.5,-5]) cylinder(d=3,h=10);
+        translate([6,1.5,-5]) cylinder(d=3.5,h=8);
+        translate([1,1.5,-5]) cylinder(d=3.5,h=8);
     }
 }
 
@@ -2460,37 +2461,98 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "hdmi_a" && side == "bottom") {
         place(loc_x,loc_y-1,loc_z-pcb_z,15,11.5,rotation,side) hdmi_open();
     }
-    if(type == "hdmi_a" && side == "top") {
-        place(loc_x-.375,loc_y-1,loc_z,15,11.5,rotation,side) hdmi_open();
+    if(type == "hdmi_a" && side == "top" && rotation == 0) {
+        place(loc_x-.5,loc_y-1,loc_z,15,11.5,rotation,side) hdmi_open();
+    }
+    if(type == "hdmi_a" && side == "top" && rotation == 90) {
+        place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) hdmi_open();
+    }
+    if(type == "hdmi_a" && side == "top" && rotation == 180) {
+        place(loc_x,loc_y+1,loc_z,15,11.5,rotation,side) hdmi_open();
+    }
+    if(type == "hdmi_a" && side == "top" && rotation == 270) {
+        place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) hdmi_open();
     }
     // micro usb opening
     if(class == "usb2" && type == "micro" && rotation == 0) {
-        place(loc_x,loc_y-1,loc_z,8,3,rotation,side) microusb_open();
+        place(loc_x,loc_y-3,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 90) {
+        place(loc_x-3,loc_y-1,loc_z,8,3,rotation,side) microusb_open();
     }
     if(class == "usb2" && type == "micro" && rotation == 180) {
-        place(loc_x-1,loc_y+1,loc_z,8,3,rotation,side) microusb_open();
+        place(loc_x-1,loc_y+4.5,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 270) {
+        place(loc_x+4.5,loc_y,loc_z,8,3,rotation,side) microusb_open();
     }
     // power plug openings
-    if(type == "pwr5.5_7.5x11.5") {
-        place(loc_x,loc_y+(2*(wallthick+gap+adjust)),loc_z,7.5,7.5,rotation,side) 
-//            cube([7.5,7.5,10]);
-            translate([4,-5,6.5]) rotate([90,0,0]) cylinder(d=7, h=9);
+    if(type == "pwr5.5_7.5x11.5" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,7,7,rotation,side) 
+            translate([3.5,2,6.5]) rotate([90,0,0]) cylinder(d=7, h=8);
     }
-    if(type == "pwr2.5_5x7.5") {
+    if(type == "pwr5.5_7.5x11.5" && rotation == 90) {
+        place(loc_x,loc_y,loc_z,7,7,rotation,side) 
+            translate([3.5,2,6.5]) rotate([90,0,0]) cylinder(d=7, h=8);
+    }
+    if(type == "pwr5.5_7.5x11.5" && rotation == 180) {
+        place(loc_x,loc_y,loc_z,7,7,rotation,side) 
+            translate([3.5,-2.5,6.5]) rotate([90,0,0]) cylinder(d=7, h=8);
+    }
+    if(type == "pwr5.5_7.5x11.5" && rotation == 270) {
+        place(loc_x-2,loc_y,loc_z,7,7,rotation,side) 
+            translate([3.5,-4.5,6.5]) rotate([90,0,0]) cylinder(d=7, h=8);
+    }
+    if(type == "pwr2.5_5x7.5" && rotation == 0) {
         place(loc_x,loc_y,loc_z,3,3,rotation,side) 
-//            cube([5,7.5,4]);
-            translate([2.75,0,2]) rotate([90,0,0]) cylinder(d=3, h=9);
+            translate([2.75,2,2]) rotate([90,0,0]) cylinder(d=3, h=8);
+    }
+    if(type == "pwr2.5_5x7.5" && rotation == 90) {
+        place(loc_x,loc_y,loc_z,3,3,rotation,side) 
+            translate([.25,2,2]) rotate([90,0,0]) cylinder(d=3, h=8);
+    }
+    if(type == "pwr2.5_5x7.5" && rotation == 180) {
+        place(loc_x,loc_y,loc_z,3,3,rotation,side) 
+            translate([.5,-2.5,2]) rotate([90,0,0]) cylinder(d=3, h=8);
+    }
+    if(type == "pwr2.5_5x7.5" && rotation == 270) {
+        place(loc_x,loc_y,loc_z,3,3,rotation,side) 
+            translate([2.75,-2.5,2]) rotate([90,0,0]) cylinder(d=3, h=8);
+    }
+    // pwr5.5_10x10 opening
+    if(type == "pwr5.5_10x10" && rotation == 0) {
+        place(loc_x-.25,loc_y-6,loc_z,10.5,13.5,rotation,side)
+            cube([10.5,8,10.5]);
+    }
+    // pwr5.5_10x10 opening
+    if(type == "pwr5.5_10x10" && rotation == 90) {
+        place(loc_x-6,loc_y-.25,loc_z,10.5,13.5,rotation,side)
+            cube([10.5,8,10.5]);
+    }
+    // pwr5.5_10x10 opening
+    if(type == "pwr5.5_10x10" && rotation == 180) {
+        place(loc_x-.25,loc_y+6,loc_z,10.5,13.5,rotation,side)
+            cube([10.5,8,10.5]);
+    }
+    // pwr5.5_10x10 opening
+    if(type == "pwr5.5_10x10" && rotation == 270) {
+        place(loc_x+6,loc_y-.25,loc_z,10.5,13.5,rotation,side)
+            cube([10.5,8,10.5]);
     }
     // emmc storage
     if(type == "emmc" && side == "bottom" && rotation == 0) {
-        place(loc_x-.5,loc_y,,floorthick+adjust,14.5,19,rotation,side) 
+        place(loc_x-.5,loc_y,floorthick+adjust,14.5,19,rotation,side) 
             cube([14.5,19,floorthick+(2*adjust)]);
     }
     if(type == "emmc" && side == "bottom" && rotation == 90) {
-        place(loc_x,loc_y-.5,,floorthick+adjust,14.5,19,rotation,side) 
+        place(loc_x,loc_y-.5,floorthick+adjust,14.5,19,rotation,side) 
             cube([14.5,19,floorthick+(2*adjust)]);
     }
     // sd storage
+    if(type == "sdcard" && side == "bottom" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,12,15.5,rotation,side)
+            translate([-1,-10,3.5]) cube([13,15.5,2]);
+    }
     if(type == "sdcard" && side == "bottom" && rotation == 90) {
         place(loc_x+(2*(wallthick+gap+adjust)),loc_y,loc_z-2.75,12,15.5,rotation,side)
             cube([12,15.5,2]);
@@ -2503,9 +2565,9 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x,loc_y+(2*(wallthick+gap+adjust)),floorthick+adjust+4,12,18.5,rotation,side)
             cube([12,18.5,floorthick+(2*adjust)+4]);
     }
-    if(type == "sdcard" && side == "bottom" && (rotation == 0 || rotation == 270)) {
-        place(loc_x,loc_y-18,loc_z+2.75,12,15.5,rotation,side)
-            cube([12,15.5,2]);
+    if(type == "sdcard" && side == "bottom" && rotation == 270) {
+        place(loc_x,loc_y,loc_z,12,15.5,rotation,side)
+            translate([0,-18,2.75]) cube([12,15.5,2]);
     }
     if(type == "sdcard" && side == "top" && rotation == 0) {
         place(loc_x,loc_y-17,loc_z,12,15.5,rotation,side)
@@ -2517,30 +2579,54 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     // rj45 opening
     if(type == "rj45_single" && rotation == 0) {
-        place(loc_x,loc_y-wallthick-gap-1-adjust,loc_z,16,17.5,rotation,side) 
-            cube([16,17.5,14]);
+        place(loc_x,loc_y-6,loc_z,16,17.5,rotation,side) 
+            cube([16,8,14]);
+        }
+    if(type == "rj45_single" && rotation == 90) {
+        place(loc_x-6,loc_y,loc_z,16,17.5,rotation,side) 
+            cube([16,8,14]);
+        }
+    if(type == "rj45_single" && rotation == 180) {
+        place(loc_x,loc_y+10,loc_z,16,17.5,rotation,side) 
+            cube([16,8,14]);
         }
     if(type == "rj45_single" && rotation == 270) {
-        place(loc_x+4*(wallthick+gap)+adjust,loc_y,loc_z,16,17.5,rotation,side) 
-            cube([16.5,17.5,14]);
+        place(loc_x+10,loc_y,loc_z,16,17.5,rotation,side) 
+            cube([16.5,8,14]);
     }
-    // double stack usb3 opening
+    // double stack usb opening
     if(type == "double_stacked_a" && rotation == 0) {
-        place(loc_x-1,loc_y-2*(wallthick+gap)-adjust,loc_z,15.5,16,rotation,side)
-            cube([15.5,16,16.5]);
+        place(loc_x-1,loc_y-6,loc_z,15.5,16,rotation,side)
+            cube([15.5,8,16.5]);
+    }
+    if(type == "double_stacked_a" && rotation == 90) {
+        place(loc_x-6,loc_y-1.25,loc_z,15.5,16,rotation,side)
+            cube([15.5,8,16.5]);
     }
     if(type == "double_stacked_a" && rotation == 180) {
-        place(loc_x-1,loc_y+2*(wallthick+gap)+adjust,loc_z,15.5,16,rotation,side)
-            cube([15.5,16,16.5]);
+        place(loc_x-1,loc_y+7.5,loc_z,15.5,16,rotation,side)
+            cube([15.5,8,16.5]);
     }
     if(type == "double_stacked_a" && rotation == 270) {
-        place(loc_x+3*(wallthick+gap)+adjust,loc_y-1,loc_z,15.5,16,rotation,side)
-            cube([15.5,16,16.5]);
+        place(loc_x+7.5,loc_y-1,loc_z,15.5,16,rotation,side)
+            cube([15.5,8,16.5]);
     }
     // single vert usb2 opening
-    if(type == "single_vert_a") {
-        place(loc_x-.5,loc_y-wallthick-gap-1-adjust,loc_z,6.5,19.5,rotation,side)
-            cube([6.5,19.5,15]);
+    if(type == "single_vert_a" && rotation == 0) {
+        place(loc_x-.5,loc_y-6,loc_z,6.5,19.5,rotation,side)
+            cube([6.5,8,15]);
+    }
+    if(type == "single_vert_a" && rotation == 90) {
+        place(loc_x-6,loc_y-.25,loc_z,6.5,19.5,rotation,side)
+            cube([6.5,8,15]);
+    }
+    if(type == "single_vert_a" && rotation == 180) {
+        place(loc_x-.5,loc_y+6,loc_z,6.5,19.5,rotation,side)
+            cube([6.5,8,15]);
+    }
+    if(type == "single_vert_a" && rotation == 270) {
+        place(loc_x+6.5,loc_y,loc_z,6.5,19.5,rotation,side)
+            cube([6.5,8,15]);
     }
     // ir opening
     if(type == "ir_1") {
@@ -2555,11 +2641,6 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "slide_4x9" && rotation == 270) {
         place(loc_x,loc_y,loc_z,4,9.1,rotation,side)
             translate([0,0,.5]) cube([15.75,9.1,4]);
-    }
-    // pwr5.5_10x10 opening
-    if(type == "pwr5.5_10x10" && rotation == 0) {
-        place(loc_x,loc_y-2*(wallthick+gap)-adjust,loc_z,10.5,13.5,rotation,side)
-            cube([10.5,13.5,10.5]);
     }
     // rj45-usb2_double opening
     if(type == "rj45-usb2_double" && rotation == 0) {
@@ -2591,10 +2672,18 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x,loc_y+wallthick+gap,loc_z,7.5,7.5,rotation,side) 
             translate([4,0,2.25]) rotate([90,0,0]) cylinder(d=5, h=9);
     }
-    // buttom opening
+    if(type == "jack_3.5" && rotation == 270) {
+        place(loc_x,loc_y+wallthick+gap,loc_z,5,5,rotation,side) 
+            translate([-.5,-6,2]) rotate([90,0,0]) cylinder(d=5, h=9);
+    }
+    // button opening
     if(type == "momentary_6x6x4") {
         place(loc_x,loc_y,loc_z,6,6,rotation,side) 
             translate([3,3,5]) rotate([0,0,0]) cylinder(d=5, h=50);
+    }    
+    if(type == "momentary_6x6x4_90" && rotation == 270) {
+        place(loc_x,loc_y,loc_z,6,6,rotation,side) 
+            translate([3,-3,3]) rotate([90,0,0]) cylinder(d=5, h=10);
     }    
 }
 
