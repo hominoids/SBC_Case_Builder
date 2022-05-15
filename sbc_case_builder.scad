@@ -1,6 +1,5 @@
 /*
-    SBC Case Builder Copyright 2022 Edward A. Kisiel
-    hominoid @ www.forum.odroid.com
+    SBC Case Builder Copyright 2022 Edward A. Kisiel hominoid@cablemi.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,6 +32,7 @@
                               enabled pcb_z, added tabs and fixed tray case top, other fixes and maintenance
     20220406 Version 1.2.2    added vu7c, vu8m and weatherboard2 models, other additions, fixes and maintenance    
     
+    see https://github.com/hominoids/SBC_Case_Builder
 */
 
 use <./lib/sbc_models.scad>;
@@ -41,7 +41,7 @@ use <./lib/fillets.scad>;
 include <./lib/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-case_name = "rockpro64_shell";                      // case_name to load from sbc_case_builder.cfg
+case_name = "rockpro64_shell";                     // case_name to load from sbc_case_builder.cfg
 view = "model";                                     // viewing mode "platter", "model", "debug"
 
 highlight = false;                                  // enable highlight for subtarctive geometry (true or false)

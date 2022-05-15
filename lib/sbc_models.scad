@@ -1,7 +1,6 @@
 /*
-    SBC Models Copyright 2016,2017,2018,2019,2020 Edward A. Kisiel
-    hominoid @ www.forum.odroid.com
-
+    SBC Models Copyright 2016,2017,2018,2019,2020,2021,2022 Edward A. Kisiel hominoid@cablemi.com
+    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -28,6 +27,8 @@
     20201021 Version 1.0.4  Added HK Odroid-HC4 as "hc4"
     20220202 Version 1.0.5  Added HK Show2 as "show2"
     20220413 Version 1.0.6  Added Odroid-M1 as "m1"
+
+    see https://github.com/hominoids/SBC_Case_Builder
     
     USE: sbc(model)
              model = "c1+","c2","c4","xu4","xu4q","mc1","hc1","hc4","n1","n2","n2+","h2"

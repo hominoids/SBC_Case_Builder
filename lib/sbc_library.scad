@@ -1,6 +1,5 @@
 /*
-    SBC Library Copyright 2016,2017,2018,2019,2020 Edward A. Kisiel
-    hominoid @ www.forum.odroid.com
+    SBC Library Copyright 2016,2017,2018,2019,2020,2021,2022 Edward A. Kisiel hominoid@cablemi.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,6 +49,37 @@
     20220413 Version 1.0.6 adjusted slide_4x9, adjust m.2_header, rj45-usb2_double, rj45-usb3_double, out-in-spdif,
                            momentary_6x6x4, fixed color for usb2 micro otg, adjust all header heights, 
                            added mipi_csi, mipi_dsi, m.2_stud
+
+    see https://github.com/hominoids/SBC_Case_Builder
+
+    place(x,y,size_x,size_y,rotation,side,type,pcbsize_z)
+    pcb_add(size_x,size_y,loc_x,loc_y,rotation,side,type,pcbsize_z,data_1,data_2) - "square","round"
+    pcb_sub(size_x,size_y,loc_x,loc_y,rotation,side,type,pcbsize_z,data_1,data_2) - "square","round","art"
+    pcb_art(scale_d1,type,dxf_file) - "dxf"
+    pcb(size, radius)
+    memory(x,y,rotation,side,type,pcbsize_z) - "emmc","emmc_plug","sodimm_5.2","sodimm_9.2"
+    switch(x,y,rotation,side,type,pcbsize_z) - "slide_4x9"
+    button(x,y,rotation,side,type,pcbsize_z) - "momentary_6x6x9","momentary_6x6x4","momentary_6x6x4_90","momentary_4x2x1"
+    plug(x,y,rotation,side,type,pcbsize_z) - "pwr2.5_5x7.5","pwr5.5_7.5x11.5","pwr5.5_10x10","rtc_micro","audio_micro","uart_micro","molex_4x1","small_encl_satapwr"
+    usb2(x,y,rotation,side,type,pcbsize_z) - "single_vert_a","double_stacked_a","micro"
+    usb3(x,y,rotation,side,type,pcbsize_z) - "double_stacked_a"
+    network(x,y,rotation,side,type,pcbsize_z) - "rj45_single"
+    video(x,y,rotation,side,type,pcbsize_z - "hdmi_a","dp-hdmi_a","mipi_csi","mipi_dsi"
+    fan(x,y,rotation,side,type,pcbsize_z) - "micro","encl_pmw","encl_pmw_h"
+    gpio(x,y,rotation,side,type,pcbsize_z) - "encl_header_30","encl_header_12","header_40","header_20"
+    ic(x,y,rotation,side,type,pcbsize_z) - "ic_2.8x2.8","ic_3x3","ic_3.7x3.7","ic_4x4","ic_4.7x4.7","ic_5x5","ic_5.75x5.75","ic_6x6","ic_6.4x6.4",ic_6.75x6.75",
+                                           "ic_7x7","ic_4.3x5.1","ic_5.4x5.3","ic_6.7x8.4","ic_9x9","ic_11x8","ic_13x8","ic_13x9","ic_16x10"
+    audio(x,y,rotation,side,type,pcbsize_z) - "out-in-spdif","jack_3.5"
+    storage(x,y,rotation,side,type,pcbsize_z) - "sdcard","sdcard_i","sata_header","sata_power_vrec","sata_encl_power","sata_encl_header","m.2_header","m.2_stud"
+    combo(x,y,rotation,side,type,pcbsize_z) - "rj45-usb2_double","rj45-usb3_double"
+    jumper(x,y,rotation,side,type,pcbsize_z) - "header_2x1","header_3x2","header_5x1","header_6x1","header_7x1"
+    misc(x,y,rotation,side,type,pcbsize_z) - "ir_1","led_3x1.5","lcd_2.2","bat_hold_1"
+    heatsink(x,y,rotation,side,type,pcbsize_z,soc1size_z) - "hc4_oem","c4_oem","c2_oem","c1+_oem","xu4_oem","n1_oem","xu4q_oem","n2_oem","n2+_oem","m1_oem","h2_oem"
+    pcie(x,y,rotation,side,type,pcbsize_z) - "x4"
+    jst_ph(x,y,rotation,side,type,pcbsize_z) - type is #pins
+    cm_holder(x,y,rotation,side,type,pcbsize_z) - jetsonnano
+    cm(x,y,rotation,side,type,pcbsize_z) - jetsonnano
+    
 */
 
 module place(x,y,size_x,size_y,rotation,side,type,pcbsize_z) {
@@ -220,12 +250,12 @@ module memory(x,y,rotation,side,type,pcbsize_z) {
 module switch(x,y,rotation,side,type,pcbsize_z) {
     // boot selector switch
     if(type=="slide_4x9") {
-        size_x = 3.75;
-        size_y = 9.1;                
+        size_x = 9;                
+        size_y = 3.75;
         place(x,y,size_x,size_y,rotation,side,type,pcbsize_z)
         union() {    
             color("silver") translate([0,0,.5]) cube([size_x, size_y, 3.5]);
-            color("white") translate([3.75,4.5,1.75]) cube([3, 2, 1.5]);
+            color("white") translate([3.75,-1.99,1.75]) cube([3, 2, 1.5]);
         }
     }
 }
@@ -1489,19 +1519,19 @@ module heatsink(x,y,rotation,side,type,pcbsize_z,soc1size_z) {
     if(type=="n2_oem") {
         size_x = 90;
         size_y = 90;                
-        place(x,y,size_x,size_y,rotation,side,type,(pcbsize_z-pcbsize_z-3))
+        place(x,y,size_x,size_y,rotation,side,type,-3)
         color("gray") import("Odroid-N2_Heatsink.stl", convexity=3);
     }
     if(type=="n2+_oem") {
         size_x = 90;
         size_y = 90;                
-        place(x,y,size_x,size_y,rotation,side,type,(pcbsize_z-pcbsize_z-3))
+        place(x,y,size_x,size_y,rotation,side,type,-3)
         color("gray") import("Odroid-N2+_Heatsink.stl", convexity=3);
     }
     if(type=="m1_oem") {
         size_x = 90;
         size_y = 122;                
-        place(x,y,size_x,size_y,rotation,side,type,(pcbsize_z-pcbsize_z-3))
+        place(x,y,size_x,size_y,rotation,side,type,-3)
         color("gray") translate([-.5,0,3]) rotate([0,0,0]) import("Odroid-M1_Heatsink.stl", convexity=3);
     }
     if(type=="h2_oem") {
