@@ -31,7 +31,9 @@
     20220320 Version 1.2.1    added hk_boom bonnet model and accessories, hk_uart model, fixed uart opening,
                               enabled pcb_z, added tabs and fixed tray case top, other fixes and maintenance
     20220406 Version 1.2.2    added vu7c, vu8m and weatherboard2 models, other additions, fixes and maintenance    
-    
+    20220515 Version 1.2.3    added odroid-m1, jetson nano, rockpro64, completed mask(), improved docs
+                              changed tray top design
+                              
     see https://github.com/hominoids/SBC_Case_Builder
 */
 
@@ -41,7 +43,7 @@ use <./lib/fillets.scad>;
 include <./lib/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-case_name = "rockpro64_shell";                     // case_name to load from sbc_case_builder.cfg
+case_name = "m1_tray";                              // case_name to load from sbc_case_builder.cfg
 view = "model";                                     // viewing mode "platter", "model", "debug"
 
 highlight = false;                                  // enable highlight for subtarctive geometry (true or false)
@@ -57,7 +59,6 @@ c = search([case_name],case_data);
 
 case_design = case_data[c[0]][2];                   // "shell", "panel", "stacked", "tray"
 case_style = case_data[c[0]][3];                    // style of case_design
-                                                    // tray: none, vu5, vu7
 
 sbc_model = case_data[c[0]][1];                     // any sbc from sbc model framework: "c1+","c2","c4","hc4"
                                                     // "xu4","xu4q","mc1","hc1","n1","n2","n2+","h2"
@@ -176,10 +177,12 @@ if (view == "platter") {
     if(case_design == "tray") {
         case_bottom(case_design);
         translate([0,(2*depth)+10,case_z]) rotate([180,0,0]) case_top(case_design);
-        translate([3*width,0,width]) rotate([0,90,90]) 
-            case_side(case_design,case_style,"right");
-        translate([width+15,0,2*sidethick]) rotate([0,-90,-90]) 
-            case_side(case_design,case_style,"left");
+        if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
+            translate([3*width,0,width]) rotate([0,90,90]) 
+                case_side(case_design,case_style,"right");
+            translate([width+15,0,2*sidethick]) rotate([0,-90,-90]) 
+                case_side(case_design,case_style,"left");
+        }
     }
     // platter accessories
     for (i=[30:14:len(case_data[c[0]])-1]) {
@@ -267,11 +270,13 @@ if (view == "model") {
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
         }
-        if(move_rightside >= 0) {
-            color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
-        }
-        if(move_leftside >= 0) {
-            color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
+        if(case_style == "sides" || case_style == "vu5" || case_style == "vu7") {
+            if(move_rightside >= 0) {
+                color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
+            }
+            if(move_leftside >= 0) {
+                color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
+            }
         }
         if(case_style == "vu5") {
             color("darkgrey",.5) translate([width+((127.5-width)/2)-6.5-wallthick-gap,
@@ -344,12 +349,12 @@ if(case_design == "tray") {
 else {
     echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
 }
-
 //}
+
 // debug
 if (view == "debug") {
-//    case_top(case_design);
-    case_bottom(case_design);
+    case_top(case_design);
+//    case_bottom(case_design);
 //    case_side(case_design,case_style,"rear");
 //    case_side(case_design,case_style,"front");
 //    case_side(case_design,case_style,"left");
@@ -413,9 +418,19 @@ module case_bottom(case_design) {
                         translate([width-wallthick-gap-wallthick-4+adjust,wallthick+gap+10,
                                 ((bottom_height+floorthick)/2)-1]) rotate([90,0,90]) 
                                     cylinder(d=10, h=4, $fn=6);
-                        translate([width-wallthick-gap-wallthick-4+adjust,depth-wallthick-gap-10,
-                                ((bottom_height+floorthick)/2)-1]) rotate([90,0,90]) 
-                                    cylinder(d=10, h=4, $fn=6);
+                        if(depth >= 75) {
+                            translate([width-wallthick-gap-wallthick-4+adjust,depth-wallthick-gap-10,
+                                    ((bottom_height+floorthick)/2)-1]) rotate([90,0,90]) 
+                                        cylinder(d=10, h=4, $fn=6);
+                        }
+                        else {
+                            
+                            translate([width-wallthick-gap-wallthick-4+adjust,wallthick+gap+40,
+                                    ((bottom_height+floorthick)/2)-1]) rotate([90,0,90]) 
+                                        cylinder(d=10, h=4, $fn=6);
+                        }
+                        
+                        
                         // left side nuts
                         translate([-adjust-gap,wallthick+gap+10,((bottom_height+floorthick)/2)-1]) 
                             rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
@@ -427,10 +442,16 @@ module case_bottom(case_design) {
                             translate([-adjust-gap,wallthick+gap+40,((bottom_height+floorthick)/2)-1]) 
                                 rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                         }
-                        // rear panel
-                        translate([-wallthick-gap,depth-(2*wallthick)-gap,bottom_height-adjust]) 
-                            rotate([0,0,0]) cube([width,wallthick,top_height]);
                         // front panel
+                        if(case_style == "sides" || case_style == "vu5" || case_style == "vu7") {
+                            translate([-wallthick-gap,depth-(2*wallthick)-gap,bottom_height-adjust]) 
+                                rotate([0,0,0]) cube([width,wallthick,top_height]);
+                        }
+                        else {
+                            translate([-wallthick-gap,depth-(2*wallthick)-gap,bottom_height-adjust]) 
+                                rotate([0,0,0]) cube([width,wallthick,top_height-floorthick]);                            
+                        }
+                        // rear panel
                         translate([-wallthick-gap,-wallthick-gap,bottom_height-adjust]) 
                             cube([width,wallthick,top_height-floorthick]);
                         
@@ -462,8 +483,15 @@ module case_bottom(case_design) {
                     // right side bottom attachment holes          
                     translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+10,
                         ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                    translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
-                        ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
+                    if(depth >= 75) {
+                        translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
+                            ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
+                    }
+                    else {
+                        translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+40,
+                            ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
+                    }
+
                     // left side bottom attachment holes
                     translate([-wallthick-gap-adjust,wallthick+gap+10,
                         ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
@@ -478,8 +506,14 @@ module case_bottom(case_design) {
                    // right side bottom nut inset          
                     translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+10,
                         ((bottom_height+floorthick)/2)-1]) rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                    translate([width-3.5-(2*wallthick)-gap-.6,depth-wallthick-gap-10,
-                        ((bottom_height+floorthick)/2)-1])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                    if(depth >= 75) {
+                        translate([width-3.5-(2*wallthick)-gap-.6,depth-wallthick-gap-10,
+                            ((bottom_height+floorthick)/2)-1])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                    }
+                    else {
+                        translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+40,
+                            ((bottom_height+floorthick)/2)-1])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                    }
                     // left side bottom nut inset
                     translate([-gap+.6,wallthick+gap+10,((bottom_height+floorthick)/2)-1]) 
                         rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
@@ -819,11 +853,51 @@ module case_top(case_design) {
                                  vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                      top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
-                    if(case_design == "tray") {
+                    if(case_design == "tray" && (case_style == "vu5" || case_style == "vu7" || case_style == "sides")) {
                         translate([-wallthick-gap+.5,-wallthick-gap,case_z])
                             cube([width-1,depth,floorthick]);
                         translate([-wallthick-gap+.5,-wallthick-gap,
                             case_z-floorthick+adjust]) cube([width-1,wallthick,wallthick]);
+                    }
+                    if(case_design == "tray" && case_style == "none") {
+                        difference() {
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z/2]) 
+                                cube_fillet_inside([width+2*wallthick+1,depth,bottom_height+top_height], 
+                                    vertical=[0,0,0,0], top=[0,fillet,0,fillet,fillet], 
+                                        bottom=[0,0,0,0], $fn=90);
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z/2)-floorthick+.25]) 
+                                cube_fillet_inside([width+1,depth+(wallthick*2),case_z], 
+                                    vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
+                                        top=[0,0,0,0],bottom=[0,0,0,0], $fn=90);
+                            // right side bottom attachment holes          
+                            translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+10,
+                                ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                    cylinder(d=3, h=10+sidethick+(2*adjust));
+                            if(depth >= 75) {
+                               translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
+                                    ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                        cylinder(d=3, h=10+sidethick+(2*adjust));
+                            }
+                            else {
+                               translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+40,
+                                    ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                        cylinder(d=3, h=10+sidethick+(2*adjust));
+                            }
+                            // left side bottom attachment holes
+                            translate([-2*wallthick-gap-2*adjust,wallthick+gap+10,
+                                ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                    cylinder(d=3, h=10+sidethick+(2*adjust));
+                            if(depth >= 75) {
+                                translate([-wallthick-gap-adjust-6,depth-wallthick-gap-10,
+                                    ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                        cylinder(d=3, h=10+sidethick+(2*adjust));
+                            }
+                            else {
+                                translate([-wallthick-gap-adjust-6,wallthick+gap+40,
+                                    ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                        cylinder(d=3, h=10+sidethick+(2*adjust));
+                            }
+                        }
                     }
                     for (i=[30:14:len(case_data[c[0]])-1]) {
                         class = case_data[c[0]][i];
@@ -1164,6 +1238,74 @@ module case_side(case_design,case_style,side) {
                     }
                 }
             }
+            if(case_design == "tray" && case_style == "sides") {
+                if(side == "right") {
+                    difference() {
+                        union() {
+                            translate([width-wallthick-gap,-(2*wallthick)-gap,0]) 
+                                cube([sidethick,depth+2*wallthick,case_z+(2*wallthick)]);
+                            translate([width-gap-wallthick-1+adjust,depth-2*(wallthick+gap)-.5,case_z+(2*wallthick)-2]) 
+                                cube([1,6,2]);
+                            translate([width-gap-wallthick-1+adjust,-2*(wallthick+gap)+1.5,case_z+(2*wallthick)-2]) 
+                                cube([1,6,2]);
+                            // top rail
+                            translate([width-6.9-adjust,-gap,case_z-floorthick-.5])
+                                cube([4,depth-2*(wallthick+gap),2]);
+                        }
+                        // right side bottom attachment holes          
+                        translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+10,
+                            ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
+                        if(depth >= 75) {                        
+                            translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
+                                ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                    cylinder(d=3, h=10+sidethick+(2*adjust));
+                        }
+                        else {
+                            translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+40,
+                                ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                    cylinder(d=3, h=10+sidethick+(2*adjust));
+                        }
+                    }
+                }
+                if(side == "left") {
+                    difference() {
+                        union() {
+                            translate([-wallthick-gap-sidethick,-(2*wallthick)-gap,0]) 
+                                cube([sidethick,depth+2*wallthick,case_z+(2*wallthick)]);
+                            translate([-gap-wallthick-adjust,depth-2*(wallthick+gap)-.5,case_z+(2*wallthick)-2])
+                                cube([1,6,2]);
+                            translate([-gap-wallthick-adjust,-2*(wallthick+gap)+1.5,case_z+(2*wallthick)-2]) 
+                                cube([1,6,2]);
+                            // top rail
+                            translate([-wallthick-gap-adjust,-gap,case_z-floorthick-.5]) 
+                                cube([4,depth-2*(wallthick+gap),2]);
+                        }
+                        // left side bottom attachment holes
+                        translate([-wallthick-gap-adjust-5,wallthick+gap+10,
+                            ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
+                        if(depth >= 75) {
+                            translate([-wallthick-gap-adjust-6,depth-wallthick-gap-10,
+                                ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                    cylinder(d=3, h=10+sidethick+(2*adjust));
+                        }
+                        else {
+                            translate([-wallthick-gap-adjust-6,wallthick+gap+40,
+                                ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) 
+                                    cylinder(d=3, h=10+sidethick+(2*adjust));
+                        }
+                    }
+                }
+            }
+            if(case_design == "tray" && case_style == "vu5") {
+                cheight = top_height+bottom_height+90;
+                vesa = 75;
+                vu_holder(case_style,side,vesa,cheight);
+            }
+            if(case_design == "tray" && case_style == "vu7") {
+                cheight = top_height+bottom_height+122;
+                vesa = 100;
+                vu_holder(case_style,side,vesa,cheight);
+            }         
             // additive accessories
             for (i=[30:14:len(case_data[c[0]])-1]) {
                 class = case_data[c[0]][i];
@@ -1186,63 +1328,6 @@ module case_side(case_design,case_style,side) {
                 }
             }
         }
-        if(case_design == "tray" && case_style == "none") {
-            if(side == "right") {
-                difference() {
-                    union() {
-                        translate([width-wallthick-gap,-(2*wallthick)-gap,0]) 
-                            cube([sidethick,depth+2*wallthick,case_z+(2*wallthick)]);
-                        translate([width-gap-wallthick-1+adjust,depth-2*(wallthick+gap)-.5,case_z+(2*wallthick)-2]) 
-                            cube([1,6,2]);
-                        translate([width-gap-wallthick-1+adjust,-2*(wallthick+gap)+1.5,case_z+(2*wallthick)-2]) 
-                            cube([1,6,2]);
-                        // top rail
-                        translate([width-6.9-adjust,-gap,case_z-floorthick-.5])
-                            cube([4,depth-2*(wallthick+gap),2]);
-                    }
-                    // right side bottom attachment holes          
-                    translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+10,
-                        ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                    translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
-                        ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                }
-            }
-            if(side == "left") {
-                difference() {
-                    union() {
-                        translate([-wallthick-gap-sidethick,-(2*wallthick)-gap,0]) 
-                            cube([sidethick,depth+2*wallthick,case_z+(2*wallthick)]);
-                        translate([-gap-wallthick-adjust,depth-2*(wallthick+gap)-.5,case_z+(2*wallthick)-2]) cube([1,6,2]);
-                        translate([-gap-wallthick-adjust,-2*(wallthick+gap)+1.5,case_z+(2*wallthick)-2]) cube([1,6,2]);
-                        // top rail
-                        translate([-wallthick-gap-adjust,-gap,case_z-floorthick-.5]) 
-                            cube([4,depth-2*(wallthick+gap),2]);
-                    }
-                    // left side bottom attachment holes
-                    translate([-wallthick-gap-adjust-5,wallthick+gap+10,
-                        ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                    if(depth >= 75) {
-                        translate([-wallthick-gap-adjust-6,depth-wallthick-gap-10,
-                            ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                    }
-                    else {
-                        translate([-wallthick-gap-adjust-6,wallthick+gap+40,
-                            ((bottom_height+floorthick)/2)-1]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                    }
-                }
-            }
-        }
-        if(case_design == "tray" && case_style == "vu5") {
-            cheight = top_height+bottom_height+90;
-            vesa = 75;
-            vu_holder(case_style,side,vesa,cheight);
-        }
-        if(case_design == "tray" && case_style == "vu7") {
-            cheight = top_height+bottom_height+122;
-            vesa = 100;
-            vu_holder(case_style,side,vesa,cheight);
-        }
-
         for (i=[30:14:len(case_data[c[0]])-1]) {
             class = case_data[c[0]][i];
             type = case_data[c[0]][i+1];

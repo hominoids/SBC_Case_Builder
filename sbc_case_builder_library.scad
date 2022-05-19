@@ -40,7 +40,8 @@
     20220406 version 1.2.2 hk_wb2(), hk_vu7c(gpio_ext, tabs), hdmi_a(), header_f(pins, height), pcb_pad(pads), 
                            embelished boom_speaker(), changed boom_speaker_holder(style, tolerance), added boom_speaker_strap(),
                            adjusted access_port(), access_cover(), added @mctom's hk_vu8m(bracket), u_bracket(), spacer()
-    2022xxxx version 1.2.x removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
+    20220515 version 1.2.3 removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
+                           printer friendly punchout(),added remaining mask() entries, standardized mask()
 
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -581,7 +582,7 @@ $fn = 90;
     if(style == "recess") {
         difference() {
             cylinder(d=8.5, h=.8);
-            translate([-1.25,-1.25,-adjust]) cube([2.5,2.5,1]);
+            translate([-1.5,-1.75,-adjust]) cube([2.75,3.5,1]);
             translate([-.75,-.75,-adjust]) cube([5,1.25,1.25]);
         }
     }
@@ -2462,7 +2463,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x,loc_y-1,loc_z-pcb_z,15,11.5,rotation,side) hdmi_open();
     }
     if(type == "hdmi_a" && side == "top" && rotation == 0) {
-        place(loc_x-.5,loc_y-1,loc_z,15,11.5,rotation,side) hdmi_open();
+        place(loc_x-.675,loc_y-1,loc_z+.25,15,11.5,rotation,side) hdmi_open();
     }
     if(type == "hdmi_a" && side == "top" && rotation == 90) {
         place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) hdmi_open();
@@ -2474,17 +2475,20 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) hdmi_open();
     }
     // micro usb opening
-    if(class == "usb2" && type == "micro" && rotation == 0) {
+    if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
         place(loc_x,loc_y-3,loc_z,8,3,rotation,side) microusb_open();
     }
-    if(class == "usb2" && type == "micro" && rotation == 90) {
+    if(class == "usb2" && type == "micro" && rotation == 90 && side == "top") {
         place(loc_x-3,loc_y-1,loc_z,8,3,rotation,side) microusb_open();
     }
-    if(class == "usb2" && type == "micro" && rotation == 180) {
+    if(class == "usb2" && type == "micro" && rotation == 180 && side == "top") {
         place(loc_x-1,loc_y+4.5,loc_z,8,3,rotation,side) microusb_open();
     }
-    if(class == "usb2" && type == "micro" && rotation == 270) {
+    if(class == "usb2" && type == "micro" && rotation == 270 && side == "top") {
         place(loc_x+4.5,loc_y,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 0 && side == "bottom") {
+        place(loc_x-1,loc_y-3,loc_z-1.25,8,3,rotation,side) microusb_open();
     }
     // power plug openings
     if(type == "pwr5.5_7.5x11.5" && rotation == 0) {
@@ -2583,7 +2587,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     if(type == "sdcard" && side == "top" && rotation == 180) {
         place(loc_x-.5,loc_y+5,loc_z,12,15.5,rotation,side)
-            translate([0,0,1.75]) cube([12,15.5,2]);
+            translate([0,0,1.5]) cube([12,15.5,2]);
     }
     if(type == "sdcard" && side == "top" && rotation == 270) {
         place(loc_x+5,loc_y,loc_z,12,15.5,rotation,side)
@@ -2659,19 +2663,19 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     // ir opening
     if(type == "ir_1" && rotation == 0) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([3.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=9);
+            translate([3.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=12);
     }
     if(type == "ir_1" && rotation == 90) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([2.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=9);
+            translate([2.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=12);
     }
     if(type == "ir_1" && rotation == 180) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([2.5,5,7.5]) rotate([90,0,0]) cylinder(d=6, h=9);
+            translate([2.5,5,6.5]) rotate([90,0,0]) cylinder(d=6, h=12);
     }
     if(type == "ir_1" && rotation == 270) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([3.375,5,7.5]) rotate([90,0,0]) cylinder(d=6, h=9);
+            translate([3.375,5,7.5]) rotate([90,0,0]) cylinder(d=6, h=12);
     }
     // switch opening
     if(type == "slide_4x9" && rotation == 0) {
@@ -2837,6 +2841,23 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             translate([-.5,-3.75,0]) cube([7,2.5,6.5]);
         }
     }    
+    if(type == "audio_micro" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
+            translate([0,4,0]) cube([7.5,8,4]);
+    }
+    if(type == "m1_oem" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,6,6,rotation,side) 
+        union() {
+            translate([8.75,7.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([80,7.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([8.75,39.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([80,39.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([8.75,79.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([80,79.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([8.75,111.5,-20]) rotate([0,0,90]) slot(3,3,8);
+            translate([80,111.5,-20]) rotate([0,0,90]) slot(3,3,8);
+        }
+    }    
 }
 
 
@@ -2852,10 +2873,10 @@ module punchout(width,depth,gap,thick,fillet,shape) {
             translate([0,0,0]) slot(depth,width,thick);
             translate([0,0,-adjust]) slot(depth-gap,width,thick+(2*adjust));
             // cross ties    
-            translate([2,-(depth/2)-1,-adjust]) cube([2,depth+2,thick+(2*adjust)]);
+            translate([-1,-(depth/2)-1,-adjust]) cube([2,depth+2,thick+(2*adjust)]);
             translate([(width/2)-1-(width/4)+4,-(depth/2)-1,-adjust]) cube([2,depth+2,thick+(2*adjust)]);
             translate([(width/2)-1+(width/4)-4,-(depth/2)-1,-adjust]) cube([2,depth+2,thick+(2*adjust)]);
-            translate([width-4,-(depth/2)-1,-adjust]) cube([2,depth+2,thick+(2*adjust)]);
+            translate([width-1,-(depth/2)-1,-adjust]) cube([2,depth+2,thick+(2*adjust)]);
             }
         }
     if(shape == "rectangle") {
@@ -2870,9 +2891,11 @@ module punchout(width,depth,gap,thick,fillet,shape) {
                         top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
             // cross ties    
             translate([-1,(depth/2)-1,-adjust]) cube([gap+2,2,thick+(2*adjust)]);
-            translate([(width/2)-1,depth-gap-1,-adjust]) cube([2,gap+2,thick+(2*adjust)]);
+            translate([width-4,depth-gap-1,-adjust]) cube([2,gap+2,thick+(2*adjust)]);
+            translate([2,depth-gap-1,-adjust]) cube([2,gap+2,thick+(2*adjust)]);
             translate([width-gap-1,(depth/2)-1,-adjust]) cube([gap+2,2,thick+(2*adjust)]);
-            translate([(width/2)-1,-1,-adjust]) cube([2,gap+2,thick+(2*adjust)]);
+            translate([width-4,-1,-adjust]) cube([2,gap+2,thick+(2*adjust)]);
+            translate([2,-1,-adjust]) cube([2,gap+2,thick+(2*adjust)]);
             }
         }
     if(shape == "round") {

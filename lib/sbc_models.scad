@@ -27,6 +27,7 @@
     20201021 Version 1.0.4  Added HK Odroid-HC4 as "hc4"
     20220202 Version 1.0.5  Added HK Show2 as "show2"
     20220413 Version 1.0.6  Added Odroid-M1 as "m1"
+    20220515 Version 1.0.7  Added rockpro64, jetsonnano, updated sbc_test.scad, sbc_test_components.scad and other fixes and adjustments
 
     see https://github.com/hominoids/SBC_Case_Builder
     
