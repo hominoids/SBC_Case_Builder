@@ -33,7 +33,8 @@
     20220406 Version 1.2.2    added vu7c, vu8m and weatherboard2 models, other additions, fixes and maintenance    
     20220515 Version 1.2.3    added odroid-m1, jetson nano, rockpro64, completed mask(), improved docs
                               changed tray top design
-                              
+    2022xxxx Version 1.x.x    added round case for odroid c-series and other rpi format
+    
     see https://github.com/hominoids/SBC_Case_Builder
 */
 
@@ -43,7 +44,7 @@ use <./lib/fillets.scad>;
 include <./lib/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-case_name = "m1_tray";                              // case_name to load from sbc_case_builder.cfg
+case_name = "c4_round";                              // case_name to load from sbc_case_builder.cfg
 view = "model";                                     // viewing mode "platter", "model", "debug"
 
 highlight = false;                                  // enable highlight for subtarctive geometry (true or false)
@@ -54,10 +55,12 @@ move_leftside = 0;                                  // move left side mm in mode
 move_rightside = 0;                                 // move right side mm in model view or < 0 = off
 move_front = 0;                                     // move front mm in model view or < 0 = off
 move_rear = 0;                                      // move rear mm in model view or < 0 = off
+case_fn = 90;                                       // circle segments for round cases
+case_ffn = 90;                                       // circle segments for fillet of round cases
 
 c = search([case_name],case_data);
 
-case_design = case_data[c[0]][2];                   // "shell", "panel", "stacked", "tray"
+case_design = case_data[c[0]][2];                   // "shell", "panel", "stacked", "tray", "round"
 case_style = case_data[c[0]][3];                    // style of case_design
 
 sbc_model = case_data[c[0]][1];                     // any sbc from sbc model framework: "c1+","c2","c4","hc4"
@@ -102,6 +105,10 @@ depth = pcb_depth+(2*(wallthick+gap))+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz;
 bottom_height = pcb_bmaxz+floorthick+case_offset_bz;
 case_z = bottom_height+top_height;
+
+case_diameter = width*1.14;
+lip = 5;
+tol = .25;
 
 top_standoff =    [case_data[c[0]][26][0],      // diameter
                    top_height-pcb_loc_z,        // height top_height
@@ -183,6 +190,10 @@ if (view == "platter") {
             translate([width+15,0,2*sidethick]) rotate([0,-90,-90]) 
                 case_side(case_design,case_style,"left");
         }
+    }
+    if(case_design == "round") {
+        case_bottom(case_design);
+        translate([width+30,depth,case_z-floorthick-gap]) rotate([180,0,0]) case_top(case_design);
     }
     // platter accessories
     for (i=[30:14:len(case_data[c[0]])-1]) {
@@ -315,6 +326,17 @@ if (view == "model") {
                 case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
         }
     } 
+    if(case_design == "round") {
+        if(lower_bottom >= 0) {
+            color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+        }
+        if(sbc_off == false) {
+            translate([pcb_loc_x ,pcb_loc_y,bottom_standoff[1]]) sbc(sbc_model);
+        }
+        if(raise_top >= 0) {
+            color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+        }        
+    }
     // model accessories
     for (i=[30:14:len(case_data[c[0]])-1]) {
         class = case_data[c[0]][i];
@@ -456,6 +478,35 @@ module case_bottom(case_design) {
                             cube([width,wallthick,top_height-floorthick]);
                         
                     }
+                    
+                    if(case_design == "round") {
+                        difference() {
+                            translate([pcb_width/2,pcb_depth/2,bottom_height/2]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=bottom_height, r=case_diameter/2, 
+                                    top=0, bottom=c_fillet, $fn=case_fn, fillet_fn=case_ffn, center=true);
+                            translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+1+floorthick]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
+                                    r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
+                                        fillet_fn=case_ffn, center=true);
+                            difference() {
+                                translate([pcb_width/2,pcb_depth/2,(bottom_height-lip)]) rotate([0,0,30]) 
+                                    cylinder(h=lip+adjust, r=(case_diameter/2)+1, $fn=case_fn);
+                                translate([pcb_width/2,pcb_depth/2,(bottom_height-lip)-adjust]) rotate([0,0,30]) 
+                                    cylinder(h=lip+2*adjust, r=(case_diameter/2)-lip/4, $fn=case_fn);
+                            }
+                        }
+                        difference() {
+                            translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+1+floorthick]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
+                                    r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
+                                        fillet_fn=case_ffn, center=true);
+                            translate([-16,(depth/2)-60,-adjust])
+                                cube([width+10,110,top_height-2*floorthick-2]); 
+                            translate([width-9,(depth/2)-62.5,bottom_height])
+                                cube([20,110,top_height-2*floorthick-2]); 
+                        }
+
+                    }                    
                     // additive accessories
                     for (i=[30:14:len(case_data[c[0]])-1]) {
                         class = case_data[c[0]][i];
@@ -898,6 +949,26 @@ module case_top(case_design) {
                                         cylinder(d=3, h=10+sidethick+(2*adjust));
                             }
                         }
+                    }
+                    if(case_design == "round") {
+                        difference() {
+                            translate([pcb_width/2,pcb_depth/2,case_z/2]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=top_height, r=case_diameter/2, 
+                                    top=fillet, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
+                            translate([pcb_width/2,pcb_depth/2,(case_z/2)-floorthick]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=top_height, r=(case_diameter/2)-lip/2, 
+                                    top=fillet-1, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
+                            translate([pcb_width/2,pcb_depth/2,lip-adjust]) rotate([0,0,30]) 
+                                cylinder(h=lip+2*adjust, r=(case_diameter/2)-(lip/4)+tol/2, $fn=case_fn);
+                            // io cutout
+                            translate([width,(depth/2)-wallthick-gap,floorthick+gap+top_height/2])
+                                cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height-1], 
+                                    vertical=[0,0,0,0], 
+                                        top=[0,0,0,0], 
+                                            bottom=[0,0,0,0], $fn=90);
+                        }
+                        translate([width-8.49,(depth/2)-32,bottom_height])
+                            cube([wallthick-.75,55,top_height-2*floorthick-3]); 
                     }
                     for (i=[30:14:len(case_data[c[0]])-1]) {
                         class = case_data[c[0]][i];
@@ -1479,8 +1550,8 @@ module open_io() {
         // top cooling openings
         if(side == "top" && cooling == "fan" && class == "heatsink" 
             && type != "h2_oem" && type != "n2_oem" && type != "n2+_oem") {
-                translate([loc_x+6,loc_y-28,case_z-(floorthick+adjust)]) 
-                    fan_mask(40,floorthick+(2*adjust)+4,2);
+                translate([loc_x+6,loc_y-28,case_z-(floorthick+adjust)-5]) 
+                    fan_mask(40,floorthick+(2*adjust)+8,2);
         }
         if(side == "top" && cooling == "fan" && class == "heatsink" && (type == "n2_oem" || type == "n2+_oem")) {
             translate([loc_x+4,loc_y+5.5,-adjust]) 
@@ -1498,8 +1569,8 @@ module open_io() {
         }
         if(side == "top" && cooling == "vents" && class == "heatsink") {
             for(r=[loc_x+7:4:48]) {
-                translate([r,loc_y-20,case_z-(floorthick+adjust)]) 
-                    cube([2,25,floorthick+(adjust*2)]);
+                translate([r,loc_y-20,case_z-(floorthick+adjust)-6]) 
+                    cube([2,25,floorthick+(adjust*2)+8]);
             }
         }
         if(side == "top" && cooling == "custom" && class == "heatsink") {
@@ -1567,8 +1638,8 @@ module open_io() {
     
         // uart knockout opening
         if(side == "top" && type == "uart_micro" && rotation == 90) {
-            translate([loc_x-wallthick-gap-4,loc_y-1,bottom_height+5]) rotate([90,0,90]) 
-                punchout(15,8,1,sidethick+(2*adjust)+5,2,"rectangle");
+            translate([loc_x-wallthick-gap-8,loc_y-1,bottom_height+5]) rotate([90,0,90]) 
+                punchout(15,8,1,sidethick+(2*adjust)+8,2,"rectangle");
         }
         if(side == "top" && type == "uart_micro" && rotation == -90) {
             translate([loc_x+2*(wallthick+gap)+1,loc_y-1,bottom_height+5]) rotate([90,0,90]) 

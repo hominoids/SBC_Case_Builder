@@ -42,7 +42,8 @@
                            adjusted access_port(), access_cover(), added @mctom's hk_vu8m(bracket), u_bracket(), spacer()
     20220515 version 1.2.3 removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
-
+    2022xxxx version 1.x.x increased mask projection for ir_1
+    
     see https://github.com/hominoids/SBC_Case_Builder
     
     place(x,y,z,size_x,size_y,rotation,side)
@@ -2663,19 +2664,19 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     // ir opening
     if(type == "ir_1" && rotation == 0) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([3.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=12);
+            translate([3.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=15);
     }
     if(type == "ir_1" && rotation == 90) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([2.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=12);
+            translate([2.5,2,7.5]) rotate([90,0,0]) cylinder(d=6, h=15);
     }
     if(type == "ir_1" && rotation == 180) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([2.5,5,6.5]) rotate([90,0,0]) cylinder(d=6, h=12);
+            translate([2.5,5,6.5]) rotate([90,0,0]) cylinder(d=6, h=15);
     }
     if(type == "ir_1" && rotation == 270) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side)
-            translate([3.375,5,7.5]) rotate([90,0,0]) cylinder(d=6, h=12);
+            translate([3.375,5,7.5]) rotate([90,0,0]) cylinder(d=6, h=15);
     }
     // switch opening
     if(type == "slide_4x9" && rotation == 0) {
