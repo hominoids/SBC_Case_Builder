@@ -2543,6 +2543,26 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+6,loc_y-.25,loc_z,10.5,13.5,rotation,side)
             cube([10.5,8,10.5]);
     }
+    // pwr5.5_9.5x7 opening
+    if(type == "pwr5.5_9.5x7" && rotation == 0) {
+        place(loc_x-.25,loc_y-6,loc_z,10,13.5,rotation,side)
+            cube([10,8,7.5]);
+    }
+    // pwr5.5_9.5x7 opening
+    if(type == "pwr5.5_9.5x7" && rotation == 90) {
+        place(loc_x-6,loc_y-.25,loc_z,10,13.5,rotation,side)
+            cube([10,8,7.5]);
+    }
+    // pwr5.5_9.5x7 opening
+    if(type == "pwr5.5_9.5x7" && rotation == 180) {
+        place(loc_x-.25,loc_y+6,loc_z,10,13.5,rotation,side)
+            cube([10,8,7.5]);
+    }
+    // pwr5.5_9.5x7 opening
+    if(type == "pwr5.5_9.5x7" && rotation == 270) {
+        place(loc_x+6,loc_y-.25,loc_z,10,13.5,rotation,side)
+            cube([10,8,7.5]);
+    }
     // emmc storage
     if(type == "emmc" && side == "bottom" && rotation == 0) {
         place(loc_x-.5,loc_y-.5,floorthick+adjust,14.5,19.5,rotation,side) 

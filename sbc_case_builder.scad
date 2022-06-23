@@ -37,14 +37,14 @@
     see https://github.com/hominoids/SBC_Case_Builder
 */
 
-use <./lib/sbc_models.scad>;
+use <./SBC_Model_Framework/sbc_models.scad>;
 use <./sbc_case_builder_library.scad>;
 use <./lib/fillets.scad>;
-include <./lib/sbc_models.cfg>;
+include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-case_name = "m1_tray";                              // case_name to load from sbc_case_builder.cfg
-view = "model";                                     // viewing mode "platter", "model", "debug"
+case_name = "rockpro64_shell";                              // case_name to load from sbc_case_builder.cfg
+view = "platter";                                     // viewing mode "platter", "model", "debug"
 
 highlight = false;                                  // enable highlight for subtarctive geometry (true or false)
 sbc_off = false;                                    // sbc off in model view (true or false)
