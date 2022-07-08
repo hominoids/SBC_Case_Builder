@@ -48,14 +48,14 @@ case_name = "c4_round";                              // case_name to load from s
 view = "model";                                     // viewing mode "platter", "model", "debug"
 
 highlight = false;                                  // enable highlight for subtarctive geometry (true or false)
-sbc_off = false;                                    // sbc off in model view (true or false)
+sbc_off = true;                                    // sbc off in model view (true or false)
 raise_top = 0;                                      // raises top mm in model view or < 0 = off
 lower_bottom = 0;                                   // lowers bottom mm in model view or < 0 = off
 move_leftside = 0;                                  // move left side mm in model view or < 0 = off
 move_rightside = 0;                                 // move right side mm in model view or < 0 = off
 move_front = 0;                                     // move front mm in model view or < 0 = off
 move_rear = 0;                                      // move rear mm in model view or < 0 = off
-case_fn = 90;                                       // circle segments for round cases
+case_fn = 360;                                       // circle segments for round cases
 case_ffn = 90;                                       // circle segments for fillet of round cases
 
 c = search([case_name],case_data);
@@ -484,24 +484,24 @@ module case_bottom(case_design) {
                             translate([pcb_width/2,pcb_depth/2,bottom_height/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=bottom_height, r=case_diameter/2, 
                                     top=0, bottom=c_fillet, $fn=case_fn, fillet_fn=case_ffn, center=true);
-                            translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+1+floorthick]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+floorthick]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
                                     r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             difference() {
-                                translate([pcb_width/2,pcb_depth/2,(bottom_height-lip)]) rotate([0,0,30]) 
+                                translate([pcb_width/2,pcb_depth/2,(bottom_height/2)-floorthick/2]) rotate([0,0,30]) 
                                     cylinder(h=lip+adjust, r=(case_diameter/2)+1, $fn=case_fn);
-                                translate([pcb_width/2,pcb_depth/2,(bottom_height-lip)-adjust]) rotate([0,0,30]) 
+                                translate([pcb_width/2,pcb_depth/2,(bottom_height/2)-adjust-floorthick/2]) rotate([0,0,30]) 
                                     cylinder(h=lip+2*adjust, r=(case_diameter/2)-lip/4, $fn=case_fn);
                             }
                         }
                         difference() {
-                            translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+1+floorthick]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
+                            translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+2*floorthick]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=bottom_height+adjust+floorthick+lip,
                                     r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             translate([-16,(depth/2)-60,-adjust])
-                                cube([width+10,110,top_height-2*floorthick-2]); 
+                                cube([width+10,110,bottom_height+top_height-2*floorthick-2]); 
                             translate([width-9,(depth/2)-62.5,bottom_height])
                                 cube([20,110,top_height-2*floorthick-2]); 
                         }
@@ -952,23 +952,23 @@ module case_top(case_design) {
                     }
                     if(case_design == "round") {
                         difference() {
-                            translate([pcb_width/2,pcb_depth/2,case_z/2]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=top_height, r=case_diameter/2, 
+                            #translate([pcb_width/2,pcb_depth/2,top_height]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=top_height+lip, r=case_diameter/2, 
                                     top=fillet, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
-                            translate([pcb_width/2,pcb_depth/2,(case_z/2)-floorthick]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,top_height-floorthick]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=top_height, r=(case_diameter/2)-lip/2, 
                                     top=fillet-1, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
-                            translate([pcb_width/2,pcb_depth/2,lip-adjust]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,lip-1-adjust]) rotate([0,0,30]) 
                                 cylinder(h=lip+2*adjust, r=(case_diameter/2)-(lip/4)+tol/2, $fn=case_fn);
                             // io cutout
-                            translate([width,(depth/2)-wallthick-gap,floorthick+gap+top_height/2])
-                                cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height-1], 
+                            translate([width,(depth/2)-wallthick-gap,bottom_height+top_height/2-floorthick+1-lip/2])
+                                cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip], 
                                     vertical=[0,0,0,0], 
                                         top=[0,0,0,0], 
                                             bottom=[0,0,0,0], $fn=90);
                         }
-                        translate([width-8.49,(depth/2)-32,bottom_height])
-                            cube([wallthick-.75,55,top_height-2*floorthick-3]); 
+                        translate([width-8.49,(depth/2)-32.5,bottom_height])
+                            cube([wallthick-.5,56,top_height-1]); 
                     }
                     for (i=[30:14:len(case_data[c[0]])-1]) {
                         class = case_data[c[0]][i];
