@@ -173,6 +173,7 @@ e.g.
 
 Every type, regardless of it’s class, uses a basic set of variables(loc_x,loc_y,loc_z,”face”,rotation[]) but each type doesn’t necessarily use all available data fields(size_x,size_y,size_z,data_1,data_2,”data_3”,data_4[]). “add1” and “add2” are used to add geometry to the case. The difference is when the addition occurs. “add1” happens at the beginning when the core case geometry is created and add2 happens after all subtractions have occurred. “suball” is used to affect all faces of a case, not just “face”. The “face” is the case piece that will be effected by the addition or subtraction. The "model" type is for placing supporting accessories in the model view. e.g. hard drives, fans. The "platter" type is for adding supporting accessories to the print platter.
 
+
 #### classes: add1, sub, suball, add2, model, platter
 
 **additive type:**
@@ -189,7 +190,6 @@ uart_strap, fan_cover, access_cover, button_top, boom_vring
 
 
 #### Shared add and sub “type” commands
-
 **circle**
 description: circlular geometry.
 *uses:* size_x=dia, size_z=height
@@ -212,7 +212,6 @@ description: circlular geometry.
 
 
 #### Add class only “types”
-
 **uart_holder**
 *description:* console uart holder
 *uses:* none
@@ -275,7 +274,6 @@ description: circlular geometry.
 
 
 #### Sub class only “types”
-
 **punchout**
 *description:* punchout in rectangle, round or slot shape
 *uses:* size_x=width, size_y=depth, data_1=gap, size_z=thick, data_2=fillet, data_3="rectangle","round" or "slot"
@@ -302,7 +300,6 @@ description: circlular geometry.
 
 
 #### Model class “types”
-
 **uart_strap**
 *description:* console uart holder strap
 *uses:* none
@@ -365,7 +362,6 @@ description: circlular geometry.
 
 
 #### Platter class “types”
-
 **uart_strap**
 *description:* console uart holder strap
 *uses:* none
