@@ -46,9 +46,9 @@ include <./sbc_case_builder.cfg>;
 
 /* [Board and View] */
 // case_name to load from sbc_case_builder.cfg
-case_name = "rpi3b+_stacked"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
+case_name = "c4_round"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
 // viewing mode "platter", "model", "debug"
-view = "platter"; // [platter, model, debug]
+view = "model"; // [platter, model, debug]
 
 /* [Adjustments] */
 // enable highlight for subtarctive geometry (true or false)
@@ -67,6 +67,9 @@ move_rightside = 0;
 move_front = 0;
 // move rear mm in model view or < 0 = off
 move_rear = 0;
+
+case_fn = 360;                                       // circle segments for round cases
+case_ffn = 90;                                       // circle segments for fillet of round cases
 
 c = search([case_name],case_data);
 
@@ -116,8 +119,9 @@ top_height = pcb_tmaxz+floorthick+case_offset_tz;
 bottom_height = pcb_bmaxz+floorthick+case_offset_bz;
 case_z = bottom_height+top_height;
 
-case_diameter = width*1.14;
+
 lip = 5;
+case_diameter = width*1.14;
 tol = .25;
 
 top_standoff =    [case_data[c[0]][26][0],      // diameter
@@ -500,9 +504,9 @@ module case_bottom(case_design) {
                                     r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             difference() {
-                                translate([pcb_width/2,pcb_depth/2,(bottom_height/2)-floorthick/2]) rotate([0,0,30]) 
+                                translate([pcb_width/2,pcb_depth/2,bottom_height-lip]) rotate([0,0,30]) 
                                     cylinder(h=lip+adjust, r=(case_diameter/2)+1, $fn=case_fn);
-                                translate([pcb_width/2,pcb_depth/2,(bottom_height/2)-adjust-floorthick/2]) rotate([0,0,30]) 
+                                translate([pcb_width/2,pcb_depth/2,bottom_height-lip]) rotate([0,0,30]) 
                                     cylinder(h=lip+2*adjust, r=(case_diameter/2)-lip/4, $fn=case_fn);
                             }
                         }
@@ -963,23 +967,21 @@ module case_top(case_design) {
                     }
                     if(case_design == "round") {
                         difference() {
-                            #translate([pcb_width/2,pcb_depth/2,top_height]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,case_z/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=top_height+lip, r=case_diameter/2, 
                                     top=fillet, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
-                            translate([pcb_width/2,pcb_depth/2,top_height-floorthick]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=top_height, r=(case_diameter/2)-lip/2, 
+                            translate([pcb_width/2,pcb_depth/2,(case_z/2)-floorthick]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-lip/2, 
                                     top=fillet-1, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
                             translate([pcb_width/2,pcb_depth/2,lip-1-adjust]) rotate([0,0,30]) 
-                                cylinder(h=lip+2*adjust, r=(case_diameter/2)-(lip/4)+tol/2, $fn=case_fn);
+                                cylinder(h=lip+2*adjust, r=(case_diameter/2)-(lip/2)+tol/2, $fn=case_fn);
                             // io cutout
-                            translate([width,(depth/2)-wallthick-gap,bottom_height+top_height/2-floorthick+1-lip/2])
+                            translate([width,(depth/2)-wallthick-gap,bottom_height-lip+top_height/2-floorthick])
                                 cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip], 
-                                    vertical=[0,0,0,0], 
-                                        top=[0,0,0,0], 
-                                            bottom=[0,0,0,0], $fn=90);
+                                    vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
-                        translate([width-8.49,(depth/2)-32.5,bottom_height])
-                            cube([wallthick-.5,56,top_height-1]); 
+                        translate([width-8.5+adjust,(depth/2)-32.5,bottom_height])
+                            cube([wallthick-.5,depth-2-2*(floorthick+gap),top_height-floorthick-gap]); 
                     }
                     for (i=[30:14:len(case_data[c[0]])-1]) {
                         class = case_data[c[0]][i];
