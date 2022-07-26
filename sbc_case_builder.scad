@@ -38,25 +38,35 @@
     see https://github.com/hominoids/SBC_Case_Builder
 */
 
-use <./lib/sbc_models.scad>;
+use <./SBC_Model_Framework/sbc_models.scad>;
 use <./sbc_case_builder_library.scad>;
 use <./lib/fillets.scad>;
-include <./lib/sbc_models.cfg>;
+include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-case_name = "c4_round";                              // case_name to load from sbc_case_builder.cfg
-view = "model";                                     // viewing mode "platter", "model", "debug"
+/* [Board and View] */
+// case_name to load from sbc_case_builder.cfg
+case_name = "rpi3b+_stacked"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
+// viewing mode "platter", "model", "debug"
+view = "platter"; // [platter, model, debug]
 
-highlight = false;                                  // enable highlight for subtarctive geometry (true or false)
-sbc_off = true;                                    // sbc off in model view (true or false)
-raise_top = 0;                                      // raises top mm in model view or < 0 = off
-lower_bottom = 0;                                   // lowers bottom mm in model view or < 0 = off
-move_leftside = 0;                                  // move left side mm in model view or < 0 = off
-move_rightside = 0;                                 // move right side mm in model view or < 0 = off
-move_front = 0;                                     // move front mm in model view or < 0 = off
-move_rear = 0;                                      // move rear mm in model view or < 0 = off
-case_fn = 360;                                       // circle segments for round cases
-case_ffn = 90;                                       // circle segments for fillet of round cases
+/* [Adjustments] */
+// enable highlight for subtarctive geometry (true or false)
+highlight = false;
+// sbc off in model view (true or false)
+sbc_off = false;
+// raises top mm in model view or < 0 = off
+raise_top = 0;
+// lowers bottom mm in model view or < 0 = off
+lower_bottom = 0;
+// move left side mm in model view or < 0 = off
+move_leftside = 0;
+// move right side mm in model view or < 0 = off
+move_rightside = 0;
+// move front mm in model view or < 0 = off
+move_front = 0;
+// move rear mm in model view or < 0 = off
+move_rear = 0;
 
 c = search([case_name],case_data);
 
@@ -157,6 +167,7 @@ bottom_ext_standoff = [case_data[c[0]][29][0],  // diameter
                    case_data[c[0]][29][9],      // insert hole dia. mm
                    case_data[c[0]][29][10]];    // insert depth mm
 
+/* [Hidden] */
 adjust = .01;
 $fn=90;
 
