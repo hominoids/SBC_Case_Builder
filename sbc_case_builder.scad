@@ -47,7 +47,7 @@ include <./sbc_case_builder.cfg>;
 
 /* [Board and View] */
 // case_name to load from sbc_case_builder.cfg
-case_name = "c4_snap"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
+case_name = "c4_fitted"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
 // viewing mode "platter", "model", "debug"
 view = "model"; // [platter, model, debug]
 
@@ -68,9 +68,6 @@ move_rightside = 0;
 move_front = 0;
 // move rear mm in model view or < 0 = off
 move_rear = 0;
-
-case_fn = 360;                                       // circle segments for round cases
-case_ffn = 90;                                       // circle segments for fillet of round cases
 
 c = search([case_name],case_data);
 
@@ -175,6 +172,9 @@ bottom_ext_standoff = [case_data[c[0]][29][0],  // diameter
 /* [Hidden] */
 adjust = .01;
 $fn=90;
+case_fn = 360;                                  // circle segments for round cases
+case_ffn = 90;                                  // circle segments for fillet of round cases
+
 
 // platter view
 if (view == "platter") {
@@ -207,9 +207,17 @@ if (view == "platter") {
                 case_side(case_design,case_style,"left");
         }
     }
-    if(case_design == "round") {
+    if(case_design == "round"  || case_design == "hex") {
         case_bottom(case_design);
         translate([width+30,depth,case_z-floorthick-gap]) rotate([180,0,0]) case_top(case_design);
+    }
+    if(case_design == "hex") {
+        case_bottom(case_design);
+        translate([width+30,depth,case_z-floorthick-gap]) rotate([180,0,0]) case_top(case_design);
+    }
+    if(case_design == "snap" || case_design == "fitted") {
+        case_bottom(case_design);
+        translate([0,(2*depth)+20,case_z]) rotate([180,0,0]) case_top(case_design);
     }
     // platter accessories
     for (i=[30:14:len(case_data[c[0]])-1]) {
@@ -353,7 +361,7 @@ if (view == "model") {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
         }        
     }
-    if(case_design == "snap") {
+    if(case_design == "snap" || case_design == "fitted") {
         if(lower_bottom >= 0) {
             color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
@@ -570,14 +578,38 @@ module case_bottom(case_design) {
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,
                                 (depth/2)-wallthick-gap,(bottom_height+top_height)/2+floorthick]) 
-                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),bottom_height+top_height+floorthick+1], 
+                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
-                            // snap top carveout
-                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,bottom_height+top_height-2]) 
+                            // snap top indent
+                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,bottom_height+top_height-1.5]) 
                                 rotate([0,45,0]) cube([4,50,4]);
-                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,bottom_height+top_height-2])
+                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,bottom_height+top_height-1.5])
                                 rotate([0,45,0]) cube([4,50,4]);
+                        }
+                    }
+                    if(case_design == "fitted") {
+                        difference() {
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height+top_height)/2]) 
+                                cube_fillet_inside([width,depth,bottom_height+top_height], 
+                                    vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
+                                        top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
+                            translate([(width/2)-wallthick-gap,
+                                (depth/2)-wallthick-gap,(bottom_height+top_height)/2+floorthick]) 
+                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
+                                        vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
+                                            top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
+                            difference() {
+                                translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z+adjust-lip/2]) 
+                                    cube_fillet_inside([width+adjust,depth+adjust,lip], 
+                                        vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
+                                            top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
+                                
+                                translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z+adjust-lip/2]) 
+                                    cube_fillet_inside([width-wallthick,depth-wallthick,lip], 
+                                        vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],top=[0,0,0,0],
+                                            bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
+                            }
                         }
                     }
                     // additive accessories
@@ -1057,36 +1089,52 @@ module case_top(case_design) {
                                     vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
                         translate([width-8.5+adjust,(depth/2)-32,bottom_height])
-                            cube([wallthick-.5,depth-3-2*(floorthick+gap),top_height-floorthick-gap]); 
+                            cube([wallthick-.5,depth-3-2*(floorthick+gap),case_z-gap]); 
                     }
                     if(case_design == "snap") {
-                        translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,top_height+bottom_height+floorthick])
+                        translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z+floorthick])
                             cube_fillet_inside([width,depth,floorthick], 
                                 vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                     top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,top_height+bottom_height]) 
-                                cube_fillet_inside([width-2*wallthick-tol,depth-2*wallthick-tol,floorthick*2], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z]) 
+                                cube_fillet_inside([width-2*wallthick-tol,depth-2*wallthick-tol,2*floorthick+1.5], 
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,top_height+bottom_height]) 
-                                cube_fillet_inside([width-(3*wallthick),depth-(3*wallthick),2*floorthick+adjust], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z]) 
+                                cube_fillet_inside([width-(3*wallthick),depth-(3*wallthick),2*floorthick+1.5+adjust], 
                                     vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],top=[0,0,0,0],
                                         bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                         }
                         // snap top outdent
                         difference() {
-                            translate([-2.85,(depth/2)-25-gap-wallthick,bottom_height+top_height+floorthick-2]) 
+                            translate([-2.85,(depth/2)-25-gap-wallthick,case_z+floorthick-3]) 
                                 rotate([0,45,0]) cube([4,50,4]);
-                            translate([-1,(depth/2)-26-gap-wallthick,bottom_height+top_height+floorthick-5]) 
+                            translate([-1,(depth/2)-26-gap-wallthick,case_z+floorthick-6]) 
                                 rotate([0,0,0]) cube([4,52,6]);
                         }
                         difference() {
-                            translate([width-wallthick-gap-6.5,(depth/2)-25-gap-wallthick,bottom_height+top_height+floorthick-2])
+                            translate([width-wallthick-gap-6.5,(depth/2)-25-gap-wallthick,case_z+floorthick-3])
                                 rotate([0,45,0]) cube([4,50,4]);
-                            translate([width-wallthick-gap-6.5,(depth/2)-26-gap-wallthick,bottom_height+top_height+floorthick-5])
+                            translate([width-wallthick-gap-6.5,(depth/2)-26-gap-wallthick,case_z+floorthick-6])
                                 rotate([0,0,0]) cube([4,52,6]);
+                        }
+                    }
+                    if(case_design == "fitted") {
+                        difference() {
+                            translate([(width/2)-wallthick-gap,
+                                (depth/2)-wallthick-gap,bottom_height+(top_height/2)+floorthick+6.5]) 
+                                    cube_fillet_inside([width,depth,lip+1*floorthick], 
+                                        vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
+                                            top=[fillet,fillet,fillet,fillet,fillet], 
+                                                bottom=[0,0,0,0], $fn=90);
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,
+                                bottom_height+(top_height/2)+floorthick+4.5]) 
+                                    cube_fillet_inside([width-wallthick+tol,depth-wallthick+tol,lip+floorthick], 
+                                        vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
+                                            top=[fillet,fillet,fillet,fillet,fillet],
+                                                bottom=[0,0,0,0], $fn=90);
                         }
                     }
                     for (i=[30:14:len(case_data[c[0]])-1]) {
@@ -1640,7 +1688,7 @@ module open_io() {
                 translate([loc_x+2.375,loc_y-gap,bottom_height+pcb_loc_z+3.75]) rotate([90,0,0]) slot(12,10,2.1);
             }
             if(type == "pwr5.5_7.5x11.5") {            
-                translate([loc_x+4,loc_y-gap,bottom_height+pcb_loc_z+6.25]) 
+                translate([loc_x+3.5,loc_y-gap,bottom_height+pcb_loc_z+6.25]) 
                      rotate([90,0,0]) cylinder(d=10, h=sidethick+(2*adjust));
             }
             if(type == "pwr2.5_5x7.5") {            
