@@ -184,9 +184,9 @@ if (view == "platter") {
     }
     if(case_design == "panel") {
         case_bottom(case_design);
-        translate([0,(2*depth)+5,bottom_height+top_height]) rotate([180,0,0]) case_top(case_design);
+        translate([0,(2*depth)+5,case_z]) rotate([180,0,0]) case_top(case_design);
         translate([width+25,0,-gap]) rotate([-90,0,0]) case_side(case_design,case_style,"rear");
-        translate([width+25,2*(bottom_height+top_height)+10,-depth+wallthick+gap+floorthick]) 
+        translate([width+25,2*(case_z)+10,-depth+wallthick+gap+floorthick]) 
             rotate([90,0,0]) case_side(case_design,case_style,"front");
         translate([2.5*width,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
             case_side(case_design,case_style,"right");
@@ -536,7 +536,7 @@ module case_bottom(case_design) {
                                     r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             translate([-16,(depth/2)-60,-adjust])
-                                cube([width+10,110,bottom_height+top_height-2*floorthick-2]); 
+                                cube([width+10,110,case_z-2*floorthick-2]); 
                             translate([width-9,(depth/2)-62.5,bottom_height])
                                 cube([20,110,top_height-2*floorthick-2]); 
                         }
@@ -564,7 +564,7 @@ module case_bottom(case_design) {
                                     r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=6, 
                                         fillet_fn=case_ffn, center=true);
                             translate([-16,(depth/2)-60,-adjust])
-                                cube([width+10,110,bottom_height+top_height-2*floorthick-2]); 
+                                cube([width+10,110,case_z-2*floorthick-2]); 
                             translate([width-9,(depth/2)-62.5,bottom_height])
                                 cube([20,110,top_height-2*floorthick-2]); 
                         }
@@ -572,30 +572,30 @@ module case_bottom(case_design) {
                     }                    
                     if(case_design == "snap") {
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height+top_height)/2]) 
-                                cube_fillet_inside([width,depth,bottom_height+top_height+floorthick], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z)/2]) 
+                                cube_fillet_inside([width,depth,case_z+floorthick], 
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,
-                                (depth/2)-wallthick-gap,(bottom_height+top_height)/2+floorthick]) 
+                                (depth/2)-wallthick-gap,(case_z)/2+floorthick]) 
                                     cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             // snap top indent
-                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,bottom_height+top_height-1.5]) 
+                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,case_z-1.5]) 
                                 rotate([0,45,0]) cube([4,50,4]);
-                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,bottom_height+top_height-1.5])
+                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,case_z-1.5])
                                 rotate([0,45,0]) cube([4,50,4]);
                         }
                     }
                     if(case_design == "fitted") {
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height+top_height)/2]) 
-                                cube_fillet_inside([width,depth,bottom_height+top_height], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z)/2]) 
+                                cube_fillet_inside([width,depth,case_z], 
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,
-                                (depth/2)-wallthick-gap,(bottom_height+top_height)/2+floorthick]) 
+                                (depth/2)-wallthick-gap,(case_z)/2+floorthick]) 
                                     cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
@@ -989,16 +989,16 @@ module case_top(case_design) {
                            translate([-gap,-gap,case_z-floorthick]) 
                                 cube([width-(2*wallthick),depth-(2*wallthick),floorthick]);
                             translate([(width*(1/5))-8-(wallthick+gap),depth-(2*wallthick)-gap-adjust,
-                                top_height+bottom_height-floorthick]) 
+                                case_z-floorthick]) 
                                     cube([8,wallthick+2*adjust,floorthick]);
                             translate([width-(width*(1/5))-(wallthick+gap),depth-(2*wallthick)-gap-adjust,
-                                top_height+bottom_height-floorthick]) 
+                                case_z-floorthick]) 
                                     cube([8,wallthick+2*adjust,floorthick]);                   
                             translate([(width*(1/5))-8-(wallthick+gap),-wallthick-gap+adjust,
-                                top_height+bottom_height-floorthick]) 
+                                case_z-floorthick]) 
                                     cube([8,wallthick+2*adjust,floorthick]);
                             translate([width-(width*(1/5))-(wallthick+gap),-wallthick-gap+adjust,
-                                top_height+bottom_height-floorthick]) 
+                                case_z-floorthick]) 
                                     cube([8,wallthick+2*adjust,floorthick]);
                         }                
                     }
@@ -1018,7 +1018,7 @@ module case_top(case_design) {
                     if(case_design == "tray" && case_style == "none") {
                         difference() {
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z/2]) 
-                                cube_fillet_inside([width+2*wallthick+1,depth,bottom_height+top_height], 
+                                cube_fillet_inside([width+2*wallthick+1,depth,case_z], 
                                     vertical=[0,0,0,0], top=[0,fillet,0,fillet,fillet], 
                                         bottom=[0,0,0,0], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z/2)-floorthick+.25]) 
@@ -1199,7 +1199,7 @@ module case_top(case_design) {
                     pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                     pcb_hole_size = sbc_data[s[0]][i+2];
                     if (pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            translate([pcb_hole_x,pcb_hole_y,top_height+bottom_height]) standoff(top_standoff);
+                            translate([pcb_hole_x,pcb_hole_y,case_z]) standoff(top_standoff);
                     }
                 }
             }
@@ -1207,23 +1207,23 @@ module case_top(case_design) {
             if(case_ext_standoffs == true) {
                 // right-rear standoff
                 if(width-pcb_loc_x-pcb_width >= 10 || pcb_loc_y >= 10) {
-                    translate([width-(2*(wallthick+gap))-(c_fillet/2),(c_fillet/2),top_height+bottom_height]) 
+                    translate([width-(2*(wallthick+gap))-(c_fillet/2),(c_fillet/2),case_z]) 
                         standoff(top_ext_standoff);
                 }
                 // right-front standoff    
                 if((width-pcb_loc_x-pcb_width >= 10 && depth-pcb_loc_y-pcb_depth >= 10) || width-pcb_loc_x-pcb_width >= 10) {
                     translate([width-(c_fillet/2)-(2*(wallthick+gap)),
-                        depth-(c_fillet/2)-(2*(wallthick+gap)),top_height+bottom_height])
+                        depth-(c_fillet/2)-(2*(wallthick+gap)),case_z])
                             standoff(top_ext_standoff);
                 }
                 // left-rear standoff
                 if(pcb_loc_x >= 10 || pcb_loc_y >= 10) {
-                    translate([(c_fillet/2),(c_fillet/2),top_height+bottom_height]) standoff(top_ext_standoff);
+                    translate([(c_fillet/2),(c_fillet/2),case_z]) standoff(top_ext_standoff);
                 }              
                 // left-front standoff
                 if(pcb_loc_x >= 10 || depth-pcb_loc_y-pcb_depth >= 10) {
                     translate([(c_fillet/2),depth-(c_fillet/2)-(2*(wallthick+gap)),
-                        top_height+bottom_height]) standoff(top_ext_standoff);                
+                        case_z]) standoff(top_ext_standoff);                
                 }
             }
             // standoff sidewall support
@@ -1385,30 +1385,30 @@ module case_side(case_design,case_style,side) {
                     difference() {
                         union() {
                             translate([-gap,-wallthick-gap,-floorthick]) 
-                                cube([width-2*wallthick,wallthick,top_height+bottom_height+2*floorthick]);
+                                cube([width-2*wallthick,wallthick,case_z+2*floorthick]);
                             difference() {
                                 translate([width-(2*wallthick)-gap-adjust,-wallthick-gap,
-                                    ((top_height+bottom_height)/2)-4]) 
+                                    ((case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
                                 translate([width-(2*wallthick)-gap-adjust,-wallthick-gap-adjust,
-                                    ((top_height+bottom_height)/2)-4-adjust]) 
+                                    ((case_z)/2)-4-adjust]) 
                                         cube([wallthick+.25,wallthick+(2*adjust),4.25]);
                             }
                             difference() {
                                 translate([-(2*wallthick)-gap-adjust,-wallthick-gap,
-                                    ((top_height+bottom_height)/2)-4]) 
+                                    ((case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
                                 translate([-wallthick-gap-adjust-.25,-wallthick-gap-adjust,
-                                    ((top_height+bottom_height)/2)-4-adjust]) 
+                                    ((case_z)/2)-4-adjust]) 
                                         cube([wallthick+.25,wallthick+(2*adjust),4.25]);
                             }
                         }
                         // top slots
                         translate([(width*(1/5))-8.25-(wallthick+gap),-wallthick-gap-adjust,
-                            top_height+bottom_height-floorthick-.25]) 
+                            case_z-floorthick-.25]) 
                                 cube([8.5,wallthick+2*adjust,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,-wallthick-gap-adjust,
-                            top_height+bottom_height-floorthick-.25]) 
+                            case_z-floorthick-.25]) 
                                 cube([8.5,wallthick+2*adjust,floorthick+.5]);
                         // bottom slots
                         translate([(width*(1/5))-8.25-(wallthick+gap),-wallthick-gap-adjust,-.25]) 
@@ -1421,30 +1421,30 @@ module case_side(case_design,case_style,side) {
                     difference() {
                         union() {
                             translate([-gap,depth-2*(wallthick)-gap,-floorthick]) 
-                                cube([width-2*wallthick,wallthick,top_height+bottom_height+2*floorthick]);
+                                cube([width-2*wallthick,wallthick,case_z+2*floorthick]);
                             difference() {
                                 translate([width-(2*wallthick)-gap-adjust,depth-2*(wallthick)-gap-adjust,
-                                    ((top_height+bottom_height)/2)-4])
+                                    ((case_z)/2)-4])
                                         cube([(2*wallthick)+.5,wallthick,8]);
                                 translate([width-(2*wallthick)-gap-adjust,
-                                    depth-2*(wallthick)-adjust-gap-adjust,((top_height+bottom_height)/2)-4-adjust])
+                                    depth-2*(wallthick)-adjust-gap-adjust,((case_z)/2)-4-adjust])
                                         cube([wallthick+.25,wallthick+(2*adjust),4.25]);
                             }
                             difference() {
                                 translate([-(2*wallthick)-gap-adjust,depth-2*(wallthick)-gap-adjust,(
-                                    (top_height+bottom_height)/2)-4]) 
+                                    (case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
                                 translate([-wallthick-gap-adjust-.25,depth-2*(wallthick)-adjust-gap-adjust,
-                                    ((top_height+bottom_height)/2)-4-adjust]) 
+                                    ((case_z)/2)-4-adjust]) 
                                         cube([wallthick+.25,wallthick+(2*adjust),4.25]);
                             }
                         }
                         // top slots
                         translate([(width*(1/5))-8.25-(wallthick+gap),depth-2*wallthick-gap-adjust,
-                            top_height+bottom_height-floorthick-.25]) 
+                            case_z-floorthick-.25]) 
                                 cube([8.5,wallthick+2*adjust,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,depth-2*wallthick-gap-adjust,
-                            top_height+bottom_height-floorthick-.25]) 
+                            case_z-floorthick-.25]) 
                                 cube([8.5,wallthick+2*adjust,floorthick+.5]);
                         // bottom slots
                         translate([(width*(1/5))-8.25-(wallthick+gap),depth-2*wallthick-gap-adjust,-.25]) 
@@ -1456,22 +1456,22 @@ module case_side(case_design,case_style,side) {
                 if(side == "right") {
                     difference() {
                         translate([width-(2*wallthick)-gap,-(2*wallthick)-gap,-wallthick]) 
-                            cube([wallthick,depth+2*wallthick,top_height+bottom_height+(2*wallthick)]);
+                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
                         translate([width-(2*wallthick)-gap-adjust,-wallthick-gap-.25,
-                            ((top_height+bottom_height)/2)]) cube([wallthick+2*adjust,wallthick+.5,8.5]);
+                            ((case_z)/2)]) cube([wallthick+2*adjust,wallthick+.5,8.5]);
                         translate([width-(2*wallthick)-gap-adjust,depth-2*(wallthick)-gap-.25,
-                            ((top_height+bottom_height)/2)])
+                            ((case_z)/2)])
                                 cube([wallthick+2*adjust,wallthick+.5,8.5]);
                     }
                 }
                 if(side == "left") {
                     difference() {
                         translate([-wallthick-gap,-(2*wallthick)-gap,-wallthick]) 
-                            cube([wallthick,depth+2*wallthick,top_height+bottom_height+(2*wallthick)]);
-                        translate([-wallthick-gap-adjust,-wallthick-gap-.25,((top_height+bottom_height)/2)])
+                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
+                        translate([-wallthick-gap-adjust,-wallthick-gap-.25,((case_z)/2)])
                             cube([wallthick+2*adjust,wallthick+.5,8.5]);
                         translate([-wallthick-gap-adjust,depth-2*(wallthick)-gap-.25,
-                            ((top_height+bottom_height)/2)])
+                            ((case_z)/2)])
                                 cube([wallthick+2*adjust,wallthick+.5,8.5]);
                     }
                 }
@@ -1535,12 +1535,12 @@ module case_side(case_design,case_style,side) {
                 }
             }
             if(case_design == "tray" && case_style == "vu5") {
-                cheight = top_height+bottom_height+90;
+                cheight = case_z+90;
                 vesa = 75;
                 vu_holder(case_style,side,vesa,cheight);
             }
             if(case_design == "tray" && case_style == "vu7") {
-                cheight = top_height+bottom_height+122;
+                cheight = case_z+122;
                 vesa = 100;
                 vu_holder(case_style,side,vesa,cheight);
             }         
@@ -1827,7 +1827,7 @@ module open_io() {
 
 module vu_holder(vu_model,side,vesa,cheight) {
 
-//cheight = top_height+bottom_height+90;
+//cheight = case_z+90;
 v_fillet = 3;
     
 vu5_case_x_offset = 6.5;                // for uniform front vu5=6.5, vu7=20
