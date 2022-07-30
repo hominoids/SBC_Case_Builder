@@ -45,14 +45,10 @@ use <./lib/fillets.scad>;
 include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder.cfg>;
 
-/* [Board and View] */
-// case_name to load from sbc_case_builder.cfg
-case_name = "c4_fitted"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
+/* [Case View] */
 // viewing mode "platter", "model", "debug"
 view = "model"; // [platter, model, debug]
-
-/* [Adjustments] */
-// enable highlight for subtarctive geometry (true or false)
+// enable highlight for accessory subtarctive geometry
 highlight = false;
 // sbc off in model view (true or false)
 sbc_off = false;
@@ -69,38 +65,76 @@ move_front = 0;
 // move rear mm in model view or < 0 = off
 move_rear = 0;
 
+/* [Case Adjustments] */
+// base case design
+case_design = "shell"; // ["shell","panel","stacked","tray","round","hex","snap","fitted"]
+// base case style
+case_style = "none"; // ["none","vu5","vu7","sides"]
+// single board computer model
+sbc_model = "c4"; // ["c1+","c2","c4","hc4","xu4","xu4q","mc1","hc1","n1","n2","n2+","h2"]
+
+// sbc location x axis
+pcb_loc_x = 0;
+// sbc location y axis
+pcb_loc_y = 0;
+// sbc location z axis
+pcb_loc_z = 0;
+// additional x axis case size
+case_offset_x = 0;
+// additional y axis case size
+case_offset_y = 0;
+// additional z axis case bottom size
+case_offset_tz = 0;
+// additional z axis case top size
+case_offset_bz = 0;
+// case wall thickness
+wallthick = 2;
+// case floor thickness
+floorthick = 2;
+// case side thickness
+sidethick = 2;
+// distance between pcb and case
+gap = 1;
+// corner fillets
+c_fillet = 3;
+// edge fillets
+fillet = 0;
+// enable indentations around io openings
+indents = true;
+// enable wall support for standoffs
+sidewall_support = true;
+// enable case top standoffs
+sbc_top_standoffs = true;
+// enable case bottom standoffs
+sbc_bottom_standoffs = true;
+// enable case extended standoffs
+case_ext_standoffs = false;
+// enable sata punchout
+sata_punchout = false;
+// gpio openings
+gpio_opening = "none"; // ["none","vent","open","punchout"]
+// cooling openings
+cooling = "fan"; // ["none","vents","fan","custom"]
+// exhaust vents
+exhaust_vents = "vent"; // ["none","vent"]
+// special mode
+mode = "none"; // ["none","net_card"]
+
+// top case standoff - [diameter,height(top_height-pcb_loc_z),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole),standoff style(0=hex, 1=cylinder),enable reverse standoff,enable insert at top of standoff,insert hole dia.,insert depth]
+top_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
+// bottom case standoff - [diameter,height(bottom_height+pcb_loc_z-pcb_z),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole),standoff style(0=hex, 1=cylinder),enable reverse standoff,enable insert at top of standoff,insert hole dia.,insert depth]
+bottom_standoff = [6.75,7,3.6,10,4,1,0,0,0,4.5,5.1];
+// top case extened standoff - [diameter,height(top_height),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole),standoff style(0=hex, 1=cylinder),enable reverse standoff,enable insert at top of standoff,insert hole dia.,insert depth]
+top_ext_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
+// bottom case extended standoff - [diameter,height(bttom_height),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole),standoff style(0=hex, 1=cylinder),enable reverse standoff,enable insert at top of standoff,insert hole dia.,insert depth]
+bottom_ext_standoff = [6.75,5,3.6,10,4,1,0,0,0,4.5,5.1];
+
+/* [Case Accessories] */
+// case accessories to load
+case_name = "c4_shell"; // [c1+_shell,c1+_shell_boombox,c1+_panel,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_stacked,c1+_tray,c1+_tray_sides,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,xu4_shell,xu4_panel,xu4_stacked,xu4_tray,xu4_tray_sides,xu4_tray_vu5,xu4_tray_vu7,xu4q_shell,xu4q_panel,xu4q_stacked,xu4q_tray,xu4q_tray_sides,xu4q_tray_vu5,xu4q_tray_vu7,n1_shell,n1_panel,n1_stacked,n1_tray,n1_tray_sides,n1_tray_vu5,n1_tray_vu7,n2_panel,n2_tray,n2_tray_sides,n2_tray_vu5,n2_tray_vu7,n2+_panel,n2+_tray,n2+_tray_sides,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,show2_shell,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,test]
+
+
 c = search([case_name],case_data);
-
-case_design = case_data[c[0]][2];                   // "shell", "panel", "stacked", "tray", "round", "snap"
-case_style = case_data[c[0]][3];                    // style of case_design
-
-sbc_model = case_data[c[0]][1];                     // any sbc from sbc model framework: "c1+","c2","c4","hc4"
-                                                    // "xu4","xu4q","mc1","hc1","n1","n2","n2+","h2"
-pcb_loc_x = case_data[c[0]][4];                     // sbc location x axis
-pcb_loc_y = case_data[c[0]][5];                     // sbc location y axis
-pcb_loc_z = case_data[c[0]][6];                     // sbc location z axis
-case_offset_x = case_data[c[0]][7];                 // additional case x axis size
-case_offset_y = case_data[c[0]][8];                 // additional case y axis size
-case_offset_tz = case_data[c[0]][9];                // additional case top z axis size
-case_offset_bz = case_data[c[0]][10];               // additional case bottom z axis size
-wallthick = case_data[c[0]][11];                    // case wall thickness
-floorthick = case_data[c[0]][12];                   // case floor thickness
-sidethick = case_data[c[0]][13];                    // case side thickness
-gap = case_data[c[0]][14];                          // distance between pcb and case
-c_fillet = case_data[c[0]][15][0];                  // corner fillets
-fillet = case_data[c[0]][15][1];                    // edge fillets
-indents = case_data[c[0]][16];                      // enable indentations around io openings
-sidewall_support = case_data[c[0]][17];             // enable wall support for standoffs
-sbc_top_standoffs = case_data[c[0]][18];            // enable sbc top standoffs
-sbc_bottom_standoffs = case_data[c[0]][19];         // enable sbc bottom standoffs
-case_ext_standoffs = case_data[c[0]][20];           // enable case extended standoffs
-sata_punchout = case_data[c[0]][21];                // enable sata punchout
-gpio_opening = case_data[c[0]][22];                 // gpio openings "none","vent","open","punchout"
-cooling = case_data[c[0]][23];                      // "none", "vents", "fan", "custom" using ./dxf/customfan.dxf
-exhaust_vents = case_data[c[0]][24];                // exhaust vents "none","vent"
-mode = case_data[c[0]][25];                         // special mode: "net_card"
-vu_rotation = [15,0,0];
-
 s = search([sbc_model],sbc_data);
 
 pcb_width = sbc_data[s[0]][1];
@@ -109,8 +143,6 @@ pcb_z = sbc_data[s[0]][3];
 pcb_tmaxz = sbc_data[s[0]][5];
 pcb_bmaxz = sbc_data[s[0]][6];
 
-//c_fillet = sbc_data[s[0]][4];                   // corner fillets
-
 width = pcb_width+(2*(wallthick+gap))+case_offset_x;
 depth = pcb_depth+(2*(wallthick+gap))+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz;
@@ -118,62 +150,15 @@ bottom_height = pcb_bmaxz+floorthick+case_offset_bz;
 case_z = bottom_height+top_height;
 
 
-lip = 5;
-case_diameter = width*1.14;
-tol = .25;
-
-top_standoff =    [case_data[c[0]][26][0],      // diameter
-                   top_height-pcb_loc_z,        // height top_height
-                   case_data[c[0]][26][2],      // holesize
-                   case_data[c[0]][26][3],      // supportsize
-                   case_data[c[0]][26][4],      // supportheight
-                   case_data[c[0]][26][5],      // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                   case_data[c[0]][26][6],      // standoff style 0=hex, 1=cylinder
-                   case_data[c[0]][26][7],      // enable reverse standoff
-                   case_data[c[0]][26][8],      // enable insert at top of standoff
-                   case_data[c[0]][26][9],      // insert hole dia. mm
-                   case_data[c[0]][26][10]];    // insert depth mm
-
-bottom_standoff = [case_data[c[0]][27][0],      // diameter
-                   bottom_height+pcb_loc_z-pcb_z, // height  bottom_height-pcb_z
-                   case_data[c[0]][27][2],      // holesize
-                   case_data[c[0]][27][3],      // supportsize
-                   case_data[c[0]][27][4],      // supportheight
-                   case_data[c[0]][27][5],      // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                   case_data[c[0]][27][6],      // standoff style 0=hex, 1=cylinder
-                   case_data[c[0]][27][7],      // enable reverse standoff
-                   case_data[c[0]][27][8],      // enable insert at top of standoff
-                   case_data[c[0]][27][9],      // insert hole dia. mm
-                   case_data[c[0]][27][10]];    // insert depth mm
-top_ext_standoff =    [case_data[c[0]][28][0],  // radius
-                   top_height,                  // height top_height
-                   case_data[c[0]][28][2],      // holesize
-                   case_data[c[0]][28][3],      // supportsize
-                   case_data[c[0]][28][4],      // supportheight
-                   case_data[c[0]][28][5],      // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                   case_data[c[0]][28][6],      // standoff style 0=hex, 1=cylinder
-                   case_data[c[0]][28][7],      // enable reverse standoff
-                   case_data[c[0]][28][8],      // enable insert at top of standoff
-                   case_data[c[0]][28][9],      // insert hole dia. mm
-                   case_data[c[0]][28][10]];    // insert depth mm
-
-bottom_ext_standoff = [case_data[c[0]][29][0],  // diameter
-                   bottom_height,               // height  bottom_height-pcb_z
-                   case_data[c[0]][29][2],      // holesize
-                   case_data[c[0]][29][3],      // supportsize
-                   case_data[c[0]][29][4],      // supportheight
-                   case_data[c[0]][29][5],      // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                   case_data[c[0]][29][6],      // standoff style 0=hex, 1=cylinder
-                   case_data[c[0]][29][7],      // enable reverse standoff
-                   case_data[c[0]][29][8],      // enable insert at top of standoff
-                   case_data[c[0]][29][9],      // insert hole dia. mm
-                   case_data[c[0]][29][10]];    // insert depth mm
-
 /* [Hidden] */
 adjust = .01;
 $fn=90;
 case_fn = 360;                                  // circle segments for round cases
 case_ffn = 90;                                  // circle segments for fillet of round cases
+lip = 5;
+case_diameter = width*1.14;
+tol = .25;
+vu_rotation = [15,0,0];
 
 
 // platter view
