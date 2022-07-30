@@ -53,17 +53,17 @@ highlight = false;
 // sbc off in model view (true or false)
 sbc_off = false;
 // raises top mm in model view or < 0 = off
-raise_top = 0;
+raise_top = 0; // [-1:100]
 // lowers bottom mm in model view or < 0 = off
-lower_bottom = 0;
+lower_bottom = 0; // [-1:100]
 // move left side mm in model view or < 0 = off
-move_leftside = 0;
+move_leftside = 0; // [-1:100]
 // move right side mm in model view or < 0 = off
-move_rightside = 0;
+move_rightside = 0; // [-1:100]
 // move front mm in model view or < 0 = off
-move_front = 0;
+move_front = 0; // [-1:100]
 // move rear mm in model view or < 0 = off
-move_rear = 0;
+move_rear = 0; // [-1:100]
 
 /* [Case Adjustments] */
 // base case design
@@ -71,34 +71,34 @@ case_design = "shell"; // ["shell","panel","stacked","tray","round","hex","snap"
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
-sbc_model = "c4"; // ["c1+","c2","c4","hc4","xu4","xu4q","mc1","hc1","n1","n2","n2+","h2"]
+sbc_model = "c4"; // ["c1+","c2","c4","xu4","xu4q","mc1","hc1","hc4","n1","n2","n2+","h2","rpi3b+","a64","rock64","rockpro64","atomicpi","jetsonnano","show2"]
 
 // sbc location x axis
-pcb_loc_x = 0;
+pcb_loc_x = 0; //[0:.5:200]
 // sbc location y axis
-pcb_loc_y = 0;
+pcb_loc_y = 0; //[0:.5:200]
 // sbc location z axis
-pcb_loc_z = 0;
+pcb_loc_z = 0; //[0:.25:50]
 // additional x axis case size
-case_offset_x = 0;
+case_offset_x = 0; //[0:.5:200]
 // additional y axis case size
-case_offset_y = 0;
+case_offset_y = 0; //[0:.5:200]
 // additional z axis case bottom size
-case_offset_tz = 0;
+case_offset_tz = 0; //[0:.5:50]
 // additional z axis case top size
-case_offset_bz = 0;
+case_offset_bz = 0; //[0:.5:50]
 // case wall thickness
-wallthick = 2;
+wallthick = 2; //[1:.5:5]
 // case floor thickness
-floorthick = 2;
+floorthick = 2; //[1:.5:5]
 // case side thickness
-sidethick = 2;
+sidethick = 2; //[1:.5:5]
 // distance between pcb and case
-gap = 1;
+gap = 1; //[.5:.5:5]
 // corner fillets
-c_fillet = 3;
+c_fillet = 3; //[0:.5:9]
 // edge fillets
-fillet = 0;
+fillet = 0; //[0:.5:6]
 // enable indentations around io openings
 indents = true;
 // enable wall support for standoffs
