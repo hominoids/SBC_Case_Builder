@@ -241,7 +241,7 @@ if (view == "model") {
             color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
         if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z]) sbc(sbc_model);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
         }
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
@@ -252,7 +252,7 @@ if (view == "model") {
             color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
         if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z]) sbc(sbc_model);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
         }
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top])case_top(case_design);
@@ -275,7 +275,7 @@ if (view == "model") {
             color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
         if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z]) sbc(sbc_model);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
         }
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
@@ -286,7 +286,7 @@ if (view == "model") {
             color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
         if(sbc_off == false) {
-            translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z]) sbc(sbc_model);
+            translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
         }
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
@@ -341,7 +341,7 @@ if (view == "model") {
             color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
         if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z]) sbc(sbc_model);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
         }
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
@@ -352,14 +352,13 @@ if (view == "model") {
             color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
         }
         if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z]) sbc(sbc_model);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
         }
         if(raise_top >= 0) {
             color("grey",1) translate([0,0,raise_top]) case_top(case_design);
         }        
     }
     // model accessories
-    echo(accessory_name,accessory_data[a[0]]);
     if(accessory_name != "none") {
         for (i=[1:14:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
@@ -448,13 +447,12 @@ module case_bottom(case_design) {
                     }
                     if(case_design == "tray") {
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,bottom_height/2]) 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height)/2]) 
                                 cube_fillet_inside([width,depth,bottom_height], 
                                     vertical=[0,0,0,0], top=[0,0,0,0], 
                                         bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,
-                                (bottom_height/2)+floorthick]) 
-                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),bottom_height], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height/2)+floorthick]) 
+                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),bottom_height+adjust], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0],bottom=[2,2,2,2], $fn=90);
                         }
@@ -558,19 +556,18 @@ module case_bottom(case_design) {
                     }                    
                     if(case_design == "snap") {
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z)/2]) 
-                                cube_fillet_inside([width,depth,case_z+floorthick], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(floorthick+case_z)/2]) 
+                                cube_fillet_inside([width,depth,floorthick+case_z], 
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
-                            translate([(width/2)-wallthick-gap,
-                                (depth/2)-wallthick-gap,(case_z)/2+floorthick]) 
-                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick+(floorthick+case_z)/2]) 
+                                cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             // snap top indent
-                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,case_z-1.5]) 
+                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,case_z-.5]) 
                                 rotate([0,45,0]) cube([4,50,4]);
-                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,case_z-1.5])
+                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,case_z-.5])
                                 rotate([0,45,0]) cube([4,50,4]);
                         }
                     }
@@ -581,18 +578,18 @@ module case_bottom(case_design) {
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,
-                                (depth/2)-wallthick-gap,(case_z)/2+floorthick]) 
-                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
+                                (depth/2)-wallthick-gap,(case_z/2)+floorthick]) 
+                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             difference() {
-                                translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z+adjust-lip/2]) 
-                                    cube_fillet_inside([width+adjust,depth+adjust,lip], 
+                                translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-lip/2]) 
+                                    cube_fillet_inside([width+adjust,depth+adjust,lip+adjust], 
                                         vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                             top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                                 
-                                translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z+adjust-lip/2]) 
-                                    cube_fillet_inside([width-wallthick,depth-wallthick,lip], 
+                                translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-lip/2]) 
+                                    cube_fillet_inside([width-wallthick,depth-wallthick,lip+adjust], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],top=[0,0,0,0],
                                             bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             }
@@ -711,39 +708,34 @@ module case_bottom(case_design) {
                     pcb_hole_size = sbc_data[s[0]][i+2];
                     if(sbc_model == "h2" && mode == "net_card" && (i == 7 || i ==13)) {
                         if (pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            netcard_standoff = [bottom_standoff[0],      // diameter
-                                                bottom_height-pcb_z-4,   // height  bottom_height-pcb_z
-                                                bottom_standoff[2],      // holesize
-                                                bottom_standoff[3],      // supportsize
-                                                bottom_standoff[4],      // supportheight
-                                                bottom_standoff[5],      // 1=countersink, 2=recessed hole, 3=nut holder, 4=blind
-                                                bottom_standoff[6],      // standoff style 0=hex, 1=cylinder
-                                                bottom_standoff[7],      // enable reverse standoff
-                                                bottom_standoff[8],      // enable insert at top of standoff
-                                                bottom_standoff[9],      // insert hole dia. mm
-                                                bottom_standoff[10]];    // insert depth mm
+                            netcard_standoff = [bottom_standoff[0],             // diameter
+                                                bottom_height-pcb_z+pcb_loc_z-4,// height  bottom_height-pcb_z
+                                                bottom_standoff[2],             // holesize
+                                                bottom_standoff[3],             // supportsize
+                                                bottom_standoff[4],             // supportheight
+                                                bottom_standoff[5],             // 1=countersink, 2=recessed hole, 3=nut holder, 4=blind
+                                                bottom_standoff[6],             // standoff style 0=hex, 1=cylinder
+                                                bottom_standoff[7],             // enable reverse standoff
+                                                bottom_standoff[8],             // enable insert at top of standoff
+                                                bottom_standoff[9],             // insert hole dia. mm
+                                                bottom_standoff[10]];           // insert depth mm
                             translate([pcb_hole_x,pcb_hole_y,0]) standoff(netcard_standoff);
                         }
                     }
                     else {
-                        if (pcb_hole_x!=0 && pcb_hole_y!=0 && case_design != "shell") {
-                            translate([pcb_hole_x,pcb_hole_y,0]) standoff(bottom_standoff);
-                        }
-                        else {
-                            if (pcb_hole_x!=0 && pcb_hole_y!=0) {
-                                shell_standoff = [bottom_standoff[0],      // diameter
-                                                  bottom_height-pcb_z,     // height  bottom_height-pcb_z
-                                                  bottom_standoff[2],      // holesize
-                                                  bottom_standoff[3],      // supportsize
-                                                  bottom_standoff[4],      // supportheight
-                                                  bottom_standoff[5],      // 1=countersink, 2=recessed hole, 3=nut holder, 4=blind
-                                                  bottom_standoff[6],      // standoff style 0=hex, 1=cylinder
-                                                  bottom_standoff[7],      // enable reverse standoff
-                                                  bottom_standoff[8],      // enable insert at top of standoff
-                                                  bottom_standoff[9],      // insert hole dia. mm
-                                                  bottom_standoff[10]];    // insert depth mm
-                                translate([pcb_hole_x,pcb_hole_y,0]) standoff(shell_standoff);
-                            }
+                        if (pcb_hole_x!=0 && pcb_hole_y!=0) {
+                            normal_standoff = [bottom_standoff[0],              // diameter
+                                                bottom_height-pcb_z+pcb_loc_z,  // height  bottom_height-pcb_z
+                                                bottom_standoff[2],             // holesize
+                                                bottom_standoff[3],             // supportsize
+                                                bottom_standoff[4],             // supportheight
+                                                bottom_standoff[5],             // 1=countersink, 2=recessed hole, 3=nut holder, 4=blind
+                                                bottom_standoff[6],             // standoff style 0=hex, 1=cylinder
+                                                bottom_standoff[7],             // enable reverse standoff
+                                                bottom_standoff[8],             // enable insert at top of standoff
+                                                bottom_standoff[9],             // insert hole dia. mm
+                                                bottom_standoff[10]];           // insert depth mm
+                            translate([pcb_hole_x,pcb_hole_y,0]) standoff(normal_standoff);
                         }
                     }
                 }
@@ -1062,15 +1054,13 @@ module case_top(case_design) {
                     }
                     if(case_design == "round") {
                         difference() {
-                            translate([pcb_width/2,pcb_depth/2,(case_z+2)/2]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,bottom_height+(top_height/2)-lip/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=top_height+lip, r=case_diameter/2, 
                                     top=fillet, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
-                            translate([pcb_width/2,pcb_depth/2,(case_z+2)/2-floorthick]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,bottom_height+(top_height/2)-floorthick-lip/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-(wallthick/3)-tol, 
                                     top=fillet-1, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
-//                            translate([pcb_width/2,pcb_depth/2,lip-1-adjust]) rotate([0,0,30]) 
-//                                cylinder(h=lip+2*adjust, r=(case_diameter/2)-(lip/2)+tol/2, $fn=case_fn);
-                            // io cutout
+                           // io cutout
                             translate([width,(depth/2)-wallthick-gap,bottom_height-lip+top_height/2-floorthick])
                                 cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip+2], 
                                     vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
@@ -1080,14 +1070,12 @@ module case_top(case_design) {
                     }
                     if(case_design == "hex") {
                         difference() {
-                            translate([pcb_width/2,pcb_depth/2,(case_z+2)/2]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,bottom_height+(top_height/2)-lip/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=top_height+lip, r=case_diameter/2, 
                                     top=fillet, bottom=0, $fn=6, fillet_fn=case_ffn, center=true);
-                            translate([pcb_width/2,pcb_depth/2,(case_z+2)/2-floorthick]) rotate([0,0,30]) 
+                            translate([pcb_width/2,pcb_depth/2,bottom_height+(top_height/2)-floorthick-lip/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-(wallthick/3)-tol, 
                                     top=fillet-1, bottom=0, $fn=6, fillet_fn=case_ffn, center=true);
-//                            translate([pcb_width/2,pcb_depth/2,lip-1-adjust]) rotate([0,0,30]) 
-//                                cylinder(h=lip+2*adjust, r=(case_diameter/2)-(lip/2)+tol/2, $fn=case_fn);
                             // io cutout
                             translate([width,(depth/2)-wallthick-gap,bottom_height-lip+top_height/2-floorthick])
                                 cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip+2], 
@@ -1097,7 +1085,7 @@ module case_top(case_design) {
                             cube([wallthick-.5,depth-3-2*(floorthick+gap),top_height-floorthick-gap]); 
                     }
                     if(case_design == "snap") {
-                        translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z+floorthick])
+                        translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick*1.5+case_z])
                             cube_fillet_inside([width,depth,floorthick], 
                                 vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                     top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
@@ -1114,13 +1102,13 @@ module case_top(case_design) {
                         }
                         // snap top outdent
                         difference() {
-                            translate([-2.85,(depth/2)-25-gap-wallthick,case_z+floorthick-3]) 
+                            translate([-2.5,(depth/2)-25-gap-wallthick,case_z-.5]) 
                                 rotate([0,45,0]) cube([4,50,4]);
                             translate([-1,(depth/2)-26-gap-wallthick,case_z+floorthick-6]) 
                                 rotate([0,0,0]) cube([4,52,6]);
                         }
                         difference() {
-                            translate([width-wallthick-gap-6.5,(depth/2)-25-gap-wallthick,case_z+floorthick-3])
+                            translate([width-wallthick-gap-6.25,(depth/2)-25-gap-wallthick,case_z-.5])
                                 rotate([0,45,0]) cube([4,50,4]);
                             translate([width-wallthick-gap-6.5,(depth/2)-26-gap-wallthick,case_z+floorthick-6])
                                 rotate([0,0,0]) cube([4,52,6]);
@@ -1129,13 +1117,13 @@ module case_top(case_design) {
                     if(case_design == "fitted") {
                         difference() {
                             translate([(width/2)-wallthick-gap,
-                                (depth/2)-wallthick-gap,bottom_height+(top_height/2)+floorthick+6.5]) 
-                                    cube_fillet_inside([width,depth,lip+1*floorthick], 
+                                (depth/2)-wallthick-gap,case_z+floorthick/2-(lip)/2]) 
+                                    cube_fillet_inside([width,depth,lip+floorthick], 
                                         vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                             top=[fillet,fillet,fillet,fillet,fillet], 
                                                 bottom=[0,0,0,0], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,
-                                bottom_height+(top_height/2)+floorthick+4.5]) 
+                                case_z-floorthick]) 
                                     cube_fillet_inside([width-wallthick+tol,depth-wallthick+tol,lip+floorthick], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[fillet,fillet,fillet,fillet,fillet],
@@ -1206,7 +1194,18 @@ module case_top(case_design) {
                     pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                     pcb_hole_size = sbc_data[s[0]][i+2];
                     if (pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            translate([pcb_hole_x,pcb_hole_y,case_z]) standoff(top_standoff);
+                        normal_standoff = [top_standoff[0],              // diameter
+                                            top_height+pcb_loc_z,        // height  bottom_height-pcb_z
+                                            top_standoff[2],             // holesize
+                                            top_standoff[3],             // supportsize
+                                            top_standoff[4],             // supportheight
+                                            top_standoff[5],             // 1=countersink, 2=recessed hole, 3=nut holder, 4=blind
+                                            top_standoff[6],             // standoff style 0=hex, 1=cylinder
+                                            top_standoff[7],             // enable reverse standoff
+                                            top_standoff[8],             // enable insert at top of standoff
+                                            top_standoff[9],             // insert hole dia. mm
+                                            top_standoff[10]];           // insert depth mm
+                        translate([pcb_hole_x,pcb_hole_y,case_z]) standoff(normal_standoff);
                     }
                 }
             }
@@ -1238,16 +1237,16 @@ module case_top(case_design) {
                 if(pcb_width/pcb_depth >= 1.4) {
                     translate([0,pcb_depth,0]) rotate([180,0,0]) {
                         for (i=[7:3:16]) {
-                            pcb_hole_x = sbc_data[s[0]][i]-pcb_loc_x;
-                            pcb_hole_y = sbc_data[s[0]][i+1]-pcb_loc_y;
+                            pcb_hole_x = sbc_data[s[0]][i]+pcb_loc_x;
+                            pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                             pcb_hole_size = sbc_data[s[0]][i+2];
                             if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
-                                translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
-                                    -top_height-bottom_height]) cube([2,gap+1.6,top_standoff[1]]);
+                                translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,-case_z]) 
+                                    cube([2,gap+1.6,top_standoff[1]]);
                             }
                             if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
-                                translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,
-                                    -top_height-bottom_height]) cube([2,gap+1.6,top_standoff[1]]);
+                                translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,-case_z]) 
+                                    cube([2,gap+1.6,top_standoff[1]]);
                             }
                         }
                     }
@@ -1258,11 +1257,11 @@ module case_top(case_design) {
                         pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                         pcb_hole_size = sbc_data[s[0]][i+2];
                         if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 10) {
-                            translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,bottom_height+adjust])
+                            translate([pcb_hole_x+pcb_loc_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,bottom_height+adjust])
                                 cube([gap+adjust+1,2,top_standoff[1]]);
                         }
                         if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 13 || i == 16) {
-                            translate([pcb_hole_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,bottom_height+adjust])
+                            translate([pcb_hole_x+pcb_loc_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,bottom_height+adjust])
                                 cube([gap+adjust+1,2,top_standoff[1]]);
                         }
                     }
@@ -1710,7 +1709,7 @@ module open_io() {
                      rotate([90,0,0]) cylinder(d=10, h=wallthick+(2*adjust));
             }
             if(type == "pwr2.5_5x7.5") {            
-                translate([loc_x+2.75,loc_y-gap-wallthick/2+1,bottom_height+pcb_loc_z+2.1]) 
+                translate([loc_x+2.75,loc_y-gap-wallthick/2,bottom_height+pcb_loc_z+2.1]) 
                      rotate([90,0,0]) cylinder(d=6, h=wallthick+(2*adjust));
             }
         }
@@ -1767,7 +1766,7 @@ module open_io() {
                 && gpio_opening != "punchout") {
                     for(r=[loc_x+7:4:46+loc_x]) {
                         translate([r,depth-(2*wallthick)-adjust-2,bottom_height+2]) 
-                           cube([2,wallthick+(2*adjust)+1,top_height-floorthick-4]);
+                           cube([2,wallthick+(2*adjust)+1,top_height-floorthick-6]);
                     }
         }
     
@@ -1867,27 +1866,27 @@ vu7_height = vu7_pcb_height + 9.75;
                     cube([sidethick,depth+2*wallthick,cheight]);
                 // right tabs for vu5 attachment
                 if(case_style == "vu5") {
-                translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-39,
-                    case_z+80]) rotate([90-vu_rotation[0],180,0]) 
-                        slab_r([((width-vesa)/2)+4,10,sidethick], [.1,.1,3,3]);
-                translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-26,
-                    case_z+31.5]) rotate([90-vu_rotation[0],180,0]) 
-                        slab_r([((width-vesa)/2)+4,10,sidethick], [.1,.1,3,3]);
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-39,
+                        case_z+80]) rotate([90-vu_rotation[0],180,0]) 
+                            slab_r([((width-vesa)/2)+4.5,10,sidethick], [.1,.1,3,3]);
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-26,
+                        case_z+31.5]) rotate([90-vu_rotation[0],180,0]) 
+                            slab_r([((width-vesa)/2)+4.5,10,sidethick], [.1,.1,3,3]);
                 
-                translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-41.85-adjust,
-                    case_z+79.25]) rotate([90-vu_rotation[0],180,0]) 
-                        difference() { 
-                            cube([sidethick,10,sidethick]);
-                            translate([0,-adjust,sidethick]) rotate([0,45,0]) 
-                                cube([2*sidethick,10+(2*adjust),sidethick]);
-                        }
-                translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-28.85-adjust,
-                    case_z+30.75]) rotate([90-vu_rotation[0],180,0])
-                        difference() { 
-                            cube([sidethick,10,sidethick]);
-                            translate([0,-adjust,sidethick]) rotate([0,45,0]) 
-                                cube([2*sidethick,10+(2*adjust),sidethick]);
-                        }
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-41.85-adjust,
+                        case_z+79.25]) rotate([90-vu_rotation[0],180,0]) 
+                    difference() { 
+                        cube([sidethick,10,sidethick]);
+                        translate([0,-adjust,sidethick]) rotate([0,45,0]) 
+                            cube([2*sidethick,10+(2*adjust),sidethick]);
+                    }
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-28.85-adjust,
+                        case_z+30.75]) rotate([90-vu_rotation[0],180,0])
+                    difference() { 
+                        cube([sidethick,10,sidethick]);
+                        translate([0,-adjust,sidethick]) rotate([0,45,0]) 
+                            cube([2*sidethick,10+(2*adjust),sidethick]);
+                    }
                 }
                 // right tabs for vu7 attachment
                 if(case_style == "vu7") {
@@ -2023,7 +2022,7 @@ vu7_height = vu7_pcb_height + 9.75;
         if(side == "left") {
             // vu5 shape and back cut
             if(case_style == "vu5") {
-                translate([-sidethick-adjust+1,-.6,case_z+sidethick+2.5]) 
+                translate([-sidethick-adjust,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                         linear_extrude(height = 2*sidethick) 
                             polygon(points = [ [-sidethick,-sidethick-wallthick-5],
@@ -2036,14 +2035,14 @@ vu7_height = vu7_pcb_height + 9.75;
                         cube_fillet_inside([10,50,110],vertical=[v_fillet,v_fillet,v_fillet,v_fillet],
                             top=[0,0,0,0],bottom=[3,3,3,3], $fn=90);
                 // tab holes
-                translate([width/2-(vesa/2)-3,depth-36.75,case_z+vu7_height-19.75]) 
+                translate([width/2-(vesa/2)-3,depth-36.75,case_z+75]) 
                     rotate([90+vu_rotation[0],0,0]) cylinder(d=3, h=sidethick+1);
-                translate([width/2-(vesa/2)-3,depth-24.25,case_z+18]) 
+                translate([width/2-(vesa/2)-3,depth-24.25,case_z+26.75]) 
                     rotate([90+vu_rotation[0],0,0])  cylinder(d=3, h=sidethick+1);
             }
             // vu7 shape and back cut
             if(case_style == "vu7") {
-                translate([-sidethick-adjust+1,-.6,case_z+sidethick+2.5]) 
+                translate([-sidethick-adjust,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                         linear_extrude(height = 2*sidethick) 
                             polygon(points = [ [-sidethick,-sidethick-wallthick-5],

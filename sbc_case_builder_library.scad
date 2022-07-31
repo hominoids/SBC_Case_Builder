@@ -2356,8 +2356,8 @@ module microusb_open() {
     
     translate([0,0,.5])rotate([90,0,0])
     hull() {
-        translate([6,1.5,-5]) cylinder(d=3.5,h=8);
-        translate([1,1.5,-5]) cylinder(d=3.5,h=8);
+        translate([6,1.5,-5]) cylinder(d=3.5,h=12);
+        translate([1,1.5,-5]) cylinder(d=3.5,h=12);
     }
 }
 
