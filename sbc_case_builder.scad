@@ -14,28 +14,29 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    20220202 Version 1.0.0    sbc case builder using sbc model framework
-    20220206 Version 1.0.1    added tray-vu7 case style, other fixes
+    20220202 Version 1.0.0    sbc case builder using sbc model framework.
+    20220206 Version 1.0.1    added tray-vu7 case style, other fixes.
     20220212 Version 1.1.0    implemented sbc_case_builder.cfg config file,
                               sbc_case_builder_library.scad and basic accessory framework.
                               adjusted tray-vu7 tabs, adjusted tray-vu7 model alignment
                               minor fixes and other maintenance.
     20220220 Version 1.1.1    added .cfg commands add1,add2,model,platter
                               schema changes, extended standoff fixes, hd mounting acc.
-                              acc. placement and other minor fixes, added raise_top setting
+                              acc. placement and other minor fixes, added raise_top setting.
     20220227 Version 1.1.2    added sbc_off setting, fixed hdmi bottom placement
                               schema change, extended standoff detection, hd vertical mount, oled holder
-                              access port, access cover, case feet and other fixes
+                              access port, access cover, case feet and other fixes.
     20220306 Version 1.1.3    added netcard, buttons, parametric access_port, other fixes and maintenance
     20220312 Version 1.2.0    added fillet array, button cutout style, hk_lcd35, other fixes and maintenance
     20220320 Version 1.2.1    added hk_boom bonnet model and accessories, hk_uart model, fixed uart opening,
                               enabled pcb_z, added tabs and fixed tray case top, other fixes and maintenance
     20220406 Version 1.2.2    added vu7c, vu8m and weatherboard2 models, other additions, 
-                              fixes and maintenance    
+                              fixes and maintenance.
     20220515 Version 1.2.3    added odroid-m1, jetson nano, rockpro64, completed mask(), improved docs
-                              changed tray top design
-    2022xxxx Version 2.0.x    added round, hexagon, snap and fitted cases, full customizer user interface,
-                              case configuration file changed to json, accessories kept in sbc_case_builder.cfg
+                              changed tray top design.
+    2022xxxx Version 2.0.x    full customizer user interface,case configuration file changed to json,
+                              accessories kept in sbc_case_builder.cfg, 
+                              added round, hexagon, snap and fitted cases. 
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -72,7 +73,7 @@ case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
-sbc_model = "c4"; // [c1+,c2,c4,xu4,xu4q,mc1,hc1,hc4,m1,n1,n2,n2+,h2,rpi3b+,a64,rock64,rockpro64,atomicpi,jetsonnano,show2]
+sbc_model = "c4"; // [c1+,c2,c4,xu4,xu4q,mc1,hc1,hc4,m1,n1,n2,n2+,h2,jetsonnano,show2,rockpro64,rpi3b+]
 // sbc location x axis
 pcb_loc_x = 0; //[0:.5:200]
 // sbc location y axis
@@ -1131,8 +1132,7 @@ module case_top(case_design) {
                                         vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                             top=[fillet,fillet,fillet,fillet,fillet], 
                                                 bottom=[0,0,0,0], $fn=90);
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,
-                                case_z-floorthick]) 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-floorthick-1]) 
                                     cube_fillet_inside([width-wallthick+tol,depth-wallthick+tol,lip+floorthick], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[fillet,fillet,fillet,fillet,fillet],
@@ -1767,7 +1767,7 @@ module open_io() {
         }
         if(side == "top" && cooling == "fan" && class == "heatsink" && type == "h2_oem") {
             translate([loc_x-28,loc_y-28,case_z-(floorthick+adjust)]) 
-                fan_mask(90,floorthick+3,2);
+                fan_mask(90,floorthick+6,2);
         }
         if(side == "top" && cooling == "vents" && class == "heatsink") {
             for(r=[loc_x+7:4:48]) {
@@ -1855,7 +1855,7 @@ module open_io() {
         // sata openings
         if(side == "top" && type == "sata_power_vrec" && sata_punchout == true) {
             translate([loc_x-3,loc_y+1.75,case_z-adjust-floorthick]) 
-                punchout(42,7.5,2,floorthick+(2*adjust)+2,3,"slot");
+                punchout(42,7.5,2,floorthick+(2*adjust)+6,3,"slot");
         }
     }
 }
