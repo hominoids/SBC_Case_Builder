@@ -237,62 +237,33 @@ if (view == "platter") {
 // model view
 if (view == "model") {
 //    translate([-width/2,-depth/2,0]) rotate([0,0,0]){
-    if(case_design == "shell") {
-        if(lower_bottom >= 0) {
-            color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+        if(case_design == "shell") {
+            if(lower_bottom >= 0) {
+                color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }
         }
-        if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
-        }
-        if(raise_top >= 0) {
-            color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-        }
-    }
-    if(case_design == "panel") {
-        if(lower_bottom >= 0) {
-            color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
-        }
-        if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
-        }
-        if(raise_top >= 0) {
-            color("grey",1) translate([0,0,raise_top])case_top(case_design);
-        }
-        if(move_front >= 0) {
-            color("grey",1) translate([0,move_front,0]) case_side(case_design,case_style,"front");
-        }
-        if(move_rear >= 0) {
-            color("grey",1) translate([0,-move_rear,0]) case_side(case_design,case_style,"rear");
-        }
-        if(move_rightside >= 0) {
-            color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
-        }
-        if(move_leftside >= 0) {
-            color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
-        }
-    }
-    if(case_design == "stacked") {
-        if(lower_bottom >= 0) {
-            color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
-        }
-        if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
-        }
-        if(raise_top >= 0) {
-            color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-        }
-    }
-    if(case_design == "tray") {
-        if(lower_bottom >= 0) {
-            color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
-        }
-        if(sbc_off == false) {
-            translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
-        }
-        if(raise_top >= 0) {
-            color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-        }
-        if(case_style == "sides" || case_style == "vu5" || case_style == "vu7") {
+        if(case_design == "panel") {
+            if(lower_bottom >= 0) {
+                color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top])case_top(case_design);
+            }
+            if(move_front >= 0) {
+                color("grey",1) translate([0,move_front,0]) case_side(case_design,case_style,"front");
+            }
+            if(move_rear >= 0) {
+                color("grey",1) translate([0,-move_rear,0]) case_side(case_design,case_style,"rear");
+            }
             if(move_rightside >= 0) {
                 color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
             }
@@ -300,101 +271,130 @@ if (view == "model") {
                 color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
             }
         }
-        if(case_style == "vu5") {
-            color("darkgrey",.5) translate([width+((127.5-width)/2)-6.5-wallthick-gap,
-                depth-1,case_z+15.5]) rotate([-vu_rotation[0],0,180]) 
-                    import(file = "stl/Vu5a_Case.stl");            
-            // right speaker and bracket
-            color("darkgrey",.5) 
-                translate([((127.5-75)/2)+(width/2)-wallthick-gap+30.5,depth-1,
-                    case_z+15]) rotate([90-vu_rotation[0],0,180]) 
-                        import(file = "stl/Vu5_Speaker_Bracket_Left.stl");
-            color("darkgrey",.5) translate([((127.5-75)/2)+(width/2)-wallthick-gap+85,depth+15,
-                case_z+12.5]) rotate([-vu_rotation[0],0,180]) hk_speaker();
-            // left speaker and bracket
-            color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-30.5,depth-1,
-                case_z+15]) rotate([90-vu_rotation[0],0,180])
-                    import(file = "stl/Vu5_Speaker_Bracket_Right.stl");
-            color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-40.5,depth+15,
-                case_z+12.5]) rotate([-vu_rotation[0],0,180]) hk_speaker();
-        }
-        if(case_style == "vu7") {
-            color("darkgrey",.5) translate([width+((192.90-width)/2)-wallthick-gap-20,
-                depth-1,case_z+15.5]) rotate([-vu_rotation[0],0,180]) 
-                    import(file = "stl/Vu7a_Case.stl");            
-            // right speaker and bracket
-            color("darkgrey",.5) 
-                translate([((192.90-100)/2)+(width/2)-wallthick-gap+57.5,depth-4,
-                    case_z+27]) rotate([90-vu_rotation[0],0,180]) 
-                        import(file = "stl/Vu7_Speaker_Bracket_Left.stl");
-            color("darkgrey",.5) translate([((192.90-100)/2)+(width/2)-wallthick-gap+97,depth+11.5,
-                case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
-            // left speaker and bracket
-            color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-58,depth-4,
-                case_z+27]) rotate([90-vu_rotation[0],0,180])
-                    import(file = "stl/Vu7_Speaker_Bracket_Right.stl");
-            color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-53.5,depth+11.5,
-                case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
-        }
-    } 
-    if(case_design == "round" || case_design == "hex") {
-        if(lower_bottom >= 0) {
-            color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
-        }
-        if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
-        }
-        if(raise_top >= 0) {
-            color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-        }        
-    }
-    if(case_design == "snap" || case_design == "fitted") {
-        if(lower_bottom >= 0) {
-            color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
-        }
-        if(sbc_off == false) {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
-        }
-        if(raise_top >= 0) {
-            color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-        }        
-    }
-    // model accessories
-    if(accessory_name != "none") {
-        for (i=[1:14:len(accessory_data[a[0]])-1]) {
-            class = accessory_data[a[0]][i];
-            type = accessory_data[a[0]][i+1];
-            loc_x = accessory_data[a[0]][i+2];
-            loc_y = accessory_data[a[0]][i+3];
-            loc_z = accessory_data[a[0]][i+4];
-            face = accessory_data[a[0]][i+5];
-            rotation = accessory_data[a[0]][i+6];
-            size_x = accessory_data[a[0]][i+7];
-            size_y = accessory_data[a[0]][i+8];
-            size_z = accessory_data[a[0]][i+9];
-            data_1 = accessory_data[a[0]][i+10];
-            data_2 = accessory_data[a[0]][i+11];
-            data_3 = accessory_data[a[0]][i+12];
-            data_4 = accessory_data[a[0]][i+13];
-            
-            if (class == "model" && face == "top" && raise_top > -1) {
-                add(type,loc_x,loc_y,loc_z+raise_top,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        if(case_design == "stacked") {
+            if(lower_bottom >= 0) {
+                color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }
-            else {
-                if (class == "model"&& face != "top" ) {
-                    add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }
+        }
+        if(case_design == "tray") {
+            if(lower_bottom >= 0) {
+                color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }
+            if(case_style == "sides" || case_style == "vu5" || case_style == "vu7") {
+                if(move_rightside >= 0) {
+                    color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
+                }
+                if(move_leftside >= 0) {
+                    color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
+                }
+            }
+            if(case_style == "vu5") {
+                color("darkgrey",.5) translate([width+((127.5-width)/2)-6.5-wallthick-gap,
+                    depth-1,case_z+15.5]) rotate([-vu_rotation[0],0,180]) 
+                        import(file = "stl/Vu5a_Case.stl");            
+                // right speaker and bracket
+                color("darkgrey",.5) 
+                    translate([((127.5-75)/2)+(width/2)-wallthick-gap+30.5,depth-1,
+                        case_z+15]) rotate([90-vu_rotation[0],0,180]) 
+                            import(file = "stl/Vu5_Speaker_Bracket_Left.stl");
+                color("darkgrey",.5) translate([((127.5-75)/2)+(width/2)-wallthick-gap+85,depth+15,
+                    case_z+12.5]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+                // left speaker and bracket
+                color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-30.5,depth-1,
+                    case_z+15]) rotate([90-vu_rotation[0],0,180])
+                        import(file = "stl/Vu5_Speaker_Bracket_Right.stl");
+                color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-40.5,depth+15,
+                    case_z+12.5]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+            }
+            if(case_style == "vu7") {
+                color("darkgrey",.5) translate([width+((192.90-width)/2)-wallthick-gap-20,
+                    depth-1,case_z+15.5]) rotate([-vu_rotation[0],0,180]) 
+                        import(file = "stl/Vu7a_Case.stl");            
+                // right speaker and bracket
+                color("darkgrey",.5) 
+                    translate([((192.90-100)/2)+(width/2)-wallthick-gap+57.5,depth-4,
+                        case_z+27]) rotate([90-vu_rotation[0],0,180]) 
+                            import(file = "stl/Vu7_Speaker_Bracket_Left.stl");
+                color("darkgrey",.5) translate([((192.90-100)/2)+(width/2)-wallthick-gap+97,depth+11.5,
+                    case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+                // left speaker and bracket
+                color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-58,depth-4,
+                    case_z+27]) rotate([90-vu_rotation[0],0,180])
+                        import(file = "stl/Vu7_Speaker_Bracket_Right.stl");
+                color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-53.5,depth+11.5,
+                    case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+            }
+        } 
+        if(case_design == "round" || case_design == "hex") {
+            if(lower_bottom >= 0) {
+                color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }        
+        }
+        if(case_design == "snap" || case_design == "fitted") {
+            if(lower_bottom >= 0) {
+                color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) sbc(sbc_model);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }        
+        }
+        // model accessories
+        if(accessory_name != "none") {
+            for (i=[1:14:len(accessory_data[a[0]])-1]) {
+                class = accessory_data[a[0]][i];
+                type = accessory_data[a[0]][i+1];
+                loc_x = accessory_data[a[0]][i+2];
+                loc_y = accessory_data[a[0]][i+3];
+                loc_z = accessory_data[a[0]][i+4];
+                face = accessory_data[a[0]][i+5];
+                rotation = accessory_data[a[0]][i+6];
+                size_x = accessory_data[a[0]][i+7];
+                size_y = accessory_data[a[0]][i+8];
+                size_z = accessory_data[a[0]][i+9];
+                data_1 = accessory_data[a[0]][i+10];
+                data_2 = accessory_data[a[0]][i+11];
+                data_3 = accessory_data[a[0]][i+12];
+                data_4 = accessory_data[a[0]][i+13];
+                
+                if (class == "model" && face == "top" && raise_top > -1) {
+                    add(type,loc_x,loc_y,loc_z+raise_top,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                }
+                else {
+                    if (class == "model"&& face != "top" ) {
+                        add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                    }
                 }
             }
         }
+        if(case_design == "tray") {
+            echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+        }
+        else {
+            echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
+        }
     }
-    if(case_design == "tray") {
-        echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
-    }
-    else {
-        echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
-    }
-}
-
+//}
 // debug
 if (view == "debug") {
     case_top(case_design);
@@ -503,10 +503,10 @@ module case_bottom(case_design) {
                         difference() {
                             translate([pcb_width/2,pcb_depth/2,bottom_height/2]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=bottom_height, r=case_diameter/2, 
-                                    top=0, bottom=c_fillet, $fn=case_fn, fillet_fn=case_ffn, center=true);
+                                    top=0, bottom=fillet, $fn=case_fn, fillet_fn=case_ffn, center=true);
                             translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+floorthick]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
-                                    r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
+                                    r=(case_diameter/2)-lip/2,top=0, bottom=fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             difference() {
                                 translate([pcb_width/2,pcb_depth/2,bottom_height-lip]) rotate([0,0,30]) 
@@ -518,7 +518,7 @@ module case_bottom(case_design) {
                         difference() {
                             translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+2*floorthick]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=bottom_height+adjust+floorthick+lip,
-                                    r=(case_diameter/2)-lip/2,top=0, bottom=c_fillet-1, $fn=case_fn, 
+                                    r=(case_diameter/2)-lip/2,top=0, bottom=fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             translate([-16,(depth/2)-60,-adjust])
                                 cube([width+10,110,case_z-2*floorthick-2]); 
@@ -778,11 +778,11 @@ case_z+floorthick],
                         pcb_hole_size = sbc_data[s[0]][i+2];
                         if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
                             translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adjust)-1,0])
-                                cube([2,gap+1.6,bottom_standoff[1]]);
+                                cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z]);
                         }
                         if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
                             translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adjust,0])
-                                cube([2,gap+1.6,bottom_standoff[1]]);
+                                cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z]);
                         }
                     }
                 }
@@ -1075,8 +1075,8 @@ module case_top(case_design) {
                                 cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip+2], 
                                     vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
-                        translate([width-8.5+adjust,(depth/2)-32.5,bottom_height])
-                            cube([wallthick-.5,depth-2-2*(floorthick+gap),top_height-floorthick-gap]); 
+                        translate([width-6.5,(depth/2)-wallthick-gap-(depth-2*(floorthick+gap))/2,bottom_height])
+                            cube([wallthick-.5,depth-2*(floorthick+gap),top_height-floorthick-gap]); 
                     }
                     if(case_design == "hex") {
                         difference() {
@@ -1091,8 +1091,8 @@ module case_top(case_design) {
                                 cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip+2], 
                                     vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
-                        translate([width-8.5+adjust,(depth/2)-32,bottom_height])
-                            cube([wallthick-.5,depth-3-2*(floorthick+gap),top_height-floorthick-gap]); 
+                        translate([width-8.5,(depth/2)+.75-wallthick-gap-(depth-2*(floorthick+gap))/2,bottom_height])
+                            cube([wallthick-.5,depth-2*(floorthick+gap)-2,top_height-floorthick-gap]); 
                     }
                     if(case_design == "snap") {
                         translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick*1.5+case_z])
@@ -1791,7 +1791,7 @@ module open_io() {
         // gpio opening
         if(side == "top" && class == "gpio" && type == "header_40" && rotation == 0) {
             if(gpio_opening == "vent") {
-                for(r=[loc_x-2:4:40+loc_y]) {
+                for(r=[loc_x-2:4:10+loc_y]) {
                     translate([r,depth-(2*wallthick)-gap-adjust,bottom_height+2]) 
                         cube([2,wallthick+(2*adjust),top_height-floorthick-7]);
                 }
