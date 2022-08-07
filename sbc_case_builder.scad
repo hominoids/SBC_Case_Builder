@@ -1080,7 +1080,10 @@ module case_top(case_design) {
                                 cylinder_fillet_inside(h=top_height+lip, r=case_diameter/2, 
                                     top=fillet, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
                             translate([pcb_width/2,pcb_depth/2,bottom_height+(top_height/2)-floorthick-lip/2]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-(wallthick/3)-tol, 
+                                cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-wallthick, 
+                                    top=fillet-1, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
+                            translate([pcb_width/2,pcb_depth/2,bottom_height-adjust-lip/2]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=lip+2*adjust, r=(case_diameter/2)-wallthick/2+tol/2, 
                                     top=fillet-1, bottom=0, $fn=case_fn, fillet_fn=case_ffn, center=true);
                             // io cutout
                             if(width/depth >= 1.4) {
@@ -1100,19 +1103,12 @@ module case_top(case_design) {
                                 cylinder_fillet_inside(h=top_height+lip, r=case_diameter/2, 
                                     top=fillet, bottom=0, $fn=6, fillet_fn=case_ffn, center=true);
                             translate([pcb_width/2,pcb_depth/2,bottom_height+(top_height/2)-floorthick-lip/2]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-(wallthick/3)-tol, 
+                                cylinder_fillet_inside(h=top_height+lip, r=(case_diameter/2)-wallthick, 
                                     top=fillet-1, bottom=0, $fn=6, fillet_fn=case_ffn, center=true);
-                            // io cutout
-/*                            if(width/depth >= 1.4) {
-                                translate([width,(depth/2)-wallthick-gap,bottom_height-lip+top_height/2-floorthick])
-                                    cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip+2], 
-                                        vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
-                            }*/
+                            translate([pcb_width/2,pcb_depth/2,bottom_height-adjust-lip/2]) rotate([0,0,30]) 
+                                cylinder_fillet_inside(h=lip+2*adjust, r=(case_diameter/2)-wallthick/2+tol/2, 
+                                    top=fillet-1, bottom=0, $fn=6, fillet_fn=case_ffn, center=true);
                         }
-/*                        if(width/depth >= 1.4) {
-                            translate([width-2*wallthick-gap-.95,depth/2-wallthick-gap+.35-(depth-2*(floorthick+gap))/2,
-                                bottom_height]) cube([wallthick-.5,case_diameter/2+wallthick,top_height+adjust]);
-                        }*/
                     }
                     if(case_design == "snap") {
                         translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick*1.5+case_z])
