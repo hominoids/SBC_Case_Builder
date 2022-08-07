@@ -512,9 +512,8 @@ module case_bottom(case_design) {
                                 cylinder_fillet_inside(h=bottom_height, r=case_diameter/2, 
                                     top=0, bottom=fillet, $fn=case_fn, fillet_fn=case_ffn, center=true);
                             translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+floorthick]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
-                                    r=(case_diameter/2)-lip/2,top=0, bottom=fillet-1, $fn=case_fn, 
-                                        fillet_fn=case_ffn, center=true);
+                                cylinder_fillet_inside(h=bottom_height+adjust, r=(case_diameter/2)-lip/2, 
+                                    top=0, bottom=fillet-1, $fn=case_fn, fillet_fn=case_ffn, center=true);
                             difference() {
                                 translate([pcb_width/2,pcb_depth/2,bottom_height-lip]) rotate([0,0,30]) 
                                     cylinder(h=lip+adjust, r=(case_diameter/2)+1, $fn=case_fn);
@@ -525,7 +524,7 @@ module case_bottom(case_design) {
                         difference() {
                             translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+2*floorthick]) rotate([0,0,30]) 
                                 cylinder_fillet_inside(h=bottom_height+adjust+floorthick+lip,
-                                    r=(case_diameter/2)-lip/2,top=0, bottom=fillet-1, $fn=case_fn, 
+                                    r=(case_diameter/2)-lip/2,top=0,bottom=fillet-1, $fn=case_fn, 
                                         fillet_fn=case_ffn, center=true);
                             translate([-16,(depth/2)-150,-adjust])
                                 cube([width+10,300,case_z-2*floorthick-2]); 
@@ -540,14 +539,13 @@ module case_bottom(case_design) {
                                 cylinder_fillet_inside(h=bottom_height, r=case_diameter/2, 
                                     top=0, bottom=fillet, $fn=6, fillet_fn=case_ffn, center=true);
                             translate([pcb_width/2,pcb_depth/2,(bottom_height/2)+floorthick]) rotate([0,0,30]) 
-                                cylinder_fillet_inside(h=bottom_height+adjust+floorthick,
-                                    r=(case_diameter/2)-lip/2,top=0, bottom=fillet-1, $fn=6, 
-                                        fillet_fn=case_ffn, center=true);
+                                cylinder_fillet_inside(h=bottom_height+adjust,r=(case_diameter/2)-lip/2,top=0, 
+                                    bottom=fillet-1,$fn=6,fillet_fn=case_ffn, center=true);
                             difference() {
                                 translate([pcb_width/2,pcb_depth/2,bottom_height-lip]) rotate([0,0,30]) 
-                                    cylinder(h=lip+adjust, r=(case_diameter/2)+1, $fn=6);
+                                    cylinder(h=lip+adjust,r=(case_diameter/2)+1, $fn=6);
                                 translate([pcb_width/2,pcb_depth/2,bottom_height-lip]) rotate([0,0,30]) 
-                                    cylinder(h=lip+2*adjust, r=(case_diameter/2)-lip/4, $fn=6);
+                                    cylinder(h=lip+2*adjust,r=(case_diameter/2)-lip/4, $fn=6);
                             }
                         }
                         difference() {
