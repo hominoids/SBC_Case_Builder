@@ -2644,7 +2644,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             cube([16,8,14]);
         }
     if(type == "rj45_single" && rotation == 270) {
-        place(loc_x+10,loc_y,loc_z,16,17.5,rotation,side) 
+        place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
             cube([16.5,8,14]);
     }
     // double stack usb opening
@@ -2661,7 +2661,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             cube([15.5,8,16.5]);
     }
     if(type == "double_stacked_a" && rotation == 270) {
-        place(loc_x+7.5,loc_y-1,loc_z,15.5,16,rotation,side)
+        place(loc_x+6.25,loc_y-1,loc_z,15.5,16,rotation,side)
             cube([15.5,8,16.5]);
     }
     // single vert usb2 opening

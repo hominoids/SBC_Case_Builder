@@ -35,7 +35,7 @@
     20220515 Version 1.2.3    added odroid-m1, jetson nano, rockpro64, completed mask(), improved docs
                               changed tray top design.
     2022xxxx Version 2.0.x    full customizer user interface,case configuration file changed to json,
-                              accessories kept in sbc_case_builder.cfg, 
+                              accessories kept in sbc_case_builder_accessories.cfg, 
                               added round, hexagon, snap and fitted cases. 
     
     see https://github.com/hominoids/SBC_Case_Builder
@@ -45,14 +45,16 @@ use <./SBC_Model_Framework/sbc_models.scad>;
 use <./sbc_case_builder_library.scad>;
 use <./lib/fillets.scad>;
 include <./SBC_Model_Framework/sbc_models.cfg>;
-include <./sbc_case_builder.cfg>;
+include <./sbc_case_builder_accessories.cfg>;
 
 /* [Case View] */
 // viewing mode "platter", "model", "debug"
 view = "model"; // [platter, model, debug]
+// enable highlight for sbc subtarctive geometry
+sbc_highlight = false;
 // enable highlight for accessory subtarctive geometry
-highlight = false;
-// sbc off in model view (true or false)
+accessory_highlight = false;
+// sbc off in model view
 sbc_off = false;
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -196,13 +198,13 @@ if (view == "platter") {
         case_bottom(case_design);
         translate([width+30,depth,case_z-floorthick-gap]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "hex") {
+    if(case_design == "snap") {
         case_bottom(case_design);
-        translate([width+30,depth,case_z-floorthick-gap]) rotate([180,0,0]) case_top(case_design);
+        translate([0,(2*depth)+20,case_z+2*floorthick]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "snap" || case_design == "fitted") {
+    if(case_design == "fitted") {
         case_bottom(case_design);
-        translate([0,(2*depth)+20,case_z]) rotate([180,0,0]) case_top(case_design);
+        translate([0,(2*depth)+20,case_z+floorthick]) rotate([180,0,0]) case_top(case_design);
     }
     // platter accessories
     if(accessory_name != "none") {
@@ -566,9 +568,9 @@ module case_bottom(case_design) {
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             // snap top indent
-                            translate([-gap-wallthick+.5,(depth/2)-25-gap-wallthick,case_z-.5]) 
+                            translate([-gap-wallthick+.75,(depth/2)-25-gap-wallthick,case_z-.5]) 
                                 rotate([0,45,0]) cube([4,50,4]);
-                            translate([width-wallthick-gap-4-2,(depth/2)-25-gap-wallthick,case_z-.5])
+                            translate([width-wallthick-gap-6.25,(depth/2)-25-gap-wallthick,case_z-.5])
                                 rotate([0,45,0]) cube([4,50,4]);
                         }
                     }
@@ -882,7 +884,7 @@ case_z+floorthick],
                 data_3 = accessory_data[a[0]][i+12];
                 data_4 = accessory_data[a[0]][i+13];
             if ((class == "sub" && face == "bottom") || class == "suball") {
-                if(highlight == false) {
+                if(accessory_highlight == false) {
                     sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
                 }
                 else {
@@ -894,7 +896,7 @@ case_z+floorthick],
                 sub("round",loc_x,loc_y,-.1,face,rotation,6.5,size_y,floorthick+1,data_1,data_2,data_3,data_4);
             }
             if ((class == "add1" || class == "add2") && type == "uart_holder") {
-                if(highlight == false) {
+                if(accessory_highlight == false) {
                     translate([loc_x+5.25,loc_y-5,loc_z+4]) rotate(rotation) microusb_open();
                 }
                 else {
@@ -933,7 +935,12 @@ case_z+floorthick],
         }                   
     }
         // sbc openings
-        open_io();        
+        if(sbc_highlight == true) {
+            #open_io();
+        }
+        else {
+            open_io();
+        }
         // clean fillets
         if(case_design == "shell") {
             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,bottom_height/2]) 
@@ -1075,7 +1082,7 @@ module case_top(case_design) {
                                 cube_fillet_inside([18,depth-2*(wallthick+gap)-1,top_height+lip+2], 
                                     vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
-                        translate([width-6.5,(depth/2)-wallthick-gap-(depth-2*(floorthick+gap))/2,bottom_height])
+                        translate([width-3*wallthick,(depth/2)-wallthick-gap-(depth-2*(floorthick+gap))/2,bottom_height])
                             cube([wallthick-.5,depth-2*(floorthick+gap),top_height-floorthick-gap]); 
                     }
                     if(case_design == "hex") {
@@ -1100,28 +1107,28 @@ module case_top(case_design) {
                                 vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                     top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z]) 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-adjust]) 
                                 cube_fillet_inside([width-2*wallthick-tol,depth-2*wallthick-tol,2*floorthick+1.5], 
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0],bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z]) 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-adjust]) 
                                 cube_fillet_inside([width-(3*wallthick),depth-(3*wallthick),2*floorthick+1.5+adjust], 
                                     vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],top=[0,0,0,0],
                                         bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                         }
                         // snap top outdent
                         difference() {
-                            translate([-2.5,(depth/2)-25-gap-wallthick,case_z-.5]) 
-                                rotate([0,45,0]) cube([4,50,4]);
-                            translate([-1,(depth/2)-26-gap-wallthick,case_z+floorthick-6]) 
-                                rotate([0,0,0]) cube([4,52,6]);
+                            translate([-2.25+tol,(depth/2)-22.5-gap-wallthick,case_z-.5]) 
+                                rotate([0,45,0]) cube([4,45,4]);
+                            translate([-.75,(depth/2)-23-gap-wallthick,case_z+floorthick-5.75]) 
+                                rotate([0,0,0]) cube([6,47,6]);
                         }
                         difference() {
-                            translate([width-wallthick-gap-6.25,(depth/2)-25-gap-wallthick,case_z-.5])
-                                rotate([0,45,0]) cube([4,50,4]);
-                            translate([width-wallthick-gap-6.5,(depth/2)-26-gap-wallthick,case_z+floorthick-6])
-                                rotate([0,0,0]) cube([4,52,6]);
+                            translate([width-wallthick-gap-6.5-tol,(depth/2)-22.5-gap-wallthick,case_z-.5])
+                                rotate([0,45,0]) cube([4,45,4]);
+                            translate([width-wallthick-gap-8.5,(depth/2)-23-gap-wallthick,case_z+floorthick-5.75])
+                                rotate([0,0,0]) cube([6,47,6]);
                         }
                     }
                     if(case_design == "fitted") {
@@ -1322,7 +1329,7 @@ module case_top(case_design) {
                 data_4 = accessory_data[a[0]][i+13];
                 
                 if ((class == "sub" && face == "top") || class == "suball") {
-                    if(highlight == false) {
+                    if(accessory_highlight == false) {
                         sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
                     }
                     else {
@@ -1334,7 +1341,7 @@ module case_top(case_design) {
                     sub("round",loc_x,loc_y,-.1,face,rotation,6.5,size_y,floorthick+1,data_1,data_2,data_3,data_4);
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "uart_holder") {
-                    if(highlight == false) {
+                    if(accessory_highlight == false) {
                         translate([loc_x+5.25,loc_y-5,loc_z+4]) rotate(rotation) microusb_open();
                     }
                     else {
@@ -1361,7 +1368,12 @@ module case_top(case_design) {
             }
         }            
         // sbc openings
-        open_io();
+        if(sbc_highlight == true) {
+            #open_io();
+        }
+        else {
+            open_io();
+        }
         // clean fillets
         if(case_design == "shell") {
             translate(([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,
@@ -1608,7 +1620,7 @@ module case_side(case_design,case_style,side) {
                 data_4 = accessory_data[a[0]][i+13];
                 
                 if ((class == "sub" && face == side) || class == "suball") {
-                    if(highlight == false) {
+                    if(accessory_highlight == false) {
                         sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
                     }
                     else {
@@ -1617,7 +1629,7 @@ module case_side(case_design,case_style,side) {
                 }
                 // create openings for additive 
                 if ((class == "sub" && face == "bottom") || class == "suball") {
-                    if(highlight == false) {
+                    if(accessory_highlight == false) {
                         sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
                     }
                     else {
@@ -1629,7 +1641,7 @@ module case_side(case_design,case_style,side) {
                     sub("round",loc_x,loc_y,-.1,face,rotation,6.5,size_y,floorthick+1,data_1,data_2,data_3,data_4);
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "uart_holder") {
-                    if(highlight == false) {
+                    if(accessory_highlight == false) {
                         translate([loc_x+5.25,loc_y-5,loc_z+4]) rotate(rotation) microusb_open();
                     }
                     else {
@@ -1669,7 +1681,12 @@ module case_side(case_design,case_style,side) {
             }
         }
         // sbc openings
-        open_io();
+        if(sbc_highlight == true) {
+            #open_io();
+        }
+        else {
+            open_io();
+        }
     }
     if(accessory_name != "none") {
         for (i=[1:14:len(accessory_data[a[0]])-1]) {
