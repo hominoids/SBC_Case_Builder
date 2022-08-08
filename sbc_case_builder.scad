@@ -567,7 +567,7 @@ module case_bottom(case_design) {
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick+(floorthick+case_z)/2]) 
-                                cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick+1], 
+                                cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             // snap top indent
@@ -579,14 +579,13 @@ module case_bottom(case_design) {
                     }
                     if(case_design == "fitted") {
                         difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z)/2]) 
+                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z/2]) 
                                 cube_fillet_inside([width,depth,case_z], 
                                     vertical=[c_fillet,c_fillet,c_fillet,c_fillet], 
                                         top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,
                                 (depth/2)-wallthick-gap,(case_z/2)+floorthick]) 
-                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),
-case_z+floorthick], 
+                                    cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z], 
                                         vertical=[c_fillet-1,c_fillet-1,c_fillet-1,c_fillet-1],
                                             top=[0,0,0,0], bottom=[fillet,fillet,fillet,fillet,fillet], $fn=90);
                             difference() {
