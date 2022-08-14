@@ -2475,22 +2475,6 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "hdmi_a" && side == "top" && rotation == 270) {
         place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) hdmi_open();
     }
-    // micro usb opening
-    if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
-        place(loc_x,loc_y-3,loc_z,8,3,rotation,side) microusb_open();
-    }
-    if(class == "usb2" && type == "micro" && rotation == 90 && side == "top") {
-        place(loc_x-3,loc_y-1,loc_z,8,3,rotation,side) microusb_open();
-    }
-    if(class == "usb2" && type == "micro" && rotation == 180 && side == "top") {
-        place(loc_x-1,loc_y+4.5,loc_z,8,3,rotation,side) microusb_open();
-    }
-    if(class == "usb2" && type == "micro" && rotation == 270 && side == "top") {
-        place(loc_x+4.5,loc_y,loc_z,8,3,rotation,side) microusb_open();
-    }
-    if(class == "usb2" && type == "micro" && rotation == 0 && side == "bottom") {
-        place(loc_x-1,loc_y-3,loc_z-1.25,8,3,rotation,side) microusb_open();
-    }
     // power plug openings
     if(type == "pwr5.5_7.5x11.5" && rotation == 0) {
         place(loc_x,loc_y,loc_z,7,7,rotation,side) 
@@ -2647,6 +2631,22 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
             cube([16.5,8,14]);
     }
+    // micro usb opening
+    if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
+        place(loc_x,loc_y-3,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 90 && side == "top") {
+        place(loc_x-3,loc_y-1,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 180 && side == "top") {
+        place(loc_x-1,loc_y+4.5,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 270 && side == "top") {
+        place(loc_x+4.5,loc_y,loc_z,8,3,rotation,side) microusb_open();
+    }
+    if(class == "usb2" && type == "micro" && rotation == 0 && side == "bottom") {
+        place(loc_x-1,loc_y-3,loc_z-1.25,8,3,rotation,side) microusb_open();
+    }
     // double stack usb opening
     if(type == "double_stacked_a" && rotation == 0) {
         place(loc_x-1,loc_y-6,loc_z,15.5,16,rotation,side)
@@ -2664,22 +2664,39 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+6.25,loc_y-1,loc_z,15.5,16,rotation,side)
             cube([15.5,8,16.5]);
     }
-    // single vert usb2 opening
-    if(type == "single_vert_a" && rotation == 0) {
+    // single vertical usb opening
+    if(type == "single_vertical_a" && rotation == 0) {
         place(loc_x-.5,loc_y-6,loc_z,6.5,19.5,rotation,side)
             cube([6.5,8,15]);
     }
-    if(type == "single_vert_a" && rotation == 90) {
+    if(type == "single_vertical_a" && rotation == 90) {
         place(loc_x-6,loc_y-.25,loc_z,6.5,19.5,rotation,side)
             cube([6.5,8,15]);
     }
-    if(type == "single_vert_a" && rotation == 180) {
+    if(type == "single_vertical_a" && rotation == 180) {
         place(loc_x-.5,loc_y+6,loc_z,6.5,19.5,rotation,side)
             cube([6.5,8,15]);
     }
-    if(type == "single_vert_a" && rotation == 270) {
+    if(type == "single_vertical_a" && rotation == 270) {
         place(loc_x+6.5,loc_y,loc_z,6.5,19.5,rotation,side)
             cube([6.5,8,15]);
+    }
+    // single horizontal usb opening
+    if(type == "single_horizontal_a" && rotation == 0) {
+        place(loc_x-.5,loc_y-6,loc_z,7.5,19.5,rotation,side)
+            cube([15,8,7.5]);
+    }
+    if(type == "single_horizontal_a" && rotation == 90) {
+        place(loc_x-6,loc_y+7,loc_z,7.5,19.5,rotation,side)
+            cube([15,8,7.5]);
+    }
+    if(type == "single_horizontal_a" && rotation == 180) {
+        place(loc_x+7,loc_y+.5,loc_z,7.5,19.5,rotation,side)
+            cube([15,8,7.5]);
+    }
+    if(type == "single_horizontal_a" && rotation == 270) {
+        place(loc_x+.5,loc_y,loc_z,7.5,19.5,rotation,side)
+            cube([15,8,7.5]);
     }
     // ir opening
     if(type == "ir_1" && rotation == 0) {
