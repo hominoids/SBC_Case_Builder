@@ -109,7 +109,7 @@
     boom_vring(tolerance)
     access_port(size[],orientation)
     access_cover(size[],orientation)
-    hdmi_open()
+    hdmi_open(hdmi_style)
     microusb_open()
     fan_mask(size, thick, style)
     mask(loc_x,loc_y,rotation,side,class,type,case_z,wallthick,gap,floorthick,pcb_z)
@@ -2360,7 +2360,6 @@ module hdmi_open(hdmi_style) {
                 translate([-.25,-6.2,0]) rotate ([-90,0,0]) cylinder(d=1.5, h=9.5,$fn=30);
                 translate([6.75,-6.2,0]) rotate ([-90,0,0]) cylinder(d=1.5, h=9.5,$fn=30);
             }
-//            translate([2,-5,.5]) cube([11.5, 8, .5]);
         }
     }
     if(hdmi_style == "hdmi_mini") {
@@ -2370,7 +2369,17 @@ module hdmi_open(hdmi_style) {
                 translate([-1,-6.2,-.5]) rotate ([-90,0,0]) cylinder(d=3, h=10,$fn=30);
                 translate([12.25,-6.2,-.5]) rotate ([-90,0,0]) cylinder(d=3, h=10,$fn=30);
             }
-//            translate([2,-5,.5]) cube([11.5, 8, .5]);
+        }
+    }
+    if(hdmi_style=="dp_mini") {
+        size_x = 9;
+        size_y = 8;        
+        union() {    
+            difference() {
+                translate([-.25,-6,0]) cube([size_x, size_y, 5.75]);
+                translate([-7.5,-7,1]) rotate([0,45,0]) cube([size_x, size_y+2, 5.6]);
+                translate([10,-7,-5]) rotate([0,-45,0]) cube([size_x, size_y+2, 5.6]);                    
+            }
         }
     }
 }       
@@ -2525,6 +2534,19 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     if(type == "hdmi_mini" && rotation == 270) {
         place(loc_x,loc_y,loc_z,11.5,8,rotation,side) hdmi_open("hdmi_mini");
+    }
+    // dp mini opening
+    if(type == "dp_mini" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,9,8,rotation,side) hdmi_open("dp_mini");
+    }
+    if(type == "dp_mini" && rotation == 90) {
+        place(loc_x,loc_y-.5,loc_z,9,8,rotation,side) hdmi_open("dp_mini");
+    }
+    if(type == "dp_mini" && rotation == 180) {
+        place(loc_x-.5,loc_y+6,loc_z,9,8,rotation,side) hdmi_open("dp_mini");
+    }
+    if(type == "dp_mini" && rotation == 270) {
+        place(loc_x+6,loc_y,loc_z,9,8,rotation,side) hdmi_open("dp_mini");
     }
     // power plug openings
     if(type == "pwr5.5_7.5x11.5" && rotation == 0) {

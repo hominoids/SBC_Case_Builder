@@ -75,7 +75,7 @@ case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
-sbc_model = "c4"; // [c1+,c2,c4,xu4,xu4q,mc1,hc1,hc4,m1,n1,n2,n2+,h2,show2,rock64,rockpro64,jetsonnano,rpizero,rpi3a+,rpi3b+,rpi4b,rockpi4b+,rockpi4c+,test]
+sbc_model = "c4"; // [c1+,c2,c4,xu4,xu4q,mc1,hc1,hc4,m1,n1,n2,n2+,h2,show2,rock64,rockpro64,jetsonnano,rpizero,rpi3a+,rpi3b+,rpi4b,rockpi4b+,rockpi4c,rockpi4c+,test]
 // sbc location x axis
 pcb_loc_x = 0; //[0:.5:200]
 // sbc location y axis
