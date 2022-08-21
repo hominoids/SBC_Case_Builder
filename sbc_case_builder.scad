@@ -51,7 +51,7 @@ include <./sbc_case_builder_accessories.cfg>;
 /* [Case View] */
 // viewing mode "platter", "model", "debug"
 view = "model"; // [platter, model, debug]
-// enable highlight for sbc subtarctive geometry
+// enable highlight for sbc component subtarctive geometry
 sbc_highlight = false;
 // enable highlight for accessory subtarctive geometry
 accessory_highlight = false;
@@ -124,7 +124,7 @@ cooling = "fan"; // [none,vents,fan,custom]
 // exhaust vents
 exhaust_vents = "vent"; // [none,vent]
 // special mode
-mode = "none"; // [none,net_card]
+mode = "none"; // [none,net_card,vim_heatsink]
 
 // top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
 top_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
@@ -1216,20 +1216,38 @@ module case_top(case_design) {
                     pcb_hole_x = sbc_data[s[0]][i]+pcb_loc_x;
                     pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                     pcb_hole_size = sbc_data[s[0]][i+2];
-                    if (pcb_hole_x!=0 && pcb_hole_y!=0) {
-                        normal_standoff = [top_standoff[0],
-                                            top_height+pcb_loc_z,
-                                            top_standoff[2],
-                                            top_standoff[3],
-                                            top_standoff[4],
-                                            top_standoff[5],
-                                            top_standoff[6],
-                                            top_standoff[7],
-                                            top_standoff[8],
-                                            top_standoff[9],
-                                            top_standoff[10]];
-                        translate([pcb_hole_x,pcb_hole_y,case_z]) standoff(normal_standoff);
+                    if(mode == "vim_heatsink") {
+                        if (pcb_hole_x!=0 && pcb_hole_y!=0) {
+                            normal_standoff = [top_standoff[0],
+                                                top_height+pcb_loc_z-3.25,
+                                                top_standoff[2],
+                                                top_standoff[3],
+                                                top_standoff[4],
+                                                top_standoff[5],
+                                                top_standoff[6],
+                                                top_standoff[7],
+                                                top_standoff[8],
+                                                top_standoff[9],
+                                                top_standoff[10]];
+                            translate([pcb_hole_x,pcb_hole_y,case_z]) standoff(normal_standoff);
+                        }
                     }
+                    else {
+                        if (pcb_hole_x!=0 && pcb_hole_y!=0) {
+                            normal_standoff = [top_standoff[0],
+                                                top_height+pcb_loc_z,
+                                                top_standoff[2],
+                                                top_standoff[3],
+                                                top_standoff[4],
+                                                top_standoff[5],
+                                                top_standoff[6],
+                                                top_standoff[7],
+                                                top_standoff[8],
+                                                top_standoff[9],
+                                                top_standoff[10]];
+                            translate([pcb_hole_x,pcb_hole_y,case_z]) standoff(normal_standoff);
+                        }
+                    }                    
                 }
             }
             // extended standoffs
@@ -1258,34 +1276,58 @@ module case_top(case_design) {
             // standoff sidewall support
             if(sidewall_support == true && sbc_top_standoffs == true) {
                 if(pcb_width/pcb_depth >= 1.4) {
-                    translate([0,pcb_depth,0]) rotate([180,0,0]) {
+//                    translate([0,pcb_depth,0]) rotate([180,0,0]) {
                         for (i=[7:3:16]) {
                             pcb_hole_x = sbc_data[s[0]][i]+pcb_loc_x;
                             pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                             pcb_hole_size = sbc_data[s[0]][i+2];
-                            if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
-                                translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
-                                    -case_z]) cube([2,gap+1.6,top_height]);
+                        if(mode == "vim_heatsink") {
+                                if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
+                                    translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
+                                        case_z-(top_height-3.25)]) cube([2,gap+1.6,top_height-3.25]);
+                                }
+                                if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
+                                    translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,case_z-(top_height-3.25)]) 
+                                        cube([2,gap+1.6,top_height-3.25]);
+                                }
                             }
-                            if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
-                                translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,-case_z]) 
-                                    cube([2,gap+1.6,top_height]);
+                            else {
+                                if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 13) {
+                                    translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
+                                        case_z-top_height]) cube([2,gap+1.6,top_height]);
+                                }
+                                if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 10 || i == 16) {
+                                    translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,case_z-top_height]) 
+                                        cube([2,gap+1.6,top_height]);
+                                }
                             }
                         }
-                    }
+//                    }
                 }
                 else {
                      for (i=[7:3:16]) {
                         pcb_hole_x = sbc_data[s[0]][i]+pcb_loc_x;
                         pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                         pcb_hole_size = sbc_data[s[0]][i+2];
-                        if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 10) {
-                            translate([pcb_hole_x+pcb_loc_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
-                                bottom_height+adjust]) cube([gap+adjust+1,2,top_height]);
+                        if(mode == "vim_heatsink") {
+                            if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 10) {
+                                translate([pcb_hole_x+pcb_loc_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
+                                    bottom_height+adjust]) cube([gap+adjust+1,2,top_height-3.25]);
+                            }
+                            if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 13 || i == 16) {
+                                translate([pcb_hole_x+pcb_loc_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,
+                                    bottom_height+adjust]) cube([gap+adjust+1,2,top_height-3.25]);
+                            }
                         }
-                        if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 13 || i == 16) {
-                            translate([pcb_hole_x+pcb_loc_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,
-                                bottom_height+adjust]) cube([gap+adjust+1,2,top_height]);
+                        else{
+                            if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 7 || i == 10) {
+                                translate([pcb_hole_x+pcb_loc_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
+                                    bottom_height]) cube([gap+adjust+1,2,top_height]);
+                            }
+                            if (pcb_hole_x!=0 && pcb_hole_y!=0 && i == 13 || i == 16) {
+                                translate([pcb_hole_x+pcb_loc_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,
+                                    bottom_height]) cube([gap+adjust+1,2,top_height]);
+                            }
                         }
                     }
                 }
