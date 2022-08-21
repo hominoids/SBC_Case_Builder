@@ -43,7 +43,7 @@
     20220515 version 1.2.3 removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
     2022xxxx version 2.x.x increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
-                           video-hdmi_mini,microsdcard
+                           video-hdmi_mini,microsdcard,momentary_7x3x3_90
 
     
     see https://github.com/hominoids/SBC_Case_Builder
@@ -93,7 +93,6 @@
     uart_micro()
     rj45()
     header(pins)
-    momentary45x15
     encl_header_12()
     micro2pin()
     audio_jack35()
@@ -3000,6 +2999,22 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             translate([3,-2.5,3]) rotate([90,0,0]) cylinder(d=5, h=8);
             translate([-.5,-3.75,0]) cube([7,2.5,6.5]);
         }
+    }    
+    if(type == "momentary_7x3x3_90" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,7,3,rotation,side) 
+            translate([0,-6,0]) cube([7,8,3]);
+    }    
+    if(type == "momentary_7x3x3_90" && rotation == 90) {
+        place(loc_x,loc_y,loc_z,7,3,rotation,side) 
+            translate([0,-6,0]) cube([7,8,3]);
+    }    
+    if(type == "momentary_7x3x3_90" && rotation == 180) {
+        place(loc_x,loc_y,loc_z,7,3,rotation,side) 
+            translate([0,-6,0]) cube([7,8,3]);
+    }    
+    if(type == "momentary_7x3x3_90" && rotation == 270) {
+        place(loc_x,loc_y,loc_z,7,3,rotation,side) 
+            translate([0,-6,0]) cube([7,8,3]);
     }    
     if(type == "audio_micro" && rotation == 0) {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
