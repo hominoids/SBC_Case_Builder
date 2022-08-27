@@ -43,7 +43,7 @@
     20220515 version 1.2.3 removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
     2022xxxx version 2.x.x increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
-                           video-hdmi_mini,microsdcard,momentary_7x3x3_90
+                           video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short
 
     
     see https://github.com/hominoids/SBC_Case_Builder
@@ -2497,7 +2497,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x,loc_y-1,loc_z-pcb_z,15,11.5,rotation,side) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a" && side == "top" && rotation == 0) {
-        place(loc_x-.675,loc_y-1,loc_z+.25,15,11.5,rotation,side) hdmi_open("hdmi_a");
+        place(loc_x-.675,loc_y,loc_z+.25,15,11.5,rotation,side) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a" && side == "top" && rotation == 90) {
         place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) hdmi_open("hdmi_a");
@@ -2734,6 +2734,23 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "rj45_single" && rotation == 270) {
         place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
             cube([16.5,8,14]);
+    }
+    // rj45 short opening
+    if(type == "rj45_single_short" && rotation == 0) {
+        place(loc_x,loc_y-6,loc_z,16,17.5,rotation,side) 
+            cube([15,8,12]);
+        }
+    if(type == "rj45_single_short"  && rotation == 90) {
+        place(loc_x-6,loc_y,loc_z,16,17.5,rotation,side) 
+            cube([15,8,12]);
+        }
+    if(type == "rj45_single_short"  && rotation == 180) {
+        place(loc_x,loc_y+10,loc_z,16,17.5,rotation,side) 
+            cube([15,8,12]);
+        }
+    if(type == "rj45_single_short"  && rotation == 270) {
+        place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
+            cube([15,8,12]);
     }
     // micro usb opening
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
