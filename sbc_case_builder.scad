@@ -37,7 +37,7 @@
     2022xxxx Version 2.0.x    full customizer user interface,case configuration file changed to json,
                               accessories kept in sbc_case_builder_accessories.cfg, 
                               added round, hexagon, snap and fitted cases, setup additional sbc from SBC_Model_Framework,
-                              added masks
+                              added components and masks
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -48,15 +48,15 @@ use <./lib/fillets.scad>;
 include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder_accessories.cfg>;
 
-/* [Case View] */
+/* [View] */
 // viewing mode "platter", "model", "debug"
 view = "model"; // [platter, model, debug]
+// sbc off in model view
+sbc_off = false;
 // enable highlight for sbc component subtarctive geometry
 sbc_highlight = false;
 // enable highlight for accessory subtarctive geometry
 accessory_highlight = false;
-// sbc off in model view
-sbc_off = false;
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
 // lowers bottom mm in model view or < 0 = off
@@ -70,13 +70,13 @@ move_front = 0; // [-1:100]
 // move rear mm in model view or < 0 = off
 move_rear = 0; // [-1:100]
 
-/* [Case Adjustments] */
+/* [Adjustments] */
 // base case design
 case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
-sbc_model = "c4"; // [c1+,c2,c4,xu4,xu4q,mc1,hc1,hc4,m1,n1,n2,n2+,h2,show2,rock64,rockpro64,rpizero,rpizero2w,rpi1a+,rpi1b+,rpi3a+,rpi3b,rpi3b+,rpi4b,jetsonnano,rockpi4b+,rockpi4c,rockpi4c+,vim1,vim2,vim3l,vim3,vim4,tinkerboard,tinkerboard-s,tinkerboard-2,tinkerboard-r2,test]
+sbc_model = "c4"; // [c1+,c2,c4,xu4,xu4q,mc1,hc1,hc4,m1,n1,n2,n2+,h2,show2,rock64,rockpro64,rpizero,rpizero2w,rpi1a+,rpi1b+,rpi3a+,rpi3b,rpi3b+,rpi4b,jetsonnano,rockpi4b+,rockpi4c,rockpi4c+,vim1,vim2,vim3l,vim3,vim4,tinkerboard,tinkerboard-s,tinkerboard-2,tinkerboard-r2,opizero,opizero2,opir1plus_lts,test]
 // sbc location x axis
 pcb_loc_x = 0; //[0:.5:200]
 // sbc location y axis
@@ -105,16 +105,28 @@ c_fillet = 3; //[0:.5:9]
 fillet = 0; //[0:.5:6]
 // tolerance for fitted surfaces
 tol = .25; //[-.5:.0625:.5]
-// enable indentations around io openings
-indents = true;
-// enable wall support for standoffs
-sidewall_support = true;
+
+/* [Standoffs] */
 // enable case top standoffs
 sbc_top_standoffs = true;
 // enable case bottom standoffs
 sbc_bottom_standoffs = true;
 // enable case extended standoffs
 case_ext_standoffs = false;
+// enable wall support for standoffs
+sidewall_support = true;
+// top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
+top_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
+// bottom case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
+bottom_standoff = [6.75,7,3.6,10,4,1,0,0,0,4.5,5.1];
+// top case extened standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
+top_ext_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
+// bottom case extended standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
+bottom_ext_standoff = [6.75,5,3.6,10,4,1,0,0,0,4.5,5.1];
+
+/* [Features and Accessories] */
+// enable indentations around io openings
+indents = true;
 // enable sata punchout
 sata_punchout = false;
 // gpio openings
@@ -125,17 +137,6 @@ cooling = "fan"; // [none,vents,fan,custom]
 exhaust_vents = "vent"; // [none,vent]
 // special mode
 mode = "none"; // [none,net_card,vim_heatsink]
-
-// top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-top_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
-// bottom case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-bottom_standoff = [6.75,7,3.6,10,4,1,0,0,0,4.5,5.1];
-// top case extened standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-top_ext_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
-// bottom case extended standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-bottom_ext_standoff = [6.75,5,3.6,10,4,1,0,0,0,4.5,5.1];
-
-/* [Case Accessories] */
 // case accessory group to load
 accessory_name = "none"; // [none,c1+_shell_boombox,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c1+_round,c1+_hex,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c2_round,c2_hex,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,c4_round,c4_hex,xu4_tray_vu5,xu4_tray_vu7,xu4q_tray_vu5,xu4q_tray_vu7,n1_tray_vu5,n1_tray_vu7,n1_round,n1_hex,n2_tray_vu5,n2_tray_vu7,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,h2_round,h2_hex,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,jetsonnano_round,jetsonnano_hex,jetsonnano_snap,jetsonnano_fitted,rock64_shell,rock64_panel,rock64_stacked,rock64_tray,rock64_tray_sides,rock64_round,rock64_hex,rock64_snap,rock64_fitted,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,rockpro64_round,rockpro64_hex,rockpro64_snap,rockpro64_fitted,show2_shell,rpizero_shell,rpizero_panel,rpizero_stacked,rpizero_tray,rpizero_tray_sides,rpizero_snap,rpizero_fitted,rpizero2w_shell,rpizero2w_panel,rpizero2w_stacked,rpizero2w_tray,rpizero2w_tray_sides,rpizero2w_snap,rpizero2w_fitted,rpi1a+_shell,rpi1a+_panel,rpi1a+_stacked,rpi1a+_tray,rpi1a+_tray_sides,rpi1a+_round,rpi1a+_hex,rpi1a+_snap,rpi1a+_fitted,rpi1b+_shell,rpi1b+_panel,rpi1b+_stacked,rpi1b+_tray,rpi1b+_tray_sides,rpi1b+_round,rpi1b+_hex,rpi1b+_snap,rpi1b+_fitted,rpi3a+_shell,rpi3a+_panel,rpi3a+_stacked,rpi3a+_tray,rpi3a+_tray_sides,rpi3a+_round,rpi3a+_hex,rpi3a+_snap,rpi3a+_fitted,rpi3b_shell,rpi3b_panel,rpi3b_stacked,rpi3b_tray,rpi3b_tray_sides,rpi3b_round,rpi3b_hex,rpi3b_snap,rpi3b_fitted,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,rpi3b+_tray_sides,rpi3b+_round,rpi3b+_hex,rpi3b+_snap,rpi3b+_fitted,rpi4b_shell,rpi4b_panel,rpi4b_stacked,rpi4b_tray,rpi4b_tray_sides,rpi4b_round,rpi4b_hex,rpi4b_snap,rpi4b_fitted,rockpi4b+_shell,rockpi4b+_panel,rockpi4b+_stacked,rockpi4b+_tray,rockpi4b+_tray_sides,rockpi4b+_round,rockpi4b+_hex,rockpi4b+_snap,rockpi4b+_fitted,rockpi4c_shell,rockpi4c_panel,rockpi4c_stackedrockpi4c_tray,rockpi4c_tray_sides,rockpi4c_round,rockpi4c_hex,rockpi4c_snap,rockpi4c_fitted,rockpi4c+_shell,rockpi4c+_panel,rockpi4c+_stacked,rockpi4c+_tray,rockpi4c+_tray_sides,rockpi4c+_round,rockpi4c+_hex,rockpi4c+_snap,rockpi4c+_fitted,vim1_shell,vim1_panel,vim1_stacked,vim1_tray,vim1_tray_sides,vim1_snap,vim1_round,vim1_hex,vim1_fitted,vim2_shell,vim2_panel,vim2_stacked,vim2_tray,vim2_tray_sides,vim2_round,vim2_hex,vim2_snap,vim2_fitted,vim3l_shell,vim3l_panel,vim3l_stacked,vim3l_tray,vim3l_tray_sides,vim3l_round,vim3l_hex,vim3l_snap,vim3l_fitted,vim3_shell,vim3_panel,vim3_stacked,vim3_tray,vim3_tray_sides,vim3_round,vim3_hex,vim3_snap,vim3_fitted,vim1_shell,vim4_panel,vim4_stacked,vim4_tray,vim4_tray_sides,vim4_round,vim4_hex,vim4_snap,vim4_fitted,tinkerboard_shell,tinkerboard_panel,tinkerboard_stacked,tinkerboard_tray,tinkerboard_tray_sides,tinkerboard_round,tinkerboard_hex,tinkerboard_snap,tinkerboard_fitted,tinkerboard-s_shell,tinkerboard-s_panel,tinkerboard-s_stacked,tinkerboard-s_tray,tinkerboard-s_tray_sides,tinkerboard-s_round,tinkerboard-s_hex,tinkerboard-s_snap,tinkerboard-s_fitted,tinkerboard-2_shell,tinkerboard-2_panel,tinkerboard-2_stacked,tinkerboard-2_tray,tinkerboard-2_tray_sides,tinkerboard-2_round,tinkerboard-2_hex,tinkerboard-2_snap,tinkerboard-2_fitted,tinkerboard-r2_shell,tinkerboard-r2_panel,tinkerboard-r2_stacked,tinkerboard-r2_tray,tinkerboard-r2_tray_sides,tinkerboard-r2_round,tinkerboard-r2_hex,tinkerboard-r2_snap,tinkerboard-r2_fitted,hk_uart]
 
@@ -533,13 +534,13 @@ module case_bottom(case_design) {
                                     sbc_model != "rpizero" && sbc_model != "rpizero2w") {
                                 translate([-16,(depth/2)-150,-adjust])
                                     cube([width+10,300,case_z-2*floorthick-2]); 
-                                translate([width-9,(depth/2)-62.5,bottom_height])
+                                translate([width-9,(depth/2)-62.5,bottom_height-2*adjust])
                                     cube([20,110,top_height-2*floorthick-2]);
                             }
                             else {
                                 translate([-width/2,0,-adjust])
                                     cube([300,depth+100,case_z-2*floorthick-2]); 
-                                translate([(-width+50)/2,-50,bottom_height])
+                                translate([(-width+50)/2,-50,bottom_height-2*adjust])
                                     cube([width+50,50+adjust,top_height-2*floorthick-2]);
                             }
                         }
@@ -569,7 +570,7 @@ module case_bottom(case_design) {
                                             fillet_fn=case_ffn, center=true);
                                 translate([-16,(depth/2)-150,-adjust])
                                     cube([width+10,300,case_z-2*floorthick-2]); 
-                                translate([width-9,(depth/2)-62.5,bottom_height])
+                                translate([width-9,(depth/2)-62.5,bottom_height-2*adjust])
                                     cube([20,110,top_height-2*floorthick-2]); 
                             }
                         }
@@ -595,7 +596,7 @@ module case_bottom(case_design) {
                                             fillet_fn=case_ffn, center=true);
                                 translate([-width/2,0,-adjust])
                                     cube([300,depth+100,case_z-2*floorthick-2]); 
-                                translate([(-width+50)/2,-50,bottom_height])
+                                translate([(-width+50)/2,-50,bottom_height-2*adjust])
                                     cube([width+50,50+adjust,top_height-2*floorthick-2]);
                             }                            
                         }
