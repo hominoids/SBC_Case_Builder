@@ -216,7 +216,7 @@ if (view == "platter") {
     }
     // platter accessories
     if(accessory_name != "none") {
-        for (i=[1:14:len(accessory_data[a[0]])-1]) {
+        for (i=[1:15:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
             type = accessory_data[a[0]][i+1];
             loc_x = accessory_data[a[0]][i+2];
@@ -224,13 +224,14 @@ if (view == "platter") {
             loc_z = accessory_data[a[0]][i+4];
             face = accessory_data[a[0]][i+5];
             rotation = accessory_data[a[0]][i+6];
-            size_x = accessory_data[a[0]][i+7];
-            size_y = accessory_data[a[0]][i+8];
-            size_z = accessory_data[a[0]][i+9];
-            data_1 = accessory_data[a[0]][i+10];
-            data_2 = accessory_data[a[0]][i+11];
-            data_3 = accessory_data[a[0]][i+12];
-            data_4 = accessory_data[a[0]][i+13];
+            positioning = accessory_data[a[0]][i+7];
+            size_x = accessory_data[a[0]][i+8];
+            size_y = accessory_data[a[0]][i+9];
+            size_z = accessory_data[a[0]][i+10];
+            data_1 = accessory_data[a[0]][i+11];
+            data_2 = accessory_data[a[0]][i+12];
+            data_3 = accessory_data[a[0]][i+13];
+            data_4 = accessory_data[a[0]][i+14];
             
             if (class == "platter" && type != "button_top") {
                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -371,7 +372,7 @@ if (view == "model") {
         }
         // model accessories
         if(accessory_name != "none") {
-            for (i=[1:14:len(accessory_data[a[0]])-1]) {
+            for (i=[1:15:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -379,13 +380,14 @@ if (view == "model") {
                 loc_z = accessory_data[a[0]][i+4];
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
-                size_x = accessory_data[a[0]][i+7];
-                size_y = accessory_data[a[0]][i+8];
-                size_z = accessory_data[a[0]][i+9];
-                data_1 = accessory_data[a[0]][i+10];
-                data_2 = accessory_data[a[0]][i+11];
-                data_3 = accessory_data[a[0]][i+12];
-                data_4 = accessory_data[a[0]][i+13];
+                positioning = accessory_data[a[0]][i+7];
+                size_x = accessory_data[a[0]][i+8];
+                size_y = accessory_data[a[0]][i+9];
+                size_z = accessory_data[a[0]][i+10];
+                data_1 = accessory_data[a[0]][i+11];
+                data_2 = accessory_data[a[0]][i+12];
+                data_3 = accessory_data[a[0]][i+13];
+                data_4 = accessory_data[a[0]][i+14];
                 
                 if (class == "model" && face == "top" && raise_top > -1) {
                     add(type,loc_x,loc_y,loc_z+raise_top,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -644,7 +646,7 @@ module case_bottom(case_design) {
                     }
                     // additive accessories
                     if(accessory_name != "none") {
-                        for (i=[1:14:len(accessory_data[a[0]])-1]) {
+                        for (i=[1:15:len(accessory_data[a[0]])-1]) {
                             class = accessory_data[a[0]][i];
                             type = accessory_data[a[0]][i+1];
                             loc_x = accessory_data[a[0]][i+2];
@@ -652,13 +654,14 @@ module case_bottom(case_design) {
                             loc_z = accessory_data[a[0]][i+4];
                             face = accessory_data[a[0]][i+5];
                             rotation = accessory_data[a[0]][i+6];
-                            size_x = accessory_data[a[0]][i+7];
-                            size_y = accessory_data[a[0]][i+8];
-                            size_z = accessory_data[a[0]][i+9];
-                            data_1 = accessory_data[a[0]][i+10];
-                            data_2 = accessory_data[a[0]][i+11];
-                            data_3 = accessory_data[a[0]][i+12];
-                            data_4 = accessory_data[a[0]][i+13];
+                            positioning = accessory_data[a[0]][i+7];
+                            size_x = accessory_data[a[0]][i+8];
+                            size_y = accessory_data[a[0]][i+9];
+                            size_z = accessory_data[a[0]][i+10];
+                            data_1 = accessory_data[a[0]][i+11];
+                            data_2 = accessory_data[a[0]][i+12];
+                            data_3 = accessory_data[a[0]][i+13];
+                            data_4 = accessory_data[a[0]][i+14];
                             
                             if (class == "add1" && face == "bottom") {
                                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -911,7 +914,7 @@ module case_bottom(case_design) {
         }
         // subtractive accessories
         if(accessory_name != "none") {
-            for (i=[1:14:len(accessory_data[a[0]])-1]) {
+            for (i=[1:15:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -919,13 +922,15 @@ module case_bottom(case_design) {
                 loc_z = accessory_data[a[0]][i+4];
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
-                size_x = accessory_data[a[0]][i+7];
-                size_y = accessory_data[a[0]][i+8];
-                size_z = accessory_data[a[0]][i+9];
-                data_1 = accessory_data[a[0]][i+10];
-                data_2 = accessory_data[a[0]][i+11];
-                data_3 = accessory_data[a[0]][i+12];
-                data_4 = accessory_data[a[0]][i+13];
+                positioning = accessory_data[a[0]][i+7];
+                size_x = accessory_data[a[0]][i+8];
+                size_y = accessory_data[a[0]][i+9];
+                size_z = accessory_data[a[0]][i+10];
+                data_1 = accessory_data[a[0]][i+11];
+                data_2 = accessory_data[a[0]][i+12];
+                data_3 = accessory_data[a[0]][i+13];
+                data_4 = accessory_data[a[0]][i+14];
+                
             if ((class == "sub" && face == "bottom") || class == "suball") {
                 if(accessory_highlight == false) {
                     sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -994,7 +999,7 @@ module case_bottom(case_design) {
     }
     // additive accessories
     if(accessory_name != "none") {
-        for (i=[1:14:len(accessory_data[a[0]])-1]) {
+        for (i=[1:15:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
             type = accessory_data[a[0]][i+1];
             loc_x = accessory_data[a[0]][i+2];
@@ -1002,13 +1007,14 @@ module case_bottom(case_design) {
             loc_z = accessory_data[a[0]][i+4];
             face = accessory_data[a[0]][i+5];
             rotation = accessory_data[a[0]][i+6];
-            size_x = accessory_data[a[0]][i+7];
-            size_y = accessory_data[a[0]][i+8];
-            size_z = accessory_data[a[0]][i+9];
-            data_1 = accessory_data[a[0]][i+10];
-            data_2 = accessory_data[a[0]][i+11];
-            data_3 = accessory_data[a[0]][i+12];
-            data_4 = accessory_data[a[0]][i+13];
+            positioning = accessory_data[a[0]][i+7];
+            size_x = accessory_data[a[0]][i+8];
+            size_y = accessory_data[a[0]][i+9];
+            size_z = accessory_data[a[0]][i+10];
+            data_1 = accessory_data[a[0]][i+11];
+            data_2 = accessory_data[a[0]][i+12];
+            data_3 = accessory_data[a[0]][i+13];
+            data_4 = accessory_data[a[0]][i+14];
             
             if (class == "add2" && face == "bottom") {
                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -1242,7 +1248,7 @@ module case_top(case_design) {
                         }
                     }
                     if(accessory_name != "none") {
-                        for (i=[1:14:len(accessory_data[a[0]])-1]) {
+                        for (i=[1:15:len(accessory_data[a[0]])-1]) {
                             class = accessory_data[a[0]][i];
                             type = accessory_data[a[0]][i+1];
                             loc_x = accessory_data[a[0]][i+2];
@@ -1250,13 +1256,14 @@ module case_top(case_design) {
                             loc_z = accessory_data[a[0]][i+4];
                             face = accessory_data[a[0]][i+5];
                             rotation = accessory_data[a[0]][i+6];
-                            size_x = accessory_data[a[0]][i+7];
-                            size_y = accessory_data[a[0]][i+8];
-                            size_z = accessory_data[a[0]][i+9];
-                            data_1 = accessory_data[a[0]][i+10];
-                            data_2 = accessory_data[a[0]][i+11];
-                            data_3 = accessory_data[a[0]][i+12];
-                            data_4 = accessory_data[a[0]][i+13];
+                            positioning = accessory_data[a[0]][i+7];
+                            size_x = accessory_data[a[0]][i+8];
+                            size_y = accessory_data[a[0]][i+9];
+                            size_z = accessory_data[a[0]][i+10];
+                            data_1 = accessory_data[a[0]][i+11];
+                            data_2 = accessory_data[a[0]][i+12];
+                            data_3 = accessory_data[a[0]][i+13];
+                            data_4 = accessory_data[a[0]][i+14];
                             
                             if (class == "add1" && face == "top") {
                                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -1449,7 +1456,7 @@ module case_top(case_design) {
         }
         // subtractive accessories
         if(accessory_name != "none") {
-            for (i=[1:14:len(accessory_data[a[0]])-1]) {
+            for (i=[1:15:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -1457,13 +1464,14 @@ module case_top(case_design) {
                 loc_z = accessory_data[a[0]][i+4];
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
-                size_x = accessory_data[a[0]][i+7];
-                size_y = accessory_data[a[0]][i+8];
-                size_z = accessory_data[a[0]][i+9];
-                data_1 = accessory_data[a[0]][i+10];
-                data_2 = accessory_data[a[0]][i+11];
-                data_3 = accessory_data[a[0]][i+12];
-                data_4 = accessory_data[a[0]][i+13];
+                positioning = accessory_data[a[0]][i+7];
+                size_x = accessory_data[a[0]][i+8];
+                size_y = accessory_data[a[0]][i+9];
+                size_z = accessory_data[a[0]][i+10];
+                data_1 = accessory_data[a[0]][i+11];
+                data_2 = accessory_data[a[0]][i+12];
+                data_3 = accessory_data[a[0]][i+13];
+                data_4 = accessory_data[a[0]][i+14];
                 
                 if ((class == "sub" && face == "top") || class == "suball") {
                     if(accessory_highlight == false) {
@@ -1523,7 +1531,7 @@ module case_top(case_design) {
     }
     // additive accessories
     if(accessory_name != "none") {
-        for (i=[1:14:len(accessory_data[a[0]])-1]) {
+        for (i=[1:15:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
             type = accessory_data[a[0]][i+1];
             loc_x = accessory_data[a[0]][i+2];
@@ -1531,13 +1539,14 @@ module case_top(case_design) {
             loc_z = accessory_data[a[0]][i+4];
             face = accessory_data[a[0]][i+5];
             rotation = accessory_data[a[0]][i+6];
-            size_x = accessory_data[a[0]][i+7];
-            size_y = accessory_data[a[0]][i+8];
-            size_z = accessory_data[a[0]][i+9];
-            data_1 = accessory_data[a[0]][i+10];
-            data_2 = accessory_data[a[0]][i+11];
-            data_3 = accessory_data[a[0]][i+12];
-            data_4 = accessory_data[a[0]][i+13];
+            positioning = accessory_data[a[0]][i+7];
+            size_x = accessory_data[a[0]][i+8];
+            size_y = accessory_data[a[0]][i+9];
+            size_z = accessory_data[a[0]][i+10];
+            data_1 = accessory_data[a[0]][i+11];
+            data_2 = accessory_data[a[0]][i+12];
+            data_3 = accessory_data[a[0]][i+13];
+            data_4 = accessory_data[a[0]][i+14];
             
             if (class == "add2" && face == "top") {
                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -1717,7 +1726,7 @@ module case_side(case_design,case_style,side) {
             }         
             // additive accessories
             if(accessory_name != "none") {
-                for (i=[1:14:len(accessory_data[a[0]])-1]) {
+                for (i=[1:15:len(accessory_data[a[0]])-1]) {
                     class = accessory_data[a[0]][i];
                     type = accessory_data[a[0]][i+1];
                     loc_x = accessory_data[a[0]][i+2];
@@ -1725,13 +1734,14 @@ module case_side(case_design,case_style,side) {
                     loc_z = accessory_data[a[0]][i+4];
                     face = accessory_data[a[0]][i+5];
                     rotation = accessory_data[a[0]][i+6];
-                    size_x = accessory_data[a[0]][i+7];
-                    size_y = accessory_data[a[0]][i+8];
-                    size_z = accessory_data[a[0]][i+9];
-                    data_1 = accessory_data[a[0]][i+10];
-                    data_2 = accessory_data[a[0]][i+11];
-                    data_3 = accessory_data[a[0]][i+12];
-                    data_4 = accessory_data[a[0]][i+13];
+                    positioning = accessory_data[a[0]][i+7];
+                    size_x = accessory_data[a[0]][i+8];
+                    size_y = accessory_data[a[0]][i+9];
+                    size_z = accessory_data[a[0]][i+10];
+                    data_1 = accessory_data[a[0]][i+11];
+                    data_2 = accessory_data[a[0]][i+12];
+                    data_3 = accessory_data[a[0]][i+13];
+                    data_4 = accessory_data[a[0]][i+14];
                     
                     if (class == "add1" && face == side) {
                         add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -1740,7 +1750,7 @@ module case_side(case_design,case_style,side) {
             }
         }
         if(accessory_name != "none") {
-            for (i=[1:14:len(accessory_data[a[0]])-1]) {
+            for (i=[1:15:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -1748,13 +1758,14 @@ module case_side(case_design,case_style,side) {
                 loc_z = accessory_data[a[0]][i+4];
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
-                size_x = accessory_data[a[0]][i+7];
-                size_y = accessory_data[a[0]][i+8];
-                size_z = accessory_data[a[0]][i+9];
-                data_1 = accessory_data[a[0]][i+10];
-                data_2 = accessory_data[a[0]][i+11];
-                data_3 = accessory_data[a[0]][i+12];
-                data_4 = accessory_data[a[0]][i+13];
+                positioning = accessory_data[a[0]][i+7];
+                size_x = accessory_data[a[0]][i+8];
+                size_y = accessory_data[a[0]][i+9];
+                size_z = accessory_data[a[0]][i+10];
+                data_1 = accessory_data[a[0]][i+11];
+                data_2 = accessory_data[a[0]][i+12];
+                data_3 = accessory_data[a[0]][i+13];
+                data_4 = accessory_data[a[0]][i+14];
                 
                 if ((class == "sub" && face == side) || class == "suball") {
                     if(accessory_highlight == false) {
@@ -1826,7 +1837,7 @@ module case_side(case_design,case_style,side) {
         }
     }
     if(accessory_name != "none") {
-        for (i=[1:14:len(accessory_data[a[0]])-1]) {
+        for (i=[1:15:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
             type = accessory_data[a[0]][i+1];
             loc_x = accessory_data[a[0]][i+2];
@@ -1834,13 +1845,14 @@ module case_side(case_design,case_style,side) {
             loc_z = accessory_data[a[0]][i+4];
             face = accessory_data[a[0]][i+5];
             rotation = accessory_data[a[0]][i+6];
-            size_x = accessory_data[a[0]][i+7];
-            size_y = accessory_data[a[0]][i+8];
-            size_z = accessory_data[a[0]][i+9];
-            data_1 = accessory_data[a[0]][i+10];
-            data_2 = accessory_data[a[0]][i+11];
-            data_3 = accessory_data[a[0]][i+12];
-            data_4 = accessory_data[a[0]][i+13];
+            positioning = accessory_data[a[0]][i+7];
+            size_x = accessory_data[a[0]][i+8];
+            size_y = accessory_data[a[0]][i+9];
+            size_z = accessory_data[a[0]][i+10];
+            data_1 = accessory_data[a[0]][i+11];
+            data_2 = accessory_data[a[0]][i+12];
+            data_3 = accessory_data[a[0]][i+13];
+            data_4 = accessory_data[a[0]][i+14];
             
             if (class == "add2" && face == side) {
                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
