@@ -43,7 +43,7 @@
     20220515 version 1.2.3 removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
     2022xxxx version 2.x.x increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
-                           video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short
+                           video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short, added subtraction microusb and sphere
 
     
     see https://github.com/hominoids/SBC_Case_Builder
@@ -260,7 +260,7 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
         translate([loc_x,loc_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data_3);
     }
     if(type == "access_cover") {
-        color("grey",1) translate([loc_x,loc_y,loc_z])  rotate(rotation) access_cover([size_x,size_y,size_z],data_3);
+        color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) access_cover([size_x,size_y,size_z],data_3);
     }
     if(type == "boom_vring") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data_1);
@@ -302,13 +302,19 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
         translate([loc_x,loc_y,loc_z])  rotate(rotation) hk_fan_top();
     }    
     if(type == "punchout") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation)  punchout(size_x,size_y,data_1,size_z,data_2,data_3);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) punchout(size_x,size_y,data_1,size_z,data_2,data_3);
     }    
     if(type == "fan") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_mask(size_x, size_z, data_1);
     }
     if(type == "vent") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) vent(size_x,size_y,size_z,data_4,data_1,data_2,data_3);
+    }
+    if(type == "microusb") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) microusb_open();
+    }
+    if(type == "sphere") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) sphere(d=size_x);
     }
 }
 
