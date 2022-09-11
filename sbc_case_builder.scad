@@ -38,7 +38,7 @@
                               accessories kept in sbc_case_builder_accessories.cfg, 
                               added round, hexagon, snap and fitted cases, setup additional sbc from SBC_Model_Framework,
                               added components and masks, added associated parametric positioning for accessories,
-                              added individual variable height standoffs
+                              added individual variable height sbc standoffs
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -120,24 +120,24 @@ sidewall_support = true;
 // top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
 top_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
 // case top - lower left standoff  
-top_rear_left = 0; //[-20:0:20]
+top_rear_left = 0; //[-20:.25:20]
 // case top - upper left standoff  
-top_front_left = 0; //[-20:0:20]
+top_front_left = 0; //[-20:.25:20]
 // case top - lower right standoff  
-top_rear_right = 0; //[-20:0:20]
+top_rear_right = 0; //[-20:.25:20]
 // case top - upper right standoff  
-top_front_right = 0; //[-20:0:20]
+top_front_right = 0; //[-20:.25:20]
 
 // bottom case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
 bottom_standoff = [6.75,7,3.6,10,4,1,0,0,0,4.5,5.1];
 // case bottom - rear left standoff  
-bottom_rear_left = 0; //[-20:0:20]
+bottom_rear_left = 0; //[-20:.25:20]
 // case bottom - upper left standoff  
-bottom_front_left = 0; //[-20:0:20]
+bottom_front_left = 0; //[-20:.25:20]
 // case bottom - lower right standoff  
-bottom_rear_right = 0; //[-20:0:20]
+bottom_rear_right = 0; //[-20:.25:20]
 // case bottom - upper right standoff  
-bottom_front_right = 0; //[-20:0:20]
+bottom_front_right = 0; //[-20:.25:20]
 
 // top case extened standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
 top_ext_standoff = [6.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
@@ -156,8 +156,6 @@ gpio_opening = "none"; // [none,vent,open,punchout]
 cooling = "fan"; // [none,vents,fan,custom]
 // exhaust vents
 exhaust_vents = "vent"; // [none,vent]
-// special mode
-mode = "none"; // [none,net_card,vim_heatsink]
 // case accessory group to load
 accessory_name = "none"; // [none,c1+_shell_boombox,c1+_panel_boombox,c1+_panel_lcd3.5,c1+_desktop_lcd3.5,c1+_tray_boombox,c1+_tray_vu5,c1+_tray_vu7,c1+_round,c1+_hex,c2_shell,c2_shell_boombox,c2_panel,c2_panel_boombox,c2_panel_lcd3.5,c2_desktop_lcd3.5,c2_deskboom_lcd3.5,c2_stacked,c2_tray,c2_tray_sides,c2_tray_boombox,c2_tray_vu5,c2_tray_vu7,c2_round,c2_hex,c4_shell,c4_shell_boombox,c4_shell_vu7c,c4_panel,c4_panel_lcd3.5,c4_desktop_lcd3.5,c4_deskboom_lcd3.5,c4_panel_boombox,c4_stacked,c4_tray,c4_tray_sides,c4_tray_boombox,c4_tray_vu5,c4_tray_vu7,c4_round,c4_hex,xu4_tray_vu5,xu4_tray_vu7,xu4q_tray_vu5,xu4q_tray_vu7,n1_tray_vu5,n1_tray_vu7,n1_round,n1_hex,n2_tray_vu5,n2_tray_vu7,n2+_tray_vu5,n2+_tray_vu7,n2+_tray_vu7_fan,m1_panel,m1_tray,m1_tray_drive,m1_tray_sides,m1_tray_vu5,m1_tray_vu7,h2_shell,h2_panel,h2_stacked,h2_tray,h2_tray_sides,h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_lowboy,h2_lowboy_router,h2_shell_router,h2_shell_router-ssd,h2_round,h2_hex,hc4_shell,hc4_panel,hc4_stacked,hc4_tray,hc4_tray_sides,hc4_tray_vu5,hc4_tray_vu7,hc4_tray_drivebox2.5,hc4_shell_drivebox2.5,hc4_shell_drivebox2.5v,hc4_shell_drivebox3.5,jetsonnano_shell,jetsonnano_panel,jetsonnano_stacked,jetsonnano_tray,jetsonnano_tray_sides,jetsonnano_round,jetsonnano_hex,jetsonnano_snap,jetsonnano_fitted,rock64_shell,rock64_panel,rock64_stacked,rock64_tray,rock64_tray_sides,rock64_round,rock64_hex,rock64_snap,rock64_fitted,rockpro64_shell,rockpro64_panel,rockpro64_stacked,rockpro64_tray,rockpro64_tray_sides,rockpro64_round,rockpro64_hex,rockpro64_snap,rockpro64_fitted,show2_shell,rpizero_shell,rpizero_panel,rpizero_stacked,rpizero_tray,rpizero_tray_sides,rpizero_snap,rpizero_fitted,rpizero2w_shell,rpizero2w_panel,rpizero2w_stacked,rpizero2w_tray,rpizero2w_tray_sides,rpizero2w_snap,rpizero2w_fitted,rpi1a+_shell,rpi1a+_panel,rpi1a+_stacked,rpi1a+_tray,rpi1a+_tray_sides,rpi1a+_round,rpi1a+_hex,rpi1a+_snap,rpi1a+_fitted,rpi1b+_shell,rpi1b+_panel,rpi1b+_stacked,rpi1b+_tray,rpi1b+_tray_sides,rpi1b+_round,rpi1b+_hex,rpi1b+_snap,rpi1b+_fitted,rpi3a+_shell,rpi3a+_panel,rpi3a+_stacked,rpi3a+_tray,rpi3a+_tray_sides,rpi3a+_round,rpi3a+_hex,rpi3a+_snap,rpi3a+_fitted,rpi3b_shell,rpi3b_panel,rpi3b_stacked,rpi3b_tray,rpi3b_tray_sides,rpi3b_round,rpi3b_hex,rpi3b_snap,rpi3b_fitted,rpi3b+_shell,rpi3b+_panel,rpi3b+_stacked,rpi3b+_tray,rpi3b+_tray_sides,rpi3b+_round,rpi3b+_hex,rpi3b+_snap,rpi3b+_fitted,rpi4b_shell,rpi4b_panel,rpi4b_stacked,rpi4b_tray,rpi4b_tray_sides,rpi4b_round,rpi4b_hex,rpi4b_snap,rpi4b_fitted,rockpi4b+_shell,rockpi4b+_panel,rockpi4b+_stacked,rockpi4b+_tray,rockpi4b+_tray_sides,rockpi4b+_round,rockpi4b+_hex,rockpi4b+_snap,rockpi4b+_fitted,rockpi4c_shell,rockpi4c_panel,rockpi4c_stackedrockpi4c_tray,rockpi4c_tray_sides,rockpi4c_round,rockpi4c_hex,rockpi4c_snap,rockpi4c_fitted,rockpi4c+_shell,rockpi4c+_panel,rockpi4c+_stacked,rockpi4c+_tray,rockpi4c+_tray_sides,rockpi4c+_round,rockpi4c+_hex,rockpi4c+_snap,rockpi4c+_fitted,vim1_shell,vim1_panel,vim1_stacked,vim1_tray,vim1_tray_sides,vim1_snap,vim1_round,vim1_hex,vim1_fitted,vim2_shell,vim2_panel,vim2_stacked,vim2_tray,vim2_tray_sides,vim2_round,vim2_hex,vim2_snap,vim2_fitted,vim3l_shell,vim3l_panel,vim3l_stacked,vim3l_tray,vim3l_tray_sides,vim3l_round,vim3l_hex,vim3l_snap,vim3l_fitted,vim3_shell,vim3_panel,vim3_stacked,vim3_tray,vim3_tray_sides,vim3_round,vim3_hex,vim3_snap,vim3_fitted,vim1_shell,vim4_panel,vim4_stacked,vim4_tray,vim4_tray_sides,vim4_round,vim4_hex,vim4_snap,vim4_fitted,tinkerboard_shell,tinkerboard_panel,tinkerboard_stacked,tinkerboard_tray,tinkerboard_tray_sides,tinkerboard_round,tinkerboard_hex,tinkerboard_snap,tinkerboard_fitted,tinkerboard-s_shell,tinkerboard-s_panel,tinkerboard-s_stacked,tinkerboard-s_tray,tinkerboard-s_tray_sides,tinkerboard-s_round,tinkerboard-s_hex,tinkerboard-s_snap,tinkerboard-s_fitted,tinkerboard-2_shell,tinkerboard-2_panel,tinkerboard-2_stacked,tinkerboard-2_tray,tinkerboard-2_tray_sides,tinkerboard-2_round,tinkerboard-2_hex,tinkerboard-2_snap,tinkerboard-2_fitted,tinkerboard-r2_shell,tinkerboard-r2_panel,tinkerboard-r2_stacked,tinkerboard-r2_tray,tinkerboard-r2_tray_sides,tinkerboard-r2_round,tinkerboard-r2_hex,tinkerboard-r2_snap,tinkerboard-r2_fitted,hk_uart]
 
@@ -1546,7 +1544,7 @@ module case_top(case_design) {
                             parametric,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
                     }
                     else {
-                        #sub(type,loc_x,loc_y,loc_z,face,rotation,
+                        #parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,
                             parametric,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
                     }
                 }
@@ -2379,7 +2377,7 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // z axis accessory parametrics
     if(parametric[1] == false && parametric[2] == false && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            add(type,loc_x,loc_y,loc_z+case_offset_tz,
+            add(type,loc_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2409,7 +2407,7 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // xz axis accessory parametrics
     if(parametric[1] == true && parametric[2] == false && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            add(type,loc_x+case_offset_x,loc_y,loc_z+case_offset_tz,
+            add(type,loc_x+case_offset_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2428,7 +2426,7 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // yz axis accessory parametrics
     if(parametric[1] == false && parametric[2] == true && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            add(type,loc_x,loc_y+case_offset_y,loc_z+case_offset_tz,
+            add(type,loc_x,loc_y+case_offset_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2447,7 +2445,7 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // xyz axis accessory parametrics
     if(parametric[1] == true && parametric[2] == true && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            add(type,loc_x+case_offset_x,loc_y+case_offset_y,loc_z+case_offset_tz,
+            add(type,loc_x+case_offset_x,loc_y+case_offset_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2499,7 +2497,7 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // z axis accessory parametrics
     if(parametric[1] == false && parametric[2] == false && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            sub(type,loc_x,loc_y,loc_z+case_offset_tz,
+            sub(type,loc_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2529,7 +2527,7 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // xz axis accessory parametrics
     if(parametric[1] == true && parametric[2] == false && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            sub(type,loc_x+case_offset_x,loc_y,loc_z+case_offset_tz,
+            sub(type,loc_x+case_offset_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2548,7 +2546,7 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // yz axis accessory parametrics
     if(parametric[1] == false && parametric[2] == true && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            sub(type,loc_x,loc_y+case_offset_y,loc_z+case_offset_tz,
+            sub(type,loc_x,loc_y+case_offset_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
@@ -2567,7 +2565,7 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
     // xyz axis accessory parametrics
     if(parametric[1] == true && parametric[2] == true && parametric[3] == true) {
         if(parametric[0] == "case" && face == "top") {
-            sub(type,loc_x+case_offset_x,loc_y+case_offset_y,loc_z+case_offset_tz,
+            sub(type,loc_x+case_offset_x,loc_y+case_offset_y,loc_z+case_offset_tz+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face == "bottom") {
