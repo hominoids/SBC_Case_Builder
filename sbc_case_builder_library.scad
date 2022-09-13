@@ -2414,80 +2414,42 @@ $fn=90;
         translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
         translate ([4,4,-1]) cylinder(h=thick+2, d=3);
     }
-    if(style == 2 && size == 40) {
-        difference() {
-            union () {
+    if (style == 2) {
+        inner = size == 30 ? 24 :
+            size == 40 ? 32 :
+            size == 50 ? 40 :
+                size == 60 ? 50 :
+                size == 70 ? 61.9 :
+                    size == 80 ? 71.5 :
+                    size * 0.8;
+        offset = (size - inner) / 2;
+        translate([0, 0, -1]) difference() {
+            union() {
+            // screw holes
+            translate([offset, offset, 0]) cylinder(d=3, h=thick+2);
+            translate([size-offset, offset, 0]) cylinder(d=3, h=thick+2);
+            translate([offset, size-offset, 0]) cylinder(d=3, h=thick+2);
+            translate([size-offset, size-offset, 0]) cylinder(d=3, h=thick+2);
+            
+            // fan grates
+            translate_xy = size * 0.5;
+            base_ring_size = size * 0.9;
+            ring_height = thick + 2;
+            ring_diff_height = ring_height + 2;
+            render() { // Necessary for large fan masks or else you get tree normalization errors
+                for(i=[0:2:inner]) {
+                echo(i);
                 difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-2);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-6);
+                    translate([translate_xy, translate_xy, 0]) cylinder(d=base_ring_size - 2*i, h=ring_height);
+                    translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size - 2*(i+1), h=ring_diff_height);
                 }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-10);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-14);
                 }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-18);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-22);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-26);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-30);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-34);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-38);
-                }
-//                translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-34);
-                // mount holes
-                translate ([size-4,size-4,-1]) cylinder(h=thick+2, d=3);
-                translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
-                translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
-                translate ([4,4,-1]) cylinder(h=thick+2, d=3);
             }
-            translate([6.5,5,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
-            translate([4.5,size-6,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
-        }    
-    }
-    if(style == 2 && size >= 80) {
-        difference() {
-            union () {
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-2);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-8);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-14);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-20);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-26);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-32);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-38);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-44);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-50);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-56);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-62);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-68);
-                }
-                difference() {
-                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-74);
-                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-79);
-                }
-                // mount holes
-                translate ([size-4,size-4,-1]) cylinder(h=thick+2, d=3);
-                translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
-                translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
-                translate ([4,4,-1]) cylinder(h=thick+2, d=3);
             }
-            translate([6.5,4.25,-2]) rotate([0,0,45]) cube([size*1.2,3,thick+4]);
-            translate([4.25,size-6.5,-2]) rotate([0,0,-45]) cube([size*1.2,3,thick+4]);
-        }    
+            // cross bars
+            translate([0, (size*0.5)-1.5, -1]) cube([size, 3, 12]);
+            translate([(size*0.5)-1.5,0 -1]) cube([3, size, 12]);
+        }
     }
 }
 
