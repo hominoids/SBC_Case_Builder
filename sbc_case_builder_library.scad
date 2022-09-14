@@ -2403,8 +2403,7 @@ module microusb_open() {
 
 /* fan mask to create opening */
 module fan_mask(size, thick, style) {
-
-$fn=90;
+    $fn=90;
 
     if(style == 1) {
         translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-2);
@@ -2436,22 +2435,19 @@ $fn=90;
                 base_ring_size = size * 0.9;
                 ring_height = thick + 2;
                 ring_diff_height = ring_height + 2;
-                render() { // Necessary for large fan masks or else you get tree normalization errors
-                    for(i=[0:2:inner]) {
-                        difference() {
-                            translate([translate_xy, translate_xy, 0]) cylinder(d=base_ring_size - 2*i, h=ring_height);
-                            translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size - 2*(i+1), h=ring_diff_height);
-                        }
+                for(i=[0:8:inner]) {
+                    difference() {
+                        translate([translate_xy, translate_xy, 0]) cylinder(d=base_ring_size - i, h=ring_height);
+                        translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size - i - 4, h=ring_diff_height);
                     }
                 }
             }
             // cross bars
             translate([0, (size*0.5)-1.5, -1]) cube([size, 3, 12]);
-            translate([(size*0.5)-1.5,0 -1]) cube([3, size, 12]);
+            translate([(size*0.5)-1.5,0, -1]) cube([3, size, 12]);
         }
     }
 }
-
 
 /* mask module */
 module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,pcb_z) {
