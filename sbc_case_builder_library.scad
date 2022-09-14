@@ -2420,31 +2420,39 @@ module fan_mask(size, thick, style) {
                 size == 60 ? 50 :
                 size == 70 ? 61.9 :
                     size == 80 ? 71.5 :
-                    size * 0.8;
-        offset = (size - inner) / 2;
+                    size * 0.8; // Use 80% as default
+        bar_width = size < 40 ? 2 : 3;
+        ring_width = size < 40 ? 5 : 4;
+        
+        screw_offset = (size - inner) / 2;
+        translate_xy = size * 0.5;
+        base_ring_size = size * 0.9;
+        ring_height = thick + 2;
+        ring_diff_height = ring_height + 2;
+
         translate([0, 0, -1]) difference() {
             union() {
                 // screw holes
-                translate([offset, offset, 0]) cylinder(d=3, h=thick+2);
-                translate([size-offset, offset, 0]) cylinder(d=3, h=thick+2);
-                translate([offset, size-offset, 0]) cylinder(d=3, h=thick+2);
-                translate([size-offset, size-offset, 0]) cylinder(d=3, h=thick+2);
+                translate([screw_offset, screw_offset, 0]) cylinder(d=3, h=thick+2);
+                translate([size-screw_offset, screw_offset, 0]) cylinder(d=3, h=thick+2);
+                translate([screw_offset, size-screw_offset, 0]) cylinder(d=3, h=thick+2);
+                translate([size-screw_offset, size-screw_offset, 0]) cylinder(d=3, h=thick+2);
                 
                 // fan grates
-                translate_xy = size * 0.5;
-                base_ring_size = size * 0.9;
-                ring_height = thick + 2;
-                ring_diff_height = ring_height + 2;
                 for(i=[0:8:inner]) {
                     difference() {
                         translate([translate_xy, translate_xy, 0]) cylinder(d=base_ring_size - i, h=ring_height);
-                        translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size - i - 4, h=ring_diff_height);
+                        translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size - i - ring_width, h=ring_diff_height);
                     }
                 }
             }
+
             // cross bars
-            translate([0, (size*0.5)-1.5, -1]) cube([size, 3, 12]);
-            translate([(size*0.5)-1.5,0, -1]) cube([3, size, 12]);
+            // NOTE: The math could be better here to figure out the bar's offset, but it works
+            // okay until you get up to a bar width of 6mm.
+            bar_offset = inner / 7;
+            translate([sqrt((bar_width*bar_width)/2) + bar_offset, bar_offset, -1]) rotate([0, 0, 45]) cube([size, bar_width, 12]);
+            translate([bar_offset, -sqrt((bar_width*bar_width)/2)+size - bar_offset, -1]) rotate([0, 0, -45]) cube([size, bar_width, 12]);
         }
     }
 }
