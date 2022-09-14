@@ -3,7 +3,7 @@ use <../sbc_case_builder_library.scad>;
 // 30mm Mask Solid
 fan_mask(30, 2, 2);
 
-// // 30mm Mask Punchout
+// 30mm Mask Punchout
 translate([0, 40, 0])
   difference() {
     cube([30, 30, 2]);
