@@ -2441,8 +2441,6 @@ module fan_mask(size, thick, style) {
             union() {
                 for(i=[inner:-rings_spacing:0]) {
                 difference() {
-                    echo("Ring", base_ring_size - i);
-                    echo("Ring Cut", base_ring_size - i - (rings_spacing/2));
                     cylinder(d=base_ring_size - i, h=thick+2);
                     translate([0, 0, -1]) cylinder(d=base_ring_size - i - (rings_spacing/2), h=thick+4);
                 }
