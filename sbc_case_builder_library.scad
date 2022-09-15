@@ -2422,11 +2422,12 @@ module fan_mask(size, thick, style) {
                     size == 80 ? 71.5 :
                     size * 0.8; // Use 80% as default
         bar_width = size < 40 ? 2 : 3;
-        ring_width = size < 40 ? 5 : 4;
+        ring_width = size <= 40 ? 3 : 8;
         
         screw_offset = (size - inner) / 2;
         translate_xy = size * 0.5;
-        base_ring_size = size * 0.9;
+        rings = 5;
+        base_ring_size = (size * 0.9) / rings;
         ring_height = thick + 2;
         ring_diff_height = ring_height + 2;
 
@@ -2438,13 +2439,35 @@ module fan_mask(size, thick, style) {
                 translate([screw_offset, size-screw_offset, 0]) cylinder(d=3, h=thick+2);
                 translate([size-screw_offset, size-screw_offset, 0]) cylinder(d=3, h=thick+2);
                 
-                // fan grates
-                for(i=[0:8:inner]) {
+                // fan grates;
+                for(i=[0:rings]) {
                     difference() {
-                        translate([translate_xy, translate_xy, 0]) cylinder(d=base_ring_size - i, h=ring_height);
-                        translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size - i - ring_width, h=ring_diff_height);
+                        translate([translate_xy, translate_xy, 0]) cylinder(d=base_ring_size * i, h=ring_height);
+                        translate([translate_xy, translate_xy, -1]) cylinder(d=base_ring_size * i - ring_width, h=ring_diff_height);
                     }
                 }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-10);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-14);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-18);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-22);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-26);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-30);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-34);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-38);
+                }
+//                translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-34);
+                // mount holes
+                translate ([size-4,size-4,-1]) cylinder(h=thick+2, d=3);
+                translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
+                translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
+                translate ([4,4,-1]) cylinder(h=thick+2, d=3);
             }
 
             // cross bars
