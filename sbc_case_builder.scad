@@ -37,7 +37,7 @@
     2022xxxx Version 2.0.x    full customizer user interface,case configuration file changed to json,
                               accessories kept in sbc_case_builder_accessories.cfg, 
                               added round, hexagon, snap and fitted cases, setup additional sbc from SBC_Model_Framework,
-                              added components and masks, added associated parametric positioning for accessories,
+                              added components and masks, added multi-associative parametric positioning for accessories,
                               added individual variable height sbc standoffs
     
     see https://github.com/hominoids/SBC_Case_Builder
@@ -2393,6 +2393,14 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
             add(type,loc_x,loc_y,loc_z+pcb_loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            add(type,loc_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            add(type,loc_x,loc_y,loc_z+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
     }
     // xy axis accessory parametrics
     if(parametric[1] == true && parametric[2] == true && parametric[3] == false) {
@@ -2423,6 +2431,14 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
             add(type,loc_x+pcb_loc_x,loc_y,loc_z+pcb_loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            add(type,loc_x+pcb_loc_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            add(type,loc_x+pcb_loc_x,loc_y,loc_z+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
     }
     // yz axis accessory parametrics
     if(parametric[1] == false && parametric[2] == true && parametric[3] == true) {
@@ -2442,6 +2458,14 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
             add(type,loc_x,loc_y+pcb_loc_y,loc_z+pcb_loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            add(type,loc_x,loc_y+pcb_loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            add(type,loc_x,loc_y+pcb_loc_y,loc_z+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
     }
     // xyz axis accessory parametrics
     if(parametric[1] == true && parametric[2] == true && parametric[3] == true) {
@@ -2454,11 +2478,19 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "case" && face != "bottom" && face != "top") {
-            #add(type,loc_x+case_offset_x,loc_y+case_offset_y,loc_z,
+            add(type,loc_x+case_offset_x,loc_y+case_offset_y,loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
         if(parametric[0] == "sbc") {
             add(type,loc_x+pcb_loc_x,loc_y+pcb_loc_y,loc_z+pcb_loc_z,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            add(type,loc_x+pcb_loc_x,loc_y+pcb_loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            add(type,loc_x+pcb_loc_x,loc_y+pcb_loc_y,loc_z+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
     }
@@ -2513,6 +2545,14 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
             sub(type,loc_x,loc_y,loc_z+pcb_loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            sub(type,loc_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            sub(type,loc_x,loc_y,loc_z+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
     }
     // xy axis accessory parametrics
     if(parametric[1] == true && parametric[2] == true && parametric[3] == false) {
@@ -2543,6 +2583,14 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
             sub(type,loc_x+pcb_loc_x,loc_y,loc_z+pcb_loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            sub(type,loc_x+pcb_loc_x,loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            sub(type,loc_x+pcb_loc_x,loc_y,loc_z+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
     }
     // yz axis accessory parametrics
     if(parametric[1] == false && parametric[2] == true && parametric[3] == true) {
@@ -2562,6 +2610,14 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
             sub(type,loc_x,loc_y+pcb_loc_y,loc_z+pcb_loc_z,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            sub(type,loc_x,loc_y+pcb_loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            sub(type,loc_x,loc_y+pcb_loc_y,loc_z+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
     }
     // xyz axis accessory parametrics
     if(parametric[1] == true && parametric[2] == true && parametric[3] == true) {
@@ -2579,6 +2635,14 @@ module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
         }
         if(parametric[0] == "sbc") {
             sub(type,loc_x+pcb_loc_x,loc_y+pcb_loc_y,loc_z+pcb_loc_z,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "top") {
+            sub(type,loc_x+pcb_loc_x,loc_y+pcb_loc_y,loc_z+case_offset_tz+case_offset_bz,
+                face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+        }
+        if(parametric[0] == "sbc-case_z" && face == "bottom") {
+            sub(type,loc_x+pcb_loc_x,loc_y+pcb_loc_y,loc_z+case_offset_bz,
                 face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
         }
     }

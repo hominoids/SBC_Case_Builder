@@ -1029,7 +1029,7 @@
         "c2_shell_boombox": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_shell_boombox",
+            "accessory_name": "c2_shell_boombox",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 7, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1143,7 +1143,7 @@
         "c2_panel_lcd3.5": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_panel_lcd3.5",
+            "accessory_name": "c2_panel_lcd3.5",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1200,7 +1200,7 @@
         "c2_panel_boombox": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_panel_boombox",
+            "accessory_name": "c2_panel_boombox",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1257,7 +1257,7 @@
         "c2_desktop_lcd3.5": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_desktop_lcd3.5",
+            "accessory_name": "c2_desktop_lcd3.5",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1314,7 +1314,7 @@
         "c2_deskboom_lcd3.5": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_deskboom_lcd3.5",
+            "accessory_name": "2_deskboom_lcd3.5",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1542,7 +1542,7 @@
         "c2_tray_boombox": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_tray_boombox",
+            "accessory_name": "c2_tray_boombox",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1713,7 +1713,7 @@
         "c2_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_round",
+            "accessory_name": "c2_round",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -1770,7 +1770,7 @@
         "c2_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "c1+_hex",
+            "accessory_name": "c2_hex",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",

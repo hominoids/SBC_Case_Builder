@@ -5,7 +5,11 @@
 
 This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project 
 to automatically generate cases based on the data for any given SBC contained within the framework.
-It uses the Customizer for a graphical user interface for all case attributes.  Cases can be created, saved, recalled and edited using the graphical interface after enabling the customizer in the OpenSCAD menu view.
+It uses the Customizer for a graphical user interface for all case attributes.  Cases can be created, 
+saved, recalled and edited using the graphical interface after enabling the customizer in the 
+OpenSCAD menu->view.  It also supports variable height sbc standoffs to accommodate hats and other add-on 
+PCB. Multi-associative parametric positioning of accessories is supported.
+
 License: GPLv3.
 
 ![Image](SBC_Case_Builder_Cases.gif)
@@ -226,7 +230,7 @@ e.g.
 
 Every type, regardless of it’s class, uses a basic set of variables(loc_x,loc_y,loc_z,”face”,rotation[],parametrics[]) but each type doesn’t necessarily use all available data fields(size_x,size_y,size_z,data_1,data_2,”data_3”,data_4[]). “add1” and “add2” are used to add geometry to the case. The difference is when the addition occurs. “add1” happens at the beginning when the core case geometry is created and add2 happens after all subtractions have occurred. “suball” is used to affect all faces of a case, not just “face”. The “face” is the case piece that will be effected by the addition or subtraction. The "model" type is for placing supporting accessories in the model view. e.g. hard drives, fans. The "platter" type is for adding supporting accessories to the print platter.
 
-The parametric array specifies the axis to enable for associated parametric positoning. An accessory can be associated with the sbc position("sbc"), case offset("case") or uses absolute values if all axises are false
+The parametric array specifies the axis to enable for associated parametric positoning. An accessory can be associated with the sbc position("sbc"), case offset("case"),multi-associated which use sbc xy postion and case z offset(sbc-case_z) or uses absolute values if all axises are false
 
 #### classes: add1, sub, suball, add2, model, platter
 
