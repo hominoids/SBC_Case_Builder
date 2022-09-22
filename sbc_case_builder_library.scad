@@ -2427,7 +2427,7 @@ module fan_mask(size, thick, style) {
 
         screw_offset = inner / 2;
         center_point = size * 0.5;
-        base_ring_size = size * 0.9;
+        base_ring_size = size * 0.95;
         rings_spacing = size / rings;
 
         translate([size/2, size/2, -1])
