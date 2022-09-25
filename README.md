@@ -128,98 +128,15 @@ h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_round,h2_hex,h2_snap
 **OPI R1PlusLTS** - 9 : opir1plus_lts_shell,opir1plus_lts_panel,opir1plus_lts_stacked,opir1plus_lts_tray,opir1plus_lts_tray_sides,opir1plus_lts_round,opir1plus_lts_hex,opir1plus_lts_snap,opir1plus_lts_fitted
 
 
-### Case and Accessory Schema
-The schema for case configuration and accessories is documented in the beginning of the file sbc_case_builder.cfg. It has not been finalized and may be subject to changes in the near future as development in these areas is ongoing. Here is a review of the current schema which will be updated as needed for each release. The schema is divided into two areas, case and accessories. There are 30 fixed entries that describe any given case followed by an unlimited number of accessory entries each containing 14 entries.
+### Accessory Schema
+The schema for case accessories is documented in the beginning of the file sbc_case_builder_accessories.cfg. There is one fixed entry that describe any given case followed by an unlimited number of accessory entries each containing 15 entries.
 
 schema:
 
-    "case_name","sbc_model","case_design","case_style",
-    pcb_loc_x,pcb_loc_y,pcb_loc_z,case_offset_x,case_offset_y,case_offset_tz,case_offset_bz,
-    wallthick,floorthick,sidethick,gap,fillet,
-    indents,sidewall_support,sbc_top_standoffs,sbc_bottom_standoffs,case_ext_standoffs,mode
-    sata_punchout,"gpio_opening","cooling","exhaust_vents",
-    top_standoff[    6.75,     // diameter
-                       18,     // height (top_height)
-                      2.5,     // holesize
-                       10,     // supportsize
-                        4,     // supportheight
-                        4,     // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                        0,     // standoff style 0=hex, 1=cylinder
-                        1,     // enable reverse standoff
-                        0,     // enable insert at top of standoff
-                      4.5,     // insert hole dia. mm
-                      5.1],    // insert depth mm
-    bottom_standoff[ 6.75,     // diameter
-                        5,     // height (bottom_height-pcb_z)
-                      3.6,     // holesize
-                       10,     // supportsize
-                        4,     // supportheight
-                        1,     // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                        0,     // standoff style 0=hex, 1=cylinder
-                        0,     // enable reverse standoff
-                        0,     // enable insert at top of standoff
-                      4.5,     // insert hole dia. mm
-                      5.1],    // insert depth mm
-    top_ext_standoff[    6.75, // diameter
-                       18,     // height (top_height)
-                      2.5,     // holesize
-                       10,     // supportsize
-                        4,     // supportheight
-                        4,     // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                        0,     // standoff style 0=hex, 1=cylinder
-                        1,     // enable reverse standoff
-                        0,     // enable insert at top of standoff
-                      4.5,     // insert hole dia. mm
-                      5.1],    // insert depth mm
-    bottom_ext_standoff[ 6.75, // diameter
-                        5,     // height (bottom_height-pcb_z)
-                      3.6,     // holesize
-                       10,     // supportsize
-                        4,     // supportheight
-                        1,     // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-                        0,     // standoff style 0=hex, 1=cylinder
-                        0,     // enable reverse standoff
-                        0,     // enable insert at top of standoff
-                      4.5,     // insert hole dia. mm
-                      5.1],    // insert depth mm
+    "accessory_name",
+    "class","type",loc_x,loc_y,loc_z,face,rotation[x,y,z],parametrics[association,x,y,z],size_x,size_y,size_z,data_1,data_2,"data_3",data_4[]
 
-"class","type",loc_x,loc_y,loc_z,face,rotation[x,y,z],parametrics[association,x,y,z],size_x,size_y,size_z,data_1,data_2,"data_3",data_4[]
-
-Fixed Schema Entries
-The 30 fixed schema entries are self-evident based on their name.
-
-    case_name = “case_name”
-    sbc_model = any sbc from sbc model framework: "c1+","c2","c4"...
-    case_design = "shell", "panel", "stacked", "tray"
-    case_style = “style” of case_design (tray: none, vu5, vu7)
-    pcb_loc_x = sbc location x axis
-    pcb_loc_y = sbc location y axis
-    pcb_loc_z = sbc location z axis
-    case_offset_x = additional case x axis size
-    case_offset_y = additional case y axis size
-    case_offset_tz = additional case top z axis size
-    case_offset_bz = additional case bottom z axis size
-    wallthick = case wall thickness
-    floorthick = case floor thickness
-    sidethick = case side thickness
-    gap = distance between pcb and case
-    fillet = edge fillets
-    indents = enable indentations around io openings (true or false)
-    sidewall_support = enable wall support for standoffs (true or false)
-    sbc_top_standoffs = enable sbc top standoffs (true or false)
-    sbc_bottom_standoffs = enable sbc bottom standoffs (true or false)
-    case_ext_standoffs = enable case extended standoffs (true or false)
-    sata_punchout = enable sata punchout (true or false)
-    gpio_opening = gpio openings "none","vent","open","punchout"
-    cooling = "none", "vents", "fan", "custom" using ./dxf/customfan.dxf
-    exhaust_vents = exhaust vents "none","vent"
-    top_standoff[] = top pcb standoffs
-    bottom_standoff[] = bottom pcb standoffs
-    top_ext_standoff[] = top extended standoffs
-    bottom_ext_standoff[] = bottom extended standoffs
-    mode = special mode "net_card"
-
-### Accessories Configuration Entries
+### Accessories Entries
 The accessories entries need more explanation because of their input variability. For accessories there are 6 classes, “add1”,“sub”,”suball”,”add2”,”model”,”platter” and all use the same command format for various “type”.
 
   `"class","type",loc_x,loc_y,loc_z,size_x,size_y,size_z,"face",rotation[],parametrics[],data_1,data_2,"data_3",data_4[]`
