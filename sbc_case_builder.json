@@ -12934,7 +12934,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -12991,7 +12991,7 @@
             "top_front_right": "-11",
             "top_rear_left": "-11",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13048,7 +13048,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13105,7 +13105,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13162,7 +13162,7 @@
             "top_front_right": "-11",
             "top_rear_left": "-11",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13219,7 +13219,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13276,7 +13276,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13333,7 +13333,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "3"
@@ -13390,7 +13390,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "3"
@@ -13447,7 +13447,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
@@ -13504,7 +13504,7 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[5.75, 20, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"

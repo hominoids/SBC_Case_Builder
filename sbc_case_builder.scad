@@ -2072,20 +2072,7 @@ module open_io() {
         
         // indents
         if(indents == true) {
-            if(type == "micro") {
-                translate([loc_x-.6,loc_y-gap-wallthick/2+1,bottom_height+pcb_loc_z+1.9]) rotate([90,0,0]) slot(6,8,wallthick);
-            }
-            if(type == "hdmi_a" && side == "top") {            
-                translate([loc_x+2.375,loc_y-gap-wallthick/2+1,bottom_height+pcb_loc_z+3.75]) rotate([90,0,0]) slot(12,10,wallthick);
-            }
-            if(type == "pwr5.5_7.5x11.5") {            
-                translate([loc_x+3.5,loc_y-gap-wallthick/2+1,bottom_height+pcb_loc_z+6.25]) 
-                     rotate([90,0,0]) cylinder(d=10, h=wallthick+(2*adjust));
-            }
-            if(type == "pwr2.5_5x7.5") {            
-                translate([loc_x+2.75,loc_y-gap-wallthick/2,bottom_height+pcb_loc_z+2.1]) 
-                     rotate([90,0,0]) cylinder(d=6, h=wallthick+(2*adjust));
-            }
+            indent(loc_x,loc_y,bottom_height+pcb_loc_z-adjust,rotation,side,class,type,wallthick,gap,floorthick,pcb_z);
         }
         
         // bottom cooling openings
