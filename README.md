@@ -3,12 +3,9 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project 
-to automatically generate cases based on the data for any given SBC contained within the framework.
-It uses the Customizer for a graphical user interface for all case attributes.  Cases can be created, 
-saved, recalled and edited using the graphical interface after enabling the customizer in the 
-OpenSCAD menu->view.  It also supports variable height sbc standoffs to accommodate hats and other add-on 
-PCB. Multi-associative parametric positioning of accessories is supported.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any given SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, round, hex, snap, fitted) available and each allows for different styles within the design.
+
+All case openings are created automatically based on SBC data and, the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
 License: GPLv3.
 
@@ -22,9 +19,75 @@ License: GPLv3.
   git submodule update
 
 ```
-### Notes
-  
-  More information can be found at this [Hard Kernel forum thread](https://forum.odroid.com/viewtopic.php?f=53&t=43948)
+
+### SBC Case Builder Features:
+-  Autonomous Multi-SBC, Multi-Case, Parametric Generation
+-  Variable Height, Autonomous Case Standoffs
+-  Accessory Customization Framework
+-  Accessory Multi-Associative Parametric Positioning
+   - Absolute Location
+   - Case Associations
+   - SBC Associations
+   - SBC_X,Y - Case_Z Association
+-  SBC Model Framework Validation Tool
+
+### Base Case Designs:
+- Shell - complete
+- Panel - complete
+- Stacked - complete
+- Tray - complete
+- Tray-Sides - complete
+- Tray-Vu5 - complete
+- Tray-Vu7 - complete
+- Round - complete
+- Hex - complete
+- Snap - complete
+- Fitted - complete
+- Sliding
+- Cylinder
+- Rack
+- CNC Cases
+
+All case data is stored in a json file, sbc_case_builder.json, with the accessory data stored in a separate file structure in sbc_case_builder_accessories.cfg.  An accessory group name for a given case is stored as part of the case data in the json file.  This allows for the reuse or sharing of an accessory set by different cases and can be used to manage groups of accessories.  This differs from version 1.x in that all accessories for a case were stored with the case data and weren’t accessible to be used by another case.
+
+Variable height automated SBC standoffs, which can be individually adjusted, are also implemented to integrate add-on PCB, hats, heatsinks or other accessories that share SBC standoffs for mounting.  The HK Netcard uses this feature as well as other accessories.
+
+Multi-associative parametric positioning of accessories is implemented and allows each accessory to enable or disable parametric movement of the accessory for each axis.  The XY and Z axis can be associated with the case offset (size), SBC positioning, multi-associated axises or absolute positioning.  For instance, a SBC fan opening needs to follow the SBC in the X and Y axis but the case Z axis for the correct height.
+```
+                                         p
+                                         a
+                                         r
+                                r        a
+                                o        m
+                                t        e                           s s s d d d d
+  c          l  l  l            a        t                           i i i a a a a
+  l      t   o  o  o      f     t        r                           z z z t t t t
+  a      y   c  c  c      a     i        i                           e e e a a a a
+  s      p                c     o        c
+  s,     e,  x, y, z,     e,    n,       s,                          x,y,z,1,2,3,4
+
+`"sub","fan",10,10,24.5,"top",[0,0,0],["sbc-case_z",true,true,true],40,0,6,2,0,"",0]`
+```
+
+An array holds a string and 3 Boolean that represent which association and axis are enabled for parametric movement.  In the accessory example above, the 8th parameter `["sbc-case_z",true,true,true]` means all axises are enabled for multi-associative movement with the X and Y accessory axis following the SBC X and Y axis and the accessory Z axis following the case Z axis. The other currently supported associations are “sbc” and “case”.  If other associations of objects are needed or are of value, they can be added in the future.  All of the existing cases have been made parametric and can serve as further working examples.
+
+### Accuracy
+In the past there was been no way of validating whether a SBC Model Framework model and it’s components were dimensionaly accurate in their size and placement other then trial and error. Along with producing cases this project provides a much needed model validation tool to assure model accuracy thru the use of test cases. It works on the very simple premise that if the real SBC fits the test case then the virtual model is accurate or otherwise shows were corrections are needed. This will further increased the overall accuracy of models.
+
+There are currently 47 SBC represented by 43 models, from 8 manufactures represented in SBC Model Framework.  Some SBC in SBC Model Framework have not been validated and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
+
+- GREEN = verified to be correct using SBC Case Builder
+- YELLOW = unverified, mostlikely usable and/or missing minor information
+- ORANGE = unverified, may be usable but missing component data
+- RED = unverified, not usable due to incomplete component data
+
+### Utility
+Additionally, template creation and i/o panel layouts in a dxf format can be easily created and integrated into other designs or for hand fabrication by sectioning a case panel for the desired SBC. The case design “panel” will most likely work best. If your new to CAD here is an example, towards the bottom of the post, on how to section an 3D stl to a 2D dxf format using OpenSCAD.
+
+Notes:
+Due to the number of possibilities, no pre-compiled case stl’s are included.
+
+“tol”, located at the bottom of the Adjustments Tab, is a  tolerance fitment adjustment for the snap, fitted, round and hex tops.  Adjust accordingly if the tops are too tight or loose.
 
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
@@ -129,22 +192,36 @@ h2_tray_vu5,h2_tray_vu7,h2_tray_router,h2_router_station,h2_round,h2_hex,h2_snap
 
 
 ### Accessory Schema
-The schema for case accessories is documented in the beginning of the file sbc_case_builder_accessories.cfg. There is one fixed entry that describe any given case followed by an unlimited number of accessory entries each containing 15 entries.
-
+The schema for case accessories is documented in the beginning of the file sbc_case_builder_accessories.cfg. There is one fixed entry that is the accessory set name followed by an unlimited number of accessory entries each containing 15 entries.
+```
 schema:
 
     "accessory_name",
     "class","type",loc_x,loc_y,loc_z,face,rotation[x,y,z],parametrics[association,x,y,z],size_x,size_y,size_z,data_1,data_2,"data_3",data_4[]
+```
 
 ### Accessories Entries
-The accessories entries need more explanation because of their input variability. For accessories there are 6 classes, “add1”,“sub”,”suball”,”add2”,”model”,”platter” and all use the same command format for various “type”.
-
-  `"class","type",loc_x,loc_y,loc_z,size_x,size_y,size_z,"face",rotation[],parametrics[],data_1,data_2,"data_3",data_4[]`
-
+There are 6 classes, “add1”,“sub”,”suball”,”add2”,”model”,”platter” and all use the same command format for various “type”.
+```
+  "class","type",loc_x,loc_y,loc_z,size_x,size_y,size_z,"face",rotation[],parametrics[],data_1,data_2,"data_3",data_4[]
+```
 e.g.
+```
+                                       p
+                                       a
+                                       r
+                              r        a
+                              o        m
+                              t        e                           s s s d d d d
+c          l  l  l            a        t                           i i i a a a a
+l      t   o  o  o      f     t        r                           z z z t t t t
+a      y   c  c  c      a     i        i                           e e e a a a a
+s      p                c     o        c
+s,     e,  x, y, z,     e,    n,       s,                          x,y,z,1,2,3,4
 
-  `"sub","rectangle",3,78,-.1,8,8,5,"bottom",[0,0,0,],["sbc",true,true,true],0,0,"",[1,1,1,1]`
-
+"sub","fan",10,10,24.5,"top",[0,0,0],["sbc-case_z",true,true,true],40,0,6,2,0,"",0]
+```
+  
 Every type, regardless of it’s class, uses a basic set of variables(loc_x,loc_y,loc_z,”face”,rotation[],parametrics[]) but each type doesn’t necessarily use all available data fields(size_x,size_y,size_z,data_1,data_2,”data_3”,data_4[]). “add1” and “add2” are used to add geometry to the case. The difference is when the addition occurs. “add1” happens at the beginning when the core case geometry is created and add2 happens after all subtractions have occurred. “suball” is used to affect all faces of a case, not just “face”. The “face” is the case piece that will be effected by the addition or subtraction. The "model" type is for placing supporting accessories in the model view. e.g. hard drives, fans. The "platter" type is for adding supporting accessories to the print platter.
 
 The parametric array specifies the axis to enable for associated parametric positoning. An accessory can be associated with the sbc position("sbc"), case offset("case"),multi-associated which use sbc xy postion and case z offset(sbc-case_z) or uses absolute values if all axises are false
