@@ -42,7 +42,7 @@
                            adjusted access_port(), access_cover(), added @mctom's hk_vu8m(bracket), u_bracket(), spacer()
     20220515 version 1.2.3 removed spacer(); added screw(); modified hk_vu8m(); added m1_hdmount(); added hdd35_25holder(length)
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
-    2022xxxx version 2.x.x increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
+    20221005 version 2.0.0 increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
                            video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short, added subtraction microusb and sphere
 
     

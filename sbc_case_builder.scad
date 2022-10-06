@@ -34,7 +34,7 @@
                               fixes and maintenance.
     20220515 Version 1.2.3    added odroid-m1, jetson nano, rockpro64, completed mask(), improved docs
                               changed tray top design.
-    2022xxxx Version 2.0.x    full customizer user interface,case configuration file changed to json,
+    20221005 Version 2.0.0    full customizer user interface,case configuration file changed to json,
                               accessories kept in sbc_case_builder_accessories.cfg, 
                               added round, hexagon, snap and fitted cases, setup additional sbc from SBC_Model_Framework,
                               added components and masks, added multi-associative parametric positioning for accessories,
@@ -267,8 +267,8 @@ if (view == "platter") {
 }
 
 // model view
-if (view == "model") {
-//    translate([-width/2,-depth/2,0]) rotate([0,0,0]){
+if (view == "model") {    
+//    translate([(-width+(gap+wallthick))/2,(-depth+(gap+wallthick))/2,0]) rotate([0,0,0]){
         if(case_design == "shell") {
             if(lower_bottom >= 0) {
                 difference() {
