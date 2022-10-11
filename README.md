@@ -82,13 +82,21 @@ There are currently 47 SBC represented by 43 models, from 8 manufactures in SBC 
 - ORANGE = unverified, may be usable but missing component data
 - RED = unverified, not usable due to incomplete component data
 
-### Utility
-Additionally, template creation and i/o panel layouts in a dxf format can be easily created and integrated into other designs or for hand fabrication by sectioning a case panel for the desired SBC. The case design “panel” will most likely work best.
+The SBC that I do not own have been created using manufacturer supplied mechanical drawings.  Some of the drawings are missing information or have errors that effect all or part of the drawings and subsequent SBC models.  If you own an SBC that is not represented or verified in SBC Model Framework, please consider adding it or helping to correct errors in existing SBC data.  An SBC can be verified to be accurate if a printed shell case from SBC Case Builder fits.  Any misalignment is corrected in the SBC Model Framework model data(sbc_models.cfg).
 
-Notes:
+### Future Development
+
+There are a few more ideas for base cases to be worked on as well as a host of supporting accessory models that need to be created.  It would also be nice to have all of the OEM accessories for each SBC in the library as well.  I’m still looking for a better way to create accessory entries and groups, and  continue to expand and verify as many SBC as possible. With that and the obvious benefit of autonomously making SBC cases, this project has also been helping fulfill another personal goal.
+
+Computer aided design(CAD) has been around along time but I have been interested in exploring approaches to the next step, computer autonomous design.  Regardless of the current or future object creation method, whether it be manufactured or materialized, I believe a universal approach to autonomous design will be needed to advance the human condition.  This application has helped me explore and think about practical approaches that might be possible right now in autonomous design and I hope to continue this work by developing new tools and techniques for the new CAD, computer autonomous design.
+
+### Notes
+
 Due to the number of possibilities, no pre-compiled case stl’s are included.
 
 “tol”, located at the bottom of the Adjustments Tab, is a  tolerance fitment adjustment for the snap, fitted, round and hex tops.  Adjust accordingly if the tops are too tight or loose.
+
+Template creation and i/o panel layouts in a dxf format can be easily created and integrated into other designs or for hand fabrication by sectioning a case panel for the desired SBC. The case design “panel” will most likely work best.
 
 
 ### Case Designs and Styles
