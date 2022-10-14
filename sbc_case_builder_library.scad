@@ -44,7 +44,7 @@
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
     20221005 version 2.0.0 increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
                            video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short, added subtraction microusb and sphere
-
+    2022xxxx version 2.0.x added hdmi_a_vertical mask   
     
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -2562,6 +2562,19 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "hdmi_a" && side == "bottom" && rotation == 270) {
         place(loc_x-1,loc_y-1,loc_z-pcb_z,15,11.5,rotation,side) hdmi_open("hdmi_a");
     }
+    // hdmi vertical opening
+    if(type == "hdmi_a_vertical" && side == "top" && rotation == 0) {
+        place(loc_x-.5,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+    }
+    if(type == "hdmi_a_vertical" && side == "top" && rotation == 90) {
+        place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+    }
+    if(type == "hdmi_a_vertical" && side == "top" && rotation == 180) {
+        place(loc_x,loc_y+1,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+    }
+    if(type == "hdmi_a_vertical" && side == "top" && rotation == 270) {
+        place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+    }
    // hdmi micro opening
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "top") {
         place(loc_x,loc_y,loc_z,7.25,6.5,rotation,side) hdmi_open("hdmi_micro");
@@ -2951,6 +2964,23 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(class == "usbc" && type == "single_horizontal" && rotation == 270 && side == "bottom") {
         place(loc_x+2,loc_y+1.5,loc_z-3.25,6,8,rotation,side)
             rotate([90,0,0]) slot(3.75,6,8);
+    }
+    // single vertical usbc opening
+    if(class == "usbc" && type == "single_vertical" && rotation == 0 && side == "top") {
+        place(loc_x+1.5,loc_y+2,loc_z+1.75,6,8,rotation,side)
+            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+    }
+    if(class == "usbc" && type == "single_vertical" && rotation == 90 && side == "top") {
+        place(loc_x+2,loc_y+1.5,loc_z+1.75,6,8,rotation,side)
+            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+    }
+    if(class == "usbc" && type == "single_vertical" && rotation == 180 && side == "top") {
+        place(loc_x+1.5,loc_y-3-adjust,loc_z+2,6,8,rotation,side)
+            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+    }
+    if(class == "usbc" && type == "single_vertical" && rotation == 270 && side == "top") {
+        place(loc_x-3-adjust,loc_y+1.5,loc_z+1.75,6,8,rotation,side)
+            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
     }
     // ir opening
     if(type == "ir_1" && rotation == 0) {

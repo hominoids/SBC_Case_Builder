@@ -78,7 +78,7 @@ case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
-sbc_model = "c1+"; //  ["c1+", "c2", "c4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2+_noheatsink", "m1", "m1_noheatsink", "h2", "hc4", "show2", "rpizero", "rpizero2w", "rpi1a+", "rpi1b+", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "a64", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "atomicpi", "jetsonnano", "rockpi4b+", "rockpi4c", "rockpi4c+", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-r2", "opizero", "opizero2", "opir1plus_lts", "test"]
+sbc_model = "c1+"; //  ["c1+", "c2", "c4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2+_noheatsink", "m1", "m1_noheatsink", "h2", "hc4", "show2", "rpizero", "rpizero2w", "rpi1a+", "rpi1b+", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "a64", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "atomicpi", "jetsonnano", "rockpi4b+", "rockpi4c", "rockpi4c+", "rockpi5b", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-r2", "opizero", "opizero2", "opir1plus_lts", "test"]
 // sbc location x axis
 pcb_loc_x = 0; //[0:.5:200]
 // sbc location y axis

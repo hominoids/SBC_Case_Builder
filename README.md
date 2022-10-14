@@ -102,7 +102,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 368
+#### Current Case Count 377
 
 ##### Hardkernel
 
@@ -128,7 +128,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 
 **Odorid-XU4Q cases** - 11 : xu4q_shell, xu4q_panel, xu4q_stacked, xu4q_tray, xu4q_tray_sides, xu4q_tray_vu5, xu4q_tray_vu7, xu4q_round, xu4q_hex, xu4q_snap, xu4q_fitted
 
-**Odroid-H2 cases** - 17 : h2_shell, h2_lowboy, h2_lowboy_router, h2_shell_router, h2_shell_routerssd, h2_panel, h2_stacked, h2_tray, h2_tray_sides, h2_tray_vu5, h2_tray_vu7, h2_tray_router, h2_router_station, h2_round, h2_hex, h2_snap, h2_fitted
+**Odroid-H2 and H3 cases** - 17 : h2_shell, h2_lowboy, h2_lowboy_router, h2_shell_router, h2_shell_routerssd, h2_panel, h2_stacked, h2_tray, h2_tray_sides, h2_tray_vu5, h2_tray_vu7, h2_tray_router, h2_router_station, h2_round, h2_hex, h2_snap, h2_fitted
 
 **Odroid-Show2** cases - 1 : show2_shell
 
@@ -171,6 +171,8 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **ROCKPi 4c** - 9 : rockpi4c_shell, rockpi4c_panel, rockpi4c_stacked, rockpi4c_tray, rockpi4c_tray_sides, rockpi4c_round, rockpi4c_hex, rockpi4c_snap, rockpi4c_fitted
 
 **ROCKPi 4c+** - 9 : rockpi4c+_shell, rockpi4c+_panel, rockpi4c+_stacked, rockpi4c+_tray, rockpi4c+_tray_sides, rockpi4c+_round, rockpi4c+_hex, rockpi4c+_snap, rockpi4c+_fitted
+
+**ROCKPi5b** - 9 : rockpi5b_shell, rockpi5b_panel, rockpi5b_stacked, rockpi5b_tray, rockpi5b_tray_sides, rockpi5b_round, rockpi5b_hex, rockpi5b_snap, rockpi5b_fitted
 
 
 ##### Khadas
