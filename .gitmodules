@@ -1,3 +1,6 @@
 [submodule "SBC_Model_Framework"]
 	path = SBC_Model_Framework
 	url = https://github.com/hominoids/SBC_Model_Framework.git
+[submodule "NopSCADlib"]
+	path = NopSCADlib
+	url = https://github.com/hominoids/NopSCADlib
