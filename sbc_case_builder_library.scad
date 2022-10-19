@@ -116,7 +116,8 @@
     
 */
 
-use <./lib/fillets.scad>;
+include <./NopSCADlib/lib.scad>
+use <./lib/fillets.scad>
 
 /* placement module *must be first* for children() */
 module place(x,y,z,size_x,size_y,rotation,side) {
@@ -253,6 +254,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "fan_cover") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z);
     }
+    if(type == "fan") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan(data_4);
+    }
     if(type == "feet") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
     }
@@ -264,6 +268,32 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "boom_vring") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data_1);
+    }
+    if(type == "screw") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) screw(data_4);
+    }
+    if(type == "nut") {
+        length = screw_head_type(data_4) == hs_grub ? screw_radius(data_4) * 4
+        : screw_radius(data_4) <= 1.5 ? 10
+        : screw_max_thread(data_4) ? screw_longer_than(screw_max_thread(data_4) + 5)
+        : 30;
+
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) screw(data_4, length);
+    }
+    if(type == "pillar") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) pillar(data_4);
+    }
+    if(type == "iec") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) iec(data_4);
+    }
+    if(type == "fuseholder") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) fuseholder(data_1);
+    }
+    if(type == "pin_header") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) pin_header(data_4, size_x, size_y, size_z, data_1, data_2, data_3);
+    }
+    if(type == "led") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) led(data_4,data_3,data_1);
     }
 }
 
@@ -304,7 +334,7 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "punchout") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) punchout(size_x,size_y,data_1,size_z,data_2,data_3);
     }    
-    if(type == "fan") {
+    if(type == "fan_mask") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_mask(size_x, size_z, data_1);
     }
     if(type == "vent") {
