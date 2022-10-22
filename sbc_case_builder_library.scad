@@ -44,7 +44,8 @@
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
     20221005 version 2.0.0 increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
                            video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short, added subtraction microusb and sphere
-    2022xxxx version 2.0.x added hdmi_a_vertical mask   
+    2022xxxx version 2.0.x added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
+                           added mask for microsdcard2
     
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -2564,16 +2565,16 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     // hdmi vertical opening
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 0) {
-        place(loc_x-.5,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x-.5,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 90) {
-        place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 180) {
-        place(loc_x,loc_y+1,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x,loc_y+1,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 270) {
-        place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) translate([-.25,0,17.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
    // hdmi micro opening
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "top") {
@@ -2821,6 +2822,38 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "microsdcard" && side == "bottom" && rotation == 270) {
         place(loc_x-12.1,loc_y+.125,loc_z-pcb_z,13.2,14.1,rotation,side)
             cube([13.5,14.1,2]);
+    }
+    if(type == "microsdcard2" && side == "bottom" && rotation == 0) {
+        place(loc_x-1,loc_y-15,loc_z-pcb_z,12,15.5,rotation,side)
+            cube([13,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "bottom" && rotation == 90) {
+        place(loc_x+5,loc_y,loc_z-pcb_z,12,15.5,rotation,side)
+            cube([12,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "bottom" && rotation == 180) {
+        place(loc_x,loc_y+5,loc_z-pcb_z,12,15.5,rotation,side)
+            cube([12,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "bottom" && rotation == 270) {
+        place(loc_x+5,loc_y-18,loc_z-pcb_z,12,15.5,rotation,side)
+            cube([12,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "top" && rotation == 0) {
+        place(loc_x,loc_y-15,loc_z+1.75,12,15.5,rotation,side)
+            cube([12,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "top" && rotation == 90) {
+        place(loc_x-15,loc_y-.5,loc_z+1.75,12,15.5,rotation,side)
+            cube([12,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "top" && rotation == 180) {
+        place(loc_x-.5,loc_y+5,loc_z+1.75,12,15.5,rotation,side)
+            cube([12,15.5,2]);
+    }
+    if(type == "microsdcard2" && side == "top" && rotation == 270) {
+        place(loc_x+5,loc_y,loc_z+1.75,12,15.5,rotation,side)
+            cube([12,15.5,2]);
     }
     // rj45 opening
     if(type == "rj45_single" && rotation == 0) {
@@ -3105,56 +3138,56 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "jack_3.5" && rotation == 0 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
             union() {
-                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([-.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 90 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side)
             union() {
-                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 180 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
             union() {
-                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 270 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side)
             union() {
-                translate([3.15,-2.5,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([3.15,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([-.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 0 && side == "bottom") {
         place(loc_x-1,loc_y,loc_z-1.5,7.5,7.5,rotation,side) 
             union() {
-                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([-.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 90 && side == "bottom") {
         place(loc_x+4.1,loc_y,loc_z-1.5,7.5,7.5,rotation,side)
             union() {
-                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 180 && side == "bottom") {
         place(loc_x-1,loc_y,loc_z-1.5,7.5,7.5,rotation,side) 
             union() {
-                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 270 && side == "bottom") {
         place(loc_x+4.1,loc_y,loc_z-1.5,7.5,7.5,rotation,side)
             union() {
-                translate([3,-2.5,2]) rotate([90,0,0]) cylinder(d=5, h=8);
+                translate([3,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
                 translate([-.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
