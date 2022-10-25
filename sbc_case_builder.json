@@ -15165,7 +15165,7 @@
         "rockpi5b_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15222,7 +15222,7 @@
         "rockpi5b_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15279,7 +15279,7 @@
         "rockpi5b_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15336,7 +15336,7 @@
         "rockpi5b_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15393,7 +15393,7 @@
         "rockpi5b_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15450,7 +15450,7 @@
         "rockpi5b_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15507,7 +15507,7 @@
         "rockpi5b_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15564,7 +15564,7 @@
         "rockpi5b_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15621,7 +15621,7 @@
         "rockpi5b_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "none",
+            "accessory_name": "rockpi5b",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",

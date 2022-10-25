@@ -1751,6 +1751,7 @@ module case_side(case_design,case_style,side) {
                         union() {
                             translate([-gap,-wallthick-gap,-floorthick]) 
                                 cube([width-2*wallthick,wallthick,case_z+2*floorthick]);
+                            // right hook
                             difference() {
                                 translate([width-(2*wallthick)-gap-adjust,-wallthick-gap,
                                     ((case_z)/2)-4]) 
@@ -1759,8 +1760,9 @@ module case_side(case_design,case_style,side) {
                                     ((case_z)/2)-4-adjust]) 
                                         cube([wallthick+.25,wallthick+(2*adjust),4.25]);
                             }
+                            // left hook
                             difference() {
-                                translate([-(2*wallthick)-gap-adjust,-wallthick-gap,
+                                translate([-(2*wallthick)-gap-adjust-.25,-wallthick-gap,
                                     ((case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
                                 translate([-wallthick-gap-adjust-.25,-wallthick-gap-adjust,
@@ -1787,6 +1789,7 @@ module case_side(case_design,case_style,side) {
                         union() {
                             translate([-gap,depth-2*(wallthick)-gap,-floorthick]) 
                                 cube([width-2*wallthick,wallthick,case_z+2*floorthick]);
+                            // right hook
                             difference() {
                                 translate([width-(2*wallthick)-gap-adjust,depth-2*(wallthick)-gap-adjust,
                                     ((case_z)/2)-4])
@@ -1795,8 +1798,9 @@ module case_side(case_design,case_style,side) {
                                     depth-2*(wallthick)-adjust-gap-adjust,((case_z)/2)-4-adjust])
                                         cube([wallthick+.25,wallthick+(2*adjust),4.25]);
                             }
+                            // left hook
                             difference() {
-                                translate([-(2*wallthick)-gap-adjust,depth-2*(wallthick)-gap-adjust,(
+                                translate([-(2*wallthick)-gap-adjust-.25,depth-2*(wallthick)-gap-adjust,(
                                     (case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
                                 translate([-wallthick-gap-adjust-.25,depth-2*(wallthick)-adjust-gap-adjust,

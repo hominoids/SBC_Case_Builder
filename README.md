@@ -3,9 +3,9 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any given SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, round, hex, snap, fitted) available and each allows for different styles within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any given SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
 
-All case openings are created automatically based on SBC data and, the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
+All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
 License: GPLv3.
 
@@ -21,9 +21,9 @@ License: GPLv3.
 ```
 
 ### SBC Case Builder Features:
--  Autonomous Multi-SBC, Parametric Multi-Case Generation
+-  Autonomous Multi-SBC, Multi-Case Parametric Generation
 -  Autonomous Case Standoffs with Variable Height
--  Extended Standoff sbc collision detection
+-  Extended Standoff SBC collision detection
 -  Accessory Customization Framework
 -  Accessory Multi-Associative Parametric Positioning
    - Absolute Location
@@ -47,6 +47,7 @@ License: GPLv3.
 - Sliding
 - Cylinder
 - Rack
+- Folded
 - CNC Cases
 
 All case data is stored in the json file sbc_case_builder.json with the accessory data stored in a separate file structure in sbc_case_builder_accessories.cfg.  An accessory group name for a given case is stored as part of the case data in the json file.  This allows for the reuse or sharing of an accessory set by different cases and can be used to manage groups of accessories.
@@ -88,7 +89,7 @@ The SBC that I do not own have been created using manufacturer supplied mechanic
 
 There are a few more ideas for base cases to be worked on as well as a host of supporting accessory models that need to be created.  It would also be nice to have all of the OEM accessories for each SBC in the library as well.  I’m still looking for a better way to create accessory entries and groups, and  continue to expand and verify as many SBC as possible. With that and the obvious benefit of autonomously making SBC cases, this project has also been helping fulfill another personal goal.
 
-Computer aided design(CAD) has been around along time but I have been interested in exploring approaches to the next step, computer autonomous design.  Regardless of the current or future object creation method, whether it be manufactured or materialized, I believe a universal approach to autonomous design will be needed to advance the human condition.  This application has helped me explore and think about practical approaches that might be possible right now in autonomous design and I hope to continue this work by developing new tools and techniques for the new CAD, computer autonomous design.
+Computer aided design(CAD) has been around along time but I have been interested in exploring approaches to the next step, computer autonomous design.  Regardless of the current or future object creation method, whether it be manufactured or materialized, I believe a universal approach to autonomous design will be needed to advance the human condition.  This application has helped me explore and think about practical approaches that might be possible right now in autonomous design and I hope to continue this work by developing new tools and techniques for the new CAD, Computer Autonomous Design.
 
 ### Notes
 
