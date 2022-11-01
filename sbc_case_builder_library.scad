@@ -44,7 +44,8 @@
                            printer friendly punchout(),added remaining mask() entries, standardized mask()
     20221005 version 2.0.0 increased mask projection for ir_1, added mask for usb2 and usb3 single_horizontal_a, hdmi_micro,
                            video-hdmi_mini,microsdcard,momentary_7x3x3_90,rj45_single_short, added subtraction microusb and sphere
-    2022xxxx version 2.0.x added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
+    20221011 Version 2.0.1  adjusted cases and accessories, updated README.md and SBC_Case_Builder_Cases.gif
+    20221101 version 2.0.2 added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
                            added mask for microsdcard2
     
     see https://github.com/hominoids/SBC_Case_Builder
@@ -2265,7 +2266,7 @@ module access_port(size,orientation) {
             translate([.5,6,-adjust]) cube([size[0]-1.15,size[1]-17,floorthick+(adjust*2)]);
             translate([(size[0]/2)-5,size[1]-12,-adjust]) slab([10.5,5.5,floorthick],5.5);
             translate([(size[0]/2)+.25,size[1]-6.5,floorthick+2])
-                cylinder(r=3.3,h=floorthick+(adjust*2)+5,$fn=6);
+                cylinder(r=3.2,h=floorthick+(adjust*2)+5,$fn=6);
             translate([(size[0]/2)+.25,size[1]-6.5,-adjust]) 
                 cylinder(d=3.2,h=floorthick+(adjust*2)+5);
             translate([4,2+adjust,floorthick]) cube([7.75,3,2.75]);
@@ -2280,15 +2281,15 @@ module access_port(size,orientation) {
             union() {
                 translate([0,-1,0]) cube([size[0],size[1],size[2]]);
                 // access panel support
-                translate([size[0]-6.5,(size[1]/2)-.75,0]) cylinder(d=9,h=floorthick+(adjust*2)+5);
-                translate([size[0]-11,(size[1]/2)-10,floorthick-adjust]) cube([9.5,20,floorthick]);
+                translate([size[0]-6.5,(size[1]/2)-.5,0]) cylinder(d=9,h=floorthick+(adjust*2)+5);
+                translate([size[0]-11,(size[1]/2)-10.5,floorthick-adjust]) cube([9.5,20,floorthick]);
                 translate([0,0,floorthick-adjust]) cube([5,size[1]-2,4.5]);
             }
             // access opening
             translate([6,-.5,-adjust]) cube([size[0]-17,size[1]-1.15,floorthick+(adjust*3)]);
             translate([size[0]-12,(size[1]/2)-6,-adjust]) slab([5.5,10.5,floorthick],5.5);
             translate([size[0]-6.5,(size[1]/2)-.5,floorthick+2]) rotate([0,0,30])
-                cylinder(r=3.3,h=floorthick+(adjust*2)+5,$fn=6);
+                cylinder(r=3.2,h=floorthick+(adjust*2)+5,$fn=6);
             translate([size[0]-6.5,(size[1]/2)-.5,-adjust]) 
                 cylinder(d=3.2,h=floorthick+(adjust*2)+5);
             translate([2+adjust,3,floorthick]) cube([3,8.25,2.75]);
@@ -2328,8 +2329,8 @@ module access_cover(size,orientation) {
     if(orientation == "landscape") {
         difference() {
             union() {
-                translate([6.25,-.25,0]) cube([size[0]-17.5,size[1]-2,floorthick]);
-                translate([size[0]-12.25,(size[1]/2)-6,0]) slab([5,10,floorthick], 5);
+                translate([6.25,0,0]) cube([size[0]-17.75,size[1]-2,floorthick]);
+                translate([size[0]-12.25,(size[1]/2)-5.75,0]) slab([5,10,floorthick], 5);
                 translate([6.25,0,floorthick-adjust]) cube([6,size[1]-2.15,floorthick]);
                 translate([3.5+adjust,3.25,floorthick]) cube([4,7.25,2]);
                 translate([3.5+adjust,size[1]-12.75,floorthick]) cube([4,7.25,2]);

@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any given SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 51 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
 
 All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 377
+#### Current Case Count 395
 
 ##### Hardkernel
 
@@ -129,7 +129,9 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 
 **Odorid-XU4Q cases** - 11 : xu4q_shell, xu4q_panel, xu4q_stacked, xu4q_tray, xu4q_tray_sides, xu4q_tray_vu5, xu4q_tray_vu7, xu4q_round, xu4q_hex, xu4q_snap, xu4q_fitted
 
-**Odroid-H2 and H3 cases** - 17 : h2_shell, h2_lowboy, h2_lowboy_router, h2_shell_router, h2_shell_routerssd, h2_panel, h2_stacked, h2_tray, h2_tray_sides, h2_tray_vu5, h2_tray_vu7, h2_tray_router, h2_router_station, h2_round, h2_hex, h2_snap, h2_fitted
+**Odroid-H2 cases** - 17 : h2_shell, h2_lowboy, h2_lowboy_router, h2_shell_router, h2_shell_routerssd, h2_panel, h2_stacked, h2_tray, h2_tray_sides, h2_tray_vu5, h2_tray_vu7, h2_tray_router, h2_router_station, h2_round, h2_hex, h2_snap, h2_fitted
+
+**Odroid-H3 cases** - 18 : h3_shell, h3_shell-internalfan, h3_lowboy, h3_lowboy_router, h3_shell_router, h3_shell_routerssd, h3_panel, h3_stacked, h3_tray, h3_tray_sides, h3_tray_vu5, h3_tray_vu7, h3_tray_router, h3_router_station, h3_round, h3_hex, h3_snap, h3_fitted
 
 **Odroid-Show2** cases - 1 : show2_shell
 
