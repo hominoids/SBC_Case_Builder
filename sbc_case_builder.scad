@@ -42,6 +42,7 @@
                               is not movable, finished indents for select components and orientations.
     20221011 Version 2.0.1    adjusted cases and accessories, updated README.md and SBC_Case_Builder_Cases.gif
     20221101 Version 2.0.2    updated sbc model framework, h3/h3+ model and rockpi5b adjustments
+    2022xxxx Version 2.x.x    added individual part selection for debug to facilitate individual part prints
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -55,6 +56,7 @@ include <./sbc_case_builder_accessories.cfg>;
 /* [View] */
 // viewing mode "platter", "model", "debug"
 view = "model"; // [platter, model, debug]
+debug_part = "bottom"; // [top, bottom, right, left, front, rear, accessories]
 // sbc off in model view
 sbc_off = false;
 // enable highlight for sbc component subtarctive geometry
@@ -266,6 +268,12 @@ if (view == "platter") {
             }
         }
     }
+    if(case_design == "tray") {
+        echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+    }
+    else {
+        echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
+    }    
 }
 
 // model view
@@ -542,12 +550,107 @@ if (view == "model") {
 //}
 // debug
 if (view == "debug") {
-    case_top(case_design);
-//    case_bottom(case_design);
-//    case_side(case_design,case_style,"rear");
-//    case_side(case_design,case_style,"front");
-//    case_side(case_design,case_style,"left");
-//    case_side(case_design,case_style,"right");
+    if(debug_part == "top") {
+        if(case_design == "shell") {
+            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "panel") {
+            case_bottom(case_design);
+            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "stacked") {
+            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "tray") {
+            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "round") {
+            translate([width+30,depth,case_z-floorthick-gap]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "hex") {
+            translate([2*width,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "snap") {
+            translate([0,depth,case_z+2*floorthick]) rotate([180,0,0]) case_top(case_design);
+        }
+        if(case_design == "fitted") {
+            translate([0,depth,case_z+floorthick]) rotate([180,0,0]) case_top(case_design);
+        }
+    }
+    if(debug_part == "bottom") {
+        case_bottom(case_design);
+    }
+    if(debug_part == "front") {
+        if(case_design == "panel") {
+            translate([0,case_z,-depth+wallthick+gap+floorthick]) 
+                rotate([90,0,0]) case_side(case_design,case_style,"front");
+        }
+    }
+    if(debug_part == "rear") {
+        if(case_design == "panel") {
+            translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,case_style,"rear");
+        }
+    }
+    if(debug_part == "right") {
+        if(case_design == "panel") {
+            translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
+                case_side(case_design,case_style,"right");
+        }
+        if(case_design == "tray") {
+            if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
+                translate([depth,0,width-gap]) rotate([0,90,90]) 
+                    case_side(case_design,case_style,"right");
+            }
+        }
+    }
+    if(debug_part == "left") {
+        if(case_design == "panel") {
+            translate([depth,0,-gap]) rotate([0,90,90]) 
+                case_side(case_design,case_style,"left");
+        }
+        if(case_design == "tray") {
+            if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
+                translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
+                    case_side(case_design,case_style,"left");
+            }
+        }
+    }
+    if(debug_part == "accessories") {
+        if(accessory_name != "none") {
+            for (i=[1:15:len(accessory_data[a[0]])-1]) {
+                class = accessory_data[a[0]][i];
+                type = accessory_data[a[0]][i+1];
+                loc_x = accessory_data[a[0]][i+2];
+                loc_y = accessory_data[a[0]][i+3];
+                loc_z = accessory_data[a[0]][i+4];
+                face = accessory_data[a[0]][i+5];
+                rotation = accessory_data[a[0]][i+6];
+                parametric = accessory_data[a[0]][i+7];
+                size_x = accessory_data[a[0]][i+8];
+                size_y = accessory_data[a[0]][i+9];
+                size_z = accessory_data[a[0]][i+10];
+                data_1 = accessory_data[a[0]][i+11];
+                data_2 = accessory_data[a[0]][i+12];
+                data_3 = accessory_data[a[0]][i+13];
+                data_4 = accessory_data[a[0]][i+14];
+                
+                if (class == "platter" && type != "button_top") {
+                    add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                }
+                if (class == "platter" && type == "button_top") {
+                    translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_3, size_x, size_z);
+                    translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_3, size_x, size_z);
+                    translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_3);
+                }
+            }
+        }
+    }
+    if(case_design == "tray") {
+        echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+    }
+    else {
+        echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
+    }    
 }
 
 
