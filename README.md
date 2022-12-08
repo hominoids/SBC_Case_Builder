@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 51 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 53 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
 
 All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 395
+#### Current Case Count 413
 
 ##### Hardkernel
 
@@ -124,6 +124,10 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Odorid-N2 cases** - 9 : n2_panel, n2_tray, n2_tray_sides, n2_tray_vu5, n2_tray_vu7, n2_round, n2_hex, n2_snap, n2_fitted
 
 **Odorid-N2+ cases** - 9 :n2+_panel, n2+_tray, n2+_tray_sides, n2+_tray_vu5, n2+_tray_vu7, n2+_round, n2+_hex, n2+_snap, n2+_fitted
+
+**Odorid-N2L cases** - 9 :n2l_shell, n2l_panel, n2l_stacked, n2l_tray, n2l_tray_sides, n2l_tray_vu5, n2l_tray_vu7, n2l_snap, n2l_fitted
+
+**Odorid-N2LQ cases** - 9 :n2lq_shell, n2lq_panel, n2lq_stacked, n2lq_tray, n2lq_tray_sides, n2lq_tray_vu5, n2lq_tray_vu7, n2lq_snap, n2lq_fitted
 
 **Odorid-XU4 cases** - 11 : xu4_shell, xu4_panel, xu4_stacked, xu4_tray, xu4_tray_sides, xu4_tray_vu5, xu4_tray_vu7, xu4_round, xu4_hex, xu4_snap, xu4_fitted
 

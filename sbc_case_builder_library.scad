@@ -47,7 +47,8 @@
     20221011 Version 2.0.1  adjusted cases and accessories, updated README.md and SBC_Case_Builder_Cases.gif
     20221101 version 2.0.2 added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
                            added mask for microsdcard2
-    
+    20221207 version 2.0.3 added double_stacked_usb3-usb2
+        
     see https://github.com/hominoids/SBC_Case_Builder
     
     place(x,y,z,size_x,size_y,rotation,side)
@@ -2740,8 +2741,8 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             cube([14.5,19.5,floorthick+(2*adjust)]);
     }
     if(type == "emmc" && side == "bottom" && rotation == 270) {
-        place(loc_x-.5,loc_y-.5,floorthick+adjust,14.5,19.5,rotation,side) 
-            cube([14.5,19.5,floorthick+(2*adjust)]);
+        place(loc_x-.5,loc_y-.5,floorthick+adjust+7,15,19.5,rotation,side) 
+            cube([14.5,19.5,floorthick+(2*adjust)+12]);
     }
     // sd storage
     if(type == "sdcard" && side == "bottom" && rotation == 0) {
@@ -2916,19 +2917,19 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x-3,loc_y,loc_z-1.25,8,3,rotation,side) microusb_open();
     }
     // double stack usb opening
-    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc") && rotation == 0) {
+    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc" || type == "double_stacked_usb3-usb2") && rotation == 0) {
         place(loc_x-1,loc_y-6,loc_z,15.5,16,rotation,side)
             cube([15.5,8,16.5]);
     }
-    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc") && rotation == 90) {
+    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc" || type == "double_stacked_usb3-usb2") && rotation == 90) {
         place(loc_x-6,loc_y-1.25,loc_z,15.5,16,rotation,side)
             cube([15.5,8,16.5]);
     }
-    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc") && rotation == 180) {
+    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc" || type == "double_stacked_usb3-usb2") && rotation == 180) {
         place(loc_x-1,loc_y+7.5,loc_z,15.5,16,rotation,side)
             cube([15.5,8,16.5]);
     }
-    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc") && rotation == 270) {
+    if((type == "double_stacked_a" || type == "double_stacked_usb3-usbc" || type == "double_stacked_usb3-usb2") && rotation == 270) {
         place(loc_x+6.25,loc_y-1,loc_z,15.5,16,rotation,side)
             cube([15.5,8,16.5]);
     }
