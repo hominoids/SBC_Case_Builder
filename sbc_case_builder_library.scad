@@ -47,7 +47,7 @@
     20221011 Version 2.0.1  adjusted cases and accessories, updated README.md and SBC_Case_Builder_Cases.gif
     20221101 version 2.0.2 added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
                            added mask for microsdcard2
-    20221207 version 2.0.3 added double_stacked_usb3-usb2
+    20221207 version 2.0.3 added double_stacked_usb3-usb2, hd35_vtab(side) and supporting code
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -76,6 +76,7 @@
     hd25_tab(side)
     hd25_vtab(side)
     hd35_tab(side)
+    hd35_vtab(side)
     hd_bottom_holes(hd,orientation,position,side,thick)
     hd25(height)
     hd35()
@@ -827,20 +828,46 @@ module hd_mount(hd,orientation,position,side) {
     }
     if(hd == 3.5) {
         if(orientation == "portrait") {
-            translate([-.5,28.5,0]) hd35_tab("left");
-            translate([-.5,69.75,0]) hd35_tab("left");
-            translate([-.5,130.1,0]) hd35_tab("left");
-            translate([101.6+.5,28.5,0]) hd35_tab("right");
-            translate([101.6+.5,69.75,0]) hd35_tab("right");
-            translate([101.6+.5,130.1,0]) hd35_tab("right");
+            if(position == "vertical") {
+                if(side == "left") {
+                    translate([0,41.28,0]) rotate([0,0,0]) hd35_vtab("right");
+                    translate([0,41.28+44.45,0]) rotate([0,0,0]) hd35_vtab("right");
+                    translate([0,41.28+76.20,0]) rotate([0,0,0]) hd35_vtab("right");
+                }
+                else {  // right
+                    translate([0,41.28,0]) rotate([0,0,0]) hd35_vtab("left");
+                    translate([0,41.28+44.45,0]) rotate([0,0,0]) hd35_vtab("left");
+                    translate([0,41.28+76.20,0]) rotate([0,0,0]) hd35_vtab("left");
+                }
+            }
+            else {
+                translate([-.5,28.5,0]) hd35_tab("left");
+                translate([-.5,69.75,0]) hd35_tab("left");
+                translate([-.5,130.1,0]) hd35_tab("left");
+                translate([101.6+.5,28.5,0]) hd35_tab("right");
+                translate([101.6+.5,69.75,0]) hd35_tab("right");
+                translate([101.6+.5,130.1,0]) hd35_tab("right");
+            }
         }
         if(orientation == "landscape") {
-            translate([16.9,-.5,0]) rotate([0,0,90]) hd35_tab("left");
-            translate([76.6,-.5,0])  rotate([0,0,90]) hd35_tab("left");
-            translate([118.5,-.5,0]) rotate([0,0,90]) hd35_tab("left");
-            translate([16.9,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
-            translate([76.6,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
-            translate([118.5,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
+            if(position == "vertical") {
+                if(side == "left") {
+                    translate([9.4,0,0]) rotate([0,0,90]) hd35_vtab("right");
+                    translate([86,0,0])  rotate([0,0,90]) hd35_vtab("right");
+                }
+                else {  // right
+                    translate([9.4,0,0]) rotate([0,0,90]) hd35_vtab("left");
+                    translate([86,0,0])  rotate([0,0,90]) hd35_vtab("left");
+                }
+            }
+            else {
+                translate([16.9,-.5,0]) rotate([0,0,90]) hd35_tab("left");
+                translate([76.6,-.5,0])  rotate([0,0,90]) hd35_tab("left");
+                translate([118.5,-.5,0]) rotate([0,0,90]) hd35_tab("left");
+                translate([16.9,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
+                translate([76.6,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
+                translate([118.5,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
+            }
         }
     }
 }
@@ -1036,6 +1063,66 @@ module hd35_tab(side) {
     }
 }
 
+module hd35_vtab(side) {
+    
+    width = 15;
+    l_width = 16;
+    depth = 15;
+    height = 4;
+    fillet = 2;
+    hole = 3.6;
+    length = 3;
+    
+    adjust = .01;
+    $fn = 90;
+    if(side == "left") {
+        difference() {
+            union() {
+                translate([0,-depth/2,0]) rotate([0,-90,0]) 
+                    slab_r([l_width,depth,height], [fillet,fillet,fillet,fillet]);
+                translate([-height,-depth/2,0]) cube([height,depth,height]);
+                translate([adjust,-5.5,depth]) 
+                    rotate([90,0,0]) 
+                        linear_extrude(height = 2) 
+                            polygon(points = [ [-height,height-5],
+                                [-depth+4,-depth], 
+                                [-height,-depth]]);
+                translate([adjust,7.5,depth]) 
+                    rotate([90,0,0]) 
+                        linear_extrude(height = 2) 
+                            polygon(points = [ [-height,height-5],
+                                [-depth+4,-depth], 
+                                [-height,-depth]]);
+            }
+            translate([3,0,-adjust]) rotate([0,0,0]) cylinder(d=hole, h=3);
+            translate([-height-adjust,1.5+(width/2)-(length/2)-depth/2,5.57]) rotate([90,90,90]) slot(hole,length,height+(2*adjust));
+        }
+    }
+    if(side == "right") {
+        difference() {
+            union() {
+                translate([height,-depth/2,0]) rotate([0,-90,0]) 
+                    slab_r([l_width,depth,height], [fillet,fillet,fillet,fillet]);
+                translate([0,-depth/2,0]) cube([height,depth,height]);
+                translate([adjust,-7.5,depth]) 
+                    rotate([90,0,180]) 
+                        linear_extrude(height = 2) 
+                            polygon(points = [ [-height,height-5],
+                                [-depth+4,-depth], 
+                                [-height,-depth]]);
+                translate([adjust,5.5,depth]) 
+                    rotate([90,0,180]) 
+                        linear_extrude(height = 2) 
+                            polygon(points = [ [-height,height-5],
+                                [-depth+4,-depth], 
+                                [-height,-depth]]);
+            }
+            translate([-3,0,-adjust]) rotate([0,0,0]) cylinder(d=hole, h=3);
+            translate([-adjust,1.5+(width/2)-(length/2)-depth/2,5.57]) rotate([90,90,90]) slot(hole,length,height+(2*adjust));
+        }
+    }
+}
+
 
 module hd_bottom_holes(hd,orientation,position,side,thick) {
 
@@ -1066,13 +1153,13 @@ module hd_bottom_holes(hd,orientation,position,side,thick) {
         if(orientation == "landscape") {
             if(position == "vertical") {
                 if(side == "left") {
-                    translate([9.4,-3,0]) cylinder(d=3.6,h=thick+(adjust*2));
-                    translate([86,-3,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                    translate([9.4,-3,0]) cylinder(d=3.6,h=thick+5);
+                    translate([86,-3,0]) cylinder(d=3.6,h=thick+5);
                 }
                 else {
                     echo(side);
-                    translate([9.4,3,0]) cylinder(d=3.6,h=thick+(adjust*2));
-                    translate([86,3,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                    translate([9.4,3,0]) cylinder(d=3.6,h=thick+5);
+                    translate([86,3,0]) cylinder(d=3.6,h=thick+5);
                 }
             }
             else {
@@ -1086,13 +1173,28 @@ module hd_bottom_holes(hd,orientation,position,side,thick) {
     }
     if(hd == 3.5) {
         if(orientation == "portrait") {
-            // portrait 3.5" bottom screw holes
-            translate([3.18,41.28,0]) cylinder(d=3.6,h=thick+(adjust*2));
-            translate([3.18,85.73,0]) cylinder(d=3.6,h=thick+(adjust*2));
-            translate([3.18,117.48,0]) cylinder(d=3.6,h=thick+(adjust*2));
-            translate([98.43,41.28,0]) cylinder(d=3.6,h=thick+(adjust*2));
-            translate([98.43,85.73,0]) cylinder(d=3.6,h=thick+(adjust*2));
-            translate([98.43,117.48,0]) cylinder(d=3.6,h=thick+(adjust*2));
+            if(position == "vertical") {
+                if(side == "left") {
+                    translate([-6,28.5,0]) cylinder(d=3.6,h=thick+5);
+                    translate([-6,70.5,0]) cylinder(d=3.6,h=thick+5);
+                    translate([-6,28.5+101.6,0]) cylinder(d=3.6,h=thick+5);
+                }
+                else {
+                    // portrait 3.5" bottom screw holes
+                    translate([6,28.5,0]) cylinder(d=3.6,h=thick+5);
+                    translate([6,70.5,0]) cylinder(d=3.6,h=thick+5);
+                    translate([6,28.5+101.6,0]) cylinder(d=3.6,h=thick+5);
+                }
+            }
+            else {
+                // portrait 3.5" bottom screw holes
+                translate([3.18,41.28,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                translate([3.18,85.73,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                translate([3.18,117.48,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                translate([98.43,41.28,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                translate([98.43,85.73,0]) cylinder(d=3.6,h=thick+(adjust*2));
+                translate([98.43,117.48,0]) cylinder(d=3.6,h=thick+(adjust*2));
+            }
         }
         if(orientation == "landscape") {
             // landscape 3.5" bottom screw holes

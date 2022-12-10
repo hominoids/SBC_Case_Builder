@@ -103,9 +103,9 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 413
+#### Current Case Count 423
 
-##### Hardkernel
+##### Hardkernel - 182
 
 **Odorid-C1+ cases** - 16 : c1+_shell, c1+_panel, c1+_panel_lcd3.5, c1+_desktop_lcd3.5, c1+_stacked, c1+_tray, c1+_tray_sides, c1+_tray_vu5, 
 c1+_tray_vu7, c1+_shell_boombox, c1+_panel_boombox, c1+_tray_boombox, c1+_round, c1+_hex, c1+_snap, c1+_fitted
@@ -129,25 +129,32 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 
 **Odorid-N2LQ cases** - 9 :n2lq_shell, n2lq_panel, n2lq_stacked, n2lq_tray, n2lq_tray_sides, n2lq_tray_vu5, n2lq_tray_vu7, n2lq_snap, n2lq_fitted
 
+**Odorid-M1 cases** - 12 : m1_panel, m1_tray, m1_tray_drive, m1_tray_sides, m1_tray_vu5, m1_tray_vu7, m1_snap, m1_fitted, m1_fitted_drivebox2.5, m1_fitted_drivebox3.5, m1_fitted_pizzabox, m1_fitted_drivebox3.5v
+
 **Odorid-XU4 cases** - 11 : xu4_shell, xu4_panel, xu4_stacked, xu4_tray, xu4_tray_sides, xu4_tray_vu5, xu4_tray_vu7, xu4_round, xu4_hex, xu4_snap, xu4_fitted
 
 **Odorid-XU4Q cases** - 11 : xu4q_shell, xu4q_panel, xu4q_stacked, xu4q_tray, xu4q_tray_sides, xu4q_tray_vu5, xu4q_tray_vu7, xu4q_round, xu4q_hex, xu4q_snap, xu4q_fitted
 
-**Odroid-H2 cases** - 17 : h2_shell, h2_lowboy, h2_lowboy_router, h2_shell_router, h2_shell_routerssd, h2_panel, h2_stacked, h2_tray, h2_tray_sides, h2_tray_vu5, h2_tray_vu7, h2_tray_router, h2_router_station, h2_round, h2_hex, h2_snap, h2_fitted
+**Odroid-H2 cases** - 17 : h2_shell, h2_lowboy, h2_lowboy_router, h2_shell_router, h2_shell_router-ssd, h2_panel, h2_stacked, h2_tray, h2_tray_sides, h2_tray_vu5, h2_tray_vu7, h2_tray_router, h2_router_station, h2_round, h2_hex, h2_snap, h2_fitted
 
-**Odroid-H3 cases** - 18 : h3_shell, h3_shell-internalfan, h3_lowboy, h3_lowboy_router, h3_shell_router, h3_shell_routerssd, h3_panel, h3_stacked, h3_tray, h3_tray_sides, h3_tray_vu5, h3_tray_vu7, h3_tray_router, h3_router_station, h3_round, h3_hex, h3_snap, h3_fitted
+**Odroid-H3 cases** - 18 : h3_shell, h3_shell-internalfan, h3_lowboy, h3_lowboy_router, h3_shell_router, h3_shell_router-ssd, h3_panel, h3_stacked, h3_tray, h3_tray_sides, h3_tray_vu5, h3_tray_vu7, h3_tray_router, h3_router_station, h3_round, h3_hex, h3_snap, h3_fitted
 
 **Odroid-Show2** cases - 1 : show2_shell
 
 
-##### Pine64
+##### Pine64 - 24
 
 **Rock64** - 9 : rockp64_shell, rock64_panel, rock64_stacked, rock64_tray, rock64_tray_sides, rock64_round, rock64_hex, rock64_snap, rock64_fitted
 
 **RockPro64** - 9 : rockpro64_shell, rockpro64_panel, rockpro64_stacked, rockpro64_tray, rockpro64_tray_sides, rockpro64_round, rockpro64_hex, rockpro64_snap, rockpro64_fitted
 
+**Quartz64a** - 2 : quartz64a_shell, quartz64a_panel
 
-##### Raspberry PI
+**Quartz64b** - 2 : quartz64b_shell, quartz64b_panel
+
+**h64b** - 2 : h64b_shell, h64b_panel
+
+##### Raspberry PI - 72
 
 **RPIzero** - 9 : rpizero_shell, rpizero_panel, rpizero_stacked, rpizero_tray, rpizero_tray_sides, rpizero_round, rpizero_hex, rpizero_snap, rpizero_fitted
 
@@ -166,12 +173,12 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **RPI4b** - 9 : rpi4b_shell, rpi4b_panel, rpi4b_stacked, rpi4b_tray, rpi4b_tray_sides, rpi4b_round, rpi4b_hex, rpi4b_snap, rpi4b_fitted
 
 
-##### Nivida
+##### Nivida - 1
 
 **Jetson Nano** - 9 : jetsonnano_shell, jetsonnano_panel, jetsonnano_stacked, jetsonnano_tray, jetsonnano_tray_sides, jetsonnano_round, jetsonnano_hex, jetsonnano_snap, jetsonnano_fitted
 
 
-##### Radxa
+##### Radxa - 36
 
 **ROCKPi 4b+** - 9 : rockpi4b+_shell, rockpi4b+_panel, rockpi4b+_stacked, rockpi4b+_tray, rockpi4b+_tray_sides, rockpi4b+_round, rockpi4b+_hex, rockpi4b+_snap, rockpi4b+_fitted
 
@@ -182,7 +189,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **ROCKPi5b** - 9 : rockpi5b_shell, rockpi5b_panel, rockpi5b_stacked, rockpi5b_tray, rockpi5b_tray_sides, rockpi5b_round, rockpi5b_hex, rockpi5b_snap, rockpi5b_fitted
 
 
-##### Khadas
+##### Khadas - 45
 
 **Vim1** - 9 : vim1_shell, vim1_panel, vim1_stacked, vim1_tray, vim1_tray_sides, vim1_round, vim1_hex, vim1_snap, vim1_fitted
 
@@ -195,7 +202,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Vim4** - 9 : vim4_shell, vim4_panel, vim4_stacked, vim4_tray, vim4_tray_sides, vim4_round, vim4_hex, vim4_snap, vim4_fitted
 
 
-##### Asus
+##### Asus - 36
 
 **Tinkerboard** - 9 : tinkerboard_shell, tinkerboard_panel, tinkerboard_stacked, tinkerboard_tray, tinkerboard_tray_sides, tinkerboard_round, tinkerboard_hex, tinkerboard_snap, tinkerboard_fitted
 
@@ -206,7 +213,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Tinkerboard R2/R2S** - 9 : tinkerboard-r2_shell, tinkerboard-r2_panel, tinkerboard-r2_stacked, tinkerboard-r2_tray, tinkerboard-r2_tray_sides, tinkerboard-r2_round, tinkerboard-r2_hex, tinkerboard-r2_snap, tinkerboard-r2_fitted
 
 
-##### Orange PI
+##### Orange PI - 27
 
 **OPI Zero/ZeroPlus** - 9 : opizero_shell, opizero_panel, opizero_stacked, opizero_tray, opizero_tray_sides, opizero_round, opizero_hex, opizero_snap, opizero_fitted
 
