@@ -117,6 +117,7 @@
     fan_mask(size, thick, style)
     mask(loc_x,loc_y,rotation,side,class,type,case_z,wallthick,gap,floorthick,pcb_z)
     punchout(width,depth,gap,thick,fillet,shape)
+    h3_port_extender()
     
 */
 
@@ -268,6 +269,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "boom_vring") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data_1);
+    }
+    if(type == "h3_port_extender") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(); 
     }
 }
 
@@ -3442,3 +3446,8 @@ module vent(width,length,height,gap,rows,columns,orientation) {
     }
 }
 
+// odroid-h3 gpio port extender
+module h3_port_extender() {
+
+    translate([7,258.5,103]) rotate([90,0,270]) import("stl/h3_port_extender.stl");
+}
