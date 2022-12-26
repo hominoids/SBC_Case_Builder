@@ -3449,5 +3449,23 @@ module vent(width,length,height,gap,rows,columns,orientation) {
 // odroid-h3 gpio port extender
 module h3_port_extender() {
 
-    translate([7,258.5,103]) rotate([90,0,270]) import("stl/h3_port_extender.stl");
+//    translate([7,258.5,103]) rotate([90,0,270]) import("stl/h3_port_extender.stl");
+    translate([1.6,188.5,84]) rotate([90,0,270]) import("stl/h3_port_extender.stl");
+
+    // gpio 24 pin front position
+    translate([-3,15.75,0.25]) rotate([90,180,180]) import("stl/header_f_2x12_90.stl");
+
+
+    // gpio 24 pin rear position
+//    translate([4.55,18.25,0.25]) rotate([90,180,0]) import("stl/header_f_2x12_90.stl");
+    
+    // serial header rear position
+//    color("yellow") translate([6.5,4,29.25]) rotate([180,90,0]) import("stl/header_2x5_90.stl");
+  
+    // serial enclosed header rear position
+//    color("yellow")translate([9,-.5,12.75]) rotate([0,270,90]) import("stl/header_encl_2x5_90.stl");
+    
+    // power button
+    translate([-2.5,0,29.5]) rotate([270,0,90]) import("stl/header_2x2_90.stl");
+
 }
