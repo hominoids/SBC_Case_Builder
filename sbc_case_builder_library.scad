@@ -48,6 +48,8 @@
     20221101 version 2.0.2 added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
                            added mask for microsdcard2
     20221207 version 2.0.3 added double_stacked_usb3-usb2, hd35_vtab(side) and supporting code
+    2023xxxx version 2.0.x added h3_port_extender(style, mask = false), hk_pwr_button(mask = false), keyhole(keysize, mask = false) 
+                           and supporting code
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -117,8 +119,9 @@
     fan_mask(size, thick, style)
     mask(loc_x,loc_y,rotation,side,class,type,case_z,wallthick,gap,floorthick,pcb_z)
     punchout(width,depth,gap,thick,fillet,shape)
-    h3_port_extender()
-    
+    h3_port_extender(style, mask = false)
+    hk_pwr_button(mask = false)
+    keyhole(keysize, mask = false)
 */
 
 use <./lib/fillets.scad>;
@@ -271,7 +274,13 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
         translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data_1);
     }
     if(type == "h3_port_extender") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data_3); 
+    }
+    if(type == "hk_pwr_button") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(); 
+    }
+    if(type == "keyhole") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data_4); 
     }
 }
 
@@ -323,6 +332,9 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "sphere") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) sphere(d=size_x);
+    }
+    if(type == "keyhole") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data_4, true); 
     }
 }
 
@@ -1915,11 +1927,11 @@ module header(pins) {
 
     adjust = .01;
     $fn = 90;
-    size_x = 2.5;
-    size_y = 2.5 * pins;                
+    size_x = 2.54;
+    size_y = 2.54 * pins;                
     union() {
         color("black") translate([0,0,0]) cube([size_x, size_y, 2.5]);
-        for (i=[1:2.5:size_y]) {
+        for (i=[1:2.54:size_y]) {
             color("silver") translate ([1,i,2.5]) cube([.64,.64,5]);
         }
     }
@@ -3446,26 +3458,140 @@ module vent(width,length,height,gap,rows,columns,orientation) {
     }
 }
 
-// odroid-h3 gpio port extender
-module h3_port_extender() {
 
-//    translate([7,258.5,103]) rotate([90,0,270]) import("stl/h3_port_extender.stl");
-    translate([1.6,188.5,84]) rotate([90,0,270]) import("stl/h3_port_extender.stl");
-
-    // gpio 24 pin front position
-    translate([-3,15.75,0.25]) rotate([90,180,180]) import("stl/header_f_2x12_90.stl");
-
-
-    // gpio 24 pin rear position
-//    translate([4.55,18.25,0.25]) rotate([90,180,0]) import("stl/header_f_2x12_90.stl");
+// hk power button
+module hk_pwr_button(mask = false) {
     
-    // serial header rear position
-//    color("yellow") translate([6.5,4,29.25]) rotate([180,90,0]) import("stl/header_2x5_90.stl");
-  
-    // serial enclosed header rear position
-//    color("yellow")translate([9,-.5,12.75]) rotate([0,270,90]) import("stl/header_encl_2x5_90.stl");
-    
-    // power button
-    translate([-2.5,0,29.5]) rotate([270,0,90]) import("stl/header_2x2_90.stl");
+    adjust=.01;
+    $fn = 90;
 
+    if(mask == true) {
+        color("silver") translate([0, 0, -19]) cylinder(h=20, d=16);
+    }
+    else {
+        difference() {
+            union() {
+                // light ring
+                difference() {
+                    color("blue", .6) translate([0, 0, 1.67]) cylinder(h=.1, d=14.75);
+                    color("blue", .6) translate([0, 0, 1.66]) cylinder(h=.2, d=13.75);
+                }
+                // power symbol
+                color("blue", .6) translate([-.5, 0, 1.65]) color("blue", .6) cube([1,3.5,.1]);
+                difference() {
+                    color("blue", .6) translate([0, 0, 1.66]) cylinder(h=.1, d=5.75);
+                    color("blue", .6) translate([0, 0, 1.65]) cylinder(h=.2, d=4.5);
+                    color("blue", .6) translate([-1.75, 0, 1.65]) cube([3.5,4,2]);
+                }
+                // body
+                color("Gainsboro") cylinder(h=1.66, d1=17.75, d2=14.75);
+                color("silver") translate([0, 0, -19]) cylinder(h=19, d=15.8);
+                difference() {
+                    color("steelblue") translate([0, 0, -27.9]) cylinder(h=9, d=15.8);
+                    color("steelblue") translate([-1+15.8/2, -4, -19-9.1]) cube([2,8,6.1]);
+                    color("steelblue") translate([-1-15.8/2, -4, -19-9.1]) cube([2,8,6.1]);
+                }
+                color("white") translate([-3.5, -6, -28]) cube([7,12,2]);
+                
+                // nut
+                difference() {
+                    translate([0, 0, -4.75]) color("Gainsboro", .6) cylinder(h=2.75, d=21.5, $fn=6);
+                    translate([0, 0, -4.75]) color("Gainsboro", .6) cylinder(h=2.75, d=15.8);
+                }
+                // connector pins
+                color("silver") translate([-1.4, -.5, -34.99]) cube([2.8, 1, 7]);
+                color("silver") translate([-1.4, -.5+5, -34.99]) cube([2.8, 1, 7]);
+                color("silver") translate([-1.4, -.5-5, -34.99]) cube([2.8, 1, 7]);
+                color("silver") translate([-1.4-1.75, -.5+1.75, -34.99]) cube([1, 2.8, 7]);
+                color("silver") translate([-1.4+3.5, -.5+1.75, -34.99]) cube([1, 2.8, 7]);
+            }
+         }
+    }
+}
+
+
+// @mctom's odroid-h3 gpio port extender
+module h3_port_extender(style, mask = false) {
+    
+    adjust=.01;
+    $fn = 90;
+
+    if(style == "header") {
+        if(mask == true) {
+            translate([-20, 6.25, 15]) cube([12, 7.5, 14.75]);
+            translate([-20, 15.875, 15]) cube([12, 7.5, 14.75]);
+            translate([-20, 25.375, 15]) cube([12, 7.5, 14.75]);
+            translate([-20, 17, 32.5]) rotate([0, 90, 0]) cylinder(d=3.5, h=12);
+        }
+        else {
+            // gpio 24 pin front position
+            color("silver") translate([1.6, 188.5, 84]) rotate([90, 0, 270]) import("stl/h3_port_extender.stl");
+//            color("dimgrey") translate([-3, 15.75, 0.25]) rotate([90, 180, 180]) import("stl/header_f_2x12_90.stl");
+            translate([0, 2, 8.25]) rotate([0, 180, 0]) header_f(12,8);
+            translate([-2.54, 2, 8.25]) rotate([0, 180, 0]) header_f(12,8);
+            color("dimgrey") translate([-2.5, 0, 29.5]) rotate([270, 0, 90]) import("stl/header_2x2_90.stl");
+        }
+    }
+    if(style == "remote") {
+        if(mask == true) {
+            translate([-20, 6.25, 15]) cube([12,7.5,14.75]);
+            translate([-20, 15.875, 15]) cube([12,7.5,14.75]);
+            translate([-20, 25.375, 15]) cube([12,7.5,14.75]);
+            translate([-20, 17, 32.5]) rotate([0,90,0]) cylinder(d=3.5, h=12);
+            translate([-20, 17, 5]) rotate([0,90,0]) cylinder(d=3.5, h=12);
+        }
+        else {
+            // gpio 24 pin front position
+            color("silver") translate([1.6, 188.5, 84]) rotate([90, 0, 270]) import("stl/h3_port_extender.stl");
+            color("dimgrey") translate([-2.5, 0, 29.5]) rotate([270, 0, 90]) import("stl/header_2x2_90.stl");
+            translate([2, 2, 14.08]) rotate([0, 90, 0]) header(12);
+            translate([2, 2, 11.54]) rotate([0, 90, 0]) header(12);
+        }
+    }
+}
+
+// enclosed keyhole
+module keyhole(keysize, mask = false) {
+    
+    adjust=.01;
+    $fn = 90;
+
+    if(mask == true) {
+        union() {
+            translate([0, 0, -adjust]) cylinder(h=keysize[3]+2*adjust, d=keysize[0]);
+            translate([-keysize[1]/2, 0, -adjust]) cube([keysize[1], keysize[2]+keysize[0]/2, keysize[3]+2*adjust]);
+            translate([0, -keysize[1]/2, -adjust]) cube([keysize[2]+keysize[0]/2, keysize[1], keysize[3]+2*adjust]);
+        }
+    }
+    else {
+        difference() {
+            union() {
+                translate([0, 0, -adjust]) 
+                difference() {
+                    difference() {
+                        translate([-keysize[2], -keysize[2], keysize[3]]) cube([keysize[2]*3, keysize[2]*3, 4.5]);
+                        translate([0, -10, 0]) rotate([0, 0, 135]) cube([20, 10, 10]);
+                        translate([keysize[2], keysize[2], -adjust]) cube([keysize[2]*3, keysize[2]*3, keysize[3]+5]);        
+                    }
+                    difference() {
+                        translate([-keysize[2]+2, -keysize[2]+2, keysize[3]-adjust]) 
+                            cube([-4+keysize[2]*3, -4+keysize[2]*3, 3.5]);
+                        translate([2, -10, 0]) rotate([0, 0, 135]) cube([20, 10, 10]);
+                        translate([+keysize[2]-2, keysize[2]-2, -adjust]) 
+                            cube([keysize[2]*3, keysize[2]*3, keysize[3]+5]);        
+                    }
+                }
+                difference() {   
+                    translate([-keysize[2], -keysize[2], 0]) cube([keysize[2]*3, keysize[2]*3, keysize[3]]);
+                    translate([0, -10, -adjust]) rotate([0, 0, 135]) cube([20, 10, 10]);
+                }   
+            }
+            translate([keysize[2], keysize[2], -adjust]) cube([keysize[2]*3, keysize[2]*3, keysize[3]+2*adjust]);        
+            union() {
+                translate([0, 0, -adjust]) cylinder(h=keysize[3]+2*adjust, d=keysize[0]);
+                translate([-keysize[1]/2, 0, -adjust]) cube([keysize[1], keysize[2]+keysize[0]/2, keysize[3]+2*adjust]);
+                translate([0, -keysize[1]/2, -adjust]) cube([keysize[2]+keysize[0]/2, keysize[1], keysize[3]+2*adjust]);
+            }
+        }
+    }
 }
