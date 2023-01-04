@@ -336,6 +336,12 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "keyhole") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data_4, true); 
     }
+    if(type == "h3_port_extender") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data_3, true); 
+    }
+    if(type == "hk_pwr_button") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(true); 
+    }
 }
 
 
@@ -2524,15 +2530,32 @@ module microusb_open() {
 
 /* fan mask to create opening */
 module fan_mask(size, thick, style) {
-    $fn=90;
 
+    $fn=90;
+    
     if(style == 1) {
         translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-2);
-        // mount holes
-        translate ([size-4,size-4,-1]) cylinder(h=thick+2, d=3);
-        translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
-        translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
-        translate ([4,4,-1]) cylinder(h=thick+2, d=3);
+        if(size == 40) {
+            // mount holes
+            translate ([size-4,size-4,-1]) cylinder(h=thick+2, d=3);
+            translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
+            translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
+            translate ([4,4,-1]) cylinder(h=thick+2, d=3);
+        }
+        if(size == 60) {
+            // mount holes
+            translate ([size-5,size-5,-1]) cylinder(h=thick+2, d=3);
+            translate ([size-5,5,-1]) cylinder(h=thick+2, d=3);
+            translate ([5,size-5,-1]) cylinder(h=thick+2, d=3);
+            translate ([5,5,-1]) cylinder(h=thick+2, d=3);
+        }
+        if(size >= 80) {
+            // mount holes
+            translate ([size-3.75,size-3.75,-1]) cylinder(h=thick+2, d=3);
+            translate ([size-3.75,3.75,-1]) cylinder(h=thick+2, d=3);
+            translate ([3.75,size-3.75,-1]) cylinder(h=thick+2, d=3);
+            translate ([3.75,3.75,-1]) cylinder(h=thick+2, d=3);
+        }
     }
     if(style == 2 && size == 40) {
         difference() {
@@ -2562,6 +2585,47 @@ module fan_mask(size, thick, style) {
                 translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
                 translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
                 translate ([4,4,-1]) cylinder(h=thick+2, d=3);
+            }
+            translate([6.5,5,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
+            translate([4.5,size-6,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
+        }
+    }
+    if(style == 2 && size == 60) {
+        difference() {
+            union () {
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-2);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-6);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-10);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-14);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-18);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-22);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-26);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-30);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-34);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-38);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-42);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-46);
+                }
+                difference() {
+                    translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-50);
+                    translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-54);
+                }
+                // mount holes
+                translate ([size-5,size-5,-1]) cylinder(h=thick+2, d=3);
+                translate ([size-5,5,-1]) cylinder(h=thick+2, d=3);
+                translate ([5,size-5,-1]) cylinder(h=thick+2, d=3);
+                translate ([5,5,-1]) cylinder(h=thick+2, d=3);
             }
             translate([6.5,5,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
             translate([4.5,size-6,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
@@ -2598,11 +2662,17 @@ module fan_mask(size, thick, style) {
                     translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-74);
                     translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-79);
                 }
+                if(size == 92) {
+                    difference() {
+                        translate ([size/2,size/2,-1]) cylinder(h=thick+2, d=size-86);
+                        translate ([size/2,size/2,-2]) cylinder(h=thick+4, d=size-92);
+                    }
+                }
                 // mount holes
-                translate ([size-4,size-4,-1]) cylinder(h=thick+2, d=3);
-                translate ([size-4,4,-1]) cylinder(h=thick+2, d=3);
-                translate ([4,size-4,-1]) cylinder(h=thick+2, d=3);
-                translate ([4,4,-1]) cylinder(h=thick+2, d=3);
+                translate ([size-3.75,size-3.75,-1]) cylinder(h=thick+2, d=3);
+                translate ([size-3.75,3.75,-1]) cylinder(h=thick+2, d=3);
+                translate ([3.75,size-3.75,-1]) cylinder(h=thick+2, d=3);
+                translate ([3.75,3.75,-1]) cylinder(h=thick+2, d=3);
             }
             translate([6.5,4.25,-2]) rotate([0,0,45]) cube([size*1.2,3,thick+4]);
             translate([4.25,size-6.5,-2]) rotate([0,0,-45]) cube([size*1.2,3,thick+4]);
@@ -3314,7 +3384,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     // button opening
     if(type == "momentary_6x6x4") {
         place(loc_x,loc_y,loc_z,6,6,rotation,side) 
-            translate([3,3,4]) rotate([0,0,0]) cylinder(d=5, h=50);
+            translate([3,3,4]) rotate([0,0,0]) cylinder(d=5, h=10);
     }    
     if(type == "momentary_6x6x4_90" && rotation == 0) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side) 
@@ -3544,6 +3614,7 @@ module h3_port_extender(style, mask = false) {
             // gpio 24 pin front position
             color("silver") translate([1.6, 188.5, 84]) rotate([90, 0, 270]) import("stl/h3_port_extender.stl");
             color("dimgrey") translate([-2.5, 0, 29.5]) rotate([270, 0, 90]) import("stl/header_2x2_90.stl");
+            color("dimgrey")translate([9,-.5,12.75]) rotate([0,270,90]) import("stl/header_encl_2x5_90.stl");
             translate([2, 2, 14.08]) rotate([0, 90, 0]) header(12);
             translate([2, 2, 11.54]) rotate([0, 90, 0]) header(12);
         }
