@@ -3,6 +3,7 @@
     
     Contributions:
     hk_vu8m(brackets),u_bracket(),screw(),m1_hdmount() Copyright 2022 Tomek Szczęsny, mctom @ www.forum.odroid.com
+    vent_hex()                                         Copyright 2023 Tomek Szczęsny, mctom @ www.forum.odroid.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,8 +49,8 @@
     20221101 version 2.0.2 added hdmi_a_vertical mask, increased jack_3.5 mask dia.to 6mm, lowered hdmi_a_vertical mask by 2mm,
                            added mask for microsdcard2
     20221207 version 2.0.3 added double_stacked_usb3-usb2, hd35_vtab(side) and supporting code
-    2023xxxx version 2.0.x added h3_port_extender(style, mask = false), hk_pwr_button(mask = false), keyhole(keysize, mask = false) 
-                           and supporting code
+    2023xxxx version 2.0.x added h3_port_extender(style, mask = false), hk_pwr_button(mask = false), keyhole(keysize, mask = false),
+                           vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -122,6 +123,7 @@
     h3_port_extender(style, mask = false)
     hk_pwr_button(mask = false)
     keyhole(keysize, mask = false)
+    vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation)
 */
 
 use <./lib/fillets.scad>;
@@ -326,6 +328,9 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "vent") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) vent(size_x,size_y,size_z,data_4,data_1,data_2,data_3);
+    }
+    if(type == "vent_hex") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_hex(size_x,size_y,size_z,data_1,data_2,data_3);
     }
     if(type == "microusb") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) microusb_open();
@@ -3523,6 +3528,28 @@ module vent(width,length,height,gap,rows,columns,orientation) {
         for (r=[0:length+(2*gap):rows*(length+gap)]) {
             for (c=[0:width+(2*gap):(columns*(width+(2*gap)))-1]) {
                 translate ([c,r,-1]) cube([width,length,height]);
+            }
+        }
+    }
+}
+
+// Hex vent opening
+module vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientation) {
+    xs = cell_size + cell_spacing;
+    ys = xs * sqrt(3/4);
+    rot = (orientation=="vertical") ? 90 : 0;
+
+    rotate([rot,0,0]) translate([cell_size/2, cell_size*sqrt(3/8),-1]) {
+        for (ix = [0 : ceil(cells_x/2)-1]) {
+            for (iy = [0 : 2 : cells_y-1]) {
+                translate([ix*xs, iy*ys,0]) rotate([0,0,90]) 
+                cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
+            }
+        }
+            for (ix = [0 : (cells_x/2)-1]) {
+                for (iy = [1 : 2 : cells_y-1]) {
+                translate([(ix+0.5)*xs, iy*ys,0]) rotate([0,0,90]) 
+                cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
             }
         }
     }
