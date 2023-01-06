@@ -3618,7 +3618,7 @@ module h3_port_extender(style, mask = false) {
             translate([-20, 6.25, 15]) cube([12, 7.5, 14.75]);
             translate([-20, 15.875, 15]) cube([12, 7.5, 14.75]);
             translate([-20, 25.375, 15]) cube([12, 7.5, 14.75]);
-            translate([-20, 17, 32.5]) rotate([0, 90, 0]) cylinder(d=3.5, h=12);
+            translate([-20, 17, 32.2]) rotate([0, 90, 0]) cylinder(d=3.5, h=12);
         }
         else {
             // gpio 24 pin front position
@@ -3634,8 +3634,8 @@ module h3_port_extender(style, mask = false) {
             translate([-20, 6.25, 15]) cube([12,7.5,14.75]);
             translate([-20, 15.875, 15]) cube([12,7.5,14.75]);
             translate([-20, 25.375, 15]) cube([12,7.5,14.75]);
-            translate([-20, 17, 32.5]) rotate([0,90,0]) cylinder(d=3.5, h=12);
-            translate([-20, 17, 5]) rotate([0,90,0]) cylinder(d=3.5, h=12);
+            translate([-20, 17, 32.2]) rotate([0,90,0]) cylinder(d=3.5, h=12);
+            translate([-20, 17, 4.6]) rotate([0,90,0]) cylinder(d=3.5, h=12);
         }
         else {
             // gpio 24 pin front position
