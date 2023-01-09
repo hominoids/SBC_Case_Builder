@@ -50,7 +50,7 @@
                            added mask for microsdcard2
     20221207 version 2.0.3 added double_stacked_usb3-usb2, hd35_vtab(side) and supporting code
     2023xxxx version 2.0.x added h3_port_extender(style, mask = false), hk_pwr_button(mask = false), keyhole(keysize, mask = false),
-                           vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code
+                           vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false)
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -124,6 +124,7 @@
     hk_pwr_button(mask = false)
     keyhole(keysize, mask = false)
     vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation)
+    dsub(dsubsize, mask = false)
 */
 
 use <./lib/fillets.scad>;
@@ -284,6 +285,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "keyhole") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data_4); 
     }
+    if(type == "dsub") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data_4); 
+    }
 }
 
 
@@ -346,6 +350,9 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "hk_pwr_button") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(true); 
+    }
+    if(type == "dsub") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data_4, true); 
     }
 }
 
@@ -3543,13 +3550,13 @@ module vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientatio
         for (ix = [0 : ceil(cells_x/2)-1]) {
             for (iy = [0 : 2 : cells_y-1]) {
                 translate([ix*xs, iy*ys,0]) rotate([0,0,90]) 
-                cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
+                    cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
             }
         }
             for (ix = [0 : (cells_x/2)-1]) {
                 for (iy = [1 : 2 : cells_y-1]) {
                 translate([(ix+0.5)*xs, iy*ys,0]) rotate([0,0,90]) 
-                cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
+                    cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
             }
         }
     }
@@ -3690,6 +3697,30 @@ module keyhole(keysize, mask = false) {
                 translate([-keysize[1]/2, 0, -adjust]) cube([keysize[1], keysize[2]+keysize[0]/2, keysize[3]+2*adjust]);
                 translate([0, -keysize[1]/2, -adjust]) cube([keysize[2]+keysize[0]/2, keysize[1], keysize[3]+2*adjust]);
             }
+        }
+    }
+}
+
+
+// d-sub connector
+module dsub(dsubsize, mask = false) {
+    
+    adjust=.01;
+    $fn = 90;
+
+    if(mask == true) {
+        union() {
+            translate([-1, 1, -.75]) rotate([90,0,0]) slab_r([19,10.5,10], [4,4,4,4]);
+            translate([-4, 1, 4.5]) rotate([90,0,0]) cylinder(h=10, d=3);
+            translate([21, 1, 4.5]) rotate([90,0,0]) cylinder(h=10, d=3);
+        }
+    }
+    else {
+        if(dsubsize[0] == 9 && dsubsize[1] == "female") {
+            translate([8.5,0.4,4.5]) rotate([90,0,0]) import("./stl/db9_f.stl");
+        }
+        if(dsubsize[0] == 9 && dsubsize[1] == "male") {
+            translate([8.5,0.4,4.5]) rotate([90,0,0]) import("./stl/db9_m.stl");
         }
     }
 }

@@ -323,6 +323,13 @@ description: circlular geometry.
 *uses:* data_1=scale, data_2=height, data_3=file
 
 
+**keyhole**
+
+*description:* enclosed keyhole
+
+*uses:* data4=[head_dia, slot_width, slot_length, floor_thick]
+
+
 
 #### Add class only “types”
 
@@ -438,7 +445,15 @@ description: circlular geometry.
 
 *description:* horizontal or vertical vent openings
 
-*uses:* size_x=open_width, size_y=open_length, size_z=thick, data_4=gap, data_1=rows, data_3=columns,
+*uses:* size_x=open_width, size_y=open_length, size_z=thick, data_1=rows, data_2=columns,
+data_3=orientation("vertical","horizontal"), data_4=gap
+
+
+**vent_hex**(cells_x, cells_y, cell_size, cell_spacing, orientation)
+
+*description:* horizontal or vertical hex vent openings
+
+*uses:* size_x=cells_x, size_y=cells_y, size_z=thick, data_1=cell_size, data_2=cell_spacing, 
 data_3=orientation("vertical","horizontal")
 
 
@@ -592,6 +607,26 @@ data_3=orientation("vertical","horizontal")
 
 *uses:* none
 
+
+**h3_port_extender**
+
+*description:* h3 usb port extender model
+
+*uses:* data_3="header" or "remote"
+
+
+**hk_pwr_button**
+
+*description:* hk power button model
+
+*uses:* none
+
+
+**dsub**
+
+*description:* d-sub connectors
+
+*uses:* data4=[pin, type("male" or "female"), floor_thick]
 
 
 #### Platter class “types”

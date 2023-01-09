@@ -1114,13 +1114,21 @@ module case_bottom(case_design) {
                         pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                         pcb_hole_size = sbc_data[s[0]][i+2];
                         if(pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            if(i == 7) {
+                            if(i == 7 && sbc_model != "n2l") {
                                 translate([pcb_hole_x-(bottom_standoff[0]/2)-2.6+adjust, pcb_hole_y-gap,0])
                                     cube([gap+1.6,2,bottom_height-pcb_z+pcb_loc_z+bottom_rear_left]);
                             }
-                            if(i == 10) {
+                            if (i == 7 && sbc_model == "n2l") {
+                                translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adjust)-1,0])
+                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_rear_left]);
+                            }
+                            if(i == 10 && sbc_model != "n2l") {
                                 translate([pcb_hole_x-(bottom_standoff[0]/2)-2.6+adjust, pcb_hole_y-gap,0])
                                     cube([gap+1.6,2,bottom_height-pcb_z+pcb_loc_z+bottom_front_left]);
+                            }
+                            if(i == 10 && sbc_model == "n2l") {
+                                translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adjust,0])
+                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_front_left]);
                             }
                             if (i == 13) {
                                 translate([pcb_hole_x+(bottom_standoff[0]/2)-.5+adjust, pcb_hole_y-gap,0])
@@ -1687,13 +1695,23 @@ module case_top(case_design) {
                         pcb_hole_y = sbc_data[s[0]][i+1]+pcb_loc_y;
                         pcb_hole_size = sbc_data[s[0]][i+2];
                         if(pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            if (i == 7) {
+                            if (i == 7 && sbc_model != "n2l") {
                                 translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
                                     bottom_height-top_rear_left]) cube([gap+adjust+1,2,top_height+top_rear_left]);
                             }
-                            if (i == 10) {
+                            if (i == 7 && sbc_model == "n2l") {
+                                translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
+                                    case_z-top_height-top_rear_left]) cube([2,gap+1.6,top_height+top_rear_left]);
+                                
+                            }
+                            if (i == 10 && sbc_model != "n2l") {
                                 translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
                                     bottom_height-top_front_left]) cube([gap+adjust+1,2,top_height+top_front_left]);
+                            }
+                            if (i == 10 && sbc_model == "n2l") {
+                                translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,case_z-top_height-top_front_left]) 
+                                    cube([2,gap+1.6,top_height+top_front_left]);
+                                
                             }
                             if (i == 13) {
                                 translate([pcb_hole_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,
