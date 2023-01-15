@@ -3,7 +3,7 @@
     
     Contributions:
     hk_vu8m(brackets),u_bracket(),screw(),m1_hdmount() Copyright 2022 Tomek Szczęsny, mctom @ www.forum.odroid.com
-    vent_hex()                                         Copyright 2023 Tomek Szczęsny, mctom @ www.forum.odroid.com
+    vent_hex(), vent_panel_hex()                       Copyright 2023 Tomek Szczęsny, mctom @ www.forum.odroid.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,7 +50,8 @@
                            added mask for microsdcard2
     20221207 version 2.0.3 added double_stacked_usb3-usb2, hd35_vtab(side) and supporting code
     2023xxxx version 2.0.x added h3_port_extender(style, mask = false), hk_pwr_button(mask = false), keyhole(keysize, mask = false),
-                           vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false)
+                           vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false),
+                           vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders),
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -125,6 +126,7 @@
     keyhole(keysize, mask = false)
     vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation)
     dsub(dsubsize, mask = false)
+    vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders);
 */
 
 use <./lib/fillets.scad>;
@@ -263,6 +265,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "fan_cover") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z);
+    }
+    if(type == "vent_panel_hex") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_panel_hex(x=size_x, y=size_y, thick=size_z, cell_size=data_1, cell_spacing=data_2, border=data_4, borders=data_3);
     }
     if(type == "feet") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
@@ -736,6 +741,37 @@ module fan_cover(size, thick) {
     difference() {
         color("grey",1) slab([size,size,thick],3);
         color("grey",1) fan_mask(size, thick, 2);
+    }
+}
+
+/* hex vent panel */
+// borders:
+// y - specified size along y axis
+// x - specified size along x axis
+// none - both borders the size of cell_spacing, no mounting holes
+// anything else ("default") - all borders of specified size
+module vent_panel_hex(x, y, thick, cell_size=8, cell_spacing=3, border=3, borders="default") {
+    hole = 3.2;
+    xb = (borders == "y" || borders == "none") ? cell_spacing : border;
+    yb = (borders == "x" || borders == "none") ? cell_spacing : border;
+    hxb = max(yb/2, cell_spacing + hole);
+    hyb = max(xb/2, cell_spacing + hole);
+
+    cells_x = floor((2*(x-2*xb-cell_size)/(cell_size+cell_spacing))+1);
+    cells_y = floor(((sqrt(12)*(y-2*yb)-4*cell_size)/(3*(cell_size+cell_spacing)))+1);
+    csx = cell_size + (cells_x-1)*(cell_size+cell_spacing)/2;
+    csy = sqrt(4/3)*cell_size + ((cell_size+cell_spacing)*sqrt(3/4)*(cells_y-1));
+
+    difference() {
+        color("grey",1) slab([x,y,thick],2);
+	translate([(x-csx)/2,(y-csy)/2,-1])
+            vent_hex(cells_x, cells_y, thick+3, cell_size, cell_spacing, "horizontal");
+	if (borders != "none") {
+	    translate([    hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
+	    translate([x - hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
+	    translate([    hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
+	    translate([x - hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
+	}
     }
 }
 
@@ -3546,7 +3582,7 @@ module vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientatio
     ys = xs * sqrt(3/4);
     rot = (orientation=="vertical") ? 90 : 0;
 
-    rotate([rot,0,0]) translate([cell_size/2, cell_size*sqrt(3/8),-1]) {
+    rotate([rot,0,0]) translate([cell_size/2, cell_size*sqrt(1/3),-1]) {
         for (ix = [0 : ceil(cells_x/2)-1]) {
             for (iy = [0 : 2 : cells_y-1]) {
                 translate([ix*xs, iy*ys,0]) rotate([0,0,90]) 

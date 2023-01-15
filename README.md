@@ -629,6 +629,14 @@ data_3=orientation("vertical","horizontal")
 *uses:* data4=[pin, type("male" or "female"), floor_thick]
 
 
+**vent_panel_hex**
+
+*description:* cover for vent opening, honeycomb pattern
+
+*uses:* size_x=x, size_y=y, size_z=thick,
+        data1=cell_size, data2=cell_spacing, 
+        data3="x", "y", "none", or "default", data4=border
+
 #### Platter class “types”
 
 
@@ -665,3 +673,13 @@ data_3=orientation("vertical","horizontal")
 *description:* hk stereo boom bonnet volume wheel extention
 
 *uses:* data_1=tolerence
+
+
+**vent_panel_hex**
+
+*description:* cover for vent opening, honeycomb pattern
+
+*uses:* size_x=x, size_y=y, size_z=thick,
+        data1=cell_size, data2=cell_spacing, 
+        data3="x", "y", "none", or "default", data4=border
+
