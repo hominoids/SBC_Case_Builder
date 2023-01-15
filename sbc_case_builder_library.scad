@@ -748,11 +748,14 @@ module fan_cover(size, thick) {
 // borders:
 // y - specified size along y axis
 // x - specified size along x axis
-// none - both borders the size of cell_spacing
+// none - both borders the size of cell_spacing, no mounting holes
 // anything else ("default") - all borders of specified size
 module vent_panel_hex(x, y, thick, cell_size=8, cell_spacing=3, border=3, borders="default") {
+    hole = 3.2;
     xb = (borders == "y" || borders == "none") ? cell_spacing : border;
     yb = (borders == "x" || borders == "none") ? cell_spacing : border;
+    hxb = max(yb/2, cell_spacing + hole);
+    hyb = max(xb/2, cell_spacing + hole);
 
     cells_x = floor((2*(x-2*xb-cell_size)/(cell_size+cell_spacing))+1);
     cells_y = floor(((sqrt(12)*(y-2*yb)-4*cell_size)/(3*(cell_size+cell_spacing)))+1);
@@ -760,9 +763,15 @@ module vent_panel_hex(x, y, thick, cell_size=8, cell_spacing=3, border=3, border
     csy = sqrt(4/3)*cell_size + ((cell_size+cell_spacing)*sqrt(3/4)*(cells_y-1));
 
     difference() {
-        color("grey",1) slab([x,y,thick],3);
+        color("grey",1) slab([x,y,thick],2);
 	translate([(x-csx)/2,(y-csy)/2,-1])
             vent_hex(cells_x, cells_y, thick+3, cell_size, cell_spacing, "horizontal");
+	if (borders != "none") {
+	    translate([    hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
+	    translate([x - hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
+	    translate([    hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
+	    translate([x - hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
+	}
     }
 }
 
