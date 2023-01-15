@@ -1784,7 +1784,7 @@ module case_top(case_design) {
                 }
                 // create openings for additive 
                 if (class == "add2" && face == "top" && type == "standoff") {
-                    parametric_move_sub("round",loc_x,loc_y,case_z-floorthick-adjust,face,rotation,parametric,
+                    parametric_move_sub("round",loc_x,loc_y,loc_z,face,rotation,parametric,
                         6.5,size_y,floorthick+1,data_1,data_2,data_3,data_4);
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "uart_holder") {
