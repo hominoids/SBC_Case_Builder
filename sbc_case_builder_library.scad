@@ -3236,6 +3236,12 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+2,loc_y+1.5,loc_z-3.25,6,8,rotation,side)
             rotate([90,0,0]) slot(3.75,6,8);
     }
+    // single horizontal usbc opening, lifted and enlarged for Lichee RV SoM
+    // TODO: implement other directions
+    if(class == "usbc" && type == "single_horizontal_on_licheerv" && rotation == 0 && side == "top") {
+        place(loc_x+1.5,loc_y+2,loc_z+5.05,6,8,rotation,side)
+            rotate([90,0,0]) slot(6,8,10);
+    }
     // single vertical usbc opening
     if(class == "usbc" && type == "single_vertical" && rotation == 0 && side == "top") {
         place(loc_x+1.5,loc_y+2,loc_z+1.75,6,8,rotation,side)
