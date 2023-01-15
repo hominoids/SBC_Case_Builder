@@ -45,7 +45,8 @@
     20221101 Version 2.0.2    updated sbc model framework, h3/h3+ model and rockpi5b adjustments
     20221207 Version 2.0.3    added part view to facilitate individual part prints, updated sbc model framework, 
                               added n2l and m1 cases
-    2023xxxx Version 2.0.x    fixed standoff sidewall support misplacement on sbc move, 
+    2023xxxx Version 2.0.x    fixed standoff sidewall support misplacement on sbc move, fixed standoff auto
+                              opening z height, fixed case top right side standoffs support
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -1201,7 +1202,7 @@ module case_bottom(case_design) {
                 }
                 // create openings for additive 
                 if (class == "add2" && face == "bottom" && type == "standoff") {
-                    parametric_move_sub("round",loc_x,loc_y,-.1,face,rotation,parametric,
+                    parametric_move_sub("round",loc_x,loc_y,loc_z-.1,face,rotation,parametric,
                         6.5,size_y,floorthick+1,data_1,data_2,data_3,data_4);
                 }
                 if ((class == "add1" || class == "add2") && type == "uart_holder") {
@@ -1696,8 +1697,8 @@ module case_top(case_design) {
                         pcb_hole_size = sbc_data[s[0]][i+2];
                         if(pcb_hole_x!=0 && pcb_hole_y!=0) {
                             if (i == 7 && sbc_model != "n2l") {
-                                translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
-                                    bottom_height-top_rear_left]) cube([gap+adjust+1,2,top_height+top_rear_left]);
+                                translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-1,pcb_hole_y-1,
+                                    bottom_height-top_rear_left]) cube([gap+adjust+1.6,2,top_height+top_rear_left]);
                             }
                             if (i == 7 && sbc_model == "n2l") {
                                 translate([pcb_hole_x-1, pcb_hole_y-(top_standoff[0]/2)-(gap-adjust)-1.4,
@@ -1705,8 +1706,8 @@ module case_top(case_design) {
                                 
                             }
                             if (i == 10 && sbc_model != "n2l") {
-                                translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-.45,pcb_hole_y-1,
-                                    bottom_height-top_front_left]) cube([gap+adjust+1,2,top_height+top_front_left]);
+                                translate([pcb_hole_x-(top_standoff[0]/2)-gap-adjust-1,pcb_hole_y-1,
+                                    bottom_height-top_front_left]) cube([gap+adjust+1.6,2,top_height+top_front_left]);
                             }
                             if (i == 10 && sbc_model == "n2l") {
                                 translate([pcb_hole_x-1, pcb_hole_y+(top_standoff[0]/2)-.6+adjust,case_z-top_height-top_front_left]) 
@@ -1715,11 +1716,11 @@ module case_top(case_design) {
                             }
                             if (i == 13) {
                                 translate([pcb_hole_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,
-                                    bottom_height-top_rear_right]) cube([gap+adjust+1,2,top_height+top_rear_right]);
+                                    bottom_height-top_rear_right]) cube([gap+adjust+1.6,2,top_height+top_rear_right]);
                             }
                             if (i == 16) {
                                 translate([pcb_hole_x+(top_standoff[0]/2)-adjust-.45,pcb_hole_y-1,
-                                    bottom_height-top_front_right]) cube([gap+adjust+1,2,top_height+top_front_right]);
+                                    bottom_height-top_front_right]) cube([gap+adjust+1.6,2,top_height+top_front_right]);
                             }
                         }
                     }
