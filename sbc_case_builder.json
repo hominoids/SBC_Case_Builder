@@ -1,7 +1,7 @@
 {
     "parameterSets": {
         "c1+_shell": {
-            "$fn": "90",  
+            "$fn": "90",
             "accessory_highlight": "false",
             "accessory_name": "none",
             "adjust": "0.01",
@@ -9477,7 +9477,7 @@
             "bottom_front_right": "0",
             "bottom_rear_left": "0",
             "bottom_rear_right": "0",
-            "bottom_standoff": "[6.25, 7, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
+            "bottom_standoff": "[6.5, 7, 3.6, 10, 4, 4, 0, 0, 1, 4.5, 5]",
             "c_fillet": "9",
             "case_design": "shell",
             "case_ext_standoffs": "false",
@@ -9495,6 +9495,7 @@
             "gap": "1.5",
             "gpio_opening": "none",
             "indents": "true",
+            "individual_part": "bottom",
             "lip": "5",
             "lower_bottom": "0",
             "move_front": "0",
@@ -9519,11 +9520,11 @@
             "top_front_right": "0",
             "top_rear_left": "0",
             "top_rear_right": "0",
-            "top_standoff": "[6.25, 18, 2.5, 10, 4, 4, 0, 1, 0, 4.5, 5.1]",
+            "top_standoff": "[6.25, 18, 3.6, 10, 28, 4, 0, 1, 0, 4.5, 5.1]",
             "view": "model",
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2.5"
-        },
+        },        
         "h3_ultimate2": {
             "$fn": "90",
             "accessory_highlight": "false",
