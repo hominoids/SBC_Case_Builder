@@ -431,6 +431,13 @@ description: circlular geometry.
 *uses:* data_1=tolorence
 
 
+**nut_holder**
+
+*description:* nut holder
+
+*uses:* size_x=top diameter or x size in mm, size_y=bottom diameter or y size in mm, size_z=holder height in mm, data_0="m2" or "m2.5" or "m3" or "m4", data_1="default" or "sloped" or "trap"
+
+
 #### Sub class only “types”
 
 
