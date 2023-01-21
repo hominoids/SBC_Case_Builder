@@ -2683,8 +2683,8 @@ module fan_mask(size, thick, style) {
                 translate ([5,size-5,-1]) cylinder(h=thick+2, d=3);
                 translate ([5,5,-1]) cylinder(h=thick+2, d=3);
             }
-            translate([6.5,5,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
-            translate([4.5,size-6,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
+            translate([9.5,8,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
+            translate([8.5,size-10,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
         }
     }
     if(style == 2 && size >= 80) {
