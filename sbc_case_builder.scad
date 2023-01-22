@@ -46,7 +46,8 @@
     20221207 Version 2.0.3    added part view to facilitate individual part prints, updated sbc model framework, 
                               added n2l and m1 cases
     2023xxxx Version 2.0.x    fixed standoff sidewall support misplacement on sbc move, fixed standoff auto
-                              opening z height, fixed case top right side standoffs support
+                              opening z height, fixed case top right side standoffs support,
+                              fixed access_port and access_cover 180 rotation in portrait and landscape,
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -1221,16 +1222,42 @@ module case_bottom(case_design) {
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "access_port") {
                     if(data_3 == "landscape") {
-                        parametric_move_sub("rectangle",loc_x+6,loc_y-.5,loc_z-adjust,face,rotation,
-                            parametric,size_x-17,size_y-1,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
-                        parametric_move_sub("rectangle",loc_x+size_x-12.5,loc_y+(size_y/2)-6,loc_z-adjust,face,rotation,
-                            parametric,5.5,10.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                        if(rotation[2] == 180) {
+                            parametric_move_sub("rectangle",loc_x-6+size_x,loc_y+.5+size_y,loc_z-adjust,face,rotation,
+                                parametric,size_x-17,size_y-1,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                            parametric_move_sub("rectangle",loc_x-size_x+12.5+size_x,loc_y-(size_y/2)+6+size_y,loc_z-adjust,
+                                face,rotation,parametric,5.5,10.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                        }
+                        else {
+                            parametric_move_sub("rectangle",loc_x+6,loc_y-.5,loc_z-adjust,face,rotation,
+                                parametric,size_x-17,size_y-1,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                            parametric_move_sub("rectangle",loc_x+size_x-12.5,loc_y+(size_y/2)-6,loc_z-adjust,face,rotation,
+                                parametric,5.5,10.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                            
+                        }
                     }
                     else {
-                        parametric_move_sub("rectangle",loc_x+.5,loc_y+5.75,loc_z-adjust,face,rotation,
-                            parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
-                        parametric_move_sub("rectangle",loc_x+(size_x/2)-5,loc_y+size_y-12.5,loc_z-adjust,face,rotation,
-                            parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]); 
+                        if(rotation[2] == 180) {
+                            if(data_3 == "portrait") {
+                                parametric_move_sub("rectangle",loc_x+size_x-.5,loc_y+size_y-5.75,loc_z-adjust,face,
+                                    rotation,parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                parametric_move_sub("rectangle",loc_x-(size_x/2)+5+size_x,loc_y-size_y+12.5+size_y,
+                                    loc_z-adjust,face,rotation,parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,
+                                        [5.5,5.5,5.5,5.5]);
+                            }
+                            else {
+                                parametric_move_sub("rectangle",loc_x-.5,loc_y-5.75,loc_z-adjust,face,rotation,
+                                    parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                parametric_move_sub("rectangle",loc_x-(size_x/2)+5,loc_y-size_y+12.5,loc_z-adjust,face,
+                                rotation,parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                            }
+                        }
+                        else {
+                            parametric_move_sub("rectangle",loc_x+.5,loc_y+5.75,loc_z-adjust,face,rotation,
+                                parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                            parametric_move_sub("rectangle",loc_x+(size_x/2)-5,loc_y+size_y-12.5,loc_z-adjust,face,rotation,
+                                parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                        }
                     }
                 }
                 if ((class == "model") && face == "bottom" && type == "h2_netcard") {

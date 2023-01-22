@@ -52,7 +52,8 @@
     2023xxxx version 2.0.x added h3_port_extender(style, mask = false), hk_pwr_button(mask = false), keyhole(keysize, mask = false),
                            vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false),
                            vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders), 
-                           added nut_holder(nut, style, dia_x, dia_y, height)
+                           added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
+                           in portrait and landscape,
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -277,10 +278,20 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
         translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
     }
     if(type == "access_port") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data_3);
+        if(rotation[2] == 180) {
+            translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data_3);
+        }
+        else {
+            translate([loc_x,loc_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data_3);
+        }
     }
     if(type == "access_cover") {
-        color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) access_cover([size_x,size_y,size_z],data_3);
+        if(rotation[2] == 180) {
+            color("grey",1) translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_cover([size_x,size_y,size_z],data_3);
+        }
+        else {
+            color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) access_cover([size_x,size_y,size_z],data_3);
+        }
     }
     if(type == "boom_vring") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data_1);
