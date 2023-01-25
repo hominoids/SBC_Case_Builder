@@ -270,6 +270,10 @@ if (view == "platter") {
                 translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_3, size_x, size_z);
                 translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_3);
             }
+            if (class == "platter" && type == "h3_port_extender_holder") {
+                translate([loc_x,loc_y,loc_z]) rotate([0,0,0]) h3_port_extender_holder("bottom");
+                translate([loc_x-20,loc_y+40,loc_z+36.5]) rotate([180,0,0]) h3_port_extender_holder("top");
+            }
         }
     }
     if(case_design == "tray") {
@@ -644,6 +648,10 @@ if (view == "part") {
                     translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_3, size_x, size_z);
                     translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_3, size_x, size_z);
                     translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_3);
+                }
+                if (class == "platter" && type == "h3_port_extender_holder") {
+                    translate([loc_x,loc_y,loc_z]) rotate([0,0,0]) h3_port_extender_holder("bottom");
+                    translate([loc_x-20,loc_y+40,loc_z+36.5]) rotate([180,0,0]) h3_port_extender_holder("top");
                 }
             }
         }

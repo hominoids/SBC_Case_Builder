@@ -53,7 +53,7 @@
                            vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false),
                            vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders), 
                            added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
-                           in portrait and landscape,
+                           in portrait and landscape, added h3_port_extender_holder(part)
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -124,6 +124,7 @@
     mask(loc_x,loc_y,rotation,side,class,type,case_z,wallthick,gap,floorthick,pcb_z)
     punchout(width,depth,gap,thick,fillet,shape)
     h3_port_extender(style, mask = false)
+    h3_port_extender_holder(part)
     hk_pwr_button(mask = false)
     keyhole(keysize, mask = false)
     vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation)
@@ -298,6 +299,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "h3_port_extender") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data_3); 
+    }
+    if(type == "h3_port_extender_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender_holder(data_3); 
     }
     if(type == "hk_pwr_button") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(); 
@@ -3702,8 +3706,8 @@ module h3_port_extender(style, mask = false) {
             translate([-20, 6.25, 15]) cube([12,7.5,14.75]);
             translate([-20, 15.875, 15]) cube([12,7.5,14.75]);
             translate([-20, 25.375, 15]) cube([12,7.5,14.75]);
-            translate([-20, 17, 32.2]) rotate([0,90,0]) cylinder(d=3.5, h=12);
-            translate([-20, 17, 4.6]) rotate([0,90,0]) cylinder(d=3.5, h=12);
+            translate([-20, 17, 32.2]) rotate([0,90,0]) cylinder(d=2.5, h=12);
+            translate([-20, 17, 4.6]) rotate([0,90,0]) cylinder(d=2.5, h=12);
         }
         else {
             // gpio 24 pin front position
@@ -3715,6 +3719,37 @@ module h3_port_extender(style, mask = false) {
         }
     }
 }
+
+
+//
+// h3_port_extender_holder(part = "both)
+// holder for the @mctom's remote h3 port extender
+//
+module h3_port_extender_holder(part) {
+
+    adjust = .01;
+    size = [14,40,5.5];
+    if(part == "bottom" || part == "both") {
+        difference() {
+            translate([-7.5,-3.5,2]) cube(size);
+            translate([-.25,-.25,-adjust]) cube([2.5, 33.25, 12]);
+            translate([2, 2, -adjust]) cube([10, 28, 12]);
+            translate([-10,(33.25/2)+.25,4.5]) rotate([0,90,0]) cylinder(d=2.7, h=20);
+            translate([-7,-1.,-adjust]) cylinder(d=4.25, h=20);
+        }
+    }
+    if(part == "top" || part == "both") {
+        difference() {
+            translate([-7.5,-3.5,29.5]) cube(size);
+            translate([-.25,-.25,28]) cube([2.5, 33.25, 12]);
+            translate([1.5, 2, 27.5-adjust]) cube([10, 28.5, 12]);
+            translate([-10, -4, 28]) cube([20, 13, 10]);
+            translate([1.35, 20, 25.5]) cube([10, 13, 5]);
+            translate([-10,(33.25/2)+.25,32]) rotate([0,90,0]) cylinder(d=2.7, h=20);
+        }
+    }
+}
+
 
 // enclosed keyhole
 module keyhole(keysize, mask = false) {
