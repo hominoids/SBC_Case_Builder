@@ -3150,6 +3150,23 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
             cube([15,8,12]);
     }
+    // double stacked rj45 opening
+    if(type == "rj45_double_stacked" && rotation == 0) {
+        place(loc_x,loc_y-7.5,loc_z,18,17.5,rotation,side)
+            cube([19,12,27]);
+        }
+    if(type == "rj45_double_stacked" && rotation == 90) {
+        place(loc_x-7.5,loc_y,loc_z,18,17.5,rotation,side)
+            cube([19,12,27]);
+        }
+    if(type == "rj45_double_stacked" && rotation == 180) {
+        place(loc_x,loc_y+11.5,loc_z,18,17.5,rotation,side)
+            cube([19,12,27]);
+        }
+    if(type == "rj45_double_stacked" && rotation == 270) {
+        place(loc_x+10.5,loc_y,loc_z,18,17.5,rotation,side)
+            cube([19,12,27]);
+    }
     // micro usb opening
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
         place(loc_x,loc_y-3,loc_z,8,3,rotation,side) microusb_open();
