@@ -53,7 +53,7 @@
                            vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false),
                            vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders), 
                            added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
-                           in portrait and landscape, added h3_port_extender_holder(part)
+                           in portrait and landscape, added h3_port_extender_holder(part,offset)
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -124,7 +124,7 @@
     mask(loc_x,loc_y,rotation,side,class,type,case_z,wallthick,gap,floorthick,pcb_z)
     punchout(width,depth,gap,thick,fillet,shape)
     h3_port_extender(style, mask = false)
-    h3_port_extender_holder(part)
+    h3_port_extender_holder(part,offset)
     hk_pwr_button(mask = false)
     keyhole(keysize, mask = false)
     vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation)
@@ -301,7 +301,7 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
         translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data_3); 
     }
     if(type == "h3_port_extender_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender_holder(data_3); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender_holder(data_3,data_1); 
     }
     if(type == "hk_pwr_button") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(); 
@@ -1370,11 +1370,11 @@ module hd35() {
 
 
 /* 3.5" hdd to 2.5" hdd holder */
-module hdd35_25holder(length) {
+module hdd35_25holder(length,width=101.6) {
     wallthick = 3;
     floorthick = 2;
     hd35_x = length;                    // 145mm for 3.5" drive
-    hd35_y = 101.6;
+    hd35_y = width;
     hd35_z = 12;
     hd25_x = 100;
     hd25_y = 69.85;
@@ -1400,7 +1400,7 @@ module hdd35_25holder(length) {
                 
                 // bottom vents
                 for ( r=[15:40:hd35_x-40]) {
-                    for (c=[25:4:75]) {
+                    for (c=[hd35_y-76:4:75]) {
                         translate ([r,c,-adjust]) cube([35,2,wallthick+(adjust*2)]);
                     }
                 }       
@@ -1416,10 +1416,10 @@ module hdd35_25holder(length) {
         translate([76,wallthick-adjust,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
             if(length >= 120) {
                 translate([117.5,wallthick-adjust,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
-                translate([117.5,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+                translate([117.5,hd35_y-wallthick+adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
             }
-        translate([76,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
-        translate([16,hd35_y-wallthick-adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+        translate([76,hd35_y-wallthick+adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+        translate([16,hd35_y-wallthick+adjust,7]) rotate([90,0,0])  cylinder(d=10,h=3);
         
         // bottom-side support
         translate([wallthick,wallthick,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
@@ -3738,35 +3738,36 @@ module h3_port_extender(style, mask = false) {
 }
 
 
-//
-// h3_port_extender_holder(part = "both)
+/*
+// h3_port_extender_holder(part, offset)
+// part = "both","top","bottom"
+// offset = projection from inside wall in mm
 // holder for the @mctom's remote h3 port extender
-//
-module h3_port_extender_holder(part) {
+*/
+module h3_port_extender_holder(part,offset=2) {
 
     adjust = .01;
-    size = [14,40,5.5];
+    size = [16-offset,40,5.5];
     if(part == "bottom" || part == "both") {
         difference() {
-            translate([-7.5,-3.5,2]) cube(size);
+            translate([-10+offset,-3.5,2]) cube(size);
             translate([-.25,-.25,-adjust]) cube([2.5, 33.25, 12]);
             translate([2, 2, -adjust]) cube([10, 28, 12]);
-            translate([-10,(33.25/2)+.25,4.5]) rotate([0,90,0]) cylinder(d=2.7, h=20);
-            translate([-7,-1.,-adjust]) cylinder(d=4.25, h=20);
+            translate([-12,(33.25/2)+.25,4.5]) rotate([0,90,0]) cylinder(d=2.7, h=20, $fn=60);
+//            translate([-7,-1.,-adjust]) cylinder(d=4.25, h=20);
         }
     }
     if(part == "top" || part == "both") {
         difference() {
-            translate([-7.5,-3.5,29.5]) cube(size);
+            translate([-10+offset,-3.5,29.5]) cube(size);
             translate([-.25,-.25,28]) cube([2.5, 33.25, 12]);
             translate([1.5, 2, 27.5-adjust]) cube([10, 28.5, 12]);
-            translate([-10, -4, 28]) cube([20, 13, 10]);
+            translate([-12, -4, 28]) cube([20, 13, 10]);
             translate([1.35, 20, 25.5]) cube([10, 13, 5]);
-            translate([-10,(33.25/2)+.25,32]) rotate([0,90,0]) cylinder(d=2.7, h=20);
+            translate([-12,(33.25/2)+.25,32]) rotate([0,90,0]) cylinder(d=2.7, h=20, $fn=60);
         }
     }
 }
-
 
 // enclosed keyhole
 module keyhole(keysize, mask = false) {
