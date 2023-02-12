@@ -53,7 +53,7 @@
                            vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation) and supporting code, dsub(dsubsize, mask = false),
                            vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders), 
                            added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
-                           in portrait and landscape, added h3_port_extender_holder(part,offset)
+                           in portrait and landscape, added h3_port_extender_holder(part,offset), cableholder_spacer()
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -131,7 +131,7 @@
     vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders);
     dsub(dsubsize, mask = false)
     nut_holder(nut, style, dia_x, dia_y, height)
-    
+    cableholder_spacer()
 */
 
 use <./lib/fillets.scad>;
@@ -3933,5 +3933,20 @@ $fn = 180;
                 translate([-nuts[3][1]/2, 0, 2]) cube([nuts[3][1], dia_x, nuts[3][2]]);
             }
         }
+    }
+}
+
+
+module cableholder_spacer() {
+    
+    size = [9.4,16,6];
+    $fn = 90;
+    translate([0,size[2]/2,-5]) rotate([90,0,0])
+    difference() {
+        translate([size[0]/2,size[0]/2,0]) rotate([0,0,90]) slot(size[0],size[1],size[2]);
+        translate([-1,5,3]) rotate([0,90,0]) cylinder(d=3.2, h=12);
+        translate([-1,7.5,-1]) cube([2,20,9]);
+        translate([5,9.5,-1]) rotate([0,0,90]) slot(4.5,11,9);
+        translate([3,20,-1]) rotate([0,0,45]) cube([2,6,9]);
     }
 }
