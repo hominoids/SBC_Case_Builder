@@ -76,7 +76,7 @@ An array holds a string and 3 Boolean that represent which association and axis 
 ### Accuracy
 In the past there was been no way of validating whether a SBC Model Framework model and it’s components were dimensionaly accurate in their size and placement other then trial and error. Along with producing cases this project provides a much needed model validation tool to assure model accuracy thru the use of test cases. It works on the very simple premise that if the real SBC fits the test case then the virtual model is accurate or otherwise shows were corrections are needed. This will further increased the overall accuracy of models.
 
-There are currently 47 SBC represented by 43 models, from 8 manufactures in SBC Model Framework.  Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
+There are currently 56 SBC represented by 52 models, from 10 manufactures in SBC Model Framework.  Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
 
 - GREEN = verified, complete and passes SBC Case Builder
 - YELLOW = unverified, mostlikely usable and/or missing minor information
@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 423
+#### Current Case Count 431
 
 ##### Hardkernel - 182
 
@@ -153,6 +153,8 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Quartz64b** - 2 : quartz64b_shell, quartz64b_panel
 
 **h64b** - 2 : h64b_shell, h64b_panel
+
+**star64** - 1 : star64_shell
 
 ##### Raspberry PI - 72
 
@@ -220,6 +222,16 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **OPI Zero2** - 9 : opizero2_shell, opizero2_panel, opizero2_stacked, opizero2_tray, opizero2_tray_sides, opizero2_round, opizero2_hex, opizero2_snap, opizero2_fitted
 
 **OPI R1PlusLTS** - 9 : opir1plus_lts_shell, opir1plus_lts_panel, opir1plus_lts_stacked, opir1plus_lts_tray, opir1plus_lts_tray_sides, opir1plus_lts_round, opir1plus_lts_hex, opir1plus_lts_snap, opir1plus_lts_fitted
+
+
+##### Sipeed - 1
+
+**licheerv+dock** - 0 : 
+
+
+##### StarFive - 1
+
+**visionfive2** - 7 : visionfive2_shell, visionfive2_panel, visionfive2_stacked, visionfive2_tray, visionfive2_tray_sides, visionfive2_snap, visionfive2_fitted
 
 
 ### Accessory Schema

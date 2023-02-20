@@ -2061,7 +2061,7 @@ module audio_jack35() {
             union() {  
                 color("dimgray") cube([size_x,size_y,3]);
                 color("dimgray") cube([size_x,5.6,4]);
-                color("dimgray") translate([size_x/2,0,2.25]) rotate([-90,0,0]) cylinder(d=4, h=size_y);
+                color("dimgray") translate([size_x/2,0,2.25]) rotate([-90,0,0]) cylinder(d=6, h=size_y);
             }
             color("gray") translate([size_x/2,0,2.25]) rotate([-90,0,0]) cylinder(d=3, h=size_y+adjust);
         }    
@@ -2659,7 +2659,7 @@ module fan_mask(size, thick, style) {
             }
             translate([6.5,5,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
             translate([4.5,size-6,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
-        }
+        } 
     }
     if(style == 2 && size == 60) {
         difference() {
@@ -2700,7 +2700,7 @@ module fan_mask(size, thick, style) {
             }
             translate([9.5,8,-2]) rotate([0,0,45]) cube([size,2,thick+4]);
             translate([8.5,size-10,-2]) rotate([0,0,-45]) cube([size,2,thick+4]);
-        }
+        } 
     }
     if(style == 2 && size >= 80) {
         difference() {
@@ -2747,7 +2747,7 @@ module fan_mask(size, thick, style) {
             }
             translate([6.5,4.25,-2]) rotate([0,0,45]) cube([size*1.2,3,thick+4]);
             translate([4.25,size-6.5,-2]) rotate([0,0,-45]) cube([size*1.2,3,thick+4]);
-        }
+        } 
     }
     if(style == 3) {
         inner = size == 30 ? 24 :
@@ -2826,16 +2826,16 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     // hdmi vertical opening
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 0) {
-        place(loc_x-.5,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x-.5,loc_y,loc_z+1,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 90) {
-        place(loc_x-1,loc_y,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x-1,loc_y,loc_z+.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 180) {
-        place(loc_x,loc_y+1,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x,loc_y+1,loc_z+.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 270) {
-        place(loc_x+1,loc_y-.5,loc_z,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x+1,loc_y-.5,loc_z+.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
    // hdmi micro opening
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "top") {
@@ -3133,6 +3133,22 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
             cube([16.5,8,14]);
     }
+    if(type == "rj45_reverse_single" && rotation == 0) {
+        place(loc_x-.25,loc_y-6,loc_z,16,17.5,rotation,side) 
+            cube([16.5,8,14]);
+        }
+    if(type == "rj45_reverse_single" && rotation == 90) {
+        place(loc_x-6,loc_y,loc_z,16,17.5,rotation,side) 
+            cube([16.5,8,14]);
+        }
+    if(type == "rj45_reverse_single" && rotation == 180) {
+        place(loc_x,loc_y+10,loc_z,16,17.5,rotation,side) 
+            cube([16.5,8,14]);
+        }
+    if(type == "rj45_reverse_single" && rotation == 270) {
+        place(loc_x+9,loc_y,loc_z,16,17.5,rotation,side) 
+            cube([16.5,8,14]);
+    }
     // rj45 short opening
     if(type == "rj45_single_short" && rotation == 0) {
         place(loc_x,loc_y-6,loc_z,16,17.5,rotation,side) 
@@ -3420,58 +3436,58 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     // audio jack opening
     if(type == "jack_3.5" && rotation == 0 && side == "top") {
-        place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
+        place(loc_x,loc_y,loc_z+.25,7.5,7.5,rotation,side) 
             union() {
-                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([-.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 90 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side)
             union() {
-                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 180 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
             union() {
-                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 270 && side == "top") {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side)
             union() {
-                translate([3.15,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([3.15,-2.5,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([-.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 0 && side == "bottom") {
         place(loc_x-1,loc_y,loc_z-1.5,7.5,7.5,rotation,side) 
             union() {
-                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([3.15,2,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([-.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 90 && side == "bottom") {
         place(loc_x+4.1,loc_y,loc_z-1.5,7.5,7.5,rotation,side)
             union() {
-                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([4.1,2,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([.5,-.5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 180 && side == "bottom") {
         place(loc_x-1,loc_y,loc_z-1.5,7.5,7.5,rotation,side) 
             union() {
-                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([4.1,-2.5,2]) rotate([90,0,0]) cylinder(d=6.5, h=8);
                 translate([.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
     if(type == "jack_3.5" && rotation == 270 && side == "bottom") {
         place(loc_x+4.1,loc_y,loc_z-1.5,7.5,7.5,rotation,side)
             union() {
-                translate([3,-2.5,2]) rotate([90,0,0]) cylinder(d=6, h=8);
+                translate([3,-2.5,2]) rotate([90,0,0]) cylinder(d=7, h=8);
                 translate([-.5,-5,0]) cube([7.5,2.5,4.5]);
             }
     }
@@ -3479,6 +3495,14 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     if(type == "momentary_6x6x4") {
         place(loc_x,loc_y,loc_z,6,6,rotation,side) 
             translate([3,3,4]) rotate([0,0,0]) cylinder(d=5, h=10);
+    }    
+    if(type == "momentary_4x2x1" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,6,6,rotation,side) 
+            translate([2,1.5,1.5]) rotate([270,0,0]) cylinder(d=4, h=10);
+    }    
+    if(type == "momentary_4x2x1" && rotation == 180) {
+        place(loc_x,loc_y,loc_z,6,6,rotation,side) 
+            translate([4,4,1.5]) rotate([90,0,0]) cylinder(d=4, h=10);
     }    
     if(type == "momentary_6x6x4_90" && rotation == 0) {
         place(loc_x,loc_y,loc_z,6,6,rotation,side) 
