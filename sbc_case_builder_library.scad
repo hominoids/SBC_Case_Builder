@@ -3113,7 +3113,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             cube([12,15.5,2]);
     }
     if(type == "microsdcard2" && side == "top" && rotation == 270) {
-        place(loc_x+5,loc_y,loc_z+1.75,12,15.5,rotation,side)
+        place(loc_x+5,loc_y,loc_z,12,15.5,rotation,side)
             cube([12,15.5,2]);
     }
     // rj45 opening
@@ -3532,6 +3532,13 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             translate([-.5,-3.75,0]) cube([7,2.5,6.5]);
         }
     }    
+    if(type == "momentary_4.5x3.5x2.5_90") {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+        union() {
+            translate([2.25,0,1.8]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+            translate([-1.25,-3.75,0]) cube([7,2.5,5]);
+        }
+    }
     if(type == "momentary_7x3x3_90" && rotation == 0) {
         place(loc_x,loc_y,loc_z,7,3,rotation,side) 
             translate([0,-6,0]) cube([7,8,3]);
@@ -3550,6 +3557,10 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }    
     if(type == "audio_micro" && rotation == 0) {
         place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side) 
+            translate([0,4,0]) cube([7.5,8,4]);
+    }
+    if(type == "audio_micro" && rotation == 90) {
+        place(loc_x,loc_y,loc_z,7.5,7.5,rotation,side)
             translate([0,4,0]) cube([7.5,8,4]);
     }
     if(type == "m1_oem" && rotation == 0) {
