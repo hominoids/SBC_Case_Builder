@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 53 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 57 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
 
 All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 431
+#### Current Case Count 433
 
 ##### Hardkernel - 182
 
@@ -215,7 +215,9 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Tinkerboard R2/R2S** - 9 : tinkerboard-r2_shell, tinkerboard-r2_panel, tinkerboard-r2_stacked, tinkerboard-r2_tray, tinkerboard-r2_tray_sides, tinkerboard-r2_round, tinkerboard-r2_hex, tinkerboard-r2_snap, tinkerboard-r2_fitted
 
 
-##### Orange PI - 27
+##### Orange PI - 29
+
+**OPI 5** - 9 : opi5_shell, opi5_panel
 
 **OPI Zero/ZeroPlus** - 9 : opizero_shell, opizero_panel, opizero_stacked, opizero_tray, opizero_tray_sides, opizero_round, opizero_hex, opizero_snap, opizero_fitted
 
