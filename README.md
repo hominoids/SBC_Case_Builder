@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 433
+#### Current Case Count 438
 
 ##### Hardkernel - 182
 
@@ -155,6 +155,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **h64b** - 2 : h64b_shell, h64b_panel
 
 **star64** - 1 : star64_shell
+
 
 ##### Raspberry PI - 72
 
@@ -215,9 +216,9 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Tinkerboard R2/R2S** - 9 : tinkerboard-r2_shell, tinkerboard-r2_panel, tinkerboard-r2_stacked, tinkerboard-r2_tray, tinkerboard-r2_tray_sides, tinkerboard-r2_round, tinkerboard-r2_hex, tinkerboard-r2_snap, tinkerboard-r2_fitted
 
 
-##### Orange PI - 29
+##### Orange PI - 34
 
-**OPI 5** - 9 : opi5_shell, opi5_panel
+**OPI 5** - 7 : opi5_shell, opi5_panel, opi5_stacked, opi5_tray, opi5_tray_sides, opi5_snap, opi5_fitted
 
 **OPI Zero/ZeroPlus** - 9 : opizero_shell, opizero_panel, opizero_stacked, opizero_tray, opizero_tray_sides, opizero_round, opizero_hex, opizero_snap, opizero_fitted
 
@@ -231,7 +232,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **licheerv+dock** - 0 : 
 
 
-##### StarFive - 1
+##### StarFive - 7
 
 **visionfive2** - 7 : visionfive2_shell, visionfive2_panel, visionfive2_stacked, visionfive2_tray, visionfive2_tray_sides, visionfive2_snap, visionfive2_fitted
 
