@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 57 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 58 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
 
 All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
@@ -76,7 +76,7 @@ An array holds a string and 3 Boolean that represent which association and axis 
 ### Accuracy
 In the past there was been no way of validating whether a SBC Model Framework model and it’s components were dimensionaly accurate in their size and placement other then trial and error. Along with producing cases this project provides a much needed model validation tool to assure model accuracy thru the use of test cases. It works on the very simple premise that if the real SBC fits the test case then the virtual model is accurate or otherwise shows were corrections are needed. This will further increased the overall accuracy of models.
 
-There are currently 56 SBC represented by 52 models, from 10 manufactures in SBC Model Framework.  Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
+There are currently 58 SBC represented by 54 models, from 10 manufactures in SBC Model Framework.  Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
 
 - GREEN = verified, complete and passes SBC Case Builder
 - YELLOW = unverified, mostlikely usable and/or missing minor information
@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 438
+#### Current Case Count 439
 
 ##### Hardkernel - 182
 
@@ -181,15 +181,15 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **Jetson Nano** - 9 : jetsonnano_shell, jetsonnano_panel, jetsonnano_stacked, jetsonnano_tray, jetsonnano_tray_sides, jetsonnano_round, jetsonnano_hex, jetsonnano_snap, jetsonnano_fitted
 
 
-##### Radxa - 36
+##### Radxa - 37
 
-**ROCKPi 4b+** - 9 : rockpi4b+_shell, rockpi4b+_panel, rockpi4b+_stacked, rockpi4b+_tray, rockpi4b+_tray_sides, rockpi4b+_round, rockpi4b+_hex, rockpi4b+_snap, rockpi4b+_fitted
+**ROCK 4b+** - 9 : rock4b+_shell, rock4b+_panel, rock4b+_stacked, rock4b+_tray, rock4b+_tray_sides, rock4b+_round, rock4b+_hex, rock4b+_snap, rock4b+_fitted
 
-**ROCKPi 4c** - 9 : rockpi4c_shell, rockpi4c_panel, rockpi4c_stacked, rockpi4c_tray, rockpi4c_tray_sides, rockpi4c_round, rockpi4c_hex, rockpi4c_snap, rockpi4c_fitted
+**ROCK 4c** - 9 : rock4c_shell, rock4c_panel, rock4c_stacked, rock4c_tray, rock4c_tray_sides, rock4c_round, rock4c_hex, rock4c_snap, rock4c_fitted
 
-**ROCKPi 4c+** - 9 : rockpi4c+_shell, rockpi4c+_panel, rockpi4c+_stacked, rockpi4c+_tray, rockpi4c+_tray_sides, rockpi4c+_round, rockpi4c+_hex, rockpi4c+_snap, rockpi4c+_fitted
+**ROCK 4c+** - 9 : rock4c+_shell, rock4c+_panel, rock4c+_stacked, rock4c+_tray, rock4c+_tray_sides, rock4c+_round, rock4c+_hex, rock4c+_snap, rock4c+_fitted
 
-**ROCKPi5b** - 9 : rockpi5b_shell, rockpi5b_panel, rockpi5b_stacked, rockpi5b_tray, rockpi5b_tray_sides, rockpi5b_round, rockpi5b_hex, rockpi5b_snap, rockpi5b_fitted
+**ROCK 5b** - 10 : rock5b_shell,rock5b_shell-v1.3, rock5b_panel, rock5b_stacked, rock5b_tray, rock5b_tray_sides, rock5b_round, rock5b_hex, rock5b_snap, rock5b_fitted
 
 
 ##### Khadas - 45

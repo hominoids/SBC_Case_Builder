@@ -2826,16 +2826,16 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     // hdmi vertical opening
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 0) {
-        place(loc_x-.5,loc_y,loc_z+1,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x-.5,loc_y,loc_z+1.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 90) {
-        place(loc_x-1,loc_y,loc_z+.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x-1,loc_y,loc_z+1.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 180) {
-        place(loc_x,loc_y+1,loc_z+.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x,loc_y+1,loc_z+1.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
     if(type == "hdmi_a_vertical" && side == "top" && rotation == 270) {
-        place(loc_x+1,loc_y-.5,loc_z+.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
+        place(loc_x+1,loc_y-.5,loc_z+1.5,15,11.5,rotation,side) translate([-.25,0,15.4]) rotate([0,90,0]) hdmi_open("hdmi_a");
     }
    // hdmi micro opening
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "top") {
@@ -3301,19 +3301,19 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     // single vertical usbc opening
     if(class == "usbc" && type == "single_vertical" && rotation == 0 && side == "top") {
         place(loc_x+1.5,loc_y+2,loc_z+1.75,6,8,rotation,side)
-            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+            translate([.25,0,5.75]) rotate([90,90,0]) slot(3.75,5.5,8);
     }
     if(class == "usbc" && type == "single_vertical" && rotation == 90 && side == "top") {
         place(loc_x+2,loc_y+1.5,loc_z+1.75,6,8,rotation,side)
-            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+            translate([.25,0,5.75]) rotate([90,90,0]) slot(3.75,5.5,8);
     }
     if(class == "usbc" && type == "single_vertical" && rotation == 180 && side == "top") {
         place(loc_x+1.5,loc_y-3-adjust,loc_z+2,6,8,rotation,side)
-            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+            translate([.25,0,5.75]) rotate([90,90,0]) slot(3.75,5.5,8);
     }
     if(class == "usbc" && type == "single_vertical" && rotation == 270 && side == "top") {
         place(loc_x-3-adjust,loc_y+1.5,loc_z+1.75,6,8,rotation,side)
-            translate([.25,0,5.5]) rotate([90,90,0]) slot(3.75,5.5,8);
+            translate([.25,0,5.75]) rotate([90,90,0]) slot(3.75,5.5,8);
     }
     // ir opening
     if(type == "ir_1" && rotation == 0) {
@@ -3536,7 +3536,6 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
         union() {
             translate([2.25,0,1.8]) rotate([90,0,0]) cylinder(d=3.5, h=8);
-            translate([-1.25,-3.75,0]) cube([7,2.5,5]);
         }
     }
     if(type == "momentary_7x3x3_90" && rotation == 0) {
