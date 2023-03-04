@@ -3301,7 +3301,7 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     // single vertical usbc opening
     if(class == "usbc" && type == "single_vertical" && rotation == 0 && side == "top") {
         place(loc_x+1.5,loc_y+2,loc_z+1.75,6,8,rotation,side)
-            translate([.25,0,5.75]) rotate([90,90,0]) slot(3.75,5.5,8);
+            translate([.25,0,6.25]) rotate([90,90,0]) slot(3.75,5.5,8);
     }
     if(class == "usbc" && type == "single_vertical" && rotation == 90 && side == "top") {
         place(loc_x+2,loc_y+1.5,loc_z+1.75,6,8,rotation,side)
