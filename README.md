@@ -103,7 +103,7 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 439
+#### Current Case Count 446
 
 ##### Hardkernel - 182
 
@@ -232,9 +232,11 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **licheerv+dock** - 0 : 
 
 
-##### StarFive - 7
+##### StarFive - 14
 
 **visionfive2** - 7 : visionfive2_shell, visionfive2_panel, visionfive2_stacked, visionfive2_tray, visionfive2_tray_sides, visionfive2_snap, visionfive2_fitted
+
+**visionfive2q** - 7 : visionfive2q_shell, visionfive2q_panel, visionfive2q_stacked, visionfive2q_tray, visionfive2q_tray_sides, visionfive2q_snap, visionfive2q_fitted
 
 
 ### Accessory Schema
