@@ -789,12 +789,12 @@ module vent_panel_hex(x, y, thick, cell_size=8, cell_spacing=3, border=3, border
         color("grey",1) slab([x,y,thick],2);
 	    color("grey",1) translate([(x-csx)/2,(y-csy)/2,-1])
             vent_hex(cells_x, cells_y, thick+3, cell_size, cell_spacing, "horizontal");
-	if (borders != "none") {
-	    color("grey",1) translate([    hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
-	    color("grey",1) translate([x - hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
-	    color("grey",1) translate([    hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
-	    color("grey",1) translate([x - hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
-	}
+	    if (borders != "none") {
+	        color("grey",1) translate([    hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
+	        color("grey",1) translate([x - hxb,     hyb, -1]) cylinder(d=hole, h=thick+3);
+	        color("grey",1) translate([    hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
+	        color("grey",1) translate([x - hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
+	    }
     }
 }
 
