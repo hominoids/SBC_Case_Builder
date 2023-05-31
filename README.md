@@ -224,6 +224,8 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 
 **OPI Zero2** - 9 : opizero2_shell, opizero2_panel, opizero2_stacked, opizero2_tray, opizero2_tray_sides, opizero2_round, opizero2_hex, opizero2_snap, opizero2_fitted
 
+**OPI R1** - 1 : opir1_shell 
+
 **OPI R1PlusLTS** - 9 : opir1plus_lts_shell, opir1plus_lts_panel, opir1plus_lts_stacked, opir1plus_lts_tray, opir1plus_lts_tray_sides, opir1plus_lts_round, opir1plus_lts_hex, opir1plus_lts_snap, opir1plus_lts_fitted
 
 
