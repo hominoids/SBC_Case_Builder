@@ -725,14 +725,14 @@ module case_bottom(case_design) {
                         // left side nut
                         translate([-adjust-gap,wallthick+gap+10,floorthick+3.4]) 
                             rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
-                        if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q") {
+                        if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q" && sbc_model != "rock5b-v1.42" && sbc_model != "rock5bq-v1.42" && sbc_model != "rock5b-v1.3") {
                             translate([width-wallthick-gap-wallthick-4+adjust,depth-wallthick-gap-10,
                                     floorthick+3.4]) rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                             translate([-adjust-gap,depth-wallthick-gap-10,floorthick+3.4]) 
                                 rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);                        
                         }
                         else {
-                            if(sbc_model == "visionfive2" || sbc_model == "visionfive2q") {
+                            if(sbc_model == "visionfive2" || sbc_model == "visionfive2q" || sbc_model == "rock5b-v1.42" ||  sbc_model == "rock5bq-v1.42" || sbc_model == "rock5b-v1.3") {
                                 translate([width-wallthick-gap-wallthick-4+adjust,wallthick+gap+58,
                                         floorthick+3.4]) rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 translate([-adjust-gap,wallthick+gap+58,floorthick+3.4]) 
@@ -934,20 +934,20 @@ module case_bottom(case_design) {
                     // left side bottom nut inset
                     translate([-gap+.6,wallthick+gap+10,floorthick+3.4]) 
                         rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                    if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q") {
+                    if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q" && sbc_model != "rock5b-v1.42" && sbc_model != "rock5bq-v1.42" && sbc_model != "rock5b-v1.3") {
                         translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
                             floorthick+3.4]) rotate([0,90,0]) 
                                 cylinder(d=3, h=10+sidethick+(2*adjust));
                         translate([-wallthick-gap-adjust-6,depth-wallthick-gap-10,
                             floorthick+3.4]) rotate([0,90,0]) 
                                 cylinder(d=3, h=10+sidethick+(2*adjust));
-                        translate([width-3.5-(2*wallthick)-gap-.6,depth-wallthick-gap-10,
+                        #translate([width-3.5-(2*wallthick)-gap-.6,depth-wallthick-gap-10,
                             floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                        translate([-gap+.6,depth-wallthick-gap-10,floorthick+3.4]) 
+                        #translate([-gap+.6,depth-wallthick-gap-10,floorthick+3.4]) 
                             rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                     }
                     else {
-                        if(sbc_model == "visionfive2" || sbc_model == "visionfive2q") {
+                        if(sbc_model == "visionfive2" || sbc_model == "visionfive2q" || sbc_model == "rock5b-v1.42" ||  sbc_model == "rock5bq-v1.42" || sbc_model == "rock5b-v1.3") {
                             translate([width-3*(wallthick+gap)-adjust,wallthick+gap+58,
                                 floorthick+3.4]) rotate([0,90,0]) 
                                     cylinder(d=3, h=10+sidethick+(2*adjust));
@@ -1397,14 +1397,14 @@ module case_top(case_design) {
                             // left side bottom attachment hole
                             translate([-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+10,
                                 floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
-                            if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q") {
+                            if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q"&& sbc_model != "rock5b-v1.42" && sbc_model != "rock5bq-v1.42" && sbc_model != "rock5b-v1.3") {
                                translate([width-2*(wallthick+gap)-sidethick-adjust,depth-wallthick-gap-10,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
                                 translate([-wallthick-gap-adjust-6,depth-wallthick-gap-10,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
                             }
                             else {
-                                if(sbc_model == "visionfive2" || sbc_model == "visionfive2q") {
+                                if(sbc_model == "visionfive2" || sbc_model == "visionfive2q" || sbc_model == "rock5b-v1.42" ||  sbc_model == "rock5bq-v1.42" || sbc_model == "rock5b-v1.3") {
                                    translate([width-2*(wallthick+gap)-sidethick-adjust,wallthick+gap+58,
                                         floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adjust));
                                     translate([-wallthick-gap-adjust-6,wallthick+gap+58,
@@ -1521,7 +1521,7 @@ module case_top(case_design) {
                         }
                         // snap top outdent
                         difference() {
-                            translate([-1.90+tol,(depth/2)-((depth*.75)/2)+2.5-gap-wallthick,case_z-.5]) 
+                            translate([-wallthick-.5+tol,(depth/2)-((depth*.75)/2)+2.5-gap-wallthick,case_z-.5]) 
                                 rotate([0,45,0]) cube([4,(depth*.75)-5,4]);
                             translate([-.75,(depth/2)-((depth*.75)/2)+1.25-gap-wallthick,case_z+floorthick-5.75]) 
                                 rotate([0,0,0]) cube([6,(depth*.75)-2,6]);

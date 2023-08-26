@@ -18131,7 +18131,7 @@
         "rock5b_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock5b",
+            "accessory_name": "rock5b_shell",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -18644,7 +18644,7 @@
         "rock5bq_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock5bq",
+            "accessory_name": "rock5bq_shell",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.2, 10, 4, 4, 0, 0, 1, 4.5, 5.1]",
             "bottom_front_left": "0",
