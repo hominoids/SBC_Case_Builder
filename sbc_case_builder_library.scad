@@ -3532,11 +3532,37 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
             translate([-.5,-3.75,0]) cube([7,2.5,6.5]);
         }
     }    
-    if(type == "momentary_4.5x3.5x2.5_90") {
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "top" && rotation == 0) {
         place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
-        union() {
             translate([2.25,0,1.8]) rotate([90,0,0]) cylinder(d=3.5, h=8);
-        }
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "top" && rotation == 90) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,0,1.8]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "top" && rotation == 180) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,1,1.8]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "top" && rotation == 270) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,1,1.8]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "bottom" && rotation == 0) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,0,3.25]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "bottom" && rotation == 90) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,1.25,3.25]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "bottom" && rotation == 180) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,1.25,3.25]) rotate([90,0,0]) cylinder(d=3.5, h=8);
+    }
+    if(type == "momentary_4.5x3.5x2.5_90" && side == "bottom"&& rotation == 270) {
+        place(loc_x,loc_y,loc_z,4.5,3.5,rotation,side)
+            translate([2.25,0,3.25]) rotate([90,0,0]) cylinder(d=3.5, h=8);
     }
     if(type == "momentary_7x3x3_90" && rotation == 0) {
         place(loc_x,loc_y,loc_z,7,3,rotation,side) 
