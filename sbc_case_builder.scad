@@ -45,11 +45,11 @@
     20221101 Version 2.0.2    updated sbc model framework, h3/h3+ model and rockpi5b adjustments
     20221207 Version 2.0.3    added part view to facilitate individual part prints, updated sbc model framework, 
                               added n2l and m1 cases
-    2023xxxx Version 2.0.x    fixed standoff sidewall support misplacement on sbc move, fixed standoff auto
+    20231110 Version 2.0.4    fixed standoff sidewall support misplacement on sbc move, fixed standoff auto
                               opening z height, fixed case top right side standoffs support,
                               fixed access_port and access_cover 180 rotation in portrait and landscape,
                               adjusted jack_3.5 and hdmi_a_vertical opening, change radxa rockpi to rock,
-                              changed visionfive2 tray design bottom screw locations
+                              changed visionfive2 tray design bottom screw locations, updated sbc model framework.
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
