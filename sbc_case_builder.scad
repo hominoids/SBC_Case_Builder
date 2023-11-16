@@ -50,6 +50,7 @@
                               fixed access_port and access_cover 180 rotation in portrait and landscape,
                               adjusted jack_3.5 and hdmi_a_vertical opening, change radxa rockpi to rock,
                               changed visionfive2 tray design bottom screw locations, updated sbc model framework.
+    20231115 Version 2.0.5    added hex vent and new component openings, updated sbc model framework
     
     see https://github.com/hominoids/SBC_Case_Builder
 */
@@ -89,7 +90,7 @@ case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
-sbc_model = "c1+"; //  ["c1+", "c2", "c4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2+_noheatsink", "n2l", "n2lq", "m1", "m1_noheatsink", "h2", "h3", "hc4", "show2", "rpizero", "rpizero2w", "rpi1a+", "rpi1b+", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rpi5_noheatsink", "a64", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "atomicpi", "jetsonnano", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b-v1.42", "rock5bq-v1.42", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-r2", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "licheerv+dock", "visionfive2", "visionfive2q"]
+sbc_model = "c1+"; //  ["c1+", "c2", "c4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2+_noheatsink", "n2l", "n2lq", "m1", "m1_noheatsink", "m1s", "h2", "h3", "hc4", "show2", "rpizero", "rpizero2w", "rpi1a+", "rpi1b+", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rpi5_noheatsink", "a64", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "atomicpi", "jetsonnano", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b-v1.42", "rock5bq-v1.42", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-r2", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "licheerv+dock", "visionfive2", "visionfive2q"]
 // sbc location x axis
 pcb_loc_x = 0; //[0:.5:300]
 // sbc location y axis
@@ -165,7 +166,7 @@ sata_punchout = false;
 // gpio openings
 gpio_opening = "none"; // [none,vent,open,punchout]
 // cooling openings
-cooling = "fan"; // [none,vents,fan,custom]
+cooling = "fan"; // [none,vents,fan,hex,custom]
 // exhaust vents
 exhaust_vents = "vent"; // [none,vent]
 // case accessory group to load
@@ -2261,8 +2262,12 @@ module open_io() {
         }    
         // top cooling openings
         if(side == "top" && cooling == "fan" && class == "heatsink" && type != "h3_oem" 
-            && type != "h2_oem" && type != "n2_oem" && type != "n2+_oem") {
+            && type != "h2_oem" && type != "n2_oem" && type != "n2+_oem"&& type != "m1s_oem") {
                 translate([loc_x+6,loc_y-28,case_z-(floorthick+adjust)-5]) 
+                    fan_mask(40,floorthick+(2*adjust)+8,2);
+        }
+        if(side == "top" && cooling == "fan" && class == "heatsink" && type == "m1s_oem") {
+                translate([loc_x,loc_y,case_z-(floorthick+adjust)-5]) 
                     fan_mask(40,floorthick+(2*adjust)+8,2);
         }
         if(side == "top" && cooling == "fan" && class == "heatsink" && (type == "n2_oem" || type == "n2+_oem")) {
@@ -2283,20 +2288,34 @@ module open_io() {
             translate([loc_x-5,loc_y-16,case_z-(floorthick+adjust)]) 
                 fan_mask(90,floorthick+6,2);
         }
-        if(side == "top" && cooling == "vents" && class == "heatsink") {
-            for(r=[loc_x+7:4:48+loc_x]) {
+        if(side == "top" && cooling == "vents" && class == "heatsink" && type != "m1s_oem") {
+            for(r=[loc_x+7:4:58+loc_x]) {
                 translate([r,loc_y-20,case_z-(floorthick+adjust)-6]) 
-                    cube([2,25,floorthick+(adjust*2)+8]);
+                    cube([2,30,floorthick+(adjust*2)+12]);
             }
+        }
+        if(side == "top" && cooling == "vents" && class == "heatsink" && type == "m1s_oem") {
+            for(r=[loc_x+7:4:58+loc_x]) {
+                translate([r-8,loc_y+8,case_z-(floorthick+adjust)-6]) 
+                    cube([2,30,floorthick+(adjust*2)+12]);
+            }
+        }
+        if(side == "top" && cooling == "hex" && class == "heatsink" && type != "m1s_oem") {
+                translate([loc_x,loc_y-32,case_z-(floorthick+adjust)-6]) 
+                    vent_hex(11, 5, floorthick+(adjust*2)+12, 8, 1.5, "horizontal");
+        }
+        if(side == "top" && cooling == "hex" && class == "heatsink" && type == "m1s_oem") {
+                translate([loc_x-8,loc_y,case_z-(floorthick+adjust)-6]) 
+                    vent_hex(11, 5, floorthick+(adjust*2)+12, 8, 1.5, "horizontal");
         }
         if(side == "top" && cooling == "custom" && class == "heatsink") {
             translate([loc_x+6,loc_y-14,case_z-(floorthick+adjust)]) 
-                linear_extrude(height = wallthick+(2*adjust)) import(file = "./dxf/customfan.dxf");
+                linear_extrude(height = wallthick+(2*adjust)+12) import(file = "./dxf/customfan.dxf");
         }
-        if(side == "top" && exhaust_vents == "vent" && (cooling == "fan" || cooling == "vents" 
+        if(side == "top" && exhaust_vents == "vent" && (cooling == "fan" || cooling == "vents" || cooling == "hex" 
             || cooling == "custom") && class == "heatsink" && gpio_opening != "vent" && gpio_opening != "open" 
                 && gpio_opening != "punchout") {
-                    for(r=[loc_x+7:4:46+loc_x]) {
+                    for(r=[loc_x+7:4:50+loc_x]) {
                         translate([r,depth-(2*wallthick)-adjust-2,bottom_height+2]) 
                            cube([2,wallthick+(2*adjust)+1,top_height-floorthick-6]);
                     }
@@ -2380,6 +2399,19 @@ module open_io() {
         if(side == "top" && type == "uart_micro" && rotation == 270) {
             translate([loc_x-2*(wallthick),loc_y-1,bottom_height+5]) rotate([90,0,90]) 
                 punchout(15,8,1,wallthick+(2*adjust)+12,2,"rectangle");
+        }
+        
+        if(side == "bottom" && type == "uart_micro_h" && rotation == 90) {
+            translate([loc_x-wallthick-gap+8.5,loc_y-1,bottom_height-6]) rotate([90,0,90]) 
+                punchout(15,5,1,wallthick+(2*adjust)+10,2,"rectangle");
+        }
+        if(side == "bottom" && type == "uart_micro_h" && rotation == -90) {
+            translate([loc_x+2*(wallthick+gap)+1,loc_y-1,bottom_height+5]) rotate([90,0,90]) 
+                punchout(15,5,1,wallthick+(2*adjust)+5,2,"rectangle");
+        }
+        if(side == "bottom" && type == "uart_micro_h" && rotation == 270) {
+            translate([loc_x-2*(wallthick),loc_y-1,bottom_height+5]) rotate([90,0,90]) 
+                punchout(15,5,1,wallthick+(2*adjust)+12,2,"rectangle");
         }
         
         // sata openings

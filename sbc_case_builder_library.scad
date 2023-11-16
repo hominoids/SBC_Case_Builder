@@ -54,6 +54,7 @@
                            vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders), 
                            added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
                            in portrait and landscape, added h3_port_extender_holder(part,offset), cableholder_spacer()
+    20231115 Version 2.0.5 added hex vent and new component openings
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -3183,6 +3184,10 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
         place(loc_x+10.5,loc_y,loc_z,18,17.5,rotation,side)
             cube([19,12,27]);
     }
+    if(type == "rj45_low_profile" && rotation == 0) {
+        place(loc_x,loc_y-6,loc_z-3.5,15,8,rotation,side) 
+            cube([14.75,8,12.25]);
+        }
     // micro usb opening
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
         place(loc_x,loc_y-3,loc_z,8,3,rotation,side) microusb_open();
