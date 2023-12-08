@@ -55,6 +55,10 @@
                            added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
                            in portrait and landscape, added h3_port_extender_holder(part,offset), cableholder_spacer()
     20231115 Version 2.0.5 added hex vent and new component openings
+    2023xxxx Version 2.0.x added vu8s, hk_m1s_case_holes, hk_m1s_ups(), proto_m1s(), proto_ups(), battery_clip(bat_dia = 18.4), 
+                           battery(type), pcb_pad(pads = 1, style = "round"), led(ledcolor = "red"), m_insert(type="M3", icolor = "#ebdc8b"), 
+                           usbc()
+
         
     see https://github.com/hominoids/SBC_Case_Builder
     
@@ -128,11 +132,22 @@
     h3_port_extender_holder(part,offset)
     hk_pwr_button(mask = false)
     keyhole(keysize, mask = false)
-    vent_hex(cells_x, cells_y, cell_size, cell_spacing, orientation)
+    vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientation)
     vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders);
     dsub(dsubsize, mask = false)
     nut_holder(nut, style, dia_x, dia_y, height)
     cableholder_spacer()
+    hk_m1s_case_holes
+    hk_m1s_ups()
+    proto_m1s()
+    proto_ups()
+    battery_clip(bat_dia = 18.4)
+    battery(type)
+    pcb_pad(pads = 1, style = "round")
+    led(ledcolor = "red")
+    m_insert(type="M3", icolor = "#ebdc8b")
+    usbc()
+
 */
 
 use <./lib/fillets.scad>;
@@ -248,6 +263,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "hk_lcd35") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk35_lcd(); 
     }
+    if(type == "hk_m1s_ups") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_m1s_ups(); 
+    }
     if(type == "hk_uart") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart(); 
     }
@@ -315,6 +333,9 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     }
     if(type == "nut_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data_1, data_2, size_x, size_y, size_z); 
+    }
+    if(type == "standoff") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data_4);
     }
 }
 
@@ -1791,6 +1812,80 @@ module u_bracket() {
     }
 }
 
+// hk vu8s lcd display
+module hk_vu8s() {
+    
+    body_size  = [202, 133, 1.70];
+    glass_size = [195.5, 131, 1.75];
+    lcd_size   = [183.5,114, body_size[2] + 1];
+    view_size  = [172.5, 107.5, .1];
+
+    rb = 5.25;   // body edge radius
+
+    lcd_clearance = [0.15, 0.1, 0];
+    pcb_size = [14,24,1.6];
+    hole = 4.31;
+    spacer_size = [5.5, 1.75+body_size[2], 2.5, 5.5, 1, 0, 1, 1, 0, 0, 0];
+    
+    $fn = 90;    
+    adj = .01;
+
+    // "body"
+    color([0.1,0.1,0.1])
+    difference(){
+        union() {
+            slab(body_size, rb);
+            translate([(8.25/2),-1.74-(8.25/2),0]) rotate([0,0,90]) slot(8.25,10+(8.25/2),body_size[2]);
+            translate([body_size[0]-(8.25/2),-1.74-(8.25/2),0]) rotate([0,0,90]) slot(8.25,10+(8.25/2),body_size[2]);
+            translate([(8.25/2),body_size[1]-10,0]) rotate([0,0,90]) slot(8.25,10.75+(8.25/2),body_size[2]);
+            translate([body_size[0]-(8.25/2),body_size[1]-10,0]) rotate([0,0,90]) slot(8.25,10.75+(8.25/2),body_size[2]);
+        }
+        lcd_space = lcd_size + 2*lcd_clearance;
+        
+        // corner holes
+        translate([4, -5, -1]) cylinder(d=hole, h=5);
+        translate([4, 143-5, -1]) cylinder(d=hole, h=5);
+        translate([202-4, -5, -1]) cylinder(d=hole, h=5);
+        translate([202-4, 143-5, -1]) cylinder(d=hole, h=5);
+
+        translate([3.5, 3.5, -1]) cylinder(d=hole, h=5);
+        translate([3.5, body_size[1]-3.5, -1]) cylinder(d=hole, h=5);
+        translate([111, 3.5, -1]) cylinder(d=hole, h=5);
+        translate([111.5, body_size[1]-3.5, -1]) cylinder(d=hole, h=5);
+
+    }
+        // standoffs
+        color([0.6,0.6,0.6]) {
+            translate([4, 3.75, body_size[2]+adj]) standoff(spacer_size);
+            translate([3.75, 128.25, body_size[2]+adj]) standoff(spacer_size);
+            translate([111.5, 4, body_size[2]+adj]) standoff(spacer_size);
+            translate([111.25, 128.75, body_size[2]+adj]) standoff(spacer_size);
+        }
+    // LCD panel
+    color([0.6, 0.6, 0.65])
+        translate([10, 9, body_size[2]-lcd_size[2]]+lcd_clearance)
+            cube(lcd_size); 
+
+    // Front glass
+    // It's actually thinner and glued, but for the sake of simplicity...
+    color([0.2, 0.2, 0.2], 0.9)
+        translate([3, 1.25, body_size[2] + 0.01])
+            slab(glass_size, rb);
+
+    // view area
+    color("dimgrey", 0.9)
+        translate([14, 12.5, body_size[2] + glass_size[2]- 0.01])
+            slab(view_size, .1);
+
+    // PCB stub
+    color([0.1,0.1,0.1])
+        translate([body_size[0]-25, body_size[1]-30, -2])
+            cube([7,7,.1]);
+    color([0.1,0.1,0.1])
+        translate([body_size[0]-50, body_size[1]-35, -2])
+            cube([4,5,.1]);
+}
+
 // ODROID M1 2.5" SATA HDD mounting kit
 module m1_hdmount() {
     $fn   = 30;
@@ -2550,11 +2645,11 @@ module hdmi_open(hdmi_style) {
     if(hdmi_style == "hdmi_a") {
         union() { 
             difference() {
-                translate([.25,-5,1]) cube([15,8,5.5]);
+                translate([0,-5,1.25]) cube([15.5,8,5.75]);
                 translate([0.5,-5.2,.5]) rotate ([-90,0,0]) cylinder(d=3, h=13.5,$fn=30);
                 translate([15,-5.2,.5]) rotate ([-90,0,0]) cylinder(d=3, h=13.5,$fn=30);
             }
-            translate([2,-5,.5]) cube([11.5, 8, .5]);
+            translate([1.75,-5,.5]) cube([12, 8, 1]);
         }
     }
     if(hdmi_style == "hdmi_micro") {
@@ -2594,8 +2689,8 @@ module microusb_open() {
     
     translate([0,0,.5])rotate([90,0,0])
     hull() {
-        translate([6,1.5,-5]) cylinder(d=3.5,h=9);
-        translate([1,1.5,-5]) cylinder(d=3.5,h=9);
+        translate([6,1.5,-5]) cylinder(d=3.5,h=12);
+        translate([1,1.5,-5]) cylinder(d=3.5,h=12);
     }
 }
 
@@ -3249,8 +3344,8 @@ module mask(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,
     }
     // single horizontal usb opening
     if(type == "single_horizontal_a" && rotation == 0) {
-        place(loc_x-.5,loc_y-6,loc_z,15,7.5,rotation,side)
-            cube([15,8,7.5]);
+        place(loc_x-.75,loc_y-6,loc_z,15,7.5,rotation,side)
+            cube([15.5,8,8]);
     }
     if(type == "single_horizontal_a" && rotation == 90) {
         place(loc_x-6,loc_y-.5,loc_z,15,7.5,rotation,side)
@@ -4015,3 +4110,273 @@ module cableholder_spacer() {
         translate([3,20,-1]) rotate([0,0,45]) cube([2,6,9]);
     }
 }
+
+
+module hk_m1s_case_holes(type="landscape") {
+    
+    if(type == "portrait") {
+        cylinder(d=3, h=6);
+        translate([0,107,0]) cylinder(d=3, h=6);
+        translate([58,0,0]) cylinder(d=3, h=6);
+        translate([58,107,0]) cylinder(d=3, h=6);
+    }
+    else {
+        cylinder(d=3, h=6);
+        translate([0,58,0]) cylinder(d=3, h=6);
+        translate([107,0,0]) cylinder(d=3, h=6);
+        translate([107,58,0]) cylinder(d=3, h=6);
+    }
+}
+
+
+// hk m1s ups
+module hk_m1s_ups() {
+    
+    pcb_size = [115,32,1.62];
+
+    adj = .01;
+    $fn = 90;
+    
+    difference() {
+        union() {
+            color("#008066") slab(pcb_size,4);
+            color("#fee5a6") translate([3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+            color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+            color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+            color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+        }
+        color("#fee5a6") translate([3.5,3.5,-1]) cylinder(d=4, h=4);
+        color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
+        color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-1]) cylinder(d=4, h=4);
+        color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
+   }
+   // battery and clips
+   color("silver") translate([15,5,pcb_size[2]]) rotate([0,0,270]) battery_clip();
+   color("silver") translate([80,16,pcb_size[2]]) rotate([0,0,90]) battery_clip();
+   translate([13.25,10.5,pcb_size[2]+10.4]) rotate([0,90,0]) battery("18650_convex");
+   
+   translate([86.75,.5,pcb_size[2]]) momentary45x15();
+   translate([97.5,-1,pcb_size[2]]) usbc();
+   
+   translate([35,28,pcb_size[2]]) led("DodgerBlue");
+   translate([40,28,pcb_size[2]]) led("DodgerBlue");
+   translate([45,28,pcb_size[2]]) led("DodgerBlue");
+   translate([50,28,pcb_size[2]]) led("DodgerBlue");
+ 
+   translate([113,8,pcb_size[2]]) rotate([0,0,90]) led("green");
+   translate([113,16,pcb_size[2]])  rotate([0,0,90]) led();
+   translate([113,21,pcb_size[2]])  rotate([0,0,90]) led();
+   
+   translate([78,29,pcb_size[2]]) rotate([0,0,270])header(7);
+   translate([78,31.5,pcb_size[2]]) rotate([0,0,270])header(7);
+}
+
+
+// prototype board, ups footprint
+module proto_ups() {
+    
+    pcb_size = [115,32,1.62];
+
+    adj = .01;
+    $fn = 90;
+    
+    union() {
+        difference() {
+            union() {
+                color("#008066") slab(pcb_size,4);
+                color("#fee5a6") translate([3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+            }
+            color("#fee5a6") translate([3.5,3.5,-1]) cylinder(d=4, h=4);
+            color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
+            color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-1]) cylinder(d=4, h=4);
+            color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
+       }
+       // pads
+       for(r=[5:2.54:30]) {
+        translate([10,r,pcb_size[2]+adj]) pcb_pad(38);
+       }
+   }
+}
+
+
+// prototype board, m1s footprint
+module proto_m1s() {
+    
+    pcb_size = [90,65,1.62];
+
+    adj = .01;
+    $fn = 90;
+    
+    union() {
+        difference() {
+            union() {
+                color("#008066") slab(pcb_size,2);
+                color("#fee5a6") translate([3.5,3.5,-.1]) cylinder(d=4.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-.1]) cylinder(d=4.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([17.5,52.5,-.1]) cylinder(d=4.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([67.5,55.1,-.1]) cylinder(d=4.5, h=pcb_size[2]+.2);
+            }
+            color("#fee5a6") translate([3.5,3.5,-1]) cylinder(d=3, h=4);
+            color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-1]) cylinder(d=3, h=4);
+            color("#fee5a6") translate([17.5,52.5,-1]) cylinder(d=3, h=4);
+            color("#fee5a6") translate([67.5,55.1,-1]) cylinder(d=3, h=4);
+       }
+       // pads
+       for(r=[7:2.54:32]) {
+        translate([10,r,pcb_size[2]+adj]) pcb_pad(28);
+       }
+   }
+}
+
+module battery_clip(bat_dia = 18.4) {
+    
+    mat = .38;
+    width = 9.5;
+    tab = 8.9;
+    bat_holder = bat_dia+2*mat;
+    adj = .1;
+
+    translate([-5.5,0,10.5]) {
+        difference() {
+            translate([0,width,0]) rotate([90,0,0]) cylinder(d=bat_holder, h=9.5);
+            translate([0,width+adj,0]) rotate([90,0,0]) cylinder(d=bat_dia, h=10.5);
+            translate([mat/2-11.1/2,-adj,mat-1.3-bat_dia/2]) cube([11.1-mat,width+2*adj,3]);
+            translate([0,width+adj,0]) rotate([90,-45,0]) cube([bat_dia,bat_dia,bat_holder]);
+        }
+        difference() {
+            translate([-11.1/2,0,-1.3-bat_dia/2]) cube([11.1,width,3]);
+            translate([mat-11.1/2,-adj,mat/2-1.3-bat_dia/2]) cube([11.1-2*mat,width+2*adj,3]);
+        }
+        difference() {
+            translate([-(tab/2),-3.5,-1-bat_dia/2]) rotate([-5,0,0]) cube([tab,3.5,10]);
+            translate([-(tab/2)-adj,-3.5+mat,mat-1-bat_dia/2]) rotate([-5,0,0]) cube([tab+2*adj,3.5+mat,10]);
+        }    
+        translate([0,-2.225,0]) rotate([85,0,0]) cylinder(d=tab, h=mat);
+        difference() {
+            translate([0,-2.75,0]) sphere(d=3);
+            translate([-5,-2.75,-5]) rotate([85,0,0]) cube([tab,10,10]);
+        }
+    }
+}
+
+
+module battery(type) {
+
+    adj = .01;
+    if(type == "18650") {
+        difference() {
+            cylinder(d=18.4, h=65);
+            translate([0,0,65-4]) difference() {
+                cylinder(d=18.5, h=2);
+                cylinder(d=17.5, h=3);
+            }
+        }
+    }
+    if(type == "18650_convex") {
+        difference() {
+            cylinder(d=18.4, h=68);
+            translate([0,0,65-4]) difference() {
+                cylinder(d=18.5, h=2);
+                cylinder(d=17.5, h=3);
+            }
+            translate([0,0,65-adj]) difference() {
+                cylinder(d=18.5, h=3+2*adj);
+                cylinder(d=14.4, h=3+2*adj);
+            }
+        }
+    }
+    if(type == "21700") {
+        difference() {
+            cylinder(d=21, h=70);
+            translate([0,0,70-4]) difference() {
+                cylinder(d=21.1, h=2);
+                cylinder(d=20.1, h=3);
+            }
+        }
+    }
+}
+
+
+// single row pcb pad
+module pcb_pad(pads = 1, style = "round") {
+
+    adjust = .01;
+    $fn = 90;
+    pad_size = 1.25;
+    size_y = 2.54;
+    size_x = 2.54 * (pads-1);                
+    union() {
+        for (i=[0:2.54:size_x]) {
+            if(style == "round") {
+                difference() {
+                    color("#fee5a6") translate ([i,0,0]) cylinder(d=pad_size, h=.125);
+                    color("dimgray") translate([i,0,-adjust]) cylinder(d=.625, h=.125+2*adjust);
+                }
+            }
+            if(style == "square") {
+                difference() {
+                    color("#fee5a6") translate ([i-pad_size/2,-pad_size/2,0]) cube([pad_size, pad_size, .125]);
+                    color("dimgray") translate([i,0,-adjust]) cylinder(d=.625, h=.125+2*adjust);
+                }
+            }
+        }
+    }
+}
+
+
+module led(ledcolor = "red") {
+    
+    color(ledcolor) cube([3,1.5,.4]);
+    color("silver") cube([.5,1.5,.5]);
+    color("silver") translate([2.5,0,0]) cube([.5,1.5,.5]);
+}
+
+
+module m_insert(type="M3", icolor = "#ebdc8b") { //#f4e6c3, #ebdc8b 
+    
+    odiam = type == "M3" ? 4.2 : 3.5;
+    idiam = type == "M3" ? 3 : 2.5;
+    iheight = 4;
+    
+    difference() {
+        color(icolor,.6) cylinder(d=odiam, h=iheight);
+        color(icolor,.6) translate([0,0,-1]) cylinder(d=idiam, h=iheight+2);
+    }
+    for(bearing = [0:10:360]) {
+        color(icolor) translate([-.25+(odiam/2)*cos(bearing),-.25+(odiam/2)*sin(bearing),iheight-1.5]) 
+            rotate([0,0,0]) cube([.5,.5,1.5]);
+    }
+}
+
+
+module usbc() {
+    
+    $fn=90;
+    adj = .01;
+    
+    // usbc horizontal type
+        
+        size_x = 9;
+        size_y = 7;
+        dia = 3.5;
+        diam = 3.75;
+
+        rotate([90, 0, 0])  translate([dia/2, dia/2, -size_y]) union() {    
+            difference () {
+                color("silver")
+                hull() {
+                    translate([0,0,0]) cylinder(d=dia,h=size_y);
+                    translate([size_x-dia,0,0]) cylinder(d=dia,h=size_y);        
+                    }
+                color("silver") translate([0,0,1])
+                hull() {
+                    translate([0,0,0]) cylinder(d=3,h=size_y+.2);
+                    translate([size_x-dia,0,0]) cylinder(d=3,h=size_y+.2);        
+                    }
+            }
+            color("black") translate([0,-1.2/2,.1]) cube([5.5,1.2,6]);
+        }
+    }
