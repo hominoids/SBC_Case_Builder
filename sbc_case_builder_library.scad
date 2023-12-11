@@ -55,9 +55,9 @@
                            added nut_holder(nut, style, dia_x, dia_y, height), fixed access_port and access_cover 180 rotation
                            in portrait and landscape, added h3_port_extender_holder(part,offset), cableholder_spacer()
     20231115 Version 2.0.5 added hex vent and new component openings
-    2023xxxx Version 2.0.x added vu8s, hk_m1s_case_holes, hk_m1s_ups(), proto_m1s(), proto_ups(), battery_clip(bat_dia = 18.4), 
+    20231211 Version 2.0.6 added vu8s, hk_m1s_case_holes, hk_m1s_ups(), proto_m1s(), proto_ups(), battery_clip(bat_dia = 18.4), 
                            battery(type), pcb_pad(pads = 1, style = "round"), led(ledcolor = "red"), m_insert(type="M3", icolor = "#ebdc8b"), 
-                           usbc()
+                           usbc().
 
         
     see https://github.com/hominoids/SBC_Case_Builder

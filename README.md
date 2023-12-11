@@ -103,9 +103,9 @@ Template creation and i/o panel layouts in a dxf format can be easily created an
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 454
+#### Current Case Count 457
 
-##### Hardkernel - 191
+##### Hardkernel - 194
 
 **Odorid-C1+ cases** - 16 : c1+_shell, c1+_panel, c1+_panel_lcd3.5, c1+_desktop_lcd3.5, c1+_stacked, c1+_tray, c1+_tray_sides, c1+_tray_vu5, 
 c1+_tray_vu7, c1+_shell_boombox, c1+_panel_boombox, c1+_tray_boombox, c1+_round, c1+_hex, c1+_snap, c1+_fitted
@@ -129,7 +129,7 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 
 **Odorid-N2LQ cases** - 9 :n2lq_shell, n2lq_panel, n2lq_stacked, n2lq_tray, n2lq_tray_sides, n2lq_tray_vu5, n2lq_tray_vu7, n2lq_snap, n2lq_fitted
 
-**Odorid-M1S cases** - 9 : m1s_shell, m1s_panel, m1s_stacked, m1s_tray, m1s_tray_vu5, m1s_tray_vu7, m1s_tray_sides, m1s_snap, m1s_fitted
+**Odorid-M1S cases** - 12 : m1s_shell, m1s_shell_nvme, m1s_shell_ups, m1s_panel, m1s_stacked, m1s_tray, m1s_tray_ups, m1s_tray_vu5, m1s_tray_vu7, m1s_tray_sides, m1s_snap, m1s_fitted
 
 **Odorid-M1 cases** - 12 : m1_panel, m1_tray, m1_tray_drive, m1_tray_sides, m1_tray_vu5, m1_tray_vu7, m1_snap, m1_fitted, m1_fitted_drivebox2.5, m1_fitted_drivebox3.5, m1_fitted_pizzabox, m1_fitted_drivebox3.5v
 
