@@ -6847,7 +6847,7 @@
         "n1_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "n1_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -6904,7 +6904,7 @@
         "n1_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "n1_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -11808,7 +11808,7 @@
         "rock64_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -11865,7 +11865,7 @@
         "rock64_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -11922,7 +11922,7 @@
         "rock64_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -11979,7 +11979,7 @@
         "rock64_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -12036,7 +12036,7 @@
         "rock64_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -12207,7 +12207,7 @@
         "rock64_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -12264,7 +12264,7 @@
         "rock64_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock64_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -12339,7 +12339,7 @@
             "case_offset_x": "0",
             "case_offset_y": "0",
             "case_style": "none",
-            "cooling": "vent",
+            "cooling": "fan_hex",
             "exhaust_vents": "none",
             "fillet": "0",
             "floorthick": "2",
@@ -14027,7 +14027,7 @@
         "rpi1a+_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14084,7 +14084,7 @@
         "rpi1a+_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14141,7 +14141,7 @@
         "rpi1a+_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14198,7 +14198,7 @@
         "rpi1a+_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14255,7 +14255,7 @@
         "rpi1a+_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14312,7 +14312,7 @@
         "rpi1a+_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14369,7 +14369,7 @@
         "rpi1a+_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14426,7 +14426,7 @@
         "rpi1a+_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14483,7 +14483,7 @@
         "rpi1a+_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1a+_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14597,7 +14597,7 @@
         "rpi1b+_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1b+_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14654,7 +14654,7 @@
         "rpi1b+_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1b+_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14711,7 +14711,7 @@
         "rpi1b+_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1b+_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14768,7 +14768,7 @@
         "rpi1b+_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1b+_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14939,7 +14939,7 @@
         "rpi1b+_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1b+_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -14996,7 +14996,7 @@
         "rpi1b+_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi1b+_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15053,7 +15053,7 @@
         "rpi3a+_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15110,7 +15110,7 @@
         "rpi3a+_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15167,7 +15167,7 @@
         "rpi3a+_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15224,7 +15224,7 @@
         "rpi3a+_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15281,7 +15281,7 @@
         "rpi3a+_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15338,7 +15338,7 @@
         "rpi3a+_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15395,7 +15395,7 @@
         "rpi3a+_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15452,7 +15452,7 @@
         "rpi3a+_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15509,7 +15509,7 @@
         "rpi3a+_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3a+_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15566,7 +15566,7 @@
         "rpi3b_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15623,7 +15623,7 @@
         "rpi3b_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15680,7 +15680,7 @@
         "rpi3b_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15737,7 +15737,7 @@
         "rpi3b_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15794,7 +15794,7 @@
         "rpi3b_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15851,7 +15851,7 @@
         "rpi3b_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15908,7 +15908,7 @@
         "rpi3b_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -15965,7 +15965,7 @@
         "rpi3b_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16022,7 +16022,7 @@
         "rpi3b_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16079,7 +16079,7 @@
         "rpi3b+_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16136,7 +16136,7 @@
         "rpi3b+_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16193,7 +16193,7 @@
         "rpi3b+_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16250,7 +16250,7 @@
         "rpi3b+_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16307,7 +16307,7 @@
         "rpi3b+_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16364,7 +16364,7 @@
         "rpi3b+_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16421,7 +16421,7 @@
         "rpi3b+_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16478,7 +16478,7 @@
         "rpi3b+_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16535,7 +16535,7 @@
         "rpi3b+_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi3b+_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16592,7 +16592,7 @@
         "rpi4b_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16706,7 +16706,7 @@
         "rpi4b_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16763,7 +16763,7 @@
         "rpi4b_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16877,7 +16877,7 @@
         "rpi4b_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16934,7 +16934,7 @@
         "rpi4b_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -16991,7 +16991,7 @@
         "rpi4b_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17048,7 +17048,7 @@
         "rpi4b_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17105,7 +17105,7 @@
         "rpi4b_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17162,7 +17162,7 @@
         "rpi4b_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi4b_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17216,10 +17216,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_shell": {
+        "rpi5_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17273,10 +17273,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_panel": {
+        "rpi5_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17330,10 +17330,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_stacked": {
+        "rpi5_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17387,10 +17387,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_tray": {
+        "rpi5_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17444,10 +17444,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_tray_sides": {
+        "rpi5_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17501,10 +17501,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_round": {
+        "rpi5_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17558,10 +17558,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "3"
         },
-        "rpi5_noheatsink_hex": {
+        "rpi5_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17615,10 +17615,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "3"
         },
-        "rpi5_noheatsink_snap": {
+        "rpi5_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17672,10 +17672,10 @@
             "vu_rotation": "[15, 0, 0]",
             "wallthick": "2"
         },
-        "rpi5_noheatsink_fitted": {
+        "rpi5_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rpi5_noheatsink_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -17732,7 +17732,7 @@
         "rock4b+_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -17789,7 +17789,7 @@
         "rock4b+_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -17846,7 +17846,7 @@
         "rock4b+_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -17903,7 +17903,7 @@
         "rock4b+_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -17960,7 +17960,7 @@
         "rock4b+_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18131,7 +18131,7 @@
         "rock4b+_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18188,7 +18188,7 @@
         "rock4b+_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4b+_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18245,7 +18245,7 @@
         "rock4c_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18302,7 +18302,7 @@
         "rock4c_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18359,7 +18359,7 @@
         "rock4c_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18416,7 +18416,7 @@
         "rock4c_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18473,7 +18473,7 @@
         "rock4c_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18644,7 +18644,7 @@
         "rock4c_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18701,7 +18701,7 @@
         "rock4c_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18758,7 +18758,7 @@
         "rock4c+_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18815,7 +18815,7 @@
         "rock4c+_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18872,7 +18872,7 @@
         "rock4c+_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18929,7 +18929,7 @@
         "rock4c+_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -18986,7 +18986,7 @@
         "rock4c+_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -19157,7 +19157,7 @@
         "rock4c+_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -19214,7 +19214,7 @@
         "rock4c+_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "rock4c+_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "-14",
@@ -19366,7 +19366,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "true",
             "sidethick": "0",
@@ -19423,7 +19423,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "0",
@@ -19480,7 +19480,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "true",
             "sidethick": "0",
@@ -19537,7 +19537,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "0",
@@ -19594,7 +19594,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "2",
@@ -19651,7 +19651,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "1",
@@ -19708,7 +19708,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "1",
@@ -19765,7 +19765,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "1",
@@ -19822,7 +19822,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5b-v1.42",
+            "sbc_model": "rock5b",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "1",
@@ -19879,7 +19879,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "true",
             "sidethick": "0",
@@ -19936,7 +19936,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "0",
@@ -19993,7 +19993,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "true",
             "sidethick": "0",
@@ -20050,7 +20050,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "0",
@@ -20107,7 +20107,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "2",
@@ -20164,7 +20164,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "1",
@@ -20221,7 +20221,7 @@
             "sata_knockout": "false",
             "sbc_bottom_standoffs": "true",
             "sbc_highlight": "false",
-            "sbc_model": "rock5bq-v1.42",
+            "sbc_model": "rock5bq",
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "sidethick": "1",
@@ -20240,7 +20240,7 @@
         "vim1_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20297,7 +20297,7 @@
         "vim1_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20354,7 +20354,7 @@
         "vim1_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20411,7 +20411,7 @@
         "vim1_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20468,7 +20468,7 @@
         "vim1_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20525,7 +20525,7 @@
         "vim1_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20582,7 +20582,7 @@
         "vim1_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20639,7 +20639,7 @@
         "vim1_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20696,7 +20696,7 @@
         "vim1_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim1_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20753,7 +20753,7 @@
         "vim2_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20810,7 +20810,7 @@
         "vim2_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20867,7 +20867,7 @@
         "vim2_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20924,7 +20924,7 @@
         "vim2_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -20981,7 +20981,7 @@
         "vim2_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21038,7 +21038,7 @@
         "vim2_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21095,7 +21095,7 @@
         "vim2_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21152,7 +21152,7 @@
         "vim2_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21209,7 +21209,7 @@
         "vim2_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim2_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21266,7 +21266,7 @@
         "vim3l_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21323,7 +21323,7 @@
         "vim3l_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21380,7 +21380,7 @@
         "vim3l_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21437,7 +21437,7 @@
         "vim3l_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21494,7 +21494,7 @@
         "vim3l_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21551,7 +21551,7 @@
         "vim3l_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21608,7 +21608,7 @@
         "vim3l_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21665,7 +21665,7 @@
         "vim3l_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21722,7 +21722,7 @@
         "vim3l_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3l_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21779,7 +21779,7 @@
         "vim3_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21836,7 +21836,7 @@
         "vim3_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21893,7 +21893,7 @@
         "vim3_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -21950,7 +21950,7 @@
         "vim3_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22007,7 +22007,7 @@
         "vim3_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22064,7 +22064,7 @@
         "vim3_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22121,7 +22121,7 @@
         "vim3_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22178,7 +22178,7 @@
         "vim3_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22235,7 +22235,7 @@
         "vim3_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim3_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22292,7 +22292,7 @@
         "vim4_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22349,7 +22349,7 @@
         "vim4_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22406,7 +22406,7 @@
         "vim4_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22463,7 +22463,7 @@
         "vim4_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22520,7 +22520,7 @@
         "vim4_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22577,7 +22577,7 @@
         "vim4_round": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_round",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22634,7 +22634,7 @@
         "vim4_hex": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_hex",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22691,7 +22691,7 @@
         "vim4_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22748,7 +22748,7 @@
         "vim4_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "vim4_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22805,7 +22805,7 @@
         "tinkerboard_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22862,7 +22862,7 @@
         "tinkerboard_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22919,7 +22919,7 @@
         "tinkerboard_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -22976,7 +22976,7 @@
         "tinkerboard_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23033,7 +23033,7 @@
         "tinkerboard_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23204,7 +23204,7 @@
         "tinkerboard_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23261,7 +23261,7 @@
         "tinkerboard_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23318,7 +23318,7 @@
         "tinkerboard-s_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23375,7 +23375,7 @@
         "tinkerboard-s_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23432,7 +23432,7 @@
         "tinkerboard-s_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23489,7 +23489,7 @@
         "tinkerboard-s_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23546,7 +23546,7 @@
         "tinkerboard-s_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23717,7 +23717,7 @@
         "tinkerboard-s_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23774,7 +23774,7 @@
         "tinkerboard-s_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-s_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23831,7 +23831,7 @@
         "tinkerboard-2_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23888,7 +23888,7 @@
         "tinkerboard-2_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -23945,7 +23945,7 @@
         "tinkerboard-2_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24002,7 +24002,7 @@
         "tinkerboard-2_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24059,7 +24059,7 @@
         "tinkerboard-2_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24230,7 +24230,7 @@
         "tinkerboard-2_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24287,7 +24287,7 @@
         "tinkerboard-2_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-2_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24344,7 +24344,7 @@
         "tinkerboard-r2_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24401,7 +24401,7 @@
         "tinkerboard-r2_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24458,7 +24458,7 @@
         "tinkerboard-r2_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24515,7 +24515,7 @@
         "tinkerboard-r2_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24572,7 +24572,7 @@
         "tinkerboard-r2_tray_sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_tray_sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24743,7 +24743,7 @@
         "tinkerboard-r2_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[6.25, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24800,7 +24800,7 @@
         "tinkerboard-r2_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "tinkerboard-r2_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[4.75, 7, 3.6, 8, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24857,7 +24857,7 @@
         "opi5_shell": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_shell",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24915,7 +24915,7 @@
         "opi5_panel": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_panel",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -24973,7 +24973,7 @@
         "opi5_stacked": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_stacked",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 8, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -25031,7 +25031,7 @@
         "opi5_tray": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_tray",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -25089,7 +25089,7 @@
         "opi5_tray-sides": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_tray-sides",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -25147,7 +25147,7 @@
         "opi5_snap": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_snap",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
@@ -25205,7 +25205,7 @@
         "opi5_fitted": {
             "$fn": "90",
             "accessory_highlight": "false",
-            "accessory_name": "opi5_fitted",
+            "accessory_name": "none",
             "adjust": "0.01",
             "bottom_ext_standoff": "[5.75, 5, 3.6, 10, 4, 1, 0, 0, 0, 4.5, 5.1]",
             "bottom_front_left": "0",
