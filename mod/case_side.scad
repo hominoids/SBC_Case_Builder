@@ -289,10 +289,10 @@ module case_side(case_design,case_style,side) {
         }
         // sbc openings
         if(sbc_highlight == true) {
-            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model,"default",0,"default","default",true);
+            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         else {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model,"default",0,"default","default",true);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
     }
     if(accessory_name != "none") {

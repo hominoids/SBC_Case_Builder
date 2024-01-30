@@ -1,6 +1,6 @@
 /*
-    uart_holder()
-    uart_strap ()
+    hk_uart_holder()
+    hk_uart_strap ()
     hc4_oled_holder(side,floorthick)
     hk_wb2()
     hc4_oled()
@@ -56,7 +56,7 @@ module hk_uart_holder() {
 
     
 /* odroid uart strap for holder */
-module uart_strap() { 
+module hk_uart_strap() { 
     difference () {
         translate ([-4.5,17,9]) cube([27,6,3]);
         translate ([-1.5,20,8]) cylinder (r=1.6, h=5, $fn=90);

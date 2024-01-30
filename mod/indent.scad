@@ -107,35 +107,35 @@ module indent(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthic
             rotate([90,0,0]) slot(6,8,wallthick);
     }
     // power plug indent
-    if(type == "pwr5.5_7.5x11.5" && rotation == 0 && side == "top") {
+    if(class == "power" && type == "pwr5.5_7.5x11.5" && rotation == 0 && side == "top") {
         place(loc_x+3.75,-(wallthick+gap)+wallthick/2,loc_z+6.25,10,10,rotation,side) 
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
-    if(type == "pwr5.5_7.5x11.5" && rotation == 90 && side == "top") {
+    if(class == "power" && type == "pwr5.5_7.5x11.5" && rotation == 90 && side == "top") {
         place(-gap-wallthick/2,loc_y-6.25,loc_z+6.25,10,10,rotation,side) 
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
-    if(type == "pwr5.5_7.5x11.5" && rotation == 180 && side == "top") {
+    if(class == "power" && type == "pwr5.5_7.5x11.5" && rotation == 180 && side == "top") {
         place(loc_x-6.5,depth-10-(wallthick+gap)-wallthick/2,loc_z+6.25,10,10,rotation,side) 
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
-    if(type == "pwr5.5_7.5x11.5" && rotation == 270 && side == "top") {
+    if(class == "power" && type == "pwr5.5_7.5x11.5" && rotation == 270 && side == "top") {
         place(width-(wallthick+gap)-10-wallthick/2,loc_y+3.75,loc_z+6.25,10,10,rotation,side) 
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
-    if(type == "pwr2.5_5x7.5" && rotation == 0 && side == "top") {
+    if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 0 && side == "top") {
         place(loc_x+2.75,-(wallthick+gap)+wallthick/2,loc_z+2.1,7,7,rotation,side) 
             rotate([90,0,0]) cylinder(d=7, h=wallthick);
     }
-    if(type == "pwr2.5_5x7.5" && rotation == 90 && side == "top") {
+    if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 90 && side == "top") {
         place(-(wallthick+gap)+wallthick/2,loc_y-4.5,loc_z+2,7,7,rotation,side) 
             rotate([90,0,0]) cylinder(d=7, h=wallthick);
     }
-    if(type == "pwr2.5_5x7.5" && rotation == 180 && side == "top") {
+    if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 180 && side == "top") {
         place(loc_x-4.5,depth-(wallthick+gap)-7-wallthick/2,loc_z+2,7,7,rotation,side) 
             rotate([90,0,0]) cylinder(d=7, h=wallthick);
     }
-    if(type == "pwr2.5_5x7.5" && rotation == 270 && side == "top") {
+    if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 270 && side == "top") {
         place(width-(wallthick+gap)-7-wallthick/2,loc_y+2.5,loc_z+2,7,7,rotation,side) 
             rotate([90,0,0]) cylinder(d=7, h=wallthick);
     }

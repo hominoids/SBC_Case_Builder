@@ -3,7 +3,7 @@
     slab(size, radius)
     slab_r(size, radius)
     slot(hole,length,depth)
-    punchout(width,depth,gap,thick,fillet,shape)
+    knockout(width,depth,gap,thick,fillet,shape)
     hdmi_open(hdmi_style)
     microusb_open()
 
@@ -55,8 +55,8 @@ module slot(hole,length,depth) {
         }
     } 
 
-// punchout opening
-module punchout(width,depth,gap,thick,fillet,shape) {
+// knockout opening
+module knockout(width,depth,gap,thick,fillet,shape) {
     
     adjust = .01;
     $fn=90;

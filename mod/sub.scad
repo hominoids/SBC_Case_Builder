@@ -37,8 +37,8 @@ module sub(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "hk_fan_top") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) hk_fan_top();
     }    
-    if(type == "punchout") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) punchout(size_x,size_y,data_1,size_z,data_2,data_3);
+    if(type == "knockout") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) knockout(size_x,size_y,data_1,size_z,data_2,data_3);
     }    
     if(type == "fan") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_mask(size_x, size_z, data_1);

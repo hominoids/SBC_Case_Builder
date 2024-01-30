@@ -34,11 +34,11 @@ module add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data
     if(type == "batt_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) batt_holder(data_1);
     }
-    if(type == "uart_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) uart_holder();
+    if(type == "hk_uart_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_holder();
     }
-    if(type == "uart_strap") {
-        color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) uart_strap();
+    if(type == "hk_uart_strap") {
+        color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_strap();
     }
     if(type == "standoff") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data_4);
