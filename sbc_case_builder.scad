@@ -151,8 +151,6 @@ pcb_bmaxz = sbc_data[s[0]][11][6];
 pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
-echo(pcb_id, pcb_width, pcb_depth, pcb_z, pcb_tmaxz, pcb_bmaxz, pcb_color, pcb_radius);
-
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz;

@@ -314,11 +314,12 @@ module case_bottom(case_design) {
                         class = sbc_data[s[0]][i+1];
                         type = sbc_data[s[0]][i+2];
                         id = sbc_data[s[0]][i+3];
-                        pcb_hole_x = sbc_data[s[0]][i+4];
-                        pcb_hole_y = sbc_data[s[0]][i+5];
+                        pcb_hole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
+                        pcb_hole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
                         pcb_hole_z = sbc_data[s[0]][i+6];
                         pcb_hole_size = sbc_data[s[0]][i+9][0];
                         pcb_hole_pos = sbc_data[s[0]][i+10][4];
+
                         if(class == "pcbhole" && id == pcb_id && (pcb_hole_pos == "left_rear" || pcb_hole_pos == "left_front" || 
                             pcb_hole_pos == "right_rear" || pcb_hole_pos == "right_front")) {
                             translate([pcb_hole_x,pcb_hole_y,-1]) cylinder(d=6.5, h=bottom_height);
@@ -355,13 +356,14 @@ module case_bottom(case_design) {
                         class = sbc_data[s[0]][i+1];
                         type = sbc_data[s[0]][i+2];
                         id = sbc_data[s[0]][i+3];
-                        pcb_hole_x = sbc_data[s[0]][i+4];
-                        pcb_hole_y = sbc_data[s[0]][i+5];
+                        pcb_hole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
+                        pcb_hole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
                         pcb_hole_z = sbc_data[s[0]][i+6];
                         pcb_hole_size = sbc_data[s[0]][i+9][0];
                         pcb_hole_pos = sbc_data[s[0]][i+10][4];
 
-                    if(pcb_hole_x!=0 && pcb_hole_y!=0) {
+                    if(class == "pcbhole" && (pcb_hole_pos == "left_rear" || pcb_hole_pos == "left_front" || 
+                        pcb_hole_pos == "right_rear" || pcb_hole_pos == "right_front")) {
                         if (pcb_hole_pos == "left_rear") {
                             normal_standoff = [bottom_standoff[0],
                                                 bottom_height-pcb_z+pcb_loc_z+bottom_rear_left,
@@ -444,68 +446,41 @@ module case_bottom(case_design) {
                 }
             }
             // standoff sidewall support
-            if(sidewall_support == true && sbc_bottom_standoffs == true) {
-                if(pcb_width/pcb_depth >= 1.4) {
-                    for (i=[1:11:len(sbc_data[s[0]])-2]) {
-                        pcb_hole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
-                        pcb_hole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
-                        pcb_hole_z = sbc_data[s[0]][i+6];
-                        pcb_hole_size = sbc_data[s[0]][i+9][0];
-                        pcb_hole_pos = sbc_data[s[0]][i+10][4];
+            if(sidewall_support == true && sbc_top_standoffs == true) {
+                for (i=[1:11:len(sbc_data[s[0]])-2]) {
+                    class = sbc_data[s[0]][i+1];
+                    type = sbc_data[s[0]][i+2];
+                    id = sbc_data[s[0]][i+3];
+                    pcb_hole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
+                    pcb_hole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
+                    pcb_hole_z = sbc_data[s[0]][i+6];
+                    pcb_hole_size = sbc_data[s[0]][i+9][0];
+                    pcb_side_pos = sbc_data[s[0]][i+10][2];
+                    pcb_hole_pos = sbc_data[s[0]][i+10][4];
+                    ex_stand = 0;
 
-                        if(pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            if(pcb_hole_pos == "left_rear") {
-                                translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adj)-1,0])
-                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_rear_left]);
-                            }
-                            if(pcb_hole_pos == "left_front") {
-                                translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adj,0])
-                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_front_left]);
-                            }
-                            if(pcb_hole_pos == "right_rear") {
-                                translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adj)-1,0])
-                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_rear_right]);
-                            }
-                            if(pcb_hole_pos == "right_front") {
-                                translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adj,0])
-                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_front_right]);
-                            }
+                    if (class == "pcbhole" && (pcb_hole_pos == "left_rear" || pcb_hole_pos == "left_front" || 
+                        pcb_hole_pos == "right_rear" || pcb_hole_pos == "right_front")) {
+                        ex_stand = pcb_hole_pos == "left_rear" ? bottom_rear_left :
+                                   pcb_hole_pos == "left_front" ? bottom_front_left :
+                                   pcb_hole_pos == "right_rear" ? bottom_rear_right :
+                                   pcb_hole_pos == "right_front" ? bottom_front_right : 0;
+
+                        if(pcb_side_pos == "rear") {
+                            translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap-adj)-1.4, 0])
+                                cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+ex_stand]);
                         }
-                    }
-                }
-                else {
-                    for (i=[1:11:len(sbc_data[s[0]])-2]) {
-                        pcb_hole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
-                        pcb_hole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
-                        pcb_hole_z = sbc_data[s[0]][i+6];
-                        pcb_hole_size = sbc_data[s[0]][i+9][0];
-                        pcb_hole_pos = sbc_data[s[0]][i+10][4];
-
-                        if(pcb_hole_x!=0 && pcb_hole_y!=0) {
-                            if(pcb_hole_pos == "left_rear" && sbc_model != "n2l") {
-                                translate([pcb_hole_x-(bottom_standoff[0]/2)-2.6+adj, pcb_hole_y-gap,0])
-                                    cube([gap+1.6,2,bottom_height-pcb_z+pcb_loc_z+bottom_rear_left]);
-                            }
-                            if (pcb_hole_pos == "left_rear" && sbc_model == "n2l") {
-                                translate([pcb_hole_x-1, pcb_hole_y-(bottom_standoff[0]/2)-(gap+adj)-1,0])
-                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_rear_left]);
-                            }
-                            if(pcb_hole_pos == "left_front" && sbc_model != "n2l") {
-                                translate([pcb_hole_x-(bottom_standoff[0]/2)-2.6+adj, pcb_hole_y-gap,0])
-                                    cube([gap+1.6,2,bottom_height-pcb_z+pcb_loc_z+bottom_front_left]);
-                            }
-                            if(pcb_hole_pos == "left_front" && sbc_model == "n2l") {
-                                translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adj,0])
-                                    cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+bottom_front_left]);
-                            }
-                            if (pcb_hole_pos == "right_rear") {
-                                translate([pcb_hole_x+(bottom_standoff[0]/2)-.5+adj, pcb_hole_y-gap,0])
-                                    cube([gap+1.5,2,bottom_height-pcb_z+pcb_loc_z+bottom_rear_right]);
-                            }
-                            if (pcb_hole_pos == "right_front") {
-                                translate([pcb_hole_x+(bottom_standoff[0]/2)-.5+adj, pcb_hole_y-gap,0])
-                                    cube([gap+1.5,2,bottom_height-pcb_z+pcb_loc_z+bottom_front_right]);
-                            }
+                        if(pcb_side_pos == "front") {
+                        translate([pcb_hole_x-1, pcb_hole_y+(bottom_standoff[0]/2)-.6+adj,0]) 
+                            cube([2,gap+1.6,bottom_height-pcb_z+pcb_loc_z+ex_stand]);
+                        }
+                        if(pcb_side_pos == "left") {
+                        translate([pcb_hole_x-(bottom_standoff[0]/2)-2.4+adj,pcb_hole_y-1,0]) 
+                            cube([gap+1.6,2,bottom_height-pcb_z+pcb_loc_z+ex_stand]);
+                        }
+                        if(pcb_side_pos == "right") {
+                        translate([pcb_hole_x+(bottom_standoff[0]/2)-.6+adj,pcb_hole_y-1,0]) 
+                            cube([gap+1.6,2,bottom_height-pcb_z+pcb_loc_z+ex_stand]);
                         }
                     }
                 }
