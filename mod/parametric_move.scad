@@ -1,5 +1,45 @@
-module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                            size_x,size_y,size_z,data_1,data_2,data_3,data_4) {
+/*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
+
+
+           NAME: parametric_move_add
+    DESCRIPTION: places parametric additive objects 
+           TODO: none
+
+          USAGE: parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric[], size_x, size_y, size_z, data_1, data_2, data_3, data_4)
+
+                           type = 
+                          loc_x = 
+                          loc_y = 
+                          loc_z = 
+                           face = 
+                       rotation = 
+                   parametric[] = 
+                        size[0] = size_x
+                        size[1] = size_y
+                        size[2] = size_z
+                        data[0] = 
+                        data[1] = 
+                        data[2] = 
+                        data[3] = 
+
+*/
+
+module parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size_x, size_y, size_z, data_1, data_2, data_3, data_4) {
     
     // absolute no parametrics
     if(parametric[1] == false && parametric[2] == false && parametric[3] == false) {        
@@ -149,9 +189,31 @@ module parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
 }
 
 
+/*
+           NAME: parametric_move_sub
+    DESCRIPTION: places parametric subtractive objects 
+           TODO: none
 
-module parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                            size_x,size_y,size_z,data_1,data_2,data_3,data_4) {
+          USAGE: parametric_move_sub(type, loc_x, loc_y, loc_z, face, rotation, parametric[], size_x, size_y, size_z, data_1, data_2, data_3, data_4)
+
+                           type = 
+                          loc_x = 
+                          loc_y = 
+                          loc_z = 
+                           face = 
+                       rotation = 
+                   parametric[] = 
+                        size[0] = size_x
+                        size[1] = size_y
+                        size[2] = size_z
+                        data[0] = 
+                        data[1] = 
+                        data[2] = 
+                        data[3] = 
+
+*/
+
+module parametric_move_sub(type, loc_x, loc_y, loc_z, face, rotation, parametric, size_x, size_y, size_z, data_1, data_2, data_3, data_4) {
     
     // absolute no parametrics
     if(parametric[1] == false && parametric[2] == false && parametric[3] == false) {        
