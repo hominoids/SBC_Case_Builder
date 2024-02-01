@@ -129,7 +129,7 @@ sata_knockout = false;
 // gpio opening
 gpio_opening = "default"; // [default,none,open,block,knockout,vent]
 // heatsink opening
-cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex]
+cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm]
 fan_size = 0; // [0,30,40,50,60,70,80,92]
 // exhaust vent
 exhaust_vents = "vent"; // [none,vent]
