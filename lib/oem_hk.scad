@@ -1,7 +1,23 @@
 /*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
+
     hk_uart_holder()
     hk_uart_strap ()
-    hc4_oled_holder(side,floorthick)
+    hc4_oled_holder(side, floorthick)
     hk_wb2()
     hc4_oled()
     h2_netcard()
@@ -12,11 +28,11 @@
     u_bracket()
     m1_hdmount()
     hk_speaker()
-    hk_boom(speakers,orientation)
-    hk_boom_speaker(side,speaker,pcb)
+    hk_boom(speakers, orientation)
+    hk_boom_speaker(side, speaker, pcb)
     boom_speaker()
-    hk_boom_grill(style,thick)
-    boom_speaker_holder(style,tolerance)
+    hk_boom_grill(style, thick)
+    boom_speaker_holder(style, tolerance)
     boom_speaker_strap()
     boom_vring(tolerance)
     hk_pwr_button(mask = false)
@@ -27,11 +43,17 @@
 
 */
 
-/* odroid uart module holder */
+/*
+           NAME: hk_uart_holder
+    DESCRIPTION: hardkernel micro-usb uart holder
+           TODO: none
+
+          USAGE: hk_uart_holder()
+
+*/
+
 module hk_uart_holder() {
 
-    rotate([0,0,0]) 
-    translate ([0,0,0])
         union () {
             difference () {
                 translate ([0,0,0]) cube([18,24,9]);
@@ -42,21 +64,29 @@ module hk_uart_holder() {
                 translate ([3.5,1.5,2]) cube ([11,14,2]);
                 //side trim
                 translate ([-1,-1,6]) cube([20,18,4]);
-            }    
+            }
             difference (){
                 translate ([-1.5,20,0]) cylinder(r=3,h=9, $fn=90);
                 translate ([-1.5,20,-1]) cylinder (r=1.375, h=11, $fn=90);
-            }    
+            }
             difference (){
                 translate ([19.5,20,0]) cylinder(r=3,h=9, $fn=90);
                 translate ([19.5,20,-1]) cylinder (r=1.375, h=11,$fn=90);
-            }  
+            }
         }
     }
 
-    
-/* odroid uart strap for holder */
-module hk_uart_strap() { 
+
+/*
+           NAME: hk_uart_strap
+    DESCRIPTION: hardkernel micro-usb uart holder strap
+           TODO: none
+
+          USAGE: hk_uart_strap()
+
+*/
+
+module hk_uart_strap() {
     difference () {
         translate ([-4.5,17,9]) cube([27,6,3]);
         translate ([-1.5,20,8]) cylinder (r=1.6, h=5, $fn=90);
@@ -65,12 +95,22 @@ module hk_uart_strap() {
     difference (){
         translate ([-1.5,20,12]) cylinder(r=3,h=1, $fn=90);
         translate ([-1.5,20,11]) cylinder (r=1.6, h=7, $fn=90);
-    }  
+    }
     difference (){
         translate ([19.5,20,12]) cylinder(r=3,h=1, $fn=90);
         translate ([19.5,20,11]) cylinder (r=1.6, h=7, $fn=90);
-    }    
+    }
 }
+
+
+/*
+           NAME: hk_wb2
+    DESCRIPTION: hardkernel weather board 2
+           TODO: none
+
+          USAGE: hk_wb2()
+
+*/
 
 module hk_wb2() {
     difference () {
@@ -94,11 +134,22 @@ module hk_wb2() {
 }
 
 
-/* odroid-hc4 oled holder */
-module hc4_oled_holder(side,wallthick) {
-    
-    adjust=.01;
-    $fn = 90;    
+/*
+           NAME: hc4_oled_holder
+    DESCRIPTION: hardkernel odroid-hc4 oled holder
+           TODO: none
+
+          USAGE: hc4_oled_holder(side, wallthick)
+
+                                 side = "top", "bottom"
+                            wallthick = wall thickness
+*/
+
+module hc4_oled_holder(side, wallthick) {
+
+    adj=.01;
+    $fn = 90;
+
     difference() {
         union() {
             if(side == "top") {
@@ -138,29 +189,36 @@ module hc4_oled_holder(side,wallthick) {
         }
         if(side == "top") {
             translate([-.5,0,wallthick-8]) cube([29.5,1.9,5]);
-            translate([(32.75/2-(15/2))-1.85,-adjust-3-1.75,-wallthick-2.5]) cube([15,12,wallthick+3]);
+            translate([(32.75/2-(15/2))-1.85,-adj-3-1.75,-wallthick-2.5]) cube([15,12,wallthick+3]);
         }
         if(side == "bottom") {
-            translate([-.5,0,-adjust]) cube([29.5,1.42,5]);
-            translate([(32.75/2-(15/2))-1.85,-adjust-3-1.75,-adjust]) cube([15,12,8]);
-            translate([2.5,-adjust-3-1.75,-adjust]) cube([6,3,8]);
-            translate([12.5,adjust,10]) rotate([90,0,0]) cylinder(d=21, h=2);
+            translate([-.5,0,-adj]) cube([29.5,1.42,5]);
+            translate([(32.75/2-(15/2))-1.85,-adj-3-1.75,-adj]) cube([15,12,8]);
+            translate([2.5,-adj-3-1.75,-adj]) cube([6,3,8]);
+            translate([12.5,adj,10]) rotate([90,0,0]) cylinder(d=21, h=2);
         }
-    }   
+    }
 }
 
-/* odroid-hc4 oled */
+
+/*
+           NAME: hc4_oled
+    DESCRIPTION: hardkernel odroid-hc4 oled
+           TODO: none
+
+          USAGE: hc4_oled_holder()
+*/
+
 module hc4_oled() {
     
-adjust = .01;
-$fn=90;
+    adj = .01;
+    $fn=90;
+    oled_x = 28.5;
+    oled_y = 1.25;
+    oled_z = 48.6;
+    oled_open_x = 29;
+    oled_open_y = 1.5;
 
-oled_x = 28.5;
-oled_y = 1.25;
-oled_z = 48.6;
-
-oled_open_x = 29;
-oled_open_y = 1.5;
     difference() {
         union() {
             // pcb board
@@ -172,39 +230,45 @@ oled_open_y = 1.5;
         translate([2.8,0,46.7]) {
             translate([-.6,1.26,0]) rotate([90,0,0])
                 hull() {
-                translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adjust*2));
-                cylinder(d=1.8, h=1.25+(adjust*2));
+                translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adj*2));
+                cylinder(d=1.8, h=1.25+(adj*2));
                 }
         }
         translate([25.7,0,46.7]) {
             translate([-.6,1.26,0]) rotate([90,0,0])
                 hull() {
-                translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adjust*2));
-                cylinder(d=1.8, h=1.25+(adjust*2));
+                translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adj*2));
+                cylinder(d=1.8, h=1.25+(adj*2));
                 }
         }
-        
     }
 }
 
 
-/* h2 network card */
+/*
+           NAME: h2_netcard
+    DESCRIPTION: hardkernel m.2 network card
+           TODO: none
+
+          USAGE: h2_netcard()
+*/
+
 module h2_netcard() {
-    
-    adjust = .01;
+
+    adj = .01;
     $fn = 90;
     difference() {
         union() {
             color("tan") translate ([0,0,0]) linear_extrude(height = 1) import("./dxf/hk-network-card.dxf");
-            color("goldenrod") translate([3.75,17.85,1-adjust]) cylinder(d=6,h=3);
-            color("goldenrod") translate([106,24.85,1-adjust]) cylinder(d=6,h=3);
+            color("goldenrod") translate([3.75,17.85,1-adj]) cylinder(d=6,h=3);
+            color("goldenrod") translate([106,24.85,1-adj]) cylinder(d=6,h=3);
         }
-        translate([20.85,3.85,-adjust]) cylinder(d=3,h=4);
-        translate([3.75,17.85,-adjust]) cylinder(d=3,h=6);
-        translate([3.75,51.1,-adjust]) cylinder(d=3,h=4);
-        translate([20.15,43.85,-adjust]) cylinder(d=3,h=4);
-        translate([106,24.85,-adjust]) cylinder(d=3,h=6);
-        translate([96.5,3.85,-adjust]) cylinder(d=3,h=4);
+        translate([20.85,3.85,-adj]) cylinder(d=3,h=4);
+        translate([3.75,17.85,-adj]) cylinder(d=3,h=6);
+        translate([3.75,51.1,-adj]) cylinder(d=3,h=4);
+        translate([20.15,43.85,-adj]) cylinder(d=3,h=4);
+        translate([106,24.85,-adj]) cylinder(d=3,h=6);
+        translate([96.5,3.85,-adj]) cylinder(d=3,h=4);
     }
     rj45(26,-1,0,"bottom",1);
     rj45(43,-1,0,"bottom",1);
@@ -227,49 +291,73 @@ module h2_netcard() {
 }
 
 
-/* hk 3.5 lcd */
+/*
+           NAME: hk35_lcd
+    DESCRIPTION: hardkernel 3.5 lcd
+           TODO: none
+
+          USAGE: hk35_lcd()
+*/
+
 module hk35_lcd() {
-    
-    adjust = .01;
+
+    adj = .01;
     $fn = 90;
     difference() {
         union() {
             color("tan") translate ([0,0,0]) slab([95,56,1.7],3.5);
             color("black",1) translate([10.5,0,1.7]) cube([74.75,54.5,4]);
-            color("white",1) translate([8.5,0,5.7-adjust]) cube([82.75,54.5,2]);
-            color("grey",1) translate([8.5,0,7.7-adjust]) cube([82.75,54.5,.8]);
-            color("dimgrey",1) translate([15,2,8.5-adjust]) cube([75.5,51,.25]);
+            color("white",1) translate([8.5,0,5.7-adj]) cube([82.75,54.5,2]);
+            color("grey",1) translate([8.5,0,7.7-adj]) cube([82.75,54.5,.8]);
+            color("dimgrey",1) translate([15,2,8.5-adj]) cube([75.5,51,.25]);
         }
-        translate([3.5,3.5,-adjust]) cylinder(d=3,h=6);
-        translate([3.5,52.5,-adjust]) cylinder(d=3,h=4);
+        translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
+        translate([3.5,52.5,-adj]) cylinder(d=3,h=4);
     }
-    translate([3,8.75,1.70-adjust]) momentary45x15();
-    translate([3,19.75,1.70-adjust]) momentary45x15();
-    translate([3,30.75,1.70-adjust]) momentary45x15();
-    translate([3,41.75,1.70-adjust]) momentary45x15();
-    color("black") translate([7.375,.8,-9+adjust]) cube([51.5,5,9]);
-    translate([92.5,4,adjust]) rotate([0,180,0]) header(5);
+    translate([3,8.75,1.70-adj]) momentary45x15();
+    translate([3,19.75,1.70-adj]) momentary45x15();
+    translate([3,30.75,1.70-adj]) momentary45x15();
+    translate([3,41.75,1.70-adj]) momentary45x15();
+    color("black") translate([7.375,.8,-9+adj]) cube([51.5,5,9]);
+    translate([92.5,4,adj]) rotate([0,180,0]) header(5);
     }
 
 
-// hk console uart model
+/*
+           NAME: hk35_lcd
+    DESCRIPTION: hardkernel micro-usb console uart
+           TODO: none
+
+          USAGE: hk_uart()
+*/
+
 module hk_uart() {
-    
+
     size = [22,13,1.25];
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     color("tan") cube([size[0],size[1],size[2]]);
-    translate([6.5,.25,6.25-adjust]) rotate([90,180,-90]) uart_micro();
-    translate([6.75,3,-2+adjust])cylinder(d=1, 2);
-    translate([6.75,5.25,-2+adjust])cylinder(d=1, 2);
-    translate([6.75,7.5,-2+adjust])cylinder(d=1, 2);
-    translate([6.75,9.75,-2+adjust])cylinder(d=1, 2);
+    translate([6.5,.25,6.25-adj]) rotate([90,180,-90]) uart_micro();
+    translate([6.75,3,-2+adj])cylinder(d=1, 2);
+    translate([6.75,5.25,-2+adj])cylinder(d=1, 2);
+    translate([6.75,7.5,-2+adj])cylinder(d=1, 2);
+    translate([6.75,9.75,-2+adj])cylinder(d=1, 2);
     translate([23,2.75,1.25]) rotate([0,0,90]) usb_micro();
     translate([13,4.5,1.25]) rotate([0,0,90]) ic([4,4,1]);
 }
 
 
-// hk vu7c lcd display
+/*
+           NAME: hk_vu7c
+    DESCRIPTION: hardkernel vu7c lcd display
+           TODO: none
+
+          USAGE: hk_vu7c(gpio_ext, tabs)
+
+                         gpio_ext = true, false
+                             tabs = true, false
+*/
+
 module hk_vu7c(gpio_ext, tabs) {
     
     lcd_size = [164.85,100,5.48];
@@ -277,9 +365,10 @@ module hk_vu7c(gpio_ext, tabs) {
     view_size = [155,88.5,.125];        // 154.21 x 85.92
     hole = 3.2;
     length = 24-hole;
-    depth = 2;    
-    adjust = .1;
-    $fn = 90;    
+    depth = 2;
+    adj = .1;
+    $fn = 90;
+
     difference() {
         union() {
             color("lightgray") translate([0,0,pcb_size[2]+3.12]) cube(lcd_size);
@@ -291,26 +380,26 @@ module hk_vu7c(gpio_ext, tabs) {
                 color("black") translate([0,lcd_size[1]-pcb_size[1]-1,0]) 
                     cube([pcb_size[0]-20,pcb_size[1],pcb_size[2]]);
             }
-            color("black") translate([3,7.5,pcb_size[2]+3.12+lcd_size[2]-adjust]) cube(view_size);
+            color("black") translate([3,7.5,pcb_size[2]+3.12+lcd_size[2]-adj]) cube(view_size);
             // tabs
             color("black") translate([51.8,99,0]) slab_r([8,8,1.6],[.1,4,4,.1]);
             color("black") translate([104.8,99,0]) slab_r([8,8,1.6],[.1,4,4,.1]);
         }
         // slots
-        color("dimgray") translate([-(pcb_size[0]-lcd_size[0])/4,lcd_size[1]-1-7,-adjust]) 
+        color("dimgray") translate([-(pcb_size[0]-lcd_size[0])/4,lcd_size[1]-1-7,-adj]) 
             rotate([0,0,-90]) slot(hole,length,depth);
-        color("dimgray") translate([-(pcb_size[0]-lcd_size[0])/4,lcd_size[1]-1-46,-adjust]) 
+        color("dimgray") translate([-(pcb_size[0]-lcd_size[0])/4,lcd_size[1]-1-46,-adj]) 
             rotate([0,0,-90]) slot(hole,length,depth);
         color("dimgray") translate([(pcb_size[0]-(pcb_size[0]-lcd_size[0])/2)-(pcb_size[0]-lcd_size[0])/4,
-            lcd_size[1]-1-7,-adjust]) rotate([0,0,-90]) slot(hole,length,depth);
+            lcd_size[1]-1-7,-adj]) rotate([0,0,-90]) slot(hole,length,depth);
         color("dimgray") translate([(pcb_size[0]-(pcb_size[0]-lcd_size[0])/2)-(pcb_size[0]-lcd_size[0])/4,
-            lcd_size[1]-1-46,-adjust]) rotate([0,0,-90]) slot(hole,length,depth);
+            lcd_size[1]-1-46,-adj]) rotate([0,0,-90]) slot(hole,length,depth);
         // holes
-        color("dimgray") translate([55.8,103.5,-adjust]) cylinder(d=hole, h=3);
-        color("dimgray") translate([108.8,103.5,-adjust]) cylinder(d=hole, h=3);
+        color("dimgray") translate([55.8,103.5,-adj]) cylinder(d=hole, h=3);
+        color("dimgray") translate([108.8,103.5,-adj]) cylinder(d=hole, h=3);
         // pcb cuts
-        color("dimgray") translate([66,97.5,-adjust]) slab_r([20.3,4,2],[1,1,1,1]);
-        color("dimgray") translate([17.8,lcd_size[1]-pcb_size[1]-2,-adjust]) slab_r([78.8,6,2],[1,1,1,1]);
+        color("dimgray") translate([66,97.5,-adj]) slab_r([20.3,4,2],[1,1,1,1]);
+        color("dimgray") translate([17.8,lcd_size[1]-pcb_size[1]-2,-adj]) slab_r([78.8,6,2],[1,1,1,1]);
     }
     // components
     translate([70+14.5,28.58,0]) rotate([180,0,180]) hdmi_a();
@@ -330,16 +419,25 @@ module hk_vu7c(gpio_ext, tabs) {
     }
     else {
         translate([57.37-2,94.93-2,0]) rotate([180,0,90]) pcb_pad(20);
-        translate([57.37-2,92.39-2,0]) rotate([180,0,90]) pcb_pad(20);        
+        translate([57.37-2,92.39-2,0]) rotate([180,0,90]) pcb_pad(20);
     }
     translate([59,52.69,-1.59]) ic(9);
 }
 
 
-// hk vu8m lcd display
+/*
+           NAME: hk_vu8m
+    DESCRIPTION: hardkernel vu8m lcd display
+           TODO: none
+
+          USAGE: hk_vu8m(brackets)
+
+                         brackets = true, false
+*/
+
 module hk_vu8m(brackets) {
+
     $fn = 90;    
-    
     m1_screw_spacing = 72;
 
     body_size  = [    198,     133,                1.93];
@@ -427,7 +525,16 @@ module hk_vu8m(brackets) {
     }
 }
 
-// Vu8M LCD U-BRACKET
+
+/*
+           NAME: u_bracket
+    DESCRIPTION: hardkernel vu8m lcd brackets
+           TODO: none
+
+          USAGE: u_bracket()
+
+*/
+
 module u_bracket() {
     $fn= 30;
     xi = 124;
@@ -444,25 +551,25 @@ module u_bracket() {
     difference() {
         union() {
             hull() {
-                translate([          rlo,      rlo,0]) cylinder(r=rlo, h=z, $fn=100);     
-                translate([xo -      rlo,      rlo,0]) cylinder(r=rlo, h=z, $fn=100);     
+                translate([          rlo,      rlo,0]) cylinder(r=rlo, h=z, $fn=100);
+                translate([xo -      rlo,      rlo,0]) cylinder(r=rlo, h=z, $fn=100);
             }
             hull() {
-                translate([          ruo, yo - ruo,0]) cylinder(r=ruo, h=z);     
-                translate([     15 - rui, yo - rui,0]) cylinder(r=rui, h=z);     
+                translate([          ruo, yo - ruo,0]) cylinder(r=ruo, h=z);
+                translate([     15 - rui, yo - rui,0]) cylinder(r=rui, h=z);
                 translate([            0,      rlo,0]) cube([15,$fs,z]);
             }
             hull() {
-                translate([xo -      ruo, yo - ruo,0]) cylinder(r=ruo, h=z);     
-                translate([xo - 15 + rui, yo - rui,0]) cylinder(r=rui, h=z);     
+                translate([xo -      ruo, yo - ruo,0]) cylinder(r=ruo, h=z);
+                translate([xo - 15 + rui, yo - rui,0]) cylinder(r=rui, h=z);
                 translate([xo - 15      ,      rlo,0]) cube([15,$fs,z]);
             }
         }
         hull() {
-            translate([     15 + rli, yo - yi + rli,-1]) cylinder(r=rli, h=z+2);     
-            translate([xo - 15 - rli, yo - yi + rli,-1]) cylinder(r=rli, h=z+2);     
+            translate([     15 + rli, yo - yi + rli,-1]) cylinder(r=rli, h=z+2);
+            translate([xo - 15 - rli, yo - yi + rli,-1]) cylinder(r=rli, h=z+2);
             translate([           15,            yo,-1]) cube([xi,$fs,z+2]);
-        }    
+        }
         translate([     7.5, yo - 4, -1]) cylinder(d=3.21, h=z+2);
         translate([xo - 7.5, yo - 4, -1]) cylinder(d=3.21, h=z+2);
         hull() {
@@ -482,7 +589,15 @@ module u_bracket() {
     }
 }
 
-// hk vu8s lcd display
+
+/*
+           NAME: hk_vu8s
+    DESCRIPTION: hardkernel vu8s lcd display
+           TODO: none
+
+          USAGE: hk_vu8s()
+*/
+
 module hk_vu8s() {
     
     body_size  = [202, 133, 1.70];
@@ -496,8 +611,8 @@ module hk_vu8s() {
     pcb_size = [14,24,1.6];
     hole = 4.31;
     spacer_size = [5.5, 1.75+body_size[2], 2.5, 5.5, 1, 0, 1, 1, 0, 0, 0];
-    
-    $fn = 90;    
+
+    $fn = 90;
     adj = .01;
 
     // "body"
@@ -537,7 +652,7 @@ module hk_vu8s() {
             cube(lcd_size); 
 
     // Front glass
-    // It's actually thinner and glued, but for the sake of simplicity...
+    // It's actually thinner and glued, but for the sake of simplicity
     color([0.2, 0.2, 0.2], 0.9)
         translate([3, 1.25, body_size[2] + 0.01])
             slab(glass_size, rb);
@@ -556,8 +671,17 @@ module hk_vu8s() {
             cube([4,5,.1]);
 }
 
-// ODROID M1 2.5" SATA HDD mounting kit
+
+/*
+           NAME: m1_hdmount
+    DESCRIPTION: hardkernel odroid-m1 2.5" sata hdd mounting kit
+           TODO: none
+
+          USAGE: m1_hdmount()
+*/
+
 module m1_hdmount() {
+
     $fn   = 30;
     dims  = [89.6,   38.5,  2.0];
     holes = 4;
@@ -597,151 +721,169 @@ module m1_hdmount() {
     linear_extrude(height=0.01) text("HDD HOLDER",5);
 }
 
-/* hk speakers */
+
+/*
+           NAME: hk_speaker
+    DESCRIPTION: hardkernel speaker
+           TODO: none
+
+          USAGE: hk_speaker()
+*/
+
 module hk_speaker() {
-    
+
     spk_x = 44;
     spk_y = 20;
     spk_z = 98;
     c_hole = 6;
     i_dia = c_hole+3;
-    adjust = .1;
-    
+    adj = .1;
+
     difference() {
         translate([spk_x/2,spk_y/2,spk_z/2]) cube_fillet_inside([spk_x,spk_y,spk_z], 
             vertical=[0,0,0,0,0], top=[0,c_hole,0,c_hole], bottom=[0,c_hole,0,c_hole], $fn=90);
         // speaker cone
-        translate([spk_x/2,-adjust,spk_z-72]) rotate([-90,0,0]) cylinder(d=36, h=.5);
-        
+        translate([spk_x/2,-adj,spk_z-72]) rotate([-90,0,0]) cylinder(d=36, h=.5);
+
         // corner holes
-        translate([(c_hole/2)+2,-adjust,(c_hole/2)+2]) rotate([-90,0,0]) 
-            cylinder(d=c_hole, h=spk_y+(2*adjust));
-        translate([(c_hole/2)+2,-adjust,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
-            cylinder(d=c_hole, h=spk_y+(2*adjust));
-        translate([spk_x-(c_hole/2)-2,-adjust,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
-            cylinder(d=c_hole, h=spk_y+(2*adjust));
-        translate([spk_x-(c_hole/2)-2,-adjust,(c_hole/2)+2]) rotate([-90,0,0]) 
-            cylinder(d=c_hole, h=spk_y+(2*adjust));
-        
+        translate([(c_hole/2)+2,-adj,(c_hole/2)+2]) rotate([-90,0,0]) 
+            cylinder(d=c_hole, h=spk_y+(2*adj));
+        translate([(c_hole/2)+2,-adj,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
+            cylinder(d=c_hole, h=spk_y+(2*adj));
+        translate([spk_x-(c_hole/2)-2,-adj,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
+            cylinder(d=c_hole, h=spk_y+(2*adj));
+        translate([spk_x-(c_hole/2)-2,-adj,(c_hole/2)+2]) rotate([-90,0,0]) 
+            cylinder(d=c_hole, h=spk_y+(2*adj));
+
         // lower left corner indent
-        translate([(c_hole/2)+2,-adjust,(c_hole/2)+2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([-adjust-1,-adjust,-adjust]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([adjust+.5,-adjust,-(i_dia/2)+adjust]) cube([i_dia+adjust,10+adjust,i_dia+adjust+.5]);        
-        translate([(c_hole/2)+2,-adjust+12+adjust,(c_hole/2)+2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([-adjust-1,-adjust+12+adjust,-adjust]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([adjust+.5,-adjust+12+adjust,-(i_dia/2)+adjust]) cube([i_dia+adjust,10+adjust,i_dia+adjust+.5]);
- 
+        translate([(c_hole/2)+2,-adj,(c_hole/2)+2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([-adj-1,-adj,-adj]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([adj+.5,-adj,-(i_dia/2)+adj]) cube([i_dia+adj,10+adj,i_dia+adj+.5]);
+        translate([(c_hole/2)+2,-adj+12+adj,(c_hole/2)+2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([-adj-1,-adj+12+adj,-adj]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([adj+.5,-adj+12+adj,-(i_dia/2)+adj]) cube([i_dia+adj,10+adj,i_dia+adj+.5]);
+
         // upper left corner corner indent
-        translate([(c_hole/2)+2,-adjust,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([-adjust-1,-adjust,spk_z-i_dia-.5]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([-adjust+.5,-adjust,spk_z-(i_dia/2)+adjust-.5]) cube([i_dia,10+adjust,i_dia+adjust+.5]);
-        translate([(c_hole/2)+2,-adjust+12,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([-adjust-1,-adjust+12,spk_z-i_dia-.5]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([-adjust+.5,-adjust+12,spk_z-(i_dia/2)+adjust-.5]) cube([i_dia,10+adjust,i_dia+adjust+.5]);
-        
+        translate([(c_hole/2)+2,-adj,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([-adj-1,-adj,spk_z-i_dia-.5]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([-adj+.5,-adj,spk_z-(i_dia/2)+adj-.5]) cube([i_dia,10+adj,i_dia+adj+.5]);
+        translate([(c_hole/2)+2,-adj+12,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([-adj-1,-adj+12,spk_z-i_dia-.5]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([-adj+.5,-adj+12,spk_z-(i_dia/2)+adj-.5]) cube([i_dia,10+adj,i_dia+adj+.5]);
+
         // upper right corner corner indent
-        translate([spk_x-(c_hole/2)-2,-adjust,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([spk_x-1-(i_dia/2),-adjust,spk_z-i_dia+adjust-.5]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([spk_x-.5-i_dia,-adjust,spk_z-(i_dia/2)+adjust-.5]) cube([i_dia,10+adjust,i_dia+adjust+.5]);
-        translate([spk_x-(c_hole/2)-2,-adjust+12,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([spk_x-1-(i_dia/2),-adjust+12,spk_z-i_dia+adjust-.5]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([spk_x-.5-i_dia,-adjust+12,spk_z-(i_dia/2)+adjust-.5]) cube([i_dia,10+adjust,i_dia+adjust+.5]);
-      
+        translate([spk_x-(c_hole/2)-2,-adj,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([spk_x-1-(i_dia/2),-adj,spk_z-i_dia+adj-.5]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([spk_x-.5-i_dia,-adj,spk_z-(i_dia/2)+adj-.5]) cube([i_dia,10+adj,i_dia+adj+.5]);
+        translate([spk_x-(c_hole/2)-2,-adj+12,spk_z-(c_hole/2)-2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([spk_x-1-(i_dia/2),-adj+12,spk_z-i_dia+adj-.5]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([spk_x-.5-i_dia,-adj+12,spk_z-(i_dia/2)+adj-.5]) cube([i_dia,10+adj,i_dia+adj+.5]);
+
         // lower right corner corner indent
-        translate([spk_x-(c_hole/2)-2,-adjust,(c_hole/2)+2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([spk_x-1-(i_dia/2),-adjust,-adjust]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([spk_x-.5-i_dia,-adjust,-(i_dia/2)+adjust]) cube([i_dia,10+adjust,i_dia+adjust+.5]);
-        translate([spk_x-(c_hole/2)-2,-adjust+12,(c_hole/2)+2]) rotate([-90,0,0]) 
-            cylinder(d=i_dia, h=10+adjust);
-        translate([spk_x-1-(i_dia/2),-adjust+12,-adjust]) cube([c_hole+adjust,10+adjust,i_dia+adjust+.5]);
-        translate([spk_x-.5-i_dia,-adjust+12,-(i_dia/2)+adjust]) cube([i_dia,10+adjust,i_dia+adjust+.5]);            
+        translate([spk_x-(c_hole/2)-2,-adj,(c_hole/2)+2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([spk_x-1-(i_dia/2),-adj,-adj]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([spk_x-.5-i_dia,-adj,-(i_dia/2)+adj]) cube([i_dia,10+adj,i_dia+adj+.5]);
+        translate([spk_x-(c_hole/2)-2,-adj+12,(c_hole/2)+2]) rotate([-90,0,0]) 
+            cylinder(d=i_dia, h=10+adj);
+        translate([spk_x-1-(i_dia/2),-adj+12,-adj]) cube([c_hole+adj,10+adj,i_dia+adj+.5]);
+        translate([spk_x-.5-i_dia,-adj+12,-(i_dia/2)+adj]) cube([i_dia,10+adj,i_dia+adj+.5]);
         }
         // speaker cone
-        translate([spk_x/2,-adjust+46,spk_z-72]) {
+        translate([spk_x/2,-adj+46,spk_z-72]) {
             difference() {
                 translate([0,0,0]) sphere(d=96, $fn=180);
                 translate([-50,-46,-50]) cube([100,100,100]);
             }
         }
-
     }
 
-    
-/* hk boom bonnet */
-module hk_boom(speakers,orientation) {
-    
-    adjust = .01;
+
+/*
+           NAME: hk_boom
+    DESCRIPTION: hardkernel boom bonnet
+           TODO: none
+
+          USAGE: hk_boom(speakers, orientation)
+
+                         speakers = true, false
+                      orientation = "front", "rear"
+*/
+
+module hk_boom(speakers, orientation) {
+
+    adj = .01;
     $fn = 90;
+
     difference() {
         union() {
             color("tan") translate ([0,0,0]) slab([60,35,1.6],.5);
             if(speakers == true) {
                 color("tan") translate ([-31.5,0,0]) slab([31.5,35,1.6],.5);
                 color("white") translate ([-0.25,0,0]) cube([.5,35,1.6]);
-                color("tan") translate ([60,0,0]) slab([31.5,35,1.6],.5);                
+                color("tan") translate ([60,0,0]) slab([31.5,35,1.6],.5);
                 color("white") translate ([60,0,0]) cube([.5,35,1.6]);
             }
         }
         // pcb holes
-        color("tan") translate([3.5,3.5,-adjust]) cylinder(d=3,h=6);
-        color("tan") translate([3.5,31.5,-adjust]) cylinder(d=3,h=6);
-        color("tan") translate([56.5,3.5,-adjust]) cylinder(d=3,h=4);
-        color("tan") translate([56.5,31.5,-adjust]) cylinder(d=3,h=4);
+        color("tan") translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
+        color("tan") translate([3.5,31.5,-adj]) cylinder(d=3,h=6);
+        color("tan") translate([56.5,3.5,-adj]) cylinder(d=3,h=4);
+        color("tan") translate([56.5,31.5,-adj]) cylinder(d=3,h=4);
         if(speakers == true) {
             // left
-            color("tan") translate([-28,3.5,-adjust]) cylinder(d=3,h=6);
-            color("tan") translate([-28,31.5,-adjust]) cylinder(d=3,h=6);
-            color("tan") translate([-3.5,3.5,-adjust]) cylinder(d=3,h=6);
-            color("tan") translate([-3.5,31.5,-adjust]) cylinder(d=3,h=6);
+            color("tan") translate([-28,3.5,-adj]) cylinder(d=3,h=6);
+            color("tan") translate([-28,31.5,-adj]) cylinder(d=3,h=6);
+            color("tan") translate([-3.5,3.5,-adj]) cylinder(d=3,h=6);
+            color("tan") translate([-3.5,31.5,-adj]) cylinder(d=3,h=6);
             // right
-            color("tan") translate([64.5,3.5,-adjust]) cylinder(d=3,h=4);
-            color("tan") translate([64.5,31.5,-adjust]) cylinder(d=3,h=4);
-            color("tan") translate([88,3.5,-adjust]) cylinder(d=3,h=4);
-            color("tan") translate([88,31.5,-adjust]) cylinder(d=3,h=4);
+            color("tan") translate([64.5,3.5,-adj]) cylinder(d=3,h=4);
+            color("tan") translate([64.5,31.5,-adj]) cylinder(d=3,h=4);
+            color("tan") translate([88,3.5,-adj]) cylinder(d=3,h=4);
+            color("tan") translate([88,31.5,-adj]) cylinder(d=3,h=4);
             // left speaker openings
-            color("tan") translate([-31.5/2,35/2,-adjust]) cylinder(d=23.5, h=3);
-            color("tan") translate([-4-31.5/2,35/2+(23.5/2)-.5,-adjust]) cube([6,3,3]);
-            color("tan") translate([-4-31.5/2,35/2-(23.5/2)-2.5,-adjust]) cube([6,3,3]);
-            color("tan") translate([-4-31.5/2+(23.5/2)+1,-2+35/2,-adjust]) cube([6,3,3]);
+            color("tan") translate([-31.5/2,35/2,-adj]) cylinder(d=23.5, h=3);
+            color("tan") translate([-4-31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+            color("tan") translate([-4-31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+            color("tan") translate([-4-31.5/2+(23.5/2)+1,-2+35/2,-adj]) cube([6,3,3]);
             // right speaker openings
-            color("tan") translate([60+(31.5/2),35/2,-adjust]) cylinder(d=23.5, h=3);
-            color("tan") translate([60-3+31.5/2,35/2+(23.5/2)-.5,-adjust]) cube([6,3,3]);
-            color("tan") translate([60-3+31.5/2,35/2-(23.5/2)-2.5,-adjust]) cube([6,3,3]);
-            color("tan") translate([60+1.25,-2+35/2,-adjust]) cube([6,3,3]);
+            color("tan") translate([60+(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
+            color("tan") translate([60-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+            color("tan") translate([60-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+            color("tan") translate([60+1.25,-2+35/2,-adj]) cube([6,3,3]);
         }
     }
     // headers
-    translate([7.5,3.5,1.6-adjust]) rotate([0,0,-90]) header(3);
-    translate([16,3.5,1.6-adjust]) rotate([0,0,-90]) header(7);
-    translate([34,2,1.6-adjust]) rotate([0,0,0]) encl_header_12();
-    translate([40,13.5,1.6-adjust]) rotate([0,0,-90]) header(2);
-    translate([45.5,13.5,1.6-adjust]) rotate([0,0,-90]) header(2);
+    translate([7.5,3.5,1.6-adj]) rotate([0,0,-90]) header(3);
+    translate([16,3.5,1.6-adj]) rotate([0,0,-90]) header(7);
+    translate([34,2,1.6-adj]) rotate([0,0,0]) encl_header_12();
+    translate([40,13.5,1.6-adj]) rotate([0,0,-90]) header(2);
+    translate([45.5,13.5,1.6-adj]) rotate([0,0,-90]) header(2);
     difference() {
         union() {
             color("dimgray", 1) translate([44.5,27,1.6+2]) rotate([0,0,0]) cylinder(d=16, h=3);
             color("dimgray", 1) translate([44.5,27,1.6]) rotate([0,0,0]) cylinder(d=8, h=2);
         }
-        color("dimgray", 1) translate([44.5,27,1.6+4]) rotate([0,0,0]) cylinder(d=12, h=3);     
+        color("dimgray", 1) translate([44.5,27,1.6+4]) rotate([0,0,0]) cylinder(d=12, h=3);
         for(d=[5:10:360]) {
-            color("dimgray") translate([44.5+(16/2)*cos(d),27+(16/2)*sin(d),1.6+2-adjust]) cylinder(d=.75, h=3+2*adjust);
-        }  
+            color("dimgray") translate([44.5+(16/2)*cos(d),27+(16/2)*sin(d),1.6+2-adj]) cylinder(d=.75, h=3+2*adj);
+        }
     }
-    color("gray", 1) translate([45,27,1.6+4-adjust]) rotate([0,0,0]) cylinder(d=1.5, h=.25);
-    translate([3.75,13,1.6-adjust]) rotate([0,0,90]) micro2pin();
-    translate([56.5,20.5,1.6-adjust]) rotate([0,0,-90]) micro2pin();
-    translate([7.75,21.75,1.6-adjust]) audio_jack35();
-    translate([20,30,1.6-adjust]) capacitor(6.25,6.5);
-    translate([30,30,1.6-adjust]) capacitor(6.25,6.5);
-    translate([22,16,1.6-adjust]) ic([6.5,4.5,1]);
-    translate([10,12,1.6-adjust]) ic([4,4,1]);
-    translate([32.5,9,1.6-adjust]) ic([3.5,3,1]);
+    color("gray", 1) translate([45,27,1.6+4-adj]) rotate([0,0,0]) cylinder(d=1.5, h=.25);
+    translate([3.75,13,1.6-adj]) rotate([0,0,90]) micro2pin();
+    translate([56.5,20.5,1.6-adj]) rotate([0,0,-90]) micro2pin();
+    translate([7.75,21.75,1.6-adj]) audio_jack35();
+    translate([20,30,1.6-adj]) capacitor(6.25,6.5);
+    translate([30,30,1.6-adj]) capacitor(6.25,6.5);
+    translate([22,16,1.6-adj]) ic([6.5,4.5,1]);
+    translate([10,12,1.6-adj]) ic([4,4,1]);
+    translate([32.5,9,1.6-adj]) ic([3.5,3,1]);
     if(speakers == true && orientation == "rear") {
         translate([-31.5/2,35/2,1.6]) boom_speaker();
         translate([60+(31.5/2),35/2,1.6]) boom_speaker();
@@ -753,72 +895,100 @@ module hk_boom(speakers,orientation) {
 }
 
 
-// hk stero boom bonnet speaker with board
-module hk_boom_speaker(side,speaker,pcb) {
+/*
+           NAME: hk_boom
+    DESCRIPTION: hardkernel stereo boom bonnet pcb and speakers
+           TODO: none
 
-    adjust = .01;
+          USAGE: hk_boom_speaker(side, speaker, pcb)
+
+                                 side = "left, "right"
+                             speakers = true, false
+                          orientation = "front", "rear"
+*/
+
+module hk_boom_speaker(side, speaker, pcb) {
+
+    adj = .01;
     $fn = 90;
 
     if(pcb == true) {
         difference() {
             color("tan") slab([31.5,35,1.6],.5);
-            color("tan") translate([27.5,4,-adjust]) cylinder(d=3,h=6);
-            color("tan") translate([27.5,31,-adjust]) cylinder(d=3,h=6);
-            color("tan") translate([4,4,-adjust]) cylinder(d=3,h=6);
-            color("tan") translate([4,31,-adjust]) cylinder(d=3,h=6);
+            color("tan") translate([27.5,4,-adj]) cylinder(d=3,h=6);
+            color("tan") translate([27.5,31,-adj]) cylinder(d=3,h=6);
+            color("tan") translate([4,4,-adj]) cylinder(d=3,h=6);
+            color("tan") translate([4,31,-adj]) cylinder(d=3,h=6);
             
             // speaker openings
-            color("tan") translate([(31.5/2),35/2,-adjust]) cylinder(d=23.5, h=3);
-            color("tan") translate([-3+31.5/2,35/2+(23.5/2)-.5,-adjust]) cube([6,3,3]);
-            color("tan") translate([-3+31.5/2,35/2-(23.5/2)-2.5,-adjust]) cube([6,3,3]);
+            color("tan") translate([(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
+            color("tan") translate([-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+            color("tan") translate([-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
             if(side == "right") {
-                color("tan") translate([.5,-2+35/2,-adjust]) cube([6,3,3]);
+                color("tan") translate([.5,-2+35/2,-adj]) cube([6,3,3]);
             }
             if(side == "left") {
-                color("tan") translate([31.5/2+(23.5/2)-2.5,-2+35/2,-adjust]) cube([6,3,3]);
+                color("tan") translate([31.5/2+(23.5/2)-2.5,-2+35/2,-adj]) cube([6,3,3]);
             }
         }
     }
     if(speaker == true && pcb == true) {
-        translate([(31.5/2),35/2,1.6]) boom_speaker();        
+        translate([(31.5/2),35/2,1.6]) boom_speaker();
     }
     if(speaker == true && pcb == false) {
-        boom_speaker();        
+        boom_speaker();
     }
 }
 
 
-// hk stero boom bonnet speakers
+/*
+           NAME: hk_boom
+    DESCRIPTION: hardkernel stereo boom bonnet speakers
+           TODO: none
+
+          USAGE: boom_speaker()
+*/
+
 module boom_speaker() {
 
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     difference() {
         union() {
             color("silver") translate([0,0,-8.5]) cylinder_fillet_inside(h=6.5, r=21.4/2, 
                 top=0, bottom=2, $fn=90, fillet_fn=30, center=false);
-            color("dimgray") translate([0,0,2.5-adjust]) cylinder_fillet_inside(h=1, r=21.75/2, 
+            color("dimgray") translate([0,0,2.5-adj]) cylinder_fillet_inside(h=1, r=21.75/2, 
                 top=1, bottom=0, $fn=90, fillet_fn=30, center=true);
-  
-            difference() {                
-                color("black") translate([0,0,-5-adjust]) cylinder(d=23.7, h=5);
+
+            difference() {
+                color("black") translate([0,0,-5-adj]) cylinder(d=23.7, h=5);
                 for(d=[30:60:360]) {
-                    color("dimgray") translate([(23.7/2)*cos(d),(23.7/2)*sin(d),-6-adjust]) cylinder(d=6, h=5+2*adjust);
+                    color("dimgray") translate([(23.7/2)*cos(d),(23.7/2)*sin(d),-6-adj]) cylinder(d=6, h=5+2*adj);
                 }
-            }                
-            color("black") translate([0,0,-adjust]) cylinder(d=27.8, h=2);
+            }
+            color("black") translate([0,0,-adj]) cylinder(d=27.8, h=2);
             color("dimgray") translate([0,0,1]) cylinder(d=22.8, h=1);
             color("dimgray") translate([0,0,1]) cylinder(d=17.5, h=1.25);
         }
         color("darkgray") translate([0,0,10.5]) sphere(d=23);
-    }  
+    }
 }
 
 
-// hk boom bonnet speaker grill
-module hk_boom_grill(style,thick) {
+/*
+           NAME: hk_boom_grill
+    DESCRIPTION: hardkernel stereo boom bonnet speaker grill
+           TODO: none
 
-    adjust = .01;
+          USAGE: hk_boom_grill(style, thick)
+
+                               style = "flat", "frame", "dome"
+                               thick = material thickness
+*/
+
+module hk_boom_grill(style, thick) {
+
+    adj = .01;
     $fn = 90;
     if(style == "dome" || style == "frame") {
         difference() {
@@ -836,7 +1006,7 @@ module hk_boom_grill(style,thick) {
                 if(style == "frame") {
                     difference() {
                         translate([0,0,-1.25]) cylinder(d=30.5, h=thick);
-                        translate([0,0,-1.25-adjust]) cylinder(d=24, h=thick+2*adjust);      
+                        translate([0,0,-1.25-adj]) cylinder(d=24, h=thick+2*adj);
                     }
                 }
             }
@@ -855,22 +1025,32 @@ module hk_boom_grill(style,thick) {
 }
 
 
-// hk stero boom bonnet speaker holder
+/*
+           NAME: hk_boom_grill
+    DESCRIPTION: hardkernel stereo boom bonnet speaker holder
+           TODO: none
+
+          USAGE: boom_speaker_holder(style, tolerance)
+
+                               style = "friction", "clamp"
+                           tolerance = friction adjustment
+*/
+
 module boom_speaker_holder(style, tolerance) {
 
-    adjust = .01;
+    adj = .01;
     $fn = 90;
 
     if(style == "friction") {
         difference() {
             translate([0,0,0]) cylinder(d=31, h=4);
-            translate([0,0,-adjust]) cylinder(d=28+tolerance, h=4+2*adjust);
-            translate([0,-1,-adjust]) cube([15,40,10], center=true);
+            translate([0,0,-adj]) cylinder(d=28+tolerance, h=4+2*adj);
+            translate([0,-1,-adj]) cube([15,40,10], center=true);
         }  
         difference() {
             translate([0,0,0]) cylinder(d=28+tolerance, h=2);
-            translate([0,0,-adjust]) cylinder(d=28+tolerance-2, h=4+2*adjust);                
-            translate([0,-1,-adjust]) cube([15,40,10], center=true);
+            translate([0,0,-adj]) cylinder(d=28+tolerance-2, h=4+2*adj);
+            translate([0,-1,-adj]) cube([15,40,10], center=true);
         }
     }
 
@@ -884,17 +1064,26 @@ module boom_speaker_holder(style, tolerance) {
                 translate([-1,14.5,14]) rotate([0,90,0]) cylinder(d=28, h=4.5);
                 translate([2,14.5,14]) rotate([0,90,0]) cylinder(d=24, h=6);
                 translate([4,14.5,14]) rotate([0,90,0]) cylinder(d=21.9, h=7.8);
-        }        
+        }
     }
 }
 
 
-// hk stero boom bonnet speaker clamp holder top
+/*
+           NAME: boom_speaker_strap
+    DESCRIPTION: hardkernel stereo boom bonnet speaker clamp holder top
+           TODO: none
+
+          USAGE: boom_speaker_strap(side)
+
+                                    side = "left", "right"
+*/
+
 module boom_speaker_strap(side) {
 
     topthick = 2;
     top_height = 14;
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     // top clamp
     difference() {
@@ -908,56 +1097,76 @@ module boom_speaker_strap(side) {
                 if(side == "right") {
                     translate([5.4,13,top_height+(topthick/2)-1]) cube_fillet_inside([16.75,55,topthick], 
                         vertical=[1,6,1,1], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
-                }        
-            translate([10.75-adjust,14.5,top_height]) rotate([0,90,0]) cylinder(d=35,h=3);
+                }
+            translate([10.75-adj,14.5,top_height]) rotate([0,90,0]) cylinder(d=35,h=3);
             }
-            translate([-9.25,0,top_height-topthick-adjust]) cube([20,29,topthick]);
+            translate([-9.25,0,top_height-topthick-adj]) cube([20,29,topthick]);
             difference() {
                 translate([-4.25,14.5,14]) rotate([0,90,0]) cylinder(d=28, h=15);
                 translate([-5.25,0,19]) cube([20,30,19.5]);
             }
         }
         // speaker holders
-        translate([-3-adjust,14.5,14]) rotate([0,90,0]) cylinder(d=30.8, h=4.5);
-        translate([-3-adjust,14.5,14]) rotate([0,90,0]) cylinder(d=32.8, h=2);
+        translate([-3-adj,14.5,14]) rotate([0,90,0]) cylinder(d=30.8, h=4.5);
+        translate([-3-adj,14.5,14]) rotate([0,90,0]) cylinder(d=32.8, h=2);
         translate([-2.75,14.5,14]) rotate([0,90,0]) cylinder(d=28, h=14.5);
         translate([-4.55,-4,-4]) cube([20,37,topthick+15]);
 
         if(side == "left") {
-            translate([4.15,-3.4,-adjust]) cylinder(d=3.2, h=50);
+            translate([4.15,-3.4,-adj]) cylinder(d=3.2, h=50);
             translate([4.15,-3.4,15]) cylinder(d=6, h=10);
-            translate([5.75,40,-adjust]) cylinder(d=3.2, h=50);
+            translate([5.75,40,-adj]) cylinder(d=3.2, h=50);
         }
         if(side == "right") {
-            translate([4.5,32.5,-adjust]) cylinder(d=3.2, h=50);
+            translate([4.5,32.5,-adj]) cylinder(d=3.2, h=50);
             translate([4.5,32.5,15]) cylinder(d=6, h=10);
-            translate([10.5,-11,-adjust]) cylinder(d=3.2, h=50);
+            translate([10.5,-11,-adj]) cylinder(d=3.2, h=50);
         }
     }
 }
 
 
-// hk stero boom bonnet volume ring 
+/*
+           NAME: boom_vring
+    DESCRIPTION: hardkernel stereo boom bonnet volume ring
+           TODO: none
+
+          USAGE: boom_vring(tolerance)
+
+                            tolerance = friction fit adjustment
+*/
+
 module boom_vring(tolerance) {
 
     out_dia = 22;
     in_dia = 16.15 + tolerance;
     thick = 3;
     nub = 1.25;
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     difference() {
         color("black") translate([0,0,0])cylinder(d=out_dia, h=thick);
-        color("dimgray") translate([0,0,-adjust]) cylinder(d=in_dia, h=thick+2*adjust);
+        color("dimgray") translate([0,0,-adj]) cylinder(d=in_dia, h=thick+2*adj);
         for(d=[5:10:360]) {
-            color("dimgray") translate([(out_dia/2)*cos(d),(out_dia/2)*sin(d),-adjust]) cylinder(d=nub, h=thick+2*adjust);
+            color("dimgray") translate([(out_dia/2)*cos(d),(out_dia/2)*sin(d),-adj]) cylinder(d=nub, h=thick+2*adj);
         }
-    }  
+    }
 }
-// hk power button
+
+
+/*
+           NAME: hk_pwr_button
+    DESCRIPTION: hardkernel power button
+           TODO: none
+
+          USAGE: hk_pwr_button(mask = false)
+
+                               mask = opening mask
+*/
+
 module hk_pwr_button(mask = false) {
-    
-    adjust=.01;
+
+    adj=.01;
     $fn = 90;
 
     if(mask == true) {
@@ -987,7 +1196,7 @@ module hk_pwr_button(mask = false) {
                     color("steelblue") translate([-1-15.8/2, -4, -19-9.1]) cube([2,8,6.1]);
                 }
                 color("white") translate([-3.5, -6, -28]) cube([7,12,2]);
-                
+
                 // nut
                 difference() {
                     translate([0, 0, -4.75]) color("Gainsboro", .6) cylinder(h=2.75, d=21.5, $fn=6);
@@ -1004,14 +1213,22 @@ module hk_pwr_button(mask = false) {
     }
 }
 
-// hk m1s ups
-module hk_m1s_ups() {
-    
-    pcb_size = [115,32,1.62];
 
+/*
+           NAME: hk_m1s_ups
+    DESCRIPTION: hardkernel odroid-m1s ups
+           TODO: none
+
+          USAGE: hk_m1s_ups()
+
+*/
+
+module hk_m1s_ups() {
+
+    pcb_size = [115,32,1.62];
     adj = .01;
     $fn = 90;
-    
+
     difference() {
         union() {
             color("#008066") slab(pcb_size,4);
@@ -1029,32 +1246,39 @@ module hk_m1s_ups() {
    color("silver") translate([15,5,pcb_size[2]]) rotate([0,0,270]) battery_clip();
    color("silver") translate([80,16,pcb_size[2]]) rotate([0,0,90]) battery_clip();
    translate([13.25,10.5,pcb_size[2]+10.4]) rotate([0,90,0]) battery("18650_convex");
-   
+
    translate([86.75,.5,pcb_size[2]]) momentary45x15();
    translate([97.5,-1,pcb_size[2]]) usbc();
-   
+
    translate([35,28,pcb_size[2]]) led("DodgerBlue");
    translate([40,28,pcb_size[2]]) led("DodgerBlue");
    translate([45,28,pcb_size[2]]) led("DodgerBlue");
    translate([50,28,pcb_size[2]]) led("DodgerBlue");
- 
+
    translate([113,8,pcb_size[2]]) rotate([0,0,90]) led("green");
    translate([113,16,pcb_size[2]])  rotate([0,0,90]) led();
    translate([113,21,pcb_size[2]])  rotate([0,0,90]) led();
-   
+
    translate([78,29,pcb_size[2]]) rotate([0,0,270])header(7);
    translate([78,31.5,pcb_size[2]]) rotate([0,0,270])header(7);
 }
 
 
-// prototype board, ups footprint
-module proto_ups() {
-    
-    pcb_size = [115,32,1.62];
+/*
+           NAME: proto_ups
+    DESCRIPTION: prototype board with odroid-m1s ups footprint
+           TODO: none
 
+          USAGE: proto_ups()
+
+*/
+
+module proto_ups() {
+
+    pcb_size = [115,32,1.62];
     adj = .01;
     $fn = 90;
-    
+
     union() {
         difference() {
             union() {
@@ -1077,14 +1301,21 @@ module proto_ups() {
 }
 
 
-// prototype board, m1s footprint
-module proto_m1s() {
-    
-    pcb_size = [90,65,1.62];
+/*
+           NAME: proto_m1s
+    DESCRIPTION: prototype board with odroid-m1s footprint 
+           TODO: none
 
+          USAGE: proto_m1s()
+
+*/
+
+module proto_m1s() {
+
+    pcb_size = [90,65,1.62];
     adj = .01;
     $fn = 90;
-    
+
     union() {
         difference() {
             union() {
@@ -1106,7 +1337,18 @@ module proto_m1s() {
    }
 }
 
-module hk_m1s_case_holes(type="landscape") {
+
+/*
+           NAME: hk_m1s_case_holes
+    DESCRIPTION: hardkernel odroid-m1s oem case hole pattern 
+           TODO: none
+
+          USAGE: hk_m1s_case_holes(type = "landscape")
+
+                                   type = "landscape", "portrait"
+*/
+
+module hk_m1s_case_holes(type = "landscape") {
     
     if(type == "portrait") {
         cylinder(d=3, h=6);

@@ -1,14 +1,39 @@
 /*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
 
-    pcb_holder(size,wallthick)
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
+
+    pcb_holder(size, wallthick)
     nut_holder(nut, style, dia_x, dia_y, height)
-    vu_holder(vu_model,side,vesa,cheight)
+    vu_holder(vu_model, side, vesa, cheight)
 
 */
 
-// pcb bottom edge holder
-module pcb_holder(size,wallthick) {
-    
+/*
+           NAME: pcb_holder
+    DESCRIPTION: pcb bottom edge holder
+           TODO: none
+
+          USAGE: pcb_holder(size, wallthick)
+
+                           size = width of holder
+                      wallthick = holder wall thickness
+*/
+
+module pcb_holder(size, wallthick) {
+
     adjust=.01;
     $fn = 90;    
     difference() {
@@ -31,19 +56,25 @@ module pcb_holder(size,wallthick) {
         }
         translate([-.5,0,2]) cube([size[0]+1,size[2],5]);
         translate([6,-adjust-5-1.75,-adjust]) cube([size[0]-12,14,8]);
-    }   
+    }
 }
 
-//
-// nut_holder(nut, style, dia_x, dia_y, height)
-//            nut = "m2", "m2.5", "m3", "m4"
-//            style = "default", "sloped", "trap"
-//            dia_x = top diameter or x size in mm
-//            dia_y = bottom diameter or y size in mm
-//            height = holder height in mm
-//
-module nut_holder(nut, style, dia_x, dia_y, height) {
 
+/*
+           NAME: nut_holder
+    DESCRIPTION: creates various nut holders
+           TODO: none
+
+          USAGE: nut_holder(nut, style, dia_x, dia_y, height)
+
+                            nut = "m2", "m2.5", "m3", "m4"
+                          style = "default", "sloped", "trap"
+                          dia_x = top diameter or x size in mm
+                          dia_y = bottom diameter or y size in mm
+                         height = holder height in mm
+*/
+
+module nut_holder(nut, style, dia_x, dia_y, height) {
 
 nuts = [[2,4,1.6],         // m2 size, diameter, height
         [2.5,5,2],         // m2.5 size, diameter, height
@@ -51,7 +82,7 @@ nuts = [[2,4,1.6],         // m2 size, diameter, height
         [4,7,3.2]];        // m4 size, diameter, height
 
 $fn = 180;
-    
+
     if( style == "default") {
         difference() {
             cylinder(d=dia_x, h=height);
@@ -130,7 +161,21 @@ $fn = 180;
     }
 }
 
-module vu_holder(vu_model,side,vesa,cheight) {
+
+/*
+           NAME: vu_holder
+    DESCRIPTION: hk vu5,vu5a,vu7,vu7a display holder
+           TODO: none
+
+          USAGE: vu_holder(vu_model, side, vesa, cheight)
+
+                           vu_model = "vu5", "vu7"
+                               side = "left", "right"
+                               vesa = 75 for vu5, 100 for vu7
+                            cheight = case_z+90 for vu5, case_z+122 for vu7
+*/
+
+module vu_holder(vu_model, side, vesa, cheight) {
 
 //cheight = case_z+90;
 v_fillet = 3;

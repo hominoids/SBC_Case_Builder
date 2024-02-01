@@ -15,7 +15,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    access_port(size, orientation)
+    access_cover(size, orientation)
 
+*/
+
+/*
            NAME: access_port
     DESCRIPTION: creates opening and structure for access openings
            TODO: none
@@ -29,7 +34,7 @@
 */
 
 module access_port(size, orientation) {
-    
+
     floorthick = size[2];
     adj = .01;
     $fn = 90;
@@ -97,7 +102,7 @@ module access_port(size, orientation) {
 */
 
 module access_cover(size, orientation) {
-    
+
     floorthick = size[2];
     adj = .01;
     $fn = 90;

@@ -1,13 +1,38 @@
 /*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
     h3_port_extender(style, mask = false)
-    h3_port_extender_holder(part,offset)
+    h3_port_extender_holder(part, offset)
 
 */
 
-// @mctom's odroid-h3 gpio port extender
+/*
+           NAME: h3_port_extender
+    DESCRIPTION: @mctom's odroid-h3 gpio port extender
+           TODO: none
+
+          USAGE: h3_port_extender(style, mask = false)
+
+                                  style = "header", "remote"
+                                   mask = true or false, mask for openings
+*/
+
 module h3_port_extender(style, mask = false) {
-    
+
     adjust=.01;
     $fn = 90;
 
@@ -48,15 +73,21 @@ module h3_port_extender(style, mask = false) {
 
 
 /*
-// h3_port_extender_holder(part, offset)
-// part = "both","top","bottom"
-// offset = projection from inside wall in mm
-// holder for the @mctom's remote h3 port extender
+           NAME: h3_port_extender
+    DESCRIPTION: holder for the @mctom's remote h3 port extender
+           TODO: none
+
+          USAGE: h3_port_extender_holder(part, offset)
+
+                                         part = "top","bottom","both"
+                                         mask = true or false, mask for openings
 */
+
 module h3_port_extender_holder(part,offset=2) {
 
-    adjust = .01;
     size = [16-offset,40,5.5];
+    adjust = .01;
+
     if(part == "bottom" || part == "both") {
         difference() {
             translate([-10+offset,-3.5,2]) cube(size);

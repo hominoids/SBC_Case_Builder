@@ -1,14 +1,40 @@
 /*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
     battery(type)
     battery_clip(bat_dia = 18.4)
-    batt_holder(tolerance)
+    module batt_holder(tolerance)
 
+*/
+
+/*
+           NAME: battery
+    DESCRIPTION: creates 18650 and 21700 batteries
+           TODO: none
+
+          USAGE: battery(type)
+
+                         type = "18650", "18650_convex", "21700"
 */
 
 module battery(type) {
 
     adj = .01;
+
     if(type == "18650") {
         difference() {
             cylinder(d=18.4, h=65);
@@ -42,6 +68,15 @@ module battery(type) {
     }
 }
 
+
+/*
+           NAME: battery_clip
+    DESCRIPTION: creates 18650 and 21700 batteries
+           TODO: none
+
+          USAGE: battery_clip(bat_dia = 18.4)
+*/
+
 module battery_clip(bat_dia = 18.4) {
     
     mat = .38;
@@ -72,6 +107,15 @@ module battery_clip(bat_dia = 18.4) {
         }
     }
 }
+
+
+/*
+           NAME: battery_holder
+    DESCRIPTION: creates cr2032 friction fit coinstyle holder
+           TODO: none
+
+          USAGE: batt_holder(tolerance)
+*/
 
 module batt_holder(tolerance) {
     

@@ -1,13 +1,40 @@
 /*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
+
     button(style, diameter, height)
-    button_assembly(style, diameter, height
+    button_assembly(style, diameter, height)
     button_plunger(style, diameter, height)
     button_top(style, diameter, height)
     button_clip(style)
 
 */
 
-/* buttons */
+/*
+           NAME: button
+    DESCRIPTION: creates different button bodys and styles
+           TODO: none
+
+          USAGE: button(style, diameter, height)
+
+                        style = "recess", "cutout"
+                     diameter = diameter of button body
+                       height = height above button
+*/
+
 module button(style, size, radius, pad) {
 
     diameter = size[0];
@@ -34,7 +61,7 @@ module button(style, size, radius, pad) {
     }
     if(style == "cutout") {
         difference() {
-            translate([-size[0]+2,-3-size[1]/2,0]) slab_r([size[0]+2,size[1]+6,size[2]-2*adjust], [.1,.1,.1,.1]);            
+            translate([-size[0]+2,-3-size[1]/2,0]) slab_r([size[0]+2,size[1]+6,size[2]-2*adjust], [.1,.1,.1,.1]);
             difference() {
                 translate([-size[0]+3,-size[1]/2,-adjust]) 
                     slab_r([size[0],size[1],size[2]], [radius[0],radius[1],radius[2],radius[3]]);
@@ -49,7 +76,18 @@ module button(style, size, radius, pad) {
 }
 
 
-/* button plunger,top,clip */
+/*
+           NAME: button_assembly
+    DESCRIPTION: creates button assembly of plunger,top,clip
+           TODO: none
+
+          USAGE: button_assembly(style, diameter, height)
+
+                                 style = "recess", "cutout"
+                              diameter = diameter of button body
+                                height = height above button
+*/
+
 module button_assembly(style, diameter, height) {
 
 adjust = .01;
@@ -63,7 +101,18 @@ $fn = 90;
 }
 
 
-/* button plunger */
+/*
+           NAME: button_plunger
+    DESCRIPTION: creates button plunger
+           TODO: none
+
+          USAGE: button_plunger(style, diameter, height)
+
+                                style = "recess", "cutout"
+                             diameter = diameter of button body
+                               height = height above button
+*/
+
 module button_plunger(style, diameter, height) {
 
 adjust = .01;
@@ -81,7 +130,18 @@ $fn = 90;
 }
 
 
-/* button top */
+/*
+           NAME: button_top
+    DESCRIPTION: creates button top
+           TODO: none
+
+          USAGE: button_top(style, diameter, height)
+
+                                style = "recess", "cutout"
+                             diameter = diameter of button body
+                               height = height above button
+*/
+
 module button_top(style, diameter, height) {
 
 adjust = .01;
@@ -96,7 +156,16 @@ $fn = 90;
 }
 
 
-/* button c-clip */
+/*
+           NAME: button_top
+    DESCRIPTION: creates button c-clip
+           TODO: none
+
+          USAGE: button_clip(style)
+
+                             style = "recess", "cutout"
+*/
+
 module button_clip(style) {
 
 adjust = .01;

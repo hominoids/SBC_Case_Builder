@@ -1,20 +1,46 @@
 /*
+    This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
+    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
 
-    standoff(standoff[radius,height,holesize,supportsize,supportheight,sink,style,i_dia,i_depth])
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
+
+           NAME: standoff
+    DESCRIPTION: create standoffs
+           TODO: none
+
+          USAGE: standoff(stand_off)
+
+                          stand_off[radius,
+                                    height,
+                                    holesize,
+                                    supportsize,
+                                    supportheight,
+                                    sink,
+                                        0 = none
+                                        1 = countersink
+                                        2 = recessed hole
+                                        3 = nut holder
+                                        4 = blind hole
+                                    style,
+                                        0 = hex shape
+                                        1 = cylinder
+                                    reverse,
+                                    insert_e,
+                                    i_dia,
+                                    i_depth]
 */
 
-/* standoff module
-    standoff(standoff[radius,height,holesize,supportsize,supportheight,sink,style,reverse,insert_e,i_dia,i_depth])
-        sink=0 none
-        sink=1 countersink
-        sink=2 recessed hole
-        sink=3 nut holder
-        sink=4 blind hole
-        
-        style=0 hex shape
-        style=1 cylinder
-*/
 module standoff(stand_off){
 
     radius = stand_off[0];
@@ -28,9 +54,9 @@ module standoff(stand_off){
     insert_e = stand_off[8];
     i_dia = stand_off[9];
     i_depth = stand_off[10];
-    
+
     adjust = 0.1;
-    
+
     difference (){ 
         union () { 
             if(style == 0 && reverse == 0) {
