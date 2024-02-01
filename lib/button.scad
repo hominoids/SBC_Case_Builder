@@ -40,7 +40,7 @@ module button(style, size, radius, pad) {
     diameter = size[0];
     height = size[2];
     gap = 1.5;
-    adjust = .01;
+    adj = .01;
     $fn = 90;
 
     if(style == "recess") {
@@ -61,17 +61,17 @@ module button(style, size, radius, pad) {
     }
     if(style == "cutout") {
         difference() {
-            translate([-size[0]+2,-3-size[1]/2,0]) slab_r([size[0]+2,size[1]+6,size[2]-2*adjust], [.1,.1,.1,.1]);
+            translate([-size[0]+2,-3-size[1]/2,0]) slab_r([size[0]+2,size[1]+6,size[2]-2*adj], [.1,.1,.1,.1]);
             difference() {
-                translate([-size[0]+3,-size[1]/2,-adjust]) 
+                translate([-size[0]+3,-size[1]/2,-adj]) 
                     slab_r([size[0],size[1],size[2]], [radius[0],radius[1],radius[2],radius[3]]);
-                translate([-size[0]+3+(gap/2),-size[1]/2+(gap/2),-1]) slab_r([size[0]-gap,size[1]-gap,1+size[2]+2*adjust], 
+                translate([-size[0]+3+(gap/2),-size[1]/2+(gap/2),-1]) slab_r([size[0]-gap,size[1]-gap,1+size[2]+2*adj], 
                     [radius[0],radius[1],radius[2]-gap/2,radius[3]-gap/2]);
-                translate([-size[0]+3-gap,-1,-1]) cube([gap*2,2,1+height+2*adjust]);
+                translate([-size[0]+3-gap,-1,-1]) cube([gap*2,2,1+height+2*adj]);
             }
             translate([0,0,2]) sphere(d=3);
         }
-        translate([0,0,-pad+adjust]) cylinder(d=3, h=pad);
+        translate([0,0,-pad+adj]) cylinder(d=3, h=pad);
     }
 }
 
@@ -90,7 +90,7 @@ module button(style, size, radius, pad) {
 
 module button_assembly(style, diameter, height) {
 
-adjust = .01;
+adj = .01;
 $fn = 90;
 
     if(style == "recess") {
@@ -115,16 +115,16 @@ $fn = 90;
 
 module button_plunger(style, diameter, height) {
 
-adjust = .01;
+adj = .01;
 $fn = 90;
 
     if(style == "recess") {
         difference() {
             translate([-1.5,-1,-(height)-2]) cube([3,2,height+1]);
-            translate([-1.5-adjust,-1.5,-height]) cube([.5,3,1]);
-            translate([1+adjust,-1.5,-height]) cube([.5,3,1]);
-            translate([-1.5-adjust,-1.5,-4]) cube([.5,3,4]);
-            translate([1+adjust,-1.5,-4]) cube([.5,3,4]);
+            translate([-1.5-adj,-1.5,-height]) cube([.5,3,1]);
+            translate([1+adj,-1.5,-height]) cube([.5,3,1]);
+            translate([-1.5-adj,-1.5,-4]) cube([.5,3,4]);
+            translate([1+adj,-1.5,-4]) cube([.5,3,4]);
         }
     }
 }
@@ -144,13 +144,13 @@ $fn = 90;
 
 module button_top(style, diameter, height) {
 
-adjust = .01;
+adj = .01;
 $fn = 90;
 
     if(style == "recess") {
         difference() {
             translate([0,0,-3]) cylinder(d=5, h=2.75);
-            translate([-1.25,-1.25,-3-adjust]) cube([2.5,2.5,2]);
+            translate([-1.25,-1.25,-3-adj]) cube([2.5,2.5,2]);
         }
     }
 }
@@ -168,14 +168,14 @@ $fn = 90;
 
 module button_clip(style) {
 
-adjust = .01;
+adj = .01;
 $fn = 90;
 
     if(style == "recess") {
         difference() {
             cylinder(d=8.5, h=.8);
-            translate([-1.5,-1.75,-adjust]) cube([2.75,3.5,1]);
-            translate([-.75,-.75,-adjust]) cube([5,1.25,1.25]);
+            translate([-1.5,-1.75,-adj]) cube([2.75,3.5,1]);
+            translate([-.75,-.75,-adj]) cube([5,1.25,1.25]);
         }
     }
 }

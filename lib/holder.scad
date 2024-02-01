@@ -34,7 +34,7 @@
 
 module pcb_holder(size, wallthick) {
 
-    adjust=.01;
+    adj=.01;
     $fn = 90;    
     difference() {
         union() {
@@ -55,7 +55,7 @@ module pcb_holder(size, wallthick) {
                             [-wallthick/2,2]]);
         }
         translate([-.5,0,2]) cube([size[0]+1,size[2],5]);
-        translate([6,-adjust-5-1.75,-adjust]) cube([size[0]-12,14,8]);
+        translate([6,-adj-5-1.75,-adj]) cube([size[0]-12,14,8]);
     }
 }
 

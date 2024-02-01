@@ -28,7 +28,7 @@
 
 module pcb_pad(pads = 1, style = "round") {
 
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     pad_size = 1.25;
     size_y = 2.54;
@@ -38,13 +38,13 @@ module pcb_pad(pads = 1, style = "round") {
             if(style == "round") {
                 difference() {
                     color("#fee5a6") translate ([i,0,0]) cylinder(d=pad_size, h=.125);
-                    color("dimgray") translate([i,0,-adjust]) cylinder(d=.625, h=.125+2*adjust);
+                    color("dimgray") translate([i,0,-adj]) cylinder(d=.625, h=.125+2*adj);
                 }
             }
             if(style == "square") {
                 difference() {
                     color("#fee5a6") translate ([i-pad_size/2,-pad_size/2,0]) cube([pad_size, pad_size, .125]);
-                    color("dimgray") translate([i,0,-adjust]) cylinder(d=.625, h=.125+2*adjust);
+                    color("dimgray") translate([i,0,-adj]) cylinder(d=.625, h=.125+2*adj);
                 }
             }
         }

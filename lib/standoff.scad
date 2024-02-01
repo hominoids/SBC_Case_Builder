@@ -55,7 +55,7 @@ module standoff(stand_off){
     i_dia = stand_off[9];
     i_depth = stand_off[10];
 
-    adjust = 0.1;
+    adj = 0.1;
 
     difference (){ 
         union () { 
@@ -80,44 +80,44 @@ module standoff(stand_off){
         }
         // hole
         if(sink <= 3  && reverse == 0) {
-                translate([0,0,-adjust]) cylinder(d=holesize, h=height+(adjust*2),$fn=90);
+                translate([0,0,-adj]) cylinder(d=holesize, h=height+(adj*2),$fn=90);
         }
         if(sink <= 3  && reverse == 1) {
-                translate([0,0,-adjust-height]) cylinder(d=holesize, h=height+(adjust*2),$fn=90);
+                translate([0,0,-adj-height]) cylinder(d=holesize, h=height+(adj*2),$fn=90);
         }
         // countersink hole
         if(sink == 1 && reverse == 0) {
-            translate([0,0,-adjust]) cylinder(d1=6.5, d2=(holesize), h=3);
+            translate([0,0,-adj]) cylinder(d1=6.5, d2=(holesize), h=3);
         }
         if(sink == 1 && reverse == 1) {
-            translate([0,0,+adjust-2.5]) cylinder(d1=(holesize), d2=6.5, h=3);
+            translate([0,0,+adj-2.5]) cylinder(d1=(holesize), d2=6.5, h=3);
         }
         // recessed hole
         if(sink == 2 && reverse == 0) {
-            translate([0,0,-adjust]) cylinder(d=6.5, h=3);
+            translate([0,0,-adj]) cylinder(d=6.5, h=3);
         }
         if(sink == 2 && reverse == 1) {
-            translate([0,0,+adjust-3]) cylinder(d=6.5, h=3);
+            translate([0,0,+adj-3]) cylinder(d=6.5, h=3);
         }
         // nut holder
         if(sink == 3 && reverse == 0) {
-            translate([0,0,-adjust]) cylinder(r=3.3,h=3,$fn=6);     
+            translate([0,0,-adj]) cylinder(r=3.3,h=3,$fn=6);     
         }
         if(sink == 3 && reverse == 1) {
-            translate([0,0,+adjust-3]) cylinder(r=3.3,h=3,$fn=6);     
+            translate([0,0,+adj-3]) cylinder(r=3.3,h=3,$fn=6);     
         }
         // blind hole
         if(sink == 4 && reverse == 0) {
             translate([0,0,2]) cylinder(d=holesize, h=height,$fn=90);
         }
         if(sink == 4 && reverse == 1) {
-            translate([0,0,-height-2-adjust]) cylinder(d=holesize, h=height,$fn=90);
+            translate([0,0,-height-2-adj]) cylinder(d=holesize, h=height,$fn=90);
         }
         if(insert_e > 0 && reverse == 0) {
-            translate([0,0,height-i_depth]) cylinder(d=i_dia, h=i_depth+adjust,$fn=90);
+            translate([0,0,height-i_depth]) cylinder(d=i_dia, h=i_depth+adj,$fn=90);
         }
         if(insert_e > 0 && reverse == 1) {
-            translate([0,0,-height-adjust]) cylinder(d=i_dia, h=i_depth+adjust,$fn=90);
+            translate([0,0,-height-adj]) cylinder(d=i_dia, h=i_depth+adj,$fn=90);
         }
     }
 }

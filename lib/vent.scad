@@ -40,7 +40,7 @@
 module vent(width, length, height, gap, rows, columns, orientation) {
     
     fillet = width/2;
-    adjust = .01;
+    adj = .01;
     $fn=90;
     
     // vertical orientation

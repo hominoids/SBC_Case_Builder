@@ -20,23 +20,11 @@
     DESCRIPTION: creates case IO indents
            TODO: none
 
-          USAGE: indent(type, loc_x, loc_y, loc_z, face, rotation, size_x, size_y, size_z, data_1, data_2, data_3, data_4)
+          USAGE: indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, floorthick, pcb_z)
 
-                           type = 
-                          loc_x = 
-                          loc_y = 
-                          loc_z = 
-                           face = 
-                       rotation = 
-                        size[0] = size_x
-                        size[1] = size_y
-                        size[2] = size_z
-                        data[0] = 
-                        data[1] = 
-                        data[2] = 
 */
 
-module indent(loc_x,loc_y,loc_z,rotation,side,class,type,wallthick,gap,floorthick,pcb_z) {
+module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, floorthick, pcb_z) {
     
     adj = .01;
     $fn=90;

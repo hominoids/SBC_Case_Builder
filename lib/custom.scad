@@ -33,7 +33,7 @@
 
 module h3_port_extender(style, mask = false) {
 
-    adjust=.01;
+    adj=.01;
     $fn = 90;
 
     if(style == "header") {
@@ -86,22 +86,22 @@ module h3_port_extender(style, mask = false) {
 module h3_port_extender_holder(part,offset=2) {
 
     size = [16-offset,40,5.5];
-    adjust = .01;
+    adj = .01;
 
     if(part == "bottom" || part == "both") {
         difference() {
             translate([-10+offset,-3.5,2]) cube(size);
-            translate([-.25,-.25,-adjust]) cube([2.5, 33.25, 12]);
-            translate([2, 2, -adjust]) cube([10, 28, 12]);
+            translate([-.25,-.25,-adj]) cube([2.5, 33.25, 12]);
+            translate([2, 2, -adj]) cube([10, 28, 12]);
             translate([-12,(33.25/2)+.25,4.5]) rotate([0,90,0]) cylinder(d=2.7, h=20, $fn=60);
-//            translate([-7,-1.,-adjust]) cylinder(d=4.25, h=20);
+//            translate([-7,-1.,-adj]) cylinder(d=4.25, h=20);
         }
     }
     if(part == "top" || part == "both") {
         difference() {
             translate([-10+offset,-3.5,29.5]) cube(size);
             translate([-.25,-.25,28]) cube([2.5, 33.25, 12]);
-            translate([1.5, 2, 27.5-adjust]) cube([10, 28.5, 12]);
+            translate([1.5, 2, 27.5-adj]) cube([10, 28.5, 12]);
             translate([-12, -4, 28]) cube([20, 13, 10]);
             translate([1.35, 20, 25.5]) cube([10, 13, 5]);
             translate([-12,(33.25/2)+.25,32]) rotate([0,90,0]) cylinder(d=2.7, h=20, $fn=60);

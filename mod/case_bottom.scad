@@ -385,7 +385,7 @@ module case_bottom(case_design) {
                         pcbhole_size = sbc_data[s[0]][i+9][0];
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
 
-                    if(class == "pcbhole" && (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || 
+                    if(class == "pcbhole" && id == pcb_id && (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || 
                         pcbhole_pos == "right_rear" || pcbhole_pos == "right_front")) {
                         if (pcbhole_pos == "left_rear") {
                             normal_standoff = [bottom_standoff[0],
@@ -482,7 +482,7 @@ module case_bottom(case_design) {
                     pcbhole_pos = sbc_data[s[0]][i+10][4];
                     ex_stand = 0;
 
-                    if (class == "pcbhole" && (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || 
+                    if (class == "pcbhole" && id == pcb_id && (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || 
                         pcbhole_pos == "right_rear" || pcbhole_pos == "right_front")) {
                         ex_stand = pcbhole_pos == "left_rear" ? bottom_rear_left :
                                    pcbhole_pos == "left_front" ? bottom_front_left :
@@ -646,6 +646,22 @@ module case_bottom(case_design) {
         }
         else {
             translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+        }
+        // indents
+        if(indents == true) {
+
+            for (i=[1:11:len(sbc_data[s[0]])-2]) {
+                class = sbc_data[s[0]][i+1];
+                type = sbc_data[s[0]][i+2];
+                id = sbc_data[s[0]][i+3];
+                loc_x = sbc_data[s[0]][i+4]+pcb_loc_x;
+                loc_y = sbc_data[s[0]][i+5]+pcb_loc_y;
+                loc_z = sbc_data[s[0]][i+6]+pcb_loc_z;
+                side = sbc_data[s[0]][i+7];
+                rotation = sbc_data[s[0]][i+8];
+
+                indent(loc_x, loc_y, bottom_height+pcb_loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
+            }   
         }
         // clean fillets
         if(case_design == "shell") {

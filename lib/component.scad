@@ -77,14 +77,14 @@ module hdmi_a() {
 // single row female headers
 module header_f(pins, height) {
 
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     size_x = 2.5;
     size_y = 2.5 * pins;                
     union() {
         color("black") cube([size_x, size_y, height]);
         for (i=[1:2.5:size_y]) {
-            color("dimgray") translate ([1,i,height-5+adjust]) cube([.64,.64,5]);
+            color("dimgray") translate ([1,i,height-5+adj]) cube([.64,.64,5]);
         }
     }
 }       
@@ -171,15 +171,15 @@ module rj45(x,y,rotation,side,pcbsize_z) {
 // momentary_4.5x4.5x1.5 button
 module momentary45x15() {
 
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     size_x = 4.5;
     size_y = 4.5;        
     size_z = 3.1;        
     union() {
         color("black") translate([0,0,0]) cube([size_x,size_y,3]);
-        color("silver") translate([0,0,3-adjust]) cube([size_x,size_y,.1]);
-        color("black") translate([2.25,2.25,3.1-adjust]) cylinder(d=2.35,h=1.50);
+        color("silver") translate([0,0,3-adj]) cube([size_x,size_y,.1]);
+        color("black") translate([2.25,2.25,3.1-adj]) cylinder(d=2.35,h=1.50);
         color("black") translate([.75,.75,3]) sphere(d=.75);
         color("black") translate([.75,3.75,3]) sphere(d=.75);
         color("black") translate([3.75,.75,3]) sphere(d=.75);
@@ -191,7 +191,7 @@ module momentary45x15() {
 // single row headers
 module header(pins) {
 
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     size_x = 2.54;
     size_y = 2.54 * pins;                
@@ -242,7 +242,7 @@ module micro2pin() {
 // 3.5mm audio plug
 module audio_jack35() {
     
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     size_x = 6.5;
     size_y = 13.5;        
@@ -252,14 +252,14 @@ module audio_jack35() {
                 color("dimgray") cube([size_x,5.6,4]);
                 color("dimgray") translate([size_x/2,0,2.25]) rotate([-90,0,0]) cylinder(d=6, h=size_y);
             }
-            color("gray") translate([size_x/2,0,2.25]) rotate([-90,0,0]) cylinder(d=3, h=size_y+adjust);
+            color("gray") translate([size_x/2,0,2.25]) rotate([-90,0,0]) cylinder(d=3, h=size_y+adj);
         }    
 }
 
 
 // can capacitor
 module capacitor(diameter, height) {
-    adjust = .01;
+    adj = .01;
     $fn = 90;
     color("dimgray") rotate([0,0,0]) cylinder(d=diameter+.5, h=.5);
     color("silver") translate([0,0,.5]) cylinder(d=diameter+.5, h=.5);
@@ -276,7 +276,7 @@ module ic(size) {
 // d-sub connector
 module dsub(dsubsize, mask = false) {
     
-    adjust=.01;
+    adj=.01;
     $fn = 90;
 
     if(mask == true) {
