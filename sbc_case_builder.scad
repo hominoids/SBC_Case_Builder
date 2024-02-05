@@ -19,7 +19,7 @@
     see https://github.com/hominoids/SBC_Case_Builder
 */
 
-use <./SBC_Model_Framework_v2/sbc_models.scad>;
+use <./SBC_Model_Framework/sbc_models.scad>;
 include <./sbc_case_builder_library.scad>;
 include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder_accessories.cfg>;
