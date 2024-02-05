@@ -1,5 +1,5 @@
 /*
-    SBC Case Builder Copyright 2022 Edward A. Kisiel hominoid@cablemi.com
+    SBC Case Builder Copyright 2022, 2023, 2024 Edward A. Kisiel hominoid@cablemi.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 use <./SBC_Model_Framework_v2/sbc_models.scad>;
 include <./sbc_case_builder_library.scad>;
-include <./SBC_Model_Framework_v2/sbc_models.cfg>;
+include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder_accessories.cfg>;
 
 /* [View] */
@@ -129,7 +129,7 @@ sata_knockout = false;
 // gpio opening
 gpio_opening = "default"; // [default,none,open,block,knockout,vent]
 // heatsink opening
-cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm]
+cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,30,40,50,60,70,80,92]
 // exhaust vent
 exhaust_vents = "vent"; // [none,vent]
