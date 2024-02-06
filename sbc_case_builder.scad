@@ -47,7 +47,7 @@ move_front = 0; // [-1:100]
 // move rear mm in model view or < 0 = off
 move_rear = 0; // [-1:100]
 
-/* [adjustments] */
+/* [Adjustments] */
 // base case design
 case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
 // base case style
