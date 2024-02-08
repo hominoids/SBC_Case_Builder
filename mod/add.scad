@@ -130,7 +130,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size_x, size_y, size_z, da
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_speaker(); 
     }
     if(type == "fan_cover") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z, data_1);
     }
     if(type == "vent_panel_hex") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_panel_hex(x=size_x, y=size_y, thick=size_z, 

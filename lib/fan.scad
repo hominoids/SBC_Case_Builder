@@ -25,16 +25,17 @@
     DESCRIPTION: creates fan covers for fan openings
            TODO: none
 
-          USAGE: fan_cover(size, thick)
+          USAGE: fan_cover(size, thick, style)
 
                            size = size of fan
                           thick = thickness of cover
+                          style = fan mask style
 */
 
-module fan_cover(size, thick) {
+module fan_cover(size, thick, style) {
     difference() {
         color("grey", 1) slab([size, size, thick], 3);
-        color("grey", 1) fan_mask(size, thick, 2);
+        color("grey", 1) fan_mask(size, thick, style);
     }
 }
 

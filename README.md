@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 62 current SBC contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 84 current devices contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs(shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted) available and each allows for different styles within the design.
 
 All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see i/o openings created or removed appropriately based on it’s proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, styles and accessories.
 
@@ -46,8 +46,10 @@ License: GPLv3.
 - Fitted - complete
 - Sliding
 - Cylinder
+- NAS
 - Rack
 - Folded
+- Adapters(itx, matx)
 - CNC Cases
 
 All case data is stored in the json file sbc_case_builder.json with the accessory data stored in a separate file structure in sbc_case_builder_accessories.cfg.  An accessory group name for a given case is stored as part of the case data in the json file.  This allows for the reuse or sharing of an accessory set by different cases and can be used to manage groups of accessories.
@@ -76,7 +78,7 @@ An array holds a string and 3 Boolean that represent which association and axis 
 ### Accuracy
 In the past there was been no way of validating whether a SBC Model Framework model and it’s components were dimensionaly accurate in their size and placement other then trial and error. Along with producing cases this project provides a much needed model validation tool to assure model accuracy thru the use of test cases. It works on the very simple premise that if the real SBC fits the test case then the virtual model is accurate or otherwise shows were corrections are needed. This will further increased the overall accuracy of models.
 
-There are currently 58 SBC represented by 54 models, from 10 manufactures in SBC Model Framework.  Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
+Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
 
 - GREEN = verified, complete and passes SBC Case Builder
 - YELLOW = unverified, mostlikely usable and/or missing minor information
@@ -96,9 +98,6 @@ Computer aided design(CAD) has been around along time but I have been interested
 Due to the number of possibilities, no pre-compiled case stl’s are included.
 
 “tol”, located at the bottom of the Adjustments Tab, is a  tolerance fitment adjustment for the snap, fitted, round and hex tops.  Adjust accordingly if the tops are too tight or loose.
-
-Template creation and i/o panel layouts in a dxf format can be easily created and integrated into other designs or for hand fabrication by sectioning a case panel for the desired SBC. The case design “panel” will most likely work best.
-
 
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
@@ -231,6 +230,23 @@ c4_tray_vu7, c4_shell_boombox, c4_panel_boombox, c4_deskboom_lcd3.5, c4_tray_boo
 **OPI R1PlusLTS** - 9 : opir1plus_lts_shell, opir1plus_lts_panel, opir1plus_lts_stacked, opir1plus_lts_tray, opir1plus_lts_tray_sides, opir1plus_lts_round, opir1plus_lts_hex, opir1plus_lts_snap, opir1plus_lts_fitted
 
 
+##### Libre Computer - 0
+**lepotato** - 0:
+
+**sweetpotato** - 0:
+
+**tirtium-h2+** - 0:
+
+**tritium-h3** - 0:
+
+**tritium-h5** - 0:
+
+**solitude** - 0:
+
+**alta** - 0:
+
+
+
 ##### Sipeed - 1
 
 **licheerv+dock** - 0 : 
@@ -310,404 +326,403 @@ uart_strap, fan_cover, access_cover, button_top, boom_vring
 
 
 **circle**
+```
+DESCRIPTION: circlular geometry.
 
-description: circlular geometry.
-
-*uses:* size_x=dia, size_z=height
-
+USES: size_x=dia, size_z=height
+```
 
 **rectangle**
+```
+DESCRIPTION: rectangular geometry with individual defined corner fillets. Radius1 is lower left corner then moves clockwise.
 
-*description:* rectangular geometry with individual defined corner fillets. Radius1 is lower left corner then moves clockwise.
-
-*uses:* size_x, size_y, size_z, data_4=[radius1, radius2, radius3, radius4]
-
+USES: size_x, size_y, size_z, data_4=[radius1, radius2, radius3, radius4]
+```
 
 **slot**
+```
+DESCRIPTION: slot geometry.
 
-*description:* slot geometry.
-
-*uses:* size_x=diameter, size_y=length, size_z=height
-
+USES: size_x=diameter, size_y=length, size_z=height
+```
 
 **text**
+```
+DESCRIPTION: raised or sunk text
 
-*description:* raised or sunk text
-
-*uses:* data_1=size, data_3="text"
-
+USES: data_1=size, data_3="text"
+```
 
 **art**
+```
+DESCRIPTION: art work in dxf or svg format
 
-*description:* art work in dxf or svg format
-
-*uses:* data_1=scale, data_2=height, data_3=file
-
+USES: data_1=scale, data_2=height, data_3=file
+```
 
 **keyhole**
+```
+DESCRIPTION: enclosed keyhole
 
-*description:* enclosed keyhole
-
-*uses:* data4=[head_dia, slot_width, slot_length, floor_thick]
-
+USES: data4=[head_dia, slot_width, slot_length, floor_thick]
+```
 
 
 #### Add class only “types”
 
 
 **uart_holder**
+```
+DESCRIPTION: console uart holder
 
-*description:* console uart holder
-
-*uses:* none
-
+USES: none
+```
 
 **batt_holder**
+```
+DESCRIPTION: rtc battery holder
 
-*description:* rtc battery holder
-
-*uses:* none
-
+USES: none
+```
 
 **standoff**
-
-*description:* user defined standoff
-
-*uses:* data_4=
-
 ```
-  [ 6.75, // radius
-    5,    // height
-    3.6,  // holesize
-    10,   // supportsize
-    4,    // supportheight
-    1,    // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
-    0,    // standoff style 0=hex, 1=cylinder
-    0,    // enable reverse standoff
-    0,    // enable insert at top of standoff
-    4.5,  // insert hole dia. mm
-    5.1]  // insert depth mm
+DESCRIPTION: user defined standoff
+
+USES: data_4=
+
+            [ 6.75, // radius
+              5,    // height
+              3.6,  // holesize
+              10,   // supportsize
+              4,    // supportheight
+              1,    // 0=none, 1=countersink, 2=recessed hole, 3=nut holder, 4=blind hole
+              0,    // standoff style 0=hex, 1=cylinder
+              0,    // enable reverse standoff
+              0,    // enable insert at top of standoff
+              4.5,  // insert hole dia. mm
+              5.1]  // insert depth mm
 ```
 
 **hd_holder**
+```
+DESCRIPTION: double stacked holder for 2.5 and 3.5 drives
 
-*description:* double stacked holder for 2.5 and 3.5 drives
-
-*uses:* data_1=2.5 or 3.5, data_3=”portrait” or “landscape”
-
+USES: data_1=2.5 or 3.5, data_3=”portrait” or “landscape”
+```
 
 **hd_vertleft_holder**
+```
+DESCRIPTION: vertical left side holder for 2.5 and 3.5 drives
 
-*description:* vertical left side holder for 2.5 and 3.5 drives
-
-*uses:* data_1=2.5 or 3.5, data_3=”portrait” or “landscape”
-
+USES: data_1=2.5 or 3.5, data_3=”portrait” or “landscape”
+```
 
 **hd_vertright_holder**
+```
+DESCRIPTION: vertical right side holder for 2.5 and 3.5 drives
 
-*description:* vertical right side holder for 2.5 and 3.5 drives
-
-*uses:* data_1=2.5 or 3.5, data_3=”portrait” or “landscape”
-
+USES: data_1=2.5 or 3.5, data_3=”portrait” or “landscape”
+```
 
 **hc4_oled_holder**
+```
+DESCRIPTION: hc4 oled holder
 
-*description:* hc4 oled holder
-
-*uses:* size_z=floorthick
-
+USES: size_z=floorthick
+```
 
 **access_port**
+```
+DESCRIPTION: bottom access for sd and emmc
 
-*description:* bottom access for sd and emmc
-
-*uses:* size_z=floorthick, data_3=”portrait” or “landscape”
-
+USES: size_z=floorthick, data_3=”portrait” or “landscape”
+```
 
 **button**
+```
+DESCRIPTION: button top and plunger
 
-*description:* button top and plunger
-
-*uses:* size_x=diameter,size_z=height, data_3=”reccess”
-
+USES: size_x=diameter,size_z=height, data_3=”reccess”
+```
 
 **pcb_holder**
+```
+DESCRIPTION: pcb bottom edge holder
 
-*description:* pcb bottom edge holder
-
-*uses:* size_x=pcb_x,size_y=pcb_y,size_z=pcb_z, data_1=wall_thick
-
+USES: size_x=pcb_x,size_y=pcb_y,size_z=pcb_z, data_1=wall_thick
+```
 
 **boom_grill**
+```
+DESCRIPTION: hk boom bonnet grill covers
 
-*description:* hk boom bonnet grill covers
-
-*uses:* data_3="flat", "dome", "frame"
-
+USES: data_3="flat", "dome", "frame"
+```
 
 **boom_speaker_holder**
+```
+DESCRIPTION: hk boom bonnet speaker friction holder
 
-*description:* hk boom bonnet speaker friction holder
-
-*uses:* data_1=tolorence
-
+USES: data_1=tolorence
+```
 
 **nut_holder**
+```
+DESCRIPTION: nut holder
 
-*description:* nut holder
-
-*uses:* size_x=top diameter or x size in mm, size_y=bottom diameter or y size in mm, size_z=holder height in mm, data_0="m2" or "m2.5" or "m3" or "m4", data_1="default" or "sloped" or "trap"
-
+USES: size_x=top diameter or x size in mm, size_y=bottom diameter or y size in mm, size_z=holder height in mm, data_0="m2" or "m2.5" or "m3" or "m4", data_1="default" or "sloped" or "trap"
+```
 
 #### Sub class only “types”
 
 
 **punchout**
+```
+DESCRIPTION: punchout in rectangle, round or slot shape
 
-*description:* punchout in rectangle, round or slot shape
-
-*uses:* size_x=width, size_y=depth, data_1=gap, size_z=thick, data_2=fillet, data_3="rectangle","round" or "slot"
-
+USES: size_x=width, size_y=depth, data_1=gap, size_z=thick, data_2=fillet, data_3="rectangle","round" or "slot"
+```
 
 **vent**
+```
+DESCRIPTION: horizontal or vertical vent openings
 
-*description:* horizontal or vertical vent openings
-
-*uses:* size_x=open_width, size_y=open_length, size_z=thick, data_1=rows, data_2=columns,
+USES: size_x=open_width, size_y=open_length, size_z=thick, data_1=rows, data_2=columns,
 data_3=orientation("vertical","horizontal"), data_4=gap
-
+```
 
 **vent_hex**(cells_x, cells_y, cell_size, cell_spacing, orientation)
+```
+DESCRIPTION: horizontal or vertical hex vent openings
 
-*description:* horizontal or vertical hex vent openings
-
-*uses:* size_x=cells_x, size_y=cells_y, size_z=thick, data_1=cell_size, data_2=cell_spacing, 
+USES: size_x=cells_x, size_y=cells_y, size_z=thick, data_1=cell_size, data_2=cell_spacing, 
 data_3=orientation("vertical","horizontal")
-
+```
 
 **fan**
+```
+DESCRIPTION: fan opening
 
-*description:* fan opening
-
-*uses:* size_x=size, size_z=thick, date_1=style(1=open,2=fan)
-
+USES: size_x=size, size_z=thick, date_1=style(0=open, 1=fan_1, 2=fan_2, 3=fan_hex)
+```
 
 **hd_holes**
+```
+DESCRIPTION: bottom hole pattern for 2.5 or 3.5 drives
 
-*description:* bottom hole pattern for 2.5 or 3.5 drives
-
-*uses:* data_1=2.5 or 3.5, data_2=thick, data_3=”portrait” or “landscape”
-
+USES: data_1=2.5 or 3.5, data_2=thick, data_3=”portrait” or “landscape”
+```
 
 **hd_vertleft_holes**
+```
+DESCRIPTION: bottom hole pattern for 2.5 or 3.5 drives
 
-*description:* bottom hole pattern for 2.5 or 3.5 drives
-
-*uses:* data_1=2.5 or 3.5, data_2=thick, data_3=”portrait” or “landscape”
-
+USES: data_1=2.5 or 3.5, data_2=thick, data_3=”portrait” or “landscape”
+```
 
 **hd_vertright_holes**
+```
+DESCRIPTION: bottom hole pattern for 2.5 or 3.5 drives
 
-*description:* bottom hole pattern for 2.5 or 3.5 drives
-
-*uses:* data_1=2.5 or 3.5, data_2=thick, data_3=”portrait” or “landscape”-component mask(incomplete)
-
+USES: data_1=2.5 or 3.5, data_2=thick, data_3=”portrait” or “landscape”-component mask(incomplete)
+```
 
 **microusb**
+```
+DESCRIPTION: micro usb opening
 
-*description:* micro usb opening
-
-*uses:* none
-
+USES: none
+```
 
 **sphere**
+```
+DESCRIPTION: sphere subtraction
 
-*description:* sphere subtraction
-
-*uses:* size_x=diameter
-
+USES: size_x=diameter
+```
 
 
 #### Model class “types”
 
 
 **uart_strap**
+```
+DESCRIPTION: console uart holder strap
 
-*description:* console uart holder strap
-
-*uses:* none
-
+USES: none
+```
 
 **fan_cover**
+```
+DESCRIPTION: cover for fan hole opening
 
-*description:* cover for fan hole opening
-
-*uses:* size_x=40 or 80, size_z=thick
-
+USES: size_x=fan size, size_z=thick, data_1=style (0=open, 1=fan_1, 2=fan_2, 3=fan_hex)
+```
 
 **hd25**
+```
+DESCRIPTION: 2.5 hard drive
 
-*description:* 2.5 hard drive
-
-*uses:* data_1=height
-
+USES: data_1=height
+```
 
 **hd35**
+```
+DESCRIPTION: 3.5 hard drive
 
-*description:* 3.5 hard drive
-
-*uses:* none
-
+USES: none
+```
 
 **hc4_oled**
+```
+DESCRIPTION: hc4_oled model
 
-*description:* hc4_oled model
-
-*uses:* none
-
+USES: none
+```
 
 **feet**
+```
+DESCRIPTION: case feet
 
-*description:* case feet
-
-*uses:* size_x=diameter, size_z=height
-
+USES: size_x=diameter, size_z=height
+```
 
 **access_cover**
+```
+DESCRIPTION: bottom access cover for sd and emmc
 
-*description:* bottom access cover for sd and emmc
-
-*uses:* size_z=floorthick, data_3=”portrait” or “landscape”
-
+USES: size_z=floorthick, data_3=”portrait” or “landscape”
+```
 
 **button_top**
+```
+DESCRIPTION: button top and plunger
 
-*description:* button top and plunger
-
-*uses:* size_x=diameter,size_z=height, data_3=”reccess”
-
+USES: size_x=diameter,size_z=height, data_3=”reccess”
+```
 
 **h2_netcard**
+```
+DESCRIPTION: h2 network card model
 
-*description:* h2 network card model
-
-*uses:* none
-
+USES: none
+```
 
 **hk_lcd35**
+```
+DESCRIPTION: hk 3.5 inch lcd model
 
-*description:* hk 3.5 inch lcd model
-
-*uses:* none
-
+USES: none
+```
 
 **hk_boom**
+```
+DESCRIPTION: hk stereo boom bonnet model
 
-*description:* hk stereo boom bonnet model
-
-*uses:* data_1=speakers(true or false), data_3=”front” or "rear"
-
+USES: data_1=speakers(true or false), data_3=”front” or "rear"
+```
 
 **boom_speaker**
+```
+DESCRIPTION: hk stereo boom bonnet speaker
 
-*description:* hk stereo boom bonnet speaker
-
-*uses:* data_1=pcb(true or false), data_3=”left” or "right"
-
+USES: data_1=pcb(true or false), data_3=”left” or "right"
+```
 
 **hk_speaker**
+```
+DESCRIPTION: hk speaker model
 
-*description:* hk speaker model
-
-*uses:* none
-
+USES: none
+```
 
 **boom_vring**
+```
+DESCRIPTION: hk stereo boom bonnet volume wheel extention
 
-*description:* hk stereo boom bonnet volume wheel extention
-
-*uses:* data_1=tolerence
-
+USES: data_1=tolerence
+```
 
 **hk_uart**
+```
+DESCRIPTION: hk console uart model
 
-*description:* hk console uart model
-
-*uses:* none
-
+USES: none
+```
 
 **h3_port_extender**
+```
+DESCRIPTION: h3 usb port extender model
 
-*description:* h3 usb port extender model
-
-*uses:* data_3="header" or "remote"
-
+USES: data_3="header" or "remote"
+```
 
 **hk_pwr_button**
+```
+DESCRIPTION: hk power button model
 
-*description:* hk power button model
-
-*uses:* none
-
+USES: none
+```
 
 **dsub**
+```
+DESCRIPTION: d-sub connectors
 
-*description:* d-sub connectors
-
-*uses:* data4=[pin, type("male" or "female"), floor_thick]
-
+USES: data4=[pin, type("male" or "female"), floor_thick]
+```
 
 **vent_panel_hex**
+```
+DESCRIPTION: cover for vent opening, honeycomb pattern
 
-*description:* cover for vent opening, honeycomb pattern
-
-*uses:* size_x=x, size_y=y, size_z=thick,
+USES: size_x=x, size_y=y, size_z=thick,
         data1=cell_size, data2=cell_spacing, 
         data3="x", "y", "none", or "default", data4=border
-
+```
 #### Platter class “types”
 
 
 **uart_strap**
+```
+DESCRIPTION: console uart holder strap
 
-*description:* console uart holder strap
-
-*uses:* none
-
+USES: none
+```
 
 **fan_cover**
+```
+DESCRIPTION: cover for fan hole opening
 
-*description:* cover for fan hole opening
-
-*uses:* size_x=40 or 80, size_z=thick
-
+USES: size_x=40 or 80, size_z=thick
+```
 
 **access_cover**
+```
+DESCRIPTION:bottom access cover for sd and emmc
 
-*description:*bottom access cover for sd and emmc
-
-*uses:* size_z=floorthick, data_3=”portrait” or “landscape”
-
+USES: size_z=floorthick, data_3=”portrait” or “landscape”
+```
 
 **button_top**
+```
+DESCRIPTION: button top and plunger
 
-*description:* button top and plunger
-
-*uses:* size_x=diameter,size_z=height, data_3=”reccess”
-
+USES: size_x=diameter,size_z=height, data_3=”reccess”
+```
 
 **boom_vring**
+```
+DESCRIPTION: hk stereo boom bonnet volume wheel extention
 
-*description:* hk stereo boom bonnet volume wheel extention
-
-*uses:* data_1=tolerence
-
+USES: data_1=tolerence
+```
 
 **vent_panel_hex**
+```
+DESCRIPTION: cover for vent opening, honeycomb pattern
 
-*description:* cover for vent opening, honeycomb pattern
-
-*uses:* size_x=x, size_y=y, size_z=thick,
+USES: size_x=x, size_y=y, size_z=thick,
         data1=cell_size, data2=cell_spacing, 
         data3="x", "y", "none", or "default", data4=border
-
+```

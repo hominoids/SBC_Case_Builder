@@ -307,9 +307,9 @@ vu7_height = vu7_pcb_height + 9.75;
         if(side == "right") {
             // vu5 shape and back cut
             if(case_style == "vu5") {
-                translate([width+sidethick-2,-.6,case_z+sidethick+2.5]) 
+                translate([width+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
-                    linear_extrude(height = 2*sidethick) 
+                    linear_extrude(height = 3*sidethick) 
                         polygon(points = [ [-sidethick,-sidethick-wallthick-5],
                             [cheight-bottom_height-top_height-3,-sidethick-wallthick-5], 
                             [cheight-bottom_height-top_height-3,depth-53], 
@@ -327,7 +327,7 @@ vu7_height = vu7_pcb_height + 9.75;
             }
             // vu7 shape and back cut
             if(case_style == "vu7") {
-                translate([width+sidethick-2,-.6,case_z+sidethick+2.5]) 
+                translate([width+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                     linear_extrude(height = 2*sidethick) 
                         polygon(points = [ [-sidethick,-sidethick-wallthick-5],
@@ -355,9 +355,9 @@ vu7_height = vu7_pcb_height + 9.75;
         if(side == "left") {
             // vu5 shape and back cut
             if(case_style == "vu5") {
-                translate([-sidethick-adj,-.6,case_z+sidethick+2.5]) 
+                translate([-sidethick+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
-                        linear_extrude(height = 2*sidethick) 
+                        linear_extrude(height = 3*sidethick) 
                             polygon(points = [ [-sidethick,-sidethick-wallthick-5],
                                 [cheight-bottom_height-top_height-3,-sidethick-wallthick-5], 
                                 [cheight-bottom_height-top_height-3,depth-53], 
@@ -375,7 +375,7 @@ vu7_height = vu7_pcb_height + 9.75;
             }
             // vu7 shape and back cut
             if(case_style == "vu7") {
-                translate([-sidethick-adj,-.6,case_z+sidethick+2.5]) 
+                translate([-sidethick+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                         linear_extrude(height = 2*sidethick) 
                             polygon(points = [ [-sidethick,-sidethick-wallthick-5],
