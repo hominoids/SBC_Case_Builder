@@ -410,7 +410,7 @@ module case_top(case_design) {
                 }
             }
             // standoff sidewall support
-            if(sidewall_support == true && sbc_top_standoffs == true) {
+            if(top_sidewall_support == true && sbc_top_standoffs == true) {
                 for (i=[1:11:len(sbc_data[s[0]])-2]) {
                     class = sbc_data[s[0]][i+1];
                     type = sbc_data[s[0]][i+2];
@@ -449,7 +449,7 @@ module case_top(case_design) {
                 }
             }
             // extended standoff sidewall support
-            if(case_ext_standoffs == true && sidewall_support == true) {
+            if(case_ext_standoffs == true && top_sidewall_support == true) {
                 // right-rear standoff
                 if(width-pcb_loc_x-pcb_width >= 10 || pcb_loc_y >= 10) {
                     translate([width-(2*(wallthick+gap))-(c_fillet/2)+(top_ext_standoff[0]/2)-.6,
