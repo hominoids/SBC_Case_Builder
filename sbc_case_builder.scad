@@ -103,12 +103,16 @@ top_sidewall_support = true;
 
 // case top - lower left standoff  
 top_rear_left = 0; //[-20:.01:20]
+top_rear_left_support = "rear"; //[left,rear,front,right]
 // case top - upper left standoff  
 top_front_left = 0; //[-20:.01:20]
+top_front_left_support = "front"; //[left,rear,front,right]
 // case top - lower right standoff  
 top_rear_right = 0; //[-20:.01:20]
+top_rear_right_support = "rear"; //[left,rear,front,right]
 // case top - upper right standoff  
 top_front_right = 0; //[-20:.01:20]
+top_front_right_support = "front";  //[left,rear,front,right]
 
 /* [Bottom Standoffs] */
 // enable case bottom standoffs
@@ -128,12 +132,16 @@ bottom_sidewall_support = true;
 
 // case bottom - rear left standoff  
 bottom_rear_left = 0; //[-20:.01:20]
+bottom_rear_left_support = "rear"; //[left,rear,front,right]
 // case bottom - upper left standoff  
 bottom_front_left = 0; //[-20:.01:20]
+bottom_front_left_support = "front"; //[left,rear,front,right]
 // case bottom - lower right standoff  
 bottom_rear_right = 0; //[-20:.01:20]
+bottom_rear_right_support = "rear"; //[left,rear,front,right]
 // case bottom - upper right standoff  
 bottom_front_right = 0; //[-20:.01:20]
+bottom_front_right_support = "front"; //[left,rear,front,right]
 
 /* [Extended Standoffs] */
 // enable case extended standoffs
@@ -193,18 +201,37 @@ case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 
 /* [Hidden] */
-adj = .01;
-$fn=90;
+// top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
+top_standoff = [top_standoff_diameter,
+                18,
+                top_standoff_hole_size,
+                top_standoff_support_size,
+                top_standoff_support_height,
+                top_standoff_type,
+                top_standoff_pillar,
+                top_rear_left_support,
+                top_standoff_reverse,
+                top_standoff_insert,
+                top_standoff_insert_dia,
+                top_standoff_insert_height];
+bottom_standoff = [bottom_standoff_diameter,
+                   6,
+                   bottom_standoff_hole_size,
+                   bottom_standoff_support_size,
+                   bottom_standoff_support_height,
+                   bottom_standoff_type,
+                   bottom_standoff_pillar,
+                   bottom_rear_left_support,
+                   bottom_standoff_reverse,
+                   bottom_standoff_insert,
+                   bottom_standoff_insert_dia,
+                   bottom_standoff_insert_height];
 case_fn = 360;                                  // circle segments for round cases
 case_ffn = 90;                                  // circle segments for fillet of round cases
 lip = 5;
 vu_rotation = [15,0,0];
-// top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-top_standoff = [top_standoff_diameter,18, top_standoff_hole_size, top_standoff_support_size, top_standoff_support_height, top_standoff_type,
-                top_standoff_pillar, top_standoff_reverse, top_standoff_insert, top_standoff_insert_dia, top_standoff_insert_height];
-bottom_standoff = [bottom_standoff_diameter, 6, bottom_standoff_hole_size, bottom_standoff_support_size, bottom_standoff_support_height,
-                   bottom_standoff_type, bottom_standoff_pillar, bottom_standoff_reverse, bottom_standoff_insert, bottom_standoff_insert_dia,
-                   bottom_standoff_insert_height];
+adj = .01;
+$fn=90;
 
 // platter view
 if (view == "platter") {

@@ -21,14 +21,15 @@
 
           USAGE: standoff(stand_off)
 
-                          stand_off[radius, height, supportsize, supportheight, sink, style, reverse, insert_e, i_dia, i_depth])
+                          stand_off[radius, height, supportsize, supportheight, sink, pillarstyle, pillarsupport, reverse, insert_e, i_dia, i_depth])
                                     radius = pillar radius
                                     height = total height
                                     holesize = hole diameter
                                     supportsize = support size for sink
-                                    supportheight = height of support
+                                    supportheight = height of support for sink
                                     sink = none, countersunk, recessed, nut holder, blind
-                                    style = hex, round style of pillar
+                                    pillarstyle = hex, round style of pillar
+                                    pillarsupport = left, rear, front, right
                                     reverse = true or false
                                     insert_e = true or false
                                     i_dia = insert diameter
@@ -44,26 +45,27 @@ module standoff(stand_off){
     supportsize = stand_off[3];
     supportheight = stand_off[4];
     sink = stand_off[5];
-    style = stand_off[6];
-    reverse = stand_off[7];
-    insert_e = stand_off[8];
-    i_dia = stand_off[9];
-    i_depth = stand_off[10];
+    pillarstyle = stand_off[6];
+    pillarsupport = stand_off[7];
+    reverse = stand_off[8];
+    insert_e = stand_off[9];
+    i_dia = stand_off[10];
+    i_depth = stand_off[11];
 
     adj = 0.1;
 
     difference (){ 
         union () { 
-            if(style != "none" && reverse == false) {
+            if(pillarstyle == "hex" && reverse == false) {
                 rotate([0,0,30]) cylinder(d=radius*2/sqrt(3),h=height,$fn=6);
             }
-            if(style != "none" && reverse == true) {
+            if(pillarstyle == "hex" && reverse == true) {
                 translate([0,0,-height]) rotate([0,0,30]) cylinder(d=radius*2/sqrt(3),h=height,$fn=6);
             }
-            if(style == "countersunk" && reverse == false) {
+            if(pillarstyle == "round" && reverse == false) {
                 cylinder(d=radius,h=height,$fn=90);
             }
-            if(style == "countersunk" && reverse == true) {
+            if(pillarstyle == "round" && reverse == true) {
                 translate([0,0,-height]) cylinder(d=radius,h=height,$fn=90);
             }
             if(reverse == true) {
@@ -89,10 +91,10 @@ module standoff(stand_off){
         }
         // recessed hole
         if(sink == "recessed" && reverse == false) {
-            translate([0,0,-adj]) cylinder(d=6.5, h=3);
+            translate([0,0,-adj]) cylinder(d=6.5, h=supportheight-2);
         }
         if(sink == "recessed" && reverse == true) {
-            translate([0,0,+adj-3]) cylinder(d=6.5, h=3);
+            translate([0,0,+adj-supportheight+2]) cylinder(d=6.5, h=supportheight-2);
         }
         // nut holder
         if(sink == "nut holder" && reverse == false) {

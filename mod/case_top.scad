@@ -335,10 +335,11 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_standoff[7],
+                                                top_rear_left_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
-                                                top_standoff[10]];
+                                                top_standoff[10],
+                                                top_standoff[11]];
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff);
                         }
                         if (pcbhole_pos == "left_front") {
@@ -349,10 +350,11 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_standoff[7],
+                                                top_front_left_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
-                                                top_standoff[10]];
+                                                top_standoff[10],
+                                                top_standoff[11]];
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff);
                         }
                         if (pcbhole_pos == "right_rear") {
@@ -363,10 +365,11 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_standoff[7],
+                                                top_rear_right_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
-                                                top_standoff[10]];
+                                                top_standoff[10],
+                                                top_standoff[11]];
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff);
                         }
                         if (pcbhole_pos == "right_front") {
@@ -377,10 +380,11 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_standoff[7],
+                                                top_front_right_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
-                                                top_standoff[10]];
+                                                top_standoff[10],
+                                                top_standoff[11]];
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff);
                         }
                     }
