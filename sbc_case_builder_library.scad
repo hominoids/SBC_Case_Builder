@@ -24,6 +24,7 @@ include <./mod/add.scad>;
 include <./mod/case_bottom.scad>;
 include <./mod/case_side.scad>;
 include <./mod/case_top.scad>;
+include <./mod/case_folded.scad>;
 include <./mod/parametric_move.scad>;
 include <./mod/indent.scad>;
 include <./mod/fillets.scad>;

@@ -26,7 +26,7 @@ include <./sbc_case_builder_accessories.cfg>;
 
 /* [View] */
 // viewing mode "model", "platter", "part"
-view = "model"; // [model, platter, part]
+view = "model"; // [model, platter, part, folded]
 individual_part = "bottom"; // [top, bottom, right, left, front, rear, accessories]
 // sbc off in model view
 sbc_off = false;
@@ -49,7 +49,7 @@ move_rear = 0; // [-1:100]
 
 /* [Adjustments] */
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted]
+case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted,paper_split-top]
 // base case style
 case_style = "none"; // ["none","vu5","vu7","sides"]
 // single board computer model
@@ -639,4 +639,9 @@ if (view == "part") {
     else {
         echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
     }    
+}
+if (view == "folded") {
+    if(case_design == "paper_split-top") {
+        case_folded(case_design);
+    }
 }
