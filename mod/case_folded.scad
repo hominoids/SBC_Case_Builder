@@ -17,11 +17,13 @@
 
 
            NAME: case_folded
-    DESCRIPTION: creates folded case flat blank for supported designs
+    DESCRIPTION: creates folded case flat blanks for supported designs
            TODO: none
 
           USAGE: case_folded(case_design, case_style)
 
+                             case_design = paper
+                              case_style = split-top, full-top
 */
 
 module case_folded(case_design, case_style) {
@@ -29,7 +31,7 @@ module case_folded(case_design, case_style) {
 section_position = 2;
 ba = bend_allowance;
 slit_len = pcb_depth < pcb_width ? pcb_depth/10 : pcb_width/10;
-slit_width = .25;
+slit_width = material_thickness;
 slit_offset = pcb_depth < pcb_width ? pcb_depth/10 : pcb_width/10;
 fold_height = pcb_tmaxz+bottom_clearence+pcb_z+ba;
 flap_y = 12;
@@ -38,164 +40,160 @@ tab_y = fold_height/2;
 tab_inset = 6;
 
     if(case_style == "split-top") {
-        projection(cut = true) {
-            // rear
-            difference() {
-                union() {
-                    folded_base(fold_height, ba, flap_y, tab_x, tab_y, tab_inset, slit_len, slit_width, slit_offset);
-                    translate([0, -fold_height-(pcb_depth/2)-ba, 0]) 
-                        cube([pcb_width, (pcb_depth/2)+ba, material_thickness]);
-                    translate([0, pcb_depth+fold_height, 0]) 
-                        cube([pcb_width, (pcb_depth/2)+ba, material_thickness]);
+        // rear
+        difference() {
+            union() {
+                folded_base(fold_height, ba, flap_y, tab_x, tab_y, tab_inset, slit_len, slit_width, slit_offset);
+                translate([0, -fold_height-(pcb_depth/2)-ba, 0]) 
+                    cube([pcb_width, (pcb_depth/2)+ba, material_thickness]);
+                translate([0, pcb_depth+fold_height, 0]) 
+                    cube([pcb_width, (pcb_depth/2)+ba, material_thickness]);
 
-                    // flaps rear left
-                    translate([-tab_y, -fold_height+tab_inset-(pcb_depth/2), 0]) 
-                        slab_r([tab_y, tab_x, material_thickness], [tab_x/2,tab_x/2,.1,.1]);
+                // flaps rear left
+                translate([-tab_y, -fold_height+tab_inset-(pcb_depth/2), 0]) 
+                    slab_r([tab_y, tab_x, material_thickness], [tab_x/2,tab_x/2,.1,.1]);
 
-                    // flaps rear right
-                    translate([pcb_width, -fold_height-(pcb_depth/2)+tab_inset, 0]) 
-                        slab_r([tab_y, tab_x, material_thickness], [.1,.1,tab_x/2,tab_x/2]);
+                // flaps rear right
+                translate([pcb_width, -fold_height-(pcb_depth/2)+tab_inset, 0]) 
+                    slab_r([tab_y, tab_x, material_thickness], [.1,.1,tab_x/2,tab_x/2]);
 
-                    // flaps front left
-                    translate([-tab_y, pcb_depth+fold_height-tab_inset+tab_x, 0]) 
-                        slab_r([tab_y, tab_x, material_thickness], [tab_x/2,tab_x/2,.1,.1]);
+                // flaps front left
+                translate([-tab_y, pcb_depth+fold_height-tab_inset+tab_x, 0]) 
+                    slab_r([tab_y, tab_x, material_thickness], [tab_x/2,tab_x/2,.1,.1]);
 
-                    // flaps front right
-                    translate([pcb_width, pcb_depth+fold_height-tab_inset+tab_x, 0]) 
-                        slab_r([tab_y, tab_x, material_thickness], [.1,.1,tab_x/2,tab_x/2]);
+                // flaps front right
+                translate([pcb_width, pcb_depth+fold_height-tab_inset+tab_x, 0]) 
+                    slab_r([tab_y, tab_x, material_thickness], [.1,.1,tab_x/2,tab_x/2]);
 
-                    // flaps left rear
-                    difference() {
-                        translate([-(fold_height), 0, 0]) 
-                            linear_extrude(material_thickness) polygon([[0, 0], 
-                                [1, (-pcb_depth/4)],
-                                [(fold_height)-2, (-pcb_depth/4)],
-                                [(fold_height), 0],
-                                [0, 0]]);
-                        translate([-bottom_clearence, 0, section_position]) rotate([90, 0, 270]) 
-                            sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
-                    // flaps left front
-                    difference() {
-                        translate([-(fold_height), pcb_depth, 0]) 
-                            linear_extrude(material_thickness) polygon([[0, 0], 
-                                [1, (pcb_depth/4)],
-                                [(fold_height)-2, (pcb_depth/4)],
-                                [(fold_height), 0],
-                                [0, 0]]);
-                            translate([-bottom_clearence, pcb_depth, pcb_depth+section_position]) rotate([-90, 0, 90]) 
-                            sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
-                    // flaps right rear
-                    difference() {
-                        translate([pcb_width, 0, 0]) 
-                            linear_extrude(material_thickness) polygon([[0, 0], 
-                                [2, (-pcb_depth/4)],
-                                [(fold_height)-1, (-pcb_depth/4)],
-                                [(fold_height), 0],
-                                [0, 0]]);
-                        translate([bottom_clearence+pcb_width, -pcb_width, section_position]) rotate([90, 0, 90]) 
-                            sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
-
-                    // flaps right front
-                    difference() {
-                    translate([pcb_width, pcb_depth, 0]) 
+                // flaps left rear
+                difference() {
+                    translate([-(fold_height), 0, 0]) 
                         linear_extrude(material_thickness) polygon([[0, 0], 
-                            [2, (pcb_depth/4)],
-                            [(fold_height)-1, (pcb_depth/4)],
+                            [1, (-pcb_depth/4)],
+                            [(fold_height)-2, (-pcb_depth/4)],
                             [(fold_height), 0],
                             [0, 0]]);
-                        translate([bottom_clearence+pcb_width, pcb_width+pcb_depth, section_position+pcb_depth])
-                            rotate([270, 0, 270]) sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
+                    translate([-bottom_clearence, 0, section_position]) rotate([90, 0, 270]) 
+                        sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
+                }
+                // flaps left front
+                difference() {
+                    translate([-(fold_height), pcb_depth, 0]) 
+                        linear_extrude(material_thickness) polygon([[0, 0], 
+                            [1, (pcb_depth/4)],
+                            [(fold_height)-2, (pcb_depth/4)],
+                            [(fold_height), 0],
+                            [0, 0]]);
+                        translate([-bottom_clearence, pcb_depth, pcb_depth+section_position]) rotate([-90, 0, 90]) 
+                        sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
+                }
+                // flaps right rear
+                difference() {
+                    translate([pcb_width, 0, 0]) 
+                        linear_extrude(material_thickness) polygon([[0, 0], 
+                            [2, (-pcb_depth/4)],
+                            [(fold_height)-1, (-pcb_depth/4)],
+                            [(fold_height), 0],
+                            [0, 0]]);
+                    translate([bottom_clearence+pcb_width, -pcb_width, section_position]) rotate([90, 0, 90]) 
+                        sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
                 }
 
-                translate([0, -fold_height, pcb_tmaxz+2]) rotate([180, 0, 0]) 
-                    sbc(sbc_model, cooling, 0, "disable", "disable", true);
-                translate([0, 2*pcb_depth+fold_height, pcb_tmaxz+2]) rotate([180, 0, 0]) 
-                    sbc(sbc_model, cooling, 0, "disable", "disable", true);
-
-
+                // flaps right front
+                difference() {
+                translate([pcb_width, pcb_depth, 0]) 
+                    linear_extrude(material_thickness) polygon([[0, 0], 
+                        [2, (pcb_depth/4)],
+                        [(fold_height)-1, (pcb_depth/4)],
+                        [(fold_height), 0],
+                        [0, 0]]);
+                    translate([bottom_clearence+pcb_width, pcb_width+pcb_depth, section_position+pcb_depth])
+                        rotate([270, 0, 270]) sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
+                }
             }
+
+            translate([0, -fold_height, pcb_tmaxz+2+material_thickness]) rotate([180, 0, 0]) 
+                sbc(sbc_model, cooling, 0, "disable", "disable", true);
+            translate([0, 2*pcb_depth+fold_height, pcb_tmaxz+2+material_thickness]) rotate([180, 0, 0]) 
+                sbc(sbc_model, cooling, 0, "disable", "disable", true);
         }
+        translate([0, -fold_height-(pcb_depth/2)-ba, 0]) cube([pcb_width, 2, material_thickness]);
+        translate([0, pcb_depth+fold_height+(pcb_depth/2)-ba, 0]) cube([pcb_width, 2, material_thickness]);
     }
 
-    if(case_style == "full-top") {
-        projection(cut = true) {
-            // rear
-            difference() {
-                union() {
-                    folded_base(fold_height, ba, flap_y, tab_x, tab_y, tab_inset, slit_len, slit_width, slit_offset);
-                    translate([0, -fold_height-pcb_depth-ba, 0]) 
-                        cube([pcb_width, pcb_depth+ba, material_thickness]);
-                    translate([0, pcb_depth+fold_height, 0]) 
-                        cube([pcb_width, (pcb_depth/4)+ba, material_thickness]);
+    if(case_style == "full-top" || case_style == "none") {
+        // rear
+        difference() {
+            union() {
+                folded_base(fold_height, ba, flap_y, tab_x, tab_y, tab_inset, slit_len, slit_width, slit_offset);
+                translate([0, -fold_height-pcb_depth-ba, 0]) 
+                    cube([pcb_width, pcb_depth+ba, material_thickness]);
+                translate([0, pcb_depth+fold_height, 0]) 
+                    cube([pcb_width, (pcb_depth/4)+ba, material_thickness]);
 
-                    // flaps rear left
-                    translate([tab_inset, -fold_height-pcb_depth-tab_y, 0]) 
-                        slab_r([tab_x, tab_y, material_thickness], [tab_x/2,.1,.1,tab_x/2]);
+                // flaps rear left
+                translate([tab_inset, -fold_height-pcb_depth-tab_y, 0]) 
+                    slab_r([tab_x, tab_y, material_thickness], [tab_x/2,.1,.1,tab_x/2]);
 
-                    // flaps rear right
-                    translate([pcb_width-tab_x-tab_inset, -fold_height-pcb_depth-tab_y, 0]) 
-                        slab_r([tab_x, tab_y, material_thickness], [tab_x/2,.1,.1,tab_x/2]);
+                // flaps rear right
+                translate([pcb_width-tab_x-tab_inset, -fold_height-pcb_depth-tab_y, 0]) 
+                    slab_r([tab_x, tab_y, material_thickness], [tab_x/2,.1,.1,tab_x/2]);
 
-                    // flaps left rear
-                    difference() {
-                        translate([-(fold_height), 0, 0]) 
-                            linear_extrude(material_thickness) polygon([[0, 0], 
-                                [1, (-pcb_depth/4)],
-                                [(fold_height)-2, (-pcb_depth/4)],
-                                [(fold_height), 0],
-                                [0, 0]]);
-                        translate([-bottom_clearence, 0, section_position]) rotate([90, 0, 270]) 
-                            sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
-                    // flaps left front
-                    difference() {
-                        translate([-(fold_height), pcb_depth, 0]) 
-                            linear_extrude(material_thickness) polygon([[0, 0], 
-                                [1, (pcb_depth/4)],
-                                [(fold_height)-2, (pcb_depth/4)],
-                                [(fold_height), 0],
-                                [0, 0]]);
-                            translate([-bottom_clearence, pcb_depth, pcb_depth+section_position]) rotate([-90, 0, 90]) 
-                            sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
-                    // flaps right rear
-                    difference() {
-                        translate([pcb_width, 0, 0]) 
-                            linear_extrude(material_thickness) polygon([[0, 0], 
-                                [2, (-pcb_depth/4)],
-                                [(fold_height)-1, (-pcb_depth/4)],
-                                [(fold_height), 0],
-                                [0, 0]]);
-                        translate([bottom_clearence+pcb_width, -pcb_width, section_position]) rotate([90, 0, 90]) 
-                            sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
-
-                    // flaps right front
-                    difference() {
-                    translate([pcb_width, pcb_depth, 0]) 
+                // flaps left rear
+                difference() {
+                    translate([-(fold_height), 0, 0]) 
                         linear_extrude(material_thickness) polygon([[0, 0], 
-                            [2, (pcb_depth/4)],
-                            [(fold_height)-1, (pcb_depth/4)],
+                            [1, (-pcb_depth/4)],
+                            [(fold_height)-2, (-pcb_depth/4)],
                             [(fold_height), 0],
                             [0, 0]]);
-                        translate([bottom_clearence+pcb_width, pcb_width+pcb_depth, section_position+pcb_depth])
-                            rotate([270, 0, 270]) sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-                    }
+                    translate([-bottom_clearence, 0, section_position]) rotate([90, 0, 270]) 
+                        sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
                 }
-                // top closure tab slits
-                translate([tab_inset, pcb_depth+fold_height, 0]) cube([tab_x, slit_width, material_thickness+(2*adj)]);
-                translate([pcb_width-tab_x-tab_inset, pcb_depth+fold_height, 0]) 
-                    cube([tab_x, slit_width, material_thickness+2*adj]);
+                // flaps left front
+                difference() {
+                    translate([-(fold_height), pcb_depth, 0]) 
+                        linear_extrude(material_thickness) polygon([[0, 0], 
+                            [1, (pcb_depth/4)],
+                            [(fold_height)-2, (pcb_depth/4)],
+                            [(fold_height), 0],
+                            [0, 0]]);
+                        translate([-bottom_clearence, pcb_depth, pcb_depth+section_position]) rotate([-90, 0, 90]) 
+                        sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
+                }
+                // flaps right rear
+                difference() {
+                    translate([pcb_width, 0, 0]) 
+                        linear_extrude(material_thickness) polygon([[0, 0], 
+                            [2, (-pcb_depth/4)],
+                            [(fold_height)-1, (-pcb_depth/4)],
+                            [(fold_height), 0],
+                            [0, 0]]);
+                    translate([bottom_clearence+pcb_width, -pcb_width, section_position]) rotate([90, 0, 90]) 
+                        sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
+                }
 
-                translate([0, -fold_height, pcb_tmaxz+2]) rotate([180, 0, 0]) 
-                    sbc(sbc_model, cooling, 0, "disable", "disable", true);
-                translate([0, 2*pcb_depth+fold_height, pcb_tmaxz+2]) rotate([180, 0, 0]) 
-                    sbc(sbc_model, cooling, 0, "disable", "disable", true);
+                // flaps right front
+                difference() {
+                translate([pcb_width, pcb_depth, 0]) 
+                    linear_extrude(material_thickness) polygon([[0, 0], 
+                        [2, (pcb_depth/4)],
+                        [(fold_height)-1, (pcb_depth/4)],
+                        [(fold_height), 0],
+                        [0, 0]]);
+                    translate([bottom_clearence+pcb_width, pcb_width+pcb_depth, section_position+pcb_depth])
+                        rotate([270, 0, 270]) sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
+                }
             }
+            // top closure tab slits
+            translate([tab_inset, pcb_depth+fold_height, 0]) cube([tab_x, slit_width, material_thickness+(2*adj)]);
+            translate([pcb_width-tab_x-tab_inset, pcb_depth+fold_height, 0]) 
+                cube([tab_x, slit_width, material_thickness+2*adj]);
+
+            translate([0, -fold_height, pcb_tmaxz+2+material_thickness]) rotate([180, 0, 0]) 
+                sbc(sbc_model, cooling, 0, "disable", "disable", true);
+            translate([0, 2*pcb_depth+fold_height, pcb_tmaxz+2+material_thickness]) rotate([180, 0, 0]) 
+                sbc(sbc_model, cooling, 0, "disable", "disable", true);
         }
     }
 }
@@ -242,11 +240,11 @@ section_position = 2;
     difference() {
         translate([0, pcb_depth, 0]) cube([pcb_width, fold_height, material_thickness]);
         // folding slits
-        translate([slit_offset, pcb_depth+fold_height, -adj]) 
+        translate([slit_offset, pcb_depth+fold_height-slit_width, -adj]) 
             cube([slit_len, slit_width, material_thickness+(2*adj)]);
-        translate([pcb_width/2-slit_len/2, pcb_depth+fold_height, -adj]) 
+        translate([pcb_width/2-slit_len/2, pcb_depth+fold_height-slit_width, -adj]) 
             cube([slit_len, slit_width, material_thickness+(2*adj)]);
-        translate([pcb_width-slit_offset-slit_len, pcb_depth+fold_height, -adj]) 
+        translate([pcb_width-slit_offset-slit_len, pcb_depth+fold_height-slit_width, -adj]) 
             cube([slit_len, slit_width, material_thickness+(2*adj)]);
 
         translate([0, pcb_depth+bottom_clearence, pcb_depth+section_position]) rotate([-90, 0, 0]) 
@@ -267,7 +265,7 @@ section_position = 2;
 
         translate([pcb_width+bottom_clearence, 0, pcb_width+section_position]) rotate([0, 90, 0]) 
             sbc(sbc_model, "disable", 0, gpio_opening, uart_opening, true);
-    } 
+    }
     // pcb section
     difference() {
         cube([pcb_width, pcb_depth, material_thickness]);

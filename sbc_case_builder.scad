@@ -125,7 +125,7 @@ bottom_ext_standoff = [5.75,5,3.6,10,4,1,0,0,0,4.5,5.1];
 
 /* [Folding Case Adjustments] */
 //Material Thickness
-material_thickness = .5; //[.1:.1:3]
+material_thickness = .5; //[.1:.01:3]
 // Bend Allowance
 bend_allowance = 1; //[0:.01:5]
 // Bottom clearence
@@ -256,6 +256,9 @@ if (view == "platter") {
                 translate([loc_x-20,loc_y+40,loc_z+36.5]) rotate([180,0,0]) h3_port_extender_holder("top");
             }
         }
+    }
+    if(case_design == "paper") {
+        case_folded(case_design, case_style);
     }
     if(case_design == "tray") {
         echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
@@ -535,6 +538,9 @@ if (view == "model") {
                 }    
             }
         }
+        if(case_design == "paper") {
+            case_folded(case_design, case_style);
+        }
         if(case_design == "tray") {
             echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
         }
@@ -652,6 +658,6 @@ if (view == "part") {
 }
 if (view == "folded") {
     if(case_design == "paper") {
-        case_folded(case_design, case_style);
+        projection() case_folded(case_design, case_style);
     }
 }
