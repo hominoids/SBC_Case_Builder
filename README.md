@@ -44,11 +44,12 @@ License: GPLv3.
 - Hex - complete
 - Snap - complete
 - Fitted - complete
+- Paper, Folded - complete
+- Sheet Metal, Folded
 - Sliding
 - Cylinder
 - NAS
 - Rack
-- Folded
 - Adapters(itx, matx)
 - CNC Cases
 
@@ -102,7 +103,7 @@ Due to the number of possibilities, no pre-compiled case stl’s are included.
 ### Case Designs and Styles
 The case naming convention for standard cases in the configuration file follow the basic form of “sbc”_”design”_”style” e.g. c4_shell or c4_tray_vu5.
 
-#### Current Case Count 457
+#### Last Case Count 457
 
 ##### Hardkernel - 194
 
