@@ -26,7 +26,7 @@ include <./sbc_case_builder_accessories.cfg>;
 
 /* [View] */
 // viewing mode "model", "platter", "part"
-view = "model"; // [model, platter, part, folded]
+view = "model"; // [model, platter, part]
 individual_part = "bottom"; // [top, bottom, right, left, front, rear, accessories]
 // single board computer model
 sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007"]
@@ -124,12 +124,14 @@ top_ext_standoff = [5.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
 bottom_ext_standoff = [5.75,5,3.6,10,4,1,0,0,0,4.5,5.1];
 
 /* [Folding Case Adjustments] */
-//Material Thickness
+// material thickness in mm
 material_thickness = .5; //[.1:.01:3]
-// Bend Allowance
+// bend allowance
 bend_allowance = 1; //[0:.01:5]
-// Bottom clearence
+// bottom clearence
 bottom_clearence = 3.5; //[-10:.01:10]
+// enable flat blank section for export
+flat_blank_section =  false;
 
 /* [Features and Accessories] */
 // heatsink opening
@@ -538,8 +540,11 @@ if (view == "model") {
                 }    
             }
         }
-        if(case_design == "paper") {
+        if(case_design == "paper" && flat_blank_section == false) {
             case_folded(case_design, case_style);
+        }
+        if(case_design == "paper" && flat_blank_section == true) {
+            projection() case_folded(case_design, case_style);
         }
         if(case_design == "tray") {
             echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
@@ -655,9 +660,4 @@ if (view == "part") {
     else {
         echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
     }    
-}
-if (view == "folded") {
-    if(case_design == "paper") {
-        projection() case_folded(case_design, case_style);
-    }
 }
