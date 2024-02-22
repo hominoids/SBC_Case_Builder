@@ -17,18 +17,35 @@
 
 
            NAME: art
-    DESCRIPTION: create artwork using dxf or svf
+    DESCRIPTION: create 2d artwork using dxf or svf
            TODO: none
 
-          USAGE: art(scale_d1, size_z, type)
+          USAGE: art(scale_d1, size_z, filename)
 
                      scale_d1 = amount to scale file
                        size_z = floor thickness
-                         type = file name
+                     filename = file name
+
+
+           NAME: stl_model
+    DESCRIPTION: import 3d artwork using stl
+           TODO: none
+
+          USAGE: art(scale_d1, size_z, filename)
+
+                     scale_d1 = amount to scale file
+                       size_z = floor thickness
+                     filename = file name
 */
 
-module art(scale_d1, size_z, type) {
+module art(scale_d1, size_z, filename) {
 
-    linear_extrude(height = size_z) import(file = type, scale=scale_d1);
+    linear_extrude(height = size_z) import(file = filename, scale=scale_d1);
+
+}
+
+module stl_model(scale_d1, filename) {
+
+    import(file = filename, scale=scale_d1);
 
 }

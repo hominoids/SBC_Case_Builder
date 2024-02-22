@@ -54,6 +54,9 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size_x, size_y, size_z, da
     if(type == "art") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) art(data_1,data_2,data_3); 
     }
+    if(type == "stl_model") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) stl_model(data_1,data_2); 
+    }
     if(type == "button") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) button(data_3,[size_x,size_y,size_z],data_4,data_1); 
     }

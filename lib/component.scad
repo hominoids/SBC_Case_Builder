@@ -268,9 +268,9 @@ module capacitor(diameter, height) {
 
 
 // ic 
-module ic(size) {
-    color("dimgray") cube(size);
-}
+//module ic(size) {
+//    color("dimgray") cube(size);
+//}
 
 
 // d-sub connector

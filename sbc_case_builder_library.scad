@@ -20,6 +20,8 @@
 
 */
 
+use <./SBC_Model_Framework/sbc_models_library.scad>
+
 include <./mod/add.scad>;
 include <./mod/case_bottom.scad>;
 include <./mod/case_side.scad>;
@@ -44,6 +46,7 @@ include <./lib/feet.scad>;
 include <./lib/hd.scad>;
 include <./lib/holder.scad>;
 include <./lib/keyhole.scad>;
+include <./lib/oem_adafruit.scad>;
 include <./lib/oem_hk.scad>;
 include <./lib/pcb_pad.scad>;
 include <./lib/shape.scad>;
