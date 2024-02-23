@@ -282,7 +282,7 @@ if (view == "platter") {
     }
     // platter accessories
     if(accessory_name != "none") {
-        for (i=[1:15:len(accessory_data[a[0]])-1]) {
+        for (i=[1:10:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
             type = accessory_data[a[0]][i+1];
             loc_x = accessory_data[a[0]][i+2];
@@ -291,13 +291,13 @@ if (view == "platter") {
             face = accessory_data[a[0]][i+5];
             rotation = accessory_data[a[0]][i+6];
             parametric = accessory_data[a[0]][i+7];
-            size_x = accessory_data[a[0]][i+8];
-            size_y = accessory_data[a[0]][i+9];
-            size_z = accessory_data[a[0]][i+10];
-            data_1 = accessory_data[a[0]][i+11];
-            data_2 = accessory_data[a[0]][i+12];
-            data_3 = accessory_data[a[0]][i+13];
-            data_4 = accessory_data[a[0]][i+14];
+            size_x = accessory_data[a[0]][i+8][0];
+            size_y = accessory_data[a[0]][i+8][1];
+            size_z = accessory_data[a[0]][i+8][2];
+            data_1 = accessory_data[a[0]][i+9][0];
+            data_2 = accessory_data[a[0]][i+9][1];
+            data_3 = accessory_data[a[0]][i+9][2];
+            data_4 = accessory_data[a[0]][i+9][3];
             
             if (class == "platter" && type != "button_top") {
                 add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -565,7 +565,7 @@ if (view == "model") {
         }
         // model accessories
         if(accessory_name != "none") {
-            for (i=[1:15:len(accessory_data[a[0]])-1]) {
+            for (i=[1:10:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -574,14 +574,14 @@ if (view == "model") {
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
                 parametric = accessory_data[a[0]][i+7];
-                size_x = accessory_data[a[0]][i+8];
-                size_y = accessory_data[a[0]][i+9];
-                size_z = accessory_data[a[0]][i+10];
-                data_1 = accessory_data[a[0]][i+11];
-                data_2 = accessory_data[a[0]][i+12];
-                data_3 = accessory_data[a[0]][i+13];
-                data_4 = accessory_data[a[0]][i+14];
-                
+                size_x = accessory_data[a[0]][i+8][0];
+                size_y = accessory_data[a[0]][i+8][1];
+                size_z = accessory_data[a[0]][i+8][2];
+                data_1 = accessory_data[a[0]][i+9][0];
+                data_2 = accessory_data[a[0]][i+9][1];
+                data_3 = accessory_data[a[0]][i+9][2];
+                data_4 = accessory_data[a[0]][i+9][3];
+
                 if (class == "model" && face == "top" && raise_top > -1) {
                     parametric_move_add(type,loc_x,loc_y,loc_z+raise_top,face,rotation,parametric,
                         size_x,size_y,size_z,data_1,data_2,data_3,data_4);
@@ -676,7 +676,7 @@ if (view == "part") {
     }
     if(individual_part == "accessories") {
         if(accessory_name != "none") {
-            for (i=[1:15:len(accessory_data[a[0]])-1]) {
+            for (i=[1:10:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -685,13 +685,13 @@ if (view == "part") {
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
                 parametric = accessory_data[a[0]][i+7];
-                size_x = accessory_data[a[0]][i+8];
-                size_y = accessory_data[a[0]][i+9];
-                size_z = accessory_data[a[0]][i+10];
-                data_1 = accessory_data[a[0]][i+11];
-                data_2 = accessory_data[a[0]][i+12];
-                data_3 = accessory_data[a[0]][i+13];
-                data_4 = accessory_data[a[0]][i+14];
+                size_x = accessory_data[a[0]][i+8][0];
+                size_y = accessory_data[a[0]][i+8][1];
+                size_z = accessory_data[a[0]][i+8][2];
+                data_1 = accessory_data[a[0]][i+9][0];
+                data_2 = accessory_data[a[0]][i+9][1];
+                data_3 = accessory_data[a[0]][i+9][2];
+                data_4 = accessory_data[a[0]][i+9][3];
                 
                 if (class == "platter" && type != "button_top") {
                     add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
