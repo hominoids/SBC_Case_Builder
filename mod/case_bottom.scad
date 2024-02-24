@@ -263,17 +263,12 @@ module case_bottom(case_design) {
                             face = accessory_data[a[0]][i+5];
                             rotation = accessory_data[a[0]][i+6];
                             parametric = accessory_data[a[0]][i+7];
-                            size_x = accessory_data[a[0]][i+8][0];
-                            size_y = accessory_data[a[0]][i+8][1];
-                            size_z = accessory_data[a[0]][i+8][2];
-                            data_1 = accessory_data[a[0]][i+9][0];
-                            data_2 = accessory_data[a[0]][i+9][1];
-                            data_3 = accessory_data[a[0]][i+9][2];
-                            data_4 = accessory_data[a[0]][i+9][3];
+                            size = accessory_data[a[0]][i+8];
+                            data = accessory_data[a[0]][i+9];
+                            mask = accessory_data[a[0]][i+10];
 
                             if(class == "add1" && face == "bottom") {
-                                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                                    size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                                parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data, mask);
                             }
                         }
                     }
@@ -557,50 +552,51 @@ module case_bottom(case_design) {
                 data_2 = accessory_data[a[0]][i+9][1];
                 data_3 = accessory_data[a[0]][i+9][2];
                 data_4 = accessory_data[a[0]][i+9][3];
+                mask = accessory_data[a[0]][i+10];
 
                 if ((class == "sub" && face == "bottom") || class == "suball") {
                     if(accessory_highlight == false) {
-                        parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                            size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                        parametric_move_sub(type, loc_x, loc_y, loc_z, face, rotation, parametric,
+                            [size_x,size_y,size_z],[data_1,data_2,data_3,data_4], mask);
                     }
                     else {
                         #parametric_move_sub(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                            size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                            [size_x,size_y,size_z],[data_1,data_2,data_3,data_4], mask);
 
                     }
                 }
                 // create openings for additive 
                 if (class == "add2" && face == "bottom" && type == "standoff") {
                     parametric_move_sub("round",loc_x,loc_y,loc_z-.1,face,rotation,parametric,
-                        6.5,size_y,floorthick+1,data_1,data_2,data_3,data_4);
+                        [6.5,size_y,floorthick+1],[data_1,data_2,data_3,data_4],mask);
                 }
                 if ((class == "add1" || class == "add2") && type == "uart_holder") {
                     if(accessory_highlight == false) {
                             parametric_move_sub("microusb",loc_x+5.25,loc_y-5,loc_z+4,face,rotation,parametric,
-                                0,0,0,data_1,data_2,data_3,data_4);
+                                [0,0,0],[data_1,data_2,data_3,data_4],mask);
                     }
                     else {
                             #parametric_move_sub("microusb",loc_x+5.25,loc_y-5,loc_z+4,face,rotation,parametric,
-                                0,0,0,data_1,data_2,data_3,data_4);
+                                [0,0,0],[data_1,data_2,data_3,data_4],mask);
                     }
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "hc4_oled_holder") {
                     parametric_move_sub("rectangle",loc_x+1,loc_y+1.75,loc_z+25.5,face,rotation,parametric,
-                        26.5,wallthick+gap+4,15,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                        [26.5,wallthick+gap+4,15],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "access_port") {
                     if(data_3 == "landscape") {
                         if(rotation[2] == 180) {
                             parametric_move_sub("rectangle",loc_x-6+size_x,loc_y+.5+size_y,loc_z-adj,face,rotation,
-                                parametric,size_x-17,size_y-1,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                parametric,[size_x-17,size_y-1,floorthick+1],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                             parametric_move_sub("rectangle",loc_x-size_x+12.5+size_x,loc_y-(size_y/2)+6+size_y,loc_z-adj,
-                                face,rotation,parametric,5.5,10.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                                face,rotation,parametric,[5.5,10.5,floorthick+.12],[data_1,data_2,data_3,[5.5,5.5,5.5,5.5]],mask);
                         }
                         else {
                             parametric_move_sub("rectangle",loc_x+6,loc_y-.5,loc_z-adj,face,rotation,
-                                parametric,size_x-17,size_y-1,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                parametric,[size_x-17,size_y-1,floorthick+1],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                             parametric_move_sub("rectangle",loc_x+size_x-12.5,loc_y+(size_y/2)-6,loc_z-adj,face,rotation,
-                                parametric,5.5,10.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                                parametric,[5.5,10.5,floorthick+.12],[data_1,data_2,data_3,[5.5,5.5,5.5,5.5]],mask);
 
                         }
                     }
@@ -608,48 +604,50 @@ module case_bottom(case_design) {
                         if(rotation[2] == 180) {
                             if(data_3 == "portrait") {
                                 parametric_move_sub("rectangle",loc_x+size_x-.5,loc_y+size_y-5.75,loc_z-adj,face,
-                                    rotation,parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                    rotation,parametric,[size_x-1,size_y-17,floorthick+1],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                                 parametric_move_sub("rectangle",loc_x-(size_x/2)+5+size_x,loc_y-size_y+12.5+size_y,
-                                    loc_z-adj,face,rotation,parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,
-                                        [5.5,5.5,5.5,5.5]);
+                                    loc_z-adj,face,rotation,parametric,[10.5,5.5,floorthick+.12],[data_1,data_2,data_3,
+                                        [5.5,5.5,5.5,5.5]],mask);
                             }
                             else {
                                 parametric_move_sub("rectangle",loc_x-.5,loc_y-5.75,loc_z-adj,face,rotation,
-                                    parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                    parametric,[size_x-1,size_y-17,floorthick+1],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                                 parametric_move_sub("rectangle",loc_x-(size_x/2)+5,loc_y-size_y+12.5,loc_z-adj,face,
-                                rotation,parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                                rotation,parametric,[10.5,5.5,floorthick+.12],[data_1,data_2,data_3,[5.5,5.5,5.5,5.5]],mask);
                             }
                         }
                         else {
                             parametric_move_sub("rectangle",loc_x+.5,loc_y+5.75,loc_z-adj,face,rotation,
-                                parametric,size_x-1,size_y-17,floorthick+1,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                                parametric,[size_x-1,size_y-17,floorthick+1],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                             parametric_move_sub("rectangle",loc_x+(size_x/2)-5,loc_y+size_y-12.5,loc_z-adj,face,rotation,
-                                parametric,10.5,5.5,floorthick+.12,data_1,data_2,data_3,[5.5,5.5,5.5,5.5]);
+                                parametric,[10.5,5.5,floorthick+.12],[data_1,data_2,data_3,[5.5,5.5,5.5,5.5]],mask);
                         }
                     }
                 }
                 if ((class == "model") && face == "bottom" && type == "h2_netcard") {
                     parametric_move_sub("rectangle",loc_x+25,loc_y-6,loc_z-14,face,rotation,
-                        parametric,68.5,wallthick+3,14.5,data_1,data_2,data_3,[1,1,1,1]);
+                        parametric,[68.5,wallthick+3,14.5],[data_1,data_2,data_3,[1,1,1,1]],mask);
                 }
                 if ((class == "add1" || class == "add2") && face == "bottom" && type == "button") {
                     if(data_3 == "recess") {
                         #parametric_move_sub("sphere",loc_x,loc_y,loc_z,face,rotation,
-                            parametric,size_x-1,size_y,size_z,data_1,data_2,data_3,0);
+                            parametric,[size_x-1,size_y,size_z],[data_1,data_2,data_3,0],mask);
                     }
                     if(data_3 == "cutout") {
                         parametric_move_sub("rectangle",loc_x+10,loc_y+4,loc_z-adj,face,rotation,
-                            parametric,size_x+2,size_y+1,size_z+2*adj,data_1,data_2,data_3,[.1,.1,.1,.1]);
+                            parametric,[size_x+2,size_y+1,size_z+2*adj],[data_1,data_2,data_3,[.1,.1,.1,.1]],mask);
                     }
                 }
             }
         }
         // sbc openings
         if(sbc_highlight == true) {
-            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
+                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         else {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
+                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         // indents
         if(indents == true) {
@@ -686,17 +684,12 @@ module case_bottom(case_design) {
             face = accessory_data[a[0]][i+5];
             rotation = accessory_data[a[0]][i+6];
             parametric = accessory_data[a[0]][i+7];
-            size_x = accessory_data[a[0]][i+8][0];
-            size_y = accessory_data[a[0]][i+8][1];
-            size_z = accessory_data[a[0]][i+8][2];
-            data_1 = accessory_data[a[0]][i+9][0];
-            data_2 = accessory_data[a[0]][i+9][1];
-            data_3 = accessory_data[a[0]][i+9][2];
-            data_4 = accessory_data[a[0]][i+9][3];
+            size = accessory_data[a[0]][i+8];
+            data = accessory_data[a[0]][i+9];
+            mask = accessory_data[a[0]][i+10];
 
             if(class == "add2" && face == "bottom") {
-                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                    size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,size,data,mask);
             }
         }
     }

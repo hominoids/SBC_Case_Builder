@@ -298,9 +298,10 @@ if (view == "platter") {
             data_2 = accessory_data[a[0]][i+9][1];
             data_3 = accessory_data[a[0]][i+9][2];
             data_4 = accessory_data[a[0]][i+9][3];
+            mask = accessory_data[a[0]][i+10];
             
             if (class == "platter" && type != "button_top") {
-                add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                add(type, loc_x, loc_y, loc_z, face, rotation, [size_x, size_y, size_z], [data_1, data_2, data_3, data_4], mask);
             }
             if (class == "platter" && type == "button_top") {
                 translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_3, size_x, size_z);
@@ -574,22 +575,16 @@ if (view == "model") {
                 face = accessory_data[a[0]][i+5];
                 rotation = accessory_data[a[0]][i+6];
                 parametric = accessory_data[a[0]][i+7];
-                size_x = accessory_data[a[0]][i+8][0];
-                size_y = accessory_data[a[0]][i+8][1];
-                size_z = accessory_data[a[0]][i+8][2];
-                data_1 = accessory_data[a[0]][i+9][0];
-                data_2 = accessory_data[a[0]][i+9][1];
-                data_3 = accessory_data[a[0]][i+9][2];
-                data_4 = accessory_data[a[0]][i+9][3];
+                size = accessory_data[a[0]][i+8];
+                data = accessory_data[a[0]][i+9];
+                mask = accessory_data[a[0]][i+10];
 
                 if (class == "model" && face == "top" && raise_top > -1) {
-                    parametric_move_add(type,loc_x,loc_y,loc_z+raise_top,face,rotation,parametric,
-                        size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                    parametric_move_add(type, loc_x, loc_y, loc_z+raise_top, face, rotation, parametric, size, data, mask);
                 }
                 else {
                     if (class == "model"&& face != "top" ) {
-                    parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,
-                        size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                    parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data, mask);
                     }
                 }    
             }
@@ -692,9 +687,10 @@ if (view == "part") {
                 data_2 = accessory_data[a[0]][i+9][1];
                 data_3 = accessory_data[a[0]][i+9][2];
                 data_4 = accessory_data[a[0]][i+9][3];
+                mask = accessory_data[a[0]][i+10];
                 
                 if (class == "platter" && type != "button_top") {
-                    add(type,loc_x,loc_y,loc_z,face,rotation,size_x,size_y,size_z,data_1,data_2,data_3,data_4);
+                    add(type, loc_x, loc_y, loc_z, face, rotation, [size_x, size_y, size_z], [data_1, data_2, data_3, data_4], mask);
                 }
                 if (class == "platter" && type == "button_top") {
                     translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_3, size_x, size_z);

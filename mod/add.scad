@@ -20,24 +20,36 @@
     DESCRIPTION: places additive objects 
            TODO: none
 
-          USAGE: add(type, loc_x, loc_y, loc_z, face, rotation, size_x, size_y, size_z, data_1, data_2, data_3, data_4)
+          USAGE: add(type, loc_x, loc_y, loc_z, face, rotation, size[], data[], mask[])
 
-                           type = 
-                          loc_x = 
-                          loc_y = 
-                          loc_z = 
-                           face = 
-                       rotation = 
-                        size[0] = size_x
-                        size[1] = size_y
-                        size[2] = size_z
-                        data[0] = 
-                        data[1] = 
-                        data[2] = 
+                         type = component type
+                        loc_x = x location placement
+                        loc_y = y location placement
+                        loc_z = z location placement
+                         face = "top", "bottom", "left", "right", "front", "rear"
+                   rotation[] = object rotation
+                 parametric[] = parametric movement array
+                       size[] = size array x,y,z
+                      mask[0] = true enables component mask
+                      mask[1] = mask length
+                      mask[2] = mask setback
+                      mask[3] = mstyle "default"
 
 */
 
-module add(type, loc_x, loc_y, loc_z, face, rotation, size_x, size_y, size_z, data_1, data_2, data_3, data_4) {
+module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
+
+    size_x = size[0];
+    size_y = size[1];
+    size_z = size[2];
+    data_1 = data[0];
+    data_2 = data[1];
+    data_3 = data[2];
+    data_4 = data[3];
+    enablemask = mask[0];
+    mlen = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
     
     if(type == "rectangle") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) slab_r([size_x,size_y,size_z],data_4);
