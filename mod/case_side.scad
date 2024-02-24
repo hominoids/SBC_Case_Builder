@@ -198,7 +198,7 @@ module case_side(case_design, case_style, side) {
             }         
             // additive accessories
             if(accessory_name != "none") {
-                for (i=[1:10:len(accessory_data[a[0]])-1]) {
+                for (i=[1:11:len(accessory_data[a[0]])-1]) {
                     class = accessory_data[a[0]][i];
                     type = accessory_data[a[0]][i+1];
                     loc_x = accessory_data[a[0]][i+2];
@@ -223,7 +223,7 @@ module case_side(case_design, case_style, side) {
             }
         }
         if(accessory_name != "none") {
-            for (i=[1:10:len(accessory_data[a[0]])-1]) {
+            for (i=[1:11:len(accessory_data[a[0]])-1]) {
                 class = accessory_data[a[0]][i];
                 type = accessory_data[a[0]][i+1];
                 loc_x = accessory_data[a[0]][i+2];
@@ -335,7 +335,7 @@ module case_side(case_design, case_style, side) {
         }
     }
     if(accessory_name != "none") {
-        for (i=[1:10:len(accessory_data[a[0]])-1]) {
+        for (i=[1:11:len(accessory_data[a[0]])-1]) {
             class = accessory_data[a[0]][i];
             type = accessory_data[a[0]][i+1];
             loc_x = accessory_data[a[0]][i+2];
