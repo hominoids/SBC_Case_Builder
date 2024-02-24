@@ -1026,7 +1026,7 @@ module hk_boom_grill(style, thick) {
 
 
 /*
-           NAME: hk_boom_grill
+           NAME: boom_speaker_holder
     DESCRIPTION: hardkernel stereo boom bonnet speaker holder
            TODO: none
 
@@ -1036,7 +1036,7 @@ module hk_boom_grill(style, thick) {
                            tolerance = friction adjustment
 */
 
-module boom_speaker_holder(style, tolerance) {
+module boom_speaker_holder(style, tolerance=0) {
 
     adj = .01;
     $fn = 90;

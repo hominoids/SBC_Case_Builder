@@ -30,6 +30,7 @@
                    rotation[] = object rotation
                  parametric[] = parametric movement array
                        size[] = size array x,y,z
+                       data[] = data variable on type
                       mask[0] = true enables component mask
                       mask[1] = mask length
                       mask[2] = mask setback
@@ -42,17 +43,13 @@ module sub(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     size_x = size[0];
     size_y = size[1];
     size_z = size[2];
-    data_1 = data[0];
-    data_2 = data[1];
-    data_3 = data[2];
-    data_4 = data[3];
     enablemask = mask[0];
     mlen = mask[1];
     msetback = mask[2];
     mstyle = mask[3];
 
     if(type == "rectangle") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) slab_r([size_x,size_y,size_z],data_4);
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) slab_r([size_x,size_y,size_z],data[0]);
     }
     if(type == "round") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) cylinder(d=size_x,h=size_z);
@@ -61,37 +58,37 @@ module sub(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) slot(size_x,size_y,size_z);
     }
     if(type == "text") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) linear_extrude(height = size_z) text(data_3, size=data_1);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) linear_extrude(height = size_z) text(data_2, size=data[0]);
     }
     if(type == "art") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) art(data_1,data_2,data_3); 
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) art(data[0],data[1],data[2]); 
     }
     if(type == "button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) button(data_3,[size_x,size_y,size_z],data_4,data_1); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) button(data[1],[size_x,size_y,size_z],data[2],data[0]); 
     }
     if(type == "hd_holes") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data_1,data_3,"none","none",data_2);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data[0],data[2],"none","none",data[1]);
     }    
     if(type == "hd_vertleft_holes") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data_1,data_3,"vertical","left",data_2);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data[0],data[2],"vertical","left",data[1]);
     }    
     if(type == "hd_vertright_holes") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data_1,data_3,"vertical","right",data_2);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data[0],data[2],"vertical","right",data[1]);
     }    
     if(type == "hk_fan_top") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) hk_fan_top();
     }    
     if(type == "knockout") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) knockout(size_x,size_y,data_1,size_z,data_2,data_3);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) knockout(size_x,size_y,data[0],size_z,data[1],data[2]);
     }    
     if(type == "fan") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_mask(size_x, size_z, data_1);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_mask(size_x, size_z, data[0]);
     }
     if(type == "vent") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent(size_x,size_y,size_z,data_4,data_1,data_2,data_3);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent(size_x,size_y,size_z,data[3],data[0],data[1],data[2]);
     }
     if(type == "vent_hex") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_hex(size_x,size_y,size_z,data_1,data_2,data_3);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_hex(size_x,size_y,size_z,data[0],data[1],data[2]);
     }
     if(type == "microusb") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) microusb_open();
@@ -100,15 +97,15 @@ module sub(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) sphere(d=size_x);
     }
     if(type == "keyhole") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data_4, true); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0], true); 
     }
     if(type == "h3_port_extender") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data_3, true); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data[0], true); 
     }
     if(type == "hk_pwr_button") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(true); 
     }
     if(type == "dsub") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data_4, true); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0], true); 
     }
 }
