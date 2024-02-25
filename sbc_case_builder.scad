@@ -143,14 +143,64 @@ bottom_rear_right_adjust = 0; //[-20:.01:20]
 bottom_front_right_support = "front"; //[none,left,rear,front,right]
 bottom_front_right_adjust = 0; //[-20:.01:20]
 
-/* [Extended Standoffs] */
+/* [Extended Top Standoffs] */
 // enable case extended standoffs
-case_ext_standoffs = false;
-// top case extened standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-top_ext_standoff = [5.75,18,2.5,10,4,4,0,1,0,4.5,5.1];
+ext_top_standoffs = true;
+ext_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
+ext_top_standoff_pillar = "hex"; //[hex, round]
+ext_top_standoff_diameter = 5.75; //[0:.01:10]
+ext_top_standoff_hole_size = 2.75; //[0:.01:5]
+ext_top_standoff_support_size = 10; //[0:.01:15]
+ext_top_standoff_support_height = 4; //[0:.01:50]
+ext_top_standoff_insert = false;
+ext_top_standoff_insert_dia = 4.5; //[0:.01:6]
+ext_top_standoff_insert_height = 5; //[0:.01:10]
+ext_top_standoff_reverse = true;
+// enable wall support for extended standoffs
+ext_top_sidewall_support = true;
 
-// bottom case extended standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
-bottom_ext_standoff = [5.75,5,3.6,10,4,1,0,0,0,4.5,5.1];
+// extended case top - lower left standoff settings
+ext_top_rear_left_support = "rear"; //[none,left,rear,front,right]
+ext_top_rear_left_adjust = 0; //[-20:.01:20]
+// extended case top - upper left standoff settings
+ext_top_front_left_support = "front"; //[none,left,rear,front,right]
+ext_top_front_left_adjust = 0; //[-20:.01:20]
+// extended case top - lower right standoff settings
+ext_top_rear_right_support = "rear"; //[none,left,rear,front,right]
+ext_top_rear_right_adjust = 0; //[-20:.01:20]
+// extended case top - upper right standoff settings
+ext_top_front_right_support = "front";  //[none,left,rear,front,right]
+ext_top_front_right_adjust = 0; //[-20:.01:20]
+
+
+/* [Extended Bottom Standoffs] */
+// enable case bottom extended standoffs
+ext_bottom_standoffs = true;
+ext_bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
+ext_bottom_standoff_pillar = "hex"; //[hex, round]
+ext_bottom_standoff_diameter = 5.75; //[2:.01:10]
+ext_bottom_standoff_hole_size = 3.4; //[0:.01:5]
+ext_bottom_standoff_support_size = 10; //[1:.01:15]
+ext_bottom_standoff_support_height = 4; //[0:.01:50]
+ext_bottom_standoff_insert = false;
+ext_bottom_standoff_insert_dia = 4.5; //[0:.01:6]
+ext_bottom_standoff_insert_height = 5; //[0:.01:10]
+ext_bottom_standoff_reverse = false;
+// enable wall support for extended standoffs
+ext_bottom_sidewall_support = true;
+
+// extended case bottom - rear left standoff settings
+ext_bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
+ext_bottom_rear_left_adjust = 0; //[-20:.01:20]
+// extended case bottom - upper left standoff settings
+ext_bottom_front_left_support = "front"; //[none,left,rear,front,right]
+ext_bottom_front_left_adjust = 0; //[-20:.01:20]
+// extended case bottom - lower right standoff settings
+ext_bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
+ext_bottom_rear_right_adjust = 0; //[-20:.01:20]
+// extended case bottom - upper right standoff settings
+ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
+ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 
 /* [Folded Case Adjustments] */
 // material thickness in mm
@@ -205,7 +255,6 @@ case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 
 /* [Hidden] */
-// top case standoff - [diameter,height(not used),holesize,supportsize,supportheight,type(0=none, 1=countersink, 2=recessed, 3=nut holder, 4=blind),style(0=hex, 1=cylinder),reverse,insert,insert hole dia.,insert depth]
 top_standoff = [top_standoff_diameter,
                 18,
                 top_standoff_hole_size,
@@ -230,16 +279,30 @@ bottom_standoff = [bottom_standoff_diameter,
                    bottom_standoff_insert,
                    bottom_standoff_insert_dia,
                    bottom_standoff_insert_height];
-case_fn = 360;     // circle segments for round cases
-case_ffn = 90;     // circle segments for fillet of round cases
-lip = 5;
-vu_rotation = [15,0,0];
-text_offset = 25;
-text_height = case_z + (len(sbc_data[s[0]][1]) * 7);
-text_indent = [0,-32.5,4,0,-20.5,-8,4,4,4,4,-12,-16,-4,-12.5,-8,-4,-12,0,4,0,4,8,-.5,-12.5,-4.5,-8.5,0,-8];
-
-ctext_offset = 15;
-ctext_height = 130;
+ext_top_standoff = [top_standoff_diameter,
+                    18,
+                    top_standoff_hole_size,
+                    top_standoff_support_size,
+                    top_standoff_support_height,
+                    top_standoff_type,
+                    top_standoff_pillar,
+                    top_rear_left_support,
+                    top_standoff_reverse,
+                    top_standoff_insert,
+                    top_standoff_insert_dia,
+                    top_standoff_insert_height];
+ext_bottom_standoff = [bottom_standoff_diameter,
+                       6,
+                       bottom_standoff_hole_size,
+                       bottom_standoff_support_size,
+                       bottom_standoff_support_height,
+                       bottom_standoff_type,
+                       bottom_standoff_pillar,
+                       bottom_rear_left_support,
+                       bottom_standoff_reverse,
+                       bottom_standoff_insert,
+                       bottom_standoff_insert_dia,
+                       bottom_standoff_insert_height];
 
 adj = .01;
 $fn=90;
@@ -329,16 +392,22 @@ if (view == "platter") {
         case_folded(case_design, case_style);
     }
     if(case_design == "tray") {
-        echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+        echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
     }
     else {
-        echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
+        echo(Case_Width=width,Depth=depth,Top=top_height,Bottom=bottom_height);        
     }    
 }
 
 // model view
 if (view == "model") {    
 //    translate([(-width+(gap+wallthick))/2,(-depth+(gap+wallthick))/2,0]) rotate([0,0,0]){
+    text_offset = 25;
+    text_height = case_z + (len(sbc_data[s[0]][1]) * 7);
+    text_indent = [0,-32.5,4,0,-20.5,-8,4,4,4,4,-12,-16,-4,-12.5,-8,-4,-12,0,4,0,4,8,-.5,-12.5,-4.5,-8.5,0,-8];
+    ctext_offset = 15;
+    ctext_height = 130;
+
         if(case_design == "shell") {
             if(lower_bottom >= 0) {
                 difference() {
@@ -615,10 +684,10 @@ if (view == "model") {
             }
         }
         if(case_design == "tray") {
-            echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+            echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
         }
         else {
-            echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
+            echo(Case_Width=width,Depth=depth,Top=top_height,Bottom=bottom_height);        
         }
     }
 //}

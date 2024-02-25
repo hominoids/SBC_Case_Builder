@@ -26,6 +26,11 @@
 
 module case_top(case_design) {
 
+    lip = 5;
+    vu_rotation = [15,0,0];
+    case_fn = 360;     // circle segments for round cases
+    case_ffn = 90;     // circle segments for fillet of round cases
+
     difference() {
         union() {
             difference() {
@@ -286,25 +291,32 @@ module case_top(case_design) {
                     }
                 }
                 // extended standoff holes
-                if(case_ext_standoffs == true) {
+                if(ext_top_standoffs == true) {
                     // right-rear standoff
-                    if(width-pcb_loc_x-pcb_width >= 10 || pcb_loc_y >= 10) {
-                        translate([width-(2*(wallthick+gap))-(corner_fillet/2),(corner_fillet/2),top_height+1]) 
-                            cylinder(d=6.5, h=top_height);
+                    if(width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 || pcb_loc_y >= 10) {
+                        translate([width-ext_top_standoff_support_size/4-(2*(wallthick+gap))-(corner_fillet/2),
+                            (corner_fillet/2)+ext_top_standoff_support_size/4,top_height+1]) cylinder(d=6.5, h=top_height);
                     }
                     // right-front standoff
-                    if((width-pcb_loc_x-pcb_width >= 10 && depth-pcb_loc_y-pcb_depth >= 10) || width-pcb_loc_x-pcb_width >= 10) {
-                        translate([width-(corner_fillet/2)-(2*(wallthick+gap)),
-                            depth-(corner_fillet/2)-(2*(wallthick+gap)),top_height+1]) cylinder(d=6.5, h=top_height);
+                    if((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 && depth-pcb_loc_y-pcb_depth >= 10) || 
+                        (width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 && depth-pcb_loc_y-pcb_depth <= 10) ||
+                            (width-pcb_loc_x-pcb_width-(gap+2*wallthick) <= 10 && depth-pcb_loc_y-pcb_depth >= 10)) {
+                        translate([width-ext_top_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)),
+                            depth-ext_top_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)),top_height+1]) 
+                                cylinder(d=6.5, h=top_height);
                     }
                     // left-rear standoff
                     if(pcb_loc_x >= 10 || pcb_loc_y >= 10) {
-                        translate([(corner_fillet/2),(corner_fillet/2),top_height+1]) cylinder(d=6.5, h=top_height);
+                        translate([(corner_fillet/2)+ext_top_standoff_support_size/4,
+                            (corner_fillet/2)+ext_top_standoff_support_size/4,top_height+1]) cylinder(d=6.5, h=top_height);
                     }
                     // left-front standoff
-                    if(pcb_loc_x >= 10 || depth-pcb_loc_y-pcb_depth >= 10) {
-                        translate([+(corner_fillet/2),depth-(corner_fillet/2)-(2*(wallthick+gap)),
-                            top_height+1]) cylinder(d=6.5, h=top_height+1);
+                    if((pcb_loc_x >= 10 && (depth-(pcb_loc_y+pcb_depth)) >= 10) || 
+                        (pcb_loc_x <= 10 && (depth-(pcb_loc_y+pcb_depth)) >= 10) || 
+                            pcb_loc_x >= 10 && (depth-(pcb_loc_y+pcb_depth)) <= 10) {
+                        translate([+(corner_fillet/2)+ext_top_standoff_support_size/4,
+                            depth-ext_top_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)),top_height+1]) 
+                                cylinder(d=6.5, h=top_height+1);
                     }
                 }
             }
@@ -387,52 +399,80 @@ module case_top(case_design) {
                 }
             }
             // extended standoffs
-            if(case_ext_standoffs == true) {
-                // right-rear standoff
-                if(width-pcb_loc_x-pcb_width >= 10 || pcb_loc_y >= 10) {
-                    translate([width-(2*(wallthick+gap))-(corner_fillet/2),(corner_fillet/2),case_z]) 
-                        standoff(top_ext_standoff);
+            if(ext_top_standoffs == true) {
+                // extended right-rear standoff
+                if(width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 || pcb_loc_y >= 10) {
+                    normal_standoff = [ext_top_standoff[0],
+                                        top_height+pcb_loc_z+ext_top_rear_right_adjust,
+                                        ext_top_standoff[2],
+                                        ext_top_standoff[3],
+                                        ext_top_standoff[4],
+                                        ext_top_standoff[5],
+                                        ext_top_standoff[6],
+                                        ext_top_rear_right_support,
+                                        ext_top_standoff[8],
+                                        ext_top_standoff[9],
+                                        ext_top_standoff[10],
+                                        ext_top_standoff[11]];
+                    translate([width-ext_top_standoff_support_size/4-(2*(wallthick+gap))-(corner_fillet/2),
+                        (corner_fillet/2)+ext_top_standoff_support_size/4,case_z]) standoff(normal_standoff);
                 }
-                // right-front standoff    
-                if((width-pcb_loc_x-pcb_width >= 10 && depth-pcb_loc_y-pcb_depth >= 10) 
-                    || width-pcb_loc_x-pcb_width >= 10) {
-                        translate([width-(corner_fillet/2)-(2*(wallthick+gap)),
-                            depth-(corner_fillet/2)-(2*(wallthick+gap)),case_z]) standoff(top_ext_standoff);
+                // extended right-front standoff    
+                if((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 && depth-pcb_loc_y-pcb_depth >= 10) || 
+                    (width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 && depth-pcb_loc_y-pcb_depth <= 10) ||
+                        (width-pcb_loc_x-pcb_width-(gap+2*wallthick) <= 10 && depth-pcb_loc_y-pcb_depth >= 10)) {
+                    normal_standoff = [ext_top_standoff[0],
+                                        top_height+pcb_loc_z+ext_top_front_right_adjust,
+                                        ext_top_standoff[2],
+                                        ext_top_standoff[3],
+                                        ext_top_standoff[4],
+                                        ext_top_standoff[5],
+                                        ext_top_standoff[6],
+                                        ext_top_front_right_support,
+                                        ext_top_standoff[8],
+                                        ext_top_standoff[9],
+                                        ext_top_standoff[10],
+                                        ext_top_standoff[11]];
+                        translate([width-ext_top_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)),
+                            depth-ext_top_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)),case_z]) 
+                                standoff(normal_standoff);
                 }
-                // left-rear standoff
+                // extended left-rear standoff
                 if(pcb_loc_x >= 10 || pcb_loc_y >= 10) {
-                    translate([(corner_fillet/2),(corner_fillet/2),case_z]) standoff(top_ext_standoff);
+                            normal_standoff = [ext_top_standoff[0],
+                                                top_height+pcb_loc_z+ext_top_rear_left_adjust,
+                                                ext_top_standoff[2],
+                                                ext_top_standoff[3],
+                                                ext_top_standoff[4],
+                                                ext_top_standoff[5],
+                                                ext_top_standoff[6],
+                                                ext_top_rear_left_support,
+                                                ext_top_standoff[8],
+                                                ext_top_standoff[9],
+                                                ext_top_standoff[10],
+                                                ext_top_standoff[11]];
+                    translate([(corner_fillet/2)+ext_top_standoff_support_size/4,
+                        (corner_fillet/2)+ext_top_standoff_support_size/4,case_z]) standoff(normal_standoff);
                 }
-                // left-front standoff
-                if(pcb_loc_x >= 10 || depth-pcb_loc_y-pcb_depth >= 10) {
-                    translate([(corner_fillet/2),depth-(corner_fillet/2)-(2*(wallthick+gap)),
-                        case_z]) standoff(top_ext_standoff);
-                }
-            }
-            // extended standoff sidewall support
-            if(case_ext_standoffs == true && top_sidewall_support == true) {
-                // right-rear standoff
-                if(width-pcb_loc_x-pcb_width >= 10 || pcb_loc_y >= 10) {
-                    translate([width-(2*(wallthick+gap))-(corner_fillet/2)+(top_ext_standoff[0]/2)-.6,
-                        (corner_fillet/2)-1,bottom_height]) cube([gap+adj+2,2,top_height]);
-                }
-                // right-front standoff    
-                if((width-pcb_loc_x-pcb_width >= 10 && depth-pcb_loc_y-pcb_depth >= 10) 
-                    || width-pcb_loc_x-pcb_width >= 10) {
-                        translate([width-(2*(wallthick+gap))-(corner_fillet/2)+(top_ext_standoff[0]/2)-.6,
-                            depth-(corner_fillet/2)-(2*(wallthick+gap))-1,bottom_height])
-                                cube([gap+adj+2,2,top_height]);
-                }
-                // left-rear standoff
-                if(pcb_loc_x >= 10 || pcb_loc_y >= 10) {
-                    translate([(corner_fillet/2)-(wallthick+gap)-(top_ext_standoff[0]/2)+.6,(corner_fillet/2)-1,
-                        bottom_height]) cube([gap+adj+2,2,top_height]);
-                }
-                // left-front standoff
-                if(pcb_loc_x >= 10 || depth-pcb_loc_y-pcb_depth >= 10) {
-                    translate([(corner_fillet/2)-(wallthick+gap)-(top_ext_standoff[0]/2)+.6,
-                        depth-(corner_fillet/2)-(2*(wallthick+gap))-1, bottom_height]) 
-                            cube([gap+adj+2,2,top_height]);
+                // extended left-front standoff
+                if((pcb_loc_x >= 10 && (depth-(pcb_loc_y+pcb_depth)) >= 10) || 
+                        (pcb_loc_x <= 10 && (depth-(pcb_loc_y+pcb_depth)) >= 10) || 
+                            pcb_loc_x >= 10 && (depth-(pcb_loc_y+pcb_depth)) <= 10) {
+                    normal_standoff = [ext_top_standoff[0],
+                                        top_height+pcb_loc_z+ext_top_front_left_adjust,
+                                        ext_top_standoff[2],
+                                        ext_top_standoff[3],
+                                        ext_top_standoff[4],
+                                        ext_top_standoff[5],
+                                        ext_top_standoff[6],
+                                        ext_top_front_left_support,
+                                        ext_top_standoff[8],
+                                        ext_top_standoff[9],
+                                        ext_top_standoff[10],
+                                        ext_top_standoff[11]];
+                    translate([(corner_fillet/2)+ext_top_standoff_support_size/4,
+                        depth-ext_top_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)), case_z]) 
+                            standoff(normal_standoff);
                 }
             }
         }
