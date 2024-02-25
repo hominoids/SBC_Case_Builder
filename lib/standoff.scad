@@ -29,7 +29,7 @@
                                     supportheight = height of support for sink
                                     sink = none, countersunk, recessed, nut holder, blind
                                     pillarstyle = hex, round style of pillar
-                                    pillarsupport = left, rear, front, right
+                                    pillarsupport = none, left, rear, front, right
                                     reverse = true or false
                                     insert_e = true or false
                                     i_dia = insert diameter
@@ -73,6 +73,30 @@ module standoff(stand_off){
             }
             else {
                 cylinder(d=(supportsize),h=supportheight,$fn=60);
+            }
+            if(pillarsupport == "rear" && reverse == true) {
+                translate([-1,-supportsize/2,-height]) cube([2,supportsize/2,height]);
+            }
+            if(pillarsupport == "rear" && reverse == false) {
+                translate([-1,-supportsize/2,0]) cube([2,supportsize/2,height]);
+            }
+            if(pillarsupport == "front" && reverse == true) {
+                translate([-1,0,-height]) cube([2,supportsize/2,height]);
+            }
+            if(pillarsupport == "front" && reverse == false) {
+                translate([-1,0,0]) cube([2,supportsize/2,height]);
+            }
+            if(pillarsupport == "left" && reverse == true) {
+                translate([-supportsize/2,-1,-height]) cube([supportsize/2,2,height]);
+            }
+            if(pillarsupport == "left" && reverse == false) {
+                translate([-supportsize/2,-1,0]) cube([supportsize/2,2,height]);
+            }
+            if(pillarsupport == "right" && reverse == true) {
+                translate([0,-1,-height]) cube([supportsize/2,2,height]);
+            }
+            if(pillarsupport == "right" && reverse == false) {
+                translate([0,-1,0]) cube([supportsize/2,2,height]);
             }
         }
         // hole
