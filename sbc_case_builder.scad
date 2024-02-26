@@ -35,9 +35,9 @@ sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "
 sbc_off = false;
 // sbc information display
 sbc_information = false;
-// enable highlight for sbc component subtarctive geometry
+// enable highlight for sbc component subtractive geometry
 sbc_highlight = false;
-// enable highlight for accessory subtarctive geometry
+// enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
 case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted,paper]
@@ -90,6 +90,9 @@ tol = .25; //[-.5:.0625:.5]
 /* [Top Standoffs] */
 // enable case top standoffs
 sbc_top_standoffs = true;
+top_standoff_reverse = true;
+// enable wall support for standoffs
+top_sidewall_support = true;
 top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
 top_standoff_pillar = "hex"; //[hex, round]
 top_standoff_diameter = 5.75; //[0:.01:10]
@@ -99,26 +102,29 @@ top_standoff_support_height = 4; //[0:.01:50]
 top_standoff_insert = false;
 top_standoff_insert_dia = 4.2; //.01
 top_standoff_insert_height = 5.1; //.01
-top_standoff_reverse = true;
-// enable wall support for standoffs
-top_sidewall_support = true;
-
 // case top - lower left standoff settings
-top_rear_left_support = "rear"; //[none,left,rear,front,right]
+top_rear_left_enable = true;
 top_rear_left_adjust = 0; //[-20:.01:20]
+top_rear_left_support = "rear"; //[none,left,rear,front,right]
 // case top - upper left standoff settings
-top_front_left_support = "front"; //[none,left,rear,front,right]
+top_front_left_enable = true;
 top_front_left_adjust = 0; //[-20:.01:20]
+top_front_left_support = "front"; //[none,left,rear,front,right]
 // case top - lower right standoff settings
-top_rear_right_support = "rear"; //[none,left,rear,front,right]
+top_rear_right_enable = true;
 top_rear_right_adjust = 0; //[-20:.01:20]
+top_rear_right_support = "rear"; //[none,left,rear,front,right]
 // case top - upper right standoff settings
-top_front_right_support = "front";  //[none,left,rear,front,right]
+top_front_right_enable = true;
 top_front_right_adjust = 0; //[-20:.01:20]
+top_front_right_support = "front";  //[none,left,rear,front,right]
 
 /* [Bottom Standoffs] */
 // enable case bottom standoffs
 sbc_bottom_standoffs = true;
+bottom_standoff_reverse = false;
+// enable wall support for standoffs
+bottom_sidewall_support = true;
 bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
 bottom_standoff_pillar = "hex"; //[hex, round]
 bottom_standoff_diameter = 5.75; //[2:.01:10]
@@ -128,26 +134,29 @@ bottom_standoff_support_height = 4; //[0:.01:50]
 bottom_standoff_insert = false;
 bottom_standoff_insert_dia = 4.2; //.01
 bottom_standoff_insert_height = 5.1; //.01
-bottom_standoff_reverse = false;
-// enable wall support for standoffs
-bottom_sidewall_support = true;
-
 // case bottom - rear left standoff settings
-bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
+bottom_rear_left_enable = true;
 bottom_rear_left_adjust = 0; //[-20:.01:20]
+bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
 // case bottom - upper left standoff settings
-bottom_front_left_support = "front"; //[none,left,rear,front,right]
+bottom_front_left_enable = true;
 bottom_front_left_adjust = 0; //[-20:.01:20]
+bottom_front_left_support = "front"; //[none,left,rear,front,right]
 // case bottom - lower right standoff settings
-bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
+bottom_rear_right_enable = true;
 bottom_rear_right_adjust = 0; //[-20:.01:20]
+bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
 // case bottom - upper right standoff settings
-bottom_front_right_support = "front"; //[none,left,rear,front,right]
+bottom_front_right_enable = true;
 bottom_front_right_adjust = 0; //[-20:.01:20]
+bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
 /* [Extended Top Standoffs] */
 // enable case extended standoffs
 ext_top_standoffs = true;
+ext_top_standoff_reverse = true;
+// enable wall support for extended standoffs
+ext_top_sidewall_support = true;
 ext_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
 ext_top_standoff_pillar = "hex"; //[hex, round]
 ext_top_standoff_diameter = 5.75; //[0:.01:10]
@@ -157,27 +166,30 @@ ext_top_standoff_support_height = 4; //[0:.01:50]
 ext_top_standoff_insert = false;
 ext_top_standoff_insert_dia = 4.2; //.01
 ext_top_standoff_insert_height = 5.1; //.01
-ext_top_standoff_reverse = true;
-// enable wall support for extended standoffs
-ext_top_sidewall_support = true;
-
 // extended case top - lower left standoff settings
-ext_top_rear_left_support = "rear"; //[none,left,rear,front,right]
+ext_top_rear_left_enable = true;
 ext_top_rear_left_adjust = 0; //[-20:.01:20]
+ext_top_rear_left_support = "rear"; //[none,left,rear,front,right]
 // extended case top - upper left standoff settings
-ext_top_front_left_support = "front"; //[none,left,rear,front,right]
+ext_top_front_left_enable = true;
 ext_top_front_left_adjust = 0; //[-20:.01:20]
+ext_top_front_left_support = "front"; //[none,left,rear,front,right]
 // extended case top - lower right standoff settings
-ext_top_rear_right_support = "rear"; //[none,left,rear,front,right]
+ext_top_rear_right_enable = true;
 ext_top_rear_right_adjust = 0; //[-20:.01:20]
+ext_top_rear_right_support = "rear"; //[none,left,rear,front,right]
 // extended case top - upper right standoff settings
-ext_top_front_right_support = "front";  //[none,left,rear,front,right]
+ext_top_front_right_enable = true;
 ext_top_front_right_adjust = 0; //[-20:.01:20]
+ext_top_front_right_support = "front";  //[none,left,rear,front,right]
 
 
 /* [Extended Bottom Standoffs] */
 // enable case bottom extended standoffs
 ext_bottom_standoffs = true;
+ext_bottom_standoff_reverse = false;
+// enable wall support for extended standoffs
+ext_bottom_sidewall_support = true;
 ext_bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
 ext_bottom_standoff_pillar = "hex"; //[hex, round]
 ext_bottom_standoff_diameter = 5.75; //[2:.01:10]
@@ -187,22 +199,22 @@ ext_bottom_standoff_support_height = 4; //[0:.01:50]
 ext_bottom_standoff_insert = false;
 ext_bottom_standoff_insert_dia = 4.2; //.01
 ext_bottom_standoff_insert_height = 5.1; //.01
-ext_bottom_standoff_reverse = false;
-// enable wall support for extended standoffs
-ext_bottom_sidewall_support = true;
-
 // extended case bottom - rear left standoff settings
-ext_bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
+ext_bottom_rear_left_enable = true;
 ext_bottom_rear_left_adjust = 0; //[-20:.01:20]
+ext_bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
 // extended case bottom - upper left standoff settings
-ext_bottom_front_left_support = "front"; //[none,left,rear,front,right]
+ext_bottom_front_left_enable = true;
 ext_bottom_front_left_adjust = 0; //[-20:.01:20]
+ext_bottom_front_left_support = "front"; //[none,left,rear,front,right]
 // extended case bottom - lower right standoff settings
-ext_bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
+ext_bottom_rear_right_enable = true;
 ext_bottom_rear_right_adjust = 0; //[-20:.01:20]
+ext_bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
 // extended case bottom - upper right standoff settings
-ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
+ext_bottom_front_right_enable = true;
 ext_bottom_front_right_adjust = 0; //[-20:.01:20]
+ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
 /* [Folded Case Adjustments] */
 // material thickness in mm
@@ -257,7 +269,7 @@ pcb_radius = sbc_data[s[0]][11][0];
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz;
-bottom_height = pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
+bottom_height = case_design == "tray" ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
 case_z = bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
