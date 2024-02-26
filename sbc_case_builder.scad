@@ -33,6 +33,8 @@ sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "
 
 // sbc off in model view
 sbc_off = false;
+// sbc information display
+sbc_information = false;
 // enable highlight for sbc component subtarctive geometry
 sbc_highlight = false;
 // enable highlight for accessory subtarctive geometry
@@ -95,8 +97,8 @@ top_standoff_hole_size = 2.75; //[0:.01:5]
 top_standoff_support_size = 10; //[0:.01:15]
 top_standoff_support_height = 4; //[0:.01:50]
 top_standoff_insert = false;
-top_standoff_insert_dia = 4.5; //[0:.01:6]
-top_standoff_insert_height = 5; //[0:.01:10]
+top_standoff_insert_dia = 4.2; //.01
+top_standoff_insert_height = 5.1; //.01
 top_standoff_reverse = true;
 // enable wall support for standoffs
 top_sidewall_support = true;
@@ -124,8 +126,8 @@ bottom_standoff_hole_size = 3.4; //[0:.01:5]
 bottom_standoff_support_size = 10; //[1:.01:15]
 bottom_standoff_support_height = 4; //[0:.01:50]
 bottom_standoff_insert = false;
-bottom_standoff_insert_dia = 4.5; //[0:.01:6]
-bottom_standoff_insert_height = 5; //[0:.01:10]
+bottom_standoff_insert_dia = 4.2; //.01
+bottom_standoff_insert_height = 5.1; //.01
 bottom_standoff_reverse = false;
 // enable wall support for standoffs
 bottom_sidewall_support = true;
@@ -153,8 +155,8 @@ ext_top_standoff_hole_size = 2.75; //[0:.01:5]
 ext_top_standoff_support_size = 10; //[0:.01:15]
 ext_top_standoff_support_height = 4; //[0:.01:50]
 ext_top_standoff_insert = false;
-ext_top_standoff_insert_dia = 4.5; //[0:.01:6]
-ext_top_standoff_insert_height = 5; //[0:.01:10]
+ext_top_standoff_insert_dia = 4.2; //.01
+ext_top_standoff_insert_height = 5.1; //.01
 ext_top_standoff_reverse = true;
 // enable wall support for extended standoffs
 ext_top_sidewall_support = true;
@@ -183,8 +185,8 @@ ext_bottom_standoff_hole_size = 3.4; //[0:.01:5]
 ext_bottom_standoff_support_size = 10; //[1:.01:15]
 ext_bottom_standoff_support_height = 4; //[0:.01:50]
 ext_bottom_standoff_insert = false;
-ext_bottom_standoff_insert_dia = 4.5; //[0:.01:6]
-ext_bottom_standoff_insert_height = 5; //[0:.01:10]
+ext_bottom_standoff_insert_dia = 4.2; //.01
+ext_bottom_standoff_insert_height = 5.1; //.01
 ext_bottom_standoff_reverse = false;
 // enable wall support for extended standoffs
 ext_bottom_sidewall_support = true;
@@ -213,23 +215,29 @@ bottom_clearence = 3.5; //[-10:.01:10]
 flat_blank_section =  false;
 
 /* [Features and Accessories] */
+// top cover pattern
+top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,embedded,Apollonian]
+// bottom cover pattern
+bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,embedded,Apollonian]
+bottom_access_port_enable = false;
+access_port_size = [30,70]; //[10:.01:120]
+access_port_orientation = "landscape"; //[landscape,portrait]
+access_port_location = [10,10]; //[0:.01:200]
+access_port_rotation = 0; //[0:90:270]
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,30,40,50,60,70,80,92]
 // exhaust vent
-exhaust_vents = "vent"; // [none,vent]
+exhaust_vent = "none"; // [none,rear,front,right,left]
 // gpio opening
 gpio_opening = "default"; // [default,none,open,block,knockout,vent]
 // uart opening
 uart_opening = "default"; // [default,none,open,knockout]
 // enable indentations around io openings
 indents = true;
-// enable sata knockout
-sata_knockout = false;
+
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "sensors", "c1+_shell_boombox", "c1+_panel_boombox", "c1+_panel_lcd3.5", "c1+_desktop_lcd3.5", "c1+_deskboom_lcd3.5", "c1+_tray_boombox", "c1+_round", "c1+_hex", "c2_shell_boombox", "c2_panel_boombox", "c2_panel_lcd3.5", "c2_desktop_lcd3.5", "c2_deskboom_lcd3.5", "c2_tray_boombox", "c2_round", "c2_hex", "c4_shell_boombox", "c4_panel_lcd3.5", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "n2l_tray", "n2l_gpio", "n2+_tray_vu7_fan", "m1s_shell", "m1s_shell_nvme", "m1s_shell_ups", "m1s_panel", "m1s_tray_nvme", "m1s_snap", "m1s_fitted", "m1_panel", "m1_tray", "m1_tray_ssd", "m1_tray_sides", "m1_tray_vu5", "m1_tray_vu7", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h2_shell", "h2_shell_router", "h2_shell_router-ssd", "h2_lowboy", "h2_lowboy_router", "h2_tray", "h2_tray_sides", "h2_tray_router", "h2_router_station", "h2_round", "h2_hex", "h3_shell", "h3_lowboy", "h3_lowboy_router", "h3_tallboy", "h3_tallboy-ssd", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "jetsonnano_round", "jetsonnano_hex", "jetsonnano_snap", "jetsonnano_fitted", "rock64_round", "rock64_hex", "rockpro64_shell", "rockpro64_panel", "rockpro64_stacked", "rockpro64_tray", "rockpro64_tray_sides", "rockpro64_round", "rockpro64_hex", "rockpro64_snap", "rockpro64_fitted", "star64_shell", "rpi1b+_round", "rpi1b+_hex", "rpi3b_round", "rpi3b_hex", "rpi3b+_round", "rpi3b+_hex", "rpi4b_round", "rpi4b_hex", "rpi4b_shell_geeekpi_poe_hat", "rpi5_round", "rpi5_hex", "rock4b+_round", "rock4b+_hex", "rock4c_round", "rock4c_hex", "rock4c+_round", "rock4c+_hex", "rock5b", "rock5b_shell", "rock5bq", "rock5bq_shell", "rock5bq_tray", "rock5bq_tray_sides", "rock5bq_snap", "rock5bq_fitted", "rock5b-v1.3", "tinkerboard_round", "tinkerboard_hex", "tinkerboard-s_round", "tinkerboard-s_hex", "tinkerboard-2_round", "tinkerboard-2_hex", "tinkerboard-r2_round", "tinkerboard-r2_hex", "visonfive2_shell", "visonfive2_panel", "visonfive2_stacked", "visonfive2_tray", "visonfive2_snap", "visonfive2_fitted", "visonfive2q_shell", "visonfive2q_panel", "visonfive2q_stacked", "visonfive2q_tray", "visonfive2q_snap", "visonfive2q_fitted"]
-// sbc information display
-sbc_information = false;
+accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_panel_lcd3.5", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "n2l_tray", "n2l_gpio", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1s_snap", "m1s_fitted", "m1_panel", "m1_tray", "m1_tray_ssd", "m1_tray_sides", "m1_tray_vu5", "m1_tray_vu7", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h3_shell", "h3_lowboy", "h3_lowboy_router", "h3_tallboy", "h3_tallboy-ssd", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "jetsonnano_round", "jetsonnano_hex", "jetsonnano_snap", "jetsonnano_fitted", "rock5b", "rock5b_shell", "rock5bq", "rock5bq_shell", "rock5bq_tray", "rock5bq_tray_sides", "rock5bq_snap", "rock5bq_fitted", "rock5b-v1.3", "visonfive2_shell", "visonfive2_panel", "visonfive2_stacked", "visonfive2_tray", "visonfive2_snap", "visonfive2_fitted", "visonfive2q_shell", "visonfive2q_panel", "visonfive2q_stacked", "visonfive2q_tray", "visonfive2q_snap", "visonfive2q_fitted"]
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
 
