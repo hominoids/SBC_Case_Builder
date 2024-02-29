@@ -362,8 +362,6 @@ module case_bottom(case_design) {
 
                     }
                 }
-
-
                 // extended standoff holes
                 if(ext_bottom_standoffs == true) {
                     // right-rear standoff
@@ -394,6 +392,15 @@ module case_bottom(case_design) {
                         translate([(corner_fillet/2)+ext_bottom_standoff_support_size/4,
                             depth-ext_bottom_standoff_support_size/4-(corner_fillet/2)-(2*(wallthick+gap)),-1]) 
                                 cylinder(d=6.5, h=bottom_height);
+                    }
+                }
+                // bottom cover pattern
+                if(bottom_cover_pattern != "solid") {
+                    if(bottom_cover_pattern == "hex_5mm") {
+                        translate([1,0,-2]) vent_hex((width)/3.75,(depth)/6,floorthick+4,5,1.5,"horizontal");
+                    }
+                    if(bottom_cover_pattern == "hex_8mm") {
+                        translate([1,2,-2]) vent_hex((width)/5.5,(depth)/9.5,floorthick+4,8,1.5,"horizontal");
                     }
                 }
             }
@@ -536,7 +543,6 @@ module case_bottom(case_design) {
                         (pcb_loc_x <= 10 && depth-(pcb_loc_y+pcb_depth) >= 10) || 
                             (pcb_loc_x >= 10 && depth-(pcb_loc_y+pcb_depth) <= 10)) && 
                                 ext_bottom_front_left_enable == true) {
-echo(ext_bottom_front_left_enable);
                     normal_standoff = [ext_bottom_standoff[0],
                                         bottom_height+pcb_loc_z+ext_bottom_front_left_adjust,
                                         ext_bottom_standoff[2],
@@ -656,6 +662,10 @@ echo(ext_bottom_front_left_enable);
                     }
                 }
             }
+        }
+        // ui access port
+        if(bottom_access_port_enable == true) {
+//            translate([access_port_location[0],access_port_location[1], floorthick+.12]) 
         }
         // sbc openings
         if(sbc_highlight == true) {

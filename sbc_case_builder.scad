@@ -228,9 +228,9 @@ flat_blank_section =  false;
 
 /* [Features and Accessories] */
 // top cover pattern
-top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,embedded,Apollonian]
+top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
 // bottom cover pattern
-bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,embedded,Apollonian]
+bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
 bottom_access_port_enable = false;
 access_port_size = [30,70]; //[10:.01:120]
 access_port_orientation = "landscape"; //[landscape,portrait]

@@ -15,16 +15,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    hk_uart_holder()
+    hk_uart(mask)
+    hk_uart_holder(mask)
     hk_uart_strap ()
-    hc4_oled_holder(side, floorthick)
-    hk_wb2()
-    hc4_oled()
-    h2_netcard()
+    hc4_oled(mask)
+    hc4_oled_holder(side, floorthick, mask)
     hk35_lcd()
-    hk_uart()
     hk_vu7c(gpio_ext, tabs)
     hk_vu8m(bracket)
+    hk_vu8s()
+    hk_wb2()
+    hk_netcard(mask)
     u_bracket()
     m1_hdmount()
     hk_speaker()
@@ -43,38 +44,94 @@
 
 */
 
+
+/*
+           NAME: hk_uart
+    DESCRIPTION: hardkernel micro-usb console uart
+           TODO: none
+
+          USAGE: hk_uart(mask)
+
+                         mask[0] = enablemask
+                         mask[1] = mask length
+                         mask[2] = mask setback
+                         mask[3] = mask style, "default"
+*/
+
+module hk_uart(mask) {
+
+    size = [22,13,1.25];
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true) {
+        translate([23-msetback,3.75,3]) rotate([90,0,90]) slot(4, 5, mlength);
+    }
+    if(enablemask == false) {
+        color("#008066") cube([size[0],size[1],size[2]]);
+        translate([6.75,3,-2+adj])cylinder(d=.62, 2);
+        translate([6.75,5.25,-2+adj])cylinder(d=.62, 2);
+        translate([6.75,7.5,-2+adj])cylinder(d=.62, 2);
+        translate([6.75,9.75,-2+adj])cylinder(d=.62, 2);
+        uart("molex_5268",.5,.25,0,"top", 90, [0,0,0], [0], size[2], false, [false,0,0,"none"]);
+        usb2("micro",18.5, 2.5, 0, "top", 270, [0,0,0], [0], size[2], false, [false,0,0,"none"]);
+        ic("generic", 13, 4.5, 0, "top", 0, [4,4,1], ["dimgrey"], size[2], false, [false,0,0,"none"]);
+    }
+}
+
+
 /*
            NAME: hk_uart_holder
     DESCRIPTION: hardkernel micro-usb uart holder
            TODO: none
 
-          USAGE: hk_uart_holder()
+          USAGE: hk_uart_holder(mask)
 
+                                mask[0] = enablemask
+                                mask[1] = mask length
+                                mask[2] = mask setback
+                                mask[3] = mask style, "default"
 */
 
-module hk_uart_holder() {
+module hk_uart_holder(mask) {
 
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    if(enablemask == true) {
+        translate([23-msetback,3.75,3]) rotate([90,0,90]) slot(4, 5, mlength);
+    }
+    if(enablemask == false) {
+        translate([22,-2.5,-3]) rotate([0,0,90])
         union () {
             difference () {
-                translate ([0,0,0]) cube([18,24,9]);
+                cube([18,21.75,9]);
                 translate ([2,-2,3]) cube([14,27,7]);
                 //pin slot
-                translate ([3.5,16,-1]) cube([11,1,5]);
+                translate ([3.5,14.75,-1]) cube([11,1,5]);
                 //component bed
                 translate ([3.5,1.5,2]) cube ([11,14,2]);
                 //side trim
-                translate ([-1,-1,6]) cube([20,18,4]);
+                translate ([-1,-2.5,6]) cube([20,18,4]);
             }
             difference (){
-                translate ([-1.5,20,0]) cylinder(r=3,h=9, $fn=90);
-                translate ([-1.5,20,-1]) cylinder (r=1.375, h=11, $fn=90);
+                translate ([-1.5,18.5,0]) cylinder(r=3,h=9, $fn=90);
+                translate ([-1.5,18.5,-1]) cylinder (r=1.375, h=11, $fn=90);
             }
             difference (){
-                translate ([19.5,20,0]) cylinder(r=3,h=9, $fn=90);
-                translate ([19.5,20,-1]) cylinder (r=1.375, h=11,$fn=90);
+                translate ([19.5,18.5,0]) cylinder(r=3,h=9, $fn=90);
+                translate ([19.5,18.5,-1]) cylinder (r=1.375, h=11,$fn=90);
             }
         }
     }
+}
 
 
 /*
@@ -87,115 +144,21 @@ module hk_uart_holder() {
 */
 
 module hk_uart_strap() {
-    difference () {
-        translate ([-4.5,17,9]) cube([27,6,3]);
-        translate ([-1.5,20,8]) cylinder (r=1.6, h=5, $fn=90);
-        translate ([19.5,20,8]) cylinder (r=1.6, h=5, $fn=90);
-    }   
-    difference (){
-        translate ([-1.5,20,12]) cylinder(r=3,h=1, $fn=90);
-        translate ([-1.5,20,11]) cylinder (r=1.6, h=7, $fn=90);
-    }
-    difference (){
-        translate ([19.5,20,12]) cylinder(r=3,h=1, $fn=90);
-        translate ([19.5,20,11]) cylinder (r=1.6, h=7, $fn=90);
-    }
-}
 
-
-/*
-           NAME: hk_wb2
-    DESCRIPTION: hardkernel weather board 2
-           TODO: none
-
-          USAGE: hk_wb2()
-
-*/
-
-module hk_wb2() {
-    difference () {
-        union() {
-        color("tan") cube([16.5,16.5,1]);
-        translate([1.75,15.75,.75]) rotate([180,0,0]) header_f(6,9);
-        color("silver") translate([11.5,11.5,1]) cube([2,3,.5]);
-        color("silver") translate([11.5,3,1]) cube([2,3,.5]);
+    translate([22,-2.5,-3]) rotate([0,0,90])
+    union() {
+        difference () {
+            translate ([-4.5,15.5,9]) cube([27,6,3]);
+            translate ([-1.5,18.5,8]) cylinder (r=1.6, h=5, $fn=90);
+            translate ([19.5,18.5,8]) cylinder (r=1.6, h=5, $fn=90);
+        }   
+        difference (){
+            translate ([-1.5,18.5,12]) cylinder(r=3,h=1, $fn=90);
+            translate ([-1.5,18.5,11]) cylinder (r=1.6, h=7, $fn=90);
         }
-    translate([9.6,8.33,-1])
-        color("tan") hull() {
-            cylinder(d=1, h=3);
-            translate([5,0,0]) cylinder(d=1, h=3);
-        }
-    translate([7.36,2,-1]) rotate([0,0,90])
-        color("tan") hull() {
-            cylinder(d=1, h=3);
-            translate([5,0,0]) cylinder(d=1, h=3);
-        }
-    }
-}
-
-
-/*
-           NAME: hc4_oled_holder
-    DESCRIPTION: hardkernel odroid-hc4 oled holder
-           TODO: none
-
-          USAGE: hc4_oled_holder(side, wallthick)
-
-                                 side = "top", "bottom"
-                            wallthick = wall thickness
-*/
-
-module hc4_oled_holder(side, wallthick) {
-
-    adj=.01;
-    $fn = 90;
-
-    difference() {
-        union() {
-            if(side == "top") {
-                translate([-1.85,-1.75,-4]) cube([32,5,4]);
-                translate([30.15,-3.75,1]) 
-                    rotate([0,-90,0]) 
-                    linear_extrude(height = 32) 
-                        polygon(points = [ [-wallthick/2,-wallthick/2],
-                            [-4,wallthick], 
-                            [-4,2], 
-                            [-wallthick/2,2]]);
-                        translate([-1.85,4,1]) 
-                            rotate([0,-90,180]) 
-                            linear_extrude(height = 32) 
-                                polygon(points = [ [-wallthick/2,-wallthick/2],
-                                    [-4,wallthick], 
-                                    [-4,2], 
-                                    [-wallthick/2,2]]);
-            }
-            if(side == "bottom") {
-                translate([-1.85,-1.75,0]) cube([32,5,4]);
-                    translate([30.15,-3.75,1]) 
-                        rotate([0,-90,0]) 
-                        linear_extrude(height = 32) 
-                            polygon(points = [ [-wallthick/2,-wallthick/2],
-                                [2,wallthick], 
-                                [2,2], 
-                                [-wallthick/2,2]]);
-                    translate([-1.85,4,1]) 
-                        rotate([0,-90,180]) 
-                        linear_extrude(height = 32) 
-                            polygon(points = [ [-wallthick/2,-wallthick/2],
-                                [2,wallthick], 
-                                [2,2], 
-                                [-wallthick/2,2]]);
-            }
-        }
-        if(side == "top") {
-            translate([-.5,0,wallthick-8]) cube([29.5,1.9,5]);
-            translate([(32.75/2-(15/2))-1.85,-adj-3-1.75,-wallthick-2.5]) cube([15,12,wallthick+3]);
-        }
-        if(side == "bottom") {
-            translate([-.5,0,-adj]) cube([29.5,1.42,5]);
-            translate([(32.75/2-(15/2))-1.85,-adj-3-1.75,-adj]) cube([15,12,8]);
-            translate([2.5,-adj-3-1.75,-adj]) cube([6,3,8]);
-            translate([12.5,adj,10]) rotate([90,0,0]) cylinder(d=21, h=2);
+        difference (){
+            translate ([19.5,18.5,12]) cylinder(r=3,h=1, $fn=90);
+            translate ([19.5,18.5,11]) cylinder (r=1.6, h=7, $fn=90);
         }
     }
 }
@@ -206,10 +169,10 @@ module hc4_oled_holder(side, wallthick) {
     DESCRIPTION: hardkernel odroid-hc4 oled
            TODO: none
 
-          USAGE: hc4_oled_holder()
+          USAGE: hc4_oled_holder(mask)
 */
 
-module hc4_oled() {
+module hc4_oled(mask) {
     
     adj = .01;
     $fn=90;
@@ -219,75 +182,117 @@ module hc4_oled() {
     oled_open_x = 29;
     oled_open_y = 1.5;
 
-    difference() {
-        union() {
-            // pcb board
-            color("Tan", 1) translate([0,0,0]) cube([oled_x,oled_y,oled_z]);
-            // oled
-            color("Black", 1) translate([.5,1.25,25.5]) cube([oled_x-1,.625,15]);
-            color("DarkGrey", 1) translate([.5,1.25,40.5]) cube([oled_x-1,.625,4]);
-        }
-        translate([2.8,0,46.7]) {
-            translate([-.6,1.26,0]) rotate([90,0,0])
-                hull() {
-                translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adj*2));
-                cylinder(d=1.8, h=1.25+(adj*2));
-                }
-        }
-        translate([25.7,0,46.7]) {
-            translate([-.6,1.26,0]) rotate([90,0,0])
-                hull() {
-                translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adj*2));
-                cylinder(d=1.8, h=1.25+(adj*2));
-                }
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    if(enablemask == true) {
+        translate([.5,2-msetback+mlength,25.25]) rotate([90,0,0]) slab([27.5,15.5,mlength], .25);
+    }
+    if(enablemask == false) {
+
+        difference() {
+            union() {
+                // pcb board
+                color("#008066", 1) translate([0,0,0]) cube([oled_x,oled_y,oled_z]);
+                // oled
+                color("Black", 1) translate([.5,1.25,25.5]) cube([oled_x-1,.625,15]);
+                color("DarkGrey", 1) translate([.5,1.25,40.5]) cube([oled_x-1,.625,4]);
+            }
+            color("#008066", 1) translate([2.8,0,46.7]) {
+                translate([-.6,1.26,0]) rotate([90,0,0])
+                    hull() {
+                        translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adj*2));
+                        cylinder(d=1.8, h=1.25+(adj*2));
+                    }
+            }
+            color("#008066", 1) translate([25.7,0,46.7]) {
+                translate([-.6,1.26,0]) rotate([90,0,0])
+                    hull() {
+                        translate([1.2,0,0]) cylinder(d=1.8, h=1.25+(adj*2));
+                        cylinder(d=1.8, h=1.25+(adj*2));
+                    }
+            }
         }
     }
 }
 
 
 /*
-           NAME: h2_netcard
-    DESCRIPTION: hardkernel m.2 network card
+           NAME: hc4_oled_holder
+    DESCRIPTION: hardkernel odroid-hc4 oled holder
            TODO: none
 
-          USAGE: h2_netcard()
+          USAGE: hc4_oled_holder(side, wallthick, mask)
+
+                                 side = "top", "bottom"
+                            wallthick = wall thickness
 */
 
-module h2_netcard() {
+module hc4_oled_holder(side, wallthick, mask) {
 
-    adj = .01;
+    adj=.01;
     $fn = 90;
-    difference() {
-        union() {
-            color("tan") translate ([0,0,0]) linear_extrude(height = 1) import("./dxf/hk-network-card.dxf");
-            color("goldenrod") translate([3.75,17.85,1-adj]) cylinder(d=6,h=3);
-            color("goldenrod") translate([106,24.85,1-adj]) cylinder(d=6,h=3);
-        }
-        translate([20.85,3.85,-adj]) cylinder(d=3,h=4);
-        translate([3.75,17.85,-adj]) cylinder(d=3,h=6);
-        translate([3.75,51.1,-adj]) cylinder(d=3,h=4);
-        translate([20.15,43.85,-adj]) cylinder(d=3,h=4);
-        translate([106,24.85,-adj]) cylinder(d=3,h=6);
-        translate([96.5,3.85,-adj]) cylinder(d=3,h=4);
-    }
-    rj45(26,-1,0,"bottom",1);
-    rj45(43,-1,0,"bottom",1);
-    rj45(60,-1,0,"bottom",1);
-    rj45(77,-1,0,"bottom",1);
-    place(30,25,0,6,6,0,"bottom") color("dimgray") translate([0,0,0]) cube([6,6,.8]);
-    place(47,25,0,6,6,0,"bottom") color("dimgray") translate([0,0,0]) cube([6,6,.8]);
-    place(64,25,0,6,6,0,"bottom") color("dimgray") translate([0,0,0]) cube([6,6,.8]);
-    place(79,25,0,6,6,0,"bottom") color("dimgray") translate([0,0,0]) cube([6,6,.8]);
-    place(56.5,41,0,5,9.75,0,"bottom") color("dimgray") translate([0,0,0]) cube([5,9.75,.8]);
-    for (i=[34.65:.5:48.5]) {
-        color("gold") translate([98,i,1]) cube([2,.25,.25]);
-        color("gold") translate([98,i,-.24]) cube([2,.25,.25]);
-    }
-    for (i=[51:.5:53]) {
-        color("gold") translate([98,i,1]) cube([2,.25,.25]);
-        color("gold") translate([98,i,-.24]) cube([2,.25,.25]);
-    }
 
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    if(enablemask == true) {
+        translate([.5,2-msetback+mlength,25.25]) rotate([90,0,0]) slab([27.5,15.5,mlength], .25);
+    }
+    if(enablemask == false) {
+        difference() {
+            union() {
+                if(side == "top") {
+                    translate([-1.85,-1.75,-4]) cube([32,5,4]);
+                    translate([30.15,-3.75,1]) 
+                        rotate([0,-90,0]) 
+                        linear_extrude(height = 32) 
+                            polygon(points = [ [-wallthick/2,-wallthick/2],
+                                [-4,wallthick], 
+                                [-4,2], 
+                                [-wallthick/2,2]]);
+                            translate([-1.85,4,1]) 
+                                rotate([0,-90,180]) 
+                                linear_extrude(height = 32) 
+                                    polygon(points = [ [-wallthick/2,-wallthick/2],
+                                        [-4,wallthick], 
+                                        [-4,2], 
+                                        [-wallthick/2,2]]);
+                }
+                if(side == "bottom") {
+                    translate([-1.85,-1.75,0]) cube([32,5,4]);
+                        translate([30.15,-3.75,1]) 
+                            rotate([0,-90,0]) 
+                            linear_extrude(height = 32) 
+                                polygon(points = [ [-wallthick/2,-wallthick/2],
+                                    [2,wallthick], 
+                                    [2,2], 
+                                    [-wallthick/2,2]]);
+                        translate([-1.85,4,1]) 
+                            rotate([0,-90,180]) 
+                            linear_extrude(height = 32) 
+                                polygon(points = [ [-wallthick/2,-wallthick/2],
+                                    [2,wallthick], 
+                                    [2,2], 
+                                    [-wallthick/2,2]]);
+                }
+            }
+            if(side == "top") {
+                translate([-.5,0,wallthick-8]) cube([29.5,1.9,5]);
+                translate([(32.75/2-(15/2))-1.85,-adj-3-1.75,-wallthick-2.5]) cube([15,12,wallthick+3]);
+            }
+            if(side == "bottom") {
+                translate([-.5,0,-adj]) cube([29.5,1.42,5]);
+                translate([(32.75/2-(15/2))-1.85,-adj-3-1.75,-adj]) cube([15,12,8]);
+                translate([2.5,-adj-3-1.75,-adj]) cube([6,3,8]);
+                translate([12.5,adj,10]) rotate([90,0,0]) cylinder(d=21, h=2);
+            }
+        }
+    }
 }
 
 
@@ -305,7 +310,7 @@ module hk35_lcd() {
     $fn = 90;
     difference() {
         union() {
-            color("tan") translate ([0,0,0]) slab([95,56,1.7],3.5);
+            color("#008066") translate ([0,0,0]) slab([95,56,1.7],3.5);
             color("black",1) translate([10.5,0,1.7]) cube([74.75,54.5,4]);
             color("white",1) translate([8.5,0,5.7-adj]) cube([82.75,54.5,2]);
             color("grey",1) translate([8.5,0,7.7-adj]) cube([82.75,54.5,.8]);
@@ -321,30 +326,6 @@ module hk35_lcd() {
     color("black") translate([7.375,.8,-9+adj]) cube([51.5,5,9]);
     translate([92.5,4,adj]) rotate([0,180,0]) header(5);
     }
-
-
-/*
-           NAME: hk35_lcd
-    DESCRIPTION: hardkernel micro-usb console uart
-           TODO: none
-
-          USAGE: hk_uart()
-*/
-
-module hk_uart() {
-
-    size = [22,13,1.25];
-    adj = .01;
-    $fn = 90;
-    color("tan") cube([size[0],size[1],size[2]]);
-    translate([6.5,.25,6.25-adj]) rotate([90,180,-90]) uart_micro();
-    translate([6.75,3,-2+adj])cylinder(d=1, 2);
-    translate([6.75,5.25,-2+adj])cylinder(d=1, 2);
-    translate([6.75,7.5,-2+adj])cylinder(d=1, 2);
-    translate([6.75,9.75,-2+adj])cylinder(d=1, 2);
-    translate([23,2.75,1.25]) rotate([0,0,90]) usb_micro();
-    translate([13,4.5,1.25]) rotate([0,0,90]) ic([4,4,1]);
-}
 
 
 /*
@@ -673,6 +654,94 @@ module hk_vu8s() {
 
 
 /*
+           NAME: hk_wb2
+    DESCRIPTION: hardkernel weather board 2
+           TODO: none
+
+          USAGE: hk_wb2()
+
+*/
+
+module hk_wb2() {
+    difference () {
+        union() {
+        color("#008066") cube([16.5,16.5,1]);
+        translate([1.75,15.75,.75]) rotate([180,0,0]) header_f(6,9);
+        color("silver") translate([11.5,11.5,1]) cube([2,3,.5]);
+        color("silver") translate([11.5,3,1]) cube([2,3,.5]);
+        }
+    translate([9.6,8.33,-1])
+        color("#008066") hull() {
+            cylinder(d=1, h=3);
+            translate([5,0,0]) cylinder(d=1, h=3);
+        }
+    translate([7.36,2,-1]) rotate([0,0,90])
+        color("#008066") hull() {
+            cylinder(d=1, h=3);
+            translate([5,0,0]) cylinder(d=1, h=3);
+        }
+    }
+}
+
+
+/*
+           NAME: hk_netcard
+    DESCRIPTION: hardkernel m.2 network card
+           TODO: none
+
+          USAGE: hk_netcard(mask)
+*/
+
+module hk_netcard(mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true) {
+        translate([25.5, msetback-1,-14]) rotate([90, 0, 0]) slab([68, 14.5, mlength], .25);
+    }
+    if(enablemask == false) {
+
+        difference() {
+            union() {
+                color("#008066") translate ([0,0,0]) linear_extrude(height = 1) import("./dxf/hk-network-card.dxf");
+                color("goldenrod") translate([3.75,17.85,1-adj]) cylinder(d=6,h=3);
+                color("goldenrod") translate([106,24.85,1-adj]) cylinder(d=6,h=3);
+            }
+            translate([20.85,3.85,-adj]) cylinder(d=3,h=4);
+            translate([3.75,17.85,-adj]) cylinder(d=3,h=6);
+            translate([3.75,51.1,-adj]) cylinder(d=3,h=4);
+            translate([20.15,43.85,-adj]) cylinder(d=3,h=4);
+            translate([106,24.85,-adj]) cylinder(d=3,h=6);
+            translate([96.5,3.85,-adj]) cylinder(d=3,h=4);
+        }
+        network("rj45_single", 26, -1, 0, "bottom", 0, [6, 6, .8], [0], 1, false, [false, 0, 0, "none"]);
+        network("rj45_single", 43, -1, 0, "bottom", 0, [6, 6, .8], [0], 1, false, [false, 0, 0, "none"]);
+        network("rj45_single", 60, -1, 0, "bottom", 0, [6, 6, .8], [0], 1, false, [false, 0, 0, "none"]);
+        network("rj45_single", 77, -1, 0, "bottom", 0, [6, 6, .8], [0], 1, false, [false, 0, 0, "none"]);
+        ic("generic", 30, 25, 0, "bottom", 0, [6, 6, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
+        ic("generic", 47, 25, 0, "bottom", 0, [6, 6, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
+        ic("generic", 64, 25, 0, "bottom", 0, [6, 6, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
+        ic("generic", 79, 25, 0, "bottom", 0, [6, 6, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
+        ic("generic", 56.5, 41, 0, "bottom", 0, [5, 9.75, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
+        for (i=[34.65:.5:48.5]) {
+            color("gold") translate([98,i,1]) cube([2,.25,.25]);
+            color("gold") translate([98,i,-.24]) cube([2,.25,.25]);
+        }
+        for (i=[51:.5:53]) {
+            color("gold") translate([98,i,1]) cube([2,.25,.25]);
+            color("gold") translate([98,i,-.24]) cube([2,.25,.25]);
+        }
+    }
+}
+
+
+/*
            NAME: m1_hdmount
     DESCRIPTION: hardkernel odroid-m1 2.5" sata hdd mounting kit
            TODO: none
@@ -823,40 +892,40 @@ module hk_boom(speakers, orientation) {
 
     difference() {
         union() {
-            color("tan") translate ([0,0,0]) slab([60,35,1.6],.5);
+            color("#008066") translate ([0,0,0]) slab([60,35,1.6],.5);
             if(speakers == true) {
-                color("tan") translate ([-31.5,0,0]) slab([31.5,35,1.6],.5);
+                color("#008066") translate ([-31.5,0,0]) slab([31.5,35,1.6],.5);
                 color("white") translate ([-0.25,0,0]) cube([.5,35,1.6]);
-                color("tan") translate ([60,0,0]) slab([31.5,35,1.6],.5);
+                color("#008066") translate ([60,0,0]) slab([31.5,35,1.6],.5);
                 color("white") translate ([60,0,0]) cube([.5,35,1.6]);
             }
         }
         // pcb holes
-        color("tan") translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
-        color("tan") translate([3.5,31.5,-adj]) cylinder(d=3,h=6);
-        color("tan") translate([56.5,3.5,-adj]) cylinder(d=3,h=4);
-        color("tan") translate([56.5,31.5,-adj]) cylinder(d=3,h=4);
+        color("#008066") translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
+        color("#008066") translate([3.5,31.5,-adj]) cylinder(d=3,h=6);
+        color("#008066") translate([56.5,3.5,-adj]) cylinder(d=3,h=4);
+        color("#008066") translate([56.5,31.5,-adj]) cylinder(d=3,h=4);
         if(speakers == true) {
             // left
-            color("tan") translate([-28,3.5,-adj]) cylinder(d=3,h=6);
-            color("tan") translate([-28,31.5,-adj]) cylinder(d=3,h=6);
-            color("tan") translate([-3.5,3.5,-adj]) cylinder(d=3,h=6);
-            color("tan") translate([-3.5,31.5,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([-28,3.5,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([-28,31.5,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([-3.5,3.5,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([-3.5,31.5,-adj]) cylinder(d=3,h=6);
             // right
-            color("tan") translate([64.5,3.5,-adj]) cylinder(d=3,h=4);
-            color("tan") translate([64.5,31.5,-adj]) cylinder(d=3,h=4);
-            color("tan") translate([88,3.5,-adj]) cylinder(d=3,h=4);
-            color("tan") translate([88,31.5,-adj]) cylinder(d=3,h=4);
+            color("#008066") translate([64.5,3.5,-adj]) cylinder(d=3,h=4);
+            color("#008066") translate([64.5,31.5,-adj]) cylinder(d=3,h=4);
+            color("#008066") translate([88,3.5,-adj]) cylinder(d=3,h=4);
+            color("#008066") translate([88,31.5,-adj]) cylinder(d=3,h=4);
             // left speaker openings
-            color("tan") translate([-31.5/2,35/2,-adj]) cylinder(d=23.5, h=3);
-            color("tan") translate([-4-31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
-            color("tan") translate([-4-31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
-            color("tan") translate([-4-31.5/2+(23.5/2)+1,-2+35/2,-adj]) cube([6,3,3]);
+            color("#008066") translate([-31.5/2,35/2,-adj]) cylinder(d=23.5, h=3);
+            color("#008066") translate([-4-31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+            color("#008066") translate([-4-31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+            color("#008066") translate([-4-31.5/2+(23.5/2)+1,-2+35/2,-adj]) cube([6,3,3]);
             // right speaker openings
-            color("tan") translate([60+(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
-            color("tan") translate([60-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
-            color("tan") translate([60-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
-            color("tan") translate([60+1.25,-2+35/2,-adj]) cube([6,3,3]);
+            color("#008066") translate([60+(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
+            color("#008066") translate([60-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+            color("#008066") translate([60-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+            color("#008066") translate([60+1.25,-2+35/2,-adj]) cube([6,3,3]);
         }
     }
     // headers
@@ -914,21 +983,21 @@ module hk_boom_speaker(side, speaker, pcb) {
 
     if(pcb == true) {
         difference() {
-            color("tan") slab([31.5,35,1.6],.5);
-            color("tan") translate([27.5,4,-adj]) cylinder(d=3,h=6);
-            color("tan") translate([27.5,31,-adj]) cylinder(d=3,h=6);
-            color("tan") translate([4,4,-adj]) cylinder(d=3,h=6);
-            color("tan") translate([4,31,-adj]) cylinder(d=3,h=6);
+            color("#008066") slab([31.5,35,1.6],.5);
+            color("#008066") translate([27.5,4,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([27.5,31,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([4,4,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([4,31,-adj]) cylinder(d=3,h=6);
             
             // speaker openings
-            color("tan") translate([(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
-            color("tan") translate([-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
-            color("tan") translate([-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+            color("#008066") translate([(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
+            color("#008066") translate([-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+            color("#008066") translate([-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
             if(side == "right") {
-                color("tan") translate([.5,-2+35/2,-adj]) cube([6,3,3]);
+                color("#008066") translate([.5,-2+35/2,-adj]) cube([6,3,3]);
             }
             if(side == "left") {
-                color("tan") translate([31.5/2+(23.5/2)-2.5,-2+35/2,-adj]) cube([6,3,3]);
+                color("#008066") translate([31.5/2+(23.5/2)-2.5,-2+35/2,-adj]) cube([6,3,3]);
             }
         }
     }
