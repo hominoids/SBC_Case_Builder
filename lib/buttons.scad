@@ -24,54 +24,78 @@
 */
 
 /*
-           NAME: button
+           NAME: buttons
     DESCRIPTION: creates different button bodys and styles
            TODO: none
 
-          USAGE: button(style, diameter, height)
+          USAGE: buttons(style, diameter, height, mask)
 
                         style = "recess", "cutout"
-                     diameter = diameter of button body
-                       height = height above button
+                      size[0] = diameter of button body
+                      size[2] = height above button
+                       radius = radius for cutout style
+                         post = button post size for cutout style
+                      mask[0] = true enables component mask
+                      mask[1] = mask length
+                      mask[2] = mask setback
+                      mask[3] = mstyle "default"
 */
 
-module button(style, size, radius, pad) {
+module buttons(style, size, radius, post, mask) {
 
+    size_x = size[0];
+    size_y = size[1];
+    size_z = size[2];
     diameter = size[0];
     height = size[2];
     gap = 1.5;
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
     adj = .01;
     $fn = 90;
 
-    if(style == "recess") {
-        difference() {
-            union() {
-                sphere(d=diameter);
-                translate([0,0,-height+3]) cylinder(d=6, h=height-6);
-            }
-            translate([-(diameter/2)-1,-(diameter/2)-1,0]) cube([diameter+2,diameter+2,(diameter/2)+2]);
-            difference() {
-                union() {
-                    sphere(d=diameter-2);
-                }
-            }
-            translate([-1.75,-1.25,-height-1]) cube([3.5,2.5,height+2]);
-            translate([0,0,-(diameter/2)]) cylinder(d=5, h=2);
+    if(enablemask == true && mstyle == "default") {
+        if(style == "recess") {
+            translate([0, 0, -adj-msetback]) cylinder(d = diameter-2*adj, h = mlength);
+        }
+        if(style == "cutout") {
+            translate([-size[0]+2.5, -2.5-size[1]/2, -adj-msetback]) cube([size[0]+1, size[1]+5, mlength]);
         }
     }
-    if(style == "cutout") {
-        difference() {
-            translate([-size[0]+2,-3-size[1]/2,0]) slab_r([size[0]+2,size[1]+6,size[2]-2*adj], [.1,.1,.1,.1]);
+    if(enablemask == false) {
+        if(style == "recess") {
             difference() {
-                translate([-size[0]+3,-size[1]/2,-adj]) 
-                    slab_r([size[0],size[1],size[2]], [radius[0],radius[1],radius[2],radius[3]]);
-                translate([-size[0]+3+(gap/2),-size[1]/2+(gap/2),-1]) slab_r([size[0]-gap,size[1]-gap,1+size[2]+2*adj], 
-                    [radius[0],radius[1],radius[2]-gap/2,radius[3]-gap/2]);
-                translate([-size[0]+3-gap,-1,-1]) cube([gap*2,2,1+height+2*adj]);
+                union() {
+                    sphere(d=diameter);
+                    translate([0,0,-height+3]) cylinder(d=6, h=height-6);
+                }
+                translate([-(diameter/2)-1,-(diameter/2)-1,0]) cube([diameter+2,diameter+2,(diameter/2)+2]);
+                difference() {
+                    union() {
+                        sphere(d=diameter-2);
+                    }
+                }
+                translate([-1.75, -1.25, -height-1]) cube([3.5, 2.5, height+2]);
+                translate([0,0,-(diameter/2)]) cylinder(d=5, h=2);
             }
-            translate([0,0,2]) sphere(d=3);
         }
-        translate([0,0,-pad+adj]) cylinder(d=3, h=pad);
+        if(style == "cutout") {
+            difference() {
+                translate([-size[0]+2, -3-size[1]/2, 0]) slab_r([size[0]+2,size[1]+6,size[2]-2*adj], [.1,.1,.1,.1]);
+                difference() {
+                    translate([-size[0]+3, -size[1]/2, -adj]) 
+                        slab_r([size[0],size[1],size[2]], [radius[0],radius[1],radius[2],radius[3]]);
+                    translate([-size[0]+3+(gap/2), -size[1]/2+(gap/2), -1]) slab_r([size[0]-gap,size[1]-gap,1+size[2]+2*adj], 
+                        [radius[0],radius[1],radius[2]-gap/2,radius[3]-gap/2]);
+                    translate([3-size[0]-gap, -1, -1]) cube([gap*2, 2, 1+height+2*adj]);
+                }
+                translate([0, 0, 2]) sphere(d=3);
+            }
+            translate([0, 0, adj-post]) cylinder(d=3, h=post);
+        }
     }
 }
 
@@ -157,7 +181,7 @@ $fn = 90;
 
 
 /*
-           NAME: button_top
+           NAME: button_clip
     DESCRIPTION: creates button c-clip
            TODO: none
 

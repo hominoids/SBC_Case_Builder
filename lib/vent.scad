@@ -18,6 +18,8 @@
     vent(width, length, height, gap, rows, columns, orientation)
     vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientation)
     vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders);
+    fan_cover(size, thick)
+    fan_mask(size, thick, style)
 
 */
 
@@ -63,44 +65,6 @@ module vent(width, length, height, gap, rows, columns, orientation) {
 
 
 /*
-           NAME: vent_hex
-    DESCRIPTION: creates hex vent mask patterns
-           TODO: none
-
-          USAGE: vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientation)
-
-                          cells_x = #rows
-                          cells_y = #columns
-                        thickness = pattern thickness
-                        cell_size = size of hex
-                     cell_spacing = space between hex
-                      orientation = "horizontal", "vertical"
-
-*/
-
-module vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientation) {
-    xs = cell_size + cell_spacing;
-    ys = xs * sqrt(3/4);
-    rot = (orientation=="vertical") ? 90 : 0;
-
-    rotate([rot,0,0]) translate([cell_size/2, cell_size*sqrt(1/3),-1]) {
-        for (ix = [0 : ceil(cells_x/2)-1]) {
-            for (iy = [0 : 2 : cells_y-1]) {
-                translate([ix*xs, iy*ys,0]) rotate([0,0,90]) 
-                    cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
-            }
-        }
-            for (ix = [0 : (cells_x/2)-1]) {
-                for (iy = [1 : 2 : cells_y-1]) {
-                translate([(ix+0.5)*xs, iy*ys,0]) rotate([0,0,90]) 
-                    cylinder(r=cell_size/sqrt(3), h=thickness, $fn=6);
-            }
-        }
-    }
-}
-
-
-/*
            NAME: vent_panel_hex
     DESCRIPTION: creates hex vent panel
            TODO: none
@@ -139,5 +103,271 @@ module vent_panel_hex(x, y, thick, cell_size=8, cell_spacing=3, border=3, border
             color("grey",1) translate([    hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
             color("grey",1) translate([x - hxb, y - hyb, -1]) cylinder(d=hole, h=thick+3);
         }
+    }
+}
+
+
+/*
+           NAME: fan_cover
+    DESCRIPTION: creates fan covers for fan openings
+           TODO: none
+
+          USAGE: fan_cover(size, thick, style)
+
+                           size = size of fan
+                          thick = thickness of cover
+                          style = fan mask style
+*/
+
+module fan_cover(size, thick, style) {
+    difference() {
+        color("grey", 1) slab([size, size, thick], 3);
+        color("grey", 1) fan_mask(size, thick, style);
+    }
+}
+
+
+/*
+    DESCRIPTION: creates heatsink masks for openings
+           TODO: 
+
+          USAGE: heatsink_mask(size, thick, style)
+
+                               size = size of fan
+                              thick = thickness of cover
+                              style = 0="fan_open", 1="fan_1", 2="fan_2", 3"fan_hex"
+*/
+
+module fan_mask(size, thick, style) {
+
+    hole_pos = size == 30 ? 3 :
+        size == 40 ? 4 :
+        size == 50 || size == 60 || size == 70 ? 5 :
+        size >= 80 ? 3.75 : 3.75;
+    $fn = 90;
+    adj = .01;
+
+    if(style == 0) {
+        
+        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-1);
+        // mount holes
+        translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+        translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+        translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+        translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+    }
+    if(style == 1 && size == 30) {
+        
+        union() {
+            difference() {
+                union () {
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-2);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-8);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-11);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-17);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-20);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-25);
+                    }
+                    // mount holes
+                    translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                }
+                translate([5, 4, -2]) rotate([0, 0, 45]) cube([size, 1.5, thick+4]);
+                translate([4, size-5, -2]) rotate([0, 0, -45]) cube([size, 1.5, thick+4]);
+            }
+        }
+    }
+    if(style == 1 && size == 40) {
+        
+        union() {
+            difference() {
+                union () {
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-2);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-8);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-11);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-17);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-20);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-25);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-28);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-35);
+                    }
+                    // mount holes
+                    translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                }
+                translate([6.5, 5.5, -2]) rotate([0, 0, 45]) cube([size, 1.5, thick+4]);
+                translate([5, size-6, -2]) rotate([0, 0, -45]) cube([size, 1.5, thick+4]);
+            }
+        }
+    }
+    if(style == 1 && (size == 50 || size == 60 || size == 70)) {
+
+        union() {
+            difference() {
+                union () {
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-2);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-14);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-18);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-30);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-34);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-46);
+                    }
+                    if(size > 50) {
+                        difference() {
+                            translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-50);
+                            translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-59);
+                        }
+                    }
+                    // mount holes
+                    translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                }
+                translate([8.5, 7, -2]) rotate([0, 0, 45]) cube([size > 60 ? size+4 : size+1, 2, thick+4]);
+                translate([6.5, size-8, -2]) rotate([0, 0, -45]) cube([size > 60 ? size+4 : size+1, 2, thick+4]);
+            } 
+        }
+    }
+    if(style == 1 && size >= 80) {
+
+        union() {
+            difference() {
+                union () {
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-2);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-9);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-14);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-21);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-26);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-33);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-38);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-45);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-50);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-57);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-62);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-68);
+                    }
+                    if(size == 92) {
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-74);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-80);
+                    }
+                        difference() {
+                            translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-85);
+                            translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-91);
+                        }
+                    }
+                    // mount holes
+                    translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                }
+                translate([6.5, 4.25, -2]) rotate([0, 0, 45]) cube([size*1.2, 3, thick+4]);
+                translate([4.25, size-6.5, -2]) rotate([0, 0, -45]) cube([size*1.2, 3, thick+4]);
+            }
+        }
+    }
+    if(style == 2) {
+
+        inner = size == 30 ? 24 :
+            size == 40 ? 32 :
+            size == 50 ? 40 :
+                size == 60 ? 50 :
+                size == 70 ? 61.9 :
+                    size == 80 ? 71.5 :
+                    size * 0.8; // Use 80% as default
+
+        rings = size <= 40 ? 4 : 6;
+        bar_size = size <= 40 ? 2 : 3;
+
+        screw_offset = inner / 2;
+        center_point = size * 0.5;
+        base_ring_size = size * 0.95;
+        rings_spacing = size / rings;
+
+        translate([size/2, size/2, -1])
+        union() {
+            translate([screw_offset, screw_offset, (thick+2)/2]) cylinder(d=3, h=thick+2, center=true);
+            translate([-screw_offset, screw_offset, (thick+2)/2]) cylinder(d=3, h=thick+2, center=true);
+            translate([screw_offset, -screw_offset, (thick+2)/2]) cylinder(d=3, h=thick+2, center=true);
+            translate([-screw_offset, -screw_offset, (thick+2)/2]) cylinder(d=3, h=thick+2, center=true);
+
+            difference() {
+            union() {
+                for(i=[inner:-rings_spacing:0]) {
+                    difference() {
+                        cylinder(d=base_ring_size - i, h=thick+2);
+                        translate([0, 0, -1]) cylinder(d=base_ring_size - i - (rings_spacing/2), h=thick+4);
+                    }
+                }
+            }
+
+            translate([0, 0, 2]) 
+                union() {
+                    cylinder(d=bar_size*2+0.1, thick+2); // Add a circle to prevent any tiny holes around cross bar
+                    rotate([0, 0, 45]) cube([size, bar_size, thick+2], center=true);
+                    rotate([0, 0, 45]) cube([bar_size, size, thick+2], center=true);
+                }
+            }
+        }
+    }
+    if(style == 3) {
+        
+        hex_pos = size == 30 ? [-11.75, -4.5, 0] :
+            size == 40 ? [-14, -11.25, 0] :
+            size == 50 ? [-16, -6.5, 0] : 
+            size == 60 ? [-11, -1.5, 0] : 
+            size == 70 ? [-13, -3.5, 0] :
+            size >= 80 ? [-8.25, -3.5, 0] : [-9, -4, 0];
+
+        union() {
+            difference () {
+                translate([1+(size-2)/2, 1+(size-2)/2, -1]) cylinder(h=thick+2, d=size-2);
+                union() {
+                    difference() {
+                        translate([1+(size-2)/2, 1+(size-2)/2, -1-adj]) cylinder(h=thick+3, d=size-2);
+                        translate(hex_pos) vent_hex(15, 8, thick+4, 12, 2, "horizontal");
+                    }
+                }
+            }
+        }
+        // mount holes
+        translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+        translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+        translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+        translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
     }
 }

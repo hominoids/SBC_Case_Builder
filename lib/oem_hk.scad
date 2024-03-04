@@ -18,9 +18,9 @@
     hk_uart(mask)
     hk_uart_holder(mask)
     hk_uart_strap ()
-    hc4_oled(mask)
-    hc4_oled_holder(side, floorthick, mask)
-    hk35_lcd()
+    hk_hc4_oled(mask)
+    hk_hc4_oled_holder(side, floorthick, mask)
+    hk_35lcd(mask)
     hk_vu7c(gpio_ext, tabs)
     hk_vu8m(bracket)
     hk_vu8s()
@@ -165,14 +165,14 @@ module hk_uart_strap() {
 
 
 /*
-           NAME: hc4_oled
+           NAME: hk_hc4_oled
     DESCRIPTION: hardkernel odroid-hc4 oled
            TODO: none
 
-          USAGE: hc4_oled_holder(mask)
+          USAGE: hk_hc4_oled(mask)
 */
 
-module hc4_oled(mask) {
+module hk_hc4_oled(mask) {
     
     adj = .01;
     $fn=90;
@@ -220,17 +220,17 @@ module hc4_oled(mask) {
 
 
 /*
-           NAME: hc4_oled_holder
+           NAME: hk_hc4_oled_holder
     DESCRIPTION: hardkernel odroid-hc4 oled holder
            TODO: none
 
-          USAGE: hc4_oled_holder(side, wallthick, mask)
+          USAGE: hk_hc4_oled_holder(side, wallthick, mask)
 
                                  side = "top", "bottom"
                             wallthick = wall thickness
 */
 
-module hc4_oled_holder(side, wallthick, mask) {
+module hk_hc4_oled_holder(side, wallthick, mask) {
 
     adj=.01;
     $fn = 90;
@@ -297,36 +297,51 @@ module hc4_oled_holder(side, wallthick, mask) {
 
 
 /*
-           NAME: hk35_lcd
+           NAME: hk_35lcd
     DESCRIPTION: hardkernel 3.5 lcd
            TODO: none
 
-          USAGE: hk35_lcd()
+          USAGE: hk_35lcd(mask)
+                          mask[0] = true enables component mask
+                          mask[1] = mask length
+                          mask[2] = mask setback
+                          mask[3] = mstyle "default"
+
 */
 
-module hk35_lcd() {
+module hk_35lcd(mask) {
 
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
     adj = .01;
     $fn = 90;
-    difference() {
-        union() {
-            color("#008066") translate ([0,0,0]) slab([95,56,1.7],3.5);
-            color("black",1) translate([10.5,0,1.7]) cube([74.75,54.5,4]);
-            color("white",1) translate([8.5,0,5.7-adj]) cube([82.75,54.5,2]);
-            color("grey",1) translate([8.5,0,7.7-adj]) cube([82.75,54.5,.8]);
-            color("dimgrey",1) translate([15,2,8.5-adj]) cube([75.5,51,.25]);
-        }
-        translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
-        translate([3.5,52.5,-adj]) cylinder(d=3,h=4);
-    }
-    translate([3,8.75,1.70-adj]) momentary45x15();
-    translate([3,19.75,1.70-adj]) momentary45x15();
-    translate([3,30.75,1.70-adj]) momentary45x15();
-    translate([3,41.75,1.70-adj]) momentary45x15();
-    color("black") translate([7.375,.8,-9+adj]) cube([51.5,5,9]);
-    translate([92.5,4,adj]) rotate([0,180,0]) header(5);
-    }
 
+    if(enablemask == true && mstyle == "default") {
+        translate([14.5, 1.5, 8.5-adj-msetback]) cube([76.5, 52, mlength]);
+    }
+    if(enablemask == false) {
+
+        difference() {
+            union() {
+                color("#008066") slab([95, 56, 1.7], 3.5);
+                color("black", 1) translate([10.5, 0, 1.7]) cube([74.75, 54.5, 4]);
+                color("white", 1) translate([8.5, 0, 5.7-adj]) cube([82.75, 54.5, 2]);
+                color("grey", 1) translate([8.5, 0, 7.7-adj]) cube([82.75, 54.5, .8]);
+                color("dimgrey", 1) translate([15, 2, 8.5-adj]) cube([75.5, 51, .25]);
+            }
+            translate([3.5, 3.5, -adj]) cylinder(d=3, h=6);
+            translate([3.5, 52.5, -adj]) cylinder(d=3, h=4);
+        }
+        button("momentary_4.5x4.5x4.5", 3, 8.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 19.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 30.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 41.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
+        header("open", 7.375, .8, 0, "bottom", 0, [20, 2, 6.75], ["thruhole", "black", "female", 2.54,"#fee5a6"], 0, false, [false,10,2,"default"]);
+        header("open", 92.5, 4, 0, "bottom", 0, [1, 5, 6.75], ["thruhole", "black", "male", 2.54,"#fee5a6"], 0, false, [false,10,2,"default"]);
+    }
+}
 
 /*
            NAME: hk_vu7c
@@ -730,12 +745,12 @@ module hk_netcard(mask) {
         ic("generic", 79, 25, 0, "bottom", 0, [6, 6, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
         ic("generic", 56.5, 41, 0, "bottom", 0, [5, 9.75, .8], ["dimgrey"], 1, false, [false, 0, 0, "none"]);
         for (i=[34.65:.5:48.5]) {
-            color("gold") translate([98,i,1]) cube([2,.25,.25]);
-            color("gold") translate([98,i,-.24]) cube([2,.25,.25]);
+            color("#fee5a6") translate([98,i,1]) cube([2,.25,.25]);
+            color("#fee5a6") translate([98,i,-.24]) cube([2,.25,.25]);
         }
         for (i=[51:.5:53]) {
-            color("gold") translate([98,i,1]) cube([2,.25,.25]);
-            color("gold") translate([98,i,-.24]) cube([2,.25,.25]);
+            color("#fee5a6") translate([98,i,1]) cube([2,.25,.25]);
+            color("#fee5a6") translate([98,i,-.24]) cube([2,.25,.25]);
         }
     }
 }

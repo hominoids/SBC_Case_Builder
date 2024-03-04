@@ -67,7 +67,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) stl_model(data[0],data[1]); 
     }
     if(type == "button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) button(data[1],[size_x,size_y,size_z],data[2],data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[1],[size_x,size_y,size_z],data[2],data[0]); 
     }
     if(type == "button_top") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) button_assembly(data[0],size_x,size_z); 
@@ -106,16 +106,16 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_wb2(); 
     }
     if(type == "hc4_oled") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hc4_oled(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled(); 
     }
     if(type == "hc4_oled_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hc4_oled_holder(face,size_z); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled_holder(face,size_z); 
     }
     if(type == "h2_netcard") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h2_netcard(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_netcard(); 
     }
     if(type == "hk_lcd35") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk35_lcd(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_35lcd(); 
     }
     if(type == "hk_m1s_ups") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_m1s_ups(); 
