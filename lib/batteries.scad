@@ -37,7 +37,7 @@ module battery(type) {
 
     if(type == "18650") {
         difference() {
-            cylinder(d=18.4, h=65);
+            color("#73bc73") cylinder(d=18.4, h=65);
             translate([0,0,65-4]) difference() {
                 cylinder(d=18.5, h=2);
                 cylinder(d=17.5, h=3);
@@ -46,20 +46,21 @@ module battery(type) {
     }
     if(type == "18650_convex") {
         difference() {
-            cylinder(d=18.4, h=68);
+            color("#73bc73") cylinder(d=18.4, h=68);
             translate([0,0,65-4]) difference() {
-                cylinder(d=18.5, h=2);
-                cylinder(d=17.5, h=3);
+                color("#73bc73") cylinder(d=18.5, h=2);
+                color("#73bc73") cylinder(d=17.5, h=3);
             }
             translate([0,0,65-adj]) difference() {
-                cylinder(d=18.5, h=3+2*adj);
-                cylinder(d=14.4, h=3+2*adj);
+                color("silver") cylinder(d=18.5, h=3+2*adj);
+                color("silver") cylinder(d=14.4, h=3+2*adj);
             }
+            color("silver") translate([0,0,68-adj]) cylinder(d=14.4, h=.1);
         }
     }
     if(type == "21700") {
         difference() {
-            cylinder(d=21, h=70);
+            color("#73bc73") cylinder(d=21, h=70);
             translate([0,0,70-4]) difference() {
                 cylinder(d=21.1, h=2);
                 cylinder(d=20.1, h=3);

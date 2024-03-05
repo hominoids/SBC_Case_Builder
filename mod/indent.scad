@@ -31,8 +31,8 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     
     // hdmi indent
     if(class == "video" && type == "hdmi_a" && side == "top" && rotation == 0) {
-        place(loc_x+2.375,-(wallthick+gap)+wallthick/2,loc_z+3.75,12,10,rotation,side) 
-             rotate([90,0,0]) slot(12,10,wallthick);
+        place(loc_x-2.375,-(wallthick+gap)+wallthick/2,loc_z+3.75,12,10,rotation,side) 
+             rotate([90,0,0]) slot(12,19,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "top" && rotation == 90) {
         place(-gap-wallthick/2,loc_y,loc_z+3.75,12,10,rotation,side)
@@ -166,8 +166,8 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     }
     // micro usb indent
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
-        place(loc_x-.5,-(wallthick+gap)+wallthick/2,loc_z+1.9,6,8,rotation,side) 
-            rotate([90,0,0]) slot(6,8,wallthick);
+        place(loc_x-2.5,-(wallthick+gap)+wallthick/2,loc_z+1.9,6,8,rotation,side) 
+            rotate([90,0,0]) slot(6,12.5,wallthick);
     }
     if(class == "usb2" && type == "micro" && rotation == 90 && side == "top") {
         place(-gap-wallthick/2,loc_y+1.5,loc_z+1.9,6,8,rotation,side)

@@ -29,14 +29,14 @@
     u_bracket()
     m1_hdmount()
     hk_speaker()
-    hk_boom(speakers, orientation)
-    hk_boom_speaker(side, speaker, pcb)
-    boom_speaker()
+    hk_boom(speakers, orientation, mask)
+    hk_boom_speaker(side, speaker, pcb, mask)
+    boom_speaker(mask)
     hk_boom_grill(style, thick)
     boom_speaker_holder(style, tolerance)
     boom_speaker_strap()
     boom_vring(tolerance)
-    hk_pwr_button(mask = false)
+    hk_pwr_button(mask)
     hk_m1s_case_holes
     hk_m1s_ups()
     proto_m1s()
@@ -334,12 +334,12 @@ module hk_35lcd(mask) {
             translate([3.5, 3.5, -adj]) cylinder(d=3, h=6);
             translate([3.5, 52.5, -adj]) cylinder(d=3, h=4);
         }
-        button("momentary_4.5x4.5x4.5", 3, 8.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
-        button("momentary_4.5x4.5x4.5", 3, 19.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
-        button("momentary_4.5x4.5x4.5", 3, 30.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
-        button("momentary_4.5x4.5x4.5", 3, 41.75, 1.70-adj, "top", 0, [0,0,0], [0], 0, false, [false,10,2,"default"]);
-        header("open", 7.375, .8, 0, "bottom", 0, [20, 2, 6.75], ["thruhole", "black", "female", 2.54,"#fee5a6"], 0, false, [false,10,2,"default"]);
-        header("open", 92.5, 4, 0, "bottom", 0, [1, 5, 6.75], ["thruhole", "black", "male", 2.54,"#fee5a6"], 0, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 8.75, 0, "top", 0, [0,0,0], [0], 1.7, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 19.75, 0, "top", 0, [0,0,0], [0], 1.7, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 30.75, 0, "top", 0, [0,0,0], [0], 1.7, false, [false,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 3, 41.75, 0, "top", 0, [0,0,0], [0], 1.7, false, [false,10,2,"default"]);
+        header("open", 7.375, .8, 0, "bottom", 0, [20, 2, 6.75], ["thruhole", "black", "female", 2.54,"#fee5a6"], 1.7, false, [false,10,2,"default"]);
+        header("open", 92.5, 4, 0, "bottom", 0, [1, 5, 6.75], ["thruhole", "black", "male", 2.54,"#fee5a6"], 1.7, false, [false,10,2,"default"]);
     }
 }
 
@@ -660,10 +660,10 @@ module hk_vu8s(mask) {
         difference(){
             union() {
                 slab(body_size, rb);
-                #translate([(8.25/2),-1.74-(8.25/2),0]) rotate([0,0,90]) slot(8.25,10+(8.25/2),body_size[2]);
-                translate([body_size[0]-(8.25/2),-1.74-(8.25/2),0]) rotate([0,0,90]) slot(8.25,10+(8.25/2),body_size[2]);
-                translate([(8.25/2),body_size[1]-10,0]) rotate([0,0,90]) slot(8.25,10.75+(8.25/2),body_size[2]);
-                translate([body_size[0]-(8.25/2),body_size[1]-10,0]) rotate([0,0,90]) slot(8.25,10.75+(8.25/2),body_size[2]);
+                translate([(8.25/2),-1.74-8.25,0]) rotate([0,0,90]) slot(8.25,10+8.25,body_size[2]);
+                translate([body_size[0]-(8.25/2),-1.74-8.25,0]) rotate([0,0,90]) slot(8.25,10+8.25,body_size[2]);
+                translate([(8.25/2),body_size[1]-10,0]) rotate([0,0,90]) slot(8.25,10.75+8.25,body_size[2]);
+                translate([body_size[0]-(8.25/2),body_size[1]-10,0]) rotate([0,0,90]) slot(8.25,10.75+8.25,body_size[2]);
             }
             lcd_space = lcd_size + 2*lcd_clearance;
             
@@ -939,87 +939,115 @@ module hk_speaker() {
     DESCRIPTION: hardkernel boom bonnet
            TODO: none
 
-          USAGE: hk_boom(speakers, orientation)
+          USAGE: hk_boom(speakers, orientation, mask)
 
                          speakers = true, false
                       orientation = "front", "rear"
+                          mask[0] = true enables component mask
+                          mask[1] = mask length
+                          mask[2] = mask setback
+                          mask[3] = mstyle "default", "pcb", "speakers"
 */
 
-module hk_boom(speakers, orientation) {
+module hk_boom(speakers, orientation, mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     adj = .01;
     $fn = 90;
 
-    difference() {
-        union() {
-            color("#008066") translate ([0,0,0]) slab([60,35,1.6],.5);
-            if(speakers == true) {
-                color("#008066") translate ([-31.5,0,0]) slab([31.5,35,1.6],.5);
-                color("white") translate ([-0.25,0,0]) cube([.5,35,1.6]);
-                color("#008066") translate ([60,0,0]) slab([31.5,35,1.6],.5);
-                color("white") translate ([60,0,0]) cube([.5,35,1.6]);
+    if(enablemask == true) {
+        if(mstyle == "default" || mstyle == "pcb") {
+            translate([35,35-msetback,5]) rotate([270,0,0]) slot(4, 19, mlength);
+            audio("jack_3.5-2", 7.75, 21.75, 0, "top", 180, [6.5,13.5,4], [5,0], 1.6, true, [true,mlength,msetback+2.5,"default"]);
+        }
+        if(mstyle == "default" || mstyle == "speakers") {
+            if(speakers == true && orientation == "rear") {
+                translate([-31.5/2,35/2,1.6]) boom_speaker(mask);
+                translate([60+(31.5/2),35/2,1.6]) boom_speaker(mask);
+            }
+            if(speakers == true && orientation == "front") {
+                translate([-31.5/2,35/2,0]) rotate([0,180,0]) boom_speaker(mask);
+                translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) boom_speaker(mask);
             }
         }
-        // pcb holes
-        color("#008066") translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
-        color("#008066") translate([3.5,31.5,-adj]) cylinder(d=3,h=6);
-        color("#008066") translate([56.5,3.5,-adj]) cylinder(d=3,h=4);
-        color("#008066") translate([56.5,31.5,-adj]) cylinder(d=3,h=4);
-        if(speakers == true) {
-            // left
-            color("#008066") translate([-28,3.5,-adj]) cylinder(d=3,h=6);
-            color("#008066") translate([-28,31.5,-adj]) cylinder(d=3,h=6);
-            color("#008066") translate([-3.5,3.5,-adj]) cylinder(d=3,h=6);
-            color("#008066") translate([-3.5,31.5,-adj]) cylinder(d=3,h=6);
-            // right
-            color("#008066") translate([64.5,3.5,-adj]) cylinder(d=3,h=4);
-            color("#008066") translate([64.5,31.5,-adj]) cylinder(d=3,h=4);
-            color("#008066") translate([88,3.5,-adj]) cylinder(d=3,h=4);
-            color("#008066") translate([88,31.5,-adj]) cylinder(d=3,h=4);
-            // left speaker openings
-            color("#008066") translate([-31.5/2,35/2,-adj]) cylinder(d=23.5, h=3);
-            color("#008066") translate([-4-31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
-            color("#008066") translate([-4-31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
-            color("#008066") translate([-4-31.5/2+(23.5/2)+1,-2+35/2,-adj]) cube([6,3,3]);
-            // right speaker openings
-            color("#008066") translate([60+(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
-            color("#008066") translate([60-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
-            color("#008066") translate([60-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
-            color("#008066") translate([60+1.25,-2+35/2,-adj]) cube([6,3,3]);
-        }
     }
-    // headers
-    translate([7.5,3.5,1.6-adj]) rotate([0,0,-90]) theader(3);
-    translate([16,3.5,1.6-adj]) rotate([0,0,-90]) theader(7);
-    translate([34,2,1.6-adj]) rotate([0,0,0]) encl_header_12();
-    translate([40,13.5,1.6-adj]) rotate([0,0,-90]) theader(2);
-    translate([45.5,13.5,1.6-adj]) rotate([0,0,-90]) theader(2);
-    difference() {
-        union() {
-            color("dimgray", 1) translate([44.5,27,1.6+2]) rotate([0,0,0]) cylinder(d=16, h=3);
-            color("dimgray", 1) translate([44.5,27,1.6]) rotate([0,0,0]) cylinder(d=8, h=2);
+    if(enablemask == false) {
+        difference() {
+            union() {
+                color("#008066") translate ([0,0,0]) slab([60,35,1.6],.5);
+                if(speakers == true) {
+                    color("#008066") translate ([-31.5,0,0]) slab([31.5,35,1.6],.5);
+                    color("white") translate ([-0.25,0,0]) cube([.5,35,1.6]);
+                    color("#008066") translate ([60,0,0]) slab([31.5,35,1.6],.5);
+                    color("white") translate ([60,0,0]) cube([.5,35,1.6]);
+                }
+            }
+            // pcb holes
+            color("#008066") translate([3.5,3.5,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([3.5,31.5,-adj]) cylinder(d=3,h=6);
+            color("#008066") translate([56.5,3.5,-adj]) cylinder(d=3,h=4);
+            color("#008066") translate([56.5,31.5,-adj]) cylinder(d=3,h=4);
+            if(speakers == true) {
+                // left
+                color("#008066") translate([-28,3.5,-adj]) cylinder(d=3,h=6);
+                color("#008066") translate([-28,31.5,-adj]) cylinder(d=3,h=6);
+                color("#008066") translate([-3.5,3.5,-adj]) cylinder(d=3,h=6);
+                color("#008066") translate([-3.5,31.5,-adj]) cylinder(d=3,h=6);
+                // right
+                color("#008066") translate([64.5,3.5,-adj]) cylinder(d=3,h=4);
+                color("#008066") translate([64.5,31.5,-adj]) cylinder(d=3,h=4);
+                color("#008066") translate([88,3.5,-adj]) cylinder(d=3,h=4);
+                color("#008066") translate([88,31.5,-adj]) cylinder(d=3,h=4);
+                // left speaker openings
+                color("#008066") translate([-31.5/2,35/2,-adj]) cylinder(d=23.5, h=3);
+                color("#008066") translate([-4-31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+                color("#008066") translate([-4-31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+                color("#008066") translate([-4-31.5/2+(23.5/2)+1,-2+35/2,-adj]) cube([6,3,3]);
+                // right speaker openings
+                color("#008066") translate([60+(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
+                color("#008066") translate([60-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+                color("#008066") translate([60-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+                color("#008066") translate([60+1.25,-2+35/2,-adj]) cube([6,3,3]);
+            }
         }
-        color("dimgray", 1) translate([44.5,27,1.6+4]) rotate([0,0,0]) cylinder(d=12, h=3);
-        for(d=[5:10:360]) {
-            color("dimgray") translate([44.5+(16/2)*cos(d),27+(16/2)*sin(d),1.6+2-adj]) cylinder(d=.75, h=3+2*adj);
+        // headers
+        header("open", 7.5, 1, 0, "top", 0, [3,1,6], ["thruhole","black","male",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
+        header("open", 16, 1, 0, "top", 0, [7,1,6], ["thruhole","black","male",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
+        header("open", 40, 11, 0, "top", 0, [2,1,6], ["thruhole","black","male",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
+        header("open", 45.5, 11, 0, "top", 0, [2,1,6], ["thruhole","black","male",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
+        gpio("encl_header_12", 34, 2, 0, "top", 0, [2,1,6], ["thruhole","black","male",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
+
+        difference() {
+            union() {
+                color("dimgray", 1) translate([44.5,27,1.6+2]) rotate([0,0,0]) cylinder(d=16, h=3);
+                color("dimgray", 1) translate([44.5,27,1.6]) rotate([0,0,0]) cylinder(d=8, h=2);
+            }
+            color("dimgray", 1) translate([44.5,27,1.6+4]) rotate([0,0,0]) cylinder(d=12, h=3);
+            for(d=[5:10:360]) {
+                color("dimgray") translate([44.5+(16/2)*cos(d),27+(16/2)*sin(d),1.6+2-adj]) cylinder(d=.75, h=3+2*adj);
+            }
         }
-    }
-    color("gray", 1) translate([45,27,1.6+4-adj]) rotate([0,0,0]) cylinder(d=1.5, h=.25);
-    translate([3.75,13,1.6-adj]) rotate([0,0,90]) micro2pin();
-    translate([56.5,20.5,1.6-adj]) rotate([0,0,-90]) micro2pin();
-    translate([7.75,21.75,1.6-adj]) audio_jack35();
-    translate([20,30,1.6-adj]) capacitor(6.25,6.5);
-    translate([30,30,1.6-adj]) capacitor(6.25,6.5);
-    translate([22,16,1.6-adj]) color("dimgrey") cube([6.5,4.5,1]);
-    translate([10,12,1.6-adj]) color("dimgrey") cube([4,4,1]);
-    translate([32.5,9,1.6-adj]) color("dimgrey") cube([3.5,3,1]);
-    if(speakers == true && orientation == "rear") {
-        translate([-31.5/2,35/2,1.6]) boom_speaker();
-        translate([60+(31.5/2),35/2,1.6]) boom_speaker();
-    }
-    if(speakers == true && orientation == "front") {
-        translate([-31.5/2,35/2,0]) rotate([0,180,0]) boom_speaker();
-        translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) boom_speaker();
+        color("gray", 1) translate([45,27,1.6+4-adj]) rotate([0,0,0]) cylinder(d=1.5, h=.25);
+        jst("ph", 0, 13.75, 0, "top", 90, [2,0,0], ["thruhole","top","white"], 1.6, false, [true,10,2,"default"]);
+        jst("ph", 55.75, 13.75, 0, "top", 270, [2,0,0], ["thruhole","top","white"], 1.6, false, [true,10,2,"default"]);
+        discrete("capacitor", 20, 30, 0, "top", 0, [6.25,0,6.5], [0], 1.6, false, [true,10,2,"default"]);
+        discrete("capacitor", 30, 30, 0, "top", 0, [6.25,0,6.5], [0], 1.6, false, [true,10,2,"default"]);
+        audio("jack_3.5-2", 7.75, 21.75, 0, "top", 180, [6.5,13.5,4], [5,2], 1.6, false, [true,10,2,"default"]);
+        translate([22,16,1.6-adj]) color("dimgrey") cube([6.5,4.5,1]);
+        translate([10,12,1.6-adj]) color("dimgrey") cube([4,4,1]);
+        translate([32.5,9,1.6-adj]) color("dimgrey") cube([3.5,3,1]);
+        if(speakers == true && orientation == "rear") {
+            translate([-31.5/2,35/2,1.6]) boom_speaker([false,10,0,"default"]);
+            translate([60+(31.5/2),35/2,1.6]) boom_speaker([false,10,0,"default"]);
+        }
+        if(speakers == true && orientation == "front") {
+            translate([-31.5/2,35/2,0]) rotate([0,180,0]) boom_speaker([false,10,0,"default"]);
+            translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) boom_speaker([false,10,0,"default"]);
+        }
     }
 }
 
@@ -1029,77 +1057,106 @@ module hk_boom(speakers, orientation) {
     DESCRIPTION: hardkernel stereo boom bonnet pcb and speakers
            TODO: none
 
-          USAGE: hk_boom_speaker(side, speaker, pcb)
+          USAGE: hk_boom_speaker(side, speaker, pcb, mask)
 
                                  side = "left, "right"
                              speakers = true, false
                           orientation = "front", "rear"
+                              mask[0] = true enables component mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
 */
 
-module hk_boom_speaker(side, speaker, pcb) {
+module hk_boom_speaker(side, speaker, pcb, mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     adj = .01;
     $fn = 90;
 
-    if(pcb == true) {
-        difference() {
-            color("#008066") slab([31.5,35,1.6],.5);
-            color("#008066") translate([27.5,4,-adj]) cylinder(d=3,h=6);
-            color("#008066") translate([27.5,31,-adj]) cylinder(d=3,h=6);
-            color("#008066") translate([4,4,-adj]) cylinder(d=3,h=6);
-            color("#008066") translate([4,31,-adj]) cylinder(d=3,h=6);
-            
-            // speaker openings
-            color("#008066") translate([(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
-            color("#008066") translate([-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
-            color("#008066") translate([-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
-            if(side == "right") {
-                color("#008066") translate([.5,-2+35/2,-adj]) cube([6,3,3]);
-            }
-            if(side == "left") {
-                color("#008066") translate([31.5/2+(23.5/2)-2.5,-2+35/2,-adj]) cube([6,3,3]);
+    if(enablemask == true) {
+        translate([31.5/2,35/2,0]) boom_speaker(mask);
+    }
+    if(enablemask == false) {
+        if(pcb == true) {
+            difference() {
+                color("#008066") slab([31.5,35,1.6],.5);
+                color("#008066") translate([27.5,4,-adj]) cylinder(d=3,h=6);
+                color("#008066") translate([27.5,31,-adj]) cylinder(d=3,h=6);
+                color("#008066") translate([4,4,-adj]) cylinder(d=3,h=6);
+                color("#008066") translate([4,31,-adj]) cylinder(d=3,h=6);
+                
+                // speaker openings
+                color("#008066") translate([(31.5/2),35/2,-adj]) cylinder(d=23.5, h=3);
+                color("#008066") translate([-3+31.5/2,35/2+(23.5/2)-.5,-adj]) cube([6,3,3]);
+                color("#008066") translate([-3+31.5/2,35/2-(23.5/2)-2.5,-adj]) cube([6,3,3]);
+                if(side == "right") {
+                    color("#008066") translate([.5,-2+35/2,-adj]) cube([6,3,3]);
+                }
+                if(side == "left") {
+                    color("#008066") translate([31.5/2+(23.5/2)-2.5,-2+35/2,-adj]) cube([6,3,3]);
+                }
             }
         }
-    }
-    if(speaker == true && pcb == true) {
-        translate([(31.5/2),35/2,1.6]) boom_speaker();
-    }
-    if(speaker == true && pcb == false) {
-        boom_speaker();
+        if(speaker == true && pcb == true) {
+            translate([(31.5/2),35/2,1.6]) boom_speaker([false,10,0,"default"]);
+        }
+        if(speaker == true && pcb == false) {
+            boom_speaker([false,10,0,"default"]);
+        }
     }
 }
 
 
 /*
-           NAME: hk_boom
+           NAME: boom_speaker
     DESCRIPTION: hardkernel stereo boom bonnet speakers
            TODO: none
 
-          USAGE: boom_speaker()
+          USAGE: boom_speaker(mask)
+                              mask[0] = true enables component mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
 */
 
-module boom_speaker() {
+module boom_speaker(mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     adj = .01;
     $fn = 90;
-    difference() {
-        union() {
-            color("silver") translate([0,0,-8.5]) cylinder_fillet_inside(h=6.5, r=21.4/2, 
-                top=0, bottom=2, $fn=90, fillet_fn=30, center=false);
-            color("dimgray") translate([0,0,2.5-adj]) cylinder_fillet_inside(h=1, r=21.75/2, 
-                top=1, bottom=0, $fn=90, fillet_fn=30, center=true);
 
-            difference() {
-                color("black") translate([0,0,-5-adj]) cylinder(d=23.7, h=5);
-                for(d=[30:60:360]) {
-                    color("dimgray") translate([(23.7/2)*cos(d),(23.7/2)*sin(d),-6-adj]) cylinder(d=6, h=5+2*adj);
+    if(enablemask == true) {
+        translate([0,0,-msetback]) cylinder(d=27.8, h=mlength);
+    }
+    if(enablemask == false) {
+        difference() {
+            union() {
+                color("silver") translate([0,0,-8.5]) cylinder_fillet_inside(h=6.5, r=21.4/2, 
+                    top=0, bottom=2, $fn=90, fillet_fn=30, center=false);
+                color("dimgray") translate([0,0,2.5-adj]) cylinder_fillet_inside(h=1, r=21.75/2, 
+                    top=1, bottom=0, $fn=90, fillet_fn=30, center=true);
+
+                difference() {
+                    color("black") translate([0,0,-5-adj]) cylinder(d=23.7, h=5);
+                    for(d=[30:60:360]) {
+                        color("dimgray") translate([(23.7/2)*cos(d),(23.7/2)*sin(d),-6-adj]) cylinder(d=6, h=5+2*adj);
+                    }
                 }
+                color("black") translate([0,0,-adj]) cylinder(d=27.8, h=2);
+                color("dimgray") translate([0,0,1]) cylinder(d=22.8, h=1);
+                color("dimgray") translate([0,0,1]) cylinder(d=17.5, h=1.25);
             }
-            color("black") translate([0,0,-adj]) cylinder(d=27.8, h=2);
-            color("dimgray") translate([0,0,1]) cylinder(d=22.8, h=1);
-            color("dimgray") translate([0,0,1]) cylinder(d=17.5, h=1.25);
+            color("darkgray") translate([0,0,10.5]) sphere(d=23);
         }
-        color("darkgray") translate([0,0,10.5]) sphere(d=23);
     }
 }
 
@@ -1288,20 +1345,28 @@ module boom_vring(tolerance) {
     DESCRIPTION: hardkernel power button
            TODO: none
 
-          USAGE: hk_pwr_button(mask = false)
+          USAGE: hk_pwr_button(mask)
 
-                               mask = opening mask
+                               mask[0] = true enables component mask
+                               mask[1] = mask length
+                               mask[2] = mask setback
+                               mask[3] = mstyle "default"
 */
 
-module hk_pwr_button(mask = false) {
+module hk_pwr_button(mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     adj=.01;
     $fn = 90;
 
-    if(mask == true) {
-        color("silver") translate([0, 0, -19]) cylinder(h=20, d=16);
+    if(enablemask == true) {
+        translate([0, 0, -mlength+msetback+adj]) cylinder(d=16, h=mlength);
     }
-    else {
+    if(enablemask == false) {
         difference() {
             union() {
                 // light ring
@@ -1348,48 +1413,58 @@ module hk_pwr_button(mask = false) {
     DESCRIPTION: hardkernel odroid-m1s ups
            TODO: none
 
-          USAGE: hk_m1s_ups()
+          USAGE: hk_m1s_ups(mask)
 
+                            mask[0] = true enables component mask
+                            mask[1] = mask length
+                            mask[2] = mask setback
+                            mask[3] = mstyle "default"
 */
 
-module hk_m1s_ups() {
+module hk_m1s_ups(mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     pcb_size = [115,32,1.62];
     adj = .01;
     $fn = 90;
 
-    difference() {
-        union() {
-            color("#008066") slab(pcb_size,4);
-            color("#fee5a6") translate([3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
-            color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
-            color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
-            color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+    if(enablemask == true) {
+        usbc("single_horizontal", 97.5, -1, 0, "top", 0, [0,0,0], [0], pcb_size[2], true, [true,mlength,msetback,mstyle]);
+    }
+    if(enablemask == false) {
+        difference() {
+            union() {
+                color("#008066") slab(pcb_size,4);
+                color("#fee5a6") translate([3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+                color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-.1]) cylinder(d=5.5, h=pcb_size[2]+.2);
+            }
+            color("#fee5a6") translate([3.5,3.5,-1]) cylinder(d=4, h=4);
+            color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
+            color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-1]) cylinder(d=4, h=4);
+            color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
         }
-        color("#fee5a6") translate([3.5,3.5,-1]) cylinder(d=4, h=4);
-        color("#fee5a6") translate([3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
-        color("#fee5a6") translate([pcb_size[0]-3.5,3.5,-1]) cylinder(d=4, h=4);
-        color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
-   }
-   // battery and clips
-   color("silver") translate([15,5,pcb_size[2]]) rotate([0,0,270]) battery_clip();
-   color("silver") translate([80,16,pcb_size[2]]) rotate([0,0,90]) battery_clip();
-   translate([13.25,10.5,pcb_size[2]+10.4]) rotate([0,90,0]) battery("18650_convex");
+        // battery and clips
+        color("grey") translate([15,5,pcb_size[2]]) rotate([0,0,270]) battery_clip();
+        color("grey") translate([80,16,pcb_size[2]]) rotate([0,0,90]) battery_clip();
+        translate([13.25,10.5,pcb_size[2]+10.4]) rotate([0,90,0]) battery("18650_convex");
 
-   translate([86.75,.5,pcb_size[2]]) momentary45x15();
-   translate([97.5,-1,pcb_size[2]]) usbc();
-
-   translate([35,28,pcb_size[2]]) led("DodgerBlue");
-   translate([40,28,pcb_size[2]]) led("DodgerBlue");
-   translate([45,28,pcb_size[2]]) led("DodgerBlue");
-   translate([50,28,pcb_size[2]]) led("DodgerBlue");
-
-   translate([113,8,pcb_size[2]]) rotate([0,0,90]) led("green");
-   translate([113,16,pcb_size[2]])  rotate([0,0,90]) led();
-   translate([113,21,pcb_size[2]])  rotate([0,0,90]) led();
-
-   translate([78,29,pcb_size[2]]) rotate([0,0,270])header(7);
-   translate([78,31.5,pcb_size[2]]) rotate([0,0,270])header(7);
+        header("open", 78, 26.5, 0, "top", 0, [7,2,6], ["thruhole","black","male",2.54,"silver"], pcb_size[2], false, [true,10,2,"default"]);
+        button("momentary_4.5x4.5x4.5", 86.75, .5, 0, "top", 0, [0,0,0], [0], pcb_size[2], false, [false,10,2,"default"]);
+        usbc("single_horizontal", 97.5, -1, 0, "top", 0, [0,0,0], [0], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 35, 28, 0, "top", 0, [3,1.5,.5], ["DodgerBlue"], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 40, 28, 0, "top", 0, [3,1.5,.5], ["DodgerBlue"], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 45, 28, 0, "top", 0, [3,1.5,.5], ["DodgerBlue"], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 50, 28, 0, "top", 0, [3,1.5,.5], ["DodgerBlue"], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 111.5, 8, 0, "top", 90, [3,1.5,.5], ["green"], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 111.5, 16, 0, "top", 90, [3,1.5,.5], ["red"], pcb_size[2], false, [false,10,2,"default"]);
+        smd("led", 111.5, 21, 0, "top", 90, [3,1.5,.5], ["red"], pcb_size[2], false, [false,10,2,"default"]);
+    }
 }
 
 
@@ -1423,9 +1498,7 @@ module proto_ups() {
             color("#fee5a6") translate([pcb_size[0]-3.5,pcb_size[1]-3.5,-1]) cylinder(d=4, h=4);
        }
        // pads
-       for(r=[5:2.54:30]) {
-        translate([10,r,pcb_size[2]+adj]) pcb_pad(38);
-       }
+       pcbpad("round", 9.5, 5, 0, "bottom", 0, [39,10,6], [1.27,"#fee5a6",2.1], pcb_size[2], false, [true,10,2,"default"]);
    }
 }
 
@@ -1459,10 +1532,7 @@ module proto_m1s() {
             color("#fee5a6") translate([17.5,52.5,-1]) cylinder(d=3, h=4);
             color("#fee5a6") translate([67.5,55.1,-1]) cylinder(d=3, h=4);
        }
-       // pads
-       for(r=[7:2.54:32]) {
-        translate([10,r,pcb_size[2]+adj]) pcb_pad(28);
-       }
+       pcbpad("round", 8, 5, 0, "bottom", 0, [30,16,6], [1.27,"#fee5a6",2.1], pcb_size[2], false, [true,10,2,"default"]);
    }
 }
 
