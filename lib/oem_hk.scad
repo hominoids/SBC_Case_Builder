@@ -377,6 +377,7 @@ module hk_vu7c(gpio_ext, tabs, mask) {
 
     if(enablemask == true && mstyle == "default") {
         translate([2.5,7,pcb_size[2]+3.12+lcd_size[2]-adj]) cube([view_size[0]+1, view_size[1]+1, mlength]);
+        video("hdmi_a", 70, 28.58, 0, "bottom", 0, [0,0,0], [0], pcb_size[2], true, [true,10,2,"default"]);
 //        translate([55.8,103.5,-adj-msetback]) cylinder(d=hole, h=mlength);
 //        translate([108.8,103.5,-adj-msetback]) cylinder(d=hole, h=mlength);
     }
@@ -385,17 +386,17 @@ module hk_vu7c(gpio_ext, tabs, mask) {
             union() {
                 color("lightgray") translate([0,0,pcb_size[2]+3.12]) cube(lcd_size);
                 if(tabs == true) {
-                    color("#181818") translate([-(pcb_size[0]-lcd_size[0])/2,lcd_size[1]-pcb_size[1]-1,0]) 
+                    color("#383838") translate([-(pcb_size[0]-lcd_size[0])/2,lcd_size[1]-pcb_size[1]-1,0]) 
                         cube(pcb_size);
                 }
                 else {
-                    color("black") translate([0,lcd_size[1]-pcb_size[1]-1,0]) 
+                    color("#383838") translate([0,lcd_size[1]-pcb_size[1]-1,0]) 
                         cube([pcb_size[0]-20,pcb_size[1],pcb_size[2]]);
                 }
                 color("black") translate([3,7.5,pcb_size[2]+3.12+lcd_size[2]-adj]) cube(view_size);
                 // tabs
-                color("black") translate([51.8,99,0]) slab_r([8,8,1.6],[.1,4,4,.1]);
-                color("black") translate([104.8,99,0]) slab_r([8,8,1.6],[.1,4,4,.1]);
+                color("#383838") translate([51.8,99,0]) slab_r([8,8,1.6],[.1,4,4,.1]);
+                color("#383838") translate([104.8,99,0]) slab_r([8,8,1.6],[.1,4,4,.1]);
             }
             // slots
             color("dimgray") translate([-(pcb_size[0]-lcd_size[0])/4,lcd_size[1]-1-7,-adj]) 
@@ -458,63 +459,70 @@ module hk_vu8m(brackets, mask) {
 
     m1_screw_spacing = 72;
 
-    body_size  = [    198,     133,                1.93];
-    glass_size = [ 195.73,  131.14,                1.60];
-    lcd_size   = [ 184.63,  114.94, body_size[2] + 0.40];
-    view_size  = [ 173.23,  108.64,                  .1];
+    body_size  = [198, 133, 1.93];
+    glass_size = [195.73, 131.14, 1.60];
+    lcd_size   = [184.63, 114.94, body_size[2] + 0.40];
+    view_size  = [173.23, 108.64, .1];
 
     rb = 5.25;   // body edge radius
 
     lcd_clearance = [0.15, 0.1, 0];
+    lcd_space = lcd_size + 2*lcd_clearance;
     pcb_size = [14,24,1.6];
     hole = 4.31;
-    spacer_size = [5.5, 6, 2.5, 5.5, 1, 0, 1, 1, 0, 0, 0];
+    spacer_size = [6, 6+body_size[2], 3, 6, 1, "none", "round", "none", true, false, 4, 5];
+
     adj = .01;
     $fn = 90;    
 
     if(enablemask == true && mstyle == "default") {
         translate([-.5+(glass_size[0]-view_size[0])/2, -.5+(glass_size[1]-view_size[1])/2, body_size[2] + glass_size[2]- 0.01]) 
             cube([view_size[0]+1, view_size[1]+1, mlength]);
+        translate([44.5, 4.5, msetback-mlength]) cylinder(d=7, h=mlength);
+        translate([183.5, 4.5, msetback-mlength]) cylinder(d=7, h=mlength);
+        translate([44.5, body_size[1]-4.5, msetback-mlength]) cylinder(d=7, h=mlength);
+        translate([183.5, body_size[1]-4.5, msetback-mlength]) cylinder(d=7, h=mlength);
     }
     if(enablemask == false) {
         // "body"
-        color([0.1,0.1,0.1])
         difference(){
-            slab(body_size, rb); 
-            lcd_space = lcd_size + 2*lcd_clearance;
-            translate([3.76               , 9               ,    -1]) cube(lcd_space);
-            translate([3.76               , 9               ,    -1]) cylinder(r=1.3, h=5);
-            translate([3.76 + lcd_space[0], 9               ,    -1]) cylinder(r=1.3, h=5);
-            translate([3.76               , 9 + lcd_space[1],    -1]) cylinder(r=1.3, h=5);
-            translate([3.76 + lcd_space[0], 9 + lcd_space[1],    -1]) cylinder(r=1.3, h=5);
-        // 8x holes in body
-            translate([  44.5,              4.5, -1]) cylinder(d=hole, h=5);
-            translate([  51.5,              4.5, -1]) cylinder(d=hole, h=5);
-            translate([ 183.5,              4.5, -1]) cylinder(d=hole, h=5);
-            translate([ 190.5,              4.5, -1]) cylinder(d=hole, h=5);
-            translate([  44.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
-            translate([  51.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
-            translate([ 183.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
-            translate([ 190.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
+            union() {
+                color("#181818") slab(body_size, rb);
+                color("#fee5a6") translate([51.5, 4.5, -adj]) cylinder(d=hole+2, h=body_size[2]+2*adj);
+                color("#fee5a6") translate([190.5, 4.5, -adj]) cylinder(d=hole+2, h=body_size[2]+2*adj);
+                color("#fee5a6") translate([51.5, body_size[1]-4.5, -adj]) cylinder(d=hole+2, h=body_size[2]+2*adj);
+                color("#fee5a6") translate([190.5, body_size[1]-4.5, -adj]) cylinder(d=hole+2, h=body_size[2]+2*adj);
+            }
+            color("#181818") translate([3.76, 9, -1]) cube(lcd_space);
+            color("#181818") translate([3.76, 9, -1]) cylinder(r=1.3, h=5);
+            color("#181818") translate([3.76 + lcd_space[0], 9, -1]) cylinder(r=1.3, h=5);
+            color("#181818") translate([3.76, 9 + lcd_space[1], -1]) cylinder(r=1.3, h=5);
+            color("#181818") translate([3.76 + lcd_space[0], 9 + lcd_space[1], -1]) cylinder(r=1.3, h=5);
+
+            // 4x holes in body
+            color("#fee5a6") translate([51.5, 4.5, -1]) cylinder(d=hole, h=5);
+            color("#fee5a6") translate([190.5, 4.5, -1]) cylinder(d=hole, h=5);
+            color("#fee5a6") translate([51.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
+            color("#fee5a6") translate([190.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
+	    
+	        // standoff openings
+            color("silver") translate([44.5, 4.5, -1]) cylinder(d=hole, h=5);
+            color("silver") translate([183.5, 4.5, -1]) cylinder(d=hole, h=5);
+            color("silver") translate([44.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
+            color("silver") translate([183.5, body_size[1]-4.5, -1]) cylinder(d=hole, h=5);
 
         }
         // 4x standoffs
-            color([0.6,0.6,0.6]) {
-                translate([  44.5,              4.5, 0]) standoff(spacer_size);
-                translate([ 183.5,              4.5, 0]) standoff(spacer_size);
-                translate([  44.5, body_size[1]-4.5, 0]) standoff(spacer_size);
-                translate([ 183.5, body_size[1]-4.5, 0]) standoff(spacer_size);
-            }
+        color("silver") translate([44.5, 4.5, glass_size[2]]) standoff(spacer_size, [false,10,2,"default"]);
+        color("silver") translate([183.5, 4.5, glass_size[2]]) standoff(spacer_size, [false,10,2,"default"]);
+        color("silver") translate([44.5, body_size[1]-4.5, glass_size[2]]) standoff(spacer_size, [false,10,2,"default"]);
+        color("silver") translate([183.5, body_size[1]-4.5, glass_size[2]]) standoff(spacer_size, [false,10,2,"default"]);
         // LCD panel
-        color([0.6, 0.6, 0.65])
-            translate([3.76, 9, body_size[2]-lcd_size[2]]+lcd_clearance)
-                cube(lcd_size); 
+        color([0.6, 0.6, 0.65]) translate([3.76, 9, body_size[2]-lcd_size[2]]+lcd_clearance) cube(lcd_size); 
 
-        // Front glass
-        // It's actually thinner and glued, but for the sake of simplicity...
-        color([0.2, 0.2, 0.2], 0.9)
-            translate([0.86, 1.38, body_size[2] + 0.01])
-                slab(glass_size, rb);
+        // front glass
+        // it's actually thinner and glued, but for the sake of simplicity...
+        color([0.2, 0.2, 0.2], 0.9) translate([0.86, 1.38, body_size[2] + 0.01]) slab(glass_size, rb);
 
         // view area
         color("dimgrey", 0.9)
@@ -522,31 +530,17 @@ module hk_vu8m(brackets, mask) {
                 slab(view_size, .1);
 
         // PCB stub
-        color([0.1,0.1,0.1])
-            translate([20.5, 24.5, -3])
-                cube(pcb_size);
-        color("dimgrey")
-            translate([22.5, 26.5, -2])
-                cube([8,16,3]);
-        color([0.1,0.1,0.1])
-            translate([12, 21, -2])
-                cube([7,7,1.6]);
-        color([0.1,0.1,0.1])
-            translate([10, 34, -2])
-                cube([4,10,1.6]);
+        color("black") translate([20.5, 24.5, -3]) cube(pcb_size);
+        color("dimgrey") translate([22.5, 26.5, -2]) cube([8,16,3]);
+        color("black") translate([12, 21, -2]) cube([7,7,1.6]);
+        color("black") translate([10, 34, -2]) cube([4,10,1.6]);
 
-        //Brackets
+        fpc("fh19", 30.5, 35, 3, "bottom", 90, [15,0,0], ["smt","side","white","black"], pcb_size[2]+body_size[2], false, [true,10,2,"default"]);
+            
+        // brackets
         if(brackets) {
             translate([44.5 - 7.5,   body_size[1]/2 + m1_screw_spacing/2 - 7.5, - spacer_size[1] - 2]) u_bracket();
             translate([44.5 - 7.5,   body_size[1]/2 - m1_screw_spacing/2 + 7.5, - spacer_size[1] - 2 + 1.93]) rotate([180,0,0]) u_bracket();
-
-        //Screws
-            color([0.1,0.1,0.1]) {
-                translate([  44.5,              4.5, -8]) rotate([180,0,0]) screw([3,7,0]);
-                translate([ 183.5,              4.5, -8]) rotate([180,0,0]) screw([3,7,0]);
-                translate([  44.5, body_size[1]-4.5, -8]) rotate([180,0,0]) screw([3,7,0]);
-                translate([ 183.5, body_size[1]-4.5, -8]) rotate([180,0,0]) screw([3,7,0]);
-            }
         }
     }
 }
@@ -645,18 +639,29 @@ module hk_vu8s(mask) {
     lcd_clearance = [0.15, 0.1, 0];
     pcb_size = [14,24,1.6];
     hole = 4.31;
-    spacer_size = [5.5, 1.75+body_size[2], 2.5, 5.5, 1, 0, 1, 1, 0, 0, 0];
+//    spacer_size = [5.5, 1.75+body_size[2], 2.5, 5.5, 1, 0, 1, 1, 0, 0, 0];
+    spacer_size = [5.5, 1.75+body_size[2], 2.5, 5.5, 1, "none", "round", "none", true, false, 4, 5];
 
     $fn = 90;
     adj = .01;
 
     if(enablemask == true && mstyle == "default") {
-        translate([13.5, 12, body_size[2] + glass_size[2]- 0.01]) 
+        translate([13.5, 12, body_size[2] + glass_size[2]- msetback]) 
             cube([view_size[0]+1, view_size[1]+1, mlength]);
+        // corner holes
+        translate([4, -5, body_size[2]/2-(mlength/2)]) cylinder(d=hole, h=mlength);
+        translate([4, 143-5, body_size[2]/2-(mlength/2)]) cylinder(d=hole, h=mlength);
+        translate([202-4, -5, body_size[2]/2-(mlength/2)]) cylinder(d=hole, h=mlength);
+        translate([202-4, 143-5, body_size[2]/2-(mlength/2)]) cylinder(d=hole, h=mlength);
+        // back studs
+        translate([4, 3.75, msetback-mlength]) cylinder(d=7, h=mlength);
+        translate([3.75, 128.25, msetback-mlength]) cylinder(d=7, h=mlength);
+        translate([111.5, 4, msetback-mlength]) cylinder(d=7, h=mlength);
+        translate([111.25, 128.75, msetback-mlength]) cylinder(d=7, h=mlength);
     }
     if(enablemask == false) {
         // "body"
-        color([0.1,0.1,0.1])
+        color("black")
         difference(){
             union() {
                 slab(body_size, rb);
@@ -677,15 +682,14 @@ module hk_vu8s(mask) {
             translate([3.5, body_size[1]-3.5, -1]) cylinder(d=hole, h=5);
             translate([111, 3.5, -1]) cylinder(d=hole, h=5);
             translate([111.5, body_size[1]-3.5, -1]) cylinder(d=hole, h=5);
-
         }
-            // standoffs
-            color([0.6,0.6,0.6]) {
-                translate([4, 3.75, body_size[2]+adj]) standoff(spacer_size);
-                translate([3.75, 128.25, body_size[2]+adj]) standoff(spacer_size);
-                translate([111.5, 4, body_size[2]+adj]) standoff(spacer_size);
-                translate([111.25, 128.75, body_size[2]+adj]) standoff(spacer_size);
-            }
+        // standoffs
+        color([0.6,0.6,0.6]) {
+            translate([4, 3.75, body_size[2]+adj]) standoff(spacer_size, [false,10,2,"default"]);
+            translate([3.75, 128.25, body_size[2]+adj]) standoff(spacer_size, [false,10,2,"default"]);
+            translate([111.5, 4, body_size[2]+adj]) standoff(spacer_size, [false,10,2,"default"]);
+            translate([111.25, 128.75, body_size[2]+adj]) standoff(spacer_size, [false,10,2,"default"]);
+        }
         // LCD panel
         color([0.6, 0.6, 0.65])
             translate([10, 9, body_size[2]-lcd_size[2]]+lcd_clearance)
@@ -703,10 +707,10 @@ module hk_vu8s(mask) {
                 slab(view_size, .1);
 
         // PCB stub
-        color([0.1,0.1,0.1])
+        color("black")
             translate([body_size[0]-25, body_size[1]-30, -2])
                 cube([7,7,.1]);
-        color([0.1,0.1,0.1])
+        color("black")
             translate([body_size[0]-50, body_size[1]-35, -2])
                 cube([4,5,.1]);
     }
@@ -836,7 +840,7 @@ module m1_hdmount() {
         translate ([   3.1,  28.3 ,  0]) rotate([  0,0,0]) standoff(standoff_style);
         translate ([  86.5,  28.3 ,  0]) rotate([  0,0,0]) standoff(standoff_style);
     }
-    color([0.1,0.1,0.1]) {
+    color("black") {
         translate ([   3.1,  28.3 ,  2]) rotate([  0,0,0]) screw([3, 7, 0]);
         translate ([  86.5,  28.3 ,  2]) rotate([  0,0,0]) screw([3, 7, 0]);
 

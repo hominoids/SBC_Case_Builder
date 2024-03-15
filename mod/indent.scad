@@ -31,105 +31,105 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     
     // hdmi indent
     if(class == "video" && type == "hdmi_a" && side == "top" && rotation == 0) {
-        place(loc_x-2.375,-(wallthick+gap)+wallthick/2,loc_z+3.75,12,10,rotation,side) 
-             rotate([90,0,0]) slot(12,19,wallthick);
+        place(loc_x+2.375,-(wallthick+gap)+wallthick/2,loc_z+3.75,12,10,rotation,side) 
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "top" && rotation == 90) {
         place(-gap-wallthick/2,loc_y,loc_z+3.75,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "top" && rotation == 180) {
         place(loc_x,depth-(wallthick+gap)-10-wallthick/2,loc_z+3.75,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "top" && rotation == 270) {
         place(width-(wallthick+gap)-10-wallthick/2,loc_y+2.375,loc_z+3.75,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "bottom" && rotation == 0) {
         place(loc_x,-(wallthick+gap)+wallthick/2,loc_z-pcb_z-3.75,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "bottom" && rotation == 90) {
         place(width-(wallthick+gap)-10-wallthick/2,loc_y,loc_z-5.25,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "bottom" && rotation == 180) {
         place(loc_x+2.375,depth-(wallthick+gap)-10-wallthick/2,loc_z-pcb_z-3.75,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     if(class == "video" && type == "hdmi_a" && side == "bottom" && rotation == 270) {
         place(-gap-wallthick/2,loc_y+1.75,loc_z-pcb_z-3.75,12,10,rotation,side)
-             rotate([90,0,0]) slot(12,10,wallthick);
+             rotate([90,0,0]) long_slot(12,10,wallthick);
     }
     // hdmi micro indent
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "top") {
         place(loc_x-.5,-(wallthick+gap)+wallthick/2,loc_z+1.5,6,8,rotation,side) 
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 90 && side == "top") {
         place(-gap-wallthick/2,loc_y+1.5,loc_z+1.5,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 180 && side == "top") {
         place(loc_x+1,depth-(wallthick+gap)-8-wallthick/2,loc_z+1.5,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 270 && side == "top") {
         place(width-(wallthick+gap)-8-wallthick/2,loc_y-.75,loc_z+1.5,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "bottom") {
         place(loc_x+1.5,-(wallthick+gap)+wallthick/2,loc_z-3,6,8,rotation,side) 
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 90 && side == "bottom") {
         place(width-(wallthick+gap)-8-wallthick/2,loc_y+1.25,loc_z-3,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
 
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 180 && side == "bottom") {
         place(loc_x-1,depth-(wallthick+gap)-8-wallthick/2,loc_z-3,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 270 && side == "bottom") {
         place(-gap-wallthick/2,loc_y-.5,loc_z-3,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     // hdmi mini indent
     if(class == "video" && type == "hdmi_mini" && rotation == 0 && side == "top") {
         place(loc_x+.5,loc_y-gap-wallthick/2+1,loc_z+1.5,6,10,rotation,side) 
-            rotate([90,0,0]) slot(6,10,wallthick);
+            rotate([90,0,0]) long_slot(6,10,wallthick);
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 90 && side == "top") {
         place(loc_x-wallthick/2,loc_y+3.5,loc_z+1.5,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
 
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 180 && side == "top") {
         place(loc_x+4.5,loc_y-wallthick/2,loc_z+1.5,6,10,rotation,side)
-            rotate([90,0,0]) slot(6,10,wallthick);
+            rotate([90,0,0]) long_slot(6,10,wallthick);
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 270 && side == "top") {
         place(loc_x+wallthick/2,loc_y+1.5,loc_z+1.5,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 0 && side == "bottom") {
         place(loc_x+4.5,loc_y-gap-wallthick/2+1,loc_z-3,6,10,rotation,side) 
-            rotate([90,0,0]) slot(6,10,wallthick);
+            rotate([90,0,0]) long_slot(6,10,wallthick);
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 90 && side == "bottom") {
         place(loc_x+wallthick/2,loc_y+3.5,loc_z-3,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
 
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 180 && side == "bottom") {
         place(loc_x+.5,loc_y-wallthick/2,loc_z-3,6,10,rotation,side)
-            rotate([90,0,0]) slot(6,10,wallthick);
+            rotate([90,0,0]) long_slot(6,10,wallthick);
     }
     if(class == "video" && type == "hdmi_mini" && rotation == 270 && side == "bottom") {
         place(loc_x-wallthick/2,loc_y+1.5,loc_z-3,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     // power plug indent
     if(class == "power" && type == "pwr5.5_7.5x11.5" && rotation == 0 && side == "top") {
@@ -166,71 +166,71 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     }
     // micro usb indent
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
-        place(loc_x-2.5,-(wallthick+gap)+wallthick/2,loc_z+1.9,6,8,rotation,side) 
-            rotate([90,0,0]) slot(6,12.5,wallthick);
+        place(loc_x-.5,-(wallthick+gap)+wallthick/2,loc_z+1.9,6,8,rotation,side) 
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usb2" && type == "micro" && rotation == 90 && side == "top") {
         place(-gap-wallthick/2,loc_y+1.5,loc_z+1.9,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
 
     }
     if(class == "usb2" && type == "micro" && rotation == 180 && side == "top") {
         place(loc_x+1.5,depth-(wallthick+gap)-8-wallthick/2,loc_z+1.9,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usb2" && type == "micro" && rotation == 270 && side == "top") {
         place(width-(wallthick+gap)-8-wallthick/2,loc_y-.5,loc_z+1.9,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "bottom") {
         place(loc_x+1.5,-(wallthick+gap)+wallthick/2,loc_z-3.25,6,8,rotation,side) 
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usb2" && type == "micro" && rotation == 90 && side == "bottom") {
         place(width-(wallthick+gap)-8-wallthick/2,loc_y+1.5,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
 
     }
     if(class == "usb2" && type == "micro" && rotation == 180 && side == "bottom") {
         place(loc_x-.5,depth-(wallthick+gap)-8-wallthick/2,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usb2" && type == "micro" && rotation == 270 && side == "bottom") {
         place(-gap-wallthick/2,loc_y-.5,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     // single horizontal usbc indent
     if(class == "usbc" && type == "single_horizontal" && rotation == 0 && side == "top") {
         place(loc_x+.5,-(wallthick+gap)+wallthick/2,loc_z+1.75,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 90 && side == "top") {
         place(-gap-wallthick/2,loc_y+2.5,loc_z+1.75,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 180 && side == "top") {
         place(loc_x+2.5,depth-(wallthick+gap)-8-wallthick/2,loc_z+2,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 270 && side == "top") {
         place(width-(wallthick+gap)-8-wallthick/2,loc_y+.5,loc_z+1.75,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 0 && side == "bottom") {
         place(loc_x+2.75,-(wallthick+gap)+wallthick/2,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 90 && side == "bottom") {
         place(width-(wallthick+gap)-8-wallthick/2,loc_y+2.5,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick-(wallthick+gap)+wallthick/2);
+            rotate([90,0,0]) long_slot(6,8,wallthick-(wallthick+gap)+wallthick/2);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 180 && side == "bottom") {
         place(loc_x+.5,depth-(wallthick+gap)-8-wallthick/2,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 270 && side == "bottom") {
         place(-gap-wallthick/2,loc_y+.5,loc_z-3.25,6,8,rotation,side)
-            rotate([90,0,0]) slot(6,8,wallthick);
+            rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     // audio jack indent
     if(class == "audio" && type == "jack_3.5" && rotation == 0 && side == "top") {

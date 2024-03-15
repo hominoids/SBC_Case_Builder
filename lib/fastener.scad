@@ -16,7 +16,6 @@
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
     m_insert(type="M3", icolor = "#ebdc8b")
-    screw(screw_type)
 
 */
 
@@ -45,34 +44,4 @@ module m_insert(type="M3", icolor = "#ebdc8b") {    //#f4e6c3, #ebdc8b
         color(icolor) translate([-.25+(odiam/2)*cos(bearing), -.25+(odiam/2)*sin(bearing), iheight-1.5]) 
             cube([.5, .5, 1.5]);
     }
-}
-
-
-/*
-           NAME: screw
-    DESCRIPTION: creates screws
-           TODO: needs improvement
-
-          USAGE: screw(screw_type)
-
-                       screw_type = [d,l,style]
-                                     d = thread diameter
-                                     l = thread length
-                                 style = screw head style, 0 = Mushroom head, 5mm diameter
-*/
-
-module screw(screw_type) {
-
-    d = screw_type[0];
-    l = screw_type[1];
-    style = screw_type[2];
-
-    if(style == 0) {
-        difference() {
-            translate([  0,  0, -0.3]) sphere(2.7);
-            translate([-10,-10,-10]) cube([20,20,10]);
-            translate([-10,-10,  2]) cube([20,20,10]);
-        }
-    }
-    rotate([180,0,0]) cylinder(d=d, h=l);
 }
