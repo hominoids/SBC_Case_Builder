@@ -680,11 +680,11 @@ if (view == "model") {
                 mask = accessory_data[a[0]][i+10];
 
                 if (class == "model" && face == "top" && raise_top > -1) {
-                    parametric_move_add(type, loc_x, loc_y, loc_z+raise_top, face, rotation, parametric, size, data, mask);
+                    parametric_move_add(type, loc_x, loc_y, loc_z+raise_top, face, rotation, parametric, size, data, [false,mask[1],mask[2],mask[3]]);
                 }
                 else {
-                    if (class == "model"&& face != "top" ) {
-                    parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data, mask);
+                    if (class == "model" && face != "top" ) {
+                        parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data, [false,mask[1],mask[2],mask[3]]);
                     }
                 }    
             }

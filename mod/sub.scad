@@ -64,7 +64,7 @@ module sub(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) art(data[0],data[1],data[2]); 
     }
     if(type == "button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[1],[size_x,size_y,size_z],data[2],data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[1],[size_x,size_y,size_z],data[2],data[0],mask); 
     }
     if(type == "hd_holes") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data[0],data[2],"none","none",data[1]);
@@ -103,7 +103,7 @@ module sub(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data[0], true); 
     }
     if(type == "hk_pwr_button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(true); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(mask); 
     }
     if(type == "dsub") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0], true); 

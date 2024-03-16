@@ -266,7 +266,7 @@ module case_top(case_design) {
                             mask = accessory_data[a[0]][i+10];
                             
                             if (class == "add1" && face == "top") {
-                                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,size,data,mask);
+                                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,size,data,[false,mask[1],mask[2],mask[3]]);
                             }
                         }
                     }
@@ -531,38 +531,15 @@ module case_top(case_design) {
                             parametric,[size_x,size_y,size_z],data,mask);
                     }
                 }
+
                 // create openings for additive 
-                if (class == "add2" && face == "top" && type == "standoff") {
-                    parametric_move_sub("round",loc_x,loc_y,loc_z,face,rotation,parametric,[6.5,size_y,floorthick+1],data,mask);
-                }
-                if ((class == "add1" || class == "add2") && face == "bottom" && type == "uart_holder") {
+                if((class == "add1" || class == "add2" || class == "model") && mask[0] == true) {
                     if(accessory_highlight == false) {
-                        parametric_move_sub("microusb",loc_x+5.25,loc_y-5,loc_z+4,face,rotation,parametric,[0,0,0],data,mask);
+                            parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,[size_x,size_y,size_z],data,mask);
                     }
                     else {
-                        #parametric_move_sub("microusb",loc_x+5.25,loc_y-5,loc_z+4,face,rotation,parametric,[0,0,0],data,mask);
+                            #parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,[size_x,size_y,size_z],data,mask);
                     }
-                }
-                if ((class == "add1" || class == "add2") && face == "bottom" && type == "hc4_oled_holder") {
-                    parametric_move_sub("rectangle",loc_x+1,loc_y+1.75,loc_z+26,face,rotation,
-                        parametric,[26.5,wallthick+gap+4,14.5],[[.1,.1,.1,.1]],mask);
-                }
-                if ((class == "add1" || class == "add2") && face == "top" && type == "button") {
-                    if(data[1] == "recess") {
-                        parametric_move_sub("sphere",loc_x,loc_y,loc_z,face,rotation,
-                            parametric,[size_x-1,size_y,size_z],data,mask);
-                    }
-                    if(data[1] == "cutout") {
-                        parametric_move_sub("rectangle",loc_x+10,loc_y+4,loc_z-adj,face,rotation,
-                            parametric,[size_x+2,size_y+1,size_z+2*adj],[[.1,.1,.1,.1]],mask);
-                    }
-                }
-                if (class == "model" && face == "bottom" && type == "hk_boom" && 
-                    rotation[0] == 90 && rotation[1] == 0 && rotation[2] == 0) {
-                        parametric_move_sub("round",loc_x+11,loc_y-4,loc_z,face,[0,0,0],
-                            parametric,[5,size_y,80],data,mask);
-                        parametric_move_sub("slot",loc_x+37.5,loc_y-4.75,loc_z,face,[0,0,0],
-                            parametric,[6,14,80],data,mask);
                 }
             }
         }
@@ -617,7 +594,7 @@ module case_top(case_design) {
             mask = accessory_data[a[0]][i+10];
             
             if (class == "add2" && face == "top") {
-                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,size,data,mask);
+                parametric_move_add(type,loc_x,loc_y,loc_z,face,rotation,parametric,size,data,[false,mask[1],mask[2],mask[3]]);
             }
         }
     }

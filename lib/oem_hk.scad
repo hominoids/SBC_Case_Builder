@@ -70,7 +70,7 @@ module hk_uart(mask) {
     $fn = 90;
 
     if(enablemask == true) {
-        translate([23-msetback,3.75,3]) rotate([90,0,90]) slot(4, 5, mlength);
+        translate([23-msetback,2,3]) rotate([90,0,90]) slot(4, 8.5, mlength);
     }
     if(enablemask == false) {
         color("#008066") cube([size[0],size[1],size[2]]);
@@ -106,10 +106,10 @@ module hk_uart_holder(mask) {
     mstyle = mask[3];
 
     if(enablemask == true) {
-        translate([23-msetback,3.75,3]) rotate([90,0,90]) slot(4, 5, mlength);
+        translate([4.5,msetback-1,6]) rotate([90,0,0]) slot(4, 8.5, mlength);
     }
     if(enablemask == false) {
-        translate([22,-2.5,-3]) rotate([0,0,90])
+//        translate([22,-2.5,-3]) rotate([0,0,90])
         union () {
             difference () {
                 cube([18,21.75,9]);
@@ -965,7 +965,7 @@ module hk_boom(speakers, orientation, mask) {
 
     if(enablemask == true) {
         if(mstyle == "default" || mstyle == "pcb") {
-            translate([35,35-msetback,5]) rotate([270,0,0]) slot(4, 19, mlength);
+            translate([35,35-msetback,5]) rotate([270,0,0]) slot(5, 19, mlength);
             audio("jack_3.5-2", 7.75, 21.75, 0, "top", 180, [6.5,13.5,4], [5,0], 1.6, true, [true,mlength,msetback+2.5,"default"]);
         }
         if(mstyle == "default" || mstyle == "speakers") {
@@ -1057,7 +1057,7 @@ module hk_boom(speakers, orientation, mask) {
 
 
 /*
-           NAME: hk_boom
+           NAME: hk_boom_speaker
     DESCRIPTION: hardkernel stereo boom bonnet pcb and speakers
            TODO: none
 
@@ -1139,7 +1139,7 @@ module boom_speaker(mask) {
     $fn = 90;
 
     if(enablemask == true) {
-        translate([0,0,-msetback]) cylinder(d=27.8, h=mlength);
+        #translate([0,0,-msetback]) cylinder(d=27, h=mlength);
     }
     if(enablemask == false) {
         difference() {
@@ -1204,7 +1204,7 @@ module hk_boom_grill(style, thick) {
     }
     if(style == "flat") {
         difference() {
-            translate([0,0,0]) cylinder(d=24.5, h=thick);
+            translate([0,0,0]) cylinder(d=27, h=thick);
             for(c=[-14.5:3:24]) {
                 for(r=[-14.5:3:24]) {
                     translate([r,c,-1]) cube([2,2,thick+2]);

@@ -47,7 +47,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     mlen = mask[1];
     msetback = mask[2];
     mstyle = mask[3];
-    
+
     if(type == "rectangle") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) slab_r([size_x,size_y,size_z],data[0]);
     }
@@ -66,8 +66,11 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     if(type == "stl_model") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) stl_model(data[0],data[1]); 
     }
+    if(type == "standoff") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data[0], mask);
+    }
     if(type == "button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[1],[size_x,size_y,size_z],data[2],data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[1],[size_x,size_y,size_z],data[2],data[0],mask); 
     }
     if(type == "button_top") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) button_assembly(data[0],size_x,size_z); 
@@ -79,22 +82,19 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) batt_holder(data[0]);
     }
     if(type == "hk_uart_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_holder();
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_holder(mask);
     }
     if(type == "hk_uart_strap") {
         color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_strap();
     }
-    if(type == "standoff") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data[0]);
-    }
     if(type == "hd_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1],"horizontal","none"); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1], "horizontal", "none"); 
     }
     if(type == "hd_vertleft") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1],"vertical","left"); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1], "vertical", "left"); 
     }
     if(type == "hd_vertright") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1],"vertical","right"); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1], "vertical", "right"); 
     }
     if(type == "hd25") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hd25(data[0]); 
@@ -106,31 +106,31 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_wb2(); 
     }
     if(type == "hc4_oled") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled(mask); 
     }
     if(type == "hc4_oled_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled_holder(face,size_z); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled_holder(face, size_z, mask); 
     }
     if(type == "h2_netcard") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_netcard(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_netcard(mask); 
     }
     if(type == "hk_lcd35") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_35lcd(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_35lcd(mask); 
     }
     if(type == "hk_m1s_ups") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_m1s_ups(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_m1s_ups(mask); 
     }
     if(type == "hk_uart") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart(mask); 
     }
     if(type == "hk_vu7c") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_vu7c(data[0],data[1]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_vu7c(data[0],data[1],mask); 
     }
     if(type == "hk_boom") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom(data[0],data[1]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom(data[0],data[1],mask); 
     }
     if(type == "boom_speaker") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker(data[1],true,data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker(data[1],true,data[0],mask); 
     }
     if(type == "boom_grill") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_grill(data[0],size_z); 
@@ -139,7 +139,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) boom_speaker_holder(data[0],data[1]); 
     }
     if(type == "hk_speaker") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_speaker(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_speaker(mask); 
     }
     if(type == "fan_cover") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z, data[0]);
@@ -153,10 +153,10 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     }
     if(type == "access_port") {
         if(rotation[2] == 180) {
-            translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data[0]);
+            translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data[0],mask);
         }
         else {
-            translate([loc_x,loc_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data[0]);
+            translate([loc_x,loc_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data[0],mask);
         }
     }
     if(type == "access_cover") {
@@ -177,7 +177,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender_holder(data[1],data[0]); 
     }
     if(type == "hk_pwr_button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(mask); 
     }
     if(type == "keyhole") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0]); 
@@ -187,8 +187,5 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     }
     if(type == "nut_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z); 
-    }
-    if(type == "standoff") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data[0]);
     }
 }

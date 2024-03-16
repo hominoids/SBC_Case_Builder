@@ -132,7 +132,7 @@ module standoff(stand_off, mask){
             }
             // countersink hole
             if(sink == "countersunk" && reverse == false) {
-                #translate([0,0, -adj]) cylinder(d1=6.5, d2=holesize, h=3.25);
+                translate([0,0, -adj]) cylinder(d1=6.5, d2=holesize, h=3.25);
             }
             if(sink == "countersunk" && reverse == true) {
                 translate([0,0,+adj-2.5]) cylinder(d1=holesize, d2=6.5, h=3.25);
