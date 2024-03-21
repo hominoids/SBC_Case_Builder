@@ -70,7 +70,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data[0], mask);
     }
     if(type == "button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[1],[size_x,size_y,size_z],data[2],data[0],mask); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[0],[size_x,size_y,size_z],data[1],data[2],mask); 
     }
     if(type == "button_top") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) button_assembly(data[0],size_x,size_z); 

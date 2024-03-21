@@ -56,7 +56,7 @@ module access_port(size, orientation, mask) {
             translate([0,0,floorthick+adj-mlength+msetback]) cube([size_x, size_y, mlength]);
         }
         if(orientation == "landscape") {
-            translate([0, -1, floorthick+adj-mlength+msetback]) cube([size_x, size_y, mlength]);
+            translate([0, -1, floorthick+adj-mlength+msetback]) cube([size_x-1, size_y, mlength]);
         }
     }
     if(enablemask == false) {

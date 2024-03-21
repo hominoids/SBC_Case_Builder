@@ -271,7 +271,7 @@ USES: size_z=floorthick, data_3=”portrait” or “landscape”
 ```
 DESCRIPTION: button top and plunger
 
-USES: size_x=diameter,size_z=height, data_3=”reccess”
+USES: size_x=diameter,size_z=height, data_0=”reccess”, data_1=radius, data_2=post height
 ```
 
 **pcb_holder**
