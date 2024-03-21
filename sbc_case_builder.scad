@@ -299,30 +299,30 @@ bottom_standoff = [bottom_standoff_diameter,
                    bottom_standoff_insert,
                    bottom_standoff_insert_dia,
                    bottom_standoff_insert_height];
-ext_top_standoff = [top_standoff_diameter,
+ext_top_standoff = [ext_top_standoff_diameter,
                     18,
-                    top_standoff_hole_size,
-                    top_standoff_support_size,
-                    top_standoff_support_height,
-                    top_standoff_type,
-                    top_standoff_pillar,
-                    top_rear_left_support,
-                    top_standoff_reverse,
-                    top_standoff_insert,
-                    top_standoff_insert_dia,
-                    top_standoff_insert_height];
-ext_bottom_standoff = [bottom_standoff_diameter,
+                    ext_top_standoff_hole_size,
+                    ext_top_standoff_support_size,
+                    ext_top_standoff_support_height,
+                    ext_top_standoff_type,
+                    ext_top_standoff_pillar,
+                    ext_top_rear_left_support,
+                    ext_top_standoff_reverse,
+                    ext_top_standoff_insert,
+                    ext_top_standoff_insert_dia,
+                    ext_top_standoff_insert_height];
+ext_bottom_standoff = [ext_bottom_standoff_diameter,
                        6,
-                       bottom_standoff_hole_size,
-                       bottom_standoff_support_size,
-                       bottom_standoff_support_height,
-                       bottom_standoff_type,
-                       bottom_standoff_pillar,
-                       bottom_rear_left_support,
-                       bottom_standoff_reverse,
-                       bottom_standoff_insert,
-                       bottom_standoff_insert_dia,
-                       bottom_standoff_insert_height];
+                       ext_bottom_standoff_hole_size,
+                       ext_bottom_standoff_support_size,
+                       ext_bottom_standoff_support_height,
+                       ext_bottom_standoff_type,
+                       ext_bottom_standoff_pillar,
+                       ext_bottom_rear_left_support,
+                       ext_bottom_standoff_reverse,
+                       ext_bottom_standoff_insert,
+                       ext_bottom_standoff_insert_dia,
+                       ext_bottom_standoff_insert_height];
 
 adj = .01;
 $fn=90;
@@ -569,39 +569,39 @@ if (view == "model") {
             }
             if(case_style == "vu5") {
                 color("darkgrey",.5) translate([width+((127.5-width)/2)-6.5-wallthick-gap,
-                    depth-1,case_z+15.5]) rotate([-vu_rotation[0],0,180]) 
+                    depth-1,case_z+15.5]) rotate([-15,0,180]) 
                         import(file = "stl/Vu5a_Case.stl");            
                 // right speaker and bracket
                 color("darkgrey",.5) 
                     translate([((127.5-75)/2)+(width/2)-wallthick-gap+30.5,depth-1,
-                        case_z+15]) rotate([90-vu_rotation[0],0,180]) 
+                        case_z+15]) rotate([75,0,180]) 
                             import(file = "stl/Vu5_Speaker_Bracket_Left.stl");
                 color("darkgrey",.5) translate([((127.5-75)/2)+(width/2)-wallthick-gap+85,depth+15,
-                    case_z+12.5]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+                    case_z+12.5]) rotate([-15,0,180]) hk_speaker();
                 // left speaker and bracket
                 color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-30.5,depth-1,
-                    case_z+15]) rotate([90-vu_rotation[0],0,180])
+                    case_z+15]) rotate([75,0,180])
                         import(file = "stl/Vu5_Speaker_Bracket_Right.stl");
                 color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-40.5,depth+15,
-                    case_z+12.5]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+                    case_z+12.5]) rotate([-15,0,180]) hk_speaker();
             }
             if(case_style == "vu7") {
                 color("darkgrey",.5) translate([width+((192.90-width)/2)-wallthick-gap-20,
-                    depth-1,case_z+15.5]) rotate([-vu_rotation[0],0,180]) 
+                    depth-1,case_z+15.5]) rotate([-15,0,180]) 
                         import(file = "stl/Vu7a_Case.stl");            
                 // right speaker and bracket
                 color("darkgrey",.5) 
                     translate([((192.90-100)/2)+(width/2)-wallthick-gap+57.5,depth-4,
-                        case_z+27]) rotate([90-vu_rotation[0],0,180]) 
+                        case_z+27]) rotate([75,0,180]) 
                             import(file = "stl/Vu7_Speaker_Bracket_Left.stl");
                 color("darkgrey",.5) translate([((192.90-100)/2)+(width/2)-wallthick-gap+97,depth+11.5,
-                    case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+                    case_z+27]) rotate([-15,0,180]) hk_speaker();
                 // left speaker and bracket
                 color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-58,depth-4,
-                    case_z+27]) rotate([90-vu_rotation[0],0,180])
+                    case_z+27]) rotate([75,0,180])
                         import(file = "stl/Vu7_Speaker_Bracket_Right.stl");
                 color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-53.5,depth+11.5,
-                    case_z+27]) rotate([-vu_rotation[0],0,180]) hk_speaker();
+                    case_z+27]) rotate([-15,0,180]) hk_speaker();
             }
         } 
         if(case_design == "round" || case_design == "hex") {

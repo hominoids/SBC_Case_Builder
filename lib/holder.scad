@@ -191,6 +191,7 @@ vu7_pcb_width = 172.90;
 vu7_pcb_height = 124.27;
 vu7_width = vu7_pcb_width + vu7_case_x_offset;
 vu7_height = vu7_pcb_height + 9.75;
+vu_rotation = [15,0,0];
 
         difference() {
         union() {
@@ -200,21 +201,21 @@ vu7_height = vu7_pcb_height + 9.75;
                 // right tabs for vu5 attachment
                 if(case_style == "vu5") {
                     translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-39,
-                        case_z+80]) rotate([90-vu_rotation[0],180,0]) 
-                            slab_r([((width-vesa)/2)+4.5,10,sidethick], [.1,.1,3,3]);
+                        case_z+80]) rotate([75,180,0]) 
+                            slab_r([((width-vesa)/2)+4.5,10,sidethick], [.01,.01,3,3]);
                     translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-26,
-                        case_z+31.5]) rotate([90-vu_rotation[0],180,0]) 
-                            slab_r([((width-vesa)/2)+4.5,10,sidethick], [.1,.1,3,3]);
+                        case_z+31.5]) rotate([75,180,0]) 
+                            slab_r([((width-vesa)/2)+4.5,10,sidethick], [.01,.01,3,3]);
                 
-                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-41.85-adj,
-                        case_z+79.25]) rotate([90-vu_rotation[0],180,0]) 
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1.5,depth-40.85-adj,
+                        case_z+79.5]) rotate([75,180,0]) 
                     difference() { 
                         cube([sidethick,10,sidethick]);
                         translate([0,-adj,sidethick]) rotate([0,45,0]) 
                             cube([2*sidethick,10+(2*adj),sidethick]);
                     }
-                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-28.85-adj,
-                        case_z+30.75]) rotate([90-vu_rotation[0],180,0])
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1.5,depth-27.85-adj,
+                        case_z+31]) rotate([75,180,0])
                     difference() { 
                         cube([sidethick,10,sidethick]);
                         translate([0,-adj,sidethick]) rotate([0,45,0]) 
@@ -224,21 +225,21 @@ vu7_height = vu7_pcb_height + 9.75;
                 // right tabs for vu7 attachment
                 if(case_style == "vu7") {
                     translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1,depth-49.40,
-                        case_z+vu7_height-15]) rotate([90-vu_rotation[0],180,0]) 
-                            slab_r([((width-vesa)/2)+12,10,sidethick], [.1,.1,3,3]);
+                        case_z+vu7_height-15]) rotate([75,180,0]) 
+                            slab_r([((width-vesa)/2)+12,10,sidethick], [.01,.01,3,3]);
                     translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1,depth-23.60,
-                        case_z+22.5]) rotate([90-vu_rotation[0],180,0]) 
-                            slab_r([((width-vesa)/2)+12,10,sidethick], [.1,.1,3,3]);
+                        case_z+22.5]) rotate([75,180,0]) 
+                            slab_r([((width-vesa)/2)+12,10,sidethick], [.01,.01,3,3]);
                     
-                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-52.25,
-                        case_z+vu7_height-15.75]) rotate([90-vu_rotation[0],180,0]) 
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1.5,depth-51.25,
+                        case_z+vu7_height-15.5]) rotate([75,180,0]) 
                             difference() { 
                                 cube([sidethick,10,sidethick]);
                                 translate([0,-adj,sidethick]) rotate([0,45,0]) 
                                     cube([2*sidethick,10+(2*adj),sidethick]);
                             }
-                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-26.5,
-                        case_z+21.8]) rotate([90-vu_rotation[0],180,0])
+                    translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1.5,depth-25.5,
+                        case_z+21.8]) rotate([75,180,0])
                             difference() { 
                                 cube([sidethick,10,sidethick]);
                                 translate([0,-adj,sidethick]) rotate([0,45,0]) 
@@ -255,20 +256,20 @@ vu7_height = vu7_pcb_height + 9.75;
                 // left tabs for vu5 attachment
                 if(case_style == "vu5") {
                     translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-36.4,
-                        case_z+70]) rotate([90+vu_rotation[0],0,0]) 
-                            slab_r([((width-vesa)/2)+4,10, sidethick], [.1,.1,3,3]);
+                        case_z+70]) rotate([105,0,0]) 
+                            slab_r([((width-vesa)/2)+4,10, sidethick], [.01,.01,3,3]);
                     translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-23.5,
-                        case_z+22]) rotate([90+vu_rotation[0],0,0]) 
-                            slab_r([((width-vesa)/2)+4,10,sidethick], [.1,.1,3,3]);
-                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-39.35+adj,
-                        case_z+69.25]) rotate([90+vu_rotation[0],0,0])
+                        case_z+22]) rotate([105,0,0]) 
+                            slab_r([((width-vesa)/2)+4,10,sidethick], [.01,.01,3,3]);
+                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-38.35+adj,
+                        case_z+69.5]) rotate([105,0,0])
                             difference() { 
                                 cube([sidethick,10,sidethick]);
                                 translate([0,-adj,sidethick]) rotate([0,45,0]) 
                                     cube([2*sidethick,10+(2*adj),2*sidethick]);
                             }                
-                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-26.4+adj,
-                        case_z+21.25]) rotate([90+vu_rotation[0],0,0])  
+                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-25.4+adj,
+                        case_z+21.5]) rotate([105,0,0])  
                         difference() { 
                             cube([sidethick,10,sidethick]);
                             translate([0,-adj,sidethick]) rotate([0,45,0]) 
@@ -278,20 +279,20 @@ vu7_height = vu7_pcb_height + 9.75;
                 // left tabs for vu7 attachment
                 if(case_style == "vu7") {
                     translate([-((width-vesa)/2)+(width/2)-(vesa/2)-4.25-adj,depth-46.85,
-                        case_z+vu7_height-24.5]) rotate([90+vu_rotation[0],0,0]) 
-                            slab_r([((width-vesa)/2),10, sidethick], [.1,.1,3,3]);
+                        case_z+vu7_height-24.5]) rotate([105,0,0]) 
+                            slab_r([((width-vesa)/2),10, sidethick], [.01,.01,3,3]);
                     translate([-((width-vesa)/2)+(width/2)-(vesa/2)-4.25-adj,depth-21,
-                        case_z+13]) rotate([90+vu_rotation[0],0,0]) 
-                            slab_r([((width-vesa)/2),10,sidethick], [.1,.1,3,3]);
-                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-4-adj,depth-49.75+adj,
-                        case_z+vu7_height-25.25]) rotate([90+vu_rotation[0],0,0])
+                        case_z+13]) rotate([105,0,0]) 
+                            slab_r([((width-vesa)/2),10,sidethick], [.01,.01,3,3]);
+                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-48.75+adj,
+                        case_z+vu7_height-25]) rotate([105,0,0])
                             difference() { 
                                 cube([sidethick,10,sidethick]);
                                 translate([0,-adj,sidethick]) rotate([0,45,0]) 
                                     cube([2*sidethick,10+(2*adj),2*sidethick]);
                             }                
-                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-4-adj,depth-23.75+adj,
-                        case_z+12.25]) rotate([90+vu_rotation[0],0,0])  
+                    translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-22.65+adj,
+                        case_z+12.5]) rotate([105,0,0])  
                         difference() { 
                             cube([sidethick,10,sidethick]);
                             translate([0,-adj,sidethick]) rotate([0,45,0]) 
@@ -321,9 +322,9 @@ vu7_height = vu7_pcb_height + 9.75;
                             top=[0,0,0,0],bottom=[3,3,3,3], $fn=90);
                 // tab holes
                 translate([width/2+(vesa/2)-3,depth-37,
-                    case_z+75]) rotate([90-vu_rotation[0],180,0]) cylinder(d=3, h=sidethick+1);
+                    case_z+75]) rotate([75,180,0]) cylinder(d=3, h=sidethick+1);
                 translate([width/2+(vesa/2)-3,depth-24,
-                    case_z+26.75]) rotate([90-vu_rotation[0],180,0]) cylinder(d=3, h=sidethick+1);
+                    case_z+26.75]) rotate([75,180,0]) cylinder(d=3, h=sidethick+1);
             }
             // vu7 shape and back cut
             if(case_style == "vu7") {
@@ -341,9 +342,9 @@ vu7_height = vu7_pcb_height + 9.75;
                             top=[0,0,0,0],bottom=[3,3,3,3], $fn=90);
                 // tab holes
                 translate([width/2+(vesa/2)-10,depth-47,case_z+vu7_height-19.75]) 
-                    rotate([90-vu_rotation[0],180,0]) cylinder(d=3, h=sidethick+4);
+                    rotate([75,180,0]) cylinder(d=3, h=sidethick+4);
                 translate([width/2+(vesa/2)-10,depth-21.25,case_z+18]) 
-                    rotate([90-vu_rotation[0],180,0]) cylinder(d=3, h=sidethick+4);
+                    rotate([75,180,0]) cylinder(d=3, h=sidethick+4);
             }
             // bottom attachment holes                         
             translate([width-wallthick-gap-adj-5,wallthick+gap+10,
@@ -369,9 +370,9 @@ vu7_height = vu7_pcb_height + 9.75;
                             top=[0,0,0,0],bottom=[3,3,3,3], $fn=90);
                 // tab holes
                 translate([width/2-(vesa/2)-3,depth-36.75,case_z+75]) 
-                    rotate([90+vu_rotation[0],0,0]) cylinder(d=3, h=sidethick+1);
+                    rotate([105,0,0]) cylinder(d=3, h=sidethick+1);
                 translate([width/2-(vesa/2)-3,depth-24.25,case_z+26.75]) 
-                    rotate([90+vu_rotation[0],0,0])  cylinder(d=3, h=sidethick+1);
+                    rotate([75,0,0])  cylinder(d=3, h=sidethick+1);
             }
             // vu7 shape and back cut
             if(case_style == "vu7") {
@@ -389,9 +390,9 @@ vu7_height = vu7_pcb_height + 9.75;
                             top=[0,0,0,0],bottom=[3,3,3,3], $fn=90);
                 // tab holes
                 translate([width/2-(vesa/2)-10,depth-48,case_z+vu7_height-19.75]) 
-                    rotate([90+vu_rotation[0],0,0]) cylinder(d=3, h=sidethick+4);
+                    rotate([105,0,0]) cylinder(d=3, h=sidethick+4);
                 translate([width/2-(vesa/2)-10,depth-22.25,case_z+18]) 
-                    rotate([90+vu_rotation[0],0,0])  cylinder(d=3, h=sidethick+4);
+                    rotate([105,0,0])  cylinder(d=3, h=sidethick+4);
             }
             // bottom attachment holes
             translate([-sidethick-adj-6,wallthick+gap+10,((bottom_height+floorthick)/2)-1]) 

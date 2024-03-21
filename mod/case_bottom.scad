@@ -419,6 +419,7 @@ module case_bottom(case_design) {
                     if(class == "pcbhole" && id == pcb_id && 
                         (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || pcbhole_pos == "right_rear" || pcbhole_pos == "right_front")) {
                         if (pcbhole_pos == "left_rear" && bottom_rear_left_enable == true) {
+                            bottom_support = bottom_sidewall_support == true ? bottom_rear_left_support : "none";
                             normal_standoff = [bottom_standoff[0],
                                                 bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
                                                 bottom_standoff[2],
@@ -426,7 +427,7 @@ module case_bottom(case_design) {
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
                                                 bottom_standoff[6],
-                                                bottom_rear_left_support,
+                                                bottom_support,
                                                 bottom_standoff[8],
                                                 bottom_standoff[9],
                                                 bottom_standoff[10],
@@ -434,6 +435,7 @@ module case_bottom(case_design) {
                             translate([pcbhole_x,pcbhole_y,0]) standoff(normal_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "left_front" && bottom_front_left_enable == true) {
+                            bottom_support = bottom_sidewall_support == true ? bottom_front_left_support : "none";
                             normal_standoff = [bottom_standoff[0],
                                                 bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust,
                                                 bottom_standoff[2],
@@ -441,7 +443,7 @@ module case_bottom(case_design) {
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
                                                 bottom_standoff[6],
-                                                bottom_front_left_support,
+                                                bottom_support,
                                                 bottom_standoff[8],
                                                 bottom_standoff[9],
                                                 bottom_standoff[10],
@@ -449,6 +451,7 @@ module case_bottom(case_design) {
                             translate([pcbhole_x,pcbhole_y,0]) standoff(normal_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "right_rear" && bottom_rear_right_enable == true) {
+                            bottom_support = bottom_sidewall_support == true ? bottom_rear_right_support : "none";
                             normal_standoff = [bottom_standoff[0],
                                                 bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
                                                 bottom_standoff[2],
@@ -456,7 +459,7 @@ module case_bottom(case_design) {
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
                                                 bottom_standoff[6],
-                                                bottom_rear_right_support,
+                                                bottom_support,
                                                 bottom_standoff[8],
                                                 bottom_standoff[9],
                                                 bottom_standoff[10],
@@ -464,6 +467,7 @@ module case_bottom(case_design) {
                             translate([pcbhole_x,pcbhole_y,0]) standoff(normal_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "right_front" && bottom_front_right_enable == true) {
+                            bottom_support = bottom_sidewall_support == true ? bottom_front_right_support : "none";
                             normal_standoff = [bottom_standoff[0],
                                                 bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust,
                                                 bottom_standoff[2],
@@ -471,7 +475,7 @@ module case_bottom(case_design) {
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
                                                 bottom_standoff[6],
-                                                bottom_front_right_support,
+                                                bottom_support,
                                                 bottom_standoff[8],
                                                 bottom_standoff[9],
                                                 bottom_standoff[10],

@@ -1139,7 +1139,7 @@ module boom_speaker(mask) {
     $fn = 90;
 
     if(enablemask == true) {
-        #translate([0,0,-msetback]) cylinder(d=27, h=mlength);
+        translate([0,0,-msetback]) cylinder(d=27, h=mlength);
     }
     if(enablemask == false) {
         difference() {

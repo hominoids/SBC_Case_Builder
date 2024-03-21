@@ -283,16 +283,20 @@ module case_top(case_design) {
                         pcbhole_size = sbc_data[s[0]][i+9][0];
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
 
-                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_rear" && top_rear_left_enable == true && top_standoff[5] != "blind") {
+                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_rear" && top_rear_left_enable == true && 
+                            top_standoff[5] != "blind") {
                             translate([pcbhole_x,pcbhole_y,top_height+1]) cylinder(d=6.5, h=top_height);
                         }
-                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_front" && top_front_left_enable == true && top_standoff[5] != "blind") {
+                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_front" && top_front_left_enable == true &&
+                            top_standoff[5] != "blind") {
                             translate([pcbhole_x,pcbhole_y,top_height+1]) cylinder(d=6.5, h=top_height);
                         }
-                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_rear" && top_rear_right_enable == true && top_standoff[5] != "blind") {
+                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_rear" && top_rear_right_enable == true && 
+                            top_standoff[5] != "blind") {
                             translate([pcbhole_x,pcbhole_y,top_height+1]) cylinder(d=6.5, h=top_height);
                         }
-                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front" && top_front_right_enable == true && top_standoff[5] != "blind") {
+                        if (class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front" && top_front_right_enable == true && 
+                            top_standoff[5] != "blind") {
                             translate([pcbhole_x,pcbhole_y,top_height+1]) cylinder(d=6.5, h=top_height);
                         }
                     }
@@ -358,10 +362,10 @@ module case_top(case_design) {
                         pcbhole_z = sbc_data[s[0]][i+6];
                         pcbhole_size = sbc_data[s[0]][i+9][0];
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
-
                     if(class == "pcbhole" && id == pcb_id && 
                         (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || pcbhole_pos == "right_rear" || pcbhole_pos == "right_front")) {
                         if (pcbhole_pos == "left_rear" && top_rear_left_enable == true) {
+                            top_support = top_sidewall_support == true ? top_rear_left_support : "none";
                             normal_standoff = [top_standoff[0],
                                                 top_height+pcb_loc_z+top_rear_left_adjust,
                                                 top_standoff[2],
@@ -369,7 +373,7 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_rear_left_support,
+                                                top_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
                                                 top_standoff[10],
@@ -377,6 +381,7 @@ module case_top(case_design) {
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "left_front" && top_front_left_enable == true) {
+                            top_support = top_sidewall_support == true ? top_front_left_support : "none";
                             normal_standoff = [top_standoff[0],
                                                 top_height+pcb_loc_z+top_front_left_adjust,
                                                 top_standoff[2],
@@ -384,7 +389,7 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_front_left_support,
+                                                top_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
                                                 top_standoff[10],
@@ -392,6 +397,7 @@ module case_top(case_design) {
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "right_rear" && top_rear_right_enable == true) {
+                            top_support = top_sidewall_support == true ? top_rear_right_support : "none";
                             normal_standoff = [top_standoff[0],
                                                 top_height+pcb_loc_z+top_rear_right_adjust,
                                                 top_standoff[2],
@@ -399,7 +405,7 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_rear_right_support,
+                                                top_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
                                                 top_standoff[10],
@@ -407,6 +413,7 @@ module case_top(case_design) {
                             translate([pcbhole_x,pcbhole_y,case_z]) standoff(normal_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "right_front" && top_front_right_enable == true) {
+                            top_support = top_sidewall_support == true ? top_front_right_support : "none";
                             normal_standoff = [top_standoff[0],
                                                 top_height+pcb_loc_z+top_front_right_adjust,
                                                 top_standoff[2],
@@ -414,7 +421,7 @@ module case_top(case_design) {
                                                 top_standoff[4],
                                                 top_standoff[5],
                                                 top_standoff[6],
-                                                top_front_right_support,
+                                                top_support,
                                                 top_standoff[8],
                                                 top_standoff[9],
                                                 top_standoff[10],

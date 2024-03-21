@@ -180,7 +180,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(mask); 
     }
     if(type == "keyhole") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0],mask); 
     }
     if(type == "dsub") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0]); 

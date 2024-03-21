@@ -20,20 +20,28 @@
     DESCRIPTION: enclosed keyhole
            TODO: none
 
-          USAGE: keyhole(keysize, mask = false)
+          USAGE: keyhole(keysize, mask)
 
                          keysize[0] = size_x
                          keysize[1] = size_y
                          keysize[2] = size_z
-                               mask = true, false enable mask
+                            mask[0] = true enables component mask
+                            mask[1] = mask length
+                            mask[2] = mask setback
+                            mask[3] = mstyle "default"
 */
 
-module keyhole(keysize, mask = false) {
+module keyhole(keysize, mask) {
 
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
     adj=.01;
     $fn = 90;
-
-    if(mask == true) {
+echo(keysize, mask);
+    if(enablemask == true && mstyle == "default") {
+echo("THIS IS IT");
         union() {
             translate([0, 0, -adj]) cylinder(h=keysize[3]+2*adj, d=keysize[0]);
             translate([-keysize[1]/2, 0, -adj]) cube([keysize[1], keysize[2]+keysize[0]/2, keysize[3]+2*adj]);
@@ -41,6 +49,7 @@ module keyhole(keysize, mask = false) {
         }
     }
     else {
+echo("THIS IS NOT IT");
         difference() {
             union() {
                 translate([0, 0, -adj]) 
