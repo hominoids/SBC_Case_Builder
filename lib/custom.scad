@@ -65,8 +65,9 @@ module h3_port_extender(style, mask = false) {
             color("silver") translate([1.6, 188.5, 84]) rotate([90, 0, 270]) import("stl/h3_port_extender.stl");
             color("dimgrey") translate([-2.5, 0, 29.5]) rotate([270, 0, 90]) import("stl/header_2x2_90.stl");
             color("dimgrey")translate([9,-.5,12.75]) rotate([0,270,90]) import("stl/header_encl_2x5_90.stl");
-            translate([2, 2, 14.08]) rotate([0, 90, 0]) header(12);
-            translate([2, 2, 11.54]) rotate([0, 90, 0]) header(12);
+//            translate([2, 2, 14.08]) rotate([0, 90, 0]) header(12);
+//            translate([2, 2, 11.54]) rotate([0, 90, 0]) header(12);
+//        header("open", 7.5, 1, 0, "top", 0, [2,12,6], ["thruhole","black","female",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
         }
     }
 }

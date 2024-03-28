@@ -66,7 +66,6 @@ module buttons(style, size, radius, post, mask) {
         }
     }
     if(enablemask == false) {
-echo(style, size, radius, post, mask);
         if(style == "recess") {
             difference() {
                 union() {

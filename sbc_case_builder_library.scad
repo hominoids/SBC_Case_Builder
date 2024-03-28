@@ -39,6 +39,7 @@ include <./lib/batteries.scad>;
 include <./lib/buttons.scad>;
 include <./lib/cable_holder.scad>;
 include <./lib/custom.scad>;
+include <./lib/dsub.scad>;
 include <./lib/fastener.scad>;
 include <./lib/feet.scad>;
 include <./lib/hd.scad>;
