@@ -30,6 +30,7 @@
                    rotation[] = object rotation
                  parametric[] = parametric movement array
                        size[] = size array x,y,z
+                       data[] = data filed
                       mask[0] = true enables component mask
                       mask[1] = mask length
                       mask[2] = mask setback

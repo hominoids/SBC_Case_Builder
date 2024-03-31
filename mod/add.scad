@@ -171,7 +171,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data[0]);
     }
     if(type == "h3_port_extender") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data[0],mask); 
     }
     if(type == "h3_port_extender_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender_holder(data[1],data[0]); 
@@ -183,7 +183,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0],mask); 
     }
     if(type == "dsub") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0], data[1], mask); 
     }
     if(type == "nut_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z); 

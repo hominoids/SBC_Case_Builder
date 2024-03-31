@@ -25,56 +25,81 @@
     DESCRIPTION: @mctom's odroid-h3 gpio port extender
            TODO: none
 
-          USAGE: h3_port_extender(style, mask = false)
+          USAGE: h3_port_extender(style, mask)
 
                                   style = "header", "remote"
-                                   mask = true or false, mask for openings
+                                mask[0] = true enables component mask
+                                mask[1] = mask length
+                                mask[2] = mask setback
+                                mask[3] = mstyle "default"
 */
 
-module h3_port_extender(style, mask = false) {
+module h3_port_extender(style, mask) {
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     adj=.01;
     $fn = 90;
 
     if(style == "header") {
-        if(mask == true) {
-            translate([-20, 6.25, 15]) cube([12, 7.5, 14.75]);
-            translate([-20, 15.875, 15]) cube([12, 7.5, 14.75]);
-            translate([-20, 25.375, 15]) cube([12, 7.5, 14.75]);
-            translate([-20, 17, 32.2]) rotate([0, 90, 0]) cylinder(d=3.5, h=12);
+        if(enablemask == true && mstyle == "default") {
+            translate([0, 14.5, 12-msetback]) cube([7.75, 15.75, mlength]);
+            translate([9.5, 14.5, 12-msetback]) cube([7.75, 15.75, mlength]);
+            translate([19, 14.5, 12-msetback]) cube([7.75, 15.75, mlength]);
+            translate([16, 32.2, 12-msetback]) cylinder(d=3, h=12);
         }
-        else {
+        if(enablemask == false) {
             // gpio 24 pin front position
-            color("silver") translate([1.6, 188.5, 84]) rotate([90, 0, 270]) import("stl/h3_port_extender.stl");
-//            color("dimgrey") translate([-3, 15.75, 0.25]) rotate([90, 180, 180]) import("stl/header_f_2x12_90.stl");
-            translate([0, 2, 8.25]) rotate([0, 180, 0]) header_f(12,8);
-            translate([-2.54, 2, 8.25]) rotate([0, 180, 0]) header_f(12,8);
-            color("dimgrey") translate([-2.5, 0, 29.5]) rotate([270, 0, 90]) import("stl/header_2x2_90.stl");
+            header("angled", -1.75, .1, 0, "top", 0, [12,2,8], ["thruhole","black","female",2.54,"silver"], 
+                1.6, false, [true,10,2,"default"]);
+            difference() {
+                color("#008066") slab([33,35.25,1.6], .25);
+                color("#008066") translate([15.95,4.6,-1]) cylinder(d=3, h=6);
+                color("#008066") translate([15.95,32.15,-1]) cylinder(d=3, h=6);
+            }
+            header("angled", 27.65, 29.6, 0, "bottom", 90, [2,2,6], ["thruhole","black","male",2.54,"silver"], 
+                1.6, false, [true,10,2,"default"]);
+            header("angled", 30.5, 16.5, 0, "bottom", 90, [5,2,6], ["thruhole","black","male",2.54,"silver"], 
+                1.6, false, [true,10,2,"default"]);
+            usb2("single_up_a", .925, 15.375, 0, "top", 180, [0,10.5,0], [0], 1.6, false, [true,10,2,"default"]);
+            usb2("single_up_a", 10.395, 15.375, 0, "top", 180, [0,10.5,0], [0], 1.6, false, [true,10,2,"default"]);
+            usb2("single_up_a", 19.925, 15.375, 0, "top", 180, [0,10.5,0], [0], 1.6, false, [true,10,2,"default"]);
         }
     }
     if(style == "remote") {
-        if(mask == true) {
-            translate([-19, 6.25, 15]) cube([12,7.5,14.75]);
-            translate([-19, 15.875, 15]) cube([12,7.5,14.75]);
-            translate([-19, 25.375, 15]) cube([12,7.5,14.75]);
-            translate([-19, 17, 32.2]) rotate([0,90,0]) cylinder(d=2.5, h=12);
-            translate([-19, 17, 4.6]) rotate([0,90,0]) cylinder(d=2.5, h=12);
+        if(enablemask == true && mstyle == "default") {
+            translate([0, 14.5, 12-msetback]) cube([7.75, 15.75, mlength]);
+            translate([9.5, 14.5, 12-msetback]) cube([7.75, 15.75, mlength]);
+            translate([19, 14.5, 12-msetback]) cube([7.75, 15.75, mlength]);
+            translate([16, 32.2, 12-msetback]) cylinder(d=3, h=12);
+            translate([16, 4.6, 12-msetback]) cylinder(d=3, h=mlength);
         }
-        else {
+        if(enablemask == false) {
+            difference() {
+                color("#008066") slab([33,35.25,1.6], .25);
+                color("#008066") translate([15.95,4.6,-1]) cylinder(d=3, h=6);
+                color("#008066") translate([15.95,32.15,-1]) cylinder(d=3, h=6);
+            }
             // gpio 24 pin front position
-            color("silver") translate([1.6, 188.5, 84]) rotate([90, 0, 270]) import("stl/h3_port_extender.stl");
-            color("dimgrey") translate([-2.5, 0, 29.5]) rotate([270, 0, 90]) import("stl/header_2x2_90.stl");
-            color("dimgrey")translate([9,-.5,12.75]) rotate([0,270,90]) import("stl/header_encl_2x5_90.stl");
-//            translate([2, 2, 14.08]) rotate([0, 90, 0]) header(12);
-//            translate([2, 2, 11.54]) rotate([0, 90, 0]) header(12);
-//        header("open", 7.5, 1, 0, "top", 0, [2,12,6], ["thruhole","black","female",2.54,"silver"], 1.6, false, [true,10,2,"default"]);
+            header("open", .75, 9, 0, "bottom", 0, [12,2,6], ["thruhole","black","male",2.54,"silver"], 
+                1.6, false, [true,10,2,"default"]);
+            header("angled", 27.65, 29.6, 0, "bottom", 90, [2,2,6], ["thruhole","black","male",2.54,"silver"], 
+                1.6, false, [true,10,2,"default"]);
+            header("angled", 30.5, 16.5, 0, "bottom", 90, [5,2,6], ["thruhole","black","male",2.54,"silver"], 
+                1.6, false, [true,10,2,"default"]);
+            usb2("single_up_a", .925, 15.375, 0, "top", 180, [0,10.5,0], [0], 1.6, false, [true,10,2,"default"]);
+            usb2("single_up_a", 10.395, 15.375, 0, "top", 180, [0,10.5,0], [0], 1.6, false, [true,10,2,"default"]);
+            usb2("single_up_a", 19.925, 15.375, 0, "top", 180, [0,10.5,0], [0], 1.6, false, [true,10,2,"default"]);
         }
     }
 }
 
 
 /*
-           NAME: h3_port_extender
+           NAME: h3_port_extender_holder
     DESCRIPTION: holder for the @mctom's remote h3 port extender
            TODO: none
 
