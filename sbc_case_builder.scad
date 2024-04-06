@@ -249,7 +249,8 @@ uart_opening = "default"; // [default,none,open,knockout]
 indents = true;
 
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_panel_lcd3.5", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "n2l_tray", "n2l_gpio", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1s_snap", "m1s_fitted", "m1_panel", "m1_tray", "m1_tray_ssd", "m1_tray_sides", "m1_tray_vu5", "m1_tray_vu7", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h3_shell", "h3_lowboy", "h3_lowboy_router", "h3_tallboy", "h3_tallboy-ssd", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "jetsonnano_round", "jetsonnano_hex", "jetsonnano_snap", "jetsonnano_fitted", "rock5b", "rock5b_shell", "rock5bq", "rock5bq_shell", "rock5bq_tray", "rock5bq_tray_sides", "rock5bq_snap", "rock5bq_fitted", "rock5b-v1.3", "visonfive2_shell", "visonfive2_panel", "visonfive2_stacked", "visonfive2_tray", "visonfive2_snap", "visonfive2_fitted", "visonfive2q_shell", "visonfive2q_panel", "visonfive2q_stacked", "visonfive2q_tray", "visonfive2q_snap", "visonfive2q_fitted"]
+accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h3_shell", "h3_tallboy-ssd", "h3_shell_router", "h3_shell_router-ssd", "h3_lowboy", "h3_lowboy_router", "h3_tray_router", "h3_router_station", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "rock5b", "rock5b-v1.3", "visonfive2_shell", "visonfive2_panel", "visonfive2_stacked", "visonfive2_tray", "visonfive2_snap", "visonfive2_fitted"]
+
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
 
@@ -352,7 +353,7 @@ if (view == "platter") {
         case_bottom(case_design);
         translate([0,(2*depth)+10,case_z]) rotate([180,0,0]) case_top(case_design);
         if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
-            translate([3*width,0,width]) rotate([0,90,90]) 
+            translate([3.5*width,0,width]) rotate([0,90,90]) 
                 case_side(case_design,case_style,"right");
             translate([width+15,0,2*sidethick]) rotate([0,-90,-90]) 
                 case_side(case_design,case_style,"left");

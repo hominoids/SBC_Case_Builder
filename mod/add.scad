@@ -111,7 +111,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     if(type == "hc4_oled_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled_holder(face, size_z, mask); 
     }
-    if(type == "h2_netcard") {
+    if(type == "hk_netcard") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_netcard(mask); 
     }
     if(type == "hk_lcd35") {

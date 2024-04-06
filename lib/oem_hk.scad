@@ -730,7 +730,8 @@ module hk_wb2() {
     difference () {
         union() {
         color("#008066") cube([16.5,16.5,1]);
-        translate([1.75,15.75,.75]) rotate([180,0,0]) header_f(6,9);
+        header("open", 1.75, 0.5, 0, "bottom", 90, [6,1,6], ["thruhole","black","female",2.54,"silver"], 1, false, [true,10,2,"default"]);
+//        translate([1.75,15.75,.75]) rotate([180,0,0]) header_f(6,9);
         color("silver") translate([11.5,11.5,1]) cube([2,3,.5]);
         color("silver") translate([11.5,3,1]) cube([2,3,.5]);
         }
