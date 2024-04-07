@@ -76,13 +76,13 @@ module case_top(case_design) {
                                  vertical=[corner_fillet,corner_fillet,corner_fillet,corner_fillet], 
                                      top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                         }
-                    if(case_design == "tray" && (case_style == "vu5" || case_style == "vu7" || case_style == "sides")) {
+                    if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
                         translate([-wallthick-gap+.5,-wallthick-gap,case_z])
                             cube([width-1,depth,floorthick]);
                         translate([-wallthick-gap+.5,-wallthick-gap,
                             case_z-floorthick+adj]) cube([width-1,wallthick,wallthick]);
                     }
-                    if(case_design == "tray" && case_style == "none") {
+                    if(case_design == "tray") {
                         difference() {
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z/2]) 
                                 cube_fillet_inside([width+2*wallthick+1,depth,case_z], 

@@ -20,13 +20,12 @@
     DESCRIPTION: creates folded case flat blanks for supported designs
            TODO: none
 
-          USAGE: case_folded(case_design, case_style)
+          USAGE: case_folded(case_design)
 
-                             case_design = paper
-                              case_style = split-top, full-top
+                             case_design = paper_full-top, paper_split-top
 */
 
-module case_folded(case_design, case_style) {
+module case_folded(case_design) {
 
 section_position = 2;
 ba = bend_allowance;
@@ -39,7 +38,7 @@ tab_x = pcb_depth/4;
 tab_y = fold_height/2;
 tab_inset = 6;
 
-    if(case_style == "split-top") {
+    if(case_design == "paper_split-top") {
         // rear
         difference() {
             union() {
@@ -121,7 +120,7 @@ tab_inset = 6;
         translate([0, pcb_depth+fold_height+(pcb_depth/2)-ba, 0]) cube([pcb_width, 2, material_thickness]);
     }
 
-    if(case_style == "full-top" || case_style == "none") {
+    if(case_design == "paper_full-top") {
         // rear
         difference() {
             union() {

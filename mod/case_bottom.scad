@@ -68,7 +68,7 @@ module case_bottom(case_design) {
                                 vertical=[corner_fillet,corner_fillet,corner_fillet,corner_fillet], 
                                     top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
                     }
-                    if(case_design == "tray") {
+                    if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
                         difference() {
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height)/2]) 
                                 cube_fillet_inside([width,depth,bottom_height], 
@@ -110,7 +110,7 @@ module case_bottom(case_design) {
                         }
                         
                         // front panel
-                        if(case_style == "sides" || case_style == "vu5" || case_style == "vu7") {
+                        if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
                             translate([-wallthick-gap,depth-(2*wallthick)-gap,bottom_height-adj]) 
                                 rotate([0,0,0]) cube([width,wallthick,top_height]);
                         }
@@ -279,7 +279,7 @@ module case_bottom(case_design) {
                     }
                 }
                 // side attachment holes
-                if(case_design == "tray") {
+                if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
                     // right side bottom attachment holes
                     translate([width-2*(wallthick+gap)-sidethick-adj,wallthick+gap+10,
                         floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));

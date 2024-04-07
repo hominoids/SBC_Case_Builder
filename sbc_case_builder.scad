@@ -40,9 +40,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,round,hex,snap,fitted,paper]
-// base case style
-case_style = "none"; // ["none","vu5","vu7","sides","split-top","full-top"]
+case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -97,7 +95,7 @@ edge_fillet = 0; //[0:.5:6]
 // tolerance for fitted surfaces
 tol = .25; //[-.5:.0625:.5]
 
-/* [Top Standoffs] */
+/* [Top Standoff Global Settings] */
 // enable case top standoffs
 sbc_top_standoffs = true;
 top_standoff_reverse = true;
@@ -112,6 +110,8 @@ top_standoff_support_height = 4; //[0:.01:50]
 top_standoff_insert = false;
 top_standoff_insert_dia = 4.2; //.01
 top_standoff_insert_height = 5.1; //.01
+
+/* [Top Standoff Individual Settings] */
 // case top - lower left standoff settings
 top_rear_left_enable = true;
 top_rear_left_adjust = 0; //[-20:.01:20]
@@ -129,7 +129,7 @@ top_front_right_enable = true;
 top_front_right_adjust = 0; //[-20:.01:20]
 top_front_right_support = "front";  //[none,left,rear,front,right]
 
-/* [Bottom Standoffs] */
+/* [Bottom Standoff Global Settings] */
 // enable case bottom standoffs
 sbc_bottom_standoffs = true;
 bottom_standoff_reverse = false;
@@ -144,6 +144,8 @@ bottom_standoff_support_height = 4; //[0:.01:50]
 bottom_standoff_insert = false;
 bottom_standoff_insert_dia = 4.2; //.01
 bottom_standoff_insert_height = 5.1; //.01
+
+/* [Bottom Standoff Individual Settings] */
 // case bottom - rear left standoff settings
 bottom_rear_left_enable = true;
 bottom_rear_left_adjust = 0; //[-20:.01:20]
@@ -160,6 +162,32 @@ bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
 bottom_front_right_enable = true;
 bottom_front_right_adjust = 0; //[-20:.01:20]
 bottom_front_right_support = "front"; //[none,left,rear,front,right]
+
+/* [Fan and Vent Openings] */
+// top cover pattern
+top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
+// bottom cover pattern
+bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
+// heatsink opening
+cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
+fan_size = 0; // [0,30,40,50,60,70,80,92]
+// exhaust vent
+exhaust_vent = "none"; // [none,rear,front,right,left]
+
+/* [Bottom Access Panel] */
+bottom_access_panel_enable = false;
+access_panel_size = [70,30]; //[10:.01:120]
+access_panel_orientation = "landscape"; //[landscape,portrait]
+access_panel_location = [10,15]; //[-10:.01:200]
+access_panel_rotation = 0; //[0:90:270]
+
+/* [GPIO and UART] */
+// gpio opening
+gpio_opening = "default"; // [default,none,open,block,knockout,vent]
+// uart opening
+uart_opening = "default"; // [default,none,open,knockout]
+// enable indentations around io openings
+indents = true;
 
 /* [Extended Top Standoffs] */
 // enable case extended standoffs
@@ -226,27 +254,7 @@ ext_bottom_front_right_enable = true;
 ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
-/* [Options and Accessories] */
-// top cover pattern
-top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
-// bottom cover pattern
-bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
-bottom_access_panel_enable = false;
-access_panel_size = [70,30]; //[10:.01:120]
-access_panel_orientation = "landscape"; //[landscape,portrait]
-access_panel_location = [10,15]; //[-10:.01:200]
-access_panel_rotation = 0; //[0:90:270]
-// heatsink opening
-cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
-fan_size = 0; // [0,30,40,50,60,70,80,92]
-// exhaust vent
-exhaust_vent = "none"; // [none,rear,front,right,left]
-// gpio opening
-gpio_opening = "default"; // [default,none,open,block,knockout,vent]
-// uart opening
-uart_opening = "default"; // [default,none,open,knockout]
-// enable indentations around io openings
-indents = true;
+/* [Accessories and Options] */
 
 // case accessory group to load
 accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h3_shell", "h3_tallboy-ssd", "h3_shell_router", "h3_shell_router-ssd", "h3_lowboy", "h3_lowboy_router", "h3_tray_router", "h3_router_station", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "rock5b", "visonfive2_shell", "visonfive2_stacked", "visonfive2_tray"]
@@ -270,7 +278,7 @@ pcb_radius = sbc_data[s[0]][11][0];
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz;
-bottom_height = case_design == "tray" ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
+bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
 case_z = bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
@@ -337,26 +345,26 @@ if (view == "platter") {
     if(case_design == "panel") {
         case_bottom(case_design);
         translate([0,(2*depth)+5,case_z]) rotate([180,0,0]) case_top(case_design);
-        translate([width+25,0,-gap]) rotate([-90,0,0]) case_side(case_design,case_style,"rear");
+        translate([width+25,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
         translate([width+25,2*(case_z)+10,-depth+wallthick+gap+floorthick]) 
-            rotate([90,0,0]) case_side(case_design,case_style,"front");
+            rotate([90,0,0]) case_side(case_design,"front");
         translate([2.5*width,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
-            case_side(case_design,case_style,"right");
+            case_side(case_design,"right");
         translate([-20,0,-gap]) rotate([0,90,90]) 
-            case_side(case_design,case_style,"left");
+            case_side(case_design,"left");
     }
     if(case_design == "stacked") {
         case_bottom(case_design);
         translate([0,(2*depth)+20,case_z]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "tray") {
+    if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
         case_bottom(case_design);
         translate([0,(2*depth)+10,case_z]) rotate([180,0,0]) case_top(case_design);
-        if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
+        if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([3.5*width,0,width]) rotate([0,90,90]) 
-                case_side(case_design,case_style,"right");
+                case_side(case_design,"right");
             translate([width+15,0,2*sidethick]) rotate([0,-90,-90]) 
-                case_side(case_design,case_style,"left");
+                case_side(case_design,"left");
         }
     }
     if(case_design == "round") {
@@ -428,10 +436,10 @@ if (view == "platter") {
             }
         }
     }
-    if(case_design == "paper") {
-        case_folded(case_design, case_style);
+    if(case_design == "paper_split-top" || case_design == "paper_full-top") {
+        case_folded(case_design);
     }
-    if(case_design == "tray") {
+    if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
         echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
     }
     else {
@@ -508,16 +516,16 @@ if (view == "model") {
                 color("grey",1) translate([0,0,raise_top])case_top(case_design);
             }
             if(move_front >= 0) {
-                color("grey",1) translate([0,move_front,0]) case_side(case_design,case_style,"front");
+                color("grey",1) translate([0,move_front,0]) case_side(case_design,"front");
             }
             if(move_rear >= 0) {
-                color("grey",1) translate([0,-move_rear,0]) case_side(case_design,case_style,"rear");
+                color("grey",1) translate([0,-move_rear,0]) case_side(case_design,"rear");
             }
             if(move_rightside >= 0) {
-                color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
+                color("grey",1) translate([move_rightside,0,0]) case_side(case_design,"right");
             }
             if(move_leftside >= 0) {
-                color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
+                color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
             }
         }
         if(case_design == "stacked") {
@@ -532,7 +540,7 @@ if (view == "model") {
                 color("grey",1) translate([0,0,raise_top]) case_top(case_design);
             }
         }
-        if(case_design == "tray") {
+        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             if(lower_bottom >= 0) {
                 difference() {
                     color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
@@ -579,15 +587,15 @@ if (view == "model") {
                     }
                 }
             }
-            if(case_style == "sides" || case_style == "vu5" || case_style == "vu7") {
+            if(case_design == "tray_sides" || case_design == "tray_vu5" || case_design == "tray_vu7") {
                 if(move_rightside >= 0) {
-                    color("grey",1) translate([move_rightside,0,0]) case_side(case_design,case_style,"right");
+                    color("grey",1) translate([move_rightside,0,0]) case_side(case_design,"right");
                 }
                 if(move_leftside >= 0) {
-                    color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,case_style,"left");
+                    color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
                 }
             }
-            if(case_style == "vu5") {
+            if(case_design == "tray_vu5") {
                 color("darkgrey",.5) translate([width+((127.5-width)/2)-6.5-wallthick-gap,
                     depth-1,case_z+15.5]) rotate([-15,0,180]) 
                         import(file = "stl/Vu5a_Case.stl");            
@@ -605,7 +613,7 @@ if (view == "model") {
                 color("darkgrey",.5) translate([-((127.5-75)/2)+(width/2)-wallthick-gap-40.5,depth+15,
                     case_z+12.5]) rotate([-15,0,180]) hk_speaker();
             }
-            if(case_style == "vu7") {
+            if(case_design == "tray_vu7") {
                 color("darkgrey",.5) translate([width+((192.90-width)/2)-wallthick-gap-20,
                     depth-1,case_z+15.5]) rotate([-15,0,180]) 
                         import(file = "stl/Vu7a_Case.stl");            
@@ -728,11 +736,11 @@ if (view == "model") {
                 }    
             }
         }
-        if(case_design == "paper" && flat_blank_section == false) {
-            case_folded(case_design, case_style);
+        if((case_design == "paper_split-top" || case_design == "paper_full-top") && flat_blank_section == false) {
+            case_folded(case_design);
         }
-        if(case_design == "paper" && flat_blank_section == true) {
-            projection() case_folded(case_design, case_style);
+        if((case_design == "paper_split-top" || case_design == "paper_full-top") && flat_blank_section == true) {
+            projection() case_folded(case_design);
         }
         // create sbc information text
         if(sbc_information == true) {
@@ -742,7 +750,7 @@ if (view == "model") {
                         rotate([90, 0, 0]) text(str(sbc_data[s[0]][1][i]), 5,  font = text_font);
             }
         }
-        if(case_design == "tray") {
+        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
         }
         else {
@@ -762,7 +770,7 @@ if (view == "part") {
         if(case_design == "stacked") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
-        if(case_design == "tray") {
+        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
         if(case_design == "round") {
@@ -784,36 +792,31 @@ if (view == "part") {
     if(individual_part == "front") {
         if(case_design == "panel") {
             translate([0,case_z,-depth+wallthick+gap+floorthick]) 
-                rotate([90,0,0]) case_side(case_design,case_style,"front");
+                rotate([90,0,0]) case_side(case_design,"front");
         }
     }
     if(individual_part == "rear") {
         if(case_design == "panel") {
-            translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,case_style,"rear");
+            translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
         }
     }
     if(individual_part == "right") {
         if(case_design == "panel") {
             translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
-                case_side(case_design,case_style,"right");
+                case_side(case_design,"right");
         }
-        if(case_design == "tray") {
-            if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
-                translate([depth,0,width-gap]) rotate([0,90,90]) 
-                    case_side(case_design,case_style,"right");
-            }
+        if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
+            translate([depth,0,width-gap]) rotate([0,90,90]) case_side(case_design,"right");
         }
     }
     if(individual_part == "left") {
         if(case_design == "panel") {
             translate([depth,0,-gap]) rotate([0,90,90]) 
-                case_side(case_design,case_style,"left");
+                case_side(case_design,"left");
         }
-        if(case_design == "tray") {
-            if(case_style == "vu5" || case_style == "vu7" || case_style == "sides") {
-                translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
-                    case_side(case_design,case_style,"left");
-            }
+        if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
+            translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
+                case_side(case_design,"left");
         }
     }
     if(individual_part == "accessories") {
@@ -870,7 +873,7 @@ if (view == "part") {
             }
         }
     }
-    if(case_design == "tray") {
+    if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
         echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
     }
     else {

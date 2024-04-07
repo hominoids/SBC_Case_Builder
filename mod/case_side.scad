@@ -20,11 +20,11 @@
     DESCRIPTION: creates case side for supported designs and styles
            TODO: none
 
-          USAGE: case_side(case_design, case_style, side)
+          USAGE: case_side(case_design, side)
 
 */
 
-module case_side(case_design, case_style, side) {
+module case_side(case_design, side) {
     
     difference() {
         union() {
@@ -128,7 +128,7 @@ module case_side(case_design, case_style, side) {
                     }
                 }
             }
-            if(case_design == "tray" && case_style == "sides") {
+            if(case_design == "tray_sides") {
                 if(side == "right") {
                     difference() {
                         union() {
@@ -186,15 +186,15 @@ module case_side(case_design, case_style, side) {
                     }
                 }
             }
-            if(case_design == "tray" && case_style == "vu5") {
+            if(case_design == "tray_vu5") {
                 cheight = case_z+90;
                 vesa = 75;
-                vu_holder(case_style,side,vesa,cheight);
+                vu_holder("vu5",side,vesa,cheight);
             }
-            if(case_design == "tray" && case_style == "vu7") {
+            if(case_design == "tray_vu7") {
                 cheight = case_z+122;
                 vesa = 100;
-                vu_holder(case_style,side,vesa,cheight);
+                vu_holder("vu7",side,vesa,cheight);
             }         
             // additive accessories
             if(accessory_name != "none") {

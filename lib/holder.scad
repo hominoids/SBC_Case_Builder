@@ -199,7 +199,7 @@ vu_rotation = [15,0,0];
                 translate([width-wallthick-gap,-(2*wallthick)-gap,0]) 
                     cube([sidethick,depth+2*wallthick,cheight]);
                 // right tabs for vu5 attachment
-                if(case_style == "vu5") {
+                if(vu_model == "vu5") {
                     translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick,depth-39,
                         case_z+80]) rotate([75,180,0]) 
                             slab_r([((width-vesa)/2)+4.5,10,sidethick], [.01,.01,3,3]);
@@ -223,7 +223,7 @@ vu_rotation = [15,0,0];
                     }
                 }
                 // right tabs for vu7 attachment
-                if(case_style == "vu7") {
+                if(vu_model == "vu7") {
                     translate([(width/2)+((width-vesa)/2)+(vesa/2)-sidethick-1,depth-49.40,
                         case_z+vu7_height-15]) rotate([75,180,0]) 
                             slab_r([((width-vesa)/2)+12,10,sidethick], [.01,.01,3,3]);
@@ -254,7 +254,7 @@ vu_rotation = [15,0,0];
                 translate([-wallthick-gap-sidethick,-(2*wallthick)-gap,0]) 
                     cube([sidethick,depth+2*wallthick,cheight]);
                 // left tabs for vu5 attachment
-                if(case_style == "vu5") {
+                if(vu_model == "vu5") {
                     translate([-((width-vesa)/2)+(width/2)-(vesa/2)-3.5-adj,depth-36.4,
                         case_z+70]) rotate([105,0,0]) 
                             slab_r([((width-vesa)/2)+4,10, sidethick], [.01,.01,3,3]);
@@ -277,7 +277,7 @@ vu_rotation = [15,0,0];
                         }
                 }           
                 // left tabs for vu7 attachment
-                if(case_style == "vu7") {
+                if(vu_model == "vu7") {
                     translate([-((width-vesa)/2)+(width/2)-(vesa/2)-4.25-adj,depth-46.85,
                         case_z+vu7_height-24.5]) rotate([105,0,0]) 
                             slab_r([((width-vesa)/2),10, sidethick], [.01,.01,3,3]);
@@ -307,7 +307,7 @@ vu_rotation = [15,0,0];
 
         if(side == "right") {
             // vu5 shape and back cut
-            if(case_style == "vu5") {
+            if(vu_model == "vu5") {
                 translate([width+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                     linear_extrude(height = 3*sidethick) 
@@ -327,7 +327,7 @@ vu_rotation = [15,0,0];
                     case_z+26.75]) rotate([75,180,0]) cylinder(d=3, h=sidethick+1);
             }
             // vu7 shape and back cut
-            if(case_style == "vu7") {
+            if(vu_model == "vu7") {
                 translate([width+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                     linear_extrude(height = 2*sidethick) 
@@ -355,7 +355,7 @@ vu_rotation = [15,0,0];
 
         if(side == "left") {
             // vu5 shape and back cut
-            if(case_style == "vu5") {
+            if(vu_model == "vu5") {
                 translate([-sidethick+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                         linear_extrude(height = 3*sidethick) 
@@ -375,7 +375,7 @@ vu_rotation = [15,0,0];
                     rotate([75,0,0])  cylinder(d=3, h=sidethick+1);
             }
             // vu7 shape and back cut
-            if(case_style == "vu7") {
+            if(vu_model == "vu7") {
                 translate([-sidethick+adj,-.6,case_z+sidethick+2.5]) 
                     rotate([0,-90,0]) 
                         linear_extrude(height = 2*sidethick) 
