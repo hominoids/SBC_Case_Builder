@@ -426,9 +426,9 @@ if (view == "platter") {
                 add(type, loc_x, loc_y, loc_z, face, rotation, [size_x, size_y, size_z], [data_1, data_2, data_3, data_4], mask);
             }
             if (class == "platter" && type == "button_top") {
-                translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_3, size_x, size_z);
-                translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_3, size_x, size_z);
-                translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_3);
+                translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_1, size_x, size_z);
+                translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_1, size_x, size_z);
+                translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_1);
             }
             if (class == "platter" && type == "h3_port_extender_holder") {
                 translate([loc_x,loc_y,loc_z]) rotate([0,0,0]) h3_port_extender_holder("bottom");
@@ -862,9 +862,9 @@ if (view == "part") {
                     add(type, loc_x, loc_y, loc_z, face, rotation, [size_x, size_y, size_z], [data_1, data_2, data_3, data_4], mask);
                 }
                 if (class == "platter" && type == "button_top") {
-                    translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_3, size_x, size_z);
-                    translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_3, size_x, size_z);
-                    translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_3);
+                    translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_1, size_x, size_z);
+                    translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_1, size_x, size_z);
+                    translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_1);
                 }
                 if (class == "platter" && type == "h3_port_extender_holder") {
                     translate([loc_x,loc_y,loc_z]) rotate([0,0,0]) h3_port_extender_holder("bottom");

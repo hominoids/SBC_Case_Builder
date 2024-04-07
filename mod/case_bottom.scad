@@ -79,35 +79,58 @@ module case_bottom(case_design) {
                                     vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
                                         top=[0,0,0,0],bottom=[2,2,2,2], $fn=90);
                         }
-                        // right side nut
-                        translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+10,
-                                floorthick+3.4]) rotate([90,0,90]) 
-                                    cylinder(d=10, h=4, $fn=6);
-                        // left side nut
-                        translate([-adj-gap,wallthick+gap+10,floorthick+3.4]) 
-                            rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
-                        if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q" && 
-                            sbc_model != "rock5b" && sbc_model != "rock5bq" && sbc_model != "rock5b-v1.3") {
-                            translate([width-wallthick-gap-wallthick-4+adj,depth-wallthick-gap-10,
-                                    floorthick+3.4]) rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
-                            translate([-adj-gap,depth-wallthick-gap-10,floorthick+3.4]) 
-                                rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
-                        }
-                        else {
-                            if(sbc_model == "visionfive2" || sbc_model == "visionfive2q" || sbc_model == "rock5b" ||  
-                                sbc_model == "rock5bq" || sbc_model == "rock5b-v1.3") {
-                                translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+58,
-                                        floorthick+3.4]) rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
-                                translate([-adj-gap,wallthick+gap+58,floorthick+3.4]) 
-                                    rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                        // case nut placement
+                        for (i=[1:11:len(sbc_data[s[0]])-2]) {
+                            class = sbc_data[s[0]][i+1];
+                            type = sbc_data[s[0]][i+2];
+                            id = sbc_data[s[0]][i+3];
+                            pcbhole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
+                            pcbhole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
+                            pcbhole_z = sbc_data[s[0]][i+6];
+                            pcbhole_size = sbc_data[s[0]][i+9][0];
+                            pcbhole_pos = sbc_data[s[0]][i+10][4];
+
+                            if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_rear") {
+                                if(pcbhole_y <= 10) {
+                                    translate([-adj-gap,wallthick+gap+10,floorthick+3.4]) rotate([90,0,90]) 
+                                        cylinder(d=10, h=4, $fn=6);
+                                }
+                                else {
+                                    translate([-adj-gap,wallthick+gap+2,floorthick+3.4]) rotate([90,0,90]) 
+                                        cylinder(d=10, h=4, $fn=6);
+                                }
                             }
-                            else {
-                                translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+40,
-                                        floorthick+3.4]) rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
-                                translate([-adj-gap,wallthick+gap+40,floorthick+3.4]) 
-                                    rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                            if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_front") {
+                                if(pcbhole_y >= pcb_depth-10) {
+                                    translate([-adj-gap,wallthick-gap+pcb_depth-14,floorthick+3.4]) 
+                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                }
+                                else {
+                                    translate([-adj-gap,wallthick+gap+pcb_depth-8,floorthick+3.4]) 
+                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                }
                             }
-                        }
+                            if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_rear") {
+                                if(pcbhole_y <= 10) {
+                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+10,floorthick+3.4])
+                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                }
+                                else {
+                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+2,floorthick+3.4])
+                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                }
+                            }
+                            if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front") {
+                                if(pcbhole_y >= pcb_depth-10) {
+                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick-gap+pcb_depth-14,floorthick+3.4]) 
+                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                }
+                                else {
+                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+pcb_depth-8,floorthick+3.4]) 
+                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                }
+                            }
+                        }   
                         
                         // front panel
                         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
@@ -278,56 +301,73 @@ module case_bottom(case_design) {
                         }
                     }
                 }
-                // side attachment holes
+                // tray side attachment holes
                 if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
-                    // right side bottom attachment holes
-                    translate([width-2*(wallthick+gap)-sidethick-adj,wallthick+gap+10,
-                        floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                    // right side bottom nut inset
-                    translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+10,
-                        floorthick+3.4]) rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                    // left side bottom attachment holes
-                    translate([-wallthick-gap-adj,wallthick+gap+10,floorthick+3.4]) rotate([0,90,0]) 
-                            cylinder(d=3, h=10+sidethick+(2*adj));
-                    // left side bottom nut inset
-                    translate([-gap+.6,wallthick+gap+10,floorthick+3.4]) 
-                        rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                    if(depth >= 75 && sbc_model != "visionfive2" && sbc_model != "visionfive2q" && 
-                        sbc_model != "rock5b" && sbc_model != "rock5bq" && sbc_model != "rock5b-v1.3") {
-                        translate([width-2*(wallthick+gap)-sidethick-adj,depth-wallthick-gap-10,
-                            floorthick+3.4]) rotate([0,90,0]) 
-                                cylinder(d=3, h=10+sidethick+(2*adj));
-                        translate([-wallthick-gap-adj-6,depth-wallthick-gap-10,
-                            floorthick+3.4]) rotate([0,90,0]) 
-                                cylinder(d=3, h=10+sidethick+(2*adj));
-                        translate([width-3.5-(2*wallthick)-gap-.6,depth-wallthick-gap-10,
-                            floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                        translate([-gap+.6,depth-wallthick-gap-10,floorthick+3.4]) 
-                            rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                    }
-                    else {
-                        if(sbc_model == "visionfive2" || sbc_model == "visionfive2q" || sbc_model == "rock5b" ||  
-                            sbc_model == "rock5bq" || sbc_model == "rock5b-v1.3") {
-                            translate([width-3*(wallthick+gap)-adj,wallthick+gap+58,
-                                floorthick+3.4]) rotate([0,90,0]) 
+                    for (i=[1:11:len(sbc_data[s[0]])-2]) {
+                        class = sbc_data[s[0]][i+1];
+                        type = sbc_data[s[0]][i+2];
+                        id = sbc_data[s[0]][i+3];
+                        pcbhole_x = sbc_data[s[0]][i+4]+pcb_loc_x;
+                        pcbhole_y = sbc_data[s[0]][i+5]+pcb_loc_y;
+                        pcbhole_z = sbc_data[s[0]][i+6];
+                        pcbhole_size = sbc_data[s[0]][i+9][0];
+                        pcbhole_pos = sbc_data[s[0]][i+10][4];
+
+                        if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_rear") {
+                            if(pcbhole_y <= 10) {
+                                translate([-wallthick-gap-adj-6,wallthick+gap+10,floorthick+3.4]) rotate([0,90,0]) 
                                     cylinder(d=3, h=10+sidethick+(2*adj));
-                            translate([-wallthick-gap-adj-6,wallthick+gap+58,
-                                floorthick+3.4]) rotate([0,90,0]) 
+                                translate([-gap+.6,wallthick+gap+10,floorthick+3.4]) rotate([90,0,90]) 
+                                    cylinder(d=6.6, h=3.5, $fn=6);
+                            }
+                            else {
+                                translate([-wallthick-gap-adj-6,wallthick+gap+2,floorthick+3.4]) rotate([0,90,0]) 
                                     cylinder(d=3, h=10+sidethick+(2*adj));
-                            translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+58,
-                                floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                            translate([-gap+.6,wallthick+gap+58,floorthick+3.4]) 
-                                rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                                translate([-gap+.6,wallthick+gap+2,floorthick+3.4]) rotate([90,0,90]) 
+                                    cylinder(d=6.6, h=3.5, $fn=6);
+                            }
                         }
-                        else {
-                            translate([width-3*(wallthick+gap)-adj,wallthick+gap+40,
-                                floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                            translate([-wallthick-gap-adj-6,wallthick+gap+40,
-                                floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                            translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+40,
-                                floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
-                            translate([-gap+.6,wallthick+gap+40,floorthick+3.4]) 
-                                rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                        if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_front") {
+                            if(pcbhole_y >= pcb_depth-10) {
+                                translate([-wallthick-gap-adj-6,wallthick-gap+pcb_depth-14,
+                                    floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
+                                translate([-gap+.6,wallthick-gap+pcb_depth-14,floorthick+3.4]) 
+                                    rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                            }
+                            else {
+                                translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth-8,
+                                    floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
+                                translate([-gap+.6,wallthick+gap+pcb_depth-8,floorthick+3.4]) 
+                                    rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                            }
+                        }
+                        if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_rear") {
+                            if(pcbhole_y <= 10) {
+                                translate([width-2*(wallthick+gap)-sidethick-adj,wallthick+gap+10,floorthick+3.4]) 
+                                    rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
+                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+10,floorthick+3.4]) 
+                                    rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                            }
+                            else {
+                                translate([width-2*(wallthick+gap)-sidethick-adj,wallthick+gap+2,floorthick+3.4]) 
+                                    rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
+                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+2,floorthick+3.4]) 
+                                    rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                            }
+                        }
+                        if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front") {
+                            if(pcbhole_y >= pcb_depth-10) {
+                                translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth-14,
+                                    floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
+                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick-gap+pcb_depth-14,
+                                    floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                            }
+                            else {
+                                translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth-8,
+                                    floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
+                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick-gap+pcb_depth-8,
+                                    floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
+                            }
                         }
                     }
                 }
