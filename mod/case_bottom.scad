@@ -442,6 +442,19 @@ module case_bottom(case_design) {
                     if(bottom_cover_pattern == "hex_8mm") {
                         translate([1,2,-2]) vent_hex((width)/5.5,(depth)/9.5,floorthick+4,8,1.5,"horizontal");
                     }
+                    if(bottom_cover_pattern == "linear_vertical") {
+                        translate([0,-gap,-2]) vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
+                    }
+                    if(bottom_cover_pattern == "linear_horizontal") {
+                        translate([-gap,-gap,-2]) vent(width-2*wallthick-gap,wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3,1,"horizontal");
+                    }
+                    if(bottom_cover_pattern == "astroid") {
+                        for(c=[3:12:depth-8]) {
+                            for(r=[4:12:width-8]) {
+                                translate([r,c,-4]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                            }
+                        }   
+                    }
                 }
             }
             // pcb standoffs

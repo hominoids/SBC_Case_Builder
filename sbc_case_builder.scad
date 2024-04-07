@@ -165,14 +165,12 @@ bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
 /* [Fan and Vent Openings] */
 // top cover pattern
-top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
+top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // bottom cover pattern
-bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,deltoid,astroid,apollonian]
+bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,30,40,50,60,70,80,92]
-// exhaust vent
-exhaust_vent = "none"; // [none,rear,front,right,left]
 
 /* [Bottom Access Panel] */
 bottom_access_panel_enable = false;
