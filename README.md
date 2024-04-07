@@ -132,7 +132,7 @@ Class “add1” and “add2” are used to add geometry to the case. The differ
 
 **additive type:**
 
-circle, rectangle, slot, text, art, standoff, batt_holder, uart_holder, hd_holder, hd_holes, hd_vertright_holes, hc4_oled_holder, access_port, button, pcb_holder, boom_grill, boom_speaker_holder
+circle, rectangle, slot, text, art, standoff, batt_holder, uart_holder, hd_holder, hd_holes, hd_vertright_holes, hc4_oled_holder, access_panel, button, pcb_holder, boom_grill, boom_speaker_holder
 
 
 **subtractive type:**
@@ -260,7 +260,7 @@ DESCRIPTION: hc4 oled holder
 USES: size_z=floorthick
 ```
 
-**access_port**
+**access_panel**
 ```
 DESCRIPTION: bottom access for sd and emmc
 

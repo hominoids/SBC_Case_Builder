@@ -151,12 +151,12 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     if(type == "feet") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
     }
-    if(type == "access_port") {
+    if(type == "access_panel") {
         if(rotation[2] == 180) {
-            translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data[0],mask);
+            translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_panel([size_x,size_y,size_z],data[0],mask);
         }
         else {
-            translate([loc_x,loc_y,loc_z])  rotate(rotation) access_port([size_x,size_y,size_z],data[0],mask);
+            translate([loc_x,loc_y,loc_z])  rotate(rotation) access_panel([size_x,size_y,size_z],data[0],mask);
         }
     }
     if(type == "access_cover") {

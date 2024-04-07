@@ -606,9 +606,24 @@ module case_bottom(case_design) {
             }
 
         }
-        // ui access port
-        if(bottom_access_port_enable == true) {
-//            translate([access_port_location[0],access_port_location[1], floorthick+.12]) 
+        // ui access panel
+        if(bottom_access_panel_enable == true) {
+            if(access_panel_rotation == 0) {
+                translate([access_panel_location[0],access_panel_location[1], 0]) rotate([0,0,access_panel_rotation]) 
+                    access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [true,10,2,"default"]);
+            }
+            if(access_panel_rotation == 90) {
+                translate([access_panel_location[0]+access_panel_size[1],access_panel_location[1], 0]) rotate([0,0,access_panel_rotation]) 
+                    access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [true,10,2,"default"]);
+            }
+            if(access_panel_rotation == 180) {
+                translate([access_panel_location[0]+access_panel_size[0],access_panel_location[1]+access_panel_size[1],0]) rotate([0,0,access_panel_rotation]) 
+                    access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [true,10,2,"default"]);
+            }
+            if(access_panel_rotation == 270) {
+                translate([access_panel_location[0],access_panel_location[1]+access_panel_size[0], 0]) rotate([0,0,access_panel_rotation]) 
+                    access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [true,10,2,"default"]);
+            }
         }
         // sbc openings
         if(sbc_highlight == true) {
@@ -661,6 +676,25 @@ module case_bottom(case_design) {
             if(class == "add2" && face == "bottom") {
                 parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data, [false,mask[1],mask[2],mask[3]]);
             }
+        }
+    }
+    // ui access port
+    if(bottom_access_panel_enable == true) {
+        if(access_panel_rotation == 0) {
+            translate([access_panel_location[0],access_panel_location[1], 0]) rotate([0,0,access_panel_rotation]) 
+                access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [false,10,2,"default"]);
+        }
+        if(access_panel_rotation == 90) {
+            translate([access_panel_location[0]+access_panel_size[1],access_panel_location[1], 0]) rotate([0,0,access_panel_rotation]) 
+                access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [false,10,2,"default"]);
+        }
+        if(access_panel_rotation == 180) {
+            translate([access_panel_location[0]+access_panel_size[0],access_panel_location[1]+access_panel_size[1],0]) rotate([0,0,access_panel_rotation]) 
+                access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [false,10,2,"default"]);
+        }
+        if(access_panel_rotation == 270) {
+            translate([access_panel_location[0],access_panel_location[1]+access_panel_size[0], 0]) rotate([0,0,access_panel_rotation]) 
+                access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [false,10,2,"default"]);
         }
     }
 }

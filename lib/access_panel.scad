@@ -15,17 +15,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    access_port(size, orientation)
+    access_panel(size, orientation)
     access_cover(size, orientation)
 
 */
 
 /*
-           NAME: access_port
+           NAME: access_panel
     DESCRIPTION: creates opening and structure for access openings
            TODO: none
 
-          USAGE: access_port(size[], orientation, mask)
+          USAGE: access_panel(size[], orientation, mask)
 
                         size[0] = size_x
                         size[1] = size_y
@@ -38,7 +38,7 @@
 
 */
 
-module access_port(size, orientation, mask) {
+module access_panel(size, orientation, mask) {
 
     size_x = size[0];
     size_y = size[1];
@@ -115,7 +115,7 @@ module access_port(size, orientation, mask) {
     DESCRIPTION: creates covers for access port openings
            TODO: none
 
-          USAGE: access_port(size[], orientation)
+          USAGE: access_panel(size[], orientation)
 
                         size[0] = size_x
                         size[1] = size_y
