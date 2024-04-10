@@ -27,7 +27,7 @@ include <./sbc_case_builder_accessories.cfg>;
 /* [View] */
 // viewing mode "model", "platter", "part"
 view = "model"; // [model, platter, part]
-individual_part = "bottom"; // [top, bottom, right, left, front, rear, accessories]
+individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_panel, accessories]
 // single board computer model
 sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007"]
 
@@ -40,7 +40,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top]
+case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-stx,adapter_nano-itx,adapter_nuc,adapter_pico-itx]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -100,7 +100,7 @@ tol = .25; //[-.5:.0625:.5]
 sbc_top_standoffs = true;
 top_standoff_reverse = true;
 // enable wall support for standoffs
-top_sidewall_support = true;
+top_sidewall_support = false;
 top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
 top_standoff_pillar = "hex"; //[hex, round]
 top_standoff_diameter = 5.75; //[0:.01:10]
@@ -134,7 +134,7 @@ top_front_right_support = "front";  //[none,left,rear,front,right]
 sbc_bottom_standoffs = true;
 bottom_standoff_reverse = false;
 // enable wall support for standoffs
-bottom_sidewall_support = true;
+bottom_sidewall_support = false;
 bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
 bottom_standoff_pillar = "hex"; //[hex, round]
 bottom_standoff_diameter = 5.75; //[2:.01:10]
@@ -437,6 +437,10 @@ if (view == "platter") {
     if(case_design == "paper_split-top" || case_design == "paper_full-top") {
         case_folded(case_design);
     }
+    if(case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_mini-stx" || case_design == "adapter_nano-itx" || case_design == "adapter_nuc" || case_design == "adapter_pico-itx") {
+        color("dimgrey",1) case_adapter(case_design);
+        color("dimgrey",1) translate([-180, 0, 4]) rotate([270,0,0]) io_panel();
+    }
     if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
         echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
     }
@@ -690,6 +694,14 @@ if (view == "model") {
                 }
             }        
         }
+        if(case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_mini-stx" || case_design == "adapter_nano-itx" || case_design == "adapter_nuc" || case_design == "adapter_pico-itx") {
+            color("dimgrey",1) case_adapter(case_design);
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
+            color("dimgrey",1) translate([0,-4,0]) io_panel();
+        }
         // ui access panel
         if(bottom_access_panel_enable == true) {
             if(access_panel_rotation == 0) {
@@ -786,6 +798,12 @@ if (view == "part") {
     }
     if(individual_part == "bottom") {
         case_bottom(case_design);
+        if(case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_mini-stx" || case_design == "adapter_nano-itx" || case_design == "adapter_nuc" || case_design == "adapter_pico-itx") {
+            color("dimgrey",1) case_adapter(case_design);
+        }
+        else {
+            case_bottom(case_design);
+        }
     }
     if(individual_part == "front") {
         if(case_design == "panel") {
@@ -815,6 +833,11 @@ if (view == "part") {
         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
                 case_side(case_design,"left");
+        }
+    }
+    if(individual_part == "io_panel") {
+        if(case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_mini-stx" || case_design == "adapter_nano-itx" || case_design == "adapter_nuc" || case_design == "adapter_pico-itx") {
+            color("dimgrey",1) translate([0, 0, 4]) rotate([270,0,0]) io_panel();
         }
     }
     if(individual_part == "accessories") {

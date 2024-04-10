@@ -23,6 +23,7 @@
 use <./SBC_Model_Framework/sbc_models_library.scad>
 
 include <./mod/add.scad>;
+include <./mod/case_adapter.scad>;
 include <./mod/case_bottom.scad>;
 include <./mod/case_side.scad>;
 include <./mod/case_top.scad>;

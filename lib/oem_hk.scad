@@ -41,6 +41,7 @@
     hk_m1s_ups()
     proto_m1s()
     proto_ups()
+    hk_xu4_shifter_shield(mask)
 
 */
 
@@ -1568,3 +1569,59 @@ module hk_m1s_case_holes(type = "landscape") {
     }
 }
 
+
+/*
+           NAME: hk_xu4_shifter_shield
+    DESCRIPTION: hardkernel xu4 shifter shield
+           TODO: none
+
+          USAGE: hk__xu4_shifter_shield(mask)
+
+                                        mask[0] = enablemask
+                                        mask[1] = mask length
+                                        mask[2] = mask setback
+                                        mask[3] = mask style, "default"
+*/
+
+module hk_xu4_shifter_shield(mask) {
+
+    size = [83,59,1];
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true) {
+        switch("slide_4x9", 28, 55, 0, "top", 180, [5, 4, .8], ["dimgrey"], size[2], true, [true, 10, 2, "default"]);
+        gpio("open", 25, 1, 0, "top", 180, [20,2,6], ["thruhole","black","male",2.54,"silver"], size[2], true, [true, 10, 0, "block"]);
+    }
+    if(enablemask == false) {
+        difference() {
+            union() {
+                color("#18525d") slab(size,3.5);
+                pcbhole("round",3.5,3.5,0,"top",0,[3,0,0],["solid","#fee5a6","none",5,"left_rear"],size[2],false,[false,10,2,"default"]);
+                pcbhole("round",3.5,55.5,0,"top",0,[3,0,0],["solid","#fee5a6","none",5,"left_front"],size[2],false,[false,10,2,"default"]);
+                pcbhole("round",79.5,3.5,0,"top",0,[3,0,0],["solid","#fee5a6","none",5,"right_rear"],size[2],false,[false,10,2,"default"]);
+                pcbhole("round",79.5,55.5,0,"top",0,[3,0,0],["solid","#fee5a6","none",5,"right_front"],size[2],false,[false,10,2,"default"]);
+            }
+            color("#fee5a6") translate([3.5,3.5,-1]) cylinder(d=3, h=4);
+            color("#fee5a6") translate([3.5,55.5,-1]) cylinder(d=3, h=4);
+            color("#fee5a6") translate([79.5,3.5,-1]) cylinder(d=3, h=4);
+            color("#fee5a6") translate([79.5,55.5,-1]) cylinder(d=3, h=4);
+        }
+        ic("generic", 43, 39.5, 0, "top", 0, [5, 4, .8], ["dimgrey"], size[2], false, [false, 0, 0, "none"]);
+        ic("generic", 53, 39.5, 0, "top", 0, [5, 4, .8], ["dimgrey"], size[2], false, [false, 0, 0, "none"]);
+        ic("generic", 63, 39.5, 0, "top", 0, [5, 4, .8], ["dimgrey"], size[2], false, [false, 0, 0, "none"]);
+        header("open", 77, 36.5, 0, "bottom", 0, [2,6,16], ["thruhole","black","female",2,"silver"], size[2], false, [true,10,2,"default"]);
+        header("open", 39, 53, 0, "bottom", 0, [15,2,16], ["thruhole","black","female",2,"silver"], size[2], false, [true,10,2,"default"]);
+        gpio("open", 25, 1, 0, "top", 180, [20,2,6], ["thruhole","black","male",2.54,"silver"], size[2], false, [true,10,2,"default"]);
+        header("open", 8, 1, 0, "top", 0, [6,1,6], ["thruhole","black","male",2.54,"silver"], size[2], false, [true,10,2,"default"]);
+        switch("slide_4x9", 28, 55, 0, "top", 180, [5, 4, .8], ["dimgrey"], size[2], false, [true, 0, 0, "none"]);
+        pcbpad("round", 9.27, 4.81, 0, "top", 0, [6, 21, .8], [1,"#fee5a6",1.7,"front"], size[2], false, [false, 0, 0, "none"]);
+        pcbpad("round", 24.54, 35.27, 0, "top", 0, [2, 9, .8], [1,"#fee5a6",1.7,"front"], size[2], false, [false, 0, 0, "none"]);
+        
+    }
+}
