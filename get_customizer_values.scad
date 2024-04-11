@@ -1,9 +1,9 @@
 // Gets a list of SBCs from the SBC Model Framework and Accessory sets
 //  for use with SBC Case Builder.
 // After running this script, copy the output from the first Echo command into the
-// list of SBC boards in `sbc_case_builder.scad:83`
+// list of SBC boards in `sbc_case_builder.scad:32`
 // Also copy the output from the second Echo command into the list of case acceessory
-// sets in `sbc_case_builder.scad:164`
+// sets in `sbc_case_builder.scad:258`
 
 include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder_accessories.cfg>;

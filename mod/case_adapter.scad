@@ -27,7 +27,7 @@
 module case_adapter(case_design) {
 
 mb_adapters=[
-            ["adapter_atx", 304.8, 243.84, ["left_rear", 6.35, 33.02], ["right_rear", 288.29, 10.16], 
+            ["adapter_atx", 304.8, 243.84, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 288.29, 10.16], 
                                            ["left_middle", 6.35, 165.1], ["middle_middle", 163.83, 165.1], ["right_middle", 288.29, 165.1],
                                            ["left_front", 6.35, 237.49], ["middle_front", 163.83, 237.49], ["right_front", 288.29, 237.49]],
             ["adapter_micro-atx", 243.84, 243.84, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 211.99, 10.16], 
@@ -37,21 +37,13 @@ mb_adapters=[
             ["adapter_dtx", 230.2, 243.84, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 211.99, 10.16], 
                                            ["left_middle", 6.35, 165.1], ["middle_middle", 163.83, 165.1], ["right_middle", 209.55, 165.1],
                                            ["left_front", 6.35, 237.49], ["right_front", 163.83, 237.49]], 
-            ["adapter_flex-atx", 228.6, 190.5, ["left_rear", 6.35, 33.02], ["right_rear", 211.99, 10.16], 
+            ["adapter_flex-atx", 228.6, 190.5, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 211.99, 10.16], 
                                                ["left_front", 6.35, 165.1], ["middle_front", 163.83, 165.1], 
                                                ["right_front", 209.55, 165.1]],
             ["adapter_mini-dtx", 203.2, 170.18, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
                                                 ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]], 
             ["adapter_mini-itx", 170, 170, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
                                            ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]],
-            ["adapter_mini-stx", 147, 140, ["left_rear", 4.8, 5.15], ["right_rear", 139.8, 5.15],
-                                           ["left_front", 4.8, 134.85], ["right_front", 139.8, 134.85]],
-            ["adapter_nano-itx", 120, 120, ["left_rear", 6.35, 33.02], ["right_rear", 113.65, 6.35],
-                                           ["left_front", 6.35, 113.65], ["right_front", 113.65, 113.65]],
-            ["adapter_nuc", 101.6, 101.6, ["left_rear", 3.3, 7.3], ["right_rear", 98.3, 7.3],
-                                          ["left_front", 3.3, 97.7], ["right_front", 98.3, 97.7]],
-            ["adapter_pico-itx", 100, 72, ["left_rear", 2.97, 3.04], ["right_rear", 97.05, 3.04], 
-                                          ["left_front", 2.97, 69.08], ["right_front", 97.05, 69.08]]
                                            ];
 
     mb = search([case_design],mb_adapters);
@@ -61,7 +53,7 @@ mb_adapters=[
     mba_offset_x = -6.35;
     mba_offset_y = 0;
     mba_radius = 5;
-    mba_standoff = [5.75, floorthick, 3.4, 7, floorthick, "none", "round", "none", true, false, 0, 0];
+    mba_standoff = [6.75, floorthick, 4, 7, floorthick, "none", "round", "none", true, false, 0, 0];
     io_offset = 6.35;
     adj = .01;
 
@@ -233,10 +225,8 @@ module io_panel() {
             translate([0,0,0]) cube([io_window_x,4,io_window_z]);
         }
         translate([2,-2,2]) cube([io_window_x-4,5,io_window_z-4]);
-        translate([0 ,6,bottom_height-pcb_z+pcb_loc_z-adj]) 
+        translate([8.79 ,6,bottom_height-pcb_z+pcb_loc_z+2]) 
             sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
     }
 }
-
- translate([-8.79,-4,0])
 
