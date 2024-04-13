@@ -30,6 +30,7 @@ module case_top(case_design) {
     vu_rotation = [15,0,0];
     case_fn = 360;     // circle segments for round cases
     case_ffn = 90;     // circle segments for fillet of round cases
+    adj = .01;
 
     difference() {
         union() {
@@ -293,6 +294,13 @@ module case_top(case_design) {
                             }
                         }
                     }
+                    // rear io plate support for standard form motherboards
+//                    if(rear_io_plate == true) {
+//                        difference() {
+//                            translate([-10.79+pcb_loc_x,-gap-adj,-2+bottom_height-pcb_z+pcb_loc_z-1]) cube([162.75, 13, 46]);
+//                            translate([-10.79+pcb_loc_x-2*adj,-gap-1,pcb_z+pcb_loc_z]) cube([162.75+2, 15, bottom_height+1]);
+//                        }
+//                    }
                 }
                 // pcb standoff holes
                 if(sbc_top_standoffs == true) {
@@ -378,6 +386,10 @@ module case_top(case_design) {
                         }   
                     }
                 }
+                // rear io plate opening for standard form motherboards
+                if(rear_io_plate == true) {
+                    translate([-8.79+pcb_loc_x,-4.5,-2+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
+                }
             }
             // pcb standoffs
             if(sbc_top_standoffs == true) {
@@ -395,7 +407,7 @@ module case_top(case_design) {
                         if (pcbhole_pos == "left_rear" && top_rear_left_enable == true) {
                             top_support = top_sidewall_support == true ? top_rear_left_support : "none";
                             normal_standoff = [top_standoff[0],
-                                                top_height+pcb_loc_z+top_rear_left_adjust,
+                                                top_height-pcb_loc_z+top_rear_left_adjust,
                                                 top_standoff[2],
                                                 top_standoff[3],
                                                 top_standoff[4],
@@ -411,7 +423,7 @@ module case_top(case_design) {
                         if (pcbhole_pos == "left_front" && top_front_left_enable == true) {
                             top_support = top_sidewall_support == true ? top_front_left_support : "none";
                             normal_standoff = [top_standoff[0],
-                                                top_height+pcb_loc_z+top_front_left_adjust,
+                                                top_height-pcb_loc_z+top_front_left_adjust,
                                                 top_standoff[2],
                                                 top_standoff[3],
                                                 top_standoff[4],
@@ -427,7 +439,7 @@ module case_top(case_design) {
                         if (pcbhole_pos == "right_rear" && top_rear_right_enable == true) {
                             top_support = top_sidewall_support == true ? top_rear_right_support : "none";
                             normal_standoff = [top_standoff[0],
-                                                top_height+pcb_loc_z+top_rear_right_adjust,
+                                                top_height-pcb_loc_z+top_rear_right_adjust,
                                                 top_standoff[2],
                                                 top_standoff[3],
                                                 top_standoff[4],
@@ -443,7 +455,7 @@ module case_top(case_design) {
                         if (pcbhole_pos == "right_front" && top_front_right_enable == true) {
                             top_support = top_sidewall_support == true ? top_front_right_support : "none";
                             normal_standoff = [top_standoff[0],
-                                                top_height+pcb_loc_z+top_front_right_adjust,
+                                                top_height-pcb_loc_z+top_front_right_adjust,
                                                 top_standoff[2],
                                                 top_standoff[3],
                                                 top_standoff[4],
@@ -464,7 +476,7 @@ module case_top(case_design) {
                 // extended right-rear standoff
                 if((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 || pcb_loc_y >= 10) && ext_top_rear_right_enable == true) {
                     normal_standoff = [ext_top_standoff[0],
-                                        top_height+pcb_loc_z+ext_top_rear_right_adjust,
+                                        top_height+ext_top_rear_right_adjust,
                                         ext_top_standoff[2],
                                         ext_top_standoff[3],
                                         ext_top_standoff[4],
@@ -484,7 +496,7 @@ module case_top(case_design) {
                         (width-pcb_loc_x-pcb_width-(gap+2*wallthick) <= 10 && depth-pcb_loc_y-pcb_depth >= 10)) &&
                             ext_top_front_right_enable == true) {
                     normal_standoff = [ext_top_standoff[0],
-                                        top_height+pcb_loc_z+ext_top_front_right_adjust,
+                                        top_height+ext_top_front_right_adjust,
                                         ext_top_standoff[2],
                                         ext_top_standoff[3],
                                         ext_top_standoff[4],
@@ -502,7 +514,7 @@ module case_top(case_design) {
                 // extended left-rear standoff
                 if((pcb_loc_x >= 10 || pcb_loc_y >= 10) && ext_top_rear_left_enable == true) {
                             normal_standoff = [ext_top_standoff[0],
-                                                top_height+pcb_loc_z+ext_top_rear_left_adjust,
+                                                top_height+ext_top_rear_left_adjust,
                                                 ext_top_standoff[2],
                                                 ext_top_standoff[3],
                                                 ext_top_standoff[4],
@@ -522,7 +534,7 @@ module case_top(case_design) {
                             (pcb_loc_x >= 10 && depth-(pcb_loc_y+pcb_depth) <= 10)) &&
                                 ext_top_front_left_enable == true) {
                     normal_standoff = [ext_top_standoff[0],
-                                        top_height+pcb_loc_z+ext_top_front_left_adjust,
+                                        top_height+ext_top_front_left_adjust,
                                         ext_top_standoff[2],
                                         ext_top_standoff[3],
                                         ext_top_standoff[4],

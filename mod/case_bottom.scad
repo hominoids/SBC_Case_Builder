@@ -300,6 +300,13 @@ module case_bottom(case_design) {
                             }
                         }
                     }
+                    // rear io plate support for standard form motherboards
+//                    if(rear_io_plate == true) {
+//                        difference() {
+//                            translate([-10.79+pcb_loc_x,-gap-adj,-2+bottom_height-pcb_z+pcb_loc_z-1]) cube([162.75, 13, 46]);
+//                            translate([-10.79+pcb_loc_x-1,-gap-2*adj,-pcb_z+pcb_loc_z+bottom_height]) cube([162.75+2, 15, top_height+1]);
+//                        }
+//                    }
                 }
                 // tray side attachment holes
                 if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
@@ -456,6 +463,10 @@ module case_bottom(case_design) {
                         }   
                     }
                 }
+                // rear io plate opening for standard form motherboards
+                if(rear_io_plate == true) {
+                    translate([-8.79+pcb_loc_x,-4.5,-2+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
+                }
             }
             // pcb standoffs
             if(sbc_bottom_standoffs  == true) {
@@ -544,7 +555,7 @@ module case_bottom(case_design) {
                 // extended right-rear standoff
                 if((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= 10 || pcb_loc_y >= 10) && ext_bottom_rear_right_enable == true) {
                     normal_standoff = [ext_bottom_standoff[0],
-                                        bottom_height+pcb_loc_z+ext_bottom_rear_right_adjust,
+                                        bottom_height+ext_bottom_rear_right_adjust,
                                         ext_bottom_standoff[2],
                                         ext_bottom_standoff[3],
                                         ext_bottom_standoff[4],
@@ -564,7 +575,7 @@ module case_bottom(case_design) {
                         (width-pcb_loc_x-pcb_width-(gap+2*wallthick) <= 10 && depth-pcb_loc_y-pcb_depth >= 10)) &&
                             ext_bottom_front_right_enable == true) {
                     normal_standoff = [ext_bottom_standoff[0],
-                                        bottom_height+pcb_loc_z+ext_bottom_front_right_adjust,
+                                        bottom_height+ext_bottom_front_right_adjust,
                                         ext_bottom_standoff[2],
                                         ext_bottom_standoff[3],
                                         ext_bottom_standoff[4],
@@ -581,7 +592,7 @@ module case_bottom(case_design) {
                 // extended left-rear standoff
                 if((pcb_loc_x >= 10 || pcb_loc_y >= 10) && ext_bottom_rear_left_enable == true) {
                     normal_standoff = [ext_bottom_standoff[0],
-                                        bottom_height+pcb_loc_z+ext_bottom_rear_left_adjust,
+                                        bottom_height+ext_bottom_rear_left_adjust,
                                         ext_bottom_standoff[2],
                                         ext_bottom_standoff[3],
                                         ext_bottom_standoff[4],
@@ -601,7 +612,7 @@ module case_bottom(case_design) {
                             (pcb_loc_x >= 10 && depth-(pcb_loc_y+pcb_depth) <= 10)) && 
                                 ext_bottom_front_left_enable == true) {
                     normal_standoff = [ext_bottom_standoff[0],
-                                        bottom_height+pcb_loc_z+ext_bottom_front_left_adjust,
+                                        bottom_height+ext_bottom_front_left_adjust,
                                         ext_bottom_standoff[2],
                                         ext_bottom_standoff[3],
                                         ext_bottom_standoff[4],
