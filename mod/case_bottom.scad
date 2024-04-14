@@ -91,7 +91,7 @@ module case_bottom(case_design) {
                             pcbhole_pos = sbc_data[s[0]][i+10][4];
 
                             if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_rear") {
-                                if(pcbhole_y <= 10) {
+                                if((pcbhole_y <= 10 && pcbhole_x <= 10) || (ext_bottom_standoffs == true && ext_bottom_rear_left_enable == true)) {
                                     translate([-adj-gap,wallthick+gap+10,floorthick+3.4]) rotate([90,0,90]) 
                                         cylinder(d=10, h=4, $fn=6);
                                 }
@@ -101,8 +101,8 @@ module case_bottom(case_design) {
                                 }
                             }
                             if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_front") {
-                                if(pcbhole_y >= pcb_depth-10) {
-                                    translate([-adj-gap,wallthick-gap+pcb_depth-14,floorthick+3.4]) 
+                                if((pcbhole_y >= pcb_depth+case_offset_y-10 && pcbhole_x <= 10) || (ext_bottom_standoffs == true && ext_bottom_front_left_enable == true)) {
+                                    translate([-adj-gap,wallthick-gap+pcb_depth+case_offset_y-14,floorthick+3.4]) 
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                                 else {
@@ -111,7 +111,7 @@ module case_bottom(case_design) {
                                 }
                             }
                             if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_rear") {
-                                if(pcbhole_y <= 10) {
+                                if((pcbhole_y <= 10 && pcbhole_x >= pcb_width-10) || (ext_bottom_standoffs == true && ext_bottom_rear_right_enable == true)) {
                                     translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+10,floorthick+3.4])
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
@@ -121,8 +121,8 @@ module case_bottom(case_design) {
                                 }
                             }
                             if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front") {
-                                if(pcbhole_y >= pcb_depth-10) {
-                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick-gap+pcb_depth-14,floorthick+3.4]) 
+                                if((pcbhole_y >= pcb_depth+case_offset_y-10 && pcbhole_x >= width-10) || (ext_bottom_standoffs == true && ext_bottom_front_right_enable == true)) {
+                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick-gap+pcb_depth+case_offset_y-14,floorthick+3.4]) 
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                                 else {
@@ -300,13 +300,6 @@ module case_bottom(case_design) {
                             }
                         }
                     }
-                    // rear io plate support for standard form motherboards
-//                    if(rear_io_plate == true) {
-//                        difference() {
-//                            translate([-10.79+pcb_loc_x,-gap-adj,-2+bottom_height-pcb_z+pcb_loc_z-1]) cube([162.75, 13, 46]);
-//                            translate([-10.79+pcb_loc_x-1,-gap-2*adj,-pcb_z+pcb_loc_z+bottom_height]) cube([162.75+2, 15, top_height+1]);
-//                        }
-//                    }
                 }
                 // tray side attachment holes
                 if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
@@ -321,7 +314,7 @@ module case_bottom(case_design) {
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
 
                         if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_rear") {
-                            if(pcbhole_y <= 10) {
+                            if((pcbhole_y <= 10 && pcbhole_x <= 10) || (ext_bottom_standoffs == true && ext_bottom_rear_left_enable == true)) {
                                 translate([-wallthick-gap-adj-6,wallthick+gap+10,floorthick+3.4]) rotate([0,90,0]) 
                                     cylinder(d=3, h=10+sidethick+(2*adj));
                                 translate([-gap+.6,wallthick+gap+10,floorthick+3.4]) rotate([90,0,90]) 
@@ -335,21 +328,21 @@ module case_bottom(case_design) {
                             }
                         }
                         if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "left_front") {
-                            if(pcbhole_y >= pcb_depth-10) {
-                                translate([-wallthick-gap-adj-6,wallthick-gap+pcb_depth-14,
+                            if((pcbhole_y >= pcb_depth+case_offset_y-10 && pcbhole_x <= 10) || (ext_bottom_standoffs == true && ext_bottom_front_left_enable == true)) {
+                                translate([-wallthick-gap-adj-6,wallthick-gap+pcb_depth+case_offset_y-14,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                                translate([-gap+.6,wallthick-gap+pcb_depth-14,floorthick+3.4]) 
+                                translate([-gap+.6,wallthick-gap+pcb_depth+case_offset_y-14,floorthick+3.4]) 
                                     rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                             }
                             else {
-                                translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth-8,
+                                translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth+case_offset_y-8,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                                translate([-gap+.6,wallthick+gap+pcb_depth-8,floorthick+3.4]) 
+                                translate([-gap+.6,wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
                                     rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                             }
                         }
                         if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_rear") {
-                            if(pcbhole_y <= 10) {
+                            if((pcbhole_y <= 10 && pcbhole_x >= pcb_width-10) || (ext_bottom_standoffs == true && ext_bottom_rear_right_enable == true)) {
                                 translate([width-2*(wallthick+gap)-sidethick-adj,wallthick+gap+10,floorthick+3.4]) 
                                     rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                 translate([width-3.5-(2*wallthick)-gap-.6,wallthick+gap+10,floorthick+3.4]) 
@@ -363,16 +356,16 @@ module case_bottom(case_design) {
                             }
                         }
                         if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front") {
-                            if(pcbhole_y >= pcb_depth-10) {
-                                translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth-14,
+                            if((pcbhole_y >= pcb_depth+case_offset_y-10 && pcbhole_x >= width-10) || (ext_bottom_standoffs == true && ext_bottom_front_right_enable == true)) {
+                                translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth+case_offset_y-14,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick-gap+pcb_depth-14,
+                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick-gap+pcb_depth+case_offset_y-14,
                                     floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                             }
                             else {
-                                translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth-8,
+                                translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth+case_offset_y-8,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
-                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick-gap+pcb_depth-8,
+                                translate([width-3.5-(2*wallthick)-gap-.6,wallthick-gap+pcb_depth+case_offset_y-8,
                                     floorthick+3.4])rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                             }
                         }
@@ -465,7 +458,12 @@ module case_bottom(case_design) {
                 }
                 // rear io plate opening for standard form motherboards
                 if(rear_io_plate == true) {
-                    translate([-8.79+pcb_loc_x,-4.5,-2+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
+                    if(sbc_model == "mini-stx") {
+                        translate([6.2+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
+                    }
+                    else {
+                        translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
+                    }
                 }
             }
             // pcb standoffs
@@ -485,7 +483,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "left_rear" && bottom_rear_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_left_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
+                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -501,7 +499,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "left_front" && bottom_front_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_left_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust,
+                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_front_left_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -517,7 +515,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "right_rear" && bottom_rear_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_right_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
+                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -533,7 +531,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "right_front" && bottom_front_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_right_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust,
+                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_front_right_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -691,11 +689,11 @@ module case_bottom(case_design) {
         }
         // sbc openings
         if(sbc_highlight == true) {
-            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
+            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z-adj]) 
                 sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         else {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z-adj]) 
                 sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         // indents

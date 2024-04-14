@@ -357,7 +357,7 @@ mb_adapters=[
 */
 module io_plate() {
 
-    io_window_x = case_design == "adapter_mini-stx" ? 124.75 : 158.75;
+    io_window_x = case_design == "adapter_mini-stx" ? 123.95 : 158.75;
     io_window_y = 4;
     io_window_z = case_design == "adapter_mini-stx" ? 40 : 44;
     io_offset = case_design == "adapter_mini-stx" ? 1.2 : 10.79;
