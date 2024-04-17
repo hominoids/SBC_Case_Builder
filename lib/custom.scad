@@ -15,17 +15,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    h3_port_extender(style, mask = false)
-    h3_port_extender_holder(part, offset)
+    hk_h3_port_extender(style, mask = false)
+    hk_h3_port_extender_holder(part, offset)
 
 */
 
 /*
-           NAME: h3_port_extender
+           NAME: hk_h3_port_extender
     DESCRIPTION: @mctom's odroid-h3 gpio port extender
            TODO: none
 
-          USAGE: h3_port_extender(style, mask)
+          USAGE: hk_h3_port_extender(style, mask)
 
                                   style = "header", "remote"
                                 mask[0] = true enables component mask
@@ -34,7 +34,7 @@
                                 mask[3] = mstyle "default"
 */
 
-module h3_port_extender(style, mask) {
+module hk_h3_port_extender(style, mask) {
 
     enablemask = mask[0];
     mlength = mask[1];
@@ -99,17 +99,17 @@ module h3_port_extender(style, mask) {
 
 
 /*
-           NAME: h3_port_extender_holder
+           NAME: hk_h3_port_extender_holder
     DESCRIPTION: holder for the @mctom's remote h3 port extender
            TODO: none
 
-          USAGE: h3_port_extender_holder(part, offset)
+          USAGE: hk_h3_port_extender_holder(part, offset)
 
                                          part = "top","bottom","both"
-                                         mask = true or false, mask for openings
+                                         offset = distance from mount face
 */
 
-module h3_port_extender_holder(part,offset=2) {
+module hk_h3_port_extender_holder(part,offset=2) {
 
     size = [16-offset,40,5.5];
     adj = .01;

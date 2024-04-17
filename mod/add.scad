@@ -48,108 +48,13 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     msetback = mask[2];
     mstyle = mask[3];
 
-    if(type == "rectangle") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) slab_r([size_x,size_y,size_z],data[0]);
-    }
-    if(type == "round") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) cylinder(d=size_x,h=size_z);
-    }
-    if(type == "slot") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) slot(size_x,size_y,size_z);
-    }
-    if(type == "text") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) linear_extrude(height = size_z) text(data[1], size=data[0]);
-    }    
-    if(type == "art") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) art(data[0],data[1],data[2]); 
-    }
-    if(type == "stl_model") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) stl_model(data[0],data[1]); 
-    }
-    if(type == "standoff") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data[0], mask);
-    }
-    if(type == "button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[0],[size_x,size_y,size_z],data[1],data[2],mask); 
-    }
-    if(type == "button_top") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) button_assembly(data[0],size_x,size_z); 
-    }
-    if(type == "pcb_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) pcb_holder([size_x,size_y,size_z],data[0]);
-    }
-    if(type == "batt_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) batt_holder(data[0]);
-    }
-    if(type == "hk_uart_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_holder(mask);
-    }
-    if(type == "hk_uart_strap") {
-        color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_strap();
-    }
-    if(type == "hd_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1], "horizontal", "none"); 
-    }
-    if(type == "hd_vertleft") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1], "vertical", "left"); 
-    }
-    if(type == "hd_vertright") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1], "vertical", "right"); 
-    }
-    if(type == "hd25") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd25(data[0]); 
-    }
-    if(type == "hd35") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd35(); 
-    }
-    if(type == "hk_wb2") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_wb2(); 
-    }
-    if(type == "hc4_oled") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled(mask); 
-    }
-    if(type == "hc4_oled_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled_holder(face, size_z, mask); 
-    }
-    if(type == "hk_netcard") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_netcard(mask); 
-    }
-    if(type == "hk_lcd35") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_35lcd(mask); 
-    }
-    if(type == "hk_m1s_ups") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_m1s_ups(mask); 
-    }
-    if(type == "hk_uart") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart(mask); 
-    }
-    if(type == "hk_vu7c") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_vu7c(data[0],data[1],mask); 
-    }
-    if(type == "hk_boom") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom(data[0],data[1],mask); 
-    }
-    if(type == "boom_speaker") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker(data[1],true,data[0],mask); 
-    }
-    if(type == "boom_grill") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_grill(data[0],size_z); 
-    }
-    if(type == "boom_speaker_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) boom_speaker_holder(data[0],data[1]); 
-    }
-    if(type == "hk_speaker") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_speaker(mask); 
-    }
-    if(type == "fan_cover") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z, data[0]);
-    }
-    if(type == "vent_panel_hex") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_panel_hex(x=size_x, y=size_y, thick=size_z, 
-            cell_size=data[0], cell_spacing=data[1], border=data[3], borders=data[2]);
-    }
-    if(type == "feet") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
+    if(type == "access_cover") {
+        if(rotation[2] == 180) {
+            color("grey",1) translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_cover([size_x,size_y,size_z],data[0]);
+        }
+        else {
+            color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) access_cover([size_x,size_y,size_z],data[0]);
+        }
     }
     if(type == "access_panel") {
         if(rotation[2] == 180) {
@@ -159,33 +64,145 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
             translate([loc_x,loc_y,loc_z])  rotate(rotation) access_panel([size_x,size_y,size_z],data[0],mask);
         }
     }
-    if(type == "access_cover") {
-        if(rotation[2] == 180) {
-            color("grey",1) translate([loc_x+size_x,loc_y+size_y,loc_z])  rotate(rotation) access_cover([size_x,size_y,size_z],data[0]);
-        }
-        else {
-            color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) access_cover([size_x,size_y,size_z],data[0]);
-        }
+    if(type == "art") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) art(data[0],data[1],data[2]); 
     }
-    if(type == "boom_vring") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) boom_vring(data[0]);
+    if(type == "batt_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) batt_holder(data[0]);
     }
-    if(type == "h3_port_extender") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender(data[0],mask); 
+    if(type == "button") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) buttons(data[0],[size_x,size_y,size_z],data[1],data[2],mask); 
     }
-    if(type == "h3_port_extender_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) h3_port_extender_holder(data[1],data[0]); 
+    if(type == "button_assembly") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) button_assembly(data[0],size_x,size_z); 
     }
-    if(type == "hk_pwr_button") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(mask); 
+    if(type == "fan_cover") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_cover(size_x, size_z, data[0]);
+    }
+    if(type == "feet") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
+    }
+    if(type == "hd_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1],data[2],data[3]); 
+    }
+    if(type == "hk_boom_grill") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_grill(data[0],size_z); 
+    }
+    if(type == "hk_boom_speaker_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker_holder(data[0],data[1]); 
+    }
+    if(type == "hk_boom_vring") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) hk_boom_vring(data[0]);
+    }
+    if(type == "hk_h3_port_extender_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_h3_port_extender_holder(data[1],data[0]); 
+    }
+    if(type == "hk_hc4_oled_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled_holder(face, size_z, mask); 
+    }
+    if(type == "hk_uart_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_holder(mask);
+    }
+    if(type == "hk_uart_strap") {
+        color("grey",1) translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart_strap();
     }
     if(type == "keyhole") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0],mask); 
     }
+    if(type == "nut_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z); 
+    }
+    if(type == "pcb_holder") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) pcb_holder([size_x,size_y,size_z],data[0]);
+    }
+    if(type == "rectangle") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) slab_r([size_x,size_y,size_z],data[0]);
+    }
+    if(type == "round") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) cylinder(d=size_x,h=size_z);
+    }
+    if(type == "slot") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) slot(size_x,size_y,size_z);
+    }
+    if(type == "sphere") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) sphere(d=size_x);
+    }
+    if(type == "standoff") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) standoff(data[0], mask);
+    }
+    if(type == "text") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) linear_extrude(height = size_z) text(data[1], size=data[0]);
+    }    
+    if(type == "vent_panel_hex") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) vent_panel_hex(size_x, size_y, thick=size_z, 
+            cell_size=data[0], cell_spacing=data[1], border=data[3], borders=data[2]);
+    }
+
+    // models
+    if(type == "adafruit_lcd") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_lcd(mask); 
+    }
     if(type == "dsub") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0], data[1], mask); 
     }
-    if(type == "nut_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z); 
+    if(type == "fan") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) fans(data[0],mask); 
+    }
+    if(type == "hd25") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd25(data[0]); 
+    }
+    if(type == "hd35") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd35(); 
+    }
+    if(type == "hk_boom") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom(data[0],data[1],mask); 
+    }
+    if(type == "hk_boom_speaker") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker(data[1],true,data[0],mask); 
+    }
+    if(type == "hk_boom_speaker_pcb") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker_pcb(data[1],true,data[0],mask); 
+    }
+    if(type == "hk_h3_port_extender") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_h3_port_extender(data[0],mask); 
+    }
+    if(type == "hk_hc4_oled") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_hc4_oled(mask); 
+    }
+    if(type == "hk_lcd35") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_35lcd(mask); 
+    }
+    if(type == "hk_m1s_ups") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_m1s_ups(mask); 
+    }
+    if(type == "hk_netcard") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_netcard(mask); 
+    }
+    if(type == "hk_pwr_button") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_pwr_button(mask); 
+    }
+    if(type == "hk_speaker") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_speaker(mask); 
+    }
+    if(type == "hk_uart") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_uart(mask); 
+    }
+    if(type == "hk_vu7c") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_vu7c(data[0],data[1],mask); 
+    }
+    if(type == "hk_vu8m") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_vu8m(data[0],mask); 
+    }
+    if(type == "hk_vu8s") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_vu8s(mask); 
+    }
+    if(type == "hk_wb2") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_wb2(); 
+    }
+    if(type == "hk_xu4_shifter_shield") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_xu4_shifter_shield(mask); 
+    }
+    if(type == "stl_model") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) stl_model(data[0],data[1]); 
     }
 }

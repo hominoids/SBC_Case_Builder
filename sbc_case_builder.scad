@@ -253,9 +253,11 @@ ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
 /* [Accessories and Options] */
-
+// adjustment for atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
+standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
 rear_io_plate = false;
+
 // case accessory group to load
 accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h3_shell", "h3_tallboy-ssd", "h3_shell_router", "h3_shell_router-ssd", "h3_lowboy", "h3_lowboy_router", "h3_tray_router", "h3_router_station", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "rock5b", "visionfive2_shell", "visionfive2_stacked", "visionfive2_tray",adapter_mini-stx_m1s]
 
@@ -269,12 +271,13 @@ s = search([sbc_model],sbc_data);
 pcb_id = sbc_data[s[0]][4];
 pcb_width = sbc_data[s[0]][10][0];
 pcb_depth = sbc_data[s[0]][10][1];
-pcb_z = sbc_data[s[0]][10][2];
+pcb_z_orig = sbc_data[s[0]][10][2];
 pcb_tmaxz = sbc_data[s[0]][11][5];
 pcb_bmaxz = sbc_data[s[0]][11][6];
 pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
+pcb_z = sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-stx" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz;
@@ -426,10 +429,10 @@ if (view == "platter") {
             data_4 = accessory_data[a[0]][i+9][3];
             mask = accessory_data[a[0]][i+10];
             
-            if (class == "platter" && type != "button_top") {
+            if (class == "platter" && type != "button_assembly") {
                 add(type, loc_x, loc_y, loc_z, face, rotation, [size_x, size_y, size_z], [data_1, data_2, data_3, data_4], mask);
             }
-            if (class == "platter" && type == "button_top") {
+            if (class == "platter" && type == "button_assembly") {
                 translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_1, size_x, size_z);
                 translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_1, size_x, size_z);
                 translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_1);
@@ -885,10 +888,10 @@ if (view == "part") {
                 data_4 = accessory_data[a[0]][i+9][3];
                 mask = accessory_data[a[0]][i+10];
                 
-                if (class == "platter" && type != "button_top") {
+                if (class == "platter" && type != "button_assembly") {
                     add(type, loc_x, loc_y, loc_z, face, rotation, [size_x, size_y, size_z], [data_1, data_2, data_3, data_4], mask);
                 }
-                if (class == "platter" && type == "button_top") {
+                if (class == "platter" && type == "button_assembly") {
                     translate([loc_x,loc_y,loc_z+1.25]) rotate([-90,0,0]) button_plunger(data_1, size_x, size_z);
                     translate([loc_x-20,loc_y-10,loc_z+3]) rotate([0,0,0]) button_top(data_1, size_x, size_z);
                     translate([loc_x-20,loc_y-20,loc_z]) rotate([0,0,0]) button_clip(data_1);

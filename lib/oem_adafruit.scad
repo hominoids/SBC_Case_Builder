@@ -20,17 +20,16 @@
     DESCRIPTION: adafruit 4311 2in TFT IPS Display model
            TODO: none
 
-          USAGE: adafruit_lcd(enablemask, mask[])
+          USAGE: adafruit_lcd(mask[])
 
-                              enablemask = true produces mask, false produces model
-                                 mask[0] = true enables component mask
+                                 mask[0] = true enables mask
                                  mask[1] = mask length
                                  mask[2] = mask setback
                                  mask[3] = mstyle "default"
 
 */
 
-module adafruit_lcd(enablemask=false, mask) {
+module adafruit_lcd(mask) {
 
     size_x = 35.5;
     size_y = 59;
@@ -40,7 +39,7 @@ module adafruit_lcd(enablemask=false, mask) {
     lcd_size = [34.75,48,2];
     corner_radius = 2;
     hole_size = 2.5;
-    cmask = mask[0];
+    enablemask = mask[0];
     mlen = mask[1];
     back = mask[2];
     mstyle = mask[3];
@@ -48,7 +47,7 @@ module adafruit_lcd(enablemask=false, mask) {
     adj = .01;
     $fn = 90;
 
-    if(enablemask == true && cmask == true && mstyle == "default") {
+    if(enablemask == true && mstyle == "default") {
         translate([2.25, 11, size_z+2.5-back]) cube([lcd_size[0]-4, lcd_size[1]-7, mlen]);
         storage("microsdcard", 11, 44, 0, "bottom", 180, [size_x, size_z, size_y], [0], size_z, enablemask, [true, 20, 0, "default"]);
         fpc("fh19", .5, 22, 0, "bottom", 270, [18,0,0], ["smt","side","white","black"], size_z, enablemask, [true,10,2,"default"]);

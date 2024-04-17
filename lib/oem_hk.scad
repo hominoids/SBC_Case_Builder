@@ -30,12 +30,12 @@
     m1_hdmount()
     hk_speaker()
     hk_boom(speakers, orientation, mask)
-    hk_boom_speaker(side, speaker, pcb, mask)
-    boom_speaker(mask)
+    hk_boom_speaker_pcb(side, speaker, pcb, mask)
+    hk_boom_speaker(mask)
     hk_boom_grill(style, thick)
-    boom_speaker_holder(style, tolerance)
-    boom_speaker_strap()
-    boom_vring(tolerance)
+    hk_boom_speaker_holder(style, tolerance)
+    hk_boom_speaker_strap()
+    hk_boom_vring(tolerance)
     hk_pwr_button(mask)
     hk_m1s_case_holes
     hk_m1s_ups()
@@ -850,7 +850,7 @@ module m1_hdmount() {
         translate ([    76,  10.15,  0]) rotate([180,0,0]) screw([3, 7, 0]);
     }
 
-    // "HDD HOLDER"
+    // hdd holder
     color([0.9, 0.9, 0.9])
     translate([67,8,0]) rotate([180,0,180])
     linear_extrude(height=0.01) text("HDD HOLDER",5);
@@ -972,12 +972,12 @@ module hk_boom(speakers, orientation, mask) {
         }
         if(mstyle == "default" || mstyle == "speakers") {
             if(speakers == true && orientation == "rear") {
-                translate([-31.5/2,35/2,1.6]) boom_speaker(mask);
-                translate([60+(31.5/2),35/2,1.6]) boom_speaker(mask);
+                translate([-31.5/2,35/2,1.6]) hk_boom_speaker(mask);
+                translate([60+(31.5/2),35/2,1.6]) hk_boom_speaker(mask);
             }
             if(speakers == true && orientation == "front") {
-                translate([-31.5/2,35/2,0]) rotate([0,180,0]) boom_speaker(mask);
-                translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) boom_speaker(mask);
+                translate([-31.5/2,35/2,0]) rotate([0,180,0]) hk_boom_speaker(mask);
+                translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) hk_boom_speaker(mask);
             }
         }
     }
@@ -1047,23 +1047,23 @@ module hk_boom(speakers, orientation, mask) {
         translate([10,12,1.6-adj]) color("dimgrey") cube([4,4,1]);
         translate([32.5,9,1.6-adj]) color("dimgrey") cube([3.5,3,1]);
         if(speakers == true && orientation == "rear") {
-            translate([-31.5/2,35/2,1.6]) boom_speaker([false,10,0,"default"]);
-            translate([60+(31.5/2),35/2,1.6]) boom_speaker([false,10,0,"default"]);
+            translate([-31.5/2,35/2,1.6]) hk_boom_speaker([false,10,0,"default"]);
+            translate([60+(31.5/2),35/2,1.6]) hk_boom_speaker([false,10,0,"default"]);
         }
         if(speakers == true && orientation == "front") {
-            translate([-31.5/2,35/2,0]) rotate([0,180,0]) boom_speaker([false,10,0,"default"]);
-            translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) boom_speaker([false,10,0,"default"]);
+            translate([-31.5/2,35/2,0]) rotate([0,180,0]) hk_boom_speaker([false,10,0,"default"]);
+            translate([60+(31.5/2),35/2,0]) rotate([0,180,0]) hk_boom_speaker([false,10,0,"default"]);
         }
     }
 }
 
 
 /*
-           NAME: hk_boom_speaker
-    DESCRIPTION: hardkernel stereo boom bonnet pcb and speakers
+           NAME: hk_boom_speaker_pcb
+    DESCRIPTION: hardkernel stereo boom bonnet speakers with optional speaker pcbs
            TODO: none
 
-          USAGE: hk_boom_speaker(side, speaker, pcb, mask)
+          USAGE: hk_boom_speaker_pcb(side, speaker, pcb, mask)
 
                                  side = "left, "right"
                              speakers = true, false
@@ -1074,7 +1074,7 @@ module hk_boom(speakers, orientation, mask) {
                               mask[3] = mstyle "default"
 */
 
-module hk_boom_speaker(side, speaker, pcb, mask) {
+module hk_boom_speaker_pcb(side, speaker, pcb, mask) {
 
     enablemask = mask[0];
     mlength = mask[1];
@@ -1085,7 +1085,7 @@ module hk_boom_speaker(side, speaker, pcb, mask) {
     $fn = 90;
 
     if(enablemask == true) {
-        translate([31.5/2,35/2,0]) boom_speaker(mask);
+        translate([31.5/2,35/2,0]) hk_boom_speaker(mask);
     }
     if(enablemask == false) {
         if(pcb == true) {
@@ -1109,28 +1109,28 @@ module hk_boom_speaker(side, speaker, pcb, mask) {
             }
         }
         if(speaker == true && pcb == true) {
-            translate([(31.5/2),35/2,1.6]) boom_speaker([false,10,0,"default"]);
+            translate([(31.5/2),35/2,1.6]) hk_boom_speaker([false,10,0,"default"]);
         }
         if(speaker == true && pcb == false) {
-            boom_speaker([false,10,0,"default"]);
+            hk_boom_speaker([false,10,0,"default"]);
         }
     }
 }
 
 
 /*
-           NAME: boom_speaker
+           NAME: hk_boom_speaker
     DESCRIPTION: hardkernel stereo boom bonnet speakers
            TODO: none
 
-          USAGE: boom_speaker(mask)
+          USAGE: hk_boom_speaker(mask)
                               mask[0] = true enables component mask
                               mask[1] = mask length
                               mask[2] = mask setback
                               mask[3] = mstyle "default"
 */
 
-module boom_speaker(mask) {
+module hk_boom_speaker(mask) {
 
     enablemask = mask[0];
     mlength = mask[1];
@@ -1218,17 +1218,17 @@ module hk_boom_grill(style, thick) {
 
 
 /*
-           NAME: boom_speaker_holder
+           NAME: hk_boom_speaker_holder
     DESCRIPTION: hardkernel stereo boom bonnet speaker holder
            TODO: none
 
-          USAGE: boom_speaker_holder(style, tolerance)
+          USAGE: hk_boom_speaker_holder(style, tolerance)
 
                                style = "friction", "clamp"
                            tolerance = friction adjustment
 */
 
-module boom_speaker_holder(style, tolerance=0) {
+module hk_boom_speaker_holder(style, tolerance=0) {
 
     adj = .01;
     $fn = 90;
@@ -1262,16 +1262,16 @@ module boom_speaker_holder(style, tolerance=0) {
 
 
 /*
-           NAME: boom_speaker_strap
+           NAME: hk_boom_speaker_strap
     DESCRIPTION: hardkernel stereo boom bonnet speaker clamp holder top
            TODO: none
 
-          USAGE: boom_speaker_strap(side)
+          USAGE: hk_boom_speaker_strap(side)
 
                                     side = "left", "right"
 */
 
-module boom_speaker_strap(side) {
+module hk_boom_speaker_strap(side) {
 
     topthick = 2;
     top_height = 14;
@@ -1319,16 +1319,16 @@ module boom_speaker_strap(side) {
 
 
 /*
-           NAME: boom_vring
+           NAME: hk_boom_vring
     DESCRIPTION: hardkernel stereo boom bonnet volume ring
            TODO: none
 
-          USAGE: boom_vring(tolerance)
+          USAGE: hk_boom_vring(tolerance)
 
                             tolerance = friction fit adjustment
 */
 
-module boom_vring(tolerance) {
+module hk_boom_vring(tolerance) {
 
     out_dia = 22;
     in_dia = 16.15 + tolerance;

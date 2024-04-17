@@ -459,7 +459,7 @@ module case_bottom(case_design) {
                 // rear io plate opening for standard form motherboards
                 if(rear_io_plate == true) {
                     if(sbc_model == "mini-stx") {
-                        translate([6.2+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
+                        translate([6.2+pcb_loc_x,-4.5,-4.4+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
                     }
                     else {
                         translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);

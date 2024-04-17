@@ -26,7 +26,7 @@
     hdd35_25holder(length)
 
 */
-
+ 
 /*
            NAME: hd_mount
     DESCRIPTION: creates 2.5" and 3.5" hard drive mounts
@@ -425,7 +425,7 @@ module hd35_vtab(side) {
 
 
 /*
-           NAME: hd_bottom_holes
+           NAME: hd_holes
     DESCRIPTION: creates 2.5" and 3.5" hard drive hole mask for mounting
            TODO: none
 
@@ -434,11 +434,11 @@ module hd35_vtab(side) {
                                  hd = 2.5, 3.5
                         orientation = "portrait", "landscape"
                            position = "vertical", "horizontal"
-                               side = "left", "right"
+                               side = "left", "right", "none"
                               thick = floor thickness
 */
 
-module hd_bottom_holes(hd, orientation, position, side, thick) {
+module hd_holes(hd, orientation, position, side, thick) {
 
     adj = .01;
     $fn = 90;
