@@ -15,20 +15,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    button(style, diameter, height)
+    buttons(style, diameter, height, mask)
     button_assembly(style, diameter, height)
+    button_clip(style)
     button_plunger(style, diameter, height)
     button_top(style, diameter, height)
-    button_clip(style)
 
 */
+
 
 /*
            NAME: buttons
     DESCRIPTION: creates different button bodys and styles
            TODO: none
 
-          USAGE: buttons(style, diameter, height, mask)
+          USAGE: buttons(style, size, radius, post, mask)
 
                         style = "recess", "cutout"
                       size[0] = diameter of button body
@@ -126,6 +127,31 @@ $fn = 90;
 
 
 /*
+           NAME: button_clip
+    DESCRIPTION: creates button c-clip
+           TODO: none
+
+          USAGE: button_clip(style)
+
+                             style = "recess", "cutout"
+*/
+
+module button_clip(style) {
+
+adj = .01;
+$fn = 90;
+
+    if(style == "recess") {
+        difference() {
+            cylinder(d=8.5, h=.8);
+            translate([-1.5,-1.75,-adj]) cube([2.75,3.5,1]);
+            translate([-.75,-.75,-adj]) cube([5,1.25,1.25]);
+        }
+    }
+}
+
+
+/*
            NAME: button_plunger
     DESCRIPTION: creates button plunger
            TODO: none
@@ -175,31 +201,6 @@ $fn = 90;
         difference() {
             translate([0,0,-3]) cylinder(d=5, h=2.75);
             translate([-1.25,-1.25,-3-adj]) cube([2.5,2.5,2]);
-        }
-    }
-}
-
-
-/*
-           NAME: button_clip
-    DESCRIPTION: creates button c-clip
-           TODO: none
-
-          USAGE: button_clip(style)
-
-                             style = "recess", "cutout"
-*/
-
-module button_clip(style) {
-
-adj = .01;
-$fn = 90;
-
-    if(style == "recess") {
-        difference() {
-            cylinder(d=8.5, h=.8);
-            translate([-1.5,-1.75,-adj]) cube([2.75,3.5,1]);
-            translate([-.75,-.75,-adj]) cube([5,1.25,1.25]);
         }
     }
 }

@@ -15,11 +15,142 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    pcb_holder(size, wallthick)
     nut_holder(nut, style, dia_x, dia_y, height)
+    pcb_holder(size, wallthick)
     vu_holder(vu_model, side, vesa, cheight)
 
 */
+
+
+/*
+           NAME: nut_holder
+    DESCRIPTION: creates various nut holders
+           TODO: none
+
+          USAGE: nut_holder(nut, style, dia_x, dia_y, height, mask)
+
+                            nut = "m2", "m2.5", "m3", "m4"
+                          style = "default", "sloped", "trap"
+                          dia_x = top diameter or x size in mm
+                          dia_y = bottom diameter or y size in mm
+                         height = holder height in mm
+                        mask[0] = true enables component mask
+                        mask[1] = mask length
+                        mask[2] = mask setback
+                        mask[3] = mstyle "default"
+
+*/
+
+module nut_holder(nut, style, dia_x, dia_y, height, mask) {
+
+    nuts = [[2,4,1.6],         // m2 size, diameter, height
+            [2.5,5,2],         // m2.5 size, diameter, height
+            [3,5.5,2.4],       // m3 size, diameter, height
+            [4,7,3.2]];        // m4 size, diameter, height
+
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true && mstyle == "default") {
+        if(nut == "m2") {
+            translate([0, 0, -mlength+msetback]) cylinder(d = nuts[0][0], h = mlength);
+        }
+         if(nut == "m2.5") {
+            translate([0, 0, -mlength+msetback]) cylinder(d = nuts[1][0], h = mlength);
+        }
+         if(nut == "m3") {
+            translate([0, 0, -mlength+msetback]) cylinder(d = nuts[2][0], h = mlength);
+        }
+         if(nut == "m4") {
+            translate([0, 0, -mlength+msetback]) cylinder(d = nuts[3][0], h = mlength);
+        }
+    }
+    if(enablemask == false) {
+
+        if( style == "default") {
+            difference() {
+                cylinder(d=dia_x, h=height);
+                if(nut == "m2") {
+                    translate([0, 0, -1]) cylinder(d=nuts[0][0]+.25, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[0][1]*2/sqrt(3), h=height, $fn=6);
+                }
+                if(nut == "m2.5") {
+                    translate([0, 0, -1]) cylinder(d=nuts[1][0]+.25, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[1][1]*2/sqrt(3), h=height, $fn=6);
+                }
+                if(nut == "m3") {
+                    translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height, $fn=6);
+                }
+                if(nut == "m4") {
+                    translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[3][1]*2/sqrt(3), h=height, $fn=6);
+                }
+            }
+        }
+        if( style == "sloped") {
+            difference() {
+                cylinder(d2=dia_x, d1=dia_y, h=height);
+                if(nut == "m2") {
+                    translate([0, 0, -1]) cylinder(d=nuts[0][0]+.25, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[0][1]*2/sqrt(3), h=height, $fn=6);
+                }
+                if(nut == "m2.5") {
+                    translate([0, 0, -1]) cylinder(d=nuts[1][0]+.25, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[1][1]*2/sqrt(3), h=height, $fn=6);
+                }
+                if(nut == "m3") {
+                    translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height, $fn=6);
+                }
+                if(nut == "m4") {
+                    translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
+                    translate([0, 0, 2]) cylinder(d=nuts[3][1]*2/sqrt(3), h=height, $fn=6);
+                }
+            }
+        }
+        if( style == "trap") {
+            if(nut == "m2") {
+                difference() {
+                    translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
+                    translate([0, 0, -1]) cylinder(d=nuts[0][0]+.25, h=height+2);
+                    translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[0][1]*2/sqrt(3), h=nuts[0][2], $fn=6);
+                    translate([-nuts[0][1]/2, 0, 2]) cube([nuts[0][1], dia_x, nuts[0][2]]);
+                }
+            }
+            if(nut == "m2.5") {
+                difference() {
+                    translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
+                    translate([0, 0, -1]) cylinder(d=nuts[1][0]+.325, h=height+2);
+                    translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[1][1]*2/sqrt(3), h=nuts[1][2], $fn=6);
+                    translate([-nuts[1][1]/2, 0, 2]) cube([nuts[1][1], dia_x, nuts[1][2]]);
+                }
+            }
+            if(nut == "m3") {
+                difference() {
+                    translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
+                    translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
+                    translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[2][1]*2/sqrt(3), h=nuts[2][2], $fn=6);
+                    translate([-nuts[2][1]/2, 0, 2]) cube([nuts[2][1], dia_x, nuts[2][2]]);
+                }
+            }
+            if(nut == "m4") {
+                difference() {
+                    translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
+                    translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
+                    translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[3][1]*2/sqrt(3), h=nuts[3][2], $fn=6);
+                    translate([-nuts[3][1]/2, 0, 2]) cube([nuts[3][1], dia_x, nuts[3][2]]);
+                }
+            }
+        }
+    }
+}
+
 
 /*
            NAME: pcb_holder
@@ -56,108 +187,6 @@ module pcb_holder(size, wallthick) {
         }
         translate([-.5,0,2]) cube([size[0]+1,size[2],5]);
         translate([6,-adj-5-1.75,-adj]) cube([size[0]-12,14,8]);
-    }
-}
-
-
-/*
-           NAME: nut_holder
-    DESCRIPTION: creates various nut holders
-           TODO: none
-
-          USAGE: nut_holder(nut, style, dia_x, dia_y, height)
-
-                            nut = "m2", "m2.5", "m3", "m4"
-                          style = "default", "sloped", "trap"
-                          dia_x = top diameter or x size in mm
-                          dia_y = bottom diameter or y size in mm
-                         height = holder height in mm
-*/
-
-module nut_holder(nut, style, dia_x, dia_y, height) {
-
-nuts = [[2,4,1.6],         // m2 size, diameter, height
-        [2.5,5,2],         // m2.5 size, diameter, height
-        [3,5.5,2.4],       // m3 size, diameter, height
-        [4,7,3.2]];        // m4 size, diameter, height
-
-$fn = 180;
-
-    if( style == "default") {
-        difference() {
-            cylinder(d=dia_x, h=height);
-            if(nut == "m2") {
-                translate([0, 0, -1]) cylinder(d=nuts[0][0]+.25, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[0][1]*2/sqrt(3), h=height, $fn=6);
-            }
-            if(nut == "m2.5") {
-                translate([0, 0, -1]) cylinder(d=nuts[1][0]+.25, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[1][1]*2/sqrt(3), h=height, $fn=6);
-            }
-            if(nut == "m3") {
-                translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height, $fn=6);
-            }
-            if(nut == "m4") {
-                translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[3][1]*2/sqrt(3), h=height, $fn=6);
-            }
-        }
-    }
-    if( style == "sloped") {
-        difference() {
-            cylinder(d2=dia_x, d1=dia_y, h=height);
-            if(nut == "m2") {
-                translate([0, 0, -1]) cylinder(d=nuts[0][0]+.25, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[0][1]*2/sqrt(3), h=height, $fn=6);
-            }
-            if(nut == "m2.5") {
-                translate([0, 0, -1]) cylinder(d=nuts[1][0]+.25, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[1][1]*2/sqrt(3), h=height, $fn=6);
-            }
-            if(nut == "m3") {
-                translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height, $fn=6);
-            }
-            if(nut == "m4") {
-                translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
-                translate([0, 0, 2]) cylinder(d=nuts[3][1]*2/sqrt(3), h=height, $fn=6);
-            }
-        }
-    }
-    if( style == "trap") {
-        if(nut == "m2") {
-            difference() {
-                translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
-                translate([0, 0, -1]) cylinder(d=nuts[0][0]+.25, h=height+2);
-                translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[0][1]*2/sqrt(3), h=nuts[0][2], $fn=6);
-                translate([-nuts[0][1]/2, 0, 2]) cube([nuts[0][1], dia_x, nuts[0][2]]);
-            }
-        }
-        if(nut == "m2.5") {
-            difference() {
-                translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
-                translate([0, 0, -1]) cylinder(d=nuts[1][0]+.325, h=height+2);
-                translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[1][1]*2/sqrt(3), h=nuts[1][2], $fn=6);
-                translate([-nuts[1][1]/2, 0, 2]) cube([nuts[1][1], dia_x, nuts[1][2]]);
-            }
-        }
-        if(nut == "m3") {
-            difference() {
-                translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
-                translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
-                translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[2][1]*2/sqrt(3), h=nuts[2][2], $fn=6);
-                translate([-nuts[2][1]/2, 0, 2]) cube([nuts[2][1], dia_x, nuts[2][2]]);
-            }
-        }
-        if(nut == "m4") {
-            difference() {
-                translate([-dia_x/2, -dia_y/2, 0]) cube([dia_x, dia_y, height]);
-                translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
-                translate([0, 0, 2]) rotate([0,0,30]) cylinder(d=nuts[3][1]*2/sqrt(3), h=nuts[3][2], $fn=6);
-                translate([-nuts[3][1]/2, 0, 2]) cube([nuts[3][1], dia_x, nuts[3][2]]);
-            }
-        }
     }
 }
 

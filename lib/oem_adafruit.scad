@@ -15,17 +15,22 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    adafruit_lcd(mask)
 
+*/
+
+
+/*
            NAME: adafruit_lcd
     DESCRIPTION: adafruit 4311 2in TFT IPS Display model
            TODO: none
 
           USAGE: adafruit_lcd(mask[])
 
-                                 mask[0] = true enables mask
-                                 mask[1] = mask length
-                                 mask[2] = mask setback
-                                 mask[3] = mstyle "default"
+                              mask[0] = true enables mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
 
 */
 
@@ -79,6 +84,3 @@ module adafruit_lcd(mask) {
                 [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
     }
 }
-
-
-

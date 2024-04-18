@@ -15,11 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    vent(width, length, height, gap, rows, columns, orientation)
-    vent_hex(cells_x, cells_y, thickness, cell_size, cell_spacing, orientation)
     vent_panel_hex(x, y, thick, cell_size, cell_spacing, border, borders);
 
 */
+
 
 /*
            NAME: vent_panel_hex
@@ -62,5 +61,3 @@ module vent_panel_hex(x, y, thick, cell_size=8, cell_spacing=3, border=3, border
         }
     }
 }
-
-

@@ -55,7 +55,7 @@ module sub(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) fan_mask(size_x, size_z, data[0]);
     }
     if(type == "hd_holes") {
-        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data[0],data[1],data[2],data[3],data[4]);
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) hd_bottom_holes(data[0],data[1],data[2],data[3]);
     }    
     if(type == "knockout") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) knockout(size_x,size_y,data[0],size_z,data[1],data[2]);

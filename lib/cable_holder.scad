@@ -15,8 +15,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    cableholder_spacer()
+*/
+
+
+/*
            NAME: cableholder_spacer
-    DESCRIPTION: creates 18650 and 21700 batteries
+    DESCRIPTION: creates spacer and cable holder for drive mounts
            TODO: none
 
           USAGE: cableholder_spacer()

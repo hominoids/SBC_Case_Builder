@@ -15,7 +15,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    art(scale_d1, size_z, filename)
+    stl_model(scale_d1, filename)
 
+*/
+
+
+/*
            NAME: art
     DESCRIPTION: create 2d artwork using dxf or svf
            TODO: none
@@ -26,16 +32,6 @@
                        size_z = floor thickness
                      filename = file name
 
-
-           NAME: stl_model
-    DESCRIPTION: import 3d artwork using stl
-           TODO: none
-
-          USAGE: art(scale_d1, size_z, filename)
-
-                     scale_d1 = amount to scale file
-                       size_z = floor thickness
-                     filename = file name
 */
 
 module art(scale_d1, size_z, filename) {
@@ -43,6 +39,18 @@ module art(scale_d1, size_z, filename) {
     linear_extrude(height = size_z) import(file = filename, scale=scale_d1);
 
 }
+
+
+/*
+           NAME: stl_model
+    DESCRIPTION: import 3d artwork using stl
+           TODO: none
+
+          USAGE: stl_model(scale_d1, filename)
+
+                           scale_d1 = amount to scale file
+                           filename = file name
+*/
 
 module stl_model(scale_d1, filename) {
 

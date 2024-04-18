@@ -680,7 +680,7 @@ DESCRIPTION: creates nut holder of various styles.
             size[2] = holder height in mm
             data[0] = "m2", "m2.5", "m3", "m4"
             data[1] = "default", "sloped", "trap"
-            mask[0] = false
+            mask[0] = true
             mask[1] = length
             mask[2] = set back
             mask[3] = mstyle "default"
@@ -994,9 +994,8 @@ DESCRIPTION: creates hard drive holes for 2.5 and 3.5 drives in various orientat
              size[] = not used
             data[0] = 2.5 or 3.5
             data[1] = "portrait", "landscape"
-            data[2] = "vertical", "horizontal"
-            data[3] = "left", "right", "none"
-            data[4] = floor thickness
+            data[2] = "left", "right", "both", "bottom", "all"
+            data[3] = floor thickness
             mask[0] = false, not used
             mask[1] = length
             mask[2] = set back
@@ -1303,7 +1302,7 @@ DESCRIPTION: creates db connectors.
             mask[0] = true
             mask[1] = length
             mask[2] = set back
-            mask[3] = mstyle "default"
+            mask[3] = mstyle "default", "fan_open", "fan_1", "fan_2", "fan_hex"
 ```
 
 
@@ -1324,11 +1323,12 @@ DESCRIPTION: creates a 2.5 hard drive model.
          rotation[] = object rotation
        parametric[] = "case", "sbc", "sbc-case_z"
              size[] = not used
-            data[0] = height
+            data[0] = "landscape", "portrait"
+            data[1] = height
             mask[0] = true
             mask[1] = length
             mask[2] = set back
-            mask[3] = mstyle "default"
+            mask[3] = mstyle "default", "bottom", "side", "both"
 ```
 
 
@@ -1349,11 +1349,11 @@ DESCRIPTION: creates a 3.5 hard drive model.
          rotation[] = object rotation
        parametric[] = "case", "sbc", "sbc-case_z"
              size[] = not used
-             data[] = not used
+            data[0] = "landscape", "portrait"
             mask[0] = true
             mask[1] = length
             mask[2] = set back
-            mask[3] = mstyle "default"
+            mask[3] = mstyle "default", "bottom", "side", "both"
 ```
 
 

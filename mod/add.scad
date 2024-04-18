@@ -149,10 +149,10 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) fans(data[0],mask); 
     }
     if(type == "hd25") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd25(data[0]); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd25(data[0],data[1],mask); 
     }
     if(type == "hd35") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd35(); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hd35(data[0],mask); 
     }
     if(type == "hk_boom") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom(data[0],data[1],mask); 

@@ -15,10 +15,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    hk_h3_port_extender(style, mask = false)
+    hk_h3_port_extender(style, mask)
     hk_h3_port_extender_holder(part, offset)
 
 */
+
 
 /*
            NAME: hk_h3_port_extender
@@ -27,11 +28,11 @@
 
           USAGE: hk_h3_port_extender(style, mask)
 
-                                  style = "header", "remote"
-                                mask[0] = true enables component mask
-                                mask[1] = mask length
-                                mask[2] = mask setback
-                                mask[3] = mstyle "default"
+                                     style = "header", "remote"
+                                   mask[0] = true enables component mask
+                                   mask[1] = mask length
+                                   mask[2] = mask setback
+                                   mask[3] = mstyle "default"
 */
 
 module hk_h3_port_extender(style, mask) {
@@ -105,8 +106,8 @@ module hk_h3_port_extender(style, mask) {
 
           USAGE: hk_h3_port_extender_holder(part, offset)
 
-                                         part = "top","bottom","both"
-                                         offset = distance from mount face
+                                            part = "top","bottom","both"
+                                          offset = distance from mount face
 */
 
 module hk_h3_port_extender_holder(part,offset=2) {

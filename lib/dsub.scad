@@ -15,6 +15,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    dsub(style, gender, mask)
+
+*/
+
+
+/*
            NAME: dsub
     DESCRIPTION: creates dsub connectors
            TODO: 9db male, 25db male and female
@@ -23,10 +29,10 @@
 
                       style = "db9"
                      gender = "female","male"
-                      mask[0] = true enables component mask
-                      mask[1] = mask length
-                      mask[2] = mask setback
-                      mask[3] = mstyle "default"
+                     mask[0] = true enables component mask
+                     mask[1] = mask length
+                     mask[2] = mask setback
+                     mask[3] = mstyle "default"
 */
 
 module dsub(style, gender, mask) {

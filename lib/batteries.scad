@@ -17,9 +17,10 @@
 
     battery(type)
     battery_clip(bat_dia = 18.4)
-    module batt_holder(tolerance)
+    batt_holder(tolerance)
 
 */
+
 
 /*
            NAME: battery

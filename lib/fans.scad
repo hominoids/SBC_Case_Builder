@@ -15,34 +15,28 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    fans(style, size, mask)
+    fans(style, mask)
     fan_cover(size, thick)
     fan_mask(size, thick, style)
 
 */
 
+
 /*
            NAME: fans
     DESCRIPTION: creates different fan styles and sizes
-           TODO: add vans
+           TODO: add efficient vanes
 
-          USAGE: fans(style, size, mask)
+          USAGE: fans(style, mask)
 
-                        style = "box",
-                      size[0] = size of fan
-                      size[2] = thickness of fan
-                      mask[0] = true enables component mask
-                      mask[1] = mask length
-                      mask[2] = mask setback
-                      mask[3] = mstyle "default"
+                      style = "box",
+                    mask[0] = true enables component mask
+                    mask[1] = mask length
+                    mask[2] = mask setback
+                    mask[3] = mstyle "default", "fan_open", "fan_1", "fan_2", "fan_hex"
 */
 
 module fans(style, mask) {
-
-    enablemask = mask[0];
-    mlength = mask[1];
-    msetback = mask[2];
-    mstyle = mask[3];
 
     // size, thick, hole-spacing, hole-size, hub-size
     fan_data = [
@@ -67,13 +61,27 @@ module fans(style, mask) {
     hole_offset = (diameter-hole_space)/2;
     hub_size = fan_data[f[0]][5];
     fan_color = fan_data[f[0]][6];
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
 
     adj = .01;
     $fn = 90;
 
-    if(enablemask == true && mstyle == "default") {
-        if(style == "box") {
-            translate([0, 0, -adj-msetback]) cylinder(d = diameter-2*adj, h = mlength);
+    if(enablemask == true) {
+        if(mstyle == "fan_open") {
+            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_open");
+        }
+        if(mstyle == "default" || mstyle == "fan_1") {
+            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_1");
+        }
+        if(mstyle == "fan_2") {
+            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_2");
+        }
+        if(mstyle == "fan_hex") {
+            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_hex");
         }
     }
     if(enablemask == false) {
@@ -96,9 +104,8 @@ module fans(style, mask) {
             color(fan_color) translate([-4,-4, -1]) cube([diameter+8, 4, thickness+2]);
             color(fan_color) translate([-4,diameter, -1]) cube([diameter+8, 4, thickness+2]);
         }
-            color(fan_color) translate([diameter/2, diameter/2, thickness/2]) rotate([0,0,30]) 
-                    cylinder_fillet_inside(h=thickness, r=hub_size/2, top=1, bottom=1, $fn=90, fillet_fn=90, center=true);
-
+        color(fan_color) translate([diameter/2, diameter/2, thickness/2]) rotate([0,0,30]) 
+            cylinder_fillet_inside(h=thickness, r=hub_size/2, top=1, bottom=1, $fn=90, fillet_fn=90, center=true);
     }
 }
 
@@ -124,14 +131,14 @@ module fan_cover(size, thick, style) {
 
 
 /*
-    DESCRIPTION: creates heatsink masks for openings
+    DESCRIPTION: creates fan masks for openings
            TODO: 
 
-          USAGE: heatsink_mask(size, thick, style)
+          USAGE: fan_mask(size, thick, style)
 
-                               size = size of fan
-                              thick = thickness of cover
-                              style = "fan_open", "fan_1", "fan_2", "fan_hex"
+                          size = size of fan
+                         thick = thickness of cover
+                         style = "fan_open", "fan_1", "fan_2", "fan_hex"
 */
 
 module fan_mask(size, thick, style) {
@@ -331,11 +338,11 @@ module fan_mask(size, thick, style) {
                 }
             }
 
-            translate([0, 0, 2]) 
+            translate([0, 0, 11]) 
                 union() {
                     cylinder(d=bar_size*2+0.1, thick+2); // Add a circle to prevent any tiny holes around cross bar
-                    rotate([0, 0, 45]) cube([size, bar_size, thick+2], center=true);
-                    rotate([0, 0, 45]) cube([bar_size, size, thick+2], center=true);
+                    rotate([0, 0, 45]) cube([size, bar_size, thick+4], center=true);
+                    rotate([0, 0, 45]) cube([bar_size, size, thick+4], center=true);
                 }
             }
         }

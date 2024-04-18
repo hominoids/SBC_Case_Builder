@@ -15,10 +15,70 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    access_panel(size, orientation)
     access_cover(size, orientation)
+    access_panel(size, orientation, mask)
 
 */
+
+
+/*
+           NAME: access_cover
+    DESCRIPTION: creates covers for access port openings
+           TODO: none
+
+          USAGE: access_panel(size[], orientation)
+
+                        size[0] = size_x
+                        size[1] = size_y
+                        size[2] = floor thickness
+                    orientation = "landscape", "portrait"
+*/
+
+module access_cover(size, orientation) {
+
+    size_x = size[0];
+    size_y = size[1];
+    floorthick = size[2];
+    adj = .01;
+    $fn = 90;
+    if(orientation == "portrait") {
+        difference() {
+            union() {
+                translate([1, 6.25, 0]) cube([size_x-2.15, size_y-17.5, floorthick]);
+                translate([(size_x/2)-4.75, size_y-12.25, 0]) slab([10, 5, floorthick], 5);
+                translate([1, 6.25, floorthick-adj]) cube([size_x-2.15, 6, floorthick]);
+                translate([4.25, 3, floorthick]) cube([7.25, 4, 2]);
+                translate([size_x-12.75, 3, floorthick]) cube([7.25, 4, 2]);
+                if(size_x > 100) {
+                    translate([(size_x/2)+.25, 3, floorthick]) cube([7.25, 4, 2]);
+                }
+            }
+            translate([(size_x/2)+.25, size_y-6.5, -floorthick-adj]) 
+                cylinder(d=3.2, h=(floorthick*2)+(adj*2));
+            translate([(size_x/2)+.25, size_y-6.5, -adj]) 
+                cylinder(d1=6, d2=3.2, h=floorthick);
+        }
+    }
+    if(orientation == "landscape") {
+        difference() {
+            union() {
+                translate([6.25, 0, 0]) cube([size_x-17.75, size_y-2, floorthick]);
+                translate([size_x-12.25, (size_y/2)-5.75, 0]) slab([5, 10, floorthick], 5);
+                translate([6.25, 0, floorthick-adj]) cube([6,size_y-2.15, floorthick]);
+                translate([3.5+adj, 3.25, floorthick]) cube([4, 7.25, 2]);
+                translate([3.5+adj, size_y-12.75, floorthick]) cube([4, 7.25, 2]);
+                if(size_y > 100) {
+                    translate([3.5+adj, (size_y/2)-(7.75/2)-1,  floorthick]) cube([4, 7.25, 2]);
+                }
+            }
+            translate([size_x-6.5, (size_y/2)-.75, -floorthick-adj]) 
+                cylinder(d=3.2, h=(floorthick*2)+(adj*2));
+            translate([size_x-6.5, (size_y/2)-.75, -adj]) 
+                cylinder(d1=6, d2=3.2, h=floorthick);
+        }
+    }
+}
+
 
 /*
            NAME: access_panel
@@ -105,65 +165,6 @@ module access_panel(size, orientation, mask) {
                     translate([2+adj, (size_y/2)-(7.75/2)-1.25, floorthick]) cube([3, 7.75, 2.5]);
                 }
             }
-        }
-    }
-}
-
-
-/*
-           NAME: access_cover
-    DESCRIPTION: creates covers for access port openings
-           TODO: none
-
-          USAGE: access_panel(size[], orientation)
-
-                        size[0] = size_x
-                        size[1] = size_y
-                        size[2] = floor thickness
-                    orientation = "landscape", "portrait"
-*/
-
-module access_cover(size, orientation) {
-
-    size_x = size[0];
-    size_y = size[1];
-    floorthick = size[2];
-    adj = .01;
-    $fn = 90;
-    if(orientation == "portrait") {
-        difference() {
-            union() {
-                translate([1, 6.25, 0]) cube([size_x-2.15, size_y-17.5, floorthick]);
-                translate([(size_x/2)-4.75, size_y-12.25, 0]) slab([10, 5, floorthick], 5);
-                translate([1, 6.25, floorthick-adj]) cube([size_x-2.15, 6, floorthick]);
-                translate([4.25, 3, floorthick]) cube([7.25, 4, 2]);
-                translate([size_x-12.75, 3, floorthick]) cube([7.25, 4, 2]);
-                if(size_x > 100) {
-                    translate([(size_x/2)+.25, 3, floorthick]) cube([7.25, 4, 2]);
-                }
-            }
-            translate([(size_x/2)+.25, size_y-6.5, -floorthick-adj]) 
-                cylinder(d=3.2, h=(floorthick*2)+(adj*2));
-            translate([(size_x/2)+.25, size_y-6.5, -adj]) 
-                cylinder(d1=6, d2=3.2, h=floorthick);
-        }
-    }
-    if(orientation == "landscape") {
-        difference() {
-            union() {
-                translate([6.25, 0, 0]) cube([size_x-17.75, size_y-2, floorthick]);
-                translate([size_x-12.25, (size_y/2)-5.75, 0]) slab([5, 10, floorthick], 5);
-                translate([6.25, 0, floorthick-adj]) cube([6,size_y-2.15, floorthick]);
-                translate([3.5+adj, 3.25, floorthick]) cube([4, 7.25, 2]);
-                translate([3.5+adj, size_y-12.75, floorthick]) cube([4, 7.25, 2]);
-                if(size_y > 100) {
-                    translate([3.5+adj, (size_y/2)-(7.75/2)-1,  floorthick]) cube([4, 7.25, 2]);
-                }
-            }
-            translate([size_x-6.5, (size_y/2)-.75, -floorthick-adj]) 
-                cylinder(d=3.2, h=(floorthick*2)+(adj*2));
-            translate([size_x-6.5, (size_y/2)-.75, -adj]) 
-                cylinder(d1=6, d2=3.2, h=floorthick);
         }
     }
 }

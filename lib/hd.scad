@@ -15,119 +15,108 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    hd_mount(hd, orientation, position, side)
+    hd25(orientation, height, mask)
     hd25_tab(side)
     hd25_vtab(side)
+    hd35(orientation, mask)
+    hdd35_25holder(length)
     hd35_tab(side)
     hd35_vtab(side)
-    hd_bottom_holes(hd, orientation, position, side, thick)
-    hd25(height)
-    hd35()
-    hdd35_25holder(length)
+    hd_bottom_holes(hd, orientation, side, thick)
+    hd_mount(hd, orientation, position, side)
 
 */
- 
+
+
 /*
-           NAME: hd_mount
-    DESCRIPTION: creates 2.5" and 3.5" hard drive mounts
+           NAME: hd25
+    DESCRIPTION: creates 2.5" hard drive model
            TODO: none
 
-          USAGE: hd_mount(hd, orientation, position, side)
+          USAGE: hd25(orientation, height, mask)
 
-                          hd = 2.5, 3.5
-                 orientation = "portrait", "landscape"
-                    position = "vertical", "horizontal"
-                        side = "left", "right"
+                      orientation = "landscape", "portrait"
+                           height = drive height
+                          mask[0] = true enables component mask
+                          mask[1] = mask length
+                          mask[2] = mask setback
+                          mask[3] = mstyle "default", "bottom", "side", "both"
 */
 
-module hd_mount(hd, orientation, position, side) {
+module hd25(orientation, height, mask) {
+
+    hd25_x = 100;
+    hd25_y = 69.85;
+    hd25_z = height;
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
 
     adj = .01;
     $fn = 90;
 
-    if(hd == 2.5) {
-        if(orientation == "portrait") {
-            if(position == "vertical") {
-                if(side == "left") {
-                    translate([0,14,0]) rotate([0,0,0]) hd25_vtab("right");
-                    translate([0,90.6,0]) rotate([0,0,0]) hd25_vtab("right");
-                }
-                else {  // right
-                    translate([0,14,0]) rotate([0,0,0]) hd25_vtab("left");
-                    translate([0,90.6,0]) rotate([0,0,0]) hd25_vtab("left");
-                }
-            }
-            else {
-                translate([-.5,14,0]) hd25_tab("left");
-                translate([-.5,90.6,0]) hd25_tab("left");
-                translate([70.35,14,0]) hd25_tab("right");
-                translate([70.35,90.6,0]) hd25_tab("right");
-            }
+    if(enablemask == true) {
+        if(orientation == "landscape" && (mstyle == "side" || mstyle == "both" || mstyle == "default")) {
+            translate([0, msetback, 0]) hd_holes(2.5, "landscape", "left", mlength);
+            translate([0, -msetback, 0]) hd_holes(2.5, "landscape", "right", mlength);
         }
-        if(orientation == "landscape") {
-            if(position == "vertical") {
-                if(side == "left") {
-                    translate([9.4,0,0]) rotate([0,0,90]) hd25_vtab("right");
-                    translate([86,0,0])  rotate([0,0,90]) hd25_vtab("right");
-                }
-                else {  // right
-                    translate([9.4,0,0]) rotate([0,0,90]) hd25_vtab("left");
-                    translate([86,0,0])  rotate([0,0,90]) hd25_vtab("left");
-                }
-            }
-            else {
-                translate([9.4,4.07-4.5,0]) rotate([0,0,90]) hd25_tab("left");
-                translate([86,4.07-4.5,0])  rotate([0,0,90]) hd25_tab("left");
-                translate([86,65.79+4.5,0]) rotate([0,0,90]) hd25_tab("right");
-                translate([9.4,65.79+4.5,0]) rotate([0,0,90]) hd25_tab("right");
-            }
+        if(orientation == "landscape" && (mstyle == "bottom" || mstyle == "both")) {
+            translate([0, 0, msetback]) hd_holes(2.5, "landscape", "bottom", mlength);
+        }
+        if(orientation == "portrait" && (mstyle == "side" || mstyle == "both" || mstyle == "default")) {
+            translate([msetback, 0, 0]) hd_holes(2.5, "portrait", "left", mlength);
+            translate([-msetback, 0, 0]) hd_holes(2.5, "portrait", "right", mlength);
+        }
+        if(orientation == "portrait" && (mstyle == "bottom" || mstyle == "both")) {
+            translate([0, 0, -mlength+msetback]) hd_holes(2.5, "portrait", "bottom", mlength);
         }
     }
-    if(hd == 3.5) {
-        if(orientation == "portrait") {
-            if(position == "vertical") {
-                if(side == "left") {
-                    translate([0,41.28,0]) rotate([0,0,0]) hd35_vtab("right");
-                    translate([0,41.28+44.45,0]) rotate([0,0,0]) hd35_vtab("right");
-                    translate([0,41.28+76.20,0]) rotate([0,0,0]) hd35_vtab("right");
-                }
-                else {  // right
-                    translate([0,41.28,0]) rotate([0,0,0]) hd35_vtab("left");
-                    translate([0,41.28+44.45,0]) rotate([0,0,0]) hd35_vtab("left");
-                    translate([0,41.28+76.20,0]) rotate([0,0,0]) hd35_vtab("left");
-                }
-            }
-            else {
-                translate([-.5,28.5,0]) hd35_tab("left");
-                translate([-.5,69.75,0]) hd35_tab("left");
-                translate([-.5,130.1,0]) hd35_tab("left");
-                translate([101.6+.5,28.5,0]) hd35_tab("right");
-                translate([101.6+.5,69.75,0]) hd35_tab("right");
-                translate([101.6+.5,130.1,0]) hd35_tab("right");
+    if(enablemask == false) {
+        if(orientation == "landscape") {
+            difference() {
+                color("LightGrey",.6) cube([hd25_x,hd25_y,hd25_z]);
+
+                // bottom screw holes
+                color("Black",.6) translate([9.4,4.07,-adj]) cylinder(d=3,h=3);
+                color("Black",.6) translate([86,4.07,-adj]) cylinder(d=3,h=3);
+                color("Black",.6) translate([86,65.79,-adj]) cylinder(d=3,h=4);
+                color("Black",.6) translate([9.4,65.79,-adj]) cylinder(d=3,h=4);
+
+                // side screw holes
+                color("Black",.6) translate([9.4,-adj,3]) rotate([-90,0,0]) cylinder(d=3,h=3);
+                color("Black",.6) translate([86,-adj,3]) rotate([-90,0,0])  cylinder(d=3,h=3);
+                color("Black",.6) translate([86,hd25_y+adj,3]) rotate([90,0,0])  cylinder(d=3,h=3);
+                color("Black",.6) translate([9.4,hd25_y+adj,3]) rotate([90,0,0])  cylinder(d=3,h=3);
+
+                // connector opening
+                color("LightSlateGray",.6) translate([hd25_x-5,11,-1]) cube([5+adj,32,5+adj]);
             }
         }
-        if(orientation == "landscape") {
-            if(position == "vertical") {
-                if(side == "left") {
-                    translate([9.4,0,0]) rotate([0,0,90]) hd35_vtab("right");
-                    translate([86,0,0])  rotate([0,0,90]) hd35_vtab("right");
+        if(orientation == "portrait") {
+            translate([0,hd25_x,0]) rotate([0,0,270])
+                difference() {
+                    color("LightGrey",.6) cube([hd25_x,hd25_y,hd25_z]);
+
+                    // bottom screw holes
+                    color("Black",.6) translate([9.4,4.07,-adj]) cylinder(d=3,h=3);
+                    color("Black",.6) translate([86,4.07,-adj]) cylinder(d=3,h=3);
+                    color("Black",.6) translate([86,65.79,-adj]) cylinder(d=3,h=4);
+                    color("Black",.6) translate([9.4,65.79,-adj]) cylinder(d=3,h=4);
+
+                    // side screw holes
+                    color("Black",.6) translate([9.4,-adj,3]) rotate([-90,0,0]) cylinder(d=3,h=3);
+                    color("Black",.6) translate([86,-adj,3]) rotate([-90,0,0])  cylinder(d=3,h=3);
+                    color("Black",.6) translate([86,hd25_y+adj,3]) rotate([90,0,0])  cylinder(d=3,h=3);
+                    color("Black",.6) translate([9.4,hd25_y+adj,3]) rotate([90,0,0])  cylinder(d=3,h=3);
+
+                    // connector opening
+                    color("LightSlateGray",.6) translate([hd25_x-5,11,-1]) cube([5+adj,32,5+adj]);
                 }
-                else {  // right
-                    translate([9.4,0,0]) rotate([0,0,90]) hd35_vtab("left");
-                    translate([86,0,0])  rotate([0,0,90]) hd35_vtab("left");
-                }
-            }
-            else {
-                translate([16.9,-.5,0]) rotate([0,0,90]) hd35_tab("left");
-                translate([76.6,-.5,0])  rotate([0,0,90]) hd35_tab("left");
-                translate([118.5,-.5,0]) rotate([0,0,90]) hd35_tab("left");
-                translate([16.9,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
-                translate([76.6,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
-                translate([118.5,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
-            }
         }
     }
 }
+
 
 /*
            NAME: hd25_tab
@@ -271,6 +260,202 @@ module hd25_vtab(side) {
             translate([-3,0,-adj]) rotate([0,0,0]) cylinder(d=hole, h=3);
             translate([-adj,1.5+(width/2)-(length/2)-depth/2,5.57]) rotate([90,90,90]) slot(hole,length,height+(2*adj));
         }
+    }
+}
+
+
+/*
+           NAME: hd35
+    DESCRIPTION: creates 3.5" hard drive model
+           TODO: none
+
+          USAGE: hd35(orientation, mask)
+
+                      orientation = "landscape", "portrait"
+                          mask[0] = true enables component mask
+                          mask[1] = mask length
+                          mask[2] = mask setback
+                          mask[3] = mstyle "default", "bottom", "side", "both"
+*/
+
+module hd35(orientation, mask) {
+    
+    hd35_x = 147;
+    hd35_y = 101.6;
+    hd35_z = 26.1;
+    enablemask = mask[0];
+    mlength = mask[1];
+    msetback = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true) {
+        if(orientation == "landscape" && (mstyle == "side" || mstyle == "both" || mstyle == "default")) {
+            translate([0, msetback, 0]) hd_holes(3.5, "landscape", "left", mlength);
+            translate([0, -msetback, 0]) hd_holes(3.5, "landscape", "right", mlength);
+        }
+        if(orientation == "landscape" && (mstyle == "bottom" || mstyle == "both")) {
+            translate([0, 0, msetback]) hd_holes(3.5, "landscape", "bottom", mlength);
+        }
+        if(orientation == "portrait" && (mstyle == "side" || mstyle == "both" || mstyle == "default")) {
+            translate([msetback, 0, 0]) hd_holes(3.5, "portrait", "left", mlength);
+            translate([-msetback, 0, 0]) hd_holes(3.5, "portrait", "right", mlength);
+        }
+        if(orientation == "portrait" && (mstyle == "bottom" || mstyle == "both")) {
+            translate([0, 0, -mlength+msetback]) hd_holes(3.5, "portrait", "bottom", mlength);
+        }
+    }
+    if(enablemask == false) {
+        if(orientation == "landscape") {
+            difference() {
+                color("LightGrey",.6) cube([hd35_x,hd35_y,hd35_z]);
+
+                // bottom screw holes
+                color("Black",.6) translate([29.52,3.18,-adj]) cylinder(d=3,h=3+adj);
+                color("Black",.6) translate([61.27,3.18,-adj]) cylinder(d=3,h=3+adj);
+                color("Black",.6) translate([105.72,3.18,-adj]) cylinder(d=3,h=3+adj);
+                color("Black",.6) translate([29.52,98.43,-adj]) cylinder(d=3,h=3+adj);
+                color("Black",.6) translate([61.27,98.43,-adj]) cylinder(d=3,h=3+adj);
+                color("Black",.6) translate([105.72,98.43,-adj]) cylinder(d=3,h=3+adj);
+
+                // side screw holes
+                color("Black",.6) translate([16.9,-adj,6.35]) rotate([-90,0,0]) cylinder(d=3,h=3);
+                color("Black",.6) translate([76.6,-adj,6.35]) rotate([-90,0,0])  cylinder(d=3,h=3);
+                color("Black",.6) translate([118.5,-adj,6.35]) rotate([-90,0,0])  cylinder(d=3,h=3);
+                color("Black",.6) translate([118.5,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
+                color("Black",.6) translate([76.6,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
+                color("Black",.6) translate([16.9,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
+
+                // connector opening
+                color("LightSlateGray",.6) translate([hd35_x-5,11,-1]) cube([5+adj,32,5+adj]);
+            }
+        }
+        if(orientation == "portrait") {
+            translate([0,hd35_x,0]) rotate([0,0,270])
+                difference() {
+                    color("LightGrey",.6) cube([hd35_x,hd35_y,hd35_z]);
+
+                    // bottom screw holes
+                    color("Black",.6) translate([29.52,3.18,-adj]) cylinder(d=3,h=3+adj);
+                    color("Black",.6) translate([61.27,3.18,-adj]) cylinder(d=3,h=3+adj);
+                    color("Black",.6) translate([105.72,3.18,-adj]) cylinder(d=3,h=3+adj);
+                    color("Black",.6) translate([29.52,98.43,-adj]) cylinder(d=3,h=3+adj);
+                    color("Black",.6) translate([61.27,98.43,-adj]) cylinder(d=3,h=3+adj);
+                    color("Black",.6) translate([105.72,98.43,-adj]) cylinder(d=3,h=3+adj);
+
+                    // side screw holes
+                    color("Black",.6) translate([16.9,-adj,6.35]) rotate([-90,0,0]) cylinder(d=3,h=3);
+                    color("Black",.6) translate([76.6,-adj,6.35]) rotate([-90,0,0])  cylinder(d=3,h=3);
+                    color("Black",.6) translate([118.5,-adj,6.35]) rotate([-90,0,0])  cylinder(d=3,h=3);
+                    color("Black",.6) translate([118.5,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
+                    color("Black",.6) translate([76.6,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
+                    color("Black",.6) translate([16.9,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
+
+                    // connector opening
+                    color("LightSlateGray",.6) translate([hd35_x-5,11,-1]) cube([5+adj,32,5+adj]);
+                }
+        }
+    }
+}
+
+
+/*
+           NAME: hd35_25holder
+    DESCRIPTION: 3.5" hdd to 2.5" hdd holder
+           TODO: none
+
+          USAGE: hdd35_25holder(length, width=101.6)
+
+                      length = length of holder min. 145mm for 3.5" drive
+*/
+
+module hd35_25holder(length, width=101.6) {
+
+    wallthick = 3;
+    floorthick = 2;
+    hd35_x = length;                    // 145mm for 3.5" drive
+    hd35_y = width;
+    hd35_z = 12;
+    hd25_x = 100;
+    hd25_y = 69.85;
+    hd25_z = 9.5;
+    hd25_xloc = 2;                     // or (hd35_x-hd25_x)/2
+    hd25_yloc = (hd35_y-hd25_y)/2;
+    hd25_zloc = 9.5;
+    adj = .1;    
+    $fn=90;
+
+    difference() {
+        union() {
+            difference() {
+                translate([(hd35_x/2),(hd35_y/2),(hd35_z/2)])
+                    cube_fillet_inside([hd35_x,hd35_y,hd35_z], 
+                        vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
+                translate([(hd35_x/2),(hd35_y/2),(hd35_z/2)+floorthick])
+                    cube_fillet_inside([hd35_x-(wallthick*2),hd35_y-(wallthick*2),hd35_z], 
+                        vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
+
+                // end trim
+                translate([-adj,5,wallthick+2]) cube([wallthick+(adj*2),hd35_y-10,10]);
+                translate([hd35_x-wallthick-adj,5,wallthick+2]) cube([wallthick+(adj*2),hd35_y-10,10]);
+
+                // bottom vents
+                for ( r=[15:40:hd35_x-40]) {
+                    for (c=[hd35_y-76:4:75]) {
+                        translate ([r,c,-adj]) cube([35,2,wallthick+(adj*2)]);
+                    }
+                }
+            }
+            // 2.5 hdd bottom support
+            translate([9.4+hd25_xloc,4.07+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
+            translate([86+hd25_xloc,4.07+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
+            translate([86+hd25_xloc,65.79+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
+            translate([9.4+hd25_xloc,65.79+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
+
+        // side nut holder support    
+        translate([16,wallthick-adj,7]) rotate([-90,0,0]) cylinder(d=10,h=3);
+        translate([76,wallthick-adj,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
+            if(length >= 120) {
+                translate([117.5,wallthick-adj,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
+                translate([117.5,hd35_y-wallthick+adj,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+            }
+        translate([76,hd35_y-wallthick+adj,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+        translate([16,hd35_y-wallthick+adj,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+        
+        // bottom-side support
+        translate([wallthick,wallthick,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
+        translate([wallthick,hd35_y-wallthick+adj,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
+
+        }
+        // bottom screw holes
+        translate([9.4+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
+        translate([86+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
+        translate([86+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
+        translate([9.4+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
+
+         // countersink holes
+        translate([9.4+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
+        translate([86+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
+        translate([86+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
+        translate([9.4+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
+
+        // side screw holes
+        translate([16,-adj,7]) rotate([-90,0,0]) cylinder(d=3.6,h=7);
+        translate([76,-adj,7]) rotate([-90,0,0])  cylinder(d=3.6,h=7);
+        translate([117.5,-adj,7]) rotate([-90,0,0])  cylinder(d=3.6,h=7);
+        translate([117.5,hd35_y+adj,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
+        translate([76,hd35_y+adj,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
+        translate([16,hd35_y+adj,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
+
+        // side nut trap
+        translate([16,wallthick-adj,7]) rotate([-90,0,0]) cylinder(r=3.30,h=5,$fn=6);
+        translate([76,wallthick-adj,7]) rotate([-90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([117.5,wallthick-adj,7]) rotate([-90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([117.5,hd35_y-wallthick-adj,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([76,hd35_y-wallthick-adj,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
+        translate([16,hd35_y-wallthick-adj,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
     }
 }
 
@@ -429,16 +614,123 @@ module hd35_vtab(side) {
     DESCRIPTION: creates 2.5" and 3.5" hard drive hole mask for mounting
            TODO: none
 
-          USAGE: hd_bottom_holes(hd, orientation, position, side, thick)
+          USAGE: hd_bottom_holes(hd, orientation, side, thick)
 
                                  hd = 2.5, 3.5
                         orientation = "portrait", "landscape"
-                           position = "vertical", "horizontal"
-                               side = "left", "right", "none"
+                               side = "left", "right", "both", "bottom", "all"
                               thick = floor thickness
 */
 
-module hd_holes(hd, orientation, position, side, thick) {
+module hd_holes(hd, orientation, side, thick) {
+
+    hd25_x = 100;
+    hd25_y = 69.85;
+    hd35_x = 147;
+    hd35_y = 101.6;
+    hd35_z = 26.1;
+    adj = .01;
+    $fn = 90;
+
+    if(hd == 2.5) {
+        if(orientation == "portrait") {
+            translate([0,hd25_x,0]) rotate([0,0,270]) union() {
+                if(side == "left" || side == "both" || side == "all") {
+                    translate([9.4,-thick,3]) rotate([270,0,0]) cylinder(d=3.6,h=thick);
+                    translate([86,-thick,3]) rotate([270,0,0]) cylinder(d=3.6,h=thick);
+                }
+                if(side == "right" || side == "both" || side == "all") {
+                    translate([9.4,hd25_y+thick,3]) rotate([90,0,0]) cylinder(d=3.6,h=thick);
+                    translate([86,hd25_y+thick,3]) rotate([90,0,0]) cylinder(d=3.6,h=thick);
+                }
+                if(side == "bottom" || side == "all") {
+                    translate([9.4,4.07,0]) cylinder(d=3.6,h=thick);
+                    translate([86,4.07,0]) cylinder(d=3.6,h=thick);
+                    translate([86,65.79,0]) cylinder(d=3.6,h=thick);
+                    translate([9.4,65.79,0]) cylinder(d=3.6,h=thick);
+                }
+            }
+        }
+        if(orientation == "landscape") {
+            if(side == "left" || side == "both" || side == "all") {
+                translate([9.4,-thick,3]) rotate([270,0,0]) cylinder(d=3.6,h=thick);
+                translate([86,-thick,3]) rotate([270,0,0]) cylinder(d=3.6,h=thick);
+            }
+            if(side == "right" || side == "both" || side == "all") {
+                translate([9.4,hd25_y+thick,3]) rotate([90,0,0]) cylinder(d=3.6,h=thick);
+                translate([86,hd25_y+thick,3]) rotate([90,0,0]) cylinder(d=3.6,h=thick);
+            }
+            if(side == "bottom" || side == "all") {
+                translate([9.4,4.07,-thick]) cylinder(d=3.6,h=thick);
+                translate([86,4.07,-thick]) cylinder(d=3.6,h=thick);
+                translate([86,65.79,-thick]) cylinder(d=3.6,h=thick);
+                translate([9.4,65.79,-thick]) cylinder(d=3.6,h=thick);
+            }
+        }
+    }
+    if(hd == 3.5) {
+        if(orientation == "portrait") {
+            translate([0,hd35_x,0]) rotate([0,0,270]) union() {
+                if(side == "left" || side == "both" || side == "all") {
+                    translate([16.9,-thick,6.35]) rotate([270,0,0]) cylinder(d=3,h=thick);
+                    translate([76.6,-thick,6.35]) rotate([270,0,0])  cylinder(d=3,h=thick);
+                    translate([118.5,-thick,6.35]) rotate([270,0,0])  cylinder(d=3,h=thick);
+                }
+                if(side == "right" || side == "both" || side == "all") {
+                    translate([118.5,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3,h=thick);
+                    translate([76.6,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3,h=thick);
+                    translate([16.9,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3,h=thick);
+                }
+                if(side == "bottom" || side == "all") {
+                    // landscape 3.5" bottom screw holes
+                    translate([29.52,3.18,0]) cylinder(d=3.6,h=thick);
+                    translate([61.27,3.18,0]) cylinder(d=3.6,h=thick);
+                    translate([105.72,3.18,0]) cylinder(d=3.6,h=thick);
+                    translate([29.52,98.43,0]) cylinder(d=3.6,h=thick);
+                    translate([61.27,98.43,0]) cylinder(d=3.6,h=thick);
+                    translate([105.72,98.43,0]) cylinder(d=3.6,h=thick);
+                }
+            }
+        }
+        if(orientation == "landscape") {
+            if(side == "left" || side == "both" || side == "all") {
+                translate([16.9,-thick,6.35]) rotate([270,0,0]) cylinder(d=3,h=thick);
+                translate([76.6,-thick,6.35]) rotate([270,0,0])  cylinder(d=3,h=thick);
+                translate([118.5,-thick,6.35]) rotate([270,0,0])  cylinder(d=3,h=thick);
+            }
+            if(side == "right" || side == "both" || side == "all") {
+                translate([118.5,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3,h=thick);
+                translate([76.6,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3,h=thick);
+                translate([16.9,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3,h=thick);
+            }
+            if(side == "bottom" || side == "all") {
+                // landscape 3.5" bottom screw holes
+                translate([29.52,3.18,-thick]) cylinder(d=3.6,h=thick);
+                translate([61.27,3.18,-thick]) cylinder(d=3.6,h=thick);
+                translate([105.72,3.18,-thick]) cylinder(d=3.6,h=thick);
+                translate([29.52,98.43,-thick]) cylinder(d=3.6,h=thick);
+                translate([61.27,98.43,-thick]) cylinder(d=3.6,h=thick);
+                translate([105.72,98.43,-thick]) cylinder(d=3.6,h=thick);
+            }
+        }
+    }
+}
+
+
+/*
+           NAME: hd_mount
+    DESCRIPTION: creates 2.5" and 3.5" hard drive mounts
+           TODO: none
+
+          USAGE: hd_mount(hd, orientation, position, side)
+
+                          hd = 2.5, 3.5
+                 orientation = "portrait", "landscape"
+                    position = "vertical", "horizontal"
+                        side = "left", "right"
+*/
+
+module hd_mount(hd, orientation, position, side) {
 
     adj = .01;
     $fn = 90;
@@ -447,42 +739,37 @@ module hd_holes(hd, orientation, position, side, thick) {
         if(orientation == "portrait") {
             if(position == "vertical") {
                 if(side == "left") {
-                    translate([-3,14,0]) cylinder(d=3.6,h=thick+(adj*2));
-                    translate([-3,90.6,0]) cylinder(d=3.6,h=thick+(adj*2));
+                    translate([0,14,0]) rotate([0,0,0]) hd25_vtab("right");
+                    translate([0,90.6,0]) rotate([0,0,0]) hd25_vtab("right");
                 }
-                else {
-                    // portrait 2.5" bottom screw holes
-                    translate([3,14,0]) cylinder(d=3.6,h=thick+(adj*2));
-                    translate([3,90.6,0]) cylinder(d=3.6,h=thick+(adj*2));
+                else {  // right
+                    translate([0,14,0]) rotate([0,0,0]) hd25_vtab("left");
+                    translate([0,90.6,0]) rotate([0,0,0]) hd25_vtab("left");
                 }
             }
             else {
-                // portrait 2.5" bottom screw holes
-                translate([4.07,14,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([4.07,90.6,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([65.79,90.6,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([65.79,14,0]) cylinder(d=3.6,h=thick+(adj*2));
-            
+                translate([-.5,14,0]) hd25_tab("left");
+                translate([-.5,90.6,0]) hd25_tab("left");
+                translate([70.35,14,0]) hd25_tab("right");
+                translate([70.35,90.6,0]) hd25_tab("right");
             }
         }
         if(orientation == "landscape") {
             if(position == "vertical") {
                 if(side == "left") {
-                    translate([9.4,-3,0]) cylinder(d=3.6,h=thick+5);
-                    translate([86,-3,0]) cylinder(d=3.6,h=thick+5);
+                    translate([9.4,0,0]) rotate([0,0,90]) hd25_vtab("right");
+                    translate([86,0,0])  rotate([0,0,90]) hd25_vtab("right");
                 }
-                else {
-                    echo(side);
-                    translate([9.4,3,0]) cylinder(d=3.6,h=thick+5);
-                    translate([86,3,0]) cylinder(d=3.6,h=thick+5);
+                else {  // right
+                    translate([9.4,0,0]) rotate([0,0,90]) hd25_vtab("left");
+                    translate([86,0,0])  rotate([0,0,90]) hd25_vtab("left");
                 }
             }
             else {
-                // landscape 2.5" bottom screw holes
-                translate([9.4,4.07,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([86,4.07,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([86,65.79,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([9.4,65.79,0]) cylinder(d=3.6,h=thick+(adj*2));
+                translate([9.4,4.07-4.5,0]) rotate([0,0,90]) hd25_tab("left");
+                translate([86,4.07-4.5,0])  rotate([0,0,90]) hd25_tab("left");
+                translate([86,65.79+4.5,0]) rotate([0,0,90]) hd25_tab("right");
+                translate([9.4,65.79+4.5,0]) rotate([0,0,90]) hd25_tab("right");
             }
         }
     }
@@ -490,217 +777,44 @@ module hd_holes(hd, orientation, position, side, thick) {
         if(orientation == "portrait") {
             if(position == "vertical") {
                 if(side == "left") {
-                    translate([-6,28.5,0]) cylinder(d=3.6,h=thick+5);
-                    translate([-6,70.5,0]) cylinder(d=3.6,h=thick+5);
-                    translate([-6,28.5+101.6,0]) cylinder(d=3.6,h=thick+5);
+                    translate([0,41.28,0]) rotate([0,0,0]) hd35_vtab("right");
+                    translate([0,41.28+44.45,0]) rotate([0,0,0]) hd35_vtab("right");
+                    translate([0,41.28+76.20,0]) rotate([0,0,0]) hd35_vtab("right");
                 }
-                else {
-                    // portrait 3.5" bottom screw holes
-                    translate([6,28.5,0]) cylinder(d=3.6,h=thick+5);
-                    translate([6,70.5,0]) cylinder(d=3.6,h=thick+5);
-                    translate([6,28.5+101.6,0]) cylinder(d=3.6,h=thick+5);
+                else {  // right
+                    translate([0,41.28,0]) rotate([0,0,0]) hd35_vtab("left");
+                    translate([0,41.28+44.45,0]) rotate([0,0,0]) hd35_vtab("left");
+                    translate([0,41.28+76.20,0]) rotate([0,0,0]) hd35_vtab("left");
                 }
             }
             else {
-                // portrait 3.5" bottom screw holes
-                translate([3.18,41.28,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([3.18,85.73,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([3.18,117.48,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([98.43,41.28,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([98.43,85.73,0]) cylinder(d=3.6,h=thick+(adj*2));
-                translate([98.43,117.48,0]) cylinder(d=3.6,h=thick+(adj*2));
+                translate([-.5,28.5,0]) hd35_tab("left");
+                translate([-.5,69.75,0]) hd35_tab("left");
+                translate([-.5,130.1,0]) hd35_tab("left");
+                translate([101.6+.5,28.5,0]) hd35_tab("right");
+                translate([101.6+.5,69.75,0]) hd35_tab("right");
+                translate([101.6+.5,130.1,0]) hd35_tab("right");
             }
         }
         if(orientation == "landscape") {
-            // landscape 3.5" bottom screw holes
-            translate([29.52,3.18,0]) cylinder(d=3.6,h=thick+(adj*2));
-            translate([61.27,3.18,0]) cylinder(d=3.6,h=thick+(adj*2));
-            translate([105.72,3.18,0]) cylinder(d=3.6,h=thick+(adj*2));
-            translate([29.52,98.43,0]) cylinder(d=3.6,h=thick+(adj*2));
-            translate([61.27,98.43,0]) cylinder(d=3.6,h=thick+(adj*2));
-            translate([105.72,98.43,0]) cylinder(d=3.6,h=thick+(adj*2));
-        }
-    }
-}
-
-
-/*
-           NAME: hd25
-    DESCRIPTION: creates 2.5" hard drive model
-           TODO: none
-
-          USAGE: hd25(height)
-
-                      height = drive height
-*/
-
-module hd25(height) {
-
-    hd25_x = 100;
-    hd25_y = 69.85;
-    hd25_z = height;
-
-    adj = .01;
-    $fn=90;
-
-    difference() {
-        color("LightGrey",.6) cube([hd25_x,hd25_y,hd25_z]);
-
-        // bottom screw holes
-        color("Black",.6) translate([9.4,4.07,-adj]) cylinder(d=3,h=3);
-        color("Black",.6) translate([86,4.07,-adj]) cylinder(d=3,h=3);
-        color("Black",.6) translate([86,65.79,-adj]) cylinder(d=3,h=4);
-        color("Black",.6) translate([9.4,65.79,-adj]) cylinder(d=3,h=4);
-
-        // side screw holes
-        color("Black",.6) translate([9.4,-adj,3]) rotate([-90,0,0]) cylinder(d=3,h=3);
-        color("Black",.6) translate([86,-adj,3]) rotate([-90,0,0])  cylinder(d=3,h=3);
-        color("Black",.6) translate([86,hd25_y+adj,3]) rotate([90,0,0])  cylinder(d=3,h=3);
-        color("Black",.6) translate([9.4,hd25_y+adj,3]) rotate([90,0,0])  cylinder(d=3,h=3);
-
-        // connector opening
-        color("LightSlateGray",.6) translate([hd25_x-5,11,-1]) cube([5+adj,32,5+adj]);
-    }
-}
-
-
-/*
-           NAME: hd35
-    DESCRIPTION: creates 3.5" hard drive model
-           TODO: none
-
-          USAGE: hd35()
-*/
-
-module hd35() {
-    
-    hd35_x = 147;
-    hd35_y = 101.6;
-    hd35_z = 26.1;
-
-    adj = .01;
-    $fn=90;
-
-    difference() {
-        color("LightGrey",.6) cube([hd35_x,hd35_y,hd35_z]);
-
-        // bottom screw holes
-        color("Black",.6) translate([29.52,3.18,-adj]) cylinder(d=3,h=3+adj);
-        color("Black",.6) translate([61.27,3.18,-adj]) cylinder(d=3,h=3+adj);
-        color("Black",.6) translate([105.72,3.18,-adj]) cylinder(d=3,h=3+adj);
-        color("Black",.6) translate([29.52,98.43,-adj]) cylinder(d=3,h=3+adj);
-        color("Black",.6) translate([61.27,98.43,-adj]) cylinder(d=3,h=3+adj);
-        color("Black",.6) translate([105.72,98.43,-adj]) cylinder(d=3,h=3+adj);
-
-        // side screw holes
-        color("Black",.6) translate([16.9,-adj,6.35]) rotate([-90,0,0]) cylinder(d=3,h=3);
-        color("Black",.6) translate([76.6,-adj,6.35]) rotate([-90,0,0])  cylinder(d=3,h=3);
-        color("Black",.6) translate([118.5,-adj,6.35]) rotate([-90,0,0])  cylinder(d=3,h=3);
-        color("Black",.6) translate([118.5,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
-        color("Black",.6) translate([76.6,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
-        color("Black",.6) translate([16.9,hd35_y+adj,6.35]) rotate([90,0,0]) cylinder(d=3,h=3);
-
-        // connector opening
-        color("LightSlateGray",.6) translate([hd35_x-5,11,-1]) cube([5+adj,32,5+adj]);
-
-    }
-}
-
-
-/*
-           NAME: hd25
-    DESCRIPTION: 3.5" hdd to 2.5" hdd holder
-           TODO: none
-
-          USAGE: hdd35_25holder(length, width=101.6)
-
-                      length = length of holder min. 145mm for 3.5" drive
-*/
-
-module hdd35_25holder(length, width=101.6) {
-
-    wallthick = 3;
-    floorthick = 2;
-    hd35_x = length;                    // 145mm for 3.5" drive
-    hd35_y = width;
-    hd35_z = 12;
-    hd25_x = 100;
-    hd25_y = 69.85;
-    hd25_z = 9.5;
-    hd25_xloc = 2;                     // or (hd35_x-hd25_x)/2
-    hd25_yloc = (hd35_y-hd25_y)/2;
-    hd25_zloc = 9.5;
-    adj = .1;    
-    $fn=90;
-
-    difference() {
-        union() {
-            difference() {
-                translate([(hd35_x/2),(hd35_y/2),(hd35_z/2)])
-                    cube_fillet_inside([hd35_x,hd35_y,hd35_z], 
-                        vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
-                translate([(hd35_x/2),(hd35_y/2),(hd35_z/2)+floorthick])
-                    cube_fillet_inside([hd35_x-(wallthick*2),hd35_y-(wallthick*2),hd35_z], 
-                        vertical=[0,0,0,0], top=[0,0,0,0], bottom=[0,0,0,0], $fn=90);
-
-                // end trim
-                translate([-adj,5,wallthick+2]) cube([wallthick+(adj*2),hd35_y-10,10]);
-                translate([hd35_x-wallthick-adj,5,wallthick+2]) cube([wallthick+(adj*2),hd35_y-10,10]);
-
-                // bottom vents
-                for ( r=[15:40:hd35_x-40]) {
-                    for (c=[hd35_y-76:4:75]) {
-                        translate ([r,c,-adj]) cube([35,2,wallthick+(adj*2)]);
-                    }
+            if(position == "vertical") {
+                if(side == "left") {
+                    translate([9.4,0,0]) rotate([0,0,90]) hd35_vtab("right");
+                    translate([86,0,0])  rotate([0,0,90]) hd35_vtab("right");
+                }
+                else {  // right
+                    translate([9.4,0,0]) rotate([0,0,90]) hd35_vtab("left");
+                    translate([86,0,0])  rotate([0,0,90]) hd35_vtab("left");
                 }
             }
-            // 2.5 hdd bottom support
-            translate([9.4+hd25_xloc,4.07+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
-            translate([86+hd25_xloc,4.07+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
-            translate([86+hd25_xloc,65.79+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
-            translate([9.4+hd25_xloc,65.79+hd25_yloc,floorthick-adj]) cylinder(d=8,h=4);
-
-        // side nut holder support    
-        translate([16,wallthick-adj,7]) rotate([-90,0,0]) cylinder(d=10,h=3);
-        translate([76,wallthick-adj,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
-            if(length >= 120) {
-                translate([117.5,wallthick-adj,7]) rotate([-90,0,0])  cylinder(d=10,h=3);
-                translate([117.5,hd35_y-wallthick+adj,7]) rotate([90,0,0])  cylinder(d=10,h=3);
+            else {
+                translate([16.9,-.5,0]) rotate([0,0,90]) hd35_tab("left");
+                translate([76.6,-.5,0])  rotate([0,0,90]) hd35_tab("left");
+                translate([118.5,-.5,0]) rotate([0,0,90]) hd35_tab("left");
+                translate([16.9,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
+                translate([76.6,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
+                translate([118.5,101.6-.5,0]) rotate([0,0,90]) hd35_tab("right");
             }
-        translate([76,hd35_y-wallthick+adj,7]) rotate([90,0,0])  cylinder(d=10,h=3);
-        translate([16,hd35_y-wallthick+adj,7]) rotate([90,0,0])  cylinder(d=10,h=3);
-        
-        // bottom-side support
-        translate([wallthick,wallthick,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
-        translate([wallthick,hd35_y-wallthick+adj,floorthick-2]) rotate([45,0,0]) cube([hd35_x-(wallthick*2),3,3]);
-
         }
-        // bottom screw holes
-        translate([9.4+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
-        translate([86+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
-        translate([86+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
-        translate([9.4+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d=3,h=(floorthick*3)+(adj*2));
-
-         // countersink holes
-        translate([9.4+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
-        translate([86+hd25_xloc,4.07+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
-        translate([86+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
-        translate([9.4+hd25_xloc,65.79+hd25_yloc,-adj]) cylinder(d1=6.5, d2=3, h=3);
-
-        // side screw holes
-        translate([16,-adj,7]) rotate([-90,0,0]) cylinder(d=3.6,h=7);
-        translate([76,-adj,7]) rotate([-90,0,0])  cylinder(d=3.6,h=7);
-        translate([117.5,-adj,7]) rotate([-90,0,0])  cylinder(d=3.6,h=7);
-        translate([117.5,hd35_y+adj,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
-        translate([76,hd35_y+adj,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
-        translate([16,hd35_y+adj,7]) rotate([90,0,0])  cylinder(d=3.6,h=7);
-
-        // side nut trap
-        translate([16,wallthick-adj,7]) rotate([-90,0,0]) cylinder(r=3.30,h=5,$fn=6);
-        translate([76,wallthick-adj,7]) rotate([-90,0,0])  cylinder(r=3.30,h=5,$fn=6);
-        translate([117.5,wallthick-adj,7]) rotate([-90,0,0])  cylinder(r=3.30,h=5,$fn=6);
-        translate([117.5,hd35_y-wallthick-adj,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
-        translate([76,hd35_y-wallthick-adj,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
-        translate([16,hd35_y-wallthick-adj,7]) rotate([90,0,0])  cylinder(r=3.30,h=5,$fn=6);
     }
 }

@@ -15,7 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+*/
 
+
+/*
            NAME: keyhole
     DESCRIPTION: enclosed keyhole
            TODO: none
@@ -39,9 +42,8 @@ module keyhole(keysize, mask) {
     mstyle = mask[3];
     adj=.01;
     $fn = 90;
-echo(keysize, mask);
+
     if(enablemask == true && mstyle == "default") {
-echo("THIS IS IT");
         union() {
             translate([0, 0, -adj]) cylinder(h=keysize[3]+2*adj, d=keysize[0]);
             translate([-keysize[1]/2, 0, -adj]) cube([keysize[1], keysize[2]+keysize[0]/2, keysize[3]+2*adj]);
@@ -49,7 +51,6 @@ echo("THIS IS IT");
         }
     }
     else {
-echo("THIS IS NOT IT");
         difference() {
             union() {
                 translate([0, 0, -adj]) 

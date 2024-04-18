@@ -15,6 +15,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    feet (diameter, height)
+
+*/
+
+
+/*
            NAME: feet
     DESCRIPTION: creates simple case feet
            TODO: none
