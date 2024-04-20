@@ -65,6 +65,12 @@ bottom_clearence = 3.5; //[-10:.01:10]
 // enable flat blank section for export
 flat_blank_section =  false;
 
+/* [Standard Motherboard Case Settings] */
+// adjustment for atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
+standard_motherboard_thickness =  0; //[-3:.01:3]
+// rear io plate opening for standard form motherboards
+rear_io_plate = false;
+
 /* [3D Case Adjustments] */
 // sbc location x axis
 pcb_loc_x = 0; //[0:.01:300]
@@ -179,13 +185,19 @@ access_panel_orientation = "landscape"; //[landscape,portrait]
 access_panel_location = [10,15]; //[-10:.01:200]
 access_panel_rotation = 0; //[0:90:270]
 
-/* [GPIO and UART] */
+/* [Options and Accessories] */
 // gpio opening
 gpio_opening = "default"; // [default,none,open,block,knockout,vent]
 // uart opening
 uart_opening = "default"; // [default,none,open,knockout]
 // enable indentations around io openings
 indents = true;
+// case accessory group to load
+accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "rock5b", "visionfive2_shell", "visionfive2_stacked", "visionfive2_tray", "adapter_mini-stx_m1s"]
+// sbc information text color
+text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
+// sbc information text font
+text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
 
 /* [Extended Top Standoffs] */
 // enable case extended standoffs
@@ -252,19 +264,6 @@ ext_bottom_front_right_enable = true;
 ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
-/* [Accessories and Options] */
-// adjustment for atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
-standard_motherboard_thickness =  0; //[-3:.01:3]
-// rear io plate opening for standard form motherboards
-rear_io_plate = false;
-
-// case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "sensors", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_tray_drivebox2.5", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_drivebox2.5", "m1_fitted_drivebox3.5", "m1_fitted_pizzabox", "m1_fitted_drivebox3.5v", "h3_shell", "h3_tallboy-ssd", "h3_shell_router", "h3_shell_router-ssd", "h3_lowboy", "h3_lowboy_router", "h3_tray_router", "h3_router_station", "h3_ultimate", "h3_ultimate2", "h3_shell_drivebox2.5v", "show2_shell", "jetsonnano_shell", "jetsonnano_panel", "jetsonnano_stacked", "jetsonnano_tray", "jetsonnano_tray_sides", "rock5b", "visionfive2_shell", "visionfive2_stacked", "visionfive2_tray",adapter_mini-stx_m1s]
-
-text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
-text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
-
-
 a = search([accessory_name],accessory_data);
 s = search([sbc_model],sbc_data);
 
@@ -280,7 +279,7 @@ pcb_radius = sbc_data[s[0]][11][0];
 pcb_z = sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-stx" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
-top_height = pcb_tmaxz+floorthick+case_offset_tz;
+top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
 case_z = bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
@@ -486,7 +485,7 @@ if (view == "model") {
                 }
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
@@ -516,7 +515,7 @@ if (view == "model") {
                 color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
@@ -556,7 +555,7 @@ if (view == "model") {
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-gap-wallthick-2.01,-lower_bottom]) 
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick)-1.01,-lower_bottom]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_leftside < 0) {
@@ -564,13 +563,13 @@ if (view == "model") {
                             cube([gap+wallthick+1.01,depth+2,case_z+2]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-gap-wallthick-2.01,-gap-wallthick-1,-lower_bottom]) 
+                        translate([width-(2*wallthick)-adj-1.01,-gap-wallthick-1,-lower_bottom]) 
                             cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
@@ -644,7 +643,7 @@ if (view == "model") {
                 color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
@@ -660,21 +659,21 @@ if (view == "model") {
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-gap-wallthick-2.01,-lower_bottom]) 
-                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                        translate([-gap-wallthick-1,depth-2*(wallthick+gap)-adj,-lower_bottom]) 
+                            cube([width+2,2*(gap+wallthick)+adj,case_z+2]);
                     }
                     if(move_leftside < 0) {
                         translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
                             cube([gap+wallthick+1.01,depth+2,case_z+2]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-gap-wallthick-2.01,-gap-wallthick-1,-lower_bottom]) 
+                        translate([width-2*(wallthick+gap)-adj,-gap-wallthick-1,-lower_bottom]) 
                             cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {

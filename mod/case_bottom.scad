@@ -483,7 +483,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "left_rear" && bottom_rear_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_left_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -499,7 +499,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "left_front" && bottom_front_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_left_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_front_left_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -515,7 +515,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "right_rear" && bottom_rear_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_right_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -531,7 +531,7 @@ module case_bottom(case_design) {
                         if (pcbhole_pos == "right_front" && bottom_front_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_right_support : "none";
                             normal_standoff = [bottom_standoff[0],
-                                                bottom_height-case_offset_bz-pcb_z+pcb_loc_z+bottom_front_right_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust,
                                                 bottom_standoff[2],
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
@@ -689,11 +689,11 @@ module case_bottom(case_design) {
         }
         // sbc openings
         if(sbc_highlight == true) {
-            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z-adj]) 
+            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
                 sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         else {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z-adj]) 
+            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
                 sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         }
         // indents
@@ -709,6 +709,7 @@ module case_bottom(case_design) {
                 side = sbc_data[s[0]][i+7];
                 rotation = sbc_data[s[0]][i+8];
 
+//                indent(loc_x, loc_y, bottom_height+pcb_loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
                 indent(loc_x, loc_y, bottom_height+pcb_loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
             }   
         }

@@ -74,7 +74,7 @@ module parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric
             add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc") {
-            add(type, loc_x, loc_y, loc_z+pcb_loc_z, face, rotation, size, data, mask);
+            add(type, loc_x, loc_y, loc_z+pcb_loc_z+case_offset_bz, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc-case_z" && face == "top") {
             add(type, loc_x, loc_y, loc_z+case_offset_tz+case_offset_bz, face, rotation, size, data, mask);
@@ -104,7 +104,7 @@ module parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric
             add(type, loc_x+case_offset_x, loc_y, loc_z, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc") {
-            add(type, loc_x+pcb_loc_x, loc_y, loc_z+pcb_loc_z, face, rotation, size, data, mask);
+            add(type, loc_x+pcb_loc_x, loc_y, loc_z+pcb_loc_z+case_offset_bz, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc-case_z" && face == "top") {
             add(type, loc_x+pcb_loc_x, loc_y, loc_z+case_offset_tz+case_offset_bz, face, rotation, size, data, mask);
@@ -125,7 +125,7 @@ module parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric
             add(type, loc_x, loc_y+case_offset_y, loc_z, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc") {
-            add(type, loc_x, loc_y+pcb_loc_y, loc_z+pcb_loc_z, face, rotation, size, data, mask);
+            add(type, loc_x, loc_y+pcb_loc_y, loc_z+pcb_loc_z+case_offset_bz, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc-case_z" && face == "top") {
             add(type, loc_x,loc_y+pcb_loc_y, loc_z+case_offset_tz+case_offset_bz, face, rotation, size, data, mask);
@@ -146,7 +146,7 @@ module parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric
             add(type, loc_x+case_offset_x, loc_y+case_offset_y, loc_z, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc") {
-            add(type, loc_x+pcb_loc_x, loc_y+pcb_loc_y, loc_z+pcb_loc_z, face, rotation, size, data, mask);
+            add(type, loc_x+pcb_loc_x, loc_y+pcb_loc_y, loc_z+pcb_loc_z+case_offset_bz, face, rotation, size, data, mask);
         }
         if(parametric[0] == "sbc-case_z" && face == "top") {
             add(type, loc_x+pcb_loc_x, loc_y+pcb_loc_y, loc_z+case_offset_tz+case_offset_bz, face, rotation, size, data, mask);

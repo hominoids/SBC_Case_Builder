@@ -110,7 +110,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) keyhole(data[0],mask); 
     }
     if(type == "nut_holder") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z, mask); 
     }
     if(type == "pcb_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) pcb_holder([size_x,size_y,size_z],data[0]);
@@ -158,7 +158,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom(data[0],data[1],mask); 
     }
     if(type == "hk_boom_speaker") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker(data[1],true,data[0],mask); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker(mask); 
     }
     if(type == "hk_boom_speaker_pcb") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_boom_speaker_pcb(data[1],true,data[0],mask); 

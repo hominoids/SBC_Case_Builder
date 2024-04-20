@@ -359,7 +359,7 @@ module io_plate() {
 
     io_window_x = case_design == "adapter_mini-stx" ? 123.95 : 158.75;
     io_window_y = 4;
-    io_window_z = case_design == "adapter_mini-stx" ? 40 : 44;
+    io_window_z = case_design == "adapter_mini-stx" ? 40 : case_design == "adapter_thin-mini-stx" ? 25 : 44;
     io_offset = case_design == "adapter_mini-stx" ? 1.2 : 10.79;
 
     difference() {
@@ -368,7 +368,7 @@ module io_plate() {
             cube([io_window_x,4,io_window_z]);
         }
         translate([2,-2,2]) cube([io_window_x-4,5,io_window_z-4]);
-        translate([io_offset,6,bottom_height-pcb_z+pcb_loc_z+2]) 
+        translate([io_offset+pcb_loc_x,6+pcb_loc_y,bottom_height-pcb_z+pcb_loc_z+2]) 
             sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
         // subtractive accessories
         if(accessory_name != "none") {
