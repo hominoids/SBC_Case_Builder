@@ -106,7 +106,7 @@ module case_bottom(case_design) {
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                                 else {
-                                    translate([-adj-gap,wallthick+gap+pcb_depth-8,floorthick+3.4]) 
+                                    translate([-adj-gap,wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                             }
@@ -126,7 +126,7 @@ module case_bottom(case_design) {
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                                 else {
-                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+pcb_depth-8,floorthick+3.4]) 
+                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
                                         rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                             }
@@ -335,6 +335,7 @@ module case_bottom(case_design) {
                                     rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                             }
                             else {
+echo(pcb_depth+case_offset_y-10);
                                 translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth+case_offset_y-8,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                 translate([-gap+.6,wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
@@ -456,12 +457,15 @@ module case_bottom(case_design) {
                         }   
                     }
                 }
-                // rear io plate opening for standard form motherboards
-                if(rear_io_plate == true) {
+                // rear io shield opening for standard form motherboards
+                if(rear_io_shield == true) {
                     if(sbc_model == "mini-stx") {
                         translate([6.2+pcb_loc_x,-4.5,-4.4+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
                     }
-                    else {
+                    if(sbc_model == "mini-itx_thin") {
+                        translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 25]);
+                    }
+                    if(sbc_model != "mini-stx" && sbc_model != "mini-itx_thin") {
                         translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
                     }
                 }

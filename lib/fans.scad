@@ -73,16 +73,16 @@ module fans(style, mask) {
 
     if(enablemask == true) {
         if(mstyle == "fan_open") {
-            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_open");
+            translate([0, 0, -mlength+msetback-1]) fan_mask(diameter, mlength, "fan_open");
         }
         if(mstyle == "default" || mstyle == "fan_1") {
-            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_1");
+            translate([0, 0, -mlength+msetback-1]) fan_mask(diameter, mlength, "fan_1");
         }
         if(mstyle == "fan_2") {
-            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_2");
+            translate([0, 0, -mlength+msetback-1]) fan_mask(diameter, mlength, "fan_2");
         }
         if(mstyle == "fan_hex") {
-            translate([0, 0, -adj-msetback]) fan_mask(diameter, mlength, "fan_hex");
+            translate([0, 0, -mlength+msetback-1]) fan_mask(diameter, mlength, "fan_hex");
         }
     }
     if(enablemask == false) {

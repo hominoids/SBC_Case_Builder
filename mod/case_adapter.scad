@@ -18,7 +18,7 @@
 
            NAME: case_adapter
     DESCRIPTION: creates adapters for legacy cases footprints
-           TODO: verify mini-stx and nano-itx hole locations
+           TODO: nano-itx hole locations
 
           USAGE: case_adapter(case_design)
 
@@ -27,7 +27,15 @@
 module case_adapter(case_design) {
 
 mb_adapters=[
-            ["adapter_atx", 304.8, 243.84, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 288.29, 10.16], 
+            ["adapter_ssi-eeb", 304.8, 330.2, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 288.29, 10.16], 
+                                           ["left_middle", 6.35, 165.1], ["middle_middle", 163.83, 165.1], ["right_middle", 288.29, 165.1],
+                                           ["middle_middle2", 209.55, 237.49], ["right_middle2", 288.29, 237.49],
+                                           ["left_front", 6.35, 322.58], ["middle_front", 163.83, 322.58], ["right_front", 299.72, 322.58]],
+            ["adapter_ssi-ceb", 304.8, 266.7, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 288.29, 10.16], 
+                                           ["left_middle", 6.35, 165.1], ["middle_middle", 163.83, 165.1], ["right_middle", 288.29, 165.1],
+                                           ["middle_front", 209.55, 237.49], ["right_front", 288.29, 237.49]],
+            ["adapter_atx", 304.8, 243.84, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], 
+                                           ["middle2_rear", 211.99, 10.16], ["right_rear", 288.29, 10.16], 
                                            ["left_middle", 6.35, 165.1], ["middle_middle", 163.83, 165.1], ["right_middle", 288.29, 165.1],
                                            ["left_front", 6.35, 237.49], ["middle_front", 163.83, 237.49], ["right_front", 288.29, 237.49]],
             ["adapter_micro-atx", 243.84, 243.84, ["left_rear", 6.35, 33.02], ["middle_rear", 163.83, 10.16], ["right_rear", 211.99, 10.16], 
@@ -43,6 +51,8 @@ mb_adapters=[
             ["adapter_mini-dtx", 203.2, 170.18, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
                                                 ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]], 
             ["adapter_mini-itx", 170, 170, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
+                                           ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]],
+            ["adapter_mini-itx_thin", 170, 170, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
                                            ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]],
             ["adapter_mini-stx", 140, 147, ["left_rear", 5, 5], ["right_rear", 135, 5],
                                            ["left_front", 5, 142], ["right_front", 135, 142]],
@@ -301,9 +311,6 @@ mb_adapters=[
             }
         }
     translate([mba_offset_x-10, -10, -1]) cube([mba_x+20, 10, floorthick+10]);
-//    translate([mba_offset_x-10, mba_y, -1]) cube([mba_x+20, 10, floorthick+4]);
-//    translate([mba_offset_x-10, -10, -1]) cube([10, mba_y+20, floorthick+4]);
-//    translate([mba_x+mba_offset_x, -10, -1]) cube([10, mba_y+20, floorthick+4]);
     }
     // additive accessories
     if(accessory_name != "none") {
@@ -348,18 +355,18 @@ mb_adapters=[
 
 
 /*
-           NAME: io_plate
+           NAME: io_shield
     DESCRIPTION: creates rear io panel for legacy cases
            TODO: none
 
-          USAGE: io_plate()
+          USAGE: io_shield()
 
 */
-module io_plate() {
+module io_shield() {
 
-    io_window_x = case_design == "adapter_mini-stx" ? 123.95 : 158.75;
+    io_window_x = case_design == ("adapter_mini-stx") ? 123.95 : 158.75;
     io_window_y = 4;
-    io_window_z = case_design == "adapter_mini-stx" ? 40 : case_design == "adapter_thin-mini-stx" ? 25 : 44;
+    io_window_z = case_design == "adapter_mini-stx" ? 40 : case_design == "adapter_mini-itx_thin" ? 25 : 44;
     io_offset = case_design == "adapter_mini-stx" ? 1.2 : 10.79;
 
     difference() {

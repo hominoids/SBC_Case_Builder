@@ -119,7 +119,7 @@ module case_top(case_design) {
                                             floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                     }
                                     else {
-                                        translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth-8,
+                                        translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth+case_offset_y-8,
                                             floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                     }
                                 }
@@ -139,7 +139,7 @@ module case_top(case_design) {
                                             floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                     }
                                     else {
-                                        translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth-8,
+                                        translate([width-3*(wallthick+gap)-adj,wallthick-gap+pcb_depth+case_offset_y-8,
                                             floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                     }
                                 }
@@ -379,12 +379,15 @@ module case_top(case_design) {
                         }   
                     }
                 }
-                // rear io plate opening for standard form motherboards
-                if(rear_io_plate == true) {
+                // rear io shield opening for standard form motherboards
+                if(rear_io_shield == true) {
                     if(sbc_model == "mini-stx") {
                         translate([6.2+pcb_loc_x,-4.5,-4.4+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
                     }
-                    else {
+                    if(sbc_model == "mini-itx_thin") {
+                        translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 25]);
+                    }
+                    if(sbc_model != "mini-stx" && sbc_model != "mini-itx_thin") {
                         translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-case_offset_bz-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
                     }
                 }

@@ -27,9 +27,9 @@ include <./sbc_case_builder_accessories.cfg>;
 /* [View] */
 // viewing mode "model", "platter", "part"
 view = "model"; // [model, platter, part]
-individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_plate, accessories]
+individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_shield, accessories]
 // single board computer model
-sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-stx", "nano-itx", "nuc", "pico-itx"]
+sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "nio12", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "nano-itx", "nuc", "pico-itx"]
 
 // sbc off in model view
 sbc_off = false;
@@ -40,7 +40,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-stx]
+case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -66,10 +66,10 @@ bottom_clearence = 3.5; //[-10:.01:10]
 flat_blank_section =  false;
 
 /* [Standard Motherboard Case Settings] */
-// adjustment for atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
+// adjustment for ssi-eeb, ssi-ceb, atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
 standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
-rear_io_plate = false;
+rear_io_shield = false;
 
 /* [3D Case Adjustments] */
 // sbc location x axis
@@ -276,7 +276,7 @@ pcb_bmaxz = sbc_data[s[0]][11][6];
 pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
-pcb_z = sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-stx" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
+pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-stx" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
@@ -385,9 +385,9 @@ if (view == "platter") {
         case_bottom(case_design);
         translate([0,(2*depth)+20,case_z+floorthick]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx") {
+    if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
         color("dimgrey",1) case_adapter(case_design);
-        color("dimgrey",1) translate([-180, 0, 4]) rotate([270,0,0]) io_plate();
+        color("dimgrey",1) translate([-180, 0, 4]) rotate([270,0,0]) io_shield();
     }
     // ui access panel
     if(bottom_access_panel_enable == true) {
@@ -467,56 +467,52 @@ if (view == "model") {
                 difference() {
                     color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
                     if(move_rear < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom]) 
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_leftside < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([gap+wallthick+1.01,depth+2,case_z+2]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-gap-(2*wallthick)-adj,-gap-wallthick-1,-lower_bottom]) 
-                            cube([gap+wallthick,depth+2,case_z+2]);
+                        translate([width-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
-            }
-            if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
                 difference() {
                     color("grey",1) translate([0,0,raise_top]) case_top(case_design);
                     if(move_rear < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,raise_top]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),raise_top]) 
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_leftside < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,raise_top]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([gap+wallthick+1.01,depth+2,case_z+2]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-gap-(2*wallthick)-adj,-gap-wallthick-1,raise_top]) 
-                            cube([gap+wallthick,depth+2,case_z+2]);
+                        translate([width-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
         }
         if(case_design == "panel") {
             if(lower_bottom >= 0) {
                 color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
-            }
-            if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
                 color("grey",1) translate([0,0,raise_top])case_top(case_design);
@@ -533,63 +529,63 @@ if (view == "model") {
             if(move_leftside >= 0) {
                 color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
             }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
         }
         if(case_design == "stacked") {
             if(lower_bottom >= 0) {
                 color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }
             if(sbc_off == false) {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
-            if(raise_top >= 0) {
-                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-            }
         }
-        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
+        if(case_design == "tray" || case_design == "tray_sides" || case_design == "tray_vu5" || case_design == "tray_vu7") {
             if(lower_bottom >= 0) {
                 difference() {
                     color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
                     if(move_rear < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
-                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                        translate([-gap-wallthick-sidethick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([width+2*sidethick+2,gap+wallthick+1.01,case_z+5]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-2*(gap+wallthick)-1.01,-lower_bottom]) 
-                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                        translate([-gap-wallthick-sidethick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
+                            cube([width+2*sidethick+2,gap+wallthick+1.01,case_z+5]);
                     }
                     if(move_leftside < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
-                            cube([gap+wallthick+1.01,depth+2,case_z+2]);
+                        translate([-gap-wallthick-sidethick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+2*sidethick+1.01,depth+2,case_z+5]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-(2*wallthick)-adj-1.01,-gap-wallthick-1,-lower_bottom]) 
-                            cube([gap+wallthick+1,depth+2,case_z+2]);
+                        translate([width-sidethick-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+2*sidethick+1,depth+2,case_z+5]);
                     }
                 }
-            }
-            if(sbc_off == false) {
-                translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
                 difference() {
                     color("grey",1) translate([0,0,raise_top]) case_top(case_design);
                     if(move_rear < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,raise_top]) 
-                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                        translate([-gap-wallthick-sidethick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([width+2*sidethick+2,gap+wallthick+1.01,case_z+5]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-gap-wallthick-2.01,raise_top]) 
-                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                        translate([-gap-wallthick-sidethick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
+                            cube([width+2*sidethick+2,gap+wallthick+1.01,case_z+5]);
                     }
                     if(move_leftside < 0) {
-                        translate([-gap-2*wallthick-1,-gap-wallthick-1,raise_top]) 
-                            cube([gap+wallthick+1.01,depth+2,case_z+2]);
+                        translate([-gap-wallthick-sidethick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+2*sidethick+1.01,depth+2,case_z+5]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-gap-wallthick-2.01,-gap-wallthick-1,raise_top]) 
-                            cube([gap+2*wallthick+1,depth+2,case_z+2]);
+                        translate([width-sidethick-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+2*sidethick+1,depth+2,case_z+5]);
                     }
                 }
             }
@@ -637,78 +633,82 @@ if (view == "model") {
                 color("darkgrey",.5) translate([-((192.90-100)/2)+(width/2)-wallthick-gap-53.5,depth+11.5,
                     case_z+27]) rotate([-15,0,180]) hk_speaker();
             }
+            if(sbc_off == false) {
+                translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
         } 
         if(case_design == "round" || case_design == "hex") {
             if(lower_bottom >= 0) {
                 color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
+            }        
             if(sbc_off == false) {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
-            if(raise_top >= 0) {
-                color("grey",1) translate([0,0,raise_top]) case_top(case_design);
-            }        
         }
         if(case_design == "snap" || case_design == "fitted") {
             if(lower_bottom >= 0) {
                 difference() {
                     color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
                     if(move_rear < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-2*(wallthick+gap)-adj,-lower_bottom]) 
-                            cube([width+2,2*(gap+wallthick)+adj,case_z+2]);
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
+                            cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_leftside < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([gap+wallthick+1.01,depth+2,case_z+2]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-2*(wallthick+gap)-adj,-gap-wallthick-1,-lower_bottom]) 
+                        translate([width-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
                             cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
-            }
-            if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(raise_top >= 0) {
                 difference() {
                     color("grey",1) translate([0,0,raise_top]) case_top(case_design);
                     if(move_rear < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,raise_top]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_front < 0) {
-                        translate([-gap-wallthick-1,depth-gap-wallthick-2.01,raise_top]) 
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
                     }
                     if(move_leftside < 0) {
-                        translate([-gap-wallthick-1,-gap-wallthick-1,raise_top]) 
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([gap+wallthick+1.01,depth+2,case_z+2]);
                     }
                     if(move_rightside < 0) {
-                        translate([width-gap-wallthick-2.01,-gap-wallthick-1,raise_top]) 
+                        translate([width-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
                             cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
             }        
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
         }
-        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx") {
+        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             color("dimgrey",1) case_adapter(case_design);
             if(sbc_off == false) {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             if(case_design == "adapter_mini-stx") {
-                color("dimgrey",1) translate([-1.2,-4.5,-2]) io_plate();
+                color("dimgrey",1) translate([-1.2,-4.5,-2]) io_shield();
             }
             else {
-                color("dimgrey",1) translate([-10.79,-4.5,-2]) io_plate();
+                color("dimgrey",1) translate([-10.79,-4.5,-2]) io_shield();
             }
         }
         // ui access panel
@@ -806,7 +806,7 @@ if (view == "part") {
         }
     }
     if(individual_part == "bottom") {
-        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx") {
+        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             case_adapter(case_design);
         }
         else {
@@ -843,9 +843,9 @@ if (view == "part") {
                 case_side(case_design,"left");
         }
     }
-    if(individual_part == "io_plate") {
-        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx") {
-            translate([0, 0, 4]) rotate([270,0,0]) io_plate();
+    if(individual_part == "io_shield") {
+        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
+            translate([0, 0, 4]) rotate([270,0,0]) io_shield();
         }
     }
     if(individual_part == "accessories") {
