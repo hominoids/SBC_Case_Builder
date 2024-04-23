@@ -104,9 +104,11 @@ tol = .25; //[-.5:.0625:.5]
 /* [Top Standoff Global Settings] */
 // enable case top standoffs
 sbc_top_standoffs = true;
+// reverse standoff vertical orientation
 top_standoff_reverse = true;
 // enable wall support for standoffs
 top_sidewall_support = false;
+top_standoff_size = "m3"; //[m2, m2.5, m3, m4, custom]
 top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
 top_standoff_pillar = "hex"; //[hex, round]
 top_standoff_diameter = 5.75; //[0:.01:10]
@@ -138,9 +140,11 @@ top_front_right_support = "front";  //[none,left,rear,front,right]
 /* [Bottom Standoff Global Settings] */
 // enable case bottom standoffs
 sbc_bottom_standoffs = true;
+// reverse standoff vertical orientation
 bottom_standoff_reverse = false;
 // enable wall support for standoffs
 bottom_sidewall_support = false;
+bottom_standoff_size = "m3"; //[m2, m2.5, m3, m4, custom]
 bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
 bottom_standoff_pillar = "hex"; //[hex, round]
 bottom_standoff_diameter = 5.75; //[2:.01:10]
@@ -286,9 +290,13 @@ case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 
 /* [Hidden] */
-top_standoff = [top_standoff_diameter,
+top_dia = top_standoff_size == "m2" ? 4 : top_standoff_size == "m2.5" ? 4 : 
+            top_standoff_size == "m3" ? 5 : top_standoff_size == "m4" ? 6 : top_standoff_diameter;
+top_hole_size = top_standoff_size == "m2" ? 2 : top_standoff_size == "m2.5" ? 2.5 : 
+            top_standoff_size == "m3" ? 3 : top_standoff_size == "m4" ? 4 : top_standoff_hole_size;
+top_standoff = [top_dia,
                 18,
-                top_standoff_hole_size,
+                top_hole_size,
                 top_standoff_support_size,
                 top_standoff_support_height,
                 top_standoff_type,
@@ -298,9 +306,13 @@ top_standoff = [top_standoff_diameter,
                 top_standoff_insert,
                 top_standoff_insert_dia,
                 top_standoff_insert_height];
-bottom_standoff = [bottom_standoff_diameter,
+bottom_dia = bottom_standoff_size == "m2" ? 4 : bottom_standoff_size == "m2.5" ? 4 : 
+                bottom_standoff_size == "m3" ? 5 : bottom_standoff_size == "m4" ? 6 : bottom_standoff_diameter;
+bottom_hole_size = bottom_standoff_size == "m2" ? 2 : bottom_standoff_size == "m2.5" ? 2.5 : 
+                bottom_standoff_size == "m3" ? 3 : bottom_standoff_size == "m4" ? 4 : bottom_standoff_hole_size;
+bottom_standoff = [bottom_dia,
                    6,
-                   bottom_standoff_hole_size,
+                   bottom_hole_size,
                    bottom_standoff_support_size,
                    bottom_standoff_support_height,
                    bottom_standoff_type,

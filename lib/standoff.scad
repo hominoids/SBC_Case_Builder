@@ -25,10 +25,10 @@
 
           USAGE: standoff(stand_off, mask)
 
-                 stand_off[radius, height, holesize, supportsize, supportheight, sink, pillarstyle, 
+                 stand_off[diameter, height, holesize, supportsize, supportheight, sink, pillarstyle, 
                             pillarsupport, reverse, insert_e, i_dia, i_depth], mask)
 
-                           radius = pillar radius
+                           diameter = pillar diameter
                            height = total height
                            holesize = hole diameter
                            supportsize = support size for sink
@@ -50,7 +50,7 @@
 
 module standoff(stand_off, mask){
 
-    radius = stand_off[0];
+    diameter = stand_off[0];
     height = stand_off[1];
     holesize = stand_off[2];
     supportsize = stand_off[3];
@@ -82,16 +82,16 @@ module standoff(stand_off, mask){
         difference (){ 
             union () { 
                 if(pillarstyle == "hex" && reverse == false) {
-                    rotate([0,0,30]) cylinder(d=radius*2/sqrt(3), h=height, $fn=6);
+                    rotate([0,0,30]) cylinder(d=diameter*2/sqrt(3), h=height, $fn=6);
                 }
                 if(pillarstyle == "hex" && reverse == true) {
-                    translate([0,0,-height]) rotate([0,0,30]) cylinder(d=radius*2/sqrt(3), h=height, $fn=6);
+                    translate([0,0,-height]) rotate([0,0,30]) cylinder(d=diameter*2/sqrt(3), h=height, $fn=6);
                 }
                 if(pillarstyle == "round" && reverse == false) {
-                    cylinder(d=radius, h=height);
+                    cylinder(d=diameter, h=height);
                 }
                 if(pillarstyle == "round" && reverse == true) {
-                    translate([0,0,-height]) cylinder(d=radius, h=height);
+                    translate([0,0,-height]) cylinder(d=diameter, h=height);
                 }
                 if(reverse == true) {
                     translate([0,0,-supportheight]) cylinder(d=supportsize, h=supportheight);
@@ -136,10 +136,14 @@ module standoff(stand_off, mask){
             }
             // countersink hole
             if(sink == "countersunk" && reverse == false) {
-                translate([0,0, -adj]) cylinder(d1=6.5, d2=holesize, h=3.25);
+                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 6.72 : holesize == 4 ? 8.96 : (2*holesize)+.5;
+                ds = holesize == 2 ? 1.2 : holesize == 2.5 ? 1.5 : holesize == 3 ? 1.86 : holesize == 4 ? 2.48 : 3.5;
+                translate([0,0,-adj]) cylinder(d1=hs, d2=holesize, h=ds);
             }
             if(sink == "countersunk" && reverse == true) {
-                translate([0,0,+adj-2.5]) cylinder(d1=holesize, d2=6.5, h=3.25);
+                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 6.72 : holesize == 4 ? 8.96 : (2*holesize)+.5;
+                ds = holesize == 2 ? 1.2 : holesize == 2.5 ? 1.5 : holesize == 3 ? 1.86 : holesize == 4 ? 2.48 : 3.5;
+                translate([0,0,+adj-ds]) cylinder(d1=holesize, d2=hs, h=ds);
             }
             // recessed hole
             if(sink == "recessed" && reverse == false) {
@@ -150,10 +154,14 @@ module standoff(stand_off, mask){
             }
             // nut holder
             if(sink == "nut holder" && reverse == false) {
-                translate([0,0,-adj]) cylinder(r=3.3,h=3,$fn=6);     
+                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 5.5 : holesize == 4 ? 7 : (2*holesize)+.5;
+                ds = holesize == 2 ? 1.6 : holesize == 2.5 ? 2 : holesize == 3 ? 2.4 : holesize == 4 ? 3.2 : 3.5;
+                translate([0,0,-adj]) cylinder(d=hs*2/sqrt(3),h=ds,$fn=6);     
             }
             if(sink == "nut holder" && reverse == true) {
-                translate([0,0,+adj-3]) cylinder(r=3.3,h=3,$fn=6);     
+                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 5.5 : holesize == 4 ? 7 : (2*holesize)+.5;
+                ds = holesize == 2 ? 1.6 : holesize == 2.5 ? 2 : holesize == 3 ? 2.4 : holesize == 4 ? 3.2 : 3.5;
+                translate([0,0,+adj-ds]) cylinder(d=hs*2/sqrt(3),h=ds,$fn=6);     
             }
             // blind hole
             if(sink == "blind" && reverse == false) {
