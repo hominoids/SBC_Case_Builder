@@ -840,9 +840,10 @@ DESCRIPTION: creates standoffs.
          rotation[] = object rotation
        parametric[] = "case", "sbc", "sbc-case_z"
              size[] = not used
-            data[0] = [radius,height,holesize,supportsize,supportheight,sink,pillarstyle,pillarsupport,reverse,insert_e,i_dia,i_depth]
+            data[0] = [size,diameter,height,holesize,supportsize,supportheight,sink,pillarstyle,pillarsupport,reverse,insert_e,i_dia,i_depth]
 
-                       radius = pillar radius
+                       size = "m2_tap","m2","m2+","m2.5_tap","m2.5","m2.5+","m3_tap","m3","m3+","m4_tap","m4","m4+","custom"
+                       diameter = pillar radius
                        height = total height
                        holesize = hole diameter
                        supportsize = support size for sink

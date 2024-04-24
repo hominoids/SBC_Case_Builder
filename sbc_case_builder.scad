@@ -29,7 +29,7 @@ include <./sbc_case_builder_accessories.cfg>;
 view = "model"; // [model, platter, part]
 individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_shield, accessories]
 // single board computer model
-sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "nio12", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "nano-itx", "nuc", "pico-itx"]
+sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "nio12", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "mini-stx_thin", "nano-itx", "nuc", "pico-itx"]
 
 // sbc off in model view
 sbc_off = false;
@@ -40,7 +40,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx]
+case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -108,7 +108,7 @@ sbc_top_standoffs = true;
 top_standoff_reverse = true;
 // enable wall support for standoffs
 top_sidewall_support = false;
-top_standoff_size = "m3"; //[m2, m2.5, m3, m4, custom]
+top_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
 top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
 top_standoff_pillar = "hex"; //[hex, round]
 top_standoff_diameter = 5.75; //[0:.01:10]
@@ -144,7 +144,7 @@ sbc_bottom_standoffs = true;
 bottom_standoff_reverse = false;
 // enable wall support for standoffs
 bottom_sidewall_support = false;
-bottom_standoff_size = "m3"; //[m2, m2.5, m3, m4, custom]
+bottom_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
 bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
 bottom_standoff_pillar = "hex"; //[hex, round]
 bottom_standoff_diameter = 5.75; //[2:.01:10]
@@ -209,6 +209,7 @@ ext_top_standoffs = true;
 ext_top_standoff_reverse = true;
 // enable wall support for extended standoffs
 ext_top_sidewall_support = true;
+ext_top_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
 ext_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
 ext_top_standoff_pillar = "hex"; //[hex, round]
 ext_top_standoff_diameter = 5.75; //[0:.01:10]
@@ -218,6 +219,7 @@ ext_top_standoff_support_height = 4; //[0:.01:50]
 ext_top_standoff_insert = false;
 ext_top_standoff_insert_dia = 4.2; //.01
 ext_top_standoff_insert_height = 5.1; //.01
+/* [Extended Top Standoff Individual Settings] */
 // extended case top - lower left standoff settings
 ext_top_rear_left_enable = true;
 ext_top_rear_left_adjust = 0; //[-20:.01:20]
@@ -235,13 +237,13 @@ ext_top_front_right_enable = true;
 ext_top_front_right_adjust = 0; //[-20:.01:20]
 ext_top_front_right_support = "front";  //[none,left,rear,front,right]
 
-
 /* [Extended Bottom Standoffs] */
 // enable case bottom extended standoffs
 ext_bottom_standoffs = true;
 ext_bottom_standoff_reverse = false;
 // enable wall support for extended standoffs
 ext_bottom_sidewall_support = true;
+ext_bottom_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
 ext_bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
 ext_bottom_standoff_pillar = "hex"; //[hex, round]
 ext_bottom_standoff_diameter = 5.75; //[2:.01:10]
@@ -251,6 +253,8 @@ ext_bottom_standoff_support_height = 4; //[0:.01:50]
 ext_bottom_standoff_insert = false;
 ext_bottom_standoff_insert_dia = 4.2; //.01
 ext_bottom_standoff_insert_height = 5.1; //.01
+
+/* [Extended Bottom Standoff Individual Settings] */
 // extended case bottom - rear left standoff settings
 ext_bottom_rear_left_enable = true;
 ext_bottom_rear_left_adjust = 0; //[-20:.01:20]
@@ -280,7 +284,7 @@ pcb_bmaxz = sbc_data[s[0]][11][6];
 pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
-pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-stx" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
+pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-itx_thin" || sbc_model == "mini-stx" || sbc_model == "mini-stx_thin" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
 width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
@@ -290,13 +294,10 @@ case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 
 /* [Hidden] */
-top_dia = top_standoff_size == "m2" ? 4 : top_standoff_size == "m2.5" ? 4 : 
-            top_standoff_size == "m3" ? 5 : top_standoff_size == "m4" ? 6 : top_standoff_diameter;
-top_hole_size = top_standoff_size == "m2" ? 2 : top_standoff_size == "m2.5" ? 2.5 : 
-            top_standoff_size == "m3" ? 3 : top_standoff_size == "m4" ? 4 : top_standoff_hole_size;
-top_standoff = [top_dia,
+top_standoff = [top_standoff_size,
+                top_standoff_diameter,
                 18,
-                top_hole_size,
+                top_standoff_hole_size,
                 top_standoff_support_size,
                 top_standoff_support_height,
                 top_standoff_type,
@@ -306,13 +307,11 @@ top_standoff = [top_dia,
                 top_standoff_insert,
                 top_standoff_insert_dia,
                 top_standoff_insert_height];
-bottom_dia = bottom_standoff_size == "m2" ? 4 : bottom_standoff_size == "m2.5" ? 4 : 
-                bottom_standoff_size == "m3" ? 5 : bottom_standoff_size == "m4" ? 6 : bottom_standoff_diameter;
-bottom_hole_size = bottom_standoff_size == "m2" ? 2 : bottom_standoff_size == "m2.5" ? 2.5 : 
-                bottom_standoff_size == "m3" ? 3 : bottom_standoff_size == "m4" ? 4 : bottom_standoff_hole_size;
-bottom_standoff = [bottom_dia,
+
+bottom_standoff = [bottom_standoff_size,
+                   bottom_standoff_diameter,
                    6,
-                   bottom_hole_size,
+                   bottom_standoff_hole_size,
                    bottom_standoff_support_size,
                    bottom_standoff_support_height,
                    bottom_standoff_type,
@@ -322,7 +321,8 @@ bottom_standoff = [bottom_dia,
                    bottom_standoff_insert,
                    bottom_standoff_insert_dia,
                    bottom_standoff_insert_height];
-ext_top_standoff = [ext_top_standoff_diameter,
+ext_top_standoff = [ext_top_standoff_size,
+                    ext_top_standoff_diameter,
                     18,
                     ext_top_standoff_hole_size,
                     ext_top_standoff_support_size,
@@ -334,7 +334,8 @@ ext_top_standoff = [ext_top_standoff_diameter,
                     ext_top_standoff_insert,
                     ext_top_standoff_insert_dia,
                     ext_top_standoff_insert_height];
-ext_bottom_standoff = [ext_bottom_standoff_diameter,
+ext_bottom_standoff = [ext_bottom_standoff_size,
+                       ext_bottom_standoff_diameter,
                        6,
                        ext_bottom_standoff_hole_size,
                        ext_bottom_standoff_support_size,
@@ -397,7 +398,7 @@ if (view == "platter") {
         case_bottom(case_design);
         translate([0,(2*depth)+20,case_z+floorthick]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
+    if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
         color("dimgrey",1) case_adapter(case_design);
         color("dimgrey",1) translate([-180, 0, 4]) rotate([270,0,0]) io_shield();
     }
@@ -710,13 +711,13 @@ if (view == "model") {
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
         }
-        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
+        if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             color("dimgrey",1) case_adapter(case_design);
             if(sbc_off == false) {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
-            if(case_design == "adapter_mini-stx") {
+            if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx") {
                 color("dimgrey",1) translate([-1.2,-4.5,-2]) io_shield();
             }
             else {
@@ -818,7 +819,7 @@ if (view == "part") {
         }
     }
     if(individual_part == "bottom") {
-        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
+        if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             case_adapter(case_design);
         }
         else {
@@ -856,7 +857,7 @@ if (view == "part") {
         }
     }
     if(individual_part == "io_shield") {
-        if(case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
+        if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             translate([0, 0, 4]) rotate([270,0,0]) io_shield();
         }
     }

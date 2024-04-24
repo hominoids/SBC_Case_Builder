@@ -25,9 +25,10 @@
 
           USAGE: standoff(stand_off, mask)
 
-                 stand_off[diameter, height, holesize, supportsize, supportheight, sink, pillarstyle, 
+                 stand_off[size, diameter, height, holesize, supportsize, supportheight, sink, pillarstyle, 
                             pillarsupport, reverse, insert_e, i_dia, i_depth], mask)
 
+                           size = "m2_tap","m2","m2+","m2.5_tap","m2.5","m2.5+","m3_tap","m3","m3+","m4_tap","m4","m4+","custom" 
                            diameter = pillar diameter
                            height = total height
                            holesize = hole diameter
@@ -50,22 +51,38 @@
 
 module standoff(stand_off, mask){
 
-    diameter = stand_off[0];
-    height = stand_off[1];
-    holesize = stand_off[2];
-    supportsize = stand_off[3];
-    supportheight = stand_off[4];
-    sink = stand_off[5];
-    pillarstyle = stand_off[6];
-    pillarsupport = stand_off[7];
-    reverse = stand_off[8];
-    insert_e = stand_off[9];
-    i_dia = stand_off[10];
-    i_depth = stand_off[11];
+    size = stand_off[0];
+    diameter = size == "m2_tap" || size == "m2" || size == "m2+" ? 4 : 
+                size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 4 : 
+                    size == "m3_tap" || size == "m3" || size == "m3+" ? 5 : 
+                        size == "m4_tap" || size == "m4" || size == "m4+" ? 6 : stand_off[1];
+    height = stand_off[2];
+    holesize = size == "m2_tap" ? 1.6 : size == "m2" ? 2 : size == "m2+" ? 2.26 : 
+                    size == "m2.5_tap" ? 2.05 : size == "m2.5" ? 2.5 : size == "m2.5+" ? 2.83 : 
+                        size == "m3_tap" ? 2.5 : size == "m3" ? 3 : size == "m3+" ? 3.4 : 
+                            size == "m4_tap" ? 3.3 : size == "m4" ? 4 : size == "m4+" ? 4.4 : stand_off[3];
+    supportsize = stand_off[4];
+    supportheight = stand_off[5];
+    sink = stand_off[6];
+    pillarstyle = stand_off[7];
+    pillarsupport = stand_off[8];
+    reverse = stand_off[9];
+    insert_e = stand_off[10];
+    i_dia = stand_off[11];
+    i_depth = stand_off[12];
     enablemask = mask[0];
     mlength = mask[1];
     msetback = mask[2];
     mstyle = mask[3];
+
+    ps = size == "m2_tap" || size == "m2" || size == "m2+" ? 4 : 
+            size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 5 : 
+                size == "m3_tap" || size == "m3" || size == "m3+" ? 6.72 : 
+                    size == "m4_tap" || size == "m4" || size == "m4+" ? 8.96 : (2*holesize)+.5;
+    ds = size == "m2_tap" || size == "m2" || size == "m2+" ? 1.2 : 
+            size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 1.5 : 
+                size == "m3_tap" || size == "m3" || size == "m3+" ? 1.86 : 
+                    size == "m4_tap" || size == "m4" || size == "m4+" ? 2.48 : holesize*.465;
 
     adj = 0.1;
     $fn = 90;
@@ -136,14 +153,10 @@ module standoff(stand_off, mask){
             }
             // countersink hole
             if(sink == "countersunk" && reverse == false) {
-                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 6.72 : holesize == 4 ? 8.96 : (2*holesize)+.5;
-                ds = holesize == 2 ? 1.2 : holesize == 2.5 ? 1.5 : holesize == 3 ? 1.86 : holesize == 4 ? 2.48 : 3.5;
-                translate([0,0,-adj]) cylinder(d1=hs, d2=holesize, h=ds);
+                translate([0,0,-adj]) cylinder(d1=ps, d2=holesize, h=ds);
             }
             if(sink == "countersunk" && reverse == true) {
-                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 6.72 : holesize == 4 ? 8.96 : (2*holesize)+.5;
-                ds = holesize == 2 ? 1.2 : holesize == 2.5 ? 1.5 : holesize == 3 ? 1.86 : holesize == 4 ? 2.48 : 3.5;
-                translate([0,0,+adj-ds]) cylinder(d1=holesize, d2=hs, h=ds);
+                translate([0,0,+adj-ds]) cylinder(d1=holesize, d2=ps, h=ds);
             }
             // recessed hole
             if(sink == "recessed" && reverse == false) {
@@ -154,14 +167,10 @@ module standoff(stand_off, mask){
             }
             // nut holder
             if(sink == "nut holder" && reverse == false) {
-                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 5.5 : holesize == 4 ? 7 : (2*holesize)+.5;
-                ds = holesize == 2 ? 1.6 : holesize == 2.5 ? 2 : holesize == 3 ? 2.4 : holesize == 4 ? 3.2 : 3.5;
-                translate([0,0,-adj]) cylinder(d=hs*2/sqrt(3),h=ds,$fn=6);     
+                translate([0,0,-adj]) cylinder(d=ps*2/sqrt(3),h=ds,$fn=6);     
             }
             if(sink == "nut holder" && reverse == true) {
-                hs = holesize == 2 ? 4 : holesize == 2.5 ? 5 : holesize == 3 ? 5.5 : holesize == 4 ? 7 : (2*holesize)+.5;
-                ds = holesize == 2 ? 1.6 : holesize == 2.5 ? 2 : holesize == 3 ? 2.4 : holesize == 4 ? 3.2 : 3.5;
-                translate([0,0,+adj-ds]) cylinder(d=hs*2/sqrt(3),h=ds,$fn=6);     
+                translate([0,0,+adj-ds]) cylinder(d=ps*2/sqrt(3),h=ds,$fn=6);     
             }
             // blind hole
             if(sink == "blind" && reverse == false) {
