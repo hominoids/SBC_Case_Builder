@@ -460,16 +460,16 @@ echo(pcb_depth+case_offset_y-10);
                 // rear io shield opening for standard form motherboards
                 if(rear_io_shield == true) {
                     if(sbc_model == "mini-stx_thin") {
-                        translate([6.2+pcb_loc_x,-4.5,-4.4+bottom_height-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 25]);
+                        translate([6.2+pcb_loc_x,-4.5,-4.65+bottom_height-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 25]);
                     }
                     if(sbc_model == "mini-stx") {
-                        translate([6.2+pcb_loc_x,-4.5,-4.4+bottom_height-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
+                        translate([6.2+pcb_loc_x,-4.5,-4.65+bottom_height-pcb_z+pcb_loc_z]) cube([123.95, 10+pcb_loc_y, 40]);
                     }
                     if(sbc_model == "mini-itx_thin") {
-                        translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 25]);
+                        translate([-2.62+pcb_loc_x,-4.5,-2.25+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 25]);
                     }
                     if(sbc_model != "mini-stx_thin" && sbc_model != "mini-stx" && sbc_model != "mini-itx_thin") {
-                        translate([-2.62+pcb_loc_x,-4.5,-2+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
+                        translate([-2.62+pcb_loc_x,-4.5,-2.25+bottom_height-pcb_z+pcb_loc_z]) cube([158.75, 10+pcb_loc_y, 44]);
                     }
                 }
             }
