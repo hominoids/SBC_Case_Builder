@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the 84 current devices contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs available (shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted, folded-paper and standard motherboard adapters) and each allows for customization within the design.
+This project is about autonomous SBC case creation. It utilizes the SBC Model Framework project to automatically generate cases based on the data for any of the current devices contained within the framework. This allows legacy, current and future SBC to have multiple cases available on day one of their inclusion in the framework. There are multiple base case designs available (shell, panel, stacked, tray, tray-sides, round, hex, snap, fitted, folded-paper and standard motherboard adapters) and each allows for customization within the design.
 
 All case openings are created automatically based on SBC data and the dimensions of any case design can be expanded in any axis allowing for the creation of larger cases. If you reposition the SBC in a case, you will see I/O openings created or removed appropriately based on their proximity to the case geometry. These cases might be useful for prototypes or other in house uses to quickly and easily create standard, specialized and custom SBC cases thru different case designs, customization and accessories.
 
@@ -31,6 +31,7 @@ License: GPLv3.
    - Case Associations
    - SBC Associations
    - SBC_X,Y - Case_Z Association
+-  Graphical User Interface
 -  SBC Model Framework Validation Tool
 
 ### Base Case Designs:
@@ -47,9 +48,9 @@ License: GPLv3.
 - Fitted - complete
 - Paper, Folded - complete
 - Standard MB SBC Adapters & io plates - completed
-	+ ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-ITX, Mini-STX
+	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-Itx, Mini-ITX Thin, Mini-STX, Mini-STX Thin
 - Standard MB Cases - completed
-	+ ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-ITX, Mini-STX, Nano-ITX, NUC, Pico-ITX
+	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-ITX, Mini-ITX Thin, Mini-STX, Mini-STX Thin, Nano-ITX, NUC, Pico-ITX
 - Sheet Metal, Folded
 - Sliding
 - Cylinder
