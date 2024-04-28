@@ -32,7 +32,12 @@ License: GPLv3.
    - SBC Associations
    - SBC_X,Y - Case_Z Association
 -  Graphical User Interface
--  SBC Model Framework Validation Tool
+-  SBC Meta Data Access
+-  Individual Standoff Parameter Control
+-  Dynamic Heatsink Fan Size, Vent and Mask Openings 
+-  Top and Bottom Case Cover Patterns
+-  Parametric Bottom Access Panel
+
 
 ### Base Case Designs:
 - Shell - complete
