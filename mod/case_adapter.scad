@@ -97,14 +97,14 @@ mb_adapters=[
                         }
                     }
                 }
-                // adapter standoff holes
+                // adapter holes
                 for (i=[2:len(mb_adapters[mb[0]])-3:len(mb_adapters[mb[0]])-3]) {
                     for (c=[1:1:len(mb_adapters[mb[0]])-3]) {
                         mbhole_pos = mb_adapters[mb[0]][i+c][0];
                         mbhole_x = mb_adapters[mb[0]][i+c][1]+mba_offset_x;
                         mbhole_y = mb_adapters[mb[0]][i+c][2]+mba_offset_y;
                         mbhole_z = -floorthick;
-                        translate([mbhole_x,mbhole_y,-1]) cylinder(d=6.5, h=mba_z+2);
+                        translate([mbhole_x,mbhole_y,-1]) cylinder(d=4, h=mba_z+2);
                     }
                 }
 
