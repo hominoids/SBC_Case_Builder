@@ -127,7 +127,7 @@ e.g.
      "sub","fan",10,10,24.5,"top",[0,0,0],["sbc-case_z",true,true,true],[40,0,6],[0],[true,10,2,"default"],
 ```
   
-Every type, regardless of it’s class, uses a basic set of variables
+Every type, regardless of its class, uses a basic set of variables
 `(loc_x,loc_y,loc_z,”face”,rotation[],parametrics[])`
 but each type doesn’t necessarily use all available data fields
 `(size[],data[])`
@@ -2038,7 +2038,7 @@ DESCRIPTION: creates hex pattern covers for vent openings.
 
 
 ## Accuracy
-In the past there was been no way of validating whether a SBC Model Framework model and it’s components were dimensionaly accurate in their size and placement other then trial and error. Along with producing cases this project provides a much needed model validation tool to assure model accuracy thru the use of test cases. It works on the very simple premise that if the real SBC fits the test case then the virtual model is accurate or otherwise shows were corrections are needed. This will further increased the overall accuracy of models.
+In the past there was been no way of validating whether a SBC Model Framework model and its components were dimensionaly accurate in their size and placement other then trial and error. Along with producing cases this project provides a much needed model validation tool to assure model accuracy thru the use of test cases. It works on the very simple premise that if the real SBC fits the test case then the virtual model is accurate or otherwise shows were corrections are needed. This will further increased the overall accuracy of models.
 
 Some SBC in SBC Model Framework have not been validated or may be missing component data and may produce one or more aspects of a case incorrectly.  SBC status is noted in sbc.png, the README.md file and at the beginning of the SBC entry defined in sbc_models.cfg, all a part of SBC Model Framework.  The color coded indicator of an SBC’s verification and completion as indicated in sbc.png is as follows:
 
