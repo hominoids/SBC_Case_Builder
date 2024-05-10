@@ -1771,12 +1771,12 @@ DESCRIPTION: creates hk odroid-xu5 level shifter shield model.
 ### stl_model
 
 ```
-    CLASSES: add1, add2
+    CLASSES: model
 DESCRIPTION: adds stl models.
        MASK: no
-      USAGE: "class", "stl_model", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+      USAGE: "model", "stl_model", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
 
-              class = "add1", "add2"
+              class = "model"
                type = "stl_model"
               loc_x = x location placement
               loc_y = y location placement
@@ -1786,7 +1786,7 @@ DESCRIPTION: adds stl models.
        parametric[] = "case", "sbc", "sbc-case_z"
              size[] = not used
             data[0] = scale
-            data[1] = "file"
+            data[1] = "file name"
             mask[0] = false, not used
             mask[1] = length
             mask[2] = set back
