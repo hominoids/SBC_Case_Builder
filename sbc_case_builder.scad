@@ -180,7 +180,7 @@ top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_hor
 bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
-fan_size = 0; // [0,30,40,50,60,70,80,92]
+fan_size = 0; // [0,25,30,40,50,60,70,80,92]
 
 /* [Bottom Access Panel] */
 bottom_access_panel_enable = false;
@@ -205,7 +205,7 @@ text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mon
 
 /* [Extended Top Standoffs] */
 // enable case extended standoffs
-ext_top_standoffs = true;
+ext_top_standoffs = false;
 ext_top_standoff_reverse = true;
 // enable wall support for extended standoffs
 ext_top_sidewall_support = true;
@@ -239,7 +239,7 @@ ext_top_front_right_support = "front";  //[none,left,rear,front,right]
 
 /* [Extended Bottom Standoffs] */
 // enable case bottom extended standoffs
-ext_bottom_standoffs = true;
+ext_bottom_standoffs = false;
 ext_bottom_standoff_reverse = false;
 // enable wall support for extended standoffs
 ext_bottom_sidewall_support = true;

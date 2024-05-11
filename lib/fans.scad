@@ -50,7 +50,8 @@ module fans(style, mask) {
                 ["box60x10", 60, 10, 50, 4.3, 30, "#353535"],
                 ["box50x10", 60, 10, 40, 4.3, 20, "#353535"],
                 ["box40x10", 40, 10, 32, 4.3, 18, "#353535"],
-                ["box30x10", 30, 10, 24, 3.2, 12, "#353535"]
+                ["box30x10", 30, 10, 24, 3.2, 12, "#353535"],
+                ["box25x10", 25, 10, 20, 3, 12, "#353535"]
                ];
 
     f = search([style],fan_data);
@@ -144,7 +145,8 @@ module fan_cover(size, thick, style) {
 
 module fan_mask(size, thick, style) {
 
-    hole_pos = size == 30 ? 3 :
+    hole_pos = size == 25 ? 2.5 :
+        size == 30 ? 3 :
         size == 40 ? 4 :
         size == 50 || size == 60 || size == 70 ? 5 :
         size >= 80 ? 3.75 : 3.75;
@@ -159,6 +161,34 @@ module fan_mask(size, thick, style) {
         translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
         translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
         translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+    }
+    if(style == "fan_1" && size == 25) {
+        
+        union() {
+            difference() {
+                union () {
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-2);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-8);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-11);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-17);
+                    }
+                    difference() {
+                        translate([size/2, size/2, -1]) cylinder(h=thick+2, d=size-20);
+                        translate([size/2, size/2, -2]) cylinder(h=thick+4, d=size-25);
+                    }
+                    // mount holes
+                    translate([size-hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([size-hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, size-hole_pos, -1]) cylinder(h=thick+2, d=3);
+                    translate([hole_pos, hole_pos, -1]) cylinder(h=thick+2, d=3);
+                }
+                translate([4, 3, -2]) rotate([0, 0, 45]) cube([size, 1.5, thick+4]);
+                translate([3, size-4, -2]) rotate([0, 0, -45]) cube([size, 1.5, thick+4]);
+            }
+        }
     }
     if(style == "fan_1" && size == 30) {
         
@@ -306,7 +336,8 @@ module fan_mask(size, thick, style) {
     }
     if(style == "fan_2") {
 
-        inner = size == 30 ? 24 :
+        inner = size == 25 ? 20 :
+            size == 30 ? 24 :
             size == 40 ? 32 :
             size == 50 ? 40 :
                 size == 60 ? 50 :
@@ -330,27 +361,26 @@ module fan_mask(size, thick, style) {
             translate([-screw_offset, -screw_offset, (thick+2)/2]) cylinder(d=3, h=thick+2, center=true);
 
             difference() {
-            union() {
-                for(i=[inner:-rings_spacing:0]) {
-                    difference() {
-                        cylinder(d=base_ring_size - i, h=thick+2);
-                        translate([0, 0, -1]) cylinder(d=base_ring_size - i - (rings_spacing/2), h=thick+4);
+                union() {
+                    for(i=[inner:-rings_spacing:0]) {
+                        difference() {
+                            cylinder(d=base_ring_size - i, h=thick+2);
+                            translate([0, 0, -1]) cylinder(d=base_ring_size - i - (rings_spacing/2), h=thick+4);
+                        }
                     }
                 }
-            }
-
-            translate([0, 0, 11]) 
                 union() {
-                    cylinder(d=bar_size*2+0.1, thick+2); // Add a circle to prevent any tiny holes around cross bar
-                    rotate([0, 0, 45]) cube([size, bar_size, thick+4], center=true);
-                    rotate([0, 0, 45]) cube([bar_size, size, thick+4], center=true);
+                    cylinder(d=bar_size*3+0.1, thick+2); // Add a circle to prevent any tiny holes around cross bar
+                    #translate([0,0,1+thick/2]) rotate([0, 0, 45]) cube([size, bar_size, thick+2], center=true);
+                    #translate([0,0,1+thick/2]) rotate([0, 0, 45]) cube([bar_size, size, thick+2], center=true);
                 }
             }
         }
     }
     if(style == "fan_hex") {
         
-        hex_pos = size == 30 ? [-11.75, -4.5, 0] :
+        hex_pos = size == 25 ? [-14.25, -7, 0] :
+            size == 30 ? [-11.75, -4.5, 0] :
             size == 40 ? [-14, -11.25, 0] :
             size == 50 ? [-16, -6.5, 0] : 
             size == 60 ? [-11, -1.5, 0] : 
