@@ -141,22 +141,22 @@ Class “add1” and “add2” are used to add geometry to the case. The differ
 
 **additive type:**
 
-circle, rectangle, slot, text, art, standoff, batt_holder, uart_holder, hd_holder, hd_holes, hd_vertright_holes, hc4_oled_holder, access_panel, button, pcb_holder, boom_grill, boom_speaker_holder
+art, access_panel, batt_holder, button, button_assembly, fan_cover, feet, hd_holder, hk_boom_grill, hk_boom_speaker_holder, hk_boom_vring, hk_h3_port_extender_holder, hk_hc4_oled_holder, hk_uart_holder, hk_uart_strap, keyhole, nut_holder, pcb_holder, rectangle, round, slot, sphere, standoff, text, vent_panel_hex, uart_holder, hc4_oled_holder, button, pcb_holder
 
 
 **subtractive type:**
 
-circle, rectangle, slot, text, art, punchout, vent, fan, hd_holes, hd_vertleft_holes, hd_vertright_holes, microusb, sphere
+art, fan_mask, hd_holes, knockout, rectangle, round, slot, sphere, text, vent, vent_hex
 
 
 **model type:**
 
-uart_strap, fan_cover, hd25, hd35, hc4_oled, feet, access_cover, net_card, hk35_lcd, hk_boom, boom_speaker, boom_vring, hk_uart
+access_cover, adafruit_lcd, dsub, fan, hd25, hd35, hk_boom, hk_boom_speaker, hk_h3_port_extender, hk_hc4_oled, hk35_lcd, hk_m1s_ups, hk_net_card, hk_pwr_button, hk_speaker, hk_uart, hk_vu7c, hk_vu8m, hk_vu8s, hk_wb2, hk_xu4_shifter_shield, stl_model
 
 
 **platter type:**
 
-uart_strap, fan_cover, access_cover, button_assembly, boom_vring
+access_cover, button_assembly, fan_cover, feet, hk_boom_vring, hk_h3_port_extender_holder, hk_uart_strap, vent_panel_hex
 
 
 ## Accessory Reference Manual
@@ -1305,7 +1305,7 @@ DESCRIPTION: creates db connectors.
          rotation[] = object rotation
        parametric[] = "case", "sbc", "sbc-case_z"
              size[] = not used
-            data[0] = "box30x10","box40x10","box50x10","box60x10","box80x10","box80x25","box92x10","box92x25","box120x25","box140x25"
+            data[0] = "box25x10","box30x10","box40x10","box50x10","box60x10","box80x10","box80x25","box92x10","box92x25","box120x25","box140x25"
             mask[0] = true
             mask[1] = length
             mask[2] = set back
