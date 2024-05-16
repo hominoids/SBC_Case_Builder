@@ -151,7 +151,7 @@ art, fan_mask, hd_holes, knockout, rectangle, round, slot, sphere, text, vent, v
 
 **model type:**
 
-access_cover, adafruit_lcd, dsub, fan, hd25, hd35, hk_boom, hk_boom_speaker, hk_h3_port_extender, hk_hc4_oled, hk35_lcd, hk_m1s_ups, hk_net_card, hk_pwr_button, hk_speaker, hk_uart, hk_vu7c, hk_vu8m, hk_vu8s, hk_wb2, hk_xu4_shifter_shield, stl_model
+access_cover, adafruit_lcd, dsub, fan, hd25, hd35, hk_boom, hk_boom_speaker, hk_h3_port_extender, hk_hc4_oled, hk35_lcd, hk_m1s_ups, hk_net_card, hk_pwr_button, hk_speaker, hk_uart, hk_vu7c, hk_vu8m, hk_vu8s, hk_wb2, hk_xu4_shifter_shield, rpi_m2hat, stl_model
 
 
 **platter type:**
@@ -1762,6 +1762,31 @@ DESCRIPTION: creates hk odroid-xu5 level shifter shield model.
              size[] = not used
              data[] = not used
             mask[0] = true
+            mask[1] = length
+            mask[2] = set back
+            mask[3] = mstyle "default"
+```
+
+
+### rpi_m2hat
+
+```
+    CLASSES: model
+DESCRIPTION: adds Raspberry Pi M.2 HAT+ M Key model
+       MASK: yes
+      USAGE: "model", "rpi_m2hat", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+
+              class = "model"
+               type = "rpi_m2hat"
+              loc_x = x location placement
+              loc_y = y location placement
+              loc_z = z location placement
+               face = "top", "bottom", "right", "left", "front", "rear"
+         rotation[] = object rotation
+       parametric[] = "case", "sbc", "sbc-case_z"
+             size[] = not used
+             data[] = not used
+            mask[0] = true, false
             mask[1] = length
             mask[2] = set back
             mask[3] = mstyle "default"

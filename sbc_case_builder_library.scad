@@ -49,5 +49,6 @@ include <./lib/holder.scad>;
 include <./lib/keyhole.scad>;
 include <./lib/oem_adafruit.scad>;
 include <./lib/oem_hk.scad>;
+include <./lib/oem_rpi.scad>;
 include <./lib/standoff.scad>;
 include <./lib/vent.scad>;

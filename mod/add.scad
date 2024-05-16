@@ -202,6 +202,9 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     if(type == "hk_xu4_shifter_shield") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_xu4_shifter_shield(mask); 
     }
+    if(type == "rpi_m2hat") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) rpi_m2hat(mask); 
+    }
     if(type == "stl_model") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) stl_model(data[0],data[1]); 
     }
