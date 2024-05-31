@@ -65,7 +65,7 @@ bottom_clearence = 3.5; //[-10:.01:10]
 // enable flat blank section for export
 flat_blank_section =  false;
 
-/* [Standard Motherboard Case Settings] */
+/* [Standard Motherboard Case Adjustments] */
 // adjustment for ssi-eeb, ssi-ceb, atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
 standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
@@ -101,78 +101,6 @@ edge_fillet = 0; //[0:.5:6]
 // tolerance for fitted surfaces
 tol = .25; //[-.5:.0625:.5]
 
-/* [Top Standoff Global Settings] */
-// enable case top standoffs
-sbc_top_standoffs = true;
-// reverse standoff vertical orientation
-top_standoff_reverse = true;
-// enable wall support for standoffs
-top_sidewall_support = false;
-top_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
-top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
-top_standoff_pillar = "hex"; //[hex, round]
-top_standoff_diameter = 5.75; //[0:.01:10]
-top_standoff_hole_size = 2.75; //[0:.01:5]
-top_standoff_support_size = 10; //[0:.01:15]
-top_standoff_support_height = 4; //[0:.01:50]
-top_standoff_insert = false;
-top_standoff_insert_dia = 4.2; //.01
-top_standoff_insert_height = 5.1; //.01
-
-/* [Top Standoff Individual Settings] */
-// case top - lower left standoff settings
-top_rear_left_enable = true;
-top_rear_left_adjust = 0; //[-20:.01:20]
-top_rear_left_support = "rear"; //[none,left,rear,front,right]
-// case top - upper left standoff settings
-top_front_left_enable = true;
-top_front_left_adjust = 0; //[-20:.01:20]
-top_front_left_support = "front"; //[none,left,rear,front,right]
-// case top - lower right standoff settings
-top_rear_right_enable = true;
-top_rear_right_adjust = 0; //[-20:.01:20]
-top_rear_right_support = "rear"; //[none,left,rear,front,right]
-// case top - upper right standoff settings
-top_front_right_enable = true;
-top_front_right_adjust = 0; //[-20:.01:20]
-top_front_right_support = "front";  //[none,left,rear,front,right]
-
-/* [Bottom Standoff Global Settings] */
-// enable case bottom standoffs
-sbc_bottom_standoffs = true;
-// reverse standoff vertical orientation
-bottom_standoff_reverse = false;
-// enable wall support for standoffs
-bottom_sidewall_support = false;
-bottom_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
-bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
-bottom_standoff_pillar = "hex"; //[hex, round]
-bottom_standoff_diameter = 5.75; //[2:.01:10]
-bottom_standoff_hole_size = 3.4; //[0:.01:5]
-bottom_standoff_support_size = 10; //[1:.01:15]
-bottom_standoff_support_height = 4; //[0:.01:50]
-bottom_standoff_insert = false;
-bottom_standoff_insert_dia = 4.2; //.01
-bottom_standoff_insert_height = 5.1; //.01
-
-/* [Bottom Standoff Individual Settings] */
-// case bottom - rear left standoff settings
-bottom_rear_left_enable = true;
-bottom_rear_left_adjust = 0; //[-20:.01:20]
-bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
-// case bottom - upper left standoff settings
-bottom_front_left_enable = true;
-bottom_front_left_adjust = 0; //[-20:.01:20]
-bottom_front_left_support = "front"; //[none,left,rear,front,right]
-// case bottom - lower right standoff settings
-bottom_rear_right_enable = true;
-bottom_rear_right_adjust = 0; //[-20:.01:20]
-bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
-// case bottom - upper right standoff settings
-bottom_front_right_enable = true;
-bottom_front_right_adjust = 0; //[-20:.01:20]
-bottom_front_right_support = "front"; //[none,left,rear,front,right]
-
 /* [Fan and Vent Openings] */
 // top cover pattern
 top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
@@ -203,7 +131,79 @@ text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, Dar
 // sbc information text font
 text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
 
-/* [Extended Top Standoffs] */
+/* [SBC Top Standoff Global Settings] */
+// enable case top standoffs
+sbc_top_standoffs = true;
+// reverse standoff vertical orientation
+top_standoff_reverse = true;
+// enable wall support for standoffs
+top_sidewall_support = false;
+top_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
+top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
+top_standoff_pillar = "hex"; //[hex, round]
+top_standoff_diameter = 5.75; //[0:.01:10]
+top_standoff_hole_size = 2.75; //[0:.01:5]
+top_standoff_support_size = 10; //[0:.01:15]
+top_standoff_support_height = 4; //[0:.01:50]
+top_standoff_insert = false;
+top_standoff_insert_dia = 4.2; //.01
+top_standoff_insert_height = 5.1; //.01
+
+/* [SBC Top Standoff Individual Settings] */
+// case top - lower left standoff settings
+top_rear_left_enable = true;
+top_rear_left_adjust = 0; //[-20:.01:20]
+top_rear_left_support = "rear"; //[none,left,rear,front,right]
+// case top - upper left standoff settings
+top_front_left_enable = true;
+top_front_left_adjust = 0; //[-20:.01:20]
+top_front_left_support = "front"; //[none,left,rear,front,right]
+// case top - lower right standoff settings
+top_rear_right_enable = true;
+top_rear_right_adjust = 0; //[-20:.01:20]
+top_rear_right_support = "rear"; //[none,left,rear,front,right]
+// case top - upper right standoff settings
+top_front_right_enable = true;
+top_front_right_adjust = 0; //[-20:.01:20]
+top_front_right_support = "front";  //[none,left,rear,front,right]
+
+/* [SBC Bottom Standoff Global Settings] */
+// enable case bottom standoffs
+sbc_bottom_standoffs = true;
+// reverse standoff vertical orientation
+bottom_standoff_reverse = false;
+// enable wall support for standoffs
+bottom_sidewall_support = false;
+bottom_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
+bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
+bottom_standoff_pillar = "hex"; //[hex, round]
+bottom_standoff_diameter = 5.75; //[2:.01:10]
+bottom_standoff_hole_size = 3.4; //[0:.01:5]
+bottom_standoff_support_size = 10; //[1:.01:15]
+bottom_standoff_support_height = 4; //[0:.01:50]
+bottom_standoff_insert = false;
+bottom_standoff_insert_dia = 4.2; //.01
+bottom_standoff_insert_height = 5.1; //.01
+
+/* [SBC Bottom Standoff Individual Settings] */
+// case bottom - rear left standoff settings
+bottom_rear_left_enable = true;
+bottom_rear_left_adjust = 0; //[-20:.01:20]
+bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
+// case bottom - upper left standoff settings
+bottom_front_left_enable = true;
+bottom_front_left_adjust = 0; //[-20:.01:20]
+bottom_front_left_support = "front"; //[none,left,rear,front,right]
+// case bottom - lower right standoff settings
+bottom_rear_right_enable = true;
+bottom_rear_right_adjust = 0; //[-20:.01:20]
+bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
+// case bottom - upper right standoff settings
+bottom_front_right_enable = true;
+bottom_front_right_adjust = 0; //[-20:.01:20]
+bottom_front_right_support = "front"; //[none,left,rear,front,right]
+
+/* [Extended Case Top Standoffs] */
 // enable case extended standoffs
 ext_top_standoffs = false;
 ext_top_standoff_reverse = true;
@@ -219,7 +219,7 @@ ext_top_standoff_support_height = 4; //[0:.01:50]
 ext_top_standoff_insert = false;
 ext_top_standoff_insert_dia = 4.2; //.01
 ext_top_standoff_insert_height = 5.1; //.01
-/* [Extended Top Standoff Individual Settings] */
+/* [Extended Case Top Standoff Individual Settings] */
 // extended case top - lower left standoff settings
 ext_top_rear_left_enable = true;
 ext_top_rear_left_adjust = 0; //[-20:.01:20]
@@ -237,7 +237,7 @@ ext_top_front_right_enable = true;
 ext_top_front_right_adjust = 0; //[-20:.01:20]
 ext_top_front_right_support = "front";  //[none,left,rear,front,right]
 
-/* [Extended Bottom Standoffs] */
+/* [Extended Case Bottom Standoffs] */
 // enable case bottom extended standoffs
 ext_bottom_standoffs = false;
 ext_bottom_standoff_reverse = false;
@@ -254,7 +254,7 @@ ext_bottom_standoff_insert = false;
 ext_bottom_standoff_insert_dia = 4.2; //.01
 ext_bottom_standoff_insert_height = 5.1; //.01
 
-/* [Extended Bottom Standoff Individual Settings] */
+/* [Extended Case Bottom Standoff Individual Settings] */
 // extended case bottom - rear left standoff settings
 ext_bottom_rear_left_enable = true;
 ext_bottom_rear_left_adjust = 0; //[-20:.01:20]
@@ -271,6 +271,75 @@ ext_bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
 ext_bottom_front_right_enable = true;
 ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
+
+/* [Multiple PCB Top Standoffs] */
+// enable multiple pcb standoffs
+multipcb_top_standoffs = false;
+multipcb_top_standoff_reverse = true;
+// enable wall support for multiple pcb
+multipcb_top_sidewall_support = false;
+multipcb_top_standoff_size = "m2.5"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
+multipcb_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
+multipcb_top_standoff_pillar = "hex"; //[hex, round]
+multipcb_top_standoff_diameter = 5.75; //[0:.01:10]
+multipcb_top_standoff_hole_size = 2.75; //[0:.01:5]
+multipcb_top_standoff_support_size = 7; //[0:.01:15]
+multipcb_top_standoff_support_height = 4; //[0:.01:50]
+multipcb_top_standoff_insert = false;
+multipcb_top_standoff_insert_dia = 4.2; //.01
+multipcb_top_standoff_insert_height = 5.1; //.01
+/* [Multiple PCB Top Standoff Individual Settings] */
+// multiple pcb top - lower left standoff settings
+multipcb_top_rear_left_enable = true;
+multipcb_top_rear_left_adjust = 0; //[-20:.01:20]
+multipcb_top_rear_left_support = "rear"; //[none,left,rear,front,right]
+// multiple pcb - upper left standoff settings
+multipcb_top_front_left_enable = true;
+multipcb_top_front_left_adjust = 0; //[-20:.01:20]
+multipcb_top_front_left_support = "front"; //[none,left,rear,front,right]
+// multiple pcb top - lower right standoff settings
+multipcb_top_rear_right_enable = true;
+multipcb_top_rear_right_adjust = 0; //[-20:.01:20]
+multipcb_top_rear_right_support = "rear"; //[none,left,rear,front,right]
+// multiple pcb top - upper right standoff settings
+multipcb_top_front_right_enable = true;
+multipcb_top_front_right_adjust = 0; //[-20:.01:20]
+multipcb_top_front_right_support = "front";  //[none,left,rear,front,right]
+
+/* [Multiple PCB Bottom Standoffs] */
+// enable multiple pcb extended standoffs
+multipcb_bottom_standoffs = false;
+multipcb_bottom_standoff_reverse = false;
+// enable wall support for multiple pcb standoffs
+multipcb_bottom_sidewall_support = false;
+multipcb_bottom_standoff_size = "m2.5"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
+multipcb_bottom_standoff_type = "countersunk"; //[none, countersunk, recessed, nut holder, blind]
+multipcb_bottom_standoff_pillar = "hex"; //[hex, round]
+multipcb_bottom_standoff_diameter = 5.75; //[2:.01:10]
+multipcb_bottom_standoff_hole_size = 3.4; //[0:.01:5]
+multipcb_bottom_standoff_support_size = 7; //[1:.01:15]
+multipcb_bottom_standoff_support_height = 4; //[0:.01:50]
+multipcb_bottom_standoff_insert = false;
+multipcb_bottom_standoff_insert_dia = 4.2; //.01
+multipcb_bottom_standoff_insert_height = 5.1; //.01
+
+/* [Multiple PCB Bottom Standoff Individual Settings] */
+// multiple pcb bottom - rear left standoff settings
+multipcb_bottom_rear_left_enable = true;
+multipcb_bottom_rear_left_adjust = 0; //[-20:.01:20]
+multipcb_bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
+// multiple pcb bottom - upper left standoff settings
+multipcb_bottom_front_left_enable = true;
+multipcb_bottom_front_left_adjust = 0; //[-20:.01:20]
+multipcb_bottom_front_left_support = "front"; //[none,left,rear,front,right]
+// multiple pcb bottom - lower right standoff settings
+multipcb_bottom_rear_right_enable = true;
+multipcb_bottom_rear_right_adjust = 0; //[-20:.01:20]
+multipcb_bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
+// multiple pcb bottom - upper right standoff settings
+multipcb_bottom_front_right_enable = true;
+multipcb_bottom_front_right_adjust = 0; //[-20:.01:20]
+multipcb_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
 a = search([accessory_name],accessory_data);
 s = search([sbc_model],sbc_data);
@@ -321,6 +390,7 @@ bottom_standoff = [bottom_standoff_size,
                    bottom_standoff_insert,
                    bottom_standoff_insert_dia,
                    bottom_standoff_insert_height];
+                   
 ext_top_standoff = [ext_top_standoff_size,
                     ext_top_standoff_diameter,
                     18,
@@ -334,6 +404,7 @@ ext_top_standoff = [ext_top_standoff_size,
                     ext_top_standoff_insert,
                     ext_top_standoff_insert_dia,
                     ext_top_standoff_insert_height];
+                    
 ext_bottom_standoff = [ext_bottom_standoff_size,
                        ext_bottom_standoff_diameter,
                        6,
@@ -347,6 +418,34 @@ ext_bottom_standoff = [ext_bottom_standoff_size,
                        ext_bottom_standoff_insert,
                        ext_bottom_standoff_insert_dia,
                        ext_bottom_standoff_insert_height];
+                       
+multipcb_top_standoff = [multipcb_top_standoff_size,
+                multipcb_top_standoff_diameter,
+                18,
+                multipcb_top_standoff_hole_size,
+                multipcb_top_standoff_support_size,
+                multipcb_top_standoff_support_height,
+                multipcb_top_standoff_type,
+                multipcb_top_standoff_pillar,
+                multipcb_top_rear_left_support,
+                multipcb_top_standoff_reverse,
+                multipcb_top_standoff_insert,
+                multipcb_top_standoff_insert_dia,
+                multipcb_top_standoff_insert_height];
+                
+multipcb_bottom_standoff = [multipcb_bottom_standoff_size,
+                   multipcb_bottom_standoff_diameter,
+                   6,
+                   multipcb_bottom_standoff_hole_size,
+                   multipcb_bottom_standoff_support_size,
+                   multipcb_bottom_standoff_support_height,
+                   multipcb_bottom_standoff_type,
+                   multipcb_bottom_standoff_pillar,
+                   multipcb_bottom_rear_left_support,
+                   multipcb_bottom_standoff_reverse,
+                   multipcb_bottom_standoff_insert,
+                   multipcb_bottom_standoff_insert_dia,
+                   multipcb_bottom_standoff_insert_height];
 
 adj = .01;
 $fn=90;
