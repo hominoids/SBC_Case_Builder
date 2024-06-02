@@ -29,7 +29,7 @@ include <./sbc_case_builder_accessories.cfg>;
 view = "model"; // [model, platter, part]
 individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_shield, accessories]
 // single board computer model
-sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007", "cnano-avr128da48",  "nodemcu-32s", "cs-solarmeter", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "mini-stx_thin", "nano-itx", "nuc", "pico-itx"]
+sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "mini-stx_thin", "nano-itx", "nuc", "pico-itx"]
 
 // sbc off in model view
 sbc_off = false;
@@ -125,7 +125,7 @@ uart_opening = "default"; // [default,none,open,knockout]
 // enable indentations around io openings
 indents = true;
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "rpi5_m2hat", "cs_solarmeter", "adapter_mini-stx_m1s"]
+accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_keyhole", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "rpi5_m2hat", "rock5b", "adapter_mini-stx_m1s", "cs_solarmeter", "env_sensors"]
 // sbc information text color
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 // sbc information text font
@@ -152,19 +152,19 @@ top_standoff_insert_height = 5.1; //.01
 /* [SBC Top Standoff Individual Settings] */
 // case top - lower left standoff settings
 top_rear_left_enable = true;
-top_rear_left_adjust = 0; //[-20:.01:20]
+top_rear_left_adjust = 0; //[-30:.01:30]
 top_rear_left_support = "rear"; //[none,left,rear,front,right]
 // case top - upper left standoff settings
 top_front_left_enable = true;
-top_front_left_adjust = 0; //[-20:.01:20]
+top_front_left_adjust = 0; //[-30:.01:30]
 top_front_left_support = "front"; //[none,left,rear,front,right]
 // case top - lower right standoff settings
 top_rear_right_enable = true;
-top_rear_right_adjust = 0; //[-20:.01:20]
+top_rear_right_adjust = 0; //[-30:.01:30]
 top_rear_right_support = "rear"; //[none,left,rear,front,right]
 // case top - upper right standoff settings
 top_front_right_enable = true;
-top_front_right_adjust = 0; //[-20:.01:20]
+top_front_right_adjust = 0; //[-30:.01:30]
 top_front_right_support = "front";  //[none,left,rear,front,right]
 
 /* [SBC Bottom Standoff Global Settings] */
@@ -188,19 +188,19 @@ bottom_standoff_insert_height = 5.1; //.01
 /* [SBC Bottom Standoff Individual Settings] */
 // case bottom - rear left standoff settings
 bottom_rear_left_enable = true;
-bottom_rear_left_adjust = 0; //[-20:.01:20]
+bottom_rear_left_adjust = 0; //[-30:.01:30]
 bottom_rear_left_support = "rear"; //[none,left,rear,front,right]
 // case bottom - upper left standoff settings
 bottom_front_left_enable = true;
-bottom_front_left_adjust = 0; //[-20:.01:20]
+bottom_front_left_adjust = 0; //[-30:.01:30]
 bottom_front_left_support = "front"; //[none,left,rear,front,right]
 // case bottom - lower right standoff settings
 bottom_rear_right_enable = true;
-bottom_rear_right_adjust = 0; //[-20:.01:20]
+bottom_rear_right_adjust = 0; //[-30:.01:30]
 bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
 // case bottom - upper right standoff settings
 bottom_front_right_enable = true;
-bottom_front_right_adjust = 0; //[-20:.01:20]
+bottom_front_right_adjust = 0; //[-30:.01:30]
 bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
 /* [Extended Case Top Standoffs] */
