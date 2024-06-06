@@ -7,11 +7,12 @@
 
 include <./SBC_Model_Framework/sbc_models.cfg>;
 include <./sbc_case_builder_accessories.cfg>;
-
+echo(" ");
 boards = [for(i=[0:1:len(sbc_data)-1]) sbc_data[i][0]];
 echo("Copy the following to `sbc_case_builder.scad` for the `sbc_model` variable");
 echo(boards);
-
+echo(" ");
 accessory_sets = [for(i=[0:1:len(accessory_data)-1]) accessory_data[i][0]];
 echo("Copy the following to `sbc_case_builder.scad` for the `accessory_name` variable");
 echo(accessory_sets);
+echo(" ");
