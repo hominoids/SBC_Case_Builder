@@ -44,7 +44,7 @@ module case_bottom(case_design) {
                             translate([(width/2)-wallthick-gap,
                                 (depth/2)-wallthick-gap,(bottom_height/2)+floorthick]) 
                                     cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),bottom_height], 
-                                        vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                             top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                         }
                     }
@@ -76,7 +76,7 @@ module case_bottom(case_design) {
                                         bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(bottom_height/2)+floorthick]) 
                                 cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),bottom_height+adj], 
-                                    vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                    vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                         top=[0,0,0,0],bottom=[2,2,2,2], $fn=90);
                         }
                         // case nut placement
@@ -251,7 +251,7 @@ module case_bottom(case_design) {
                                         top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick+(floorthick+case_z)/2]) 
                                 cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick], 
-                                        vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                             top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                             // snap top indent
                             translate([-gap-wallthick+.75,(depth/2)-(depth*.75)/2-gap-wallthick,case_z-.5]) 
@@ -269,7 +269,7 @@ module case_bottom(case_design) {
                             translate([(width/2)-wallthick-gap,
                                 (depth/2)-wallthick-gap,(case_z/2)+floorthick]) 
                                     cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z], 
-                                        vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                             top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                             difference() {
                                 translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-lip/2]) 
@@ -279,7 +279,7 @@ module case_bottom(case_design) {
                                 
                                 translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-lip/2]) 
                                     cube_fillet_inside([width-wallthick,depth-wallthick,lip+adj], 
-                                        vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],top=[0,0,0,0],
+                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],top=[0,0,0,0],
                                             bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                             }
                         }

@@ -19,7 +19,9 @@ License: GPLv3.
   git submodule update
 
 ```
+NOTE: SBC Model Framework is regularly updated whenever new devices are added, corrections are made or bugs are fixed.  IT is a good practice to regularly update the SBC Model Framework submodule to make new devices available in SBC Case Builder and avoid issues.
 
+  
 ## SBC Case Builder Features:
 -  Autonomous Multi-SBC, Multi-Case Parametric Generation
 -  Autonomous SBC and Accessory Model I/O Openings
@@ -70,7 +72,7 @@ Variable height automated SBC standoffs, which can be individually adjusted, are
 
 
 ## Graphical User Interface
-The GUI has thirteen tabs that control what model and case is displayed, how it is presented, its adjustments, options and associated accessories. There are separate tabs in the GUI for *Folded Case Adjustments*, *Standard Motherboard Case Adjustments* and *3D Case Adjustments*.  The first two have unique settings that only apply to the respective case designs.  3D case adjustments affect all others case designs and some entries can affect Folded and Standard Motherboard cases as well. There are three groups of two tabs each associated with SBC, Extended Case and Multi-PCB standoffs.
+The GUI has thirteen tabs that control what model and case is displayed, how it is presented, its adjustments, options and associated accessories. There are separate tabs in the GUI for *Folded Case Adjustments*, *Standard Motherboard Case Adjustments* and *3D Case Adjustments*.  The first two have unique settings that only apply to the respective case designs.  3D case adjustments affect all others case designs and some entries can also affect Folded and Standard Motherboard cases as well. There are three groups of two tabs each associated with SBC, Extended Case and Multi-PCB standoffs.
 
 
 ### View Tab
@@ -78,11 +80,11 @@ The View Tab allows the selection of various viewing modes and the selection of 
 
 
 ### Folded Case Adjustments Tab
-This tab exclusively deals with folded cases.  At this time the bend allowance equations are not complete and limits its use to paper and other thin materials with a low bend radius.  Once folded metal cases are implemented the bend allowance equations will be complete and allow for any bendable material of any given bend radius.  With that said, these adjustments are used for the paper_full-top and paper_splt-top case designs and the *material thickness* and *bend Allowance* adjustments still need to be set appropriately for the material in use.  The *bottom clearance* adjustment allows additional bottom height adjustment for those wishing to use user provided standoffs on the bottom of the device for better stability.  The *flat blank section* checkbox generates a flat blank based on the aforementioned settings.  Once it has been generated the model must be rendered(F6) to produce a 2D blank that can then be exported as a DXF or SVG file for printing or fed to a CNC cutter.
+This tab exclusively deals with folded cases.  At this time the bend allowance equations are not complete and limits its use to paper and other thin materials with a low bend radius.  Once folded metal cases are implemented the bend allowance equations will be complete and allow for any bendable material of any given bend radius.  With that said, these adjustments are used for the paper_full-top and paper_splt-top case designs and the *material thickness* and *bend Allowance* adjustments still need to be set appropriately for proper use.  The *bottom clearance* adjustment allows additional bottom height adjustment for those wishing to use user provided standoffs on the bottom of the device for better stability.  The *flat blank section* checkbox generates a flat blank based on the aforementioned settings.  Once it has been generated the model must be rendered(F6) to produce a 2D blank that can then be exported as a DXF or SVG file for printing or fed to a CNC cutter.
 
 
 ### Standard Motherboard Case Adjustments Tab
-Both standard motherboard adapters and cases can be generated with SBC Case Builder and this tab controls the specific settings. Since it is not possible to know the motherboard thickness it is set to 2mm and the *standard motherboard thickness* setting is used to add or subtract thickness for an accurate representation of the user provided PCB.  The *rear io shield setting is only used when generating full cases and not when generating adapters and io shields.  Most of the adjustments in the *3D Case Adjustments* tab work for motherboard adapters which allows for the SBC or other device to be repositioned on the adapter while providing the full use of the accessory subsystem. Any accessory entries in the sbc_case_builder_accessories.cfg file should reference the bottom face. The *bottom cover pattern* in the *Fan and Vent Openings* tab and the *SBC Bottom Standoff* tabs also apply to motherboard adapters.  There are predefined example cases and adapters available in the GUI for further reference.
+Both standard motherboard adapters and cases can be generated with SBC Case Builder and this tab controls the specific settings. Since it is not possible to know the motherboard thickness it is set to 2mm and the *standard motherboard thickness* setting is used to add or subtract thickness for an accurate representation of the user provided PCB.  The *rear io shield* setting is only used when generating full cases and is not needed when generating adapters and io shields.  Most of the adjustments in the *3D Case Adjustments* tab also work for motherboard adapters which allows for the SBC or other device to be repositioned on the adapter while providing the full use of the accessory subsystem. Any accessory entries in the sbc_case_builder_accessories.cfg file should reference the bottom face. The *bottom cover pattern* in the *Fan and Vent Openings* tab and the *SBC Bottom Standoff* tabs also apply to motherboard adapters.  There are predefined example cases and adapters available in the GUI for further reference.
 
 
 ### 3D Case Adjustments Tab
@@ -92,12 +94,12 @@ The *3D Case Adjustments* tab makes up the bulk of the possible case adjustments
 ### Fan and Vent Openings Tab
 This tab handles the fan and cooling options for case designs.  The *top cover pattern* and *bottom cover pattern* contain several options for the creation of vent patterns that cover the complete top and bottom respectively, including a solid covering.  The *cooling* pickbox selects fan and vent openings exclusively for the heatsink associated with the device in SBC Model Framework.
 ```
-*disable* - turns off the heatsink model and mask
-*off* - heatsink model is off, mask is on and default will be used when called.
-*default* - heatsink model is on and uses the mask setting in ./SBC_Model_Framework/sbc_models.cfg
-*none* - heatsink model is on and mask is off.
-fan and vent pattern selections - *open*, *fan_open*, *fan_1*, *fan_2*, *fan_hex*, *vent", *vent_hex_5mm*, *vent_hex_8mm*
-*custom* - uses the file ./SBC_Model_Framework/customfan.dxf
+disable - turns off the heatsink model and mask
+off - heatsink model is off, mask is on and default will be used
+default - heatsink model is on and uses the mask setting in ./SBC_Model_Framework/sbc_models.cfg
+none - heatsink model is on and mask is off.
+fan and vent pattern selections - open, fan_open, fan_1, fan_2, fan_hex, vent, vent_hex_5mm, vent_hex_8mm
+custom - uses the file ./SBC_Model_Framework/customfan.dxf
 ```
 The *fan size* allows the selection of different fan size masks over the default size selected by 0.
 
@@ -107,14 +109,14 @@ This tab allows the creation of a bottom access panel and its entries are self e
 
 
 ### Options and Accessories
-The entities in this tab allow for the enablement and selection of different GPIO and UART openings based on their type identifier in SBC_Model_Framework.
+The entrys in this tab allow for the enablement and selection of different GPIO and UART openings based on their type identifier in SBC_Model_Framework.
 
 #### GPIO Selections
 ```
 disable - turns off the GPIO model and mask
-off - GPIO model is off, mask is on and default will be used when called
+off - GPIO model is off, mask is on and default will be used
 default - GPIO model is on and uses the mask setting stored in ./SBC_Model_Framework/sbc_models.cfg
-none - GPIO model is on and mask is off.
+none - GPIO model is on and mask is off
 mask opening selections - open, block, knockout, vent
 ```
 
@@ -125,24 +127,24 @@ none - UART model is on and mask is off
 mask opening selections - open, knockout
 ```
 
-The *indent* checkbox enables indents for a select group of component defined in SBC Model Framework.  The currently support components are - video-hmdi_a, video-hdmi_micro, video-hdmi_mini, power-pwr5.5_7.5x11.5, power-pwr2.5_5x7.5, usb2-micro, usbc-single_horizontal, audio-jack_3.5. The *accessory name* pickbox uses the unique accessory group name to associate a given accessory set with a case design.  Entries are stored in the file sbc_case_builder_accessories.cfg which is covered in detail with the Accessory Subsystem in this document.  The remaining two entries select the color and proportional font used with the *sbc information* display when enabled in the *View* tab.
+The *indent* checkbox enables indents for a select group of components defined in SBC Model Framework.  The currently support components are - video-hmdi_a, video-hdmi_micro, video-hdmi_mini, power-pwr5.5_7.5x11.5, power-pwr2.5_5x7.5, usb2-micro, usbc-single_horizontal, audio-jack_3.5. The *accessory name* pickbox uses the unique accessory group name to associate a given accessory set with a case design.  Entries are stored in the file sbc_case_builder_accessories.cfg which is covered in detail with the Accessory Subsystem in this document.  The remaining two entries select the color and proportional font used with the *sbc information* display when enabled in the *View* tab.
 
 
 ### Standoff Tabs
-There are 3 types of standoffs available in the user interface, SBC Standoffs, Extended Case Standoffs and Multi-PCB Standoffs.  The SBC standoffs control adjustments for the SBC or pcbid 0 as defined by the entry in SBC Model Framework file ./SBC_Model_Framework/sbc_models.cfg.  The Extended Case Standoffs control case corner standoffs when the case exceeds the SBC size by the Extended Standoff Support Size.  The Multi-PCB standoffs are used for additional PCB in multi-PCB configurations as defined in ./SBC_Model_Framework/sbc_models.cfg e.g. pcbid 1, pcbid 2, etc.  All three standoff types have similar controls made up of a global tab and individual Settings tab in the GUI.
+There are 3 types of standoffs available in the user interface, SBC Standoffs, Extended Case Standoffs and Multi-PCB Standoffs.  The SBC standoffs control adjustments for the SBC or pcbid 0 as defined by the entry in SBC Model Framework file ./SBC_Model_Framework/sbc_models.cfg.  The Extended Case Standoffs control case corner standoffs when the case exceeds the SBC size by the *SBC Standoff Support Size*.  The Multi-PCB standoffs are used for additional PCB in multi-PCB configurations as defined in ./SBC_Model_Framework/sbc_models.cfg e.g. pcbid 1, pcbid 2, etc.  All three standoff types have similar controls made up of a global tab and individual Settings tab in the GUI.
 
-The main difference between the different standoff groups are that the SBC Standoffs are located by the SBC PCB holes, the Extended Case Standoffs are located in the four corners of a case design that exceeds dimensions of the intended device by the size of the *Extended Case Standoff Support Size* and the Multiple PCB Standoffs are located by the holes of the additional PCBs that makeup a given device.  The entries for the standoffs are basically the same so only the top SBC standoffs will be specifically covered.
+The main difference between the different standoff groups are that the SBC Standoffs are located by the SBC PCB holes, the Extended Case Standoffs are located in the four corners of a case design that exceeds dimensions of the intended device by the size of the *SBC Case Standoff Support Size* and the Multiple PCB Standoffs are located by the holes of the additional PCBs that makeup a given device.  The entries for the standoffs are basically the same so only the top SBC standoffs will be specifically covered.
 
 
 #### Standoff Global Settings
-The tab *SBC Top Standoff Global Settings* affect all the respective standoffs and starts with three checkboxes. The first, *sbc top standoffs*, enables or disable all the top standoffs.  The second, *top standoff reverse*, rotates the standoff 180 degrees and is used primarily for standoffs associated with the top face of all case designs.  The last, *top sidewall support*, enables or disables the side wall support for all SBC top standoffs.  The first pickbox in the tab is called *top standoff size* and determines the overall size of the SBC top standoffs.  It is made up of named sizes that are predefined and a custom entry that is defined by the remaining entries in the tab.  The predefined named top standoff sizes are further divided into entries where only the hole size is different e.g. m3, m3+, m3_tap.  The m3 entry has a 3mm hole, the m3+ entry's hole is approximately 15% larger for clearance and the m3_tap entry's hole size is the tap drill size.  When a named size is selected the *top standoff diameter* and *top standoff hole size* entries have no effect but the remaining entries do apply - it is the *custom* entry that allows full control of all parameters.
+The tab *SBC Top Standoff Global Settings* affects all the respective standoffs and starts with three checkboxes. The first, *sbc top standoffs*, enables or disable all the top standoffs.  The second, *top standoff reverse*, rotates the standoff 180 degrees and is used primarily for standoffs associated with the top face of all case designs.  The last, *top sidewall support*, enables or disables the side wall support for all SBC top standoffs.  The first pickbox in the tab is called *top standoff size* and determines the overall size of the SBC top standoffs.  It is made up of named sizes that are predefined and a custom entry that is defined by the remaining entries in the tab.  The predefined named top standoff sizes are further divided into entries where only the hole size is different e.g. m3, m3+, m3_tap.  The m3 entry has a 3mm hole, the m3+ entry's hole is approximately 15% larger for clearance and the m3_tap entry's hole size is the tap drill size.  When a named size is selected the *top standoff diameter* and *top standoff hole size* entries have no effect but the remaining entries do apply - it is the *custom* entry that allows full control of all parameters.
 
 The *top standoff support size* and *top standoff support height* is what allows recessed *top standoff type* entries to work on thin wall 
 floors and ceilings by providing the extra size and depth for the given recess.  This applies to the *top standoff type* selections countersunk, recessed and nutholder.  The recessed entry also allows for deep recessed screws by recessing the standoff for the full height of the *standoff support height* less 2mm.  This can be deployed for tall cases in order to use shorter fasteners and is the most practical way to handle this scenario.  The *top standoff insert* checkbox enables the use of inserts of the size defined by *top standoff insert dia* and *top Standoff insert height* at the opposite end of the standoff.  This allows case halves to be fastened together thru the bottom of the case and is another alternative to dealing with tall case designs.
 
 
 #### Standoff Individual Settings
-The SBC Top Individual Settings entries control variable on a per standoff basis.  There are four entry groups each controlling a standoff's enablement, height adjustment and sidewall support location.  This are useful when dealing with hats or other accessories that share SBC PCB holes for mounting.  Likewise, being able to change the direction of the sidewall support allows for a wider choice to strengthen and tie the standoff to the case walls or completely disable them if SBC components interfere.  The length of the sidewall support is equal to the respective *standoff support size* for SBC, Extended Case and  Multi-PCB standoffs.
+The *SBC Top Individual Settings* entries control variable on a per standoff basis.  There are four entry groups each controlling a standoff's enablement, height adjustment and sidewall support location.  This is useful when dealing with hats or other accessories that share SBC PCB holes for mounting.  Likewise, being able to change the direction of the sidewall support allows for a wider choice to strengthen and tie the standoff to the case walls or completely disable them if SBC components interfere.  The length of the sidewall support is equal to the respective *standoff support size* for SBC, Extended Case and  Multi-PCB standoffs.
 
 As indicated previously, The SBC Standoffs, Extended Case Standoffs and Multi-PCB Standoffs all work the same with the following exceptions. The *standoff support size* is also used to determine the corner proximity for the Extended Case standoffs.  The Multiple PCB Standoffs present a unique challenge due to their nature.  There will be situations with multiple PCB devices when not all the standoffs created by the PCB holes will be needed.  Imagine two PCBs next to each other that would normally create eight standoffs.  In many scenarios only outer standoffs are needed for both the top and bottom and the bottom inner standoffs for PCB support.  In order to handle this and many other situations without creating a complex and burdensome GUI, an entry for the creation of the PCB hole can be used to disable the top, bottom or both standoffs.  This is accomplished within the SBC Model Framework pcbhole class.  The person creating the sbc_models.cfg entry can determine and override the creation of these standoffs in SBC Case Builder.  See the SBC Model Framework pcbhole class for further details.
 
@@ -186,11 +188,12 @@ Every type, regardless of its class, uses a basic set of variables
 but each type doesn’t necessarily use all available data fields
 `(size[],data[])`
 
-Multi-associative parametric positioning of accessories is implemented and allows each accessory to enable or disable parametric movement of the accessory for each axis.  The XY and Z axis can be associated with the case offset (size), SBC positioning, multi-associated axis's or absolute positioning.  For instance, a SBC fan opening needs to follow the SBC in the X and Y axis but the case Z axis for the correct height.  The parametric array specifies the axis to enable for associated parametric positioning. An accessory can be associated with the sbc position("sbc"), case offset("case"),multi-associated which use sbc xy position and case z offset("sbc-case_z") or use absolute values if all axis's are false.  In the accessory example above, the 8th parameter `["sbc-case_z",true,true,true]` means all axis's are enabled for multi-associative movement with the X and Y accessory axis following the SBC X and Y axis and the accessory Z axis following the case Z axis. The other currently supported associations are “sbc” and “case”.
+Multi-associative parametric positioning of accessories is implemented and allows each accessory to enable or disable parametric movement of the accessory for each axis.  The XY and Z axis can be associated with the case offset (size), SBC positioning, multi-associated axis's or absolute positioning.  For instance, a SBC fan opening needs to follow the SBC in the X and Y axis but the case Z axis for the correct height.  The parametric array specifies the axis to enable for associated parametric positioning. An accessory can be associated with the sbc position("sbc"), case offset("case"),multi-associated which use sbc xy position and case z offset("sbc-case_z") or use absolute values if all axis's are false.  In the accessory example above, the 8th parameter `["sbc-case_z",true,true,true]` means all axis's are enabled for multi-associative movement with the X and Y accessory axis following the SBC X and Y axis and the accessory Z axis following the case Z axis.
+
 
 ### classes: add1, sub, suball, add2, model, platter
 
-Class “add1” and “add2” are used to add geometry to the case. The difference is when the addition occurs. “add1” happens at the beginning when the core case geometry is created before any subtractions and add2 happens at the end after all subtractions have occurred. “suball” is used to affect all faces of a case, not just a single face. The “face” is the case piece that will be effected by the addition or subtraction. The "model" class is for placing supporting accessories in the model view. e.g. hard drives, fans. The "platter" class is for adding supporting accessories that are not part of the core case geometry to the print platter for printing e.g. an access panel.
+Class *add1* and *add2* are used to add geometry to the case. The difference is when the addition occurs. *add1* happens at the beginning when the core case geometry is created before any subtractions and *add2* happens at the end after all subtractions have occurred. *suball* is used to affect all faces of a case, not just a single face. The “face” is the case piece that will be effected by the addition or subtraction. The *model* class is for placing supporting accessories in the model view. e.g. hard drives, fans. The *platter* class is for adding supporting accessories, that are not part of the core case geometry, to the print platter for printing e.g. an access panel cover.
 
 
 **additive type:**
@@ -2127,11 +2130,11 @@ Some SBC in SBC Model Framework have not been validated or may be missing compon
 - ORANGE = unverified, may be usable but missing component data
 - RED = unverified, not usable due to incomplete component data
 
-The SBC that I do not own have been created using manufacturer supplied models and mechanical drawings.  Some of the drawings are missing information or have errors that effect all or part of the subsequent SBC models.  If you own an SBC that is not represented or verified in SBC Model Framework, please consider adding it or helping to correct any errors in the SBC data.  An SBC can be verified to be accurate if a printed shell case from SBC Case Builder fits.  Any misalignment is corrected in the SBC Model Framework model data(sbc_models.cfg).
+The SBC that I do not own have been created using manufacturer supplied models, mechanical drawings or contributed by users.  Some of the drawings are missing information or have errors that effect all or part of the subsequent SBC models.  If you own an SBC that is not represented or verified in SBC Model Framework, please consider adding it or helping to correct any errors in the SBC data.  An SBC can be verified to be accurate if a printed shell case from SBC Case Builder fits.  Any misalignment is corrected in the SBC Model Framework model data(sbc_models.cfg).
 
 ## Future Development
 
 There are a few more ideas for base cases to be worked on as well as a host of supporting accessory models that need to be created.  It would also be nice to have all of the OEM accessories for each OEM in the library as well.  I’m still looking for a better way to create accessory entries and groups, and  continue to expand and verify as many SBC as possible. With that and the obvious benefit of autonomously making SBC cases, this project has also been helping fulfill another personal goal.
 
-Computer aided design(CAD) has been around along time but I have been interested in exploring approaches to the next step, computer autonomous design.  Regardless of the current or future object creation method, whether it be manufactured or materialized, I believe a universal approach to autonomous design will be needed to advance the human condition.  This application has helped me explore and think about practical approaches that might be possible right now in autonomous design and I hope to continue this work by developing new tools and techniques for the new CAD, Computer Autonomous Design.
+Computer aided design(CAD) has been around a long time but I have been interested in exploring approaches to the next step, computer autonomous design.  Regardless of the current or future object creation method, whether it be manufactured or materialized, I believe a universal approach to autonomous design will be needed to advance the human condition.  This application has helped me explore and think about practical approaches that might be possible right now in autonomous design and I hope to continue this work by developing new tools and techniques for the new CAD, Computer Autonomous Design.
 

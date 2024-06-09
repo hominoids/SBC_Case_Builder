@@ -47,7 +47,7 @@ module case_top(case_design) {
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,
                                 bottom_height+(top_height/2)-floorthick]) 
                                     cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),top_height], 
-                                        vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                             top=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet],
                                                 bottom=[0,0,0,0], $fn=90);
                         }
@@ -91,7 +91,7 @@ module case_top(case_design) {
                                         bottom=[0,0,0,0], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z/2)-floorthick+.25]) 
                                 cube_fillet_inside([width+1,depth+(wallthick*2),case_z], 
-                                    vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                    vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                         top=[0,0,0,0],bottom=[0,0,0,0], $fn=90);
                             for (i=[1:11:len(sbc_data[s[0]])-2]) {
                                 class = sbc_data[s[0]][i+1];
@@ -247,7 +247,7 @@ module case_top(case_design) {
                             
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-adj]) 
                                 cube_fillet_inside([width-(3*wallthick),depth-(3*wallthick),2*floorthick+1.5+adj], 
-                                    vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],top=[0,0,0,0],
+                                    vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],top=[0,0,0,0],
                                         bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                         }
                         // snap top outdent
@@ -274,7 +274,7 @@ module case_top(case_design) {
                                                 bottom=[0,0,0,0], $fn=90);
                             translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,case_z-floorthick-1]) 
                                     cube_fillet_inside([width-wallthick+tol,depth-wallthick+tol,lip+floorthick], 
-                                        vertical=[corner_fillet-1,corner_fillet-1,corner_fillet-1,corner_fillet-1],
+                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick,corner_fillet-wallthick],
                                             top=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet],
                                                 bottom=[0,0,0,0], $fn=90);
                         }
