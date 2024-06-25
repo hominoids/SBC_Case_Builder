@@ -19,7 +19,7 @@ License: GPLv3.
   git submodule update
 
 ```
-NOTE: SBC Model Framework is regularly updated whenever new devices are added, corrections are made or bugs are fixed.  IT is a good practice to regularly update the SBC Model Framework submodule to make new devices available in SBC Case Builder and avoid issues.
+NOTE: SBC Model Framework is regularly updated whenever new devices are added, corrections are made or bugs are fixed.  It is a good practice to regularly update the SBC Model Framework submodule so new devices are available in SBC Case Builder and avoid issues.  This is especially true anytime SBC Case Builder is updated.
 
   
 ## SBC Case Builder Features:
