@@ -246,7 +246,7 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
     if(class == "audio" && type == "jack_3.5" && rotation == 270 && side == "top") {
-        place(width-(wallthick+gap)-8-wallthick/2,loc_y+3.25,loc_z+2.75,8,8,rotation,side)
+        place(width-(wallthick+gap)-8-wallthick/2,loc_y+3.25,loc_z+2.5,8,8,rotation,side)
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
     if(class == "audio" && type == "jack_3.5" && rotation == 0 && side == "bottom") {
