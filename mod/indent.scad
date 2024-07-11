@@ -150,19 +150,19 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     }
     if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 0 && side == "top") {
         place(loc_x+2.75,-(wallthick+gap)+wallthick/2,loc_z+2.1,7,7,rotation,side) 
-            rotate([90,0,0]) cylinder(d=7, h=wallthick);
+            rotate([90,0,0]) cylinder(d=9, h=wallthick);
     }
     if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 90 && side == "top") {
         place(-(wallthick+gap)+wallthick/2,loc_y-4.5,loc_z+2,7,7,rotation,side) 
-            rotate([90,0,0]) cylinder(d=7, h=wallthick);
+            rotate([90,0,0]) cylinder(d=9, h=wallthick);
     }
     if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 180 && side == "top") {
         place(loc_x-4.5,depth-(wallthick+gap)-7-wallthick/2,loc_z+2,7,7,rotation,side) 
-            rotate([90,0,0]) cylinder(d=7, h=wallthick);
+            rotate([90,0,0]) cylinder(d=9, h=wallthick);
     }
     if(class == "power" && type == "pwr2.5_5x7.5" && rotation == 270 && side == "top") {
         place(width-(wallthick+gap)-7-wallthick/2,loc_y+2.5,loc_z+2,7,7,rotation,side) 
-            rotate([90,0,0]) cylinder(d=7, h=wallthick);
+            rotate([90,0,0]) cylinder(d=9, h=wallthick);
     }
     // micro usb indent
     if(class == "usb2" && type == "micro" && rotation == 0 && side == "top") {
