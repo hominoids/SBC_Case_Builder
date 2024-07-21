@@ -19,7 +19,7 @@ License: GPLv3.
   git submodule update
 
 ```
-NOTE: SBC Model Framework is regularly updated whenever new devices are added, corrections are made or bugs are fixed.  It is a good practice to regularly update the SBC Model Framework submodule so new devices are available in SBC Case Builder and avoid issues.  This is especially true anytime SBC Case Builder is updated.
+NOTE: The submodule *SBC Model Framework* needs to be updated anytime SBC Case Builder is updated.
 
   
 ## SBC Case Builder Features:
@@ -148,9 +148,24 @@ The *SBC Top Individual Settings* entries control variable on a per standoff bas
 
 As indicated previously, The SBC Standoffs, Extended Case Standoffs and Multi-PCB Standoffs all work the same with the following exceptions. The *standoff support size* is also used to determine the corner proximity for the Extended Case standoffs.  The Multiple PCB Standoffs present a unique challenge due to their nature.  There will be situations with multiple PCB devices when not all the standoffs created by the PCB holes will be needed.  Imagine two PCBs next to each other that would normally create eight standoffs.  In many scenarios only outer standoffs are needed for both the top and bottom and the bottom inner standoffs for PCB support.  In order to handle this and many other situations without creating a complex and burdensome GUI, an entry for the creation of the PCB hole can be used to disable the top, bottom or both standoffs.  This is accomplished within the SBC Model Framework pcbhole class.  The person creating the sbc_models.cfg entry can determine and override the creation of these standoffs in SBC Case Builder.  See the SBC Model Framework pcbhole class for further details.
 
+## Notes, Tips and Things to Check
+SBC Case Builder by default makes the smallest symmetrical case possible for the SBC selected and default parameters.  Most times this works well but some SBC need asymmetrical spacing, extra gap or additional standoff clearance and may require tweaking to obtain the best results. If there is a saved case for an SBC it is best to start your new case with it, or at least become familiar with any special changes made, since they might apply to a new case.
 
+### Standoff Selection, Inserts and Clearance
+Standoff selection and implementation is the most effected part of customizing a case.  Some SBC can use a M3 screw and others only use a M2.5 or M2 screw.  Finding the best fastening approach can be influenced too by the hardware one has on-hand or personal preference.  If using inserts, a custom standoff size must be used since the standard standoff sizes are to small for their respective insert diameter.  For tall cases, fastener length can be reduced by using a deep recessed standoff, the depth set by the *standoff support height* after selecting a *recessed* type under the appropriate global Tab . Watch for standoff clearance issues around PCB holes and neighboring components.  Some SBC designs crowd the area and can interfere with standoff diameter sizes, especially when inserts are being used. This is one factor that may determine whether to fasten the case from the top or bottom.
+
+### Component Overhang and Case Gap
+As previously stated, symmetrical cases use the same gap spacing for all sides. This has worked well but more recently many SBC use significantly different component overhangs and could benefit from an asymmetrical case. By increasing the case size by the needed amount in an axis and possibly shifting the PCB the same amount or not, an asymmetrical case gap can be created to accommodate SBC with significantly differing overhangs.  This is especially import if opposing sides of an SBC use component overhangs greater then 2mm which may also influence the assembly of the case.
+
+### Geometry Placement, Alignment and Interference Checking
+When using subtractive geometry accessories, turning on *accessory highlight* under the *View Tab* will help in placing and aligning objects.
+Use case sections to view inside a closed case by setting to -1 the *move side* slider under the *View Tab*.  Platter view can be useful to view changes and as a final check if everything is configured as required prior to STL export. 
+
+### Using Accessories Dynamically
+Having SBC Case Builder running while editing the sbc_case_builder_accessories.cfg file using a seperate text editor will aide in visual accessory manipulation and placement.  OpenSCAD will automatically regenerate the model preview when the accessory configuration files is saved.  
+ 
 ## Accessory Subsystem
-Case accessories entries are kept in the file sbc_case_builder_accessories.cfg. Newly created accessory group names also need to be added to the variable accessory_name in sbc_models.scad on or around line #128 in order for them to appear in the GUI pickbox.  Any new accessory group names must be added to the pickbox entry or they will not be present in the GUI. This can be done manually or the helper script get_customizer_values.scad can be used.
+Case accessories entries are kept in the file sbc_case_builder_accessories.cfg. Newly created accessory group names also need to be added to the variable accessory_name in sbc_models.scad on or around line #128 in order for them to appear in the GUI pickbox.  Any new accessory group names must be added to the pickbox entry or they will not be present in the GUI. This can be done manually or the helper script get_customizer_values.scad can be used to generate a complete accessory names list for copy and paste from the console.
 
 ### Accessory Schema
 Each accessory group consists of a unique name followed by an unlimited number of accessory entries each containing 11 variables.
@@ -2138,3 +2153,7 @@ There are a few more ideas for base cases to be worked on as well as a host of s
 
 Computer aided design(CAD) has been around a long time but I have been interested in exploring approaches to the next step, computer autonomous design.  Regardless of the current or future object creation method, whether it be manufactured or materialized, I believe a universal approach to autonomous design will be needed to advance the human condition.  This application has helped me explore and think about practical approaches that might be possible right now in autonomous design and I hope to continue this work by developing new tools and techniques for the new CAD, Computer Autonomous Design.
 
+
+## Project Supporters
+
+Thank You to the contributors for their contributions and also HardKernel and Pine64 for their support through the donation of SBC.
