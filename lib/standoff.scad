@@ -76,7 +76,7 @@ module standoff(stand_off, mask){
     mstyle = mask[3];
 
     ps = size == "m2_tap" || size == "m2" || size == "m2+" ? 4 : 
-            size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 5 : 
+            size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 5.375 : 
                 size == "m3_tap" || size == "m3" || size == "m3+" ? 6.72 : 
                     size == "m4_tap" || size == "m4" || size == "m4+" ? 8.96 : (2*holesize)+.5;
     ds = size == "m2_tap" || size == "m2" || size == "m2+" ? 1.2 : 

@@ -1365,7 +1365,7 @@ DESCRIPTION: creates db connectors.
 
 ```
     CLASSES: model
-DESCRIPTION: creates db connectors.
+DESCRIPTION: creates fans.
        MASK: yes
       USAGE: "model", "fan", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
 
