@@ -74,13 +74,13 @@ module rpi_m2hat(mask) {
                 [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
         pcbpad("round", size_x-hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
                 [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
-        pillar("hex", hole_size-4, size_y-hole_size, 0, "bottom", 0, [4, 3, 16], 
-                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
-        pillar("hex", size_x-hole_size-4, size_y-hole_size, 0, "bottom", 0, [4, 3, 16], 
-                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
-        pillar("hex", hole_size-4, hole_size, 0, "bottom", 0, [4, 3, 16], 
-                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
-        pillar("hex", size_x-hole_size-4, hole_size, 0, "bottom", 0, [4, 3, 16], 
-                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
+//        pillar("hex", hole_size-4, size_y-hole_size, 0, "bottom", 0, [4, 3, 16], 
+//                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
+//        pillar("hex", size_x-hole_size-4, size_y-hole_size, 0, "bottom", 0, [4, 3, 16], 
+//                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
+//        pillar("hex", hole_size-4, hole_size, 0, "bottom", 0, [4, 3, 16], 
+//                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
+//        pillar("hex", size_x-hole_size-4, hole_size, 0, "bottom", 0, [4, 3, 16], 
+//                [0, "#fee5a6"], size_z, enablemask, [false, 20, 0, "default"]);
     }
 }

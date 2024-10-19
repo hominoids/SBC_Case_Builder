@@ -203,7 +203,7 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hk_xu4_shifter_shield(mask); 
     }
     if(type == "pillar") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) pillar(data[0], 0, 0, 0, data[2], 0, size, data, pcb_z, false, mask); 
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) pillar(data[0], 0, 0, 0, data[2], 0, size, data, 0, false, mask); 
     }
     if(type == "rpi_m2hat") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) rpi_m2hat(mask); 
