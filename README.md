@@ -1310,16 +1310,66 @@ DESCRIPTION: creates horizontal or vertical hex vent openings.
 ## Model class “types”
 
 
-### adafruit_lcd
+### adafruit_2030_powerboost
 
 ```
     CLASSES: model
-DESCRIPTION: creates bottom access cover for access panels.
+DESCRIPTION: creates Adafruit 2030 Powerboost 1000 basic.
        MASK: yes
-      USAGE: "model", "adafruit_lcd", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+      USAGE: "model", "adafruit_2030_powerboost", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
 
               class = "model"
-               type = "adafruit_lcd"
+               type = "adafruit_2030_powerboost"
+              loc_x = x location placement
+              loc_y = y location placement
+              loc_z = z location placement
+               face = "top", "bottom", "right", "left", "front", "rear"
+         rotation[] = object rotation
+       parametric[] = "case", "sbc", "sbc-case_z"
+             size[] = not used
+             data[] = not used
+            mask[0] = true
+            mask[1] = length
+            mask[2] = set back
+            mask[3] = mstyle "default"
+```
+
+
+### adafruit_4311_lcd
+
+```
+    CLASSES: model
+DESCRIPTION: creates Adafruit 4311 2.0" 320x240 Color IPS TFT Display with microSD Card Breakout - ST7789 EYESPI.
+       MASK: yes
+      USAGE: "model", "adafruit_4311_lcd", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+
+              class = "model"
+               type = "adafruit_4311_lcd"
+              loc_x = x location placement
+              loc_y = y location placement
+              loc_z = z location placement
+               face = "top", "bottom", "right", "left", "front", "rear"
+         rotation[] = object rotation
+       parametric[] = "case", "sbc", "sbc-case_z"
+             size[] = not used
+             data[] = not used
+            mask[0] = true
+            mask[1] = length
+            mask[2] = set back
+            mask[3] = mstyle "default"
+```
+
+
+### adafruit_4755_solar_charger
+
+```
+    CLASSES: model
+DESCRIPTION: creates Adafruit 4755 Universal USB/DC/Solar Lithium Ion/Polymer charger - bq24074.
+       MASK: yes
+      USAGE: "model", "adafruit_4755_solar_charger", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+
+              class = "model"
+               type = "adafruit_4755_solar_charger"
               loc_x = x location placement
               loc_y = y location placement
               loc_z = z location placement

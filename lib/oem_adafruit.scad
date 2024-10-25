@@ -15,17 +15,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
-    adafruit_lcd(mask)
+    adafruit_2030_powerboost(mask)
+    adafruit_4311_lcd(mask)
+    adafruit_4755_solar_charger(mask)
 
 */
 
 
 /*
-           NAME: adafruit_lcd
-    DESCRIPTION: adafruit 4311 2in TFT IPS Display model
+           NAME: adafruit_2030_powerboost
+    DESCRIPTION: adafruit 2030 Powerboost 1000 Basic
            TODO: none
 
-          USAGE: adafruit_lcd(mask[])
+          USAGE: adafruit_2030_powerboost(mask[])
 
                               mask[0] = true enables mask
                               mask[1] = mask length
@@ -34,7 +36,65 @@
 
 */
 
-module adafruit_lcd(mask) {
+module adafruit_2030_powerboost(mask) {
+
+    size_x = 29.21;
+    size_y = 22.86;
+    size_z = 1.6;
+    lcd_size = [34.75,48,2];
+    corner_radius = 2;
+    hole_size = 2.54;
+    enablemask = mask[0];
+    mlen = mask[1];
+    back = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true && mstyle == "default") {
+        jst("ph",0,8.5,0,"top",90,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        usb2("single_horizontal_a",23,4.5,0,"top",270,[0,13,0],[0], size_z, enablemask, [true,12,7,"default"]);
+    }
+    if(enablemask == false) {
+        difference() {
+            color("#252525") slab([size_x, size_y, size_z], corner_radius);
+            color("#252525") translate([hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+
+            for(i=[6:2.54:20]) {
+                color("#fee5a6",1) translate([i, 21.5, -adj]) cylinder(d=.8, h=6);
+            }
+        }
+        pcbpad("round", 6, 21.5, 0, "top", 0, [6, 1, 0], [.8, "#fee5a6", 1.2], size_z, enablemask, [false, 20, 0, "default"]);
+
+        pcbpad("round", hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        ic("generic", 12.5, 11, 0, "top", 0, [9, 9, 2], ["dimgrey"], size_z, enablemask, [false, 20, 0, "default"]);
+        ic("generic", 13.5, 5, 0, "top", 0, [4, 4, .8], ["dimgrey"], size_z, enablemask, [false, 20, 0, "default"]);
+        jst("ph",0,8.5,0,"top",90,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        usb2("single_horizontal_a",23,4.5,0,"top",270,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+    }
+}
+
+
+/*
+           NAME: adafruit_lcd
+    DESCRIPTION: adafruit 4311 2in TFT IPS Display model
+           TODO: none
+
+          USAGE: adafruit_4311_lcd(mask[])
+
+                              mask[0] = true enables mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
+
+*/
+
+module adafruit_4311_lcd(mask) {
 
     size_x = 35.5;
     size_y = 59;
@@ -84,3 +144,71 @@ module adafruit_lcd(mask) {
                 [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
     }
 }
+
+
+/*
+           NAME: adafruit_4755_solar_charger
+    DESCRIPTION: adafruit 4755 Universal USB/DC/Solar Lithium Ion/Polymer charger - bq24074
+           TODO: none
+
+          USAGE: adafruit_4755_solar_charger(mask[])
+
+                              mask[0] = true enables mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
+
+*/
+
+module adafruit_4755_solar_charger(mask) {
+
+    size_x = 38.1;
+    size_y = 33.02;
+    size_z = 1.6;
+    lcd_size = [34.75,48,2];
+    corner_radius = 2;
+    hole_size = 2.54;
+    enablemask = mask[0];
+    mlen = mask[1];
+    back = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true && mstyle == "default") {
+        jst("ph",33.5,8,0,"top",270,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        jst("ph",33.5,19,0,"top",270,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        usbc("single_horizontal",-1,5.5,0,"top",90,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+        power("pj-202ah",-2,17.5,0,"top",90,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+    }
+    if(enablemask == false) {
+        difference() {
+            color("#252525") slab([size_x, size_y, size_z], corner_radius);
+            color("#252525") translate([hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+            color("#252525") translate([size_x-hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([size_x-hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+
+            for(i=[6.5:2.54:25]) {
+                color("#fee5a6",1) translate([i, 2.5, -adj]) cylinder(d=.8, h=6);
+            }
+        }
+        pcbpad("round", 6.5, 2.5, 0, "top", 0, [11, 1, 0], [.8, "#fee5a6", 1.2], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        ic("generic", 17.5, 15, 0, "top", 0, [4, 4, .8], ["dimgrey"], size_z, enablemask, [false, 20, 0, "default"]);
+        jst("ph",33.5,8,0,"top",270,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        jst("ph",33.5,19,0,"top",270,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        usbc("single_horizontal",-1,5.5,0,"top",90,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+        power("pj-202ah",-2,17.5,0,"top",90,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+    }
+}
+
+

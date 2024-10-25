@@ -139,8 +139,14 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     }
 
     // models
-    if(type == "adafruit_lcd") {
-        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_lcd(mask); 
+    if(type == "adafruit_2030_powerboost") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_2030_powerboost(mask); 
+    }
+    if(type == "adafruit_4311_lcd") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_4311_lcd(mask); 
+    }
+    if(type == "adafruit_4755_solar_charger") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_4755_solar_charger(mask); 
     }
     if(type == "dsub") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0], data[1], mask); 
