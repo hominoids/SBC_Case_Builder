@@ -6028,7 +6028,7 @@
             "fan_size": "0",
             "flat_blank_section": "false",
             "floorthick": "2",
-            "gap": "2",
+            "gap": "2.5",
             "gpio_opening": "vent",
             "indents": "true",
             "individual_part": "bottom",
