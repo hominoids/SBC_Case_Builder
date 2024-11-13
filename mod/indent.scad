@@ -209,7 +209,7 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
             rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 180 && side == "top") {
-        place(loc_x+2.5,depth-(wallthick+gap)-8-wallthick/2,loc_z+2,6,8,rotation,side)
+        place(loc_x+2.5,depth-(wallthick+gap)-8-wallthick/2,loc_z+1.875,6,8,rotation,side)
             rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "usbc" && type == "single_horizontal" && rotation == 270 && side == "top") {
