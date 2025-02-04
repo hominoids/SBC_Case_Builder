@@ -64,7 +64,7 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     }
     // hdmi micro indent
     if(class == "video" && type == "hdmi_micro" && rotation == 0 && side == "top") {
-        place(loc_x-.5,-(wallthick+gap)+wallthick/2,loc_z+1.5,6,8,rotation,side) 
+        place(loc_x-.75,-(wallthick+gap)+wallthick/2,loc_z+1.5,6,8,rotation,side) 
             rotate([90,0,0]) long_slot(6,8,wallthick);
     }
     if(class == "video" && type == "hdmi_micro" && rotation == 90 && side == "top") {
@@ -234,7 +234,7 @@ module indent(loc_x, loc_y, loc_z, rotation, side, class, type, wallthick, gap, 
     }
     // audio jack indent
     if(class == "audio" && type == "jack_3.5" && rotation == 0 && side == "top") {
-        place(loc_x+3.15,-(wallthick+gap)+wallthick/2,loc_z+2,8,8,rotation,side) 
+        place(loc_x+3.25,-(wallthick+gap)+wallthick/2,loc_z+2.75,8,8,rotation,side) 
             rotate([90,0,0]) cylinder(d=10, h=wallthick);
     }
     if(class == "audio" && type == "jack_3.5" && rotation == 90 && side == "top") {
