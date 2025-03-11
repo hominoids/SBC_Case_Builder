@@ -144,7 +144,7 @@ $fn = 90;
     if(style == "recess") {
         difference() {
             cylinder(d=8.5, h=.8);
-            translate([-1.5,-1.75,-adj]) cube([2.75,3.5,1]);
+            translate([-1.5,-1.75,-adj]) cube([2.75,3.25,1]);
             translate([-.75,-.75,-adj]) cube([5,1.25,1.25]);
         }
     }
