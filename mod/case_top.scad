@@ -310,7 +310,9 @@ module case_top(case_design) {
                         pcbhole_z = sbc_data[s[0]][i+6];
                         pcbhole_size = sbc_data[s[0]][i+9][0];
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
-                        case_z = case_design == "fitted" ? case_z+floorthick : case_design == "snap" ? case_z+(2 * floorthick) : case_z;
+                        case_z = case_design == "fitted" || case_design == "tray_sides" || 
+                            case_design == "tray_vu5" || case_design == "tray_vu7" ? case_z+floorthick : 
+                                case_design == "snap" ? case_z+(2 * floorthick) : case_z;
 
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_rear" && 
                             top_rear_left_enable == true && top_standoff[6] != "blind") {
@@ -350,7 +352,9 @@ module case_top(case_design) {
                                 pcbhole_size = sbc_data[s[0]][i+9][0];
                                 pcbhole_state = sbc_data[s[0]][i+10][0];
                                 pcbhole_pos = sbc_data[s[0]][i+10][4];
-                                case_z = case_design == "fitted" ? case_z+floorthick : case_design == "snap" ? case_z+(2 * floorthick) : case_z;
+                                case_z = case_design == "fitted" || case_design == "tray_sides" || 
+                                    case_design == "tray_vu5" || case_design == "tray_vu7" ? case_z+floorthick : 
+                                        case_design == "snap" ? case_z+(2 * floorthick) : case_z;
 
                                 if(id == pcbid && id != 0 && pcbclass == "pcbhole") {
                                     if (pcbclass == "pcbhole" && pcbhole_pos == "left_rear" && 
@@ -385,7 +389,9 @@ module case_top(case_design) {
                 // extended standoff holes
                 if(ext_top_standoffs == true) {
 
-                    case_z = case_design == "fitted" ? case_z+floorthick : case_design == "snap" ? case_z+(2 * floorthick) : case_z;
+                    case_z = case_design == "fitted" || case_design == "tray_sides" || 
+                        case_design == "tray_vu5" || case_design == "tray_vu7" ? case_z+floorthick : 
+                            case_design == "snap" ? case_z+(2 * floorthick) : case_z;
 
                     // right-rear standoff
                     if((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= ext_top_standoff_support_size || 
@@ -477,8 +483,12 @@ module case_top(case_design) {
                         pcbhole_z = sbc_data[s[0]][i+6];
                         pcbhole_size = sbc_data[s[0]][i+9][0];
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
-                        case_z = case_design == "fitted" ? case_z+floorthick : case_design == "snap" ? case_z+(2 * floorthick) : case_z;
-                        stand_off_adj = case_design == "fitted" ? floorthick : case_design == "snap" ? 2 * floorthick : 0;
+                        case_z = case_design == "fitted" || case_design == "tray_sides" || 
+                            case_design == "tray_vu5" || case_design == "tray_vu7" ? case_z+floorthick : 
+                                case_design == "snap" ? case_z+(2 * floorthick) : case_z;
+                        stand_off_adj = case_design == "fitted" || case_design == "tray_sides" || 
+                            case_design == "tray_vu5" || case_design == "tray_vu7" ? floorthick : 
+                                case_design == "snap" ? 2 * floorthick : 0;
 
                     if(class == "pcbhole" && id == pcb_id && 
                         (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || 
@@ -574,8 +584,12 @@ module case_top(case_design) {
                             pcbhole_size = sbc_data[s[0]][i+9][0];
                             pcbhole_state = sbc_data[s[0]][i+10][0];
                             pcbhole_pos = sbc_data[s[0]][i+10][4];
-                            case_z = case_design == "fitted" ? case_z+floorthick : case_design == "snap" ? case_z+(2 * floorthick) : case_z;
-                            stand_off_adj = case_design == "fitted" ? floorthick : case_design == "snap" ? 2 * floorthick : 0;
+                            case_z = case_design == "fitted" || case_design == "tray_sides" || 
+                                case_design == "tray_vu5" || case_design == "tray_vu7" ? case_z+floorthick : 
+                                    case_design == "snap" ? case_z+(2 * floorthick) : case_z;
+                            stand_off_adj = case_design == "fitted" || case_design == "tray_sides" || 
+                                case_design == "tray_vu5" || case_design == "tray_vu7" ? floorthick : 
+                                    case_design == "snap" ? 2 * floorthick : 0;
 
                             if(pcbclass == "pcbhole" && pcbid == id && id != 0) {
                                 if (pcbhole_pos == "left_rear" && multipcb_top_rear_left_enable == true && 
@@ -658,8 +672,12 @@ module case_top(case_design) {
             // extended standoffs
             if(ext_top_standoffs == true) {
 
-                case_z = case_design == "fitted" ? case_z+floorthick : case_design == "snap" ? case_z+(2 * floorthick) : case_z;
-                stand_off_adj = case_design == "fitted" ? floorthick : case_design == "snap" ? 2 * floorthick : 0;
+                case_z = case_design == "fitted" || case_design == "tray_sides" || 
+                    case_design == "tray_vu5" || case_design == "tray_vu7" ? case_z+floorthick : 
+                        case_design == "snap" ? case_z+(2 * floorthick) : case_z;
+                stand_off_adj = case_design == "fitted" || case_design == "tray_sides" || 
+                    case_design == "tray_vu5" || case_design == "tray_vu7" ? floorthick : 
+                        case_design == "snap" ? 2 * floorthick : 0;
 
                 // extended right-rear standoff
                 if((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= ext_top_standoff_support_size || 
