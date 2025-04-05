@@ -316,19 +316,19 @@ module case_top(case_design) {
 
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_rear" && 
                             top_rear_left_enable == true && top_standoff[6] != "blind") {
-                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick-adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2+adj));
+                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick+adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_front" && 
                             top_front_left_enable == true && top_standoff[6] != "blind") {
-                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick-adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
+                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick+adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "right_rear" && 
                             top_rear_right_enable == true && top_standoff[6] != "blind") {
-                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick-adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
+                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick+adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "right_front" && 
                             top_front_right_enable == true && top_standoff[6] != "blind") {
-                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick-adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
+                            translate([pcbhole_x,pcbhole_y,case_z-(floorthick+adj)]) cylinder(d=top_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                     }
                 }
