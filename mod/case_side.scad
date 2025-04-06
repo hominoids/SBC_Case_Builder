@@ -128,6 +128,106 @@ module case_side(case_design, side) {
                     }
                 }
             }
+            if(case_design == "panel_nas") {
+                if(side == "rear") {
+                    difference() {
+                        union() {
+                            translate([-gap,-wallthick-gap,-floorthick]) 
+                                cube([width-2*wallthick+(101.6-width+(2*(wallthick+gap))),wallthick,case_z+2*floorthick]);
+                            // right hook
+                            difference() {
+                                translate([width-(2*wallthick)-gap-adj,-wallthick-gap,
+                                    ((case_z)/2)-4]) 
+                                        cube([(2*wallthick)+.5,wallthick,8]);
+                                translate([width-(2*wallthick)-gap-adj,-wallthick-gap-adj,
+                                    ((case_z)/2)-4-adj]) 
+                                        cube([wallthick+.25,wallthick+(2*adj),4.25]);
+                            }
+                            // left hook
+                            difference() {
+                                translate([-(2*wallthick)-gap-adj-.25,-wallthick-gap,
+                                    ((case_z)/2)-4]) 
+                                        cube([(2*wallthick)+.5,wallthick,8]);
+                                translate([-wallthick-gap-adj-.25,-wallthick-gap-adj,
+                                    ((case_z)/2)-4-adj]) 
+                                        cube([wallthick+.25,wallthick+(2*adj),4.25]);
+                            }
+                        }
+                        // top slots
+                        translate([(width*(1/5))-8.25-(wallthick+gap),-wallthick-gap-adj,
+                            case_z-floorthick-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        translate([width-(width*(1/5))-(wallthick+gap)-.25,-wallthick-gap-adj,
+                            case_z-floorthick-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        // bottom slots
+                        translate([(width*(1/5))-8.25-(wallthick+gap),-wallthick-gap-adj,-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        translate([width-(width*(1/5))-(wallthick+gap)-.25,-wallthick-gap-adj,-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                    }
+                }
+                if(side == "front") {
+                    difference() {
+                        union() {
+                            translate([-gap,depth-2*(wallthick)-gap,-floorthick]) 
+                                cube([width-2*wallthick+(101.6-width+(2*(wallthick+gap))),wallthick,case_z+2*floorthick]);
+                            // right hook
+                            difference() {
+                                translate([width-(2*wallthick)-gap-adj,depth-2*(wallthick)-gap-adj,
+                                    ((case_z)/2)-4])
+                                        cube([(2*wallthick)+.5,wallthick,8]);
+                                translate([width-(2*wallthick)-gap-adj,
+                                    depth-2*(wallthick)-adj-gap-adj,((case_z)/2)-4-adj])
+                                        cube([wallthick+.25,wallthick+(2*adj),4.25]);
+                            }
+                            // left hook
+                            difference() {
+                                translate([-(2*wallthick)-gap-adj-.25,depth-2*(wallthick)-gap-adj,(
+                                    (case_z)/2)-4]) 
+                                        cube([(2*wallthick)+.5,wallthick,8]);
+                                translate([-wallthick-gap-adj-.25,depth-2*(wallthick)-adj-gap-adj,
+                                    ((case_z)/2)-4-adj]) 
+                                        cube([wallthick+.25,wallthick+(2*adj),4.25]);
+                            }
+                        }
+                        // top slots
+                        translate([(width*(1/5))-8.25-(wallthick+gap),depth-2*wallthick-gap-adj,
+                            case_z-floorthick-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        translate([width-(width*(1/5))-(wallthick+gap)-.25,depth-2*wallthick-gap-adj,
+                            case_z-floorthick-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        // bottom slots
+                        translate([(width*(1/5))-8.25-(wallthick+gap),depth-2*wallthick-gap-adj,-.25]) 
+                                cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        translate([width-(width*(1/5))-(wallthick+gap)-.25,
+                            depth-2*wallthick-gap-adj,-.25]) cube([8.5,wallthick+2*adj,floorthick+.5]);
+                    }
+                }
+                if(side == "right") {
+                    difference() {
+                        translate([width-(2*wallthick)-gap+(101.6-width+(2*wallthick)),-(2*wallthick)-gap,-wallthick]) 
+                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
+                        translate([width-(2*wallthick)-gap-adj,-wallthick-gap-.25,
+                            ((case_z)/2)]) cube([wallthick+2*adj,wallthick+.5,8.5]);
+                        translate([width-(2*wallthick)-gap-adj,depth-2*(wallthick)-gap-.25,
+                            ((case_z)/2)])
+                                cube([wallthick+2*adj,wallthick+.5,8.5]);
+                    }
+                }
+                if(side == "left") {
+                    difference() {
+                        translate([-wallthick-gap,-(2*wallthick)-gap,-wallthick]) 
+                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
+                        translate([-wallthick-gap-adj,-wallthick-gap-.25,((case_z)/2)])
+                            cube([wallthick+2*adj,wallthick+.5,8.5]);
+                        translate([-wallthick-gap-adj,depth-2*(wallthick)-gap-.25,
+                            ((case_z)/2)])
+                                cube([wallthick+2*adj,wallthick+.5,8.5]);
+                    }
+                }
+            }
             if(case_design == "tray_sides") {
                 if(side == "right") {
                     difference() {

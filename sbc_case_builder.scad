@@ -40,7 +40,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
+case_design = "shell"; // [shell,panel,panel_nas,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -83,9 +83,9 @@ case_offset_x = 0; //[0:.01:300]
 // additional y axis case size
 case_offset_y = 0; //[0:.01:300]
 // additional z axis case top size
-case_offset_tz = 0; //[-10:.01:100]
+case_offset_tz = 0; //[-10:.01:300]
 // additional z axis case bottom size
-case_offset_bz = 0; //[0:.01:100]
+case_offset_bz = 0; //[0:.01:300]
 // case wall thickness
 wallthick = 2; //[1:.01:5]
 // case floor thickness
@@ -124,8 +124,12 @@ gpio_opening = "default"; // [default,none,open,block,knockout,vent]
 uart_opening = "default"; // [default,none,open,knockout]
 // enable indentations around io openings
 indents = true;
+// nas sbc location
+nas_sbc_location = "top"; // ["top","bottom"]
+// number of nas bays
+nas_bays = 2; // [0:5]
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "rpi5_m2hat", "rock5b", "adapter_mini-stx_m1s", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
+accessory_name = "none"; // ["none", "hk_uart", "nas", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "rpi5_m2hat", "rock5b", "adapter_mini-stx_m1s", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
 // sbc information text color
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 // sbc information text font
@@ -611,6 +615,30 @@ if (view == "model") {
             }
         }
         if(case_design == "panel") {
+            if(lower_bottom >= 0) {
+                color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top])case_top(case_design);
+            }
+            if(move_front >= 0) {
+                color("grey",1) translate([0,move_front,0]) case_side(case_design,"front");
+            }
+            if(move_rear >= 0) {
+                color("grey",1) translate([0,-move_rear,0]) case_side(case_design,"rear");
+            }
+            if(move_rightside >= 0) {
+                color("grey",1) translate([move_rightside,0,0]) case_side(case_design,"right");
+            }
+            if(move_leftside >= 0) {
+                color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
+            }
+            if(sbc_off == false) {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
+        }
+        if(case_design == "panel_nas") {
             if(lower_bottom >= 0) {
                 color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }

@@ -614,7 +614,7 @@ module hd35_vtab(side) {
     DESCRIPTION: creates 2.5" and 3.5" hard drive hole mask for mounting
            TODO: none
 
-          USAGE: hd_bottom_holes(hd, orientation, side, thick)
+          USAGE: hd_holes(hd, orientation, side, thick)
 
                                  hd = 2.5, 3.5
                         orientation = "portrait", "landscape"
