@@ -72,9 +72,9 @@ module case_top(case_design) {
                     }
                     if(case_design == "panel_nas") {
                         union() {
-                           translate([-gap,-gap,case_z-floorthick]) 
-                                cube([width-(2*wallthick)+(101.6-width+(2*wallthick)),depth-(2*wallthick),floorthick]);
-                            translate([(width*(1/5))-8-(wallthick+gap),depth-(2*wallthick)-gap-adj,
+                           translate([-gap,-gap,case_z-2*wallthick]) 
+                                cube([width-(2*wallthick)+(101.6-width+(2*wallthick)),depth-(3*wallthick),wallthick]);
+/*                            translate([(width*(1/5))-8-(wallthick+gap),depth-(2*wallthick)-gap-adj,
                                 case_z-floorthick]) 
                                     cube([8,wallthick+2*adj,floorthick]);
                             translate([width-(width*(1/5))-(wallthick+gap),depth-(2*wallthick)-gap-adj,
@@ -86,7 +86,7 @@ module case_top(case_design) {
                             translate([width-(width*(1/5))-(wallthick+gap),-wallthick-gap+adj,
                                 case_z-floorthick]) 
                                     cube([8,wallthick+2*adj,floorthick]);
-                        }
+*/                        }
                     }
                     if(case_design == "stacked") {
                         translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,

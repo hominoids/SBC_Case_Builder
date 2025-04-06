@@ -26,6 +26,9 @@
 
 module case_side(case_design, side) {
     
+    hd_space = 36;
+    hd_height = 40;
+
     difference() {
         union() {
             if(case_design == "panel") {
@@ -132,14 +135,14 @@ module case_side(case_design, side) {
                 if(side == "rear") {
                     difference() {
                         union() {
-                            translate([-gap,-wallthick-gap,-floorthick]) 
-                                cube([width-2*wallthick+(101.6-width+(2*(wallthick+gap))),wallthick,case_z+2*floorthick]);
+                            translate([-gap,-wallthick-gap,floorthick]) 
+                                cube([width-2*wallthick+(101.6-width+(2*wallthick)),wallthick,case_z-2*floorthick]);
                             // right hook
                             difference() {
-                                translate([width-(2*wallthick)-gap-adj,-wallthick-gap,
+                                translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),-wallthick-gap,
                                     ((case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
-                                translate([width-(2*wallthick)-gap-adj,-wallthick-gap-adj,
+                                translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),-wallthick-gap-adj,
                                     ((case_z)/2)-4-adj]) 
                                         cube([wallthick+.25,wallthick+(2*adj),4.25]);
                             }
@@ -165,28 +168,30 @@ module case_side(case_design, side) {
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,-wallthick-gap-adj,-.25]) 
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        translate([(101.6-80)/2,-1,bottom_height+98]) rotate([90,0,0]) fan_mask(80, wallthick+2, "fan_hex"); 
+                        translate([(101.6-80)/2,-1,bottom_height+17]) rotate([90,0,0]) fan_mask(80, wallthick+2, "fan_hex"); 
                     }
                 }
                 if(side == "front") {
                     difference() {
                         union() {
-                            translate([-gap,depth-2*(wallthick)-gap,-floorthick]) 
-                                cube([width-2*wallthick+(101.6-width+(2*(wallthick+gap))),wallthick,case_z+2*floorthick]);
+                            translate([-gap,depth-4*(wallthick)-gap,floorthick]) 
+                                cube([width-2*wallthick+(101.6-width+(2*wallthick)),wallthick,case_z-2*wallthick]);
                             // right hook
                             difference() {
-                                translate([width-(2*wallthick)-gap-adj,depth-2*(wallthick)-gap-adj,
+                                translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),depth-3*(wallthick)-gap-adj,
                                     ((case_z)/2)-4])
                                         cube([(2*wallthick)+.5,wallthick,8]);
-                                translate([width-(2*wallthick)-gap-adj,
-                                    depth-2*(wallthick)-adj-gap-adj,((case_z)/2)-4-adj])
+                                translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),
+                                    depth-3*(wallthick)-adj-gap-adj,((case_z)/2)-4-adj])
                                         cube([wallthick+.25,wallthick+(2*adj),4.25]);
                             }
                             // left hook
                             difference() {
-                                translate([-(2*wallthick)-gap-adj-.25,depth-2*(wallthick)-gap-adj,(
+                                translate([-(2*wallthick)-gap-adj-.25,depth-3*(wallthick)-gap-adj,(
                                     (case_z)/2)-4]) 
                                         cube([(2*wallthick)+.5,wallthick,8]);
-                                translate([-wallthick-gap-adj-.25,depth-2*(wallthick)-adj-gap-adj,
+                                translate([-wallthick-gap-adj-.25,depth-3*(wallthick)-adj-gap-adj,
                                     ((case_z)/2)-4-adj]) 
                                         cube([wallthick+.25,wallthick+(2*adj),4.25]);
                             }
@@ -203,28 +208,42 @@ module case_side(case_design, side) {
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,
                             depth-2*wallthick-gap-adj,-.25]) cube([8.5,wallthick+2*adj,floorthick+.5]);
+                        translate([-gap+6,depth-4*(wallthick)-gap,case_z-6]) rotate([-90,0,0]) 
+                            vent_hex((width)/3.5,(depth)/7,wallthick+4,5,1.5,"horizontal");
                     }
                 }
                 if(side == "right") {
                     difference() {
-                        translate([width-(2*wallthick)-gap+(101.6-width+(2*wallthick)),-(2*wallthick)-gap,-wallthick]) 
-                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
-                        translate([width-(2*wallthick)-gap-adj,-wallthick-gap-.25,
+//                        translate([width-(2*wallthick)-gap+(101.6-width+(2*wallthick)),-(3*wallthick)-gap,-wallthick]) 
+//                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
+                        translate([width-gap+(101.6-width+sidethick),-(3*wallthick)-gap,-wallthick]) 
+                            rotate([0,-90,0]) slab([case_z+(2*wallthick),depth+2*wallthick,sidethick],corner_fillet);
+                        translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),-wallthick-gap-.25,
                             ((case_z)/2)]) cube([wallthick+2*adj,wallthick+.5,8.5]);
-                        translate([width-(2*wallthick)-gap-adj,depth-2*(wallthick)-gap-.25,
+                        translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),depth-2*(wallthick)-gap-.25,
                             ((case_z)/2)])
                                 cube([wallthick+2*adj,wallthick+.5,8.5]);
+                        for( i=[0:1:nas_bays-1]) {
+                            translate([-gap,-(3*wallthick)-gap+78.25,hd_height+hd_space*i]) 
+                                rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                        }
                     }
                 }
                 if(side == "left") {
                     difference() {
-                        translate([-wallthick-gap,-(2*wallthick)-gap,-wallthick]) 
-                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
+//                        translate([-sidethick-gap,-(2*wallthick)-gap,-wallthick]) 
+//                            cube([wallthick,depth+2*wallthick,case_z+(2*wallthick)]);
+                        translate([-gap,-(3*wallthick)-gap,-wallthick]) 
+                            rotate([0,-90,0]) slab([case_z+(2*wallthick),depth+2*wallthick,sidethick],corner_fillet);
                         translate([-wallthick-gap-adj,-wallthick-gap-.25,((case_z)/2)])
                             cube([wallthick+2*adj,wallthick+.5,8.5]);
                         translate([-wallthick-gap-adj,depth-2*(wallthick)-gap-.25,
                             ((case_z)/2)])
                                 cube([wallthick+2*adj,wallthick+.5,8.5]);
+                        for( i=[0:1:nas_bays-1]) {
+                            translate([-gap,-(3*wallthick)-gap+78.25,hd_height+hd_space*i]) 
+                                rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                        }
                     }
                 }
             }
