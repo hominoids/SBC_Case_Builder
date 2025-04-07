@@ -26,9 +26,6 @@
 
 module case_side(case_design, side) {
     
-    hd_space = 36;
-    hd_height = 40;
-
     difference() {
         union() {
             if(case_design == "panel") {
@@ -168,8 +165,14 @@ module case_side(case_design, side) {
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,-wallthick-gap-adj,-.25]) 
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
-                        translate([(101.6-80)/2,-1,bottom_height+98]) rotate([90,0,0]) fan_mask(80, wallthick+2, "fan_hex"); 
-                        translate([(101.6-80)/2,-1,bottom_height+17]) rotate([90,0,0]) fan_mask(80, wallthick+2, "fan_hex"); 
+                        if(hd_fan == 1 || hd_fan == 2) {
+                            translate([-1+(101.6-hd_fan_size)/2,-1,bottom_height+pcb_tmaxz+hd_fan_position]) 
+                                rotate([90,0,0]) fan_mask(hd_fan_size, wallthick+2, hd_cooling);
+                        }
+                        if(hd_fan == 2) {
+                            translate([-1+(101.6-hd_fan_size)/2,-1,bottom_height+pcb_tmaxz+hd_fan_position+3+hd_fan_size]) 
+                                rotate([90,0,0]) fan_mask(hd_fan_size, wallthick+2, hd_cooling); 
+                        }
                     }
                 }
                 if(side == "front") {
@@ -208,8 +211,8 @@ module case_side(case_design, side) {
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,
                             depth-2*wallthick-gap-adj,-.25]) cube([8.5,wallthick+2*adj,floorthick+.5]);
-                        translate([-gap+6,depth-4*(wallthick)-gap,case_z-6]) rotate([-90,0,0]) 
-                            vent_hex((width)/3.5,(depth)/7,wallthick+4,5,1.5,"horizontal");
+                        translate([-gap+8,depth-4*(wallthick)-gap,case_z-8]) rotate([-90,0,0]) 
+                            vent_hex((width)/3.5,(case_z-8)/6,wallthick+4,5,1.5,"horizontal");
                     }
                 }
                 if(side == "right") {
@@ -223,8 +226,8 @@ module case_side(case_design, side) {
                         translate([width-(2*wallthick)-gap-adj+(101.6-width+(2*wallthick)),depth-2*(wallthick)-gap-.25,
                             ((case_z)/2)])
                                 cube([wallthick+2*adj,wallthick+.5,8.5]);
-                        for( i=[0:1:nas_bays-1]) {
-                            translate([-gap,-(3*wallthick)-gap+78.25,hd_height+hd_space*i]) 
+                        for( i=[0:1:hd_bays-1]) {
+                            translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
                                 rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
                         }
                     }
@@ -240,8 +243,8 @@ module case_side(case_design, side) {
                         translate([-wallthick-gap-adj,depth-2*(wallthick)-gap-.25,
                             ((case_z)/2)])
                                 cube([wallthick+2*adj,wallthick+.5,8.5]);
-                        for( i=[0:1:nas_bays-1]) {
-                            translate([-gap,-(3*wallthick)-gap+78.25,hd_height+hd_space*i]) 
+                        for( i=[0:1:hd_bays-1]) {
+                            translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
                                 rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
                         }
                     }

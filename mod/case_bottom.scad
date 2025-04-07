@@ -65,10 +65,10 @@ module case_bottom(case_design) {
                     if(case_design == "panel_nas") {
                        union() {
                            translate([-gap,-gap,0]) 
-                                cube([width-(2*wallthick)+(101.6-width+(2*wallthick)),depth-(2*wallthick),floorthick]);
-                            translate([(width*(1/5))-8-(wallthick+gap),depth-(2*wallthick)-gap-adj,0]) 
+                                cube([width-(2*wallthick)+(101.6-width+(2*wallthick)),depth-(3*wallthick),floorthick]);
+                            translate([(width*(1/5))-8-(wallthick+gap),depth-(3*wallthick)-gap-adj,0]) 
                                     cube([8,wallthick+2*adj,floorthick]);
-                            translate([width-(width*(1/5))-(wallthick+gap),depth-(2*wallthick)-gap-adj,0])
+                            translate([width-(width*(1/5))-(wallthick+gap),depth-(3*wallthick)-gap-adj,0])
                                     cube([8,wallthick+2*adj,floorthick]);
                             translate([(width*(1/5))-8-(wallthick+gap),-wallthick-gap+adj,0])
                                     cube([8,wallthick+2*adj,floorthick]);
