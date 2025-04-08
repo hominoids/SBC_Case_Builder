@@ -165,13 +165,13 @@ module case_side(case_design, side) {
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
                         translate([width-(width*(1/5))-(wallthick+gap)-.25,-wallthick-gap-adj,-.25]) 
                                 cube([8.5,wallthick+2*adj,floorthick+.5]);
-                        if(hd_fan == 1 || hd_fan == 2) {
-                            translate([-1+(101.6-hd_fan_size)/2,-1,bottom_height+pcb_tmaxz+hd_fan_position]) 
-                                rotate([90,0,0]) fan_mask(hd_fan_size, wallthick+2, hd_cooling);
+                        if(rear_fan == 1 || rear_fan == 2) {
+                            translate([-1+(101.6-rear_fan_size)/2,-1,bottom_height+pcb_tmaxz+rear_fan_position]) 
+                                rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
                         }
-                        if(hd_fan == 2) {
-                            translate([-1+(101.6-hd_fan_size)/2,-1,bottom_height+pcb_tmaxz+hd_fan_position+3+hd_fan_size]) 
-                                rotate([90,0,0]) fan_mask(hd_fan_size, wallthick+2, hd_cooling); 
+                        if(rear_fan == 2) {
+                            translate([-1+(101.6-rear_fan_size)/2,-1,bottom_height+pcb_tmaxz+rear_fan_position+3+rear_fan_size]) 
+                                rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling); 
                         }
                     }
                 }
@@ -378,13 +378,37 @@ module case_side(case_design, side) {
             }
         }
         // sbc openings
-        if(sbc_highlight == true) {
-            #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
-                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+        if(case_design != "panel_nas") {
+            if(sbc_highlight == true) {
+                #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+            }
+            else {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+            }
         }
         else {
-            translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
-                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+            if(nas_sbc_location == "top") {
+                if(sbc_highlight == true) {
+                    #translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))]) 
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
+                else {
+                    translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))]) 
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
+            }
+            if(nas_sbc_location == "bottom") {
+                if(sbc_highlight == true) {
+                    #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) 
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
+                else {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) 
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
+            }
         }
         // indents
         if(indents == true) {
@@ -405,8 +429,15 @@ module case_side(case_design, side) {
                         loc_z = sbc_data[s[0]][i+6]+pcb_loc_z+pcbloc_z;
                         side = sbc_data[s[0]][i+7];
                         rotation = sbc_data[s[0]][i+8];
-                        if(id == pcbid) {
+                        if(id == pcbid && case_design != "panel_nas") {
                             indent(loc_x, loc_y, bottom_height+loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
+                        }
+                        if(id == pcbid && case_design == "panel_nas" && nas_sbc_location == "bottom") {
+                            indent(loc_x, loc_y, bottom_height+loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
+
+                        }
+                        if(id == pcbid && case_design == "panel_nas" && nas_sbc_location == "top") {
+                            indent(loc_x, loc_y, case_z-(top_height+pcb_loc_z+(2*floorthick))+.5, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
                         }
                     }
                 }

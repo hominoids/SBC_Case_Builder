@@ -83,7 +83,7 @@ case_offset_x = 0; //[0:.01:300]
 // additional y axis case size
 case_offset_y = 0; //[0:.01:300]
 // additional z axis case top size
-case_offset_tz = 0; //[-10:.01:300]
+case_offset_tz = 0; //[-30:.01:300]
 // additional z axis case bottom size
 case_offset_bz = 0; //[0:.01:300]
 // case wall thickness
@@ -109,6 +109,12 @@ bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,25,30,40,50,60,70,80,92]
+// rear fan number for nas cases
+rear_fan = 1; // [1,2]
+// rear fan opening
+rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
+rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
+rear_fan_position = 0; // [-50:300]
 
 /* [Bottom Access Panel] */
 bottom_access_panel_enable = false;
@@ -131,10 +137,6 @@ hd_bays = 2; // [1:6]
 hd_y_position = 25; // [1:300]
 hd_z_position = 40; // [1:300]
 hd_space = 10; // [1:50]
-hd_fan = 1; // [1,2]
-hd_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
-hd_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
-hd_fan_position = 0; // [-50:300]
 
 // case accessory group to load
 accessory_name = "none"; // ["none", "hk_uart", "nas", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "rpi5_m2hat", "rock5b", "adapter_mini-stx_m1s", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
@@ -370,7 +372,7 @@ width = pcb_width+2*(wallthick+gap)+case_offset_x;
 depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
-case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position + (hd_bays * (hd_space + 26.1)-hd_space) : bottom_height+top_height;
+case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position + (hd_bays * (hd_space + 26.1)) : bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 
@@ -659,8 +661,12 @@ if (view == "model") {
             if(move_leftside >= 0) {
                 color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
             }
-            if(sbc_off == false) {
+            if(sbc_off == false && nas_sbc_location == "bottom") {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
+             if(sbc_off == false && nas_sbc_location == "top") {
+                translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))+.5])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             for( i=[0:1:hd_bays-1]) {
@@ -1036,7 +1042,7 @@ if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu
 }
 else {
     if(case_design == "panel_nas") {
-        echo(width=width+(101.6-width+(2*sidethick)),depth=depth,top=top_height,bottom=bottom_height);
+        echo(width=width+(101.6-width+(2*sidethick)),depth=depth,top=top_height,bottom=bottom_height, height=case_z+(2*wallthick));
     }
     else {
         echo(width=width,depth=depth,top=top_height,bottom=bottom_height);
