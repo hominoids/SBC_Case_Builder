@@ -72,21 +72,21 @@ module case_top(case_design) {
                     }
                     if(case_design == "panel_nas") {
                         union() {
-                           translate([-gap,-gap,case_z-2*wallthick]) 
-                                cube([width-(2*wallthick)+(101.6-width+(2*wallthick)),depth-(3*wallthick),wallthick]);
-/*                            translate([(width*(1/5))-8-(wallthick+gap),depth-(2*wallthick)-gap-adj,
-                                case_z-floorthick]) 
-                                    cube([8,wallthick+2*adj,floorthick]);
-                            translate([width-(width*(1/5))-(wallthick+gap),depth-(2*wallthick)-gap-adj,
-                                case_z-floorthick]) 
-                                    cube([8,wallthick+2*adj,floorthick]);
-                            translate([(width*(1/5))-8-(wallthick+gap),-wallthick-gap+adj,
-                                case_z-floorthick]) 
-                                    cube([8,wallthick+2*adj,floorthick]);
-                            translate([width-(width*(1/5))-(wallthick+gap),-wallthick-gap+adj,
-                                case_z-floorthick]) 
-                                    cube([8,wallthick+2*adj,floorthick]);
-*/                        }
+                           translate([-gap,-wallthick,case_z-2*wallthick]) 
+                                cube([width-2*(gap+sidethick),depth-(2*wallthick),wallthick]);
+                            translate([-gap-sidethick+(2*adj),depth-(3*wallthick)-gap-adj-20,
+                                case_z-2*floorthick]) 
+                                    cube([sidethick+(2*adj),10,floorthick]);
+                            translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-20,
+                                case_z-2*floorthick]) 
+                                    cube([sidethick+2*adj,10,floorthick]);
+                            translate([-gap-sidethick+(2*adj),40-wallthick-gap+adj,
+                                case_z-2*floorthick])
+                                    cube([sidethick+2*adj,10,floorthick]);
+                            translate([width-(3*sidethick)-adj,40-wallthick-gap+adj,
+                                case_z-2*floorthick])
+                                    cube([sidethick+2*adj,10,floorthick]);
+                        }
                     }
                     if(case_design == "stacked") {
                         translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,

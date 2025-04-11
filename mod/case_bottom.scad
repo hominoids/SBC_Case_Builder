@@ -64,16 +64,16 @@ module case_bottom(case_design) {
                     }
                     if(case_design == "panel_nas") {
                        union() {
-                           translate([-gap,-gap,0]) 
-                                cube([width-(2*wallthick)+(101.6-width+(2*wallthick)),depth-(3*wallthick),floorthick]);
-                            translate([(width*(1/5))-8-(wallthick+gap),depth-(3*wallthick)-gap-adj,0]) 
-                                    cube([8,wallthick+2*adj,floorthick]);
-                            translate([width-(width*(1/5))-(wallthick+gap),depth-(3*wallthick)-gap-adj,0])
-                                    cube([8,wallthick+2*adj,floorthick]);
-                            translate([(width*(1/5))-8-(wallthick+gap),-wallthick-gap+adj,0])
-                                    cube([8,wallthick+2*adj,floorthick]);
-                            translate([width-(width*(1/5))-(wallthick+gap),-wallthick-gap+adj,0])
-                                    cube([8,wallthick+2*adj,floorthick]);
+                           translate([-gap,-2*wallthick,0]) 
+                                cube([width-2*(gap+sidethick),depth-wallthick,wallthick]);
+                            #translate([-gap-sidethick+(2*adj),depth-(3*wallthick)-gap-adj-20,0]) 
+                                    cube([sidethick+(2*adj),10,floorthick]);
+                            #translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-20,0]) 
+                                    cube([sidethick+2*adj,10,floorthick]);
+                            #translate([-gap-sidethick+(2*adj),40-wallthick-gap+adj,0])
+                                    cube([sidethick+2*adj,10,floorthick]);
+                            #translate([width-(3*sidethick)-adj,40-wallthick-gap+adj,0])
+                                    cube([sidethick+2*adj,10,floorthick]);
                         }
                     }
                     if(case_design == "stacked") {

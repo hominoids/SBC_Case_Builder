@@ -368,11 +368,11 @@ pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
 pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-itx_thin" || sbc_model == "mini-stx" || sbc_model == "mini-stx_thin" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
-width = pcb_width+2*(wallthick+gap)+case_offset_x;
+width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+(2*(sidethick+gap))+case_offset_x+(101.6-pcb_width) : pcb_width+(2*(wallthick+gap))+case_offset_x;
 depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
-case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position + (hd_bays * (hd_space + 26.1)) : bottom_height+top_height;
+case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 
@@ -656,10 +656,10 @@ if (view == "model") {
                 color("grey",1) translate([0,-move_rear,0]) case_side(case_design,"rear");
             }
             if(move_rightside >= 0) {
-                color("grey",1) translate([move_rightside,0,0]) case_side(case_design,"right");
+                color("dimgrey",1) translate([move_rightside,0,0]) case_side(case_design,"right");
             }
             if(move_leftside >= 0) {
-                color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
+                color("dimgrey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
             }
             if(sbc_off == false && nas_sbc_location == "bottom") {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
