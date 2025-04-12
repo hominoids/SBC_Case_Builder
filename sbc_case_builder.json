@@ -9748,7 +9748,7 @@
             "multipcb_top_standoffs": "false",
             "nas_sbc_location": "top",
             "pcb_loc_x": "8",
-            "pcb_loc_y": "0",
+            "pcb_loc_y": "1",
             "pcb_loc_z": "0",
             "raise_top": "0",
             "rear_cooling": "fan_hex",

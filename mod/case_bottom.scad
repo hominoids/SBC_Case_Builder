@@ -64,15 +64,15 @@ module case_bottom(case_design) {
                     }
                     if(case_design == "panel_nas") {
                        union() {
-                           translate([-gap,-2*wallthick,0]) 
-                                cube([width-2*(gap+sidethick),depth-wallthick,wallthick]);
-                            #translate([-gap-sidethick+(2*adj),depth-(3*wallthick)-gap-adj-20,0]) 
+                           translate([-gap,-wallthick,0]) 
+                                cube([width-2*(gap+sidethick),depth-(2*wallthick),wallthick]);
+                            translate([-gap-sidethick-(2*adj),depth-(3*wallthick)-gap-adj-20,0]) 
                                     cube([sidethick+(2*adj),10,floorthick]);
-                            #translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-20,0]) 
+                            translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-20,0]) 
                                     cube([sidethick+2*adj,10,floorthick]);
-                            #translate([-gap-sidethick+(2*adj),40-wallthick-gap+adj,0])
+                            translate([-gap-sidethick-(2*adj),40-wallthick-gap+adj,0])
                                     cube([sidethick+2*adj,10,floorthick]);
-                            #translate([width-(3*sidethick)-adj,40-wallthick-gap+adj,0])
+                            translate([width-(3*sidethick)-adj,40-wallthick-gap+adj,0])
                                     cube([sidethick+2*adj,10,floorthick]);
                         }
                     }

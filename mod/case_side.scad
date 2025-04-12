@@ -132,8 +132,8 @@ module case_side(case_design, side) {
                 if(side == "rear") {
                     difference() {
                         union() {
-                            translate([-gap,-(2*wallthick),floorthick]) 
-                                cube([width-2*sidethick,wallthick,case_z-2*wallthick]);
+                            translate([-gap,-(2*wallthick),0]) 
+                                cube([width-2*sidethick,wallthick,case_z-wallthick]);
                             // bottom right tab
                             translate([width-(3*sidethick)-adj,-(2*wallthick),20])
                                 cube([sidethick+(2*adj),wallthick,10]);
@@ -182,8 +182,8 @@ module case_side(case_design, side) {
                 }
                 if(side == "right") {
                     difference() {
-                        translate([width-2*sidethick,-(3*wallthick)-gap,-wallthick]) 
-                            rotate([0,-90,0]) slab([case_z+(2*wallthick),depth+2*wallthick,sidethick],corner_fillet);
+                        translate([width-2*sidethick,-(3*wallthick)-gap,-2*wallthick]) 
+                            rotate([0,-90,0]) slab([case_z+(3*wallthick),depth+2*wallthick,sidethick],corner_fillet);
                         // rear edge top tab openings
                         translate([width-adj-(3*sidethick),-2*wallthick,case_z-30]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
@@ -211,26 +211,40 @@ module case_side(case_design, side) {
                                 rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
                         }
 
-                        // top edge front tab openings
+                        // top edge front tab opening
                         translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-30,
                             case_z-(2*floorthick)]) 
                                 cube([sidethick+(2*adj),20,floorthick+tol]);
-                        translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-30,
+                        translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-30-tol,
                             case_z-(2*floorthick)]) 
                                 cube([sidethick+2*adj,10+tol,(3*floorthick)+adj]);
-                        // top edge rear tab openings
+
+                        // top edge rear tab opening
                         translate([width-(3*sidethick)-adj,40-wallthick-gap+adj,
                             case_z-(2*floorthick)])
                                 cube([sidethick+(2*adj),10,floorthick+tol]);
-                        translate([width-(3*sidethick)-adj,30-wallthick-gap+adj,
+                        translate([width-(3*sidethick)-adj,30-wallthick-gap+adj-tol,
                             case_z-(2*floorthick)]) 
                                 cube([sidethick+(2*adj),10+tol,(3*floorthick)+adj]);
+
+                        // bottom edge front tab opening
+                        translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-30-tol,-tol]) 
+                                cube([sidethick+2*adj,20+tol,floorthick+tol]);
+                        translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-30-tol,-(3*floorthick)+adj]) 
+                                cube([sidethick+2*adj,10+tol,(3*floorthick)+adj]);
+
+                        // bottom edge rear tab opening
+                        translate([width-(3*sidethick)-adj,30-wallthick-gap+adj-tol,-tol])
+                                cube([sidethick+2*adj,20+tol,floorthick+tol]);
+                        translate([width-(3*sidethick)-adj,30-wallthick-gap+adj-tol,-(3*floorthick)+adj]) 
+                                cube([sidethick+(2*adj),10+tol,(3*floorthick)+adj]);
+
                     }
                 }
                 if(side == "left") {
                     difference() {
-                        translate([-gap,-(3*wallthick)-gap,-wallthick]) 
-                            rotate([0,-90,0]) slab([case_z+(2*wallthick),depth+(2*wallthick),sidethick],corner_fillet);
+                        translate([-gap,-(3*wallthick)-gap,-2*wallthick]) 
+                            rotate([0,-90,0]) slab([case_z+(3*wallthick),depth+(2*wallthick),sidethick],corner_fillet);
                         // rear edge top tab openings
                         translate([-sidethick-gap-adj,-2*wallthick,case_z-30]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
@@ -262,15 +276,27 @@ module case_side(case_design, side) {
                         translate([-gap-sidethick-adj,depth-(3*wallthick)-gap-adj-30,
                             case_z-(2*floorthick)]) 
                                 cube([sidethick+(2*adj),20,floorthick+tol]);
-                        translate([-gap-sidethick-adj,depth-(3*wallthick)-gap-adj-30,
+                        translate([-gap-sidethick-adj,depth-(3*wallthick)-gap-adj-30-tol,
                             case_z-(2*floorthick)]) 
                                 cube([sidethick+(2*adj),10+tol,(3*floorthick)+adj]);
                         // top edge rear tab openings
                         translate([-gap-sidethick-adj,40-wallthick-gap+adj,
                             case_z-(2*floorthick)])
                                 cube([sidethick+(2*adj),10,floorthick+tol]);
-                        translate([-gap-sidethick-adj,30-wallthick-gap+adj,
+                        translate([-gap-sidethick-adj,30-wallthick-gap+adj-tol,
                             case_z-(2*floorthick)]) 
+                                cube([sidethick+(2*adj),10+tol,(3*floorthick)+adj]);
+
+                        // bottom edge front tab openings
+                        translate([-gap-sidethick-adj,depth-(3*wallthick)-gap-adj-30,-tol]) 
+                                cube([sidethick+(2*adj),20,floorthick+tol]);
+                        translate([-gap-sidethick-adj,depth-(3*wallthick)-gap-adj-30-tol,-(2*floorthick)-adj]) 
+                                cube([sidethick+(2*adj),10+tol,(3*floorthick)+adj]);
+
+                        // bottom edge rear tab openings
+                        translate([-gap-sidethick-adj,30-wallthick-gap+adj,-tol])
+                                cube([sidethick+(2*adj),20,floorthick+tol]);
+                        translate([-gap-sidethick-adj,30-wallthick-gap+adj-tol,-(2*floorthick)-adj]) 
                                 cube([sidethick+(2*adj),10+tol,(3*floorthick)+adj]);
 
                     }

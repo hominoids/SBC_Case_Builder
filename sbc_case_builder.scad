@@ -644,7 +644,7 @@ if (view == "model") {
         }
         if(case_design == "panel_nas") {
             if(lower_bottom >= 0) {
-                color("dimgrey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+                color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
             }
             if(raise_top >= 0) {
                 color("grey",1) translate([0,0,raise_top])case_top(case_design);
@@ -1042,7 +1042,7 @@ if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu
 }
 else {
     if(case_design == "panel_nas") {
-        echo(width=width+(101.6-width+(2*sidethick)),depth=depth,top=top_height,bottom=bottom_height, height=case_z+(2*wallthick));
+        echo(width=width+(101.6-width+(2*sidethick)),depth=depth,top=top_height,bottom=bottom_height, height=case_z+(3*wallthick));
     }
     else {
         echo(width=width,depth=depth,top=top_height,bottom=bottom_height);
