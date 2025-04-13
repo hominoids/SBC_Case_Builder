@@ -368,7 +368,7 @@ pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
 pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-itx_thin" || sbc_model == "mini-stx" || sbc_model == "mini-stx_thin" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
-width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+(2*(sidethick+gap))+case_offset_x+(101.6-pcb_width) : pcb_width+(2*(wallthick+gap))+case_offset_x;
+width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+(2*(sidethick+gap))+case_offset_x+(101.6-pcb_width) : case_design == "panel_nas" && pcb_width > 100 ? pcb_width+(2*(sidethick+gap))+case_offset_x+(3*gap) : pcb_width+(2*(wallthick+gap))+case_offset_x;
 depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
@@ -670,8 +670,10 @@ if (view == "model") {
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             for( i=[0:1:hd_bays-1]) {
-                translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-                    rotate([0,0,0]) hd35("portrait", [false,0,0,"default"]);
+//                translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+//                    rotate([0,0,0]) hd35("portrait", [false,0,0,"default"]);
+                translate([-gap,-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+(hd_space+27.1)*i]) 
+                    rotate([0,0,0]) cableholder_spacer();
             }
         }
         if(case_design == "stacked") {

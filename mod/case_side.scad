@@ -161,7 +161,7 @@ module case_side(case_design, side) {
                     difference() {
                         union() {
                             translate([-gap,depth-(4*wallthick),floorthick]) 
-                                cube([width-2*wallthick+(101.6-width+(2*wallthick)),wallthick,case_z-3*wallthick]);
+                                cube([width-2*(gap+sidethick),wallthick,case_z-3*wallthick]);
                             // bottom right tab
                             translate([width-(3*sidethick)-adj,depth-(4*wallthick),20])
                                 cube([sidethick+(2*adj),wallthick,10]);
@@ -207,7 +207,7 @@ module case_side(case_design, side) {
 
                         // hd holes for bays
                         for( i=[0:1:hd_bays-1]) {
-                            translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                            translate([(width-101.6)-(3*sidethick)-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
                                 rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
                         }
 
