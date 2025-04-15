@@ -670,10 +670,18 @@ if (view == "model") {
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             for( i=[0:1:hd_bays-1]) {
-//                translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-//                    rotate([0,0,0]) hd35("portrait", [false,0,0,"default"]);
-                translate([-gap,-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+(hd_space+27.1)*i]) 
-                    rotate([0,0,0]) cableholder_spacer();
+                translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                    rotate([0,0,0]) hd35("portrait", [false,0,0,"default"]);
+                if(pcb_width > 100) {
+                    translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,28.5-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+6+(hd_space+27.1)*i]) 
+                        rotate([0,0,0]) cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+
+                    translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,-31-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+6+(hd_space+27.1)*i]) 
+                        rotate([0,0,0]) cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+
+                    translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,-73-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+6+(hd_space+27.1)*i]) 
+                        rotate([0,0,0]) cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+                }
             }
         }
         if(case_design == "stacked") {

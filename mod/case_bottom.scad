@@ -512,13 +512,13 @@ echo(pcb_depth+case_offset_y-10);
                 // bottom cover pattern
                 if(bottom_cover_pattern != "solid") {
                     if(bottom_cover_pattern == "hex_5mm") {
-                        translate([1,0,-floorthick]) vent_hex((width)/3.75,(depth)/6,floorthick+4,5,1.5,"horizontal");
+                        translate([1,0,-floorthick]) vent_hex(width/3.75,depth/6,floorthick+4,5,1.5,"horizontal");
                     }
                     if(bottom_cover_pattern == "hex_8mm") {
-                        translate([1,2,-floorthick]) vent_hex((width)/5.5,(depth)/9.5,floorthick+4,8,1.5,"horizontal");
+                        translate([1,2,-floorthick]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
                     }
                     if(bottom_cover_pattern == "linear_vertical") {
-                        translate([0,-gap,-floorthick]) vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
+                        #translate([0,-gap,-floorthick]) vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
                     }
                     if(bottom_cover_pattern == "linear_horizontal") {
                         translate([-gap,-gap,-floorthick]) vent(width-2*wallthick-gap,wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3,1,"horizontal");

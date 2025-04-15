@@ -268,7 +268,7 @@ module case_side(case_design, side) {
 
                         // hd holes for bays
                         for( i=[0:1:hd_bays-1]) {
-                            translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                            translate([-gap+adj,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
                                 rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
                         }
 

@@ -460,10 +460,21 @@ module case_top(case_design) {
                 // top cover pattern
                 if(top_cover_pattern != "solid") {
                     if(top_cover_pattern == "hex_5mm") {
-                        translate([1,0,case_z-(2*floorthick)]) vent_hex((width)/3.75,(depth)/6,floorthick+4,5,1.5,"horizontal");
+                        if(case_design == "panel_nas") { 
+                            translate([6,5,case_z-(2*floorthick)]) vent_hex((width-10)/3.75,(depth-10)/6,floorthick+4,5,1.5,"horizontal");
+                        }
+                        else {
+                            translate([1,0,case_z-(2*floorthick)]) vent_hex(width/3.75,depth/6,floorthick+4,5,1.5,"horizontal");
+                        }
                     }
                     if(top_cover_pattern == "hex_8mm") {
-                        translate([1,2,case_z-(2*floorthick)]) vent_hex((width)/5.5,(depth)/9.5,floorthick+4,8,1.5,"horizontal");
+                        
+                        if(case_design == "panel_nas") { 
+                            translate([2,5,case_z-(2*floorthick)]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
+                        }
+                        else {
+                            translate([1,2,case_z-(2*floorthick)]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
+                        }
                     }
                     if(top_cover_pattern == "linear_vertical") {
                         translate([0,-gap,case_z-(2*floorthick)]) 
