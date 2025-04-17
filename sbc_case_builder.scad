@@ -88,9 +88,9 @@ case_offset_tz = 0; //[-30:.01:300]
 case_offset_bz = 0; //[0:.01:300]
 // case wall thickness
 wallthick = 2; //[1:.01:5]
-// case floor thickness
+// case floor and ceiling thickness
 floorthick = 2; //[1:.01:5]
-// side wall thickness for tray_side cases only
+// side wall thickness for tray_side and panel_nas cases only
 sidethick = 2; //[1:.01:5]
 // distance between pcb and case
 gap = 1; //[.5:.01:5]
@@ -104,17 +104,19 @@ tol = .25; //[-.5:.0625:.5]
 /* [Fan and Vent Openings] */
 // top cover pattern
 top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
+// front cover pattern for nas cases
+front_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // bottom cover pattern
 bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,25,30,40,50,60,70,80,92]
 // rear fan number for nas cases
-rear_fan = 1; // [1,2]
+rear_fan = 1; // [1:2]
 // rear fan opening
 rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
 rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
-rear_fan_position = 0; // [-50:300]
+rear_fan_position = 0; // [0:1:300]
 
 /* [Bottom Access Panel] */
 bottom_access_panel_enable = false;
@@ -132,10 +134,12 @@ uart_opening = "default"; // [default,none,open,knockout]
 indents = true;
 // nas sbc location
 nas_sbc_location = "top"; // ["top","bottom"]
+// rotate hd 180 degrees in the z-axis
+hd_reverse = false; // [true, false]
 // number of nas drive bays
 hd_bays = 2; // [1:6]
-hd_y_position = 25; // [1:300]
-hd_z_position = 40; // [1:300]
+hd_y_position = 25; // [0:300]
+hd_z_position = 40; // [0:300]
 hd_space = 10; // [1:50]
 
 // case accessory group to load
@@ -665,22 +669,51 @@ if (view == "model") {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
-             if(sbc_off == false && nas_sbc_location == "top") {
+            if(sbc_off == false && nas_sbc_location == "top") {
                 translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))+.5])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
             for( i=[0:1:hd_bays-1]) {
-                translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-                    rotate([0,0,0]) hd35("portrait", [false,0,0,"default"]);
-                if(pcb_width > 100) {
-                    translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,28.5-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+6+(hd_space+27.1)*i]) 
-                        rotate([0,0,0]) cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+                if(hd_reverse == false) {
+                    translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                        hd35("portrait", [false,0,0,"default"]);
+                    if(pcb_width > 100) {
+                        translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,
+                            28.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                hd_z_position+6+(hd_space+27.1)*i]) 
+                                    cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
 
-                    translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,-31-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+6+(hd_space+27.1)*i]) 
-                        rotate([0,0,0]) cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+                        translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,
+                            -31-(3*wallthick)-gap+hd_y_position+101.6,
+                                hd_z_position+6+(hd_space+27.1)*i]) 
+                                    cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
 
-                    translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,-73-(3*wallthick)-gap+hd_y_position+101.6,hd_z_position+6+(hd_space+27.1)*i]) 
-                        rotate([0,0,0]) cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+                        translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,
+                            -73-(3*wallthick)-gap+hd_y_position+101.6,
+                                hd_z_position+6+(hd_space+27.1)*i]) 
+                                    cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+                    }
+                }
+                else {
+                    translate([-gap+101.6,-(3*wallthick)-gap+hd_y_position+147,
+                        hd_z_position+(hd_space+27.1)*i]) 
+                            rotate([0,0,180]) hd35("portrait", [false,0,0,"default"]);
+                    if(pcb_width > 100) {
+                        translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,
+                            17-(3*wallthick)-gap+hd_y_position+101.6,
+                                hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                    cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+
+                        translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,
+                            -25-(3*wallthick)-gap+hd_y_position+101.6,
+                                hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                    cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+
+                        translate([101.6-gap+wallthick+(width-2*(sidethick+gap)-101.6)-11.4,
+                            -84.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                    cableholder_spacer((width-2*(sidethick+gap)-101.6)-9.4);
+                    }
                 }
             }
         }

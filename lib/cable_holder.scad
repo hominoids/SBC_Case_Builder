@@ -39,7 +39,7 @@ module cableholder_spacer(length) {
             translate([size[0]/2,size[0]/2,0]) rotate([0,0,90]) long_slot(size[0],size[1],size[2]);
             translate([-length,5,3]) rotate([0,90,0]) cylinder(d=6, h=length+1);
         }
-        #translate([-length-adj,5,3]) rotate([0,90,0]) cylinder(d=3.2, h=length+size[0]+adj);
+        translate([-length-adj,5,3]) rotate([0,90,0]) cylinder(d=3.2, h=length+size[0]+adj);
         translate([-1,8,-1]) cube([2,20,9]);
         translate([5,9.5,-1]) rotate([0,0,90]) long_slot(4.5,11,9);
         translate([3,20,-1]) rotate([0,0,45]) cube([2,6,9]);

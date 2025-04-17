@@ -148,11 +148,11 @@ module case_side(case_design, side) {
                                 cube([sidethick+(2*adj),wallthick,10]);
                         }
                         if(rear_fan == 1 || rear_fan == 2) {
-                            translate([-1+(101.6-rear_fan_size)/2,-1,bottom_height+pcb_tmaxz+rear_fan_position]) 
+                            translate([-1+(101.6-rear_fan_size)/2,-1,rear_fan_position]) 
                                 rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
                         }
                         if(rear_fan == 2) {
-                            translate([-1+(101.6-rear_fan_size)/2,-1,bottom_height+pcb_tmaxz+rear_fan_position+3+rear_fan_size]) 
+                            translate([-1+(101.6-rear_fan_size)/2,-1,rear_fan_position+3+rear_fan_size]) 
                                 rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling); 
                         }
                     }
@@ -175,42 +175,80 @@ module case_side(case_design, side) {
                             translate([-sidethick-gap-adj,depth-(4*wallthick),case_z-30])
                                 cube([sidethick+(2*adj),wallthick,10]);
                         }
-                        // hex vent
-                        translate([-gap+3,depth-3*(wallthick)+gap,5])
-                            vent_hex(width/3.85,(case_z-6)/6,wallthick+4,5,1.5,"vertical");
+
+                        // front cover pattern
+                        if(front_cover_pattern != "solid" && case_design == "panel_nas") {
+                            if(front_cover_pattern == "hex_5mm") {
+                                translate([-gap+4,depth-3*(wallthick)+gap,5])
+                                    vent_hex(width/3.85,(case_z-6)/6,wallthick+4,5,1.5,"vertical");
+                            }
+                            if(front_cover_pattern == "hex_8mm") {
+                                translate([-gap+5,depth-3*(wallthick)+gap,5]) 
+                                    vent_hex(width/5.5,(case_z-6)/9,floorthick+4,8,1.5,"vertical");
+                            }
+// vent(width, length, height, gap, rows, columns, orientation)
+                            if(front_cover_pattern == "linear_vertical") {
+                                translate([-gap+4,depth-3*(wallthick)+gap,5]) 
+                                    vent(wallthick,(case_z-2*(wallthick+gap)-20)/2,floorthick+4,1,2,(width-2*(wallthick+gap+sidethick))/4.2,"vertical");
+                            }
+                            if(front_cover_pattern == "linear_horizontal") {
+                                translate([-gap+4,depth-3*(wallthick)+gap,5]) 
+                                    vent(width-2*(wallthick+gap+sidethick)-4,wallthick,floorthick+4,1,(case_z-2*(wallthick+gap)-10)/3,1,"vertical");
+                            }
+                            if(front_cover_pattern == "astroid") {
+                                for(c=[3:12:depth-8]) {
+                                    for(r=[4:12:width-8]) {
+                                        translate([r,c,case_z-(2*floorthick)]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                    }
+                                }   
+                            }
+                        }
                     }
                 }
                 if(side == "right") {
                     difference() {
                         translate([width-2*sidethick,-(3*wallthick)-gap,-2*wallthick]) 
                             rotate([0,-90,0]) slab([case_z+(3*wallthick),depth+2*wallthick,sidethick],corner_fillet);
+
                         // rear edge top tab openings
                         translate([width-adj-(3*sidethick),-2*wallthick,case_z-30]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([width-adj-(3*sidethick),-(4*wallthick),case_z-20-tol]) 
                             cube([sidethick+(2*adj),2*wallthick,10+tol]);
+
                         // rear edge bottom tab openings
                         translate([width-adj-(3*sidethick),-2*wallthick,20]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([width-adj-(3*sidethick),-(4*wallthick),30-tol]) 
                             cube([sidethick+(2*adj),2*wallthick,10+tol]);
+
                         // front edge top tab openings
                         translate([width-(3*sidethick)-adj,depth-(4*wallthick),case_z-30])
                             cube([sidethick+(2*adj),wallthick,20]);
                         translate([width-(3*sidethick),depth-(4*wallthick),case_z-20-tol])
-                            cube([sidethick+(2*adj)-adj,3*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick,10+tol]);
+
                         // front edge bottom tab openings
                         translate([width-(3*sidethick)-adj,depth-(4*wallthick),20])
                             cube([sidethick+(2*adj),wallthick,20]);
                         translate([width-(3*sidethick),depth-(4*wallthick),30-tol])
-                            cube([sidethick+(2*adj)-adj,3*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick,10+tol]);
 
                         // hd holes for bays
-                        for( i=[0:1:hd_bays-1]) {
-                            translate([(width-101.6)-(3*sidethick)-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-                                rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                        if(hd_reverse == false) {
+                            for( i=[0:1:hd_bays-1]) {
+                                translate([(width-101.6)-(3*sidethick)-gap,
+                                    -(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                                        hd_holes(3.5, "portrait", "both", sidethick+2);
+                            }
                         }
-
+                        else {
+                            for( i=[0:1:hd_bays-1]) {
+                                translate([width-(3*sidethick)-adj,-(3*wallthick)-gap+hd_y_position+147,
+                                    hd_z_position+(hd_space+27.1)*i]) 
+                                        rotate([0,0,180]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                            }
+                        }
                         // top edge front tab opening
                         translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-30,
                             case_z-(2*floorthick)]) 
@@ -245,33 +283,46 @@ module case_side(case_design, side) {
                     difference() {
                         translate([-gap,-(3*wallthick)-gap,-2*wallthick]) 
                             rotate([0,-90,0]) slab([case_z+(3*wallthick),depth+(2*wallthick),sidethick],corner_fillet);
+
                         // rear edge top tab openings
                         translate([-sidethick-gap-adj,-2*wallthick,case_z-30]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([-sidethick-gap-adj,-(4*wallthick),case_z-20-tol]) 
                             cube([sidethick+(2*adj),2*wallthick,10+tol]);
+
                         // rear edge botom tab openings
                         translate([-sidethick-gap-adj,-2*wallthick,20]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([-sidethick-gap-adj,-(4*wallthick),30-tol]) 
                             cube([sidethick+(2*adj),2*wallthick,10+tol]);
+
                         // front edge top tab openings
                         translate([-sidethick-gap-adj,depth-(4*wallthick),case_z-30])
                             cube([sidethick+(2*adj),wallthick,20]);
                         translate([-sidethick-gap-adj,depth-(4*wallthick),case_z-20-tol])
-                            cube([sidethick+(2*adj)-adj,3*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick,10+tol]);
+
                         // front edge bottom tab openings
                         translate([-sidethick-gap-adj,depth-(4*wallthick),20])
                             cube([sidethick+(2*adj),wallthick,20]);
                         translate([-sidethick-gap-adj,depth-(4*wallthick),30-tol])
-                            cube([sidethick+(2*adj)-adj,3*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick,10+tol]);
 
                         // hd holes for bays
-                        for( i=[0:1:hd_bays-1]) {
-                            translate([-gap+adj,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-                                rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                        if(hd_reverse == false) {
+                            for( i=[0:1:hd_bays-1]) {
+                                translate([-gap+adj,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                                    rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                            }
                         }
-
+                        else {
+                            for( i=[0:1:hd_bays-1]) {
+                                translate([101.6-gap+adj,-(3*wallthick)-gap+hd_y_position+147,
+                                    hd_z_position+(hd_space+27.1)*i]) 
+                                        rotate([0,0,180]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                            }
+                        }
+  
                         // top edge front tab openings
                         translate([-gap-sidethick-adj,depth-(3*wallthick)-gap-adj-30,
                             case_z-(2*floorthick)]) 
