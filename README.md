@@ -1076,6 +1076,7 @@ DESCRIPTION: creates hard drive holes for 2.5 and 3.5 drives in various orientat
             data[1] = "portrait", "landscape"
             data[2] = "left", "right", "both", "bottom", "all"
             data[3] = floor thickness
+            data[4] = "hole", "slot"
             mask[0] = false, not used
             mask[1] = length
             mask[2] = set back
