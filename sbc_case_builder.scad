@@ -785,6 +785,30 @@ if (view == "model") {
                     }
                 }
             }
+            fan_model = rear_fan_size == 92 ? "box92x10" : rear_fan_size == 80 ? "box80x10" : rear_fan_size == 60 ? "box60x10" : "box40x10";
+            if(rear_fan == 1 || rear_fan == 2) {
+                if(rear_fan_center == false) {
+                    translate([-1+(101.6-rear_fan_size)/2,10-wallthick,rear_fan_position]) 
+                        rotate([90,0,0]) fans(fan_model,[false,0,0,"default"]);
+                }
+                if(rear_fan_center == true) {
+                    translate([-1+(101.6-rear_fan_size)/2+(width-2*(sidethick+gap)-101.6)/2,
+                        10-wallthick,rear_fan_position]) rotate([90,0,0]) 
+                            fans(fan_model,[false,0,0,"default"]);
+                }
+            }
+            if(rear_fan == 2) {
+                if(rear_fan_center == false) {
+                    translate([-1+(101.6-rear_fan_size)/2,10-wallthick,
+                        rear_fan_position+rear_dualfan_spacing+rear_fan_size]) 
+                            rotate([90,0,0]) fans(fan_model,[false,0,0,"default"]);
+                }
+                if(rear_fan_center == true) {
+                    translate([-1+(101.6-rear_fan_size)/2+(width-2*(sidethick+gap)-101.6)/2,
+                        10-wallthick,rear_fan_position+rear_dualfan_spacing+rear_fan_size]) 
+                            rotate([90,0,0]) fans(fan_model,[false,0,0,"default"]);
+                }
+            }
         }
         if(case_design == "stacked") {
             if(lower_bottom >= 0) {
