@@ -207,27 +207,39 @@ module case_side(case_design, side) {
 
                         // front cover pattern
                         if(front_cover_pattern != "solid" && case_design == "panel_nas") {
-                            if(front_cover_pattern == "hex_5mm") {
-                                translate([-gap+4,depth-3*(wallthick)+gap,5])
-                                    vent_hex(width/3.85,(case_z-6)/6,wallthick+4,5,1.5,"vertical");
+                            if(front_cover_pattern == "hex_5mm" && hd_bays < 6) {
+                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position])
+                                    vent_hex(width/3.85,hd_bays*(27.1+hd_space)/5.75,wallthick+4,5,1.5,"vertical");
+                            }
+                            if(front_cover_pattern == "hex_5mm" && hd_bays == 6) {
+                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position])
+                                    vent_hex(width/3.85,hd_bays*(27.1+hd_space)/7,wallthick+4,5,1.5,"vertical");
                             }
                             if(front_cover_pattern == "hex_8mm") {
                                 translate([-gap+5,depth-3*(wallthick)+gap,5]) 
-                                    vent_hex(width/5.5,(case_z-6)/9,floorthick+4,8,1.5,"vertical");
+                                    vent_hex(width/5.5,(case_z-6)/10,floorthick+4,8,1.5,"vertical");
                             }
-// vent(width, length, height, gap, rows, columns, orientation)
                             if(front_cover_pattern == "linear_vertical") {
-                                translate([-gap+4,depth-3*(wallthick)+gap,5]) 
-                                    vent(wallthick,(case_z-2*(wallthick+gap)-20)/2,floorthick+4,1,2,(width-2*(wallthick+gap+sidethick))/4.2,"vertical");
+                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position]) 
+                                    vent(wallthick,(case_z-2*(wallthick+gap)-20)/8,floorthick+4,1,1,
+                                        (width-2*(wallthick+gap+sidethick))/4.2,"vertical");
+                                translate([-gap+4,depth-3*(wallthick)+gap,case_z-(top_height+bottom_height+4*floorthick)]) 
+                                    vent(wallthick,(case_z-2*(wallthick+gap)-20)/8,floorthick+4,1,1,
+                                        (width-2*(wallthick+gap+sidethick))/4.2,"vertical");
                             }
                             if(front_cover_pattern == "linear_horizontal") {
-                                translate([-gap+4,depth-3*(wallthick)+gap,5]) 
-                                    vent(width-2*(wallthick+gap+sidethick)-4,wallthick,floorthick+4,1,(case_z-2*(wallthick+gap)-10)/3,1,"vertical");
+                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position]) 
+                                    vent(width-2*(wallthick+gap+sidethick)-4,wallthick,floorthick+4,2,
+                                        (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
+                                translate([-gap+4,depth-3*(wallthick)+gap,case_z-(top_height+bottom_height+4*floorthick)-20]) 
+                                    vent(width-2*(wallthick+gap+sidethick)-4,wallthick,floorthick+4,2,
+                                        (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
                             }
                             if(front_cover_pattern == "astroid") {
-                                for(c=[3:12:depth-8]) {
-                                    for(r=[4:12:width-8]) {
-                                        translate([r,c,case_z-(2*floorthick)]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                for(c=[10:12:case_z-20]) {
+                                    for(r=[6:12:width-8]) {
+                                        translate([r,depth-wallthick,c]) rotate([90,0,0])
+                                            linear_extrude(wallthick+5) import("./dxf/astroid_8mm.dxf");
                                     }
                                 }   
                             }

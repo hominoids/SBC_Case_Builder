@@ -512,23 +512,56 @@ echo(pcb_depth+case_offset_y-10);
                 // bottom cover pattern
                 if(bottom_cover_pattern != "solid") {
                     if(bottom_cover_pattern == "hex_5mm") {
-                        translate([1,0,-floorthick]) vent_hex(width/3.75,depth/6,floorthick+4,5,1.5,"horizontal");
+                        if(case_design == "panel_nas") { 
+                            translate([5,5,-floorthick]) vent_hex((width-10)/3.75,(depth-10)/7,floorthick+4,5,1.5,"horizontal");
+                        }
+                        else {
+                            translate([1,0,-floorthick]) vent_hex(width/3.75,depth/6,floorthick+4,5,1.5,"horizontal");
+                        }
                     }
                     if(bottom_cover_pattern == "hex_8mm") {
-                        translate([1,2,-floorthick]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
+                        if(case_design == "panel_nas") { 
+                            translate([5,6,-floorthick]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
+                        }
+                        else {
+                            translate([1,2,-floorthick]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
+                        }
                     }
                     if(bottom_cover_pattern == "linear_vertical") {
-                        #translate([0,-gap,-floorthick]) vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
+                        if(case_design == "panel_nas") { 
+                            translate([6,5,-floorthick]) 
+                                vent(wallthick,depth-8*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4.5,"horizontal");
+                        }
+                        else {
+                            translate([0,-gap,-floorthick])
+                                vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
+                        }
                     }
                     if(bottom_cover_pattern == "linear_horizontal") {
-                        translate([-gap,-gap,-floorthick]) vent(width-2*wallthick-gap,wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3,1,"horizontal");
+                        if(case_design == "panel_nas") { 
+                            translate([6,5,-floorthick]) 
+                                vent(width-6*(sidethick+gap),wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3.25,1,"horizontal");
+                        }
+                        else {
+                            translate([-gap,-gap,-floorthick]) 
+                                vent(width-2*(wallthick+gap),wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3,1,"horizontal");
+                        }
                     }
                     if(bottom_cover_pattern == "astroid") {
+                        if(case_design == "panel_nas") { 
+                        for(c=[12:12:depth-16]) {
+                            for(r=[12:12:width-16]) {
+                                translate([r,c,-(2*floorthick)]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                }
+                            }
+                        }
+                        else {
                         for(c=[3:12:depth-8]) {
                             for(r=[4:12:width-8]) {
                                 translate([r,c,-(2*floorthick)]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                }
                             }
-                        }   
+                        }
                     }
                 }
                 // rear io shield opening for standard form motherboards
