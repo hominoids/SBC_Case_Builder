@@ -148,12 +148,25 @@ module case_side(case_design, side) {
                                 cube([sidethick+(2*adj),wallthick,10]);
                         }
                         if(rear_fan == 1 || rear_fan == 2) {
-                            translate([-1+(101.6-rear_fan_size)/2,-1,rear_fan_position]) 
-                                rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
+                            if(rear_fan_center == false) {
+                                translate([-1+(101.6-rear_fan_size)/2,-1,rear_fan_position]) 
+                                    rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
+                            }
+                            if(rear_fan_center == true) {
+                                translate([-1+(101.6-rear_fan_size)/2+(width-2*(sidethick+gap)-101.6)/2,-1,rear_fan_position]) 
+                                    rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
+                            }
                         }
                         if(rear_fan == 2) {
-                            translate([-1+(101.6-rear_fan_size)/2,-1,rear_fan_position+3+rear_fan_size]) 
-                                rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling); 
+                            if(rear_fan_center == false) {
+                                translate([-1+(101.6-rear_fan_size)/2,-1,rear_fan_position+rear_dualfan_spacing+rear_fan_size]) 
+                                    rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
+                            }
+                            if(rear_fan_center == true) {
+                                translate([-1+(101.6-rear_fan_size)/2+(width-2*(sidethick+gap)-101.6)/2,
+                                    -1,rear_fan_position+rear_dualfan_spacing+rear_fan_size]) 
+                                        rotate([90,0,0]) fan_mask(rear_fan_size, wallthick+2, rear_cooling);
+                            }
                         }
                     }
                 }
