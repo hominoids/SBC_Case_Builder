@@ -133,7 +133,7 @@ module case_side(case_design, side) {
                     difference() {
                         union() {
                             translate([-gap,-(2*wallthick),0]) 
-                                cube([width-2*sidethick,wallthick,case_z-wallthick]);
+                                cube([width-2*(gap+sidethick),wallthick,case_z-wallthick]);
                             // bottom right tab
                             translate([width-(3*sidethick)-adj,-(2*wallthick),20])
                                 cube([sidethick+(2*adj),wallthick,10]);
@@ -605,11 +605,13 @@ module case_side(case_design, side) {
                             indent(loc_x, loc_y, bottom_height+loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
                         }
                         if(id == pcbid && case_design == "panel_nas" && nas_sbc_location == "bottom") {
-                            indent(loc_x, loc_y, bottom_height+loc_z-adj, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
+                            indent(loc_x, loc_y, bottom_height+loc_z-adj, rotation[2], side, class, 
+                                type, 2*wallthick, gap, floorthick, pcb_z);
 
                         }
                         if(id == pcbid && case_design == "panel_nas" && nas_sbc_location == "top") {
-                            indent(loc_x, loc_y, case_z-(top_height+pcb_loc_z+(2*floorthick))+.5, rotation[2], side, class, type, wallthick, gap, floorthick, pcb_z);
+                            indent(loc_x, loc_y, case_z-(top_height+pcb_loc_z+(2*floorthick))+.5, rotation[2], 
+                                side, class, type, 2*wallthick, gap, floorthick, pcb_z);
                         }
                     }
                 }

@@ -480,7 +480,7 @@ if (view == "platter") {
         case_bottom(case_design);
         translate([0,(2*depth)+20,case_z]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "panel") {
+    if(case_design == "panel" || case_design == "panel_nas") {
         case_bottom(case_design);
         translate([0,(2*depth)+5,case_z]) rotate([180,0,0]) case_top(case_design);
         translate([width+25,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
@@ -490,6 +490,15 @@ if (view == "platter") {
             case_side(case_design,"right");
         translate([-20,0,-gap]) rotate([0,90,90]) 
             case_side(case_design,"left");
+        // nas hd spacers
+        if(case_design == "panel_nas" && pcb_width > 100) {
+            if(hd_center == false) {
+                translate([0,-35,0]) rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
+            }
+            else {
+                translate([0,-35,0]) rotate([270,0,0]) cableholder_spacer(hd_spacer/2-9.4);
+            }
+        }
     }
     if(case_design == "stacked") {
         case_bottom(case_design);
@@ -1053,7 +1062,7 @@ if (view == "part") {
         if(case_design == "shell") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
         if(case_design == "stacked") {
@@ -1084,18 +1093,18 @@ if (view == "part") {
         }
     }
     if(individual_part == "front") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([0,case_z,-depth+wallthick+gap+floorthick]) 
                 rotate([90,0,0]) case_side(case_design,"front");
         }
     }
     if(individual_part == "rear") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
         }
     }
     if(individual_part == "right") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
                 case_side(case_design,"right");
         }
@@ -1104,7 +1113,7 @@ if (view == "part") {
         }
     }
     if(individual_part == "left") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([depth,0,-gap]) rotate([0,90,90]) 
                 case_side(case_design,"left");
         }
@@ -1119,6 +1128,10 @@ if (view == "part") {
         }
     }
     if(individual_part == "accessories") {
+        // nas hd spacers
+        if(case_design == "panel_nas" && pcb_width > 100) {
+            rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
+        }
         // ui access panel
         if(bottom_access_panel_enable == true) {
             if(access_panel_rotation == 0) {
