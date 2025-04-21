@@ -63,16 +63,18 @@ module case_bottom(case_design) {
                         }
                     }
                     if(case_design == "panel_nas") {
+                        x_adj = pcb_width > 100 ? width-2*sidethick : width-2*(gap+sidethick);
+                        xtab_adj = pcb_width > 100 ? width-gap-2*sidethick-adj : width-gap-2*(gap+sidethick)-adj;
                        union() {
                            translate([-gap,-wallthick,0]) 
-                                cube([width-2*(gap+sidethick),depth-(2*wallthick),wallthick]);
+                                cube([x_adj,depth-(2*wallthick),floorthick]);
                             translate([-gap-sidethick-(2*adj),depth-(3*wallthick)-gap-adj-20,0]) 
                                     cube([sidethick+(2*adj),10,floorthick]);
-                            translate([width-(3*sidethick)-adj,depth-(3*wallthick)-gap-adj-20,0]) 
+                            translate([xtab_adj,depth-(3*wallthick)-gap-adj-20,0]) 
                                     cube([sidethick+2*adj,10,floorthick]);
                             translate([-gap-sidethick-(2*adj),40-wallthick-gap+adj,0])
                                     cube([sidethick+2*adj,10,floorthick]);
-                            translate([width-(3*sidethick)-adj,40-wallthick-gap+adj,0])
+                            translate([xtab_adj,40-wallthick-gap+adj,0])
                                     cube([sidethick+2*adj,10,floorthick]);
                         }
                     }
@@ -140,12 +142,14 @@ module case_bottom(case_design) {
                             if(class == "pcbhole" && id == pcb_id && pcbhole_pos == "right_front") {
                                 if((pcbhole_y >= pcb_depth+case_offset_y-10 && pcbhole_x >= width-10) || 
                                     (ext_bottom_standoffs == true && ext_bottom_front_right_enable == true)) {
-                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick-gap+pcb_depth+case_offset_y-14,floorthick+3.4]) 
-                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                    translate([width-wallthick-gap-wallthick-4+adj,
+                                        wallthick-gap+pcb_depth+case_offset_y-14,floorthick+3.4]) 
+                                            rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                                 else {
-                                    translate([width-wallthick-gap-wallthick-4+adj,wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
-                                        rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
+                                    translate([width-wallthick-gap-wallthick-4+adj,
+                                        wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
+                                            rotate([90,0,90]) cylinder(d=10, h=4, $fn=6);
                                 }
                             }
                         }   

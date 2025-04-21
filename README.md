@@ -93,7 +93,7 @@ The *3D Case Adjustments* tab makes up the bulk of the possible case adjustments
 
 
 ### Fan and Vent Openings Tab
-This tab handles the fan and cooling options for case designs.  The *top cover pattern* and *bottom cover pattern* contain several options for the creation of vent patterns that cover the complete top and bottom respectively, including a solid covering.  The *cooling* pickbox selects fan and vent openings exclusively for the heatsink associated with the device in SBC Model Framework.
+This tab handles the fan and cooling options for case designs.  The *top cover pattern*, *bottom cover pattern* and *front cover pattern* contain several options for the creation of vent patterns that cover the complete panel, including a solid covering.  The *cooling* pickbox selects fan and vent openings exclusively for the heatsink associated with the device in SBC Model Framework.
 ```
 disable - turns off the heatsink model and mask
 off - heatsink model is off, mask is on and default will be used
@@ -102,7 +102,7 @@ none - heatsink model is on and mask is off.
 fan and vent pattern selections - open, fan_open, fan_1, fan_2, fan_hex, vent, vent_hex_5mm, vent_hex_8mm
 custom - uses the file ./SBC_Model_Framework/customfan.dxf
 ```
-The *fan size* allows the selection of different fan size masks over the default size selected by 0.
+The *fan size* allows the selection of different fan size masks over the default size selected by 0.  The rear fan entries are for the *panel_nas* case design and allow for the same types of fan adjustments as the heatsink.  There is also the choice of one or two rear fans as well as additional adjustments for the position and spacing of them.
 
 
 ### Bottom Access Panel Tab
@@ -110,7 +110,7 @@ This tab allows the creation of a bottom access panel and its entries are self e
 
 
 ### Options and Accessories
-The entrys in this tab allow for the enablement and selection of different GPIO and UART openings based on their type identifier in SBC_Model_Framework.
+The entrys in this tab allow for the enablement and selection of different options and accessories. It includes case indents, GPIO, and UART openings based on their type identifier in SBC_Model_Framework.  It also contains hard drive options for the panel_nas case.
 
 #### GPIO Selections
 ```
@@ -130,6 +130,11 @@ mask opening selections - open, knockout
 
 The *indent* checkbox enables indents for a select group of components defined in SBC Model Framework.  The currently support components are - video-hmdi_a, video-hdmi_micro, video-hdmi_mini, power-pwr5.5_7.5x11.5, power-pwr2.5_5x7.5, usb2-micro, usbc-single_horizontal, audio-jack_3.5. The *accessory name* pickbox uses the unique accessory group name to associate a given accessory set with a case design.  Entries are stored in the file sbc_case_builder_accessories.cfg which is covered in detail with the Accessory Subsystem in this document.  The remaining two entries select the color and proportional font used with the *sbc information* display when enabled in the *View* tab.
 
+#### NAS HD Options
+The *nas sbc location* pickbox allows the positioning of the SBC at the top or bottom of a NAS case.  *hd bays* sets the number of drive bays, *hd reverse* checkbox rotates the drives 180 degrees while *hd center* centers the drives in the x-axis.  The next entry, *hd space* determines the spacing between drives and *hd y position* and *hd z position* sets the respective axis locations.
+
+#### Accessory Group Name 
+The *accessory name* allows the selection of an accessory group to be associated with the current case.  These groups are located in the file sbc_case_builder_accessories.cfg and provide a means to add or subtract geometry, models and add items to the print platter.  See the *Accessory Subsystem* area below for further details and use.
 
 ### Standoff Tabs
 There are 3 types of standoffs available in the user interface, SBC Standoffs, Extended Case Standoffs and Multi-PCB Standoffs.  The SBC standoffs control adjustments for the SBC or pcbid 0 as defined by the entry in SBC Model Framework file ./SBC_Model_Framework/sbc_models.cfg.  The Extended Case Standoffs control case corner standoffs when the case exceeds the SBC size by the *SBC Standoff Support Size*.  The Multi-PCB standoffs are used for additional PCB in multi-PCB configurations as defined in ./SBC_Model_Framework/sbc_models.cfg e.g. pcbid 1, pcbid 2, etc.  All three standoff types have similar controls made up of a global tab and individual Settings tab in the GUI.
