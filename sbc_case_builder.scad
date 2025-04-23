@@ -40,7 +40,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
+case_design = "shell"; // [shell,panel,panel_nas,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -83,17 +83,17 @@ case_offset_x = 0; //[0:.01:300]
 // additional y axis case size
 case_offset_y = 0; //[0:.01:300]
 // additional z axis case top size
-case_offset_tz = 0; //[-10:.01:100]
+case_offset_tz = 0; //[-50:.01:300]
 // additional z axis case bottom size
-case_offset_bz = 0; //[0:.01:100]
+case_offset_bz = 0; //[-50:.01:300]
 // case wall thickness
-wallthick = 2; //[1:.01:5]
-// case floor thickness
-floorthick = 2; //[1:.01:5]
-// side wall thickness for tray_side cases only
-sidethick = 2; //[1:.01:5]
+wallthick = 2; //[1:.25:5]
+// case floor and ceiling thickness
+floorthick = 2; //[1:.25:5]
+// side wall thickness for tray_side and panel_nas cases only
+sidethick = 2; //[1:.25:5]
 // distance between pcb and case
-gap = 1; //[.5:.01:5]
+gap = 1; //[.5:.25:5]
 // corner fillets
 corner_fillet = 3; //[0:.5:9]
 // edge fillets
@@ -104,11 +104,24 @@ tol = .25; //[-.5:.0625:.5]
 /* [Fan and Vent Openings] */
 // top cover pattern
 top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
+// front cover pattern for nas cases
+front_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // bottom cover pattern
 bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,25,30,40,50,60,70,80,92]
+// number of rear fans for nas cases
+rear_fan = 1; // [1:2]
+// rear fan x-axis center
+rear_fan_center = false; // [true,false]
+// rear fan opening
+rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
+rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
+// rear fan z-axis position
+rear_fan_position = 0; // [0:1:300]
+// space between dual rear fans
+rear_dualfan_spacing = 6; // [0:1:50]
 
 /* [Bottom Access Panel] */
 bottom_access_panel_enable = false;
@@ -124,8 +137,22 @@ gpio_opening = "default"; // [default,none,open,block,knockout,vent]
 uart_opening = "default"; // [default,none,open,knockout]
 // enable indentations around io openings
 indents = true;
+// nas sbc location
+nas_sbc_location = "top"; // ["top","bottom"]
+// number of nas drive bays
+hd_bays = 2; // [1:6]
+// rotate hd 180 degrees in the z-axis
+hd_reverse = false; // [true, false]
+// center hd in the x-axis
+hd_center = false; // [true, false]
+// distance between drives
+hd_space = 10; // [1:50]
+hd_y_position = 25; // [0:300]
+hd_z_position = 40; // [0:300]
+
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_ultimate", "h3_ultimate2", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
+accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
+
 // sbc information text color
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 // sbc information text font
@@ -354,13 +381,17 @@ pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
 pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-itx_thin" || sbc_model == "mini-stx" || sbc_model == "mini-stx_thin" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
-width = pcb_width+2*(wallthick+gap)+case_offset_x;
-depth = pcb_depth+2*(wallthick+gap)+case_offset_y;
+width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+2*(sidethick+gap)+case_offset_x+(101.6-pcb_width) : case_design == "panel_nas" && pcb_width > 100 ? pcb_width+2*(sidethick+gap)+case_offset_x : pcb_width+(2*(wallthick+gap))+case_offset_x;
+depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
-case_z = bottom_height+top_height;
+case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
+//hd_spacer = case_design == "panel_nas" && pcb_width > 100 ? (pcb_width+case_offset_x+2*gap)-101.6 : 
+//    case_design == "panel_nas" && pcb_width <= 100 ? (width-2*(sidethick+gap)-101.6) : 0;
+hd_spacer = case_design == "panel_nas" && pcb_width > 100 ? (pcb_width+case_offset_x+2*gap)-101.6 : 
+    case_design == "panel_nas" && pcb_width <= 100 ? (width-2*(sidethick+gap)-101.6) : 0;
 
 /* [Hidden] */
 top_standoff = [top_standoff_size,
@@ -456,16 +487,25 @@ if (view == "platter") {
         case_bottom(case_design);
         translate([0,(2*depth)+20,case_z]) rotate([180,0,0]) case_top(case_design);
     }
-    if(case_design == "panel") {
+    if(case_design == "panel" || case_design == "panel_nas") {
         case_bottom(case_design);
         translate([0,(2*depth)+5,case_z]) rotate([180,0,0]) case_top(case_design);
         translate([width+25,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
         translate([width+25,2*(case_z)+10,-depth+wallthick+gap+floorthick]) 
             rotate([90,0,0]) case_side(case_design,"front");
-        translate([2.5*width,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
+        translate([2.5*width,0,-width+(3*sidethick)+gap]) rotate([0,-90,-90]) 
             case_side(case_design,"right");
         translate([-20,0,-gap]) rotate([0,90,90]) 
             case_side(case_design,"left");
+        // nas hd spacers
+        if(case_design == "panel_nas" && (pcb_width > 100 || width > 112)) {
+            if(hd_center == false) {
+                translate([0,-35,0]) rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
+            }
+            else {
+                translate([0,-35,0]) rotate([270,0,0]) cableholder_spacer(hd_spacer/2-9.4);
+            }
+        }
     }
     if(case_design == "stacked") {
         case_bottom(case_design);
@@ -545,12 +585,6 @@ if (view == "platter") {
     if(case_design == "paper_split-top" || case_design == "paper_full-top") {
         case_folded(case_design);
     }
-    if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
-        echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
-    }
-    else {
-        echo(Case_Width=width,Depth=depth,Top=top_height,Bottom=bottom_height);        
-    }    
 }
 
 // model view
@@ -632,6 +666,181 @@ if (view == "model") {
             if(sbc_off == false) {
                 translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
+        }
+        if(case_design == "panel_nas") {
+            if(lower_bottom >= 0) {
+                color("grey",1) translate([0,0,-lower_bottom]) case_bottom(case_design);
+            }
+            if(raise_top >= 0) {
+                color("grey",1) translate([0,0,raise_top])case_top(case_design);
+            }
+            if(move_front >= 0) {
+                color("grey",1) translate([0,move_front,0]) case_side(case_design,"front");
+            }
+            if(move_rear >= 0) {
+                color("grey",1) translate([0,-move_rear,0]) case_side(case_design,"rear");
+            }
+            if(move_rightside >= 0) {
+                color("dimgrey",1) translate([move_rightside,0,0]) case_side(case_design,"right");
+            }
+            if(move_leftside >= 0) {
+                color("dimgrey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
+            }
+            if(sbc_off == false && nas_sbc_location == "bottom") {
+                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
+            if(sbc_off == false && nas_sbc_location == "top") {
+                translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))+.5])
+                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+            }
+            for( i=[0:1:hd_bays-1]) {
+                if(hd_reverse == false) {
+                    if(hd_center == false) {
+                        translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                            hd35("portrait", [false,0,0,"default"]);
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
+                            translate([101.6-gap+hd_spacer-9.4,
+                                28.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -31-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -73-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer-9.4);
+                        }
+                    }
+                    if(hd_center == true) {
+                        translate([-gap+hd_spacer/2,
+                            -(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
+                                hd35("portrait", [false,0,0,"default"]);
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
+                            // right side spacers
+                            translate([101.6-gap+hd_spacer-9.4,
+                                28.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -31-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -73-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+                            // left side spacers
+                            translate([-(hd_spacer/2-9.4)-gap+hd_spacer/2,
+                                28.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) rotate([0,0,180]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([-(hd_spacer/2-9.4)-gap+hd_spacer/2,
+                                -31-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) rotate([0,0,180]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([-(hd_spacer/2-9.4)-gap+hd_spacer/2,
+                                -73-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) rotate([0,0,180]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+                        }
+                    }
+                }
+                if(hd_reverse == true) {
+                    if(hd_center == false) {
+                        translate([101.6-gap,-(3*wallthick)-gap+hd_y_position+147,
+                            hd_z_position+(hd_space+27.1)*i]) 
+                                rotate([0,0,180]) hd35("portrait", [false,0,0,"default"]);
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
+                            translate([101.6-gap+hd_spacer-9.4,
+                                17-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -25-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer-9.4);
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -84.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer-9.4);
+                        }
+                    }
+                    if(hd_center == true) {
+                        translate([101.6-gap+hd_spacer/2,
+                            -(3*wallthick)-gap+hd_y_position+147,
+                                hd_z_position+(hd_space+27.1)*i]) 
+                                    rotate([0,0,180]) hd35("portrait", [false,0,0,"default"]);
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
+                            // right side spacers
+                            translate([101.6-gap+hd_spacer-9.4,
+                                17-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -25-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([101.6-gap+hd_spacer-9.4,
+                                -84.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+                            // left side spacers
+                            translate([-(hd_spacer/2-9.4)-gap+hd_spacer/2,
+                                17-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) rotate([0,0,180]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([-(hd_spacer/2-9.4)-gap+hd_spacer/2,
+                                -25-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) rotate([0,0,180]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+
+                            translate([-(hd_spacer/2-9.4)-gap+hd_spacer/2,
+                                -84.5-(3*wallthick)-gap+hd_y_position+101.6,
+                                    hd_z_position+6.5+(hd_space+27.1)*i]) rotate([0,0,180]) 
+                                        cableholder_spacer(hd_spacer/2-9.4);
+                        }
+                    }
+                }
+            }
+            if(move_rear >= 0) {
+                fan_model = rear_fan_size == 92 ? "box92x10" : rear_fan_size == 80 ? "box80x10" : rear_fan_size == 60 ? "box60x10" : "box40x10";
+                if(rear_fan == 1 || rear_fan == 2) {
+                    if(rear_fan_center == false) {
+                        translate([-1+(101.6-rear_fan_size)/2,10-wallthick,rear_fan_position]) 
+                            rotate([90,0,0]) fans(fan_model,[false,0,0,"default"]);
+                    }
+                    if(rear_fan_center == true) {
+                        translate([-1+(101.6-rear_fan_size)/2+(width-2*(sidethick+gap)-101.6)/2,
+                            10-wallthick,rear_fan_position]) rotate([90,0,0]) 
+                                fans(fan_model,[false,0,0,"default"]);
+                    }
+                }
+                if(rear_fan == 2) {
+                    if(rear_fan_center == false) {
+                        translate([-1+(101.6-rear_fan_size)/2,10-wallthick,
+                            rear_fan_position+rear_dualfan_spacing+rear_fan_size]) 
+                                rotate([90,0,0]) fans(fan_model,[false,0,0,"default"]);
+                    }
+                    if(rear_fan_center == true) {
+                        translate([-1+(101.6-rear_fan_size)/2+(width-2*(sidethick+gap)-101.6)/2,
+                            10-wallthick,rear_fan_position+rear_dualfan_spacing+rear_fan_size]) 
+                                rotate([90,0,0]) fans(fan_model,[false,0,0,"default"]);
+                    }
+                }
             }
         }
         if(case_design == "stacked") {
@@ -869,12 +1078,6 @@ if (view == "model") {
                         rotate([90, 0, 0]) text(str(sbc_data[s[0]][1][i]), 5,  font = text_font);
             }
         }
-        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
-            echo(Case_Width=width+2*sidethick,Depth=depth,Top=top_height,Bottom=bottom_height);
-        }
-        else {
-            echo(Case_Width=width,Depth=depth,Top=top_height,Bottom=bottom_height);        
-        }
     }
 //}
 // part
@@ -883,7 +1086,7 @@ if (view == "part") {
         if(case_design == "shell") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
         if(case_design == "stacked") {
@@ -914,18 +1117,18 @@ if (view == "part") {
         }
     }
     if(individual_part == "front") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([0,case_z,-depth+wallthick+gap+floorthick]) 
                 rotate([90,0,0]) case_side(case_design,"front");
         }
     }
     if(individual_part == "rear") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
         }
     }
     if(individual_part == "right") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
                 case_side(case_design,"right");
         }
@@ -934,7 +1137,7 @@ if (view == "part") {
         }
     }
     if(individual_part == "left") {
-        if(case_design == "panel") {
+        if(case_design == "panel" || case_design == "panel_nas") {
             translate([depth,0,-gap]) rotate([0,90,90]) 
                 case_side(case_design,"left");
         }
@@ -949,6 +1152,10 @@ if (view == "part") {
         }
     }
     if(individual_part == "accessories") {
+        // nas hd spacers
+        if(case_design == "panel_nas" && (pcb_width > 100 || width > 101.6)) {
+            rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
+        }
         // ui access panel
         if(bottom_access_panel_enable == true) {
             if(access_panel_rotation == 0) {
@@ -1002,10 +1209,16 @@ if (view == "part") {
             }
         }
     }
-    if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
-        echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+}
+if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
+    echo(width=width+2*sidethick,depth=depth,top=top_height,bottom=bottom_height);
+}
+else {
+    if(case_design == "panel_nas") {
+        echo(width=width+hd_spacer,depth=depth,top=top_height,bottom=bottom_height, height=case_z+(3*wallthick));
+        echo(drive_spacer=hd_spacer);
     }
     else {
-        echo(width=width,depth=depth,top=top_height,bottom=bottom_height);        
-    }    
+        echo(width=width,depth=depth,top=top_height,bottom=bottom_height);
+    }
 }
