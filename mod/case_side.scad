@@ -131,6 +131,7 @@ module case_side(case_design, side) {
             if(case_design == "panel_nas") {
                 x_adj = pcb_width > 100 ? width-2*sidethick : width-2*(gap+sidethick);
                 xtab_adj = pcb_width > 100 ? width-gap-2*sidethick-adj : width-gap-2*(gap+sidethick)-adj;
+                xvent8_adj = pcb_width > 100 ? width/5.5 : width/6;
                 if(side == "rear") {
                     difference() {
                         union() {
@@ -208,38 +209,41 @@ module case_side(case_design, side) {
                         }
                         // front cover pattern
                         if(front_cover_pattern != "solid" && case_design == "panel_nas") {
+                            xvent_pos = pcb_width <= 100 ? -gap+3 : -gap+6;
                             if(front_cover_pattern == "hex_5mm" && hd_bays < 6) {
-                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position])
-                                    vent_hex(width/3.85,hd_bays*(27.1+hd_space)/5.75,wallthick+4,5,1.5,"vertical");
+                                translate([xvent_pos,depth-3*(wallthick)+gap,hd_z_position-5])
+                                    vent_hex(round(width/3.85),round(hd_bays*(27.1+hd_space)/5.75),wallthick+4,5,1.5,"vertical");
                             }
                             if(front_cover_pattern == "hex_5mm" && hd_bays == 6) {
-                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position])
-                                    vent_hex(width/3.85,hd_bays*(27.1+hd_space)/7,wallthick+4,5,1.5,"vertical");
+                                translate([xvent_pos,depth-3*(wallthick)+gap,hd_z_position])
+                                    vent_hex(round(width/3.85),round(hd_bays*(27.1+hd_space)/5.75),wallthick+4,5,1.5,"vertical");
                             }
                             if(front_cover_pattern == "hex_8mm") {
-                                translate([-gap+5,depth-3*(wallthick)+gap,5]) 
-                                    vent_hex(width/5.5,(case_z-6)/10,floorthick+4,8,1.5,"vertical");
+                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position]) 
+                                    vent_hex(xvent8_adj,round(hd_bays*(27.1+hd_space)/5.75)-5,floorthick+4,8,1.5,"vertical");
                             }
                             if(front_cover_pattern == "linear_vertical") {
                                 translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position]) 
                                     vent(wallthick,(case_z-2*(wallthick+gap)-20)/8,floorthick+4,1,1,
-                                        (width-2*(wallthick+gap+sidethick))/4.2,"vertical");
-                                translate([-gap+4,depth-3*(wallthick)+gap,case_z-(top_height+bottom_height+4*floorthick)]) 
+                                        (width-2*(sidethick+gap))/5.35,"vertical");
+                                translate([-gap+4,depth-3*(wallthick)+gap,case_z-(top_height+bottom_height+4*floorthick)-5]) 
                                     vent(wallthick,(case_z-2*(wallthick+gap)-20)/8,floorthick+4,1,1,
-                                        (width-2*(wallthick+gap+sidethick))/4.2,"vertical");
+                                        (width-2*(sidethick+gap))/5.35,"vertical");
                             }
                             if(front_cover_pattern == "linear_horizontal") {
-                                translate([-gap+4,depth-3*(wallthick)+gap,hd_z_position]) 
+                                translate([wallthick+gap,depth-3*(wallthick)+gap,hd_z_position]) 
                                     vent(width-2*(wallthick+gap+sidethick)-4,wallthick,floorthick+4,2,
                                         (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
-                                translate([-gap+4,depth-3*(wallthick)+gap,case_z-(top_height+bottom_height+4*floorthick)-20]) 
-                                    vent(width-2*(wallthick+gap+sidethick)-4,wallthick,floorthick+4,2,
-                                        (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
+                                translate([wallthick+gap,depth-3*(wallthick)+gap,
+                                    case_z-(top_height+bottom_height+4*floorthick)-20]) 
+                                        vent(width-4*(sidethick+gap),,wallthick,floorthick+4,2,
+                                            (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
                             }
                             if(front_cover_pattern == "astroid") {
-                                for(c=[10:12:case_z-20]) {
-                                    for(r=[6:12:width-8]) {
-                                        translate([r,depth-wallthick,c]) rotate([90,0,0])
+                                xast_adj = pcb_width <= 100 ? 8 : 6;
+                                for(c=[xast_adj:12:case_z-20]) {
+                                    for(r=[8:12:width-8]) {
+                                        translate([r,depth-2*wallthick,c]) rotate([90,0,0])
                                             linear_extrude(wallthick+5) import("./dxf/astroid_8mm.dxf");
                                     }
                                 }   
@@ -287,13 +291,13 @@ module case_side(case_design, side) {
                             translate([width-3*sidethick+gap-adj,depth-(4*wallthick),(case_z/2)-5]) 
                                 cube([2*sidethick+2*adj,wallthick+tol,20]);
                             translate([width-3*sidethick+gap-adj,depth-(4*wallthick),(case_z/2)-5+10]) 
-                                cube([2*sidethick+(2*adj),2*wallthick,10+tol]);
+                                cube([2*sidethick+(2*adj),3*wallthick,10+tol]);
 
                             // rear edge middle tab openings
                             translate([width-3*sidethick+gap-adj,-2*wallthick+adj,(case_z/2)-5]) 
                                 cube([2*sidethick+2*adj,wallthick+tol,20]);
                             translate([width-3*sidethick+gap-adj,-(4*wallthick),(case_z/2)-5+10]) 
-                                cube([2*sidethick+(2*adj),2*wallthick,10+tol]);
+                                cube([2*sidethick+(2*adj),3*wallthick,10+tol]);
                         }
 
                         // hd holes for bays
@@ -350,13 +354,13 @@ module case_side(case_design, side) {
                         translate([-sidethick-gap-adj,-2*wallthick+adj,case_z-30]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([-sidethick-gap-adj,-(4*wallthick),case_z-20-tol]) 
-                            cube([sidethick+(2*adj),2*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick+adj,10+tol]);
 
-                        // rear edge botom tab openings
+                        // rear edge bottom tab openings
                         translate([-sidethick-gap-adj,-2*wallthick+adj,20]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([-sidethick-gap-adj,-(4*wallthick),30-tol]) 
-                            cube([sidethick+(2*adj),2*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick,10+tol]);
 
                         // front edge top tab openings
                         translate([-sidethick-gap-adj,depth-(4*wallthick),case_z-30])
@@ -375,7 +379,7 @@ module case_side(case_design, side) {
                         translate([-sidethick-gap-adj,-2*wallthick+adj,(case_z/2)-5]) 
                             cube([sidethick+2*adj,wallthick+tol,20]);
                         translate([-sidethick-gap-adj,-(4*wallthick),(case_z/2)-5+10]) 
-                            cube([sidethick+(2*adj),2*wallthick,10+tol]);
+                            cube([sidethick+(2*adj),3*wallthick,10+tol]);
 
                         // front edge middle tab openings
                         translate([-sidethick-gap-adj,depth-(4*wallthick),(case_z/2)-5]) 
@@ -388,7 +392,7 @@ module case_side(case_design, side) {
                         if(hd_reverse == false) {
                             for( i=[0:1:hd_bays-1]) {
                                 translate([-gap+adj,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-                                    rotate([0,0,0]) hd_holes(3.5, "portrait", "both", sidethick+2);
+                                    hd_holes(3.5, "portrait", "both", sidethick+2);
                             }
                         }
                         else {

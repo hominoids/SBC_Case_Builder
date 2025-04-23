@@ -83,9 +83,9 @@ case_offset_x = 0; //[0:.01:300]
 // additional y axis case size
 case_offset_y = 0; //[0:.01:300]
 // additional z axis case top size
-case_offset_tz = 0; //[-30:.01:300]
+case_offset_tz = 0; //[-50:.01:300]
 // additional z axis case bottom size
-case_offset_bz = 0; //[0:.01:300]
+case_offset_bz = 0; //[-50:.01:300]
 // case wall thickness
 wallthick = 2; //[1:.25:5]
 // case floor and ceiling thickness
@@ -497,7 +497,7 @@ if (view == "platter") {
         translate([-20,0,-gap]) rotate([0,90,90]) 
             case_side(case_design,"left");
         // nas hd spacers
-        if(case_design == "panel_nas" && (pcb_width > 100 || width > 101.6)) {
+        if(case_design == "panel_nas" && (pcb_width > 100 || width > 112)) {
             if(hd_center == false) {
                 translate([0,-35,0]) rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
             }
@@ -699,7 +699,7 @@ if (view == "model") {
                     if(hd_center == false) {
                         translate([-gap,-(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
                             hd35("portrait", [false,0,0,"default"]);
-                        if(pcb_width > 100 || width > 101.6) {
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
                             translate([101.6-gap+hd_spacer-9.4,
                                 28.5-(3*wallthick)-gap+hd_y_position+101.6,
                                     hd_z_position+6+(hd_space+27.1)*i]) 
@@ -720,7 +720,7 @@ if (view == "model") {
                         translate([-gap+hd_spacer/2,
                             -(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
                                 hd35("portrait", [false,0,0,"default"]);
-                        if(pcb_width > 100 || width > 101.6) {
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
                             // right side spacers
                             translate([101.6-gap+hd_spacer-9.4,
                                 28.5-(3*wallthick)-gap+hd_y_position+101.6,
@@ -759,7 +759,7 @@ if (view == "model") {
                         translate([101.6-gap,-(3*wallthick)-gap+hd_y_position+147,
                             hd_z_position+(hd_space+27.1)*i]) 
                                 rotate([0,0,180]) hd35("portrait", [false,0,0,"default"]);
-                        if(pcb_width > 100 || width > 101.6) {
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
                             translate([101.6-gap+hd_spacer-9.4,
                                 17-(3*wallthick)-gap+hd_y_position+101.6,
                                     hd_z_position+6.5+(hd_space+27.1)*i]) 
@@ -780,7 +780,7 @@ if (view == "model") {
                             -(3*wallthick)-gap+hd_y_position+147,
                                 hd_z_position+(hd_space+27.1)*i]) 
                                     rotate([0,0,180]) hd35("portrait", [false,0,0,"default"]);
-                        if(pcb_width > 100 || width > 101.6) {
+                        if(pcb_width > 100 || width-2*(sidethick+gap) > 101.6) {
                             // right side spacers
                             translate([101.6-gap+hd_spacer-9.4,
                                 17-(3*wallthick)-gap+hd_y_position+101.6,
