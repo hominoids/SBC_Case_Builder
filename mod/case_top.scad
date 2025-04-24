@@ -71,8 +71,8 @@ module case_top(case_design) {
                         }
                     }
                     if(case_design == "panel_nas") {
-                        x_adj = pcb_width > 100 ? width-2*sidethick : width-2*(gap+sidethick);
-                        xtab_adj = pcb_width > 100 ? width-gap-2*sidethick-adj : width-gap-2*(gap+sidethick)-adj;
+                        x_adj = pcb_width > 100 ? width-2*sidethick : 101.6+case_offset_x;
+                        xtab_adj = pcb_width > 100 ? width-gap-2*sidethick-adj : 101.6-gap+case_offset_x-adj;
                         union() {
                            translate([-gap,-wallthick,case_z-2*floorthick]) 
                                 cube([x_adj,depth-(2*wallthick),floorthick]);
