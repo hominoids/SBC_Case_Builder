@@ -28,6 +28,8 @@ include <./sbc_case_builder_accessories.cfg>;
 // viewing mode "model", "platter", "part"
 view = "model"; // [model, platter, part]
 individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_shield, accessories]
+// section individual parts for panel cases
+section_part = false; // [true,false]
 // single board computer model
 sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "mini-stx_thin", "nano-itx", "nuc", "pico-itx"]
 
@@ -1087,7 +1089,12 @@ if (view == "part") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
         }
         if(case_design == "panel" || case_design == "panel_nas") {
-            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+            if(section_part == false) {
+                translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+            }
+            else {
+                projection() translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+            }
         }
         if(case_design == "stacked") {
             translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
@@ -1113,24 +1120,47 @@ if (view == "part") {
             case_adapter(case_design);
         }
         else {
-            case_bottom(case_design);
+            if(section_part == false) {
+                case_bottom(case_design);
+            }
+            else {
+                projection() case_bottom(case_design);
+            }
         }
     }
     if(individual_part == "front") {
         if(case_design == "panel" || case_design == "panel_nas") {
-            translate([0,case_z,-depth+wallthick+gap+floorthick]) 
-                rotate([90,0,0]) case_side(case_design,"front");
+            if(section_part == false) {
+                translate([0,case_z,-depth+wallthick+gap+floorthick]) 
+                    rotate([90,0,0]) case_side(case_design,"front");
+            }
+            else {
+                projection() translate([0,case_z,-depth+wallthick+gap+floorthick]) 
+                    rotate([90,0,0]) case_side(case_design,"front");
+
+            }
         }
     }
     if(individual_part == "rear") {
         if(case_design == "panel" || case_design == "panel_nas") {
-            translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
+           if(section_part == false) {
+                translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
+            }
+            else {
+                projection() translate([0,0,-gap]) rotate([-90,0,0]) case_side(case_design,"rear");
+            }
         }
     }
     if(individual_part == "right") {
         if(case_design == "panel" || case_design == "panel_nas") {
-            translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
-                case_side(case_design,"right");
+           if(section_part == false) {
+                translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
+                    case_side(case_design,"right");
+            }
+            else {
+                projection() translate([gap,0,-width+(2*wallthick)+gap]) rotate([0,-90,-90]) 
+                    case_side(case_design,"right");
+            }
         }
         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([depth,0,width-gap]) rotate([0,90,90]) case_side(case_design,"right");
@@ -1138,8 +1168,15 @@ if (view == "part") {
     }
     if(individual_part == "left") {
         if(case_design == "panel" || case_design == "panel_nas") {
-            translate([depth,0,-gap]) rotate([0,90,90]) 
-                case_side(case_design,"left");
+           if(section_part == false) {
+                translate([depth,0,-gap]) rotate([0,90,90]) 
+                    case_side(case_design,"left");
+            }
+            else {
+                projection() translate([depth,0,-gap]) rotate([0,90,90]) 
+                    case_side(case_design,"left");
+
+            }
         }
         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
