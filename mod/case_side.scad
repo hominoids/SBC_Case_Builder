@@ -309,16 +309,16 @@ module case_side(case_design, side) {
                         // hd holes for bays
                         if(hd_reverse == false) {
                             for( i=[0:1:hd_bays-1]) {
-                                translate([(width-101.6)-(3*sidethick)-gap+adj,
+                                translate([(width-101.6)-(4*sidethick)-gap+adj,
                                     -(3*wallthick)-gap+hd_y_position,hd_z_position+(hd_space+27.1)*i]) 
-                                        hd_holes(3.5, "portrait", "both", 2*sidethick+2);
+                                        hd_holes(3.5, "portrait", "both", 4*sidethick+2);
                             }
                         }
                         else {
                             for( i=[0:1:hd_bays-1]) {
-                                translate([width-(3*sidethick)-adj,-(3*wallthick)-gap+hd_y_position+147,
+                                translate([width-(4*sidethick)-adj,-(3*wallthick)-gap+hd_y_position+147,
                                     hd_z_position+(hd_space+27.1)*i]) 
-                                        rotate([0,0,180]) hd_holes(3.5, "portrait", "both", 2*sidethick+2);
+                                        rotate([0,0,180]) hd_holes(3.5, "portrait", "both", 4*sidethick+2);
                             }
                         }
                         // top edge front tab opening
