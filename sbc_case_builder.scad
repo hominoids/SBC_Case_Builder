@@ -159,7 +159,6 @@ accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 // sbc information text font
 text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
-
 /* [SBC Top Standoff Global Settings] */
 // enable case top standoffs
 sbc_top_standoffs = true;
@@ -232,7 +231,7 @@ bottom_front_right_enable = true;
 bottom_front_right_adjust = 0; //[-30:.01:30]
 bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
-/* [Extended Case Top Standoffs] */
+/* [    Extended Case Top Standoffs] */
 // enable case extended standoffs
 ext_top_standoffs = false;
 ext_top_standoff_reverse = true;
@@ -248,7 +247,7 @@ ext_top_standoff_support_height = 4; //[0:.01:50]
 ext_top_standoff_insert = false;
 ext_top_standoff_insert_dia = 4.2; //.01
 ext_top_standoff_insert_height = 5.1; //.01
-/* [Extended Case Top Standoff Individual Settings] */
+/* [    Extended Case Top Standoff Individual Settings] */
 // extended case top - lower left standoff settings
 ext_top_rear_left_enable = true;
 ext_top_rear_left_adjust = 0; //[-20:.01:20]
@@ -266,7 +265,7 @@ ext_top_front_right_enable = true;
 ext_top_front_right_adjust = 0; //[-20:.01:20]
 ext_top_front_right_support = "front";  //[none,left,rear,front,right]
 
-/* [Extended Case Bottom Standoffs] */
+/* [    Extended Case Bottom Standoffs] */
 // enable case bottom extended standoffs
 ext_bottom_standoffs = false;
 ext_bottom_standoff_reverse = false;
@@ -283,7 +282,7 @@ ext_bottom_standoff_insert = false;
 ext_bottom_standoff_insert_dia = 4.2; //.01
 ext_bottom_standoff_insert_height = 5.1; //.01
 
-/* [Extended Case Bottom Standoff Individual Settings] */
+/* [    Extended Case Bottom Standoff Individual Settings] */
 // extended case bottom - rear left standoff settings
 ext_bottom_rear_left_enable = true;
 ext_bottom_rear_left_adjust = 0; //[-20:.01:20]
@@ -301,7 +300,7 @@ ext_bottom_front_right_enable = true;
 ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
-/* [Multiple PCB Top Standoffs] */
+/* [    Multiple PCB Top Standoffs] */
 // enable multiple pcb standoffs
 multipcb_top_standoffs = false;
 multipcb_top_standoff_reverse = true;
@@ -317,7 +316,7 @@ multipcb_top_standoff_support_height = 4; //[0:.01:50]
 multipcb_top_standoff_insert = false;
 multipcb_top_standoff_insert_dia = 4.2; //.01
 multipcb_top_standoff_insert_height = 5.1; //.01
-/* [Multiple PCB Top Standoff Individual Settings] */
+/* [    Multiple PCB Top Standoff Individual Settings] */
 // multiple pcb top - lower left standoff settings
 multipcb_top_rear_left_enable = true;
 multipcb_top_rear_left_adjust = 0; //[-20:.01:20]
@@ -335,7 +334,7 @@ multipcb_top_front_right_enable = true;
 multipcb_top_front_right_adjust = 0; //[-20:.01:20]
 multipcb_top_front_right_support = "front";  //[none,left,rear,front,right]
 
-/* [Multiple PCB Bottom Standoffs] */
+/* [    Multiple PCB Bottom Standoffs] */
 // enable multiple pcb extended standoffs
 multipcb_bottom_standoffs = false;
 multipcb_bottom_standoff_reverse = false;
@@ -352,7 +351,7 @@ multipcb_bottom_standoff_insert = false;
 multipcb_bottom_standoff_insert_dia = 4.2; //.01
 multipcb_bottom_standoff_insert_height = 5.1; //.01
 
-/* [Multiple PCB Bottom Standoff Individual Settings] */
+/* [    Multiple PCB Bottom Standoff Individual Settings] */
 // multiple pcb bottom - rear left standoff settings
 multipcb_bottom_rear_left_enable = true;
 multipcb_bottom_rear_left_adjust = 0; //[-20:.01:20]
