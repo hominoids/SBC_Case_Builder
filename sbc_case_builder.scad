@@ -73,6 +73,31 @@ standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
 rear_io_shield = false;
 
+/* [Rack Mount Case Adjustments] */
+// size of rack 10" or 19" //
+rack_size =  19; //[10,19]
+// size of rack mount cases 1U-4U //
+rack_u_size =  1; //[1:4]
+// number of rack bays //
+rack_bays =  1; //[1:4]
+// enable rack io plate opening for sbc
+Rack_Bay1 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay1_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay1_xyz_loc = [0,0,0]; // [0:.5:300]
+rack_bay1_wall = false; // [true,false]
+Rack_Bay2 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay2_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay2_xyz_loc = [0,0,0]; // [0:.5:300]
+rack_bay2_wall = false; // [true,false]
+Rack_Bay3 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay3_xyz_loc = [0,0,0]; // [0:.5:300]
+rack_bay3_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay3_wall = false; // [true,false]
+Rack_Bay4 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay4_xyz_loc = [0,0,0]; // [0:.5:300]
+rack_bay4_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay4_wall = false; // [true,false]
+
 /* [3D Case Adjustments] */
 // sbc location x axis
 pcb_loc_x = 0; //[0:.01:300]
@@ -159,6 +184,7 @@ accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 // sbc information text font
 text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
+
 /* [SBC Top Standoff Global Settings] */
 // enable case top standoffs
 sbc_top_standoffs = true;
@@ -194,6 +220,76 @@ top_rear_right_support = "rear"; //[none,left,rear,front,right]
 top_front_right_enable = true;
 top_front_right_adjust = 0; //[-30:.01:30]
 top_front_right_support = "front";  //[none,left,rear,front,right]
+
+/* [    Extended Case Top Standoffs] */
+// enable case extended standoffs
+ext_top_standoffs = false;
+ext_top_standoff_reverse = true;
+// enable wall support for extended standoffs
+ext_top_sidewall_support = true;
+ext_top_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
+ext_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
+ext_top_standoff_pillar = "hex"; //[hex, round]
+ext_top_standoff_diameter = 5.75; //[0:.01:10]
+ext_top_standoff_hole_size = 2.75; //[0:.01:5]
+ext_top_standoff_support_size = 10; //[0:.01:25]
+ext_top_standoff_support_height = 4; //[0:.01:50]
+ext_top_standoff_insert = false;
+ext_top_standoff_insert_dia = 4.2; //.01
+ext_top_standoff_insert_height = 5.1; //.01
+
+/* [    Extended Case Top Standoff Individual Settings] */
+// extended case top - lower left standoff settings
+ext_top_rear_left_enable = true;
+ext_top_rear_left_adjust = 0; //[-20:.01:20]
+ext_top_rear_left_support = "rear"; //[none,left,rear,front,right]
+// extended case top - upper left standoff settings
+ext_top_front_left_enable = true;
+ext_top_front_left_adjust = 0; //[-20:.01:20]
+ext_top_front_left_support = "front"; //[none,left,rear,front,right]
+// extended case top - lower right standoff settings
+ext_top_rear_right_enable = true;
+ext_top_rear_right_adjust = 0; //[-20:.01:20]
+ext_top_rear_right_support = "rear"; //[none,left,rear,front,right]
+// extended case top - upper right standoff settings
+ext_top_front_right_enable = true;
+ext_top_front_right_adjust = 0; //[-20:.01:20]
+ext_top_front_right_support = "front";  //[none,left,rear,front,right]
+
+/* [    Multiple PCB Top Standoffs] */
+// enable multiple pcb standoffs
+multipcb_top_standoffs = false;
+multipcb_top_standoff_reverse = true;
+// enable wall support for multiple pcb
+multipcb_top_sidewall_support = false;
+multipcb_top_standoff_size = "m2.5"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
+multipcb_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
+multipcb_top_standoff_pillar = "hex"; //[hex, round]
+multipcb_top_standoff_diameter = 5.75; //[0:.01:10]
+multipcb_top_standoff_hole_size = 2.75; //[0:.01:5]
+multipcb_top_standoff_support_size = 7; //[0:.01:25]
+multipcb_top_standoff_support_height = 4; //[0:.01:50]
+multipcb_top_standoff_insert = false;
+multipcb_top_standoff_insert_dia = 4.2; //.01
+multipcb_top_standoff_insert_height = 5.1; //.01
+
+/* [    Multiple PCB Top Standoff Individual Settings] */
+// multiple pcb top - lower left standoff settings
+multipcb_top_rear_left_enable = true;
+multipcb_top_rear_left_adjust = 0; //[-20:.01:20]
+multipcb_top_rear_left_support = "rear"; //[none,left,rear,front,right]
+// multiple pcb - upper left standoff settings
+multipcb_top_front_left_enable = true;
+multipcb_top_front_left_adjust = 0; //[-20:.01:20]
+multipcb_top_front_left_support = "front"; //[none,left,rear,front,right]
+// multiple pcb top - lower right standoff settings
+multipcb_top_rear_right_enable = true;
+multipcb_top_rear_right_adjust = 0; //[-20:.01:20]
+multipcb_top_rear_right_support = "rear"; //[none,left,rear,front,right]
+// multiple pcb top - upper right standoff settings
+multipcb_top_front_right_enable = true;
+multipcb_top_front_right_adjust = 0; //[-20:.01:20]
+multipcb_top_front_right_support = "front";  //[none,left,rear,front,right]
 
 /* [SBC Bottom Standoff Global Settings] */
 // enable case bottom standoffs
@@ -231,40 +327,6 @@ bottom_front_right_enable = true;
 bottom_front_right_adjust = 0; //[-30:.01:30]
 bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
-/* [    Extended Case Top Standoffs] */
-// enable case extended standoffs
-ext_top_standoffs = false;
-ext_top_standoff_reverse = true;
-// enable wall support for extended standoffs
-ext_top_sidewall_support = true;
-ext_top_standoff_size = "m3"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
-ext_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
-ext_top_standoff_pillar = "hex"; //[hex, round]
-ext_top_standoff_diameter = 5.75; //[0:.01:10]
-ext_top_standoff_hole_size = 2.75; //[0:.01:5]
-ext_top_standoff_support_size = 10; //[0:.01:25]
-ext_top_standoff_support_height = 4; //[0:.01:50]
-ext_top_standoff_insert = false;
-ext_top_standoff_insert_dia = 4.2; //.01
-ext_top_standoff_insert_height = 5.1; //.01
-/* [    Extended Case Top Standoff Individual Settings] */
-// extended case top - lower left standoff settings
-ext_top_rear_left_enable = true;
-ext_top_rear_left_adjust = 0; //[-20:.01:20]
-ext_top_rear_left_support = "rear"; //[none,left,rear,front,right]
-// extended case top - upper left standoff settings
-ext_top_front_left_enable = true;
-ext_top_front_left_adjust = 0; //[-20:.01:20]
-ext_top_front_left_support = "front"; //[none,left,rear,front,right]
-// extended case top - lower right standoff settings
-ext_top_rear_right_enable = true;
-ext_top_rear_right_adjust = 0; //[-20:.01:20]
-ext_top_rear_right_support = "rear"; //[none,left,rear,front,right]
-// extended case top - upper right standoff settings
-ext_top_front_right_enable = true;
-ext_top_front_right_adjust = 0; //[-20:.01:20]
-ext_top_front_right_support = "front";  //[none,left,rear,front,right]
-
 /* [    Extended Case Bottom Standoffs] */
 // enable case bottom extended standoffs
 ext_bottom_standoffs = false;
@@ -299,40 +361,6 @@ ext_bottom_rear_right_support = "rear"; //[none,left,rear,front,right]
 ext_bottom_front_right_enable = true;
 ext_bottom_front_right_adjust = 0; //[-20:.01:20]
 ext_bottom_front_right_support = "front"; //[none,left,rear,front,right]
-
-/* [    Multiple PCB Top Standoffs] */
-// enable multiple pcb standoffs
-multipcb_top_standoffs = false;
-multipcb_top_standoff_reverse = true;
-// enable wall support for multiple pcb
-multipcb_top_sidewall_support = false;
-multipcb_top_standoff_size = "m2.5"; //[m2_tap, m2, m2+, m2.5_tap, m2.5, m2.5+, m3_tap, m3, m3+, m4_tap, m4, m4+, custom]
-multipcb_top_standoff_type = "blind"; //[none, countersunk, recessed, nut holder, blind]
-multipcb_top_standoff_pillar = "hex"; //[hex, round]
-multipcb_top_standoff_diameter = 5.75; //[0:.01:10]
-multipcb_top_standoff_hole_size = 2.75; //[0:.01:5]
-multipcb_top_standoff_support_size = 7; //[0:.01:25]
-multipcb_top_standoff_support_height = 4; //[0:.01:50]
-multipcb_top_standoff_insert = false;
-multipcb_top_standoff_insert_dia = 4.2; //.01
-multipcb_top_standoff_insert_height = 5.1; //.01
-/* [    Multiple PCB Top Standoff Individual Settings] */
-// multiple pcb top - lower left standoff settings
-multipcb_top_rear_left_enable = true;
-multipcb_top_rear_left_adjust = 0; //[-20:.01:20]
-multipcb_top_rear_left_support = "rear"; //[none,left,rear,front,right]
-// multiple pcb - upper left standoff settings
-multipcb_top_front_left_enable = true;
-multipcb_top_front_left_adjust = 0; //[-20:.01:20]
-multipcb_top_front_left_support = "front"; //[none,left,rear,front,right]
-// multiple pcb top - lower right standoff settings
-multipcb_top_rear_right_enable = true;
-multipcb_top_rear_right_adjust = 0; //[-20:.01:20]
-multipcb_top_rear_right_support = "rear"; //[none,left,rear,front,right]
-// multiple pcb top - upper right standoff settings
-multipcb_top_front_right_enable = true;
-multipcb_top_front_right_adjust = 0; //[-20:.01:20]
-multipcb_top_front_right_support = "front";  //[none,left,rear,front,right]
 
 /* [    Multiple PCB Bottom Standoffs] */
 // enable multiple pcb extended standoffs
@@ -369,6 +397,7 @@ multipcb_bottom_front_right_enable = true;
 multipcb_bottom_front_right_adjust = 0; //[-20:.01:20]
 multipcb_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
+/* [Hidden] */
 a = search([accessory_name],accessory_data);
 s = search([sbc_model],sbc_data);
 
@@ -394,7 +423,6 @@ hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2
 hd_spacer = case_design == "panel_nas" && pcb_width > 100 ? (pcb_width+case_offset_x+2*gap)-101.6 : 
     case_design == "panel_nas" && pcb_width <= 100 ? (width-2*(sidethick+gap)-101.6) : 0;
 
-/* [Hidden] */
 top_standoff = [top_standoff_size,
                 top_standoff_diameter,
                 18,
@@ -478,6 +506,8 @@ multipcb_bottom_standoff = [multipcb_bottom_standoff_size,
                    multipcb_bottom_standoff_insert,
                    multipcb_bottom_standoff_insert_dia,
                    multipcb_bottom_standoff_insert_height];
+
+rack_bay_sbc = [Rack_Bay4,Rack_Bay4,Rack_Bay4,Rack_Bay4];
 
 adj = .01;
 $fn=90;
