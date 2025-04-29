@@ -25,6 +25,7 @@ use <./SBC_Model_Framework/sbc_models_library.scad>
 include <./mod/add.scad>;
 include <./mod/case_adapter.scad>;
 include <./mod/case_bottom.scad>;
+include <./mod/case_rack.scad>;
 include <./mod/case_side.scad>;
 include <./mod/case_top.scad>;
 include <./mod/case_folded.scad>;
@@ -50,5 +51,6 @@ include <./lib/keyhole.scad>;
 include <./lib/oem_adafruit.scad>;
 include <./lib/oem_hk.scad>;
 include <./lib/oem_rpi.scad>;
+include <./lib/rack.scad>;
 include <./lib/standoff.scad>;
 include <./lib/vent.scad>;
