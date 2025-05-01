@@ -136,7 +136,7 @@ module case_side(case_design, side) {
                     difference() {
                         union() {
                             translate([-gap,-(2*wallthick),0]) 
-                                cube([x_adj,wallthick,case_z-wallthick]);
+                                cube([x_adj,wallthick,case_z-floorthick]);
                             // bottom right tab
                             translate([xtab_adj,-(2*wallthick),20])
                                 cube([sidethick+(2*adj),wallthick,10]);
@@ -185,7 +185,7 @@ module case_side(case_design, side) {
                     difference() {
                         union() {
                             translate([-gap,depth-(4*wallthick),floorthick]) 
-                                cube([x_adj,wallthick,case_z-3*wallthick]);
+                                cube([x_adj,wallthick,case_z-3*floorthick]);
                             // bottom right tab
                             translate([xtab_adj,depth-(4*wallthick),20])
                                 cube([sidethick+(2*adj),wallthick,10]);
