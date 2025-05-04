@@ -48,11 +48,17 @@ if(side == "bottom") {
                         }
                         // rack ears
                         translate([-gap-wallthick, -gap+(sidethick-wallthick), 0]) 
-                            rack_end_bracket("left", rack_u_size, sidethick);
+                            rack_end_bracket("left", rack_size, sidethick);
                         translate([width-wallthick-gap, -gap+(sidethick-wallthick), 0]) 
-                            rack_end_bracket("right", rack_u_size, sidethick);
+                            rack_end_bracket("right", rack_size, sidethick);
 
-                        // case upper panel clamp
+                        // bay divider walls
+                        for(r = [0:len(rack_bay_sbc)-1]) {
+                            if(rack_bay_wall[r] == true) {
+                                translate([-gap-wallthick+75*(r+1),-gap-wallthick-adj,0]) cube([wallthick-1,depth,case_z-floorthick]);
+                            }
+                        }
+                        // case upper panel clamps
                         translate([150-gap-wallthick,-gap-adj-.5,case_z-13]) 
                             panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
                         translate([300-gap-wallthick,-gap-adj-.5,case_z-13]) 
@@ -61,6 +67,12 @@ if(side == "bottom") {
                             case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
                         translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj+.5,
                             case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+
+                        // case floor panel clamps
+                        translate([150-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj]) 
+                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                        translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj]) 
+                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
 
                         // case lower assembly blocks
                         // rear left - left side
