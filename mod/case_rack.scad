@@ -55,7 +55,8 @@ if(side == "bottom") {
                         // bay divider walls
                         for(r = [0:len(rack_bay_sbc)-1]) {
                             if(rack_bay_wall[r] == true) {
-                                translate([-gap-wallthick+75*(r+1),-gap-wallthick-adj,0]) cube([wallthick-1,depth,case_z-floorthick]);
+                                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1),-gap-wallthick-adj,0]) 
+                                    cube([wallthick-1,depth,case_z-2*floorthick]);
                             }
                         }
                         // case upper panel clamps

@@ -35,7 +35,7 @@
 
 module rack_end_bracket(side, size, thick) {
 
-    depth = size == "1u" ? 44.45 : size == "2u" ? 2*44.45 : size == "3u" ? 3*44.45 : 4*44.45;
+    depth = size == "1u" ? 44.45 : size == "1u+" ? 59.26 : size == "1u++" ? 74.07 : size == "2u" ? 2*44.45 : size == "3u" ? 3*44.45 : 4*44.45;
     c_fillet = 2;
     hole = 3.2;
     rack_hole = 6;

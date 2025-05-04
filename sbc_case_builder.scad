@@ -77,43 +77,55 @@ rear_io_shield = false;
 // size of rack 10" or 19" //
 rack_width =  19; //[10,19]
 // size of rack mount cases 1U or 2U //
-rack_size =  "1u"; //["1u", "2u"]
+rack_size =  "1u"; //["1u","1u+","1u++","2u"]
 // enable rack io plate opening for sbc
 Rack_Bay1 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay1_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay1_rotation = 0; // [0:90:270]
-rack_bay1_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay1_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
 rack_bay1_wall = false; // [true,false]
+rack_bay1_rear_fan = false; //[true,false]
+rack_bay1_rear_conduit = false; //[true,false]
 
 Rack_Bay2 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay2_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay2_rotation = 0; // [0:90:270]
-rack_bay2_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay2_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
 rack_bay2_wall = false; // [true,false]
+rack_bay2_rear_fan = false; //[true,false]
+rack_bay2_rear_conduit = false; //[true,false]
 
 Rack_Bay3 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay3_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay3_rotation = 0; // [0:90:270]
-rack_bay3_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay3_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
 rack_bay3_wall = false; // [true,false]
+rack_bay3_rear_fan = false; //[true,false]
+rack_bay3_rear_conduit = false; //[true,false]
 
 Rack_Bay4 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay4_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay4_rotation = 0; // [0:90:270]
-rack_bay4_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay4_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
 rack_bay4_wall = false; // [true,false]
+rack_bay4_rear_fan = false; //[true,false]
+rack_bay4_rear_conduit = false; //[true,false]
 
 Rack_Bay5 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay5_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay5_rotation = 0; // [0:90:270]
-rack_bay5_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay5_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
 rack_bay5_wall = false; // [true,false]
+rack_bay5_rear_fan = false; //[true,false]
+rack_bay5_rear_conduit = false; //[true,false]
 
 Rack_Bay6 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay6_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay6_rotation = 0; // [0:90:270]
-rack_bay6_face = "io_shield"; //["none","blank","io_shield","vent_hex"]
+rack_bay6_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
 rack_bay6_wall = false; // [true,false]
+rack_bay6_rear_fan = false; //[true,false]
+rack_bay6_rear_conduit = false; //[true,false]
 
 /* [3D Case Adjustments] */
 // sbc location x axis
@@ -432,7 +444,7 @@ width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+2*(sidethick+
 depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
-case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : case_design == "rack" && rack_size == "1u" ? 44.45+floorthick : case_design == "rack" && rack_size == "2u" ? 88.90+floorthick : bottom_height+top_height;
+case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : case_design == "rack" && rack_size == "1u" ? 44.45+floorthick : case_design == "rack" && rack_size == "1u+" ? 59.26+floorthick : case_design == "rack" && rack_size == "1u++" ? 74.07+floorthick : case_design == "rack" && rack_size == "2u" ? 88.90+floorthick : bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
 hd_spacer = case_design == "panel_nas" && pcb_width > 100 ? (pcb_width+case_offset_x+2*gap)-101.6 : 
