@@ -123,7 +123,7 @@ Rack_Bay6 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1
 rack_bay6_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay6_rotation = 0; // [0:90:270]
 rack_bay6_face = "io_shield"; //["solid","blank","io_shield","vent_hex"]
-rack_bay6_wall = false; // [true,false]
+//rack_bay6_wall = false; // [true,false]
 rack_bay6_rear_fan = false; //[true,false]
 rack_bay6_rear_conduit = false; //[true,false]
 
@@ -538,7 +538,9 @@ rack_bay_sbc = [Rack_Bay1,Rack_Bay2,Rack_Bay3,Rack_Bay4,Rack_Bay5,Rack_Bay6];
 rack_bay_xyz_loc = [rack_bay1_xyz_loc, rack_bay2_xyz_loc, rack_bay3_xyz_loc, rack_bay4_xyz_loc, rack_bay5_xyz_loc, rack_bay6_xyz_loc];
 rack_bay_rotation = [rack_bay1_rotation, rack_bay2_rotation, rack_bay3_rotation, rack_bay4_rotation, rack_bay5_rotation, rack_bay6_rotation];
 rack_bay_face = [rack_bay1_face, rack_bay2_face, rack_bay3_face, rack_bay4_face, rack_bay5_face, rack_bay6_face];
-rack_bay_wall = [rack_bay1_wall, rack_bay2_wall, rack_bay3_wall, rack_bay4_wall, rack_bay5_wall, rack_bay6_wall];
+rack_bay_wall = [rack_bay1_wall, rack_bay2_wall, rack_bay3_wall, rack_bay4_wall, rack_bay5_wall, false];
+rack_bay_rear_fan = [rack_bay1_rear_fan, rack_bay2_rear_fan, rack_bay3_rear_fan, rack_bay4_rear_fan, rack_bay5_rear_fan, rack_bay6_rear_fan];
+rack_bay_rear_conduit = [rack_bay1_rear_conduit, rack_bay2_rear_conduit, rack_bay3_rear_conduit, rack_bay4_rear_conduit, rack_bay5_rear_conduit, rack_bay6_rear_conduit];
 
 adj = .01;
 $fn=90;
@@ -1112,6 +1114,23 @@ if (view == "model") {
                     }
                 }
             }        
+            // rear fan covers
+            for(r = [0:len(rack_bay_sbc)-1]) {
+                fan_offset = -75+(75-rear_fan_size)/2;
+                if(rack_bay_rear_fan[r] == true) {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,
+                        depth-gap,(case_z-rear_fan_size)/2])
+                            rotate([90,0,0]) fan_cover(rear_fan_size, wallthick, rear_cooling);
+                }
+            }
+            // rear grommets
+            for(r = [0:len(rack_bay_sbc)-1]) {
+                grommet_offset = -75+11;
+                if(rack_bay_rear_conduit[r] == true) {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,13])
+                        color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
+                }
+            }
             if(sbc_off == false) {
                 for(i = [0:len(rack_bay_sbc)-1]) {
                     s = search([rack_bay_sbc[i]],sbc_data);

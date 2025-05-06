@@ -644,6 +644,22 @@ if(side == "bottom") {
                 }
             }
         }
+        // rear fan openings
+        for(r = [0:len(rack_bay_sbc)-1]) {
+            fan_offset = -75+(75-rear_fan_size)/2;
+            if(rack_bay_rear_fan[r] == true) {
+                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+fan_offset+8,depth-gap-wallthick-adj,(case_z-rear_fan_size)/2])
+                    rotate([90,0,0]) fan_mask(rear_fan_size, wallthick, "fan_open");
+            }
+        }
+        // rear grommet openings
+        for(r = [0:len(rack_bay_sbc)-1]) {
+            grommet_offset = -75+11;
+            if(rack_bay_rear_conduit[r] == true) {
+                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+grommet_offset+4,depth-wallthick-gap,13])
+                    grommet("front", "sleeve", 10, 4, wallthick, true, [true,10,0,"default"]);
+            }
+        }
         // subtractive accessories
         if(accessory_name != "none") {
             for (i=[1:11:len(accessory_data[a[0]])-1]) {

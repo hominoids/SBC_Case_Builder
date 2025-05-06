@@ -45,6 +45,7 @@ include <./lib/dsub.scad>;
 include <./lib/fans.scad>;
 include <./lib/fastener.scad>;
 include <./lib/feet.scad>;
+include <./lib/grommet.scad>;
 include <./lib/hd.scad>;
 include <./lib/holder.scad>;
 include <./lib/keyhole.scad>;

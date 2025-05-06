@@ -38,9 +38,10 @@ module panel_clamp(face, screw, style, dia_x, dia_y, height, mask) {
     rotz = face == "left" ? 90 : face == "right" ? 270 : 0;
 
     if(enablemask == true && mstyle == "default") {
+
     }
     if(enablemask == false) {
-        translate([0,0,0]) rotate([rotx,roty,rotz]) {
+        rotate([rotx,roty,rotz]) {
             difference() {
                 cylinder(d2=dia_x, d1=dia_y, h=height);
                 if(screw == "m2") {
