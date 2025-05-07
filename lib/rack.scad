@@ -33,13 +33,14 @@
 
 */
 
+
 module rack_end_bracket(side, size, thick) {
 
     depth = size == "1u" ? 44.45 : size == "1u+" ? 59.26 : size == "1u++" ? 74.07 : size == "2u" ? 2*44.45 : size == "3u" ? 3*44.45 : 4*44.45;
     c_fillet = 2;
     hole = 3.2;
     rack_hole = 6;
-    tab_width = 25;
+    tab_width = 15.875+thick;
     b_width = thick;
     b_depth = depth;
     b_height = 25;
@@ -60,7 +61,7 @@ module rack_end_bracket(side, size, thick) {
                         vertical=[0,0,0,0],top=[c_fillet,0,c_fillet,0],bottom=[0,0,0,0], $fn=90);
             }
             for (c=[7.5:15:depth]) {
-                translate([-15,c,-adjust]) slot(rack_hole,3,thick+(adjust*2));
+                translate([(3-thick)-9-(15.875-9)/2,c,-adjust]) slot(rack_hole,3,thick+(adjust*2));
             }
         }
     }
@@ -76,7 +77,7 @@ module rack_end_bracket(side, size, thick) {
                         vertical=[0,0,0,0],top=[c_fillet,0,c_fillet,0],bottom=[0,0,0,0], $fn=90);
             }
             for (c=[7.5:15:depth]) {
-                translate([-15,c,-adjust]) slot(rack_hole,3,thick+(adjust*2));
+                translate([(3-thick)-9-(15.875-9)/2,c,-adjust]) slot(rack_hole,3,thick+(adjust*2));
             }
         }
     }
