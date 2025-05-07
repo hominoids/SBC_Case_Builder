@@ -30,80 +30,94 @@ rack_asm_gap = .25;
 rack_asm_size = 5;
 rack_asm_hole = 2.25;
 
-if(side == "bottom") {
+if(case_design == "rack" && side == "bottom") {
     difference() {
         union() {
             difference() {
                 union() {
-                    if(case_design == "rack") {
-                        difference() {
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z-floorthick)/2]) 
-                                cube_fillet_inside([width,depth,case_z-floorthick], 
-                                    vertical=[corner_fillet,corner_fillet,0,0], 
+                    difference() {
+                        translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,(case_z-floorthick)/2]) 
+                            cube_fillet_inside([width,depth,case_z-floorthick], 
+                                vertical=[corner_fillet,corner_fillet,0,0], 
+                                    top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
+                        translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick+(floorthick+case_z)/2]) 
+                            cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick], 
+                                    vertical=[corner_fillet-wallthick,corner_fillet-wallthick,-wallthick,-wallthick],
                                         top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
-                            translate([(width/2)-wallthick-gap,(depth/2)-wallthick-gap,floorthick+(floorthick+case_z)/2]) 
-                                cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick], 
-                                        vertical=[corner_fillet-wallthick,corner_fillet-wallthick,-wallthick,-wallthick],
-                                            top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
-                        }
-                        // rack ears
-                        translate([-gap-wallthick, -gap+(sidethick-wallthick), 0]) 
-                            rack_end_bracket("left", rack_size, sidethick);
-                        translate([width-wallthick-gap, -gap+(sidethick-wallthick), 0]) 
-                            rack_end_bracket("right", rack_size, sidethick);
+                        // case floor panel clamp holes
+                        translate([150-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
+                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
+                        translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
+                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
 
-                        // bay divider walls
-                        for(r = [0:len(rack_bay_sbc)-1]) {
-                            if(rack_bay_wall[r] == true) {
-                                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1),-gap-wallthick-adj,0]) 
-                                    cube([wallthick-1,depth,case_z-2*floorthick]);
-                            }
-                        }
-                        // case upper panel clamps
-                        translate([150-gap-wallthick,-gap-adj-.5,case_z-13]) 
-                            panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
-                        translate([300-gap-wallthick,-gap-adj-.5,case_z-13]) 
-                            panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
-                        translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj+.5,
-                            case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
-                        translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj+.5,
-                            case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                        // case upper panel clamp holes
+                        translate([150-gap-wallthick,-gap-adj,case_z-13]) 
+                            panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
+                        translate([300-gap-wallthick,-gap-adj,case_z-13]) 
+                            panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
+                        translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                            case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
+                        translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                            case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
 
-                        // case floor panel clamps
-                        translate([150-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj]) 
-                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
-                        translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj]) 
-                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
-
-                        // case lower assembly blocks
-                        // rear left - left side
-                        translate([150-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // rear right - left side
-                        translate([300-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // rear left - right side
-                        translate([150-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // rear right - right
-                        translate([300-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-
-                        // front left - left
-                        translate([150-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
-                            floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // front right - left
-                        translate([300-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
-                            floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // front left - right
-                        translate([150-gap-wallthick+rack_asm_gap,
-                            depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
-                                cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // front right - right
-                        translate([300-gap-wallthick+rack_asm_gap,
-                            depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
-                                cube([rack_asm_size,rack_asm_size,rack_asm_size]);
                     }
+                    // rack mounting tabs
+                    translate([-gap-wallthick, -gap+(sidethick-wallthick), 0]) 
+                        rack_end_bracket("left", rack_size, sidethick);
+                    translate([width-wallthick-gap, -gap+(sidethick-wallthick), 0]) 
+                        rack_end_bracket("right", rack_size, sidethick);
+
+                    // bay divider walls
+                    for(r = [0:len(rack_bay_sbc)-1]) {
+                        if(rack_bay_wall[r] == true) {
+                            translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1),-gap-wallthick-adj,0]) 
+                                cube([wallthick-1,depth,case_z-2*floorthick]);
+                        }
+                    }
+                    // case upper panel clamps
+                    translate([150-gap-wallthick,-gap-adj,case_z-13]) 
+                        panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                    translate([300-gap-wallthick,-gap-adj,case_z-13]) 
+                        panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                    translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                        case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                    translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                        case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+
+                    // case floor panel clamps
+                    translate([150-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
+                        panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                    translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
+                        panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+
+                    // case lower assembly blocks
+                    // rear left - left side
+                    translate([150-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
+                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                    // rear right - left side
+                    translate([300-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
+                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                    // rear left - right side
+                    translate([150-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
+                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                    // rear right - right
+                    translate([300-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
+                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+
+                    // front left - left
+                    translate([150-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
+                        floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                    // front right - left
+                    translate([300-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
+                        floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                    // front left - right
+                    translate([150-gap-wallthick+rack_asm_gap,
+                        depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
+                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                    // front right - right
+                    translate([300-gap-wallthick+rack_asm_gap,
+                        depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
+                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
 
                     // additive accessories
                     if(accessory_name != "none") {
@@ -121,7 +135,8 @@ if(side == "bottom") {
                             mask = accessory_data[a[0]][i+10];
 
                             if(class == "add1" && face == "bottom") {
-                                parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data, [false,mask[1],mask[2],mask[3]]);
+                                parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, 
+                                    size, data, [false,mask[1],mask[2],mask[3]]);
                             }
                         }
                     }
@@ -175,7 +190,7 @@ if(side == "bottom") {
                 translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
                     floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
                         cylinder(d=4*2/sqrt(3), h=2);
-
+                // pcb and multi-pcb standoff holes 
                 for(r = [0:len(rack_bay_sbc)-1]) {
                     if(rack_bay_sbc[r] != "empty") {
                         s = search([rack_bay_sbc[r]],sbc_data);
@@ -188,13 +203,15 @@ if(side == "bottom") {
                         pcb_color = sbc_data[s[0]][11][1];
                         pcb_radius = sbc_data[s[0]][11][0];
 
-                        pcb_loc_x = rack_bay_rotation[r] == 90 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
-                        pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
+                        pcb_loc_x = rack_bay_rotation[r] == 90 ? rack_bay_xyz_loc[r][0] + pcb_width : 
+                            rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
+                        pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : 
+                            rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
                         pcb_loc_z = rack_bay_xyz_loc[r][2];
 
                         translate([pcb_loc_x,pcb_loc_y,pcb_loc_z]) rotate([0,0,rack_bay_rotation[r]]) union() {
                             // pcb standoff holes
-                            if(sbc_bottom_standoffs == true && rack_bay_sbc[r] != "empty") {
+                            if(sbc_bottom_standoffs == true) {
                                 for (i=[1:11:len(sbc_data[s[0]])-2]) {
                                     class = sbc_data[s[0]][i+1];
                                     type = sbc_data[s[0]][i+2];
@@ -229,7 +246,7 @@ if(side == "bottom") {
                                 }
                             }
                             // multi-pcb standoff holes
-                            if(multipcb_bottom_standoffs == true && rack_bay_sbc[r] != "empty") {
+                            if(multipcb_bottom_standoffs == true) {
                                 for (i=[1:11:len(sbc_data[s[0]])-2]) {
                                     class = sbc_data[s[0]][i+1];
                                     type = sbc_data[s[0]][i+2];
@@ -324,30 +341,42 @@ if(side == "bottom") {
                     }
                 }
                 // bottom cover pattern
-                if(bottom_cover_pattern != "solid") {
-                    if(bottom_cover_pattern == "hex_5mm") {
-                        translate([1,0,-floorthick+adj]) vent_hex(width/3.75,depth/6,floorthick+4,5,1.5,"horizontal");
-                    }
-                    if(bottom_cover_pattern == "hex_8mm") {
-                        translate([1,2,-floorthick+adj]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
-                    }
-                    if(bottom_cover_pattern == "linear_vertical") {
-                        translate([0,-gap,-floorthick+adj])
-                            vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
-                    }
-                    if(bottom_cover_pattern == "linear_horizontal") {
-                        translate([-gap,-gap,-floorthick+adj]) 
-                            vent(width-2*(wallthick+gap),wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3,1,"horizontal");
-                    }
-                    if(bottom_cover_pattern == "astroid") {
-                        for(c=[3:12:depth-8]) {
-                            for(r=[4:12:width-8]) {
-                                translate([r,c,-(2*floorthick)]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                for(r = [0:len(rack_bay_sbc)-1]) {
+                    if(bottom_cover_pattern != "solid") {
+                        if(bottom_cover_pattern == "hex_5mm") {
+                            translate([rack_bay_xyz_loc[r][0]+25,rack_bay_xyz_loc[r][1]+10,-floorthick+adj]) 
+                                vent_hex(15/3.75,(depth-40)/6,floorthick+4,5,1.5,"horizontal");
+                        }
+                        if(bottom_cover_pattern == "hex_8mm") {
+                            translate([rack_bay_xyz_loc[r][0]+10,rack_bay_xyz_loc[r][1]+5,-floorthick+adj]) 
+                                vent_hex(35/5.5,(depth-10)/9.5,floorthick+4,8,1.5,"horizontal");
+                        }
+                        if(bottom_cover_pattern == "linear_vertical") {
+                            translate([rack_bay_xyz_loc[r][0]+10,rack_bay_xyz_loc[r][1]+10,-floorthick+adj])
+                                vent(2,12,floorthick+4,1,1,9,"horizontal");
+                            translate([rack_bay_xyz_loc[r][0]+10,rack_bay_xyz_loc[r][1]+55,-floorthick+adj])
+                                vent(2,12,floorthick+4,1,1,9,"horizontal");
+                        }
+                        if(bottom_cover_pattern == "linear_horizontal") {
+                            translate([rack_bay_xyz_loc[r][0]+10,rack_bay_xyz_loc[r][1]+10,-floorthick+adj])
+                                vent(35-2*(wallthick+gap),wallthick,floorthick+4,1,(depth-2*wallthick-gap)/6,1,"horizontal");
+                        }
+                        if(bottom_cover_pattern == "astroid") {
+                            for(c=[rack_bay_xyz_loc[r][1]+10:12:85+rack_bay_xyz_loc[r][1]]) {
+                                for(r=[rack_bay_xyz_loc[r][0]:12:55+rack_bay_xyz_loc[r][0]]) {
+                                    translate([r,c,-floorthick]) linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                }
                             }
                         }
                     }
+                    // front vent
+                    if(rack_bay_face[r] == "vent") {
+                        translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)-75+14,-gap-adj,case_z-16])
+                            vent(2,10,wallthick+4,2,1,9,"vertical");
+                    }
                 }
             }
+            // pcb and multi-pcb standoffs
             for(r = [0:len(rack_bay_sbc)-1]) {
                 if(rack_bay_sbc[r] != "empty") {
                     s = search([rack_bay_sbc[r]],sbc_data);
@@ -360,8 +389,10 @@ if(side == "bottom") {
                     pcb_color = sbc_data[s[0]][11][1];
                     pcb_radius = sbc_data[s[0]][11][0];
 
-                    pcb_loc_x = rack_bay_rotation[r] == 90 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
-                    pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
+                    pcb_loc_x = rack_bay_rotation[r] == 90 ? rack_bay_xyz_loc[r][0] + pcb_width : 
+                        rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
+                    pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : 
+                        rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
                     pcb_loc_z = rack_bay_xyz_loc[r][2];
 
                     translate([pcb_loc_x,pcb_loc_y,pcb_loc_z]) rotate([0,0,rack_bay_rotation[r]]) union() {
