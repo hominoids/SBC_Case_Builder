@@ -387,6 +387,24 @@ if(case_design == "rack" && side == "bottom") {
                             vent(2,10,wallthick+4,2,1,9,"vertical");
                     }
                 }
+                // case floor panel clamp holes
+                translate([150-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
+                    panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
+                if(rack_width == 19) { 
+                    translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
+                        panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
+                }
+                // case upper panel clamp holes
+                translate([150-gap-wallthick,-gap-adj,case_z-13]) 
+                    panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
+                translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                    case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
+                if(rack_width == 19) { 
+                    translate([300-gap-wallthick,-gap-adj,case_z-13]) 
+                        panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
+                    translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                        case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
+                }
             }
             // pcb and multi-pcb standoffs
             for(r = [0:len(rack_bay_sbc)-1]) {

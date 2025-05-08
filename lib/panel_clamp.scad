@@ -37,9 +37,43 @@ module panel_clamp(face, screw, style, dia_x, dia_y, height, mask) {
     roty = 0;
     rotz = face == "left" ? 90 : face == "right" ? 270 : 0;
 
-    if(enablemask == true && mstyle == "default") {
+    if(enablemask == true) {
         rotate([rotx,roty,rotz]) {
-            cylinder(d=dia_y, h=height);
+            if(mstyle == "default") {
+                cylinder(d=dia_y, h=height);
+            }
+            if(screw == "m2" && mstyle == "holes") {
+                translate([(-dia_y-(nuts[2][0]+.5)/2)/2, 0, 2.25]) rotate([0,90,0]) 
+                    cylinder(d=nuts[0][0]+.5, h=dia_y+2);
+                translate([-(dia_y/2), 0, 2.25]) rotate([0,90,0]) 
+                    cylinder(d=nuts[0][1]*2/sqrt(3), h=dia_y*.375, $fn=6);
+                translate([nuts[0][0]+.5, 0, 2.25]) rotate([0,90,0]) 
+                    cylinder(d=nuts[0][1]+.5, h=dia_y*.375);
+            }
+            if(screw == "m2.5" && mstyle == "holes") {
+                translate([(-dia_y-(nuts[2][0]+.5)/2)/2, 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[1][0]+.5, h=dia_y+2);
+                translate([-(dia_y/2), 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[1][1]*2/sqrt(3), h=dia_y*.375, $fn=6);
+                translate([nuts[1][0]+.5, 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[1][1]+.5, h=dia_y*.375);
+            }
+            if(screw == "m3" && mstyle == "holes") {
+                translate([(-dia_y-(nuts[2][0]+.5)/2)/2, 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[2][0]+.5, h=dia_y+2);
+                translate([-(dia_y/2), 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[2][1]*2/sqrt(3), h=dia_y*.375, $fn=6);
+                translate([nuts[2][0]+.5, 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[2][1]+.5, h=dia_y*.375);
+            }
+            if(screw == "m4" && mstyle == "holes") {
+                translate([(-dia_y-(nuts[2][0]+.5)/2)/2, 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[3][0]+.5, h=dia_y+2);
+                translate([-(dia_y/2), 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[3][1]*2/sqrt(3), h=dia_y*.375, $fn=6);
+                translate([nuts[3][0]+.5, 0, 3]) rotate([0,90,0]) 
+                    cylinder(d=nuts[3][1]+.5, h=dia_y*.375);
+            }
         }
     }
     if(enablemask == false) {
