@@ -16,7 +16,7 @@
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
     grommet(face, style, od, id, wall, assembly, mask)
-    grommet_clip(style, od, id, height)
+    grommet_clip(style, od, id, wall)
 
 */
 

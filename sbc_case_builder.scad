@@ -1387,7 +1387,35 @@ if (view == "part") {
         if(case_design == "panel_nas" && (pcb_width > 100 || width > 101.6)) {
             rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
         }
-        // ui access panel
+        if(case_design == "rack") {
+            // rear fan covers
+            for(r = [0:len(rack_bay_sbc)-1]) {
+                fan_offset = -75+(75-rear_fan_size)/2;
+                if(rack_bay_rear_fan[r] == true) {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,0,0])
+                            fan_cover(rear_fan_size, wallthick, rear_cooling);
+                }
+            }
+            // rear grommets
+            for(r = [0:len(rack_bay_sbc)-1]) {
+                grommet_offset = -75+11;
+                if(rack_bay_rear_conduit[r] == true) {
+                    translate([0,0,0]) rotate([270,0,0]) difference() {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                    }
+                    translate([0,20,0]) rotate([270,0,0]) difference() {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                    }
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,-20,0])
+                        grommet_clip("sleeve", 10, r+2, wallthick);
+                }
+            }
+        }
+       // ui access panel
         if(bottom_access_panel_enable == true) {
             if(access_panel_rotation == 0) {
                 translate([access_panel_location[0],-access_panel_location[1], 0]) rotate([0,0,access_panel_rotation]) 
