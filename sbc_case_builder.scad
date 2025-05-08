@@ -1285,8 +1285,17 @@ if (view == "part") {
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             case_adapter(case_design);
         }
+        if(case_design == "rack" && rack_width == 19) {
+            difference() {
+                translate([-150,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+                translate([150-gap-wallthick,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+            }
+        }
+        if(case_design == "rack" && rack_width == 10) {
+        }
         else {
-            if(section_part == false) {
+             if(section_part == false) {
                 case_bottom(case_design);
             }
             else {
@@ -1331,6 +1340,18 @@ if (view == "part") {
         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([depth,0,width-gap]) rotate([0,90,90]) case_side(case_design,"right");
         }
+        if(case_design == "rack" && rack_width == 19) {
+            difference() {
+                translate([-300,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+            }
+        }
+        if(case_design == "rack" && rack_width == 10) {
+            difference() {
+                translate([-150,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+            }
+        }
     }
     if(individual_part == "left") {
         if(case_design == "panel" || case_design == "panel_nas") {
@@ -1347,6 +1368,13 @@ if (view == "part") {
         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
                 case_side(case_design,"left");
+        }
+        if(case_design == "rack") {
+            difference() {
+                translate([0,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([150-gap-wallthick,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+
+            }
         }
     }
     if(individual_part == "io_shield") {

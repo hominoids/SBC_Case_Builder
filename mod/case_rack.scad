@@ -201,6 +201,7 @@ if(case_design == "rack" && side == "bottom") {
                 translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
                     floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
                         cylinder(d=4*2/sqrt(3), h=2);
+
                 // pcb and multi-pcb standoff holes 
                 for(r = [0:len(rack_bay_sbc)-1]) {
                     if(rack_bay_sbc[r] != "empty") {
