@@ -82,7 +82,7 @@ rack_size =  "1u"; //["1u","1u+","1u++","2u"]
 Rack_Bay1 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay1_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay1_rotation = 0; // [0:90:270]
-rack_bay1_face = "vent"; //["solid","blank","io_shield","vent"]
+rack_bay1_face = "vent"; //["open","solid","removable","vent"]
 rack_bay1_wall = false; // [true,false]
 rack_bay1_rear_fan = false; //[true,false]
 rack_bay1_rear_conduit = false; //[true,false]
@@ -90,7 +90,7 @@ rack_bay1_rear_conduit = false; //[true,false]
 Rack_Bay2 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay2_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay2_rotation = 0; // [0:90:270]
-rack_bay2_face = "vent"; //["solid","blank","io_shield","vent"]
+rack_bay2_face = "vent"; //["open","solid","removable","vent"]
 rack_bay2_wall = false; // [true,false]
 rack_bay2_rear_fan = false; //[true,false]
 rack_bay2_rear_conduit = false; //[true,false]
@@ -98,7 +98,7 @@ rack_bay2_rear_conduit = false; //[true,false]
 Rack_Bay3 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay3_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay3_rotation = 0; // [0:90:270]
-rack_bay3_face = "vent"; //["solid","blank","io_shield","vent"]
+rack_bay3_face = "vent"; //["open","solid","removable","vent"]
 rack_bay3_wall = false; // [true,false]
 rack_bay3_rear_fan = false; //[true,false]
 rack_bay3_rear_conduit = false; //[true,false]
@@ -106,7 +106,7 @@ rack_bay3_rear_conduit = false; //[true,false]
 Rack_Bay4 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay4_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay4_rotation = 0; // [0:90:270]
-rack_bay4_face = "vent"; //["solid","blank","io_shield","vent"]
+rack_bay4_face = "vent"; //["open","solid","removable","vent"]
 rack_bay4_wall = false; // [true,false]
 rack_bay4_rear_fan = false; //[true,false]
 rack_bay4_rear_conduit = false; //[true,false]
@@ -114,7 +114,7 @@ rack_bay4_rear_conduit = false; //[true,false]
 Rack_Bay5 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay5_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay5_rotation = 0; // [0:90:270]
-rack_bay5_face = "vent"; //["solid","blank","io_shield","vent"]
+rack_bay5_face = "vent"; //["open","solid","removable","vent"]
 rack_bay5_wall = false; // [true,false]
 rack_bay5_rear_fan = false; //[true,false]
 rack_bay5_rear_conduit = false; //[true,false]
@@ -122,7 +122,7 @@ rack_bay5_rear_conduit = false; //[true,false]
 Rack_Bay6 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay6_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay6_rotation = 0; // [0:90:270]
-rack_bay6_face = "vent"; //["solid","blank","io_shield","vent"]
+rack_bay6_face = "vent"; //["open","solid","removable","vent"]
 rack_bay6_rear_fan = false; //[true,false]
 rack_bay6_rear_conduit = false; //[true,false]
 
@@ -534,7 +534,13 @@ multipcb_bottom_standoff = [multipcb_bottom_standoff_size,
                    multipcb_bottom_standoff_insert_height];
 
 rack_bay_sbc = [Rack_Bay1,Rack_Bay2,Rack_Bay3,Rack_Bay4,Rack_Bay5,Rack_Bay6];
-rack_bay_xyz_loc = [rack_bay1_xyz_loc, rack_bay2_xyz_loc, rack_bay3_xyz_loc, rack_bay4_xyz_loc, rack_bay5_xyz_loc, rack_bay6_xyz_loc];
+rack_bay_xyz_loc = [[rack_bay1_xyz_loc[0],rack_bay1_xyz_loc[1],0], 
+                    [rack_bay2_xyz_loc[0],rack_bay2_xyz_loc[1],0],
+                    [rack_bay3_xyz_loc[0],rack_bay3_xyz_loc[1],0],
+                    [rack_bay4_xyz_loc[0],rack_bay4_xyz_loc[1],0],
+                    [rack_bay5_xyz_loc[0],rack_bay5_xyz_loc[1],0],
+                    [rack_bay6_xyz_loc[0],rack_bay6_xyz_loc[1],0]];
+
 rack_bay_rotation = [rack_bay1_rotation, rack_bay2_rotation, rack_bay3_rotation, rack_bay4_rotation, rack_bay5_rotation, rack_bay6_rotation];
 rack_bay_face = [rack_bay1_face, rack_bay2_face, rack_bay3_face, rack_bay4_face, rack_bay5_face, rack_bay6_face];
 rack_bay_wall = [rack_bay1_wall, rack_bay2_wall, rack_bay3_wall, rack_bay4_wall, rack_bay5_wall, false];

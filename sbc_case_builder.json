@@ -11342,7 +11342,7 @@
             "rack_bay6_rear_conduit": "true",
             "rack_bay6_rear_fan": "true",
             "rack_bay6_rotation": "270",
-            "rack_bay6_xyz_loc": "[383, 0, 0]",
+            "rack_bay6_xyz_loc": "[385, 0, 0]",
             "rack_size": "1u",
             "rack_width": "19",
             "raise_top": "0",
