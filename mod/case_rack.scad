@@ -15,6 +15,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    case_rack(case_design,side)
+
 
            NAME: case_rack
     DESCRIPTION: creates a 1u-2u rack case
@@ -29,6 +31,8 @@ module case_rack(case_design,side) {
 rack_asm_gap = .25;
 rack_asm_size = 5;
 rack_asm_hole = 2.25;
+baysize = (450-(2*wallthick))/6;
+bay_height = rack_size == "1u" ? 44.45-floorthick : (2 * 44.45)-floorthick;
 
 if(case_design == "rack" && side == "bottom") {
     difference() {
@@ -729,9 +733,10 @@ if(case_design == "rack" && side == "bottom") {
             
             }
             // open front
-            if(rack_bay_face[r] == "open") {
-                baysize = (450-(2*wallthick))/6;
-                open_offset = r == 0 && rack_bay_wall[r] == true ? wallthick+gap+1 : 
+            if(rack_bay_face[r] == "open" || rack_bay_face[r] == "removable") {
+                open_radius = rack_bay_face[r] == "removable" ? 1 : 6;
+                open_height = rack_bay_face[r] == "removable" ? 2 : 6;
+                open_offset = r == 0 && rack_bay_wall[r] == true ? wallthick+gap+.5 : 
                     r == 0 && rack_bay_wall[r] == false && rack_bay_sbc[r+1] == "empty" ? wallthick+gap+1 : 
                     r >= 1 && r < 5 && rack_bay_wall[r] == true ? 3 : 
                     r >= 1 && r < 5 && rack_bay_wall[r] == false && rack_bay_sbc[r+1] == "empty" ? wallthick-1 : 
@@ -741,16 +746,17 @@ if(case_design == "rack" && side == "bottom") {
                     r == 0 && rack_bay_wall[r] == false && rack_bay_sbc[r+1] == "empty" ? 75-wallthick-gap-3+baysize : 
                     r >= 1 && r < 5 && rack_bay_wall[r] == true ? 75-wallthick-gap-2 : 
                     r >= 1 && r < 5 && rack_bay_wall[r] == false && rack_bay_sbc[r+1] == "empty" && 
-                        r != 2 && rack_width == 10 ? 75-wallthick-gap-3+baysize : 
-                    r == 5 ? 75-wallthick-gap-3 : 
+                        r != 2 && rack_width == 10 ? 75-wallthick-gap-4+baysize : 
+                    r == 5 ? 75-wallthick-gap-sidethick+.125 : 
                     r == 2 && rack_width == 10 ? 66 : 73;
 
-                translate([open_offset-wallthick-gap+rack_asm_gap/2+75*(r+1)-75,-wallthick-gap-adj,floorthick+case_z+6]) 
-                    rotate([270,0,0]) slab([open_size,case_z,2*wallthick+15],6);
+                translate([open_offset-wallthick-gap+rack_asm_gap/2+75*(r+1)-75,
+                    -wallthick-gap-adj,floorthick+case_z+open_height]) 
+                        rotate([270,0,0]) slab([open_size,case_z,2*wallthick+15],open_radius);
 
-#translate([-gap-wallthick+(75*(r+1))-75,-10-r,0]) rotate([0,90,0]) cylinder(d=1, h=75);
+//#translate([-gap-wallthick+(75*(r+1))-75,-10-r,0]) rotate([0,90,0]) cylinder(d=1, h=75);
             }
-#translate([-gap-wallthick,0,case_z]) rotate([0,90,0]) cylinder(d=1, h=450);
+//#translate([-gap-wallthick,0,case_z]) rotate([0,90,0]) cylinder(d=1, h=450);
         }
         // subtractive accessories
         if(accessory_name != "none") {
@@ -814,7 +820,7 @@ if(case_design == "rack" && side == "bottom") {
             }
         }
         for(r = [0:len(rack_bay_sbc)-1]) {
-            if(rack_bay_sbc[r] != "empty") {
+            if(rack_bay_sbc[r] != "empty" && rack_bay_face[r] != "removable") {
                 s = search([rack_bay_sbc[r]],sbc_data);
                 pcb_id = sbc_data[s[0]][4];
                 pcb_width = sbc_data[s[0]][10][0];
@@ -919,5 +925,27 @@ if(case_design == "rack" && side == "bottom") {
                 access_panel([access_panel_size[0],access_panel_size[1],floorthick], access_panel_orientation, [false,10,2,"default"]);
         }
     }
+    // bay inserts
+    for(r = [0:len(rack_bay_sbc)-1]) {
+        if(rack_bay_face[r] == "removable") {
+            bay_tray(baysize-wallthick-gap,depth-2*wallthick-gap-.5-tol,r);
+        }
+    }
+  }
 }
+
+
+module bay_tray(width, depth, bay) {
+
+baysize = (450-(2*wallthick))/6;
+bay_height = rack_size == "1u" ? 44.45-floorthick : (2 * 44.45)-floorthick;
+bayadj = bay == 0 ? -74 : -75.5;
+
+    union() {
+        #translate([bayadj+75*(bay+1),0,floorthick]) 
+            slab([baysize-wallthick-gap-2,depth-.5-tol,1],3);
+        #translate([bayadj+75*(bay+1),0,floorthick+bay_height-floorthick-adj]) 
+            rotate([270,0,0]) slab([baysize-wallthick-gap-2,bay_height-floorthick,1.5],1);
+    }
+
 }
