@@ -1161,7 +1161,15 @@ if (view == "model") {
             // bay inserts
             for(r = [0:len(rack_bay_sbc)-1]) {
                 bayadj = r == 0 ? -74 : -75.5;
-                if(rack_bay_face[r] == "removable") {
+                if(rack_bay_face[r] == "removable" && r ==0 && rack_bay_sbc[r] != "empty") {
+                    color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
+                        bay_tray(depth-2*wallthick-gap-.5-tol,r);
+                }
+//                if(rack_bay_face[r] == "removable" && r !=0 && rack_bay_face[r-1] == "removable") {
+//                    color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
+//                        bay_tray(depth-2*wallthick-gap-.5-tol,r);
+//                }
+                if(rack_bay_face[r] == "removable" && r !=0 && rack_bay_sbc[r] != "empty") {
                     color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
                         bay_tray(depth-2*wallthick-gap-.5-tol,r);
                 }

@@ -43,7 +43,7 @@ module rack_end_bracket(side, size, thick) {
     tab_width = 15.875+thick;
     b_width = thick;
     b_depth = depth;
-    b_height = 25;
+    b_height = thick;
     b_loc = [-thick,0,0];
 
     adjust = .01;
