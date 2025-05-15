@@ -1,6 +1,6 @@
 /*
     This file is part of SBC Case Builder https://github.com/hominoids/SBC_Case_Builder
-    Copyright 2022,2023,2024 Edward A. Kisiel hominoid@cablemi.com
+    Copyright 2025 Edward A. Kisiel hominoid@cablemi.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 
            NAME: case_rack
-    DESCRIPTION: creates a 1u-2u rack case
+    DESCRIPTION: creates 1u-2u rack cases
            TODO: none
 
           USAGE: case_rack(case_design,side)
@@ -99,39 +99,6 @@ if(case_design == "rack" && side == "bottom") {
                             panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
                     }
 
-                    // case lower assembly blocks
-                    // rear left - left side
-                    translate([150-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
-                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                    // rear left - right side
-                    translate([150-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
-                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                    if(rack_width == 19) { 
-                        // rear right - right
-                        translate([300-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // rear right - left side
-                        translate([300-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                    }
-
-                    // front left - left
-                    translate([150-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
-                        floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                    // front left - right
-                    translate([150-gap-wallthick+rack_asm_gap,
-                        depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
-                            cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                    if(rack_width == 19) { 
-                        // front right - right
-                        translate([300-gap-wallthick+rack_asm_gap,
-                            depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
-                                cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                        // front right - left
-                        translate([300-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
-                            floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
-                    }                    
-
                     // additive accessories
                     if(accessory_name != "none") {
                         for (i=[1:11:len(accessory_data[a[0]])-1]) {
@@ -154,56 +121,6 @@ if(case_design == "rack" && side == "bottom") {
                         }
                     }
                 }
-                // case lower block assembly holes
-                // rear left
-                translate([150-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
-                // rear left nut
-                translate([150-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
-                // rear left recess
-                translate([150-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,-gap-adj+(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2);
-                // rear right
-                translate([300-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
-                // rear right nut
-                translate([300-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
-                // rear right recess
-                translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,-gap-adj+(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2);
-                // front left
-                translate([150-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
-                // front left nut
-                translate([150-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
-                // front left recess
-                translate([150-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2);
-                // front right
-                translate([300-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)+adj-(rack_asm_size/2),
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
-                // front right nut
-                translate([300-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
-                // front right recess
-                translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
-                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
-                        cylinder(d=4*2/sqrt(3), h=2);
-
                 // pcb and multi-pcb standoff holes 
                 for(r = [0:len(rack_bay_sbc)-1]) {
                     if(rack_bay_sbc[r] != "empty" && rack_bay_face[r] != "removable") {
@@ -725,9 +642,19 @@ if(case_design == "rack" && side == "bottom") {
             }
             // rear grommet openings
             grommet_offset = -75+11;
-            if(rack_bay_rear_conduit[r] == true) {
+            if(rack_bay_rear_conduit[r] == "grommet" || rack_bay_rear_conduit[r] == "grommets-vertical") {
                 translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+grommet_offset+4,depth-wallthick-gap,13])
                     grommet("front", "sleeve", 10, 4, wallthick, true, [true,10,0,"default"]);
+            }
+            if(rack_bay_rear_conduit[r] == "grommets-vertical") {
+                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+grommet_offset+4,depth-wallthick-gap,30])
+                    grommet("front", "sleeve", 10, 4, wallthick, true, [true,10,0,"default"]);
+            }
+            if(rack_bay_rear_conduit[r] == "conduit") {
+                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+grommet_offset+1.5,depth-gap-wallthick+adj,5])
+                    rotate([90,0,0]) slab([5,30,wallthick+2*adj],2.5);
+                translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+grommet_offset+4,depth-gap-wallthick+adj,30])
+                    rotate([90,0,0]) cylinder(d=15, h=2*(wallthick+adj));
             }
             // front vent
             if(rack_bay_face[r] == "vent") {
@@ -801,7 +728,6 @@ if(case_design == "rack" && side == "bottom") {
                     }
                 }
             }
-
         }
         // ui access panel
         if(bottom_access_panel_enable == true) {
@@ -854,34 +780,6 @@ if(case_design == "rack" && side == "bottom") {
                     translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])  rotate([0,0,rack_bay_rotation[r]])
                         sbc(rack_bay_sbc[r], cooling, fan_size, gpio_opening, uart_opening, true);
                 }
-                // indents
-                if(indents == true) {
-                    for (i=[1:11:len(sbc_data[s[0]])-2]) {
-                        class = sbc_data[s[0]][i+1];
-                        type = sbc_data[s[0]][i+2];
-                        pcbid = sbc_data[s[0]][i+3];
-                        pcbloc_x = sbc_data[s[0]][i+4];
-                        pcbloc_y = sbc_data[s[0]][i+5];
-                        pcbloc_z = sbc_data[s[0]][i+6];
-                        if(class == "pcb") {
-                            for (i=[1:11:len(sbc_data[s[0]])-2]) {
-                                class = sbc_data[s[0]][i+1];
-                                type = sbc_data[s[0]][i+2];
-                                id = sbc_data[s[0]][i+3];
-                                loc_x = sbc_data[s[0]][i+4]+pcb_loc_x+pcbloc_x;
-                                loc_y = sbc_data[s[0]][i+5]+pcb_loc_y+pcbloc_y;
-                                loc_z = sbc_data[s[0]][i+6]+pcb_loc_z+pcbloc_z;
-                                side = sbc_data[s[0]][i+7];
-                                rotation = sbc_data[s[0]][i+8];
-                                if(id == pcbid) {
-                                    indent(loc_x, loc_y, bottom_height+loc_z-adj, rotation[2], side, class,
-                                         type, wallthick, gap, floorthick, pcb_z);
-                                }
-                            }
-                        }
-                    }
-                }
-
                 // case divide
                 translate([150-gap-wallthick,-gap-wallthick-1,-adj]) cube([rack_asm_gap,depth+2,case_z+2*adj]);
                 translate([300-gap-wallthick,-gap-wallthick-1,-adj]) cube([rack_asm_gap,depth+2,case_z+2*adj]);
@@ -939,6 +837,90 @@ if(case_design == "rack" && side == "bottom") {
                     floorthick], access_panel_orientation, [false,10,2,"default"]);
         }
     }
+    // case lower assembly blocks
+    difference() {
+        union() {
+            // rear left - left side
+            translate([150-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
+                cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+            // rear left - right side
+            translate([150-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
+                cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+            if(rack_width == 19) { 
+                // rear right - right
+                translate([300-gap-wallthick+rack_asm_gap,-gap-adj,floorthick-adj]) 
+                    cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                // rear right - left side
+                translate([300-gap-wallthick-rack_asm_size,-gap-adj,floorthick-adj]) 
+                    cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+            }
+            // front left - left
+            translate([150-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
+                floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+            // front left - right
+            translate([150-gap-wallthick+rack_asm_gap,
+                depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
+                    cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+            if(rack_width == 19) { 
+                // front right - right
+                translate([300-gap-wallthick+rack_asm_gap,
+                    depth-gap-(2*wallthick)-rack_asm_size+adj,floorthick-adj]) 
+                        cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+                // front right - left
+                translate([300-gap-wallthick-rack_asm_size,depth-gap-(2*wallthick)-rack_asm_size+adj,
+                    floorthick-adj]) cube([rack_asm_size,rack_asm_size,rack_asm_size]);
+            }                    
+        }
+        // case lower block assembly holes
+        // rear left
+        translate([150-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+        // rear left nut
+        translate([150-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+        // rear left recess
+        translate([150-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,-gap-adj+(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2);
+        // rear right
+        translate([300-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+        // rear right nut
+        translate([300-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+        // rear right recess
+        translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,-gap-adj+(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2);
+        // front left
+        translate([150-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+        // front left nut
+        translate([150-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+        // front left recess
+        translate([150-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2);
+        // front right
+        translate([300-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)+adj-(rack_asm_size/2),
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+        // front right nut
+        translate([300-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+        // front right recess
+        translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+            floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                cylinder(d=4*2/sqrt(3), h=2);
+    }
   }
 }
 
@@ -968,11 +950,26 @@ module bay_tray(depth, bay) {
             translate([reminsert-4,(depth/2)-gap-wallthick+3.75,-adj]) 
                 cylinder(d=20, h=7);
         }
-        // left assembly block opening
+        // rear assembly block opening
+        // rear left
         translate([2-2*rack_asm_size,depth-wallthick-1.25,-adj]) 
             cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size]);
-        // right assembly block opening
+        // rear middle
         translate([2+baysize-2*rack_asm_size,depth-wallthick-1.25,-adj]) 
+            cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size]);
+        // rear right
+        translate([2+2*baysize-2*rack_asm_size+1.25-.25,depth-wallthick-1.25,-adj]) 
+            cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size]);
+        // front assembly block opening
+        // front left
+        translate([2-2*rack_asm_size,-gap,-adj]) 
+            cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size]);
+        // front middle
+        if((bay == 1 || bay) == 3 && reminsert/9 > 10)
+            translate([2+baysize-2*rack_asm_size,-gap,-adj]) 
+                cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size]);
+        // front right
+        translate([2+2*baysize-2*rack_asm_size+1.25-.25,-gap,-adj]) 
             cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size]);
 
         // front vent

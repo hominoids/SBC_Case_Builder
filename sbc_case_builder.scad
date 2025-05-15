@@ -85,7 +85,7 @@ rack_bay1_rotation = 0; // [0:90:270]
 rack_bay1_face = "vent"; //["open","fixed","removable","vent"]
 rack_bay1_wall = false; // [true,false]
 rack_bay1_rear_fan = false; //[true,false]
-rack_bay1_rear_conduit = false; //[true,false]
+rack_bay1_rear_conduit = "grommet"; //["none","conduit","grommet","grommets-vertical"]
 
 Rack_Bay2 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay2_xyz_loc = [0,0,0]; // [0:.5:450]
@@ -93,7 +93,7 @@ rack_bay2_rotation = 0; // [0:90:270]
 rack_bay2_face = "vent"; //["open","fixed","removable","vent"]
 rack_bay2_wall = false; // [true,false]
 rack_bay2_rear_fan = false; //[true,false]
-rack_bay2_rear_conduit = false; //[true,false]
+rack_bay2_rear_conduit =  "grommet"; //["none","conduit","grommet","grommets-vertical"]
 
 Rack_Bay3 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay3_xyz_loc = [0,0,0]; // [0:.5:450]
@@ -101,7 +101,7 @@ rack_bay3_rotation = 0; // [0:90:270]
 rack_bay3_face = "vent"; //["open","fixed","removable","vent"]
 rack_bay3_wall = false; // [true,false]
 rack_bay3_rear_fan = false; //[true,false]
-rack_bay3_rear_conduit = false; //[true,false]
+rack_bay3_rear_conduit =  "grommet"; //["none","conduit","grommet","grommets-vertical"]
 
 Rack_Bay4 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay4_xyz_loc = [0,0,0]; // [0:.5:450]
@@ -109,7 +109,7 @@ rack_bay4_rotation = 0; // [0:90:270]
 rack_bay4_face = "vent"; //["open","fixed","removable","vent"]
 rack_bay4_wall = false; // [true,false]
 rack_bay4_rear_fan = false; //[true,false]
-rack_bay4_rear_conduit = false; //[true,false]
+rack_bay4_rear_conduit =  "grommet"; //["none","conduit","grommet","grommets-vertical"]
 
 Rack_Bay5 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay5_xyz_loc = [0,0,0]; // [0:.5:450]
@@ -117,14 +117,14 @@ rack_bay5_rotation = 0; // [0:90:270]
 rack_bay5_face = "vent"; //["open","fixed","removable","vent"]
 rack_bay5_wall = false; // [true,false]
 rack_bay5_rear_fan = false; //[true,false]
-rack_bay5_rear_conduit = false; //[true,false]
+rack_bay5_rear_conduit =  "grommet"; //["none","conduit","grommet","grommets-vertical"]
 
 Rack_Bay6 = "empty"; //  ["empty", "c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
 rack_bay6_xyz_loc = [0,0,0]; // [0:.5:450]
 rack_bay6_rotation = 0; // [0:90:270]
 rack_bay6_face = "vent"; //["open","fixed","removable","vent"]
 rack_bay6_rear_fan = false; //[true,false]
-rack_bay6_rear_conduit = false; //[true,false]
+rack_bay6_rear_conduit =  "grommet"; //["none","conduit","grommet","grommets-vertical"]
 
 /* [3D Case Adjustments] */
 // sbc location x axis
@@ -611,22 +611,33 @@ if (view == "platter") {
     if(case_design == "rack") {
         case_rack(case_design,"bottom");
         // rear fan covers
-        for(r = [0:len(rack_bay_sbc)-1]) {
+        ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
+        for(r = [0:ucount-1]) {
             fan_offset = -75+(75-rear_fan_size)/2;
             if(rack_bay_rear_fan[r] == true) {
                 translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,
-                    depth+10,(case_z-rear_fan_size)/2])
+                    -80,(case_z-rear_fan_size)/2])
                         fan_cover(rear_fan_size, wallthick, rear_cooling);
             }
         }
-        // rear grommets
-        for(r = [0:len(rack_bay_sbc)-1]) {
-            grommet_offset = -75+11;
-            if(rack_bay_rear_conduit[r] == true) {
-                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,depth+30,0])
-                    color("lightgrey") grommet("bottom", "sleeve", 10, r+2, wallthick, true, [false,10,0,"default"]);
+            // rear grommets
+            for(r = [0:len(rack_bay_sbc)-1]) {
+                grommet_offset = -75+11;
+                if(rack_bay_rear_conduit[r] == "grommet") {
+                    translate([0,-50,0]) rotate([270,0,0]) difference() {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                    }
+                    translate([0,-30,0]) rotate([270,0,0]) difference() {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                    }
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,-70,0])
+                        grommet_clip("sleeve", 10, r+2, wallthick);
+                }
             }
-        }
     }
     if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
         color("dimgrey",1) case_adapter(case_design);
@@ -1140,83 +1151,80 @@ if (view == "model") {
                             cube([gap+wallthick+1,depth+2,case_z+2]);
                     }
                 }
-            }        
+            } 
+            ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
             // rear fan covers
-            for(r = [0:len(rack_bay_sbc)-1]) {
+            for(r = [0:ucount-1]) {
                 fan_offset = -75+(75-rear_fan_size)/2;
                 if(rack_bay_rear_fan[r] == true) {
                     translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,
                         depth-gap,(case_z-rear_fan_size)/2])
                             rotate([90,0,0]) fan_cover(rear_fan_size, wallthick, rear_cooling);
                 }
-            }
             // rear grommets
-            for(r = [0:len(rack_bay_sbc)-1]) {
-                grommet_offset = -75+11;
-                if(rack_bay_rear_conduit[r] == true) {
-                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,13])
-                        color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
-                }
+            grommet_offset = -75+11;
+            if(rack_bay_rear_conduit[r] == "grommet" || rack_bay_rear_conduit[r] == "grommets-vertical") {
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,13])
+                    color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
             }
-            // bay inserts
-            for(r = [0:len(rack_bay_sbc)-1]) {
-                bayadj = r == 0 ? -74 : -75.5;
-                if(rack_bay_face[r] == "removable" && r ==0 && rack_bay_sbc[r] != "empty") {
-                    color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
-                        bay_tray(depth-2*wallthick-gap-.5-tol,r);
-                }
-//                if(rack_bay_face[r] == "removable" && r !=0 && rack_bay_face[r-1] == "removable") {
-//                    color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
-//                        bay_tray(depth-2*wallthick-gap-.5-tol,r);
-//                }
-                if(rack_bay_face[r] == "removable" && r !=0 && rack_bay_sbc[r] != "empty") {
-                    color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
-                        bay_tray(depth-2*wallthick-gap-.5-tol,r);
-                }
+            if(rack_bay_rear_conduit[r] == "grommets-vertical") {
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,30])
+                    color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
             }
-            if(sbc_off == false) {
-                for(i = [0:len(rack_bay_sbc)-1]) {
-                    if(rack_bay_sbc[i] != "empty" && rack_bay_face[i] != "removable") {
-                        s = search([rack_bay_sbc[i]],sbc_data);
-                        pcb_loc_z = rack_bay_xyz_loc[i][2];
-                        pcb_id = sbc_data[s[0]][4];
-                        pcb_width = sbc_data[s[0]][10][0];
-                        pcb_depth = sbc_data[s[0]][10][1];
-                        pcb_z_orig = sbc_data[s[0]][10][2];
-                        pcb_tmaxz = sbc_data[s[0]][11][5];
-                        pcb_bmaxz = sbc_data[s[0]][11][6];
-                        pcb_color = sbc_data[s[0]][11][1];
-                        pcb_radius = sbc_data[s[0]][11][0];
+        // bay inserts
+            bayadj = r == 0 ? -74 : -75.5;
+            if(rack_bay_face[r] == "removable" && r ==0 && rack_bay_sbc[r] != "empty") {
+                color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
+                    bay_tray(depth-2*wallthick-gap-.5-tol,r);
+            }
+            if(rack_bay_face[r] == "removable" && r !=0 && rack_bay_sbc[r] != "empty") {
+                color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
+                    bay_tray(depth-2*wallthick-gap-.5-tol,r);
+            }
+        }
+        if(sbc_off == false) {
+            for(i = [0:len(rack_bay_sbc)-1]) {
+                if(rack_bay_sbc[i] != "empty" && rack_bay_face[i] != "removable") {
+                    s = search([rack_bay_sbc[i]],sbc_data);
+                    pcb_loc_z = rack_bay_xyz_loc[i][2];
+                    pcb_id = sbc_data[s[0]][4];
+                    pcb_width = sbc_data[s[0]][10][0];
+                    pcb_depth = sbc_data[s[0]][10][1];
+                    pcb_z_orig = sbc_data[s[0]][10][2];
+                    pcb_tmaxz = sbc_data[s[0]][11][5];
+                    pcb_bmaxz = sbc_data[s[0]][11][6];
+                    pcb_color = sbc_data[s[0]][11][1];
+                    pcb_radius = sbc_data[s[0]][11][0];
 
-                        pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_xyz_loc[i][0];
-                        pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : rack_bay_xyz_loc[i][1];
-                        translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
-                            rotate([0,0,rack_bay_rotation[i]])
-                                sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
-                    }
-                    if(rack_bay_sbc[i] != "empty" && rack_bay_face[i] == "removable") {
-                        bayadj = i == 0 ? -74 : -75.5;
-                        s = search([rack_bay_sbc[i]],sbc_data);
-                        pcb_loc_z = rack_bay_xyz_loc[i][2];
-                        pcb_id = sbc_data[s[0]][4];
-                        pcb_width = sbc_data[s[0]][10][0];
-                        pcb_depth = sbc_data[s[0]][10][1];
-                        pcb_z_orig = sbc_data[s[0]][10][2];
-                        pcb_tmaxz = sbc_data[s[0]][11][5];
-                        pcb_bmaxz = sbc_data[s[0]][11][6];
-                        pcb_color = sbc_data[s[0]][11][1];
-                        pcb_radius = sbc_data[s[0]][11][0];
+                    pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_xyz_loc[i][0];
+                    pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : rack_bay_xyz_loc[i][1];
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
+                        rotate([0,0,rack_bay_rotation[i]])
+                            sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                if(rack_bay_sbc[i] != "empty" && rack_bay_face[i] == "removable") {
+                    bayadj = i == 0 ? -74 : -75.5;
+                    s = search([rack_bay_sbc[i]],sbc_data);
+                    pcb_loc_z = rack_bay_xyz_loc[i][2];
+                    pcb_id = sbc_data[s[0]][4];
+                    pcb_width = sbc_data[s[0]][10][0];
+                    pcb_depth = sbc_data[s[0]][10][1];
+                    pcb_z_orig = sbc_data[s[0]][10][2];
+                    pcb_tmaxz = sbc_data[s[0]][11][5];
+                    pcb_bmaxz = sbc_data[s[0]][11][6];
+                    pcb_color = sbc_data[s[0]][11][1];
+                    pcb_radius = sbc_data[s[0]][11][0];
 
-                        pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : 
-                            rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : 
-                            rack_bay_xyz_loc[i][0];
-                        pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : 
-                            rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : 
-                            rack_bay_xyz_loc[i][1];
+                    pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : 
+                        rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : 
+                        rack_bay_xyz_loc[i][0];
+                    pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : 
+                        rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : 
+                        rack_bay_xyz_loc[i][1];
 
-                        translate([pcb_loc_x+bayadj+75*(i+1) ,pcb_loc_y+wallthick+gap, 
-                            bottom_height-pcb_z+pcb_loc_z-adj+floorthick]) rotate([0,0,rack_bay_rotation[i]])
-                                sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
+                    translate([pcb_loc_x+bayadj+75*(i+1) ,pcb_loc_y+wallthick+gap, 
+                        bottom_height-pcb_z+pcb_loc_z-adj+floorthick]) rotate([0,0,rack_bay_rotation[i]])
+                            sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
                     }
                 }
             }
@@ -1435,7 +1443,8 @@ if (view == "part") {
         }
         if(case_design == "rack") {
             // rear fan covers
-            for(r = [0:len(rack_bay_sbc)-1]) {
+            ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
+            for(r = [0:ucount-1]) {
                 fan_offset = -75+(75-rear_fan_size)/2;
                 if(rack_bay_rear_fan[r] == true) {
                     translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,0,0])
@@ -1445,7 +1454,7 @@ if (view == "part") {
             // rear grommets
             for(r = [0:len(rack_bay_sbc)-1]) {
                 grommet_offset = -75+11;
-                if(rack_bay_rear_conduit[r] == true) {
+                if(rack_bay_rear_conduit[r] == "grommet") {
                     translate([0,0,0]) rotate([270,0,0]) difference() {
                     translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
                         grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
