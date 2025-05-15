@@ -1133,7 +1133,7 @@ if (view == "model") {
             }
             if(raise_top >= 0) {
                 difference() {
-                    color("grey",1) translate([0,0,raise_top]) case_rack(case_design,"top");
+                    color("dimgrey",1) translate([0,0,raise_top]) case_rack(case_design,"top");
                     if(move_rear < 0) {
                         translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
                             cube([width+2,gap+wallthick+1.01,case_z+2]);
@@ -1154,7 +1154,7 @@ if (view == "model") {
             } 
             ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
             // rear fan covers
-            for(r = [0:ucount-1]) {
+            for(r = [0:ucount]) {
                 fan_offset = -75+(75-rear_fan_size)/2;
                 if(rack_bay_rear_fan[r] == true) {
                     translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,
@@ -1171,7 +1171,8 @@ if (view == "model") {
                 translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,30])
                     color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
             }
-        // bay inserts
+            
+// bay inserts
             bayadj = r == 0 ? -74 : -75.5;
             if(rack_bay_face[r] == "removable" && r ==0 && rack_bay_sbc[r] != "empty") {
                 color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
