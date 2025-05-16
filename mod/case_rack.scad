@@ -150,7 +150,7 @@ if(case_design == "rack" && side == "bottom") {
                             rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
                         pcb_loc_z = rack_bay_xyz_loc[r][2];
 
-                        translate([pcb_loc_x,pcb_loc_y,pcb_loc_z]) rotate([0,0,rack_bay_rotation[r]]) union() {
+                        translate([pcb_loc_x,pcb_loc_y,0]) rotate([0,0,rack_bay_rotation[r]]) union() {
                             // pcb standoff holes
                             if(sbc_bottom_standoffs == true) {
                                 for (i=[1:11:len(sbc_data[s[0]])-2]) {
@@ -307,7 +307,7 @@ if(case_design == "rack" && side == "bottom") {
                         rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
                     pcb_loc_z = rack_bay_xyz_loc[r][2];
 
-                    translate([pcb_loc_x,pcb_loc_y,pcb_loc_z]) rotate([0,0,rack_bay_rotation[r]]) union() {
+                    translate([pcb_loc_x,pcb_loc_y,0]) rotate([0,0,rack_bay_rotation[r]]) union() {
                         // primary pcb standoffs
                         if(sbc_bottom_standoffs  == true) {
                                 for (i=[1:11:len(sbc_data[s[0]])-2]) {
@@ -988,7 +988,7 @@ module bay_tray(depth, bay) {
                 rack_bay_rotation[bay] == 180 ? rack_bay_xyz_loc[bay][1]+pcb_depth : rack_bay_xyz_loc[bay][1];
             pcb_loc_z = rack_bay_xyz_loc[bay][2];
 
-            translate([pcb_loc_x,pcb_loc_y+floorthick+gap,pcb_loc_z]) rotate([0,0,rack_bay_rotation[bay]]) union() {
+            translate([pcb_loc_x,pcb_loc_y+wallthick+gap,0]) rotate([0,0,rack_bay_rotation[bay]]) union() {
                 // pcb standoff holes
                 if(sbc_bottom_standoffs == true) {
                     for (i=[1:11:len(sbc_data[s[0]])-2]) {
@@ -1107,7 +1107,7 @@ module bay_tray(depth, bay) {
             rack_bay_rotation[bay] == 180 ? rack_bay_xyz_loc[bay][1]+pcb_depth : rack_bay_xyz_loc[bay][1];
         pcb_loc_z = rack_bay_xyz_loc[bay][2];
 
-        translate([pcb_loc_x,pcb_loc_y+floorthick+gap,pcb_loc_z]) rotate([0,0,rack_bay_rotation[bay]]) union() {
+        translate([pcb_loc_x,pcb_loc_y+wallthick+gap,0]) rotate([0,0,rack_bay_rotation[bay]]) union() {
             // primary pcb standoffs
             if(sbc_bottom_standoffs  == true) {
                     for (i=[1:11:len(sbc_data[s[0]])-2]) {
