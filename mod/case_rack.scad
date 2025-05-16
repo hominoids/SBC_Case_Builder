@@ -46,13 +46,6 @@ if(case_design == "rack" && side == "bottom") {
                             cube_fillet_inside([width-(wallthick*2),depth-(wallthick*2),case_z+floorthick], 
                                     vertical=[corner_fillet-wallthick,corner_fillet-wallthick,-wallthick,-wallthick],
                                         top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
-                        // case floor panel clamp holes
-                        translate([150-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
-                            panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
-                        if(rack_width == 19) { 
-                            translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
-                                panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
-                        }
                         // case upper panel clamp holes
                         translate([150-gap-wallthick,-gap-adj,case_z-13]) 
                             panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
@@ -305,7 +298,8 @@ if(case_design == "rack" && side == "bottom") {
                         rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
                     pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : 
                         rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
-                    pcb_loc_z = rack_bay_xyz_loc[r][2];
+                    pcb_loc_z = rack_bay_sbc[r] == "n2" ? rack_bay_xyz_loc[r][2]-6 : 
+                        rack_bay_sbc[r] == "n2+" ? rack_bay_xyz_loc[r][2]-4.5 : rack_bay_xyz_loc[r][2];
 
                     translate([pcb_loc_x,pcb_loc_y,0]) rotate([0,0,rack_bay_rotation[r]]) union() {
                         // primary pcb standoffs
@@ -906,7 +900,7 @@ if(case_design == "rack" && side == "top") {
             data = accessory_data[a[0]][i+9];
             mask = accessory_data[a[0]][i+10];
 
-            if(class == "add2" && face == "bottom") {
+            if(class == "add2" && face == "top") {
                 parametric_move_add(type, loc_x, loc_y, loc_z, face, rotation, parametric, size, data,
                     [false,mask[1],mask[2],mask[3]]);
             }

@@ -206,7 +206,7 @@ hd_y_position = 25; // [0:300]
 hd_z_position = 40; // [0:300]
 
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
+accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "n-series_rack19-1u", "n1_rack10-1u", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
 
 // sbc information text color
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
@@ -610,6 +610,7 @@ if (view == "platter") {
     }
     if(case_design == "rack") {
         case_rack(case_design,"bottom");
+        translate([0,(2*depth)+20,case_z+floorthick]) rotate([180,0,0]) case_rack(case_design,"top");
         // rear fan covers
         ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
         for(r = [0:ucount-1]) {
@@ -1152,7 +1153,7 @@ if (view == "model") {
                     }
                 }
             } 
-            ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
+            ucount = rack_width == 10 ? 2 : len(rack_bay_sbc)-1;
             // rear fan covers
             for(r = [0:ucount]) {
                 fan_offset = -75+(75-rear_fan_size)/2;
@@ -1338,19 +1339,24 @@ if (view == "part") {
         }
     }
     if(individual_part == "bottom") {
+        if(case_design == "shell" || case_design == "stacked" || case_design == "round" || case_design == "hex"
+             || case_design == "round" || case_design == "snap" || case_design == "fitted") {
+                case_bottom(case_design);
+        }
+        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
+            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             case_adapter(case_design);
         }
-        if(case_design == "rack" && rack_width == 19) {
+        if(case_design == "rack") {
             difference() {
                 translate([-150,0,-lower_bottom]) case_rack(case_design,"bottom");
                 translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
                 translate([150-gap-wallthick,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
             }
         }
-        if(case_design == "rack" && rack_width == 10) {
-        }
-        else {
+        if(case_design == "panel" || case_design == "panel_nas") {
              if(section_part == false) {
                 case_bottom(case_design);
             }
