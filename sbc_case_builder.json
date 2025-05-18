@@ -10872,7 +10872,7 @@
             "view": "model",
             "wallthick": "2"
         },
-        "c4_rack10-1u": {
+        "c-series_rack10-1u": {
             "$fn": "90",
             "Rack_Bay1": "c4",
             "Rack_Bay2": "c4",
@@ -10975,7 +10975,7 @@
             "ext_top_standoffs": "false",
             "fan_size": "0",
             "flat_blank_section": "false",
-            "floorthick": "3",
+            "floorthick": "2",
             "front_cover_pattern": "solid",
             "gap": "1",
             "gpio_opening": "none",
@@ -11131,9 +11131,9 @@
             "top_standoff_type": "blind",
             "uart_opening": "none",
             "view": "model",
-            "wallthick": "3"
+            "wallthick": "2"
         },
-        "c4_rack19-1u": {
+        "c-series_rack19-1u": {
             "$fn": "90",
             "Rack_Bay1": "c4",
             "Rack_Bay2": "c4",
@@ -11236,7 +11236,7 @@
             "ext_top_standoffs": "false",
             "fan_size": "0",
             "flat_blank_section": "false",
-            "floorthick": "3",
+            "floorthick": "2",
             "front_cover_pattern": "solid",
             "gap": "1",
             "gpio_opening": "none",
@@ -11360,7 +11360,7 @@
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "section_part": "false",
-            "sidethick": "4",
+            "sidethick": "3",
             "standard_motherboard_thickness": "0",
             "text_color": "Green",
             "text_font": "Nimbus Mono PS",
@@ -11392,12 +11392,12 @@
             "top_standoff_type": "blind",
             "uart_opening": "none",
             "view": "model",
-            "wallthick": "3"
+            "wallthick": "2"
         },
         "n1_rack10-1u": {
             "$fn": "90",
-            "Rack_Bay1": "n1",
-            "Rack_Bay2": "empty",
+            "Rack_Bay1": "empty",
+            "Rack_Bay2": "n1",
             "Rack_Bay3": "empty",
             "Rack_Bay4": "empty",
             "Rack_Bay5": "empty",
@@ -11441,7 +11441,7 @@
             "case_offset_bz": "0",
             "case_offset_tz": "0",
             "case_offset_x": "0",
-            "case_offset_y": "75",
+            "case_offset_y": "50",
             "cooling": "vent_hex_8mm",
             "corner_fillet": "3",
             "edge_fillet": "0",
@@ -11497,7 +11497,7 @@
             "ext_top_standoffs": "false",
             "fan_size": "0",
             "flat_blank_section": "false",
-            "floorthick": "3",
+            "floorthick": "2",
             "front_cover_pattern": "solid",
             "gap": "1",
             "gpio_opening": "none",
@@ -11580,7 +11580,7 @@
             "rack_bay2_rear_fan": "true",
             "rack_bay2_rotation": "0",
             "rack_bay2_wall": "false",
-            "rack_bay2_xyz_loc": "[120, 0, 6]",
+            "rack_bay2_xyz_loc": "[123.5, 0, 6]",
             "rack_bay3_face": "vent",
             "rack_bay3_rear_conduit": "grommet",
             "rack_bay3_rear_fan": "true",
@@ -11621,7 +11621,7 @@
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "section_part": "false",
-            "sidethick": "4",
+            "sidethick": "3",
             "standard_motherboard_thickness": "0",
             "text_color": "Green",
             "text_font": "Nimbus Mono PS",
@@ -11653,7 +11653,7 @@
             "top_standoff_type": "blind",
             "uart_opening": "none",
             "view": "model",
-            "wallthick": "3"
+            "wallthick": "2"
         },
         "n-series_rack19-1u": {
             "$fn": "90",
@@ -11702,7 +11702,7 @@
             "case_offset_bz": "0",
             "case_offset_tz": "0",
             "case_offset_x": "0",
-            "case_offset_y": "51",
+            "case_offset_y": "63",
             "cooling": "vent_hex_8mm",
             "corner_fillet": "3",
             "edge_fillet": "0",
@@ -11758,7 +11758,7 @@
             "ext_top_standoffs": "false",
             "fan_size": "0",
             "flat_blank_section": "false",
-            "floorthick": "3",
+            "floorthick": "2",
             "front_cover_pattern": "solid",
             "gap": "1",
             "gpio_opening": "none",
@@ -11869,7 +11869,7 @@
             "rack_width": "19",
             "raise_top": "0",
             "rear_cooling": "fan_1",
-            "rear_dualfan_spacing": "6",
+            "rear_dualfan_spacing": "47",
             "rear_fan": "1",
             "rear_fan_center": "false",
             "rear_fan_position": "0",
@@ -11882,7 +11882,7 @@
             "sbc_off": "false",
             "sbc_top_standoffs": "false",
             "section_part": "false",
-            "sidethick": "4",
+            "sidethick": "3",
             "standard_motherboard_thickness": "0",
             "text_color": "Green",
             "text_font": "Nimbus Mono PS",
@@ -11914,7 +11914,7 @@
             "top_standoff_type": "blind",
             "uart_opening": "none",
             "view": "model",
-            "wallthick": "3"
+            "wallthick": "2"
         }
     },
     "fileFormatVersion": "1"
