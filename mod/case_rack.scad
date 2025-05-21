@@ -47,15 +47,15 @@ if(case_design == "rack" && side == "bottom") {
                                     vertical=[corner_fillet-wallthick,corner_fillet-wallthick,-wallthick,-wallthick],
                                         top=[0,0,0,0], bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
                         // case upper panel clamp holes
-                        translate([150-gap-wallthick,-gap-adj,case_z-13]) 
+                        translate([150-gap-wallthick,-gap-adj,case_z-13+4]) 
                             panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
                         translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
-                            case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
+                            case_z-13+4]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
                         if(rack_width == 19) { 
-                            translate([300-gap-wallthick,-gap-adj,case_z-13]) 
+                            translate([300-gap-wallthick,-gap-adj,case_z-13+4]) 
                                 panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
                             translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
-                                case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
+                                case_z-13+4]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"default"]);
                         }
 
                     }
@@ -73,14 +73,14 @@ if(case_design == "rack" && side == "bottom") {
                         }
                     }
                     // case upper panel clamps
-                    translate([150-gap-wallthick,-gap-adj,case_z-13]) 
+                    translate([150-gap-wallthick,-gap-adj,case_z-13+4]) 
                         panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
                     translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
-                        case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                        case_z-13+4]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
                     if(rack_width == 19) { 
                         translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
-                            case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
-                        translate([300-gap-wallthick,-gap-adj,case_z-13]) 
+                            case_z-13+4]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
+                        translate([300-gap-wallthick,-gap-adj,case_z-13+4]) 
                             panel_clamp("rear", "m2", "sloped", 6, 18, 5, [false,10,2,"default"]);
                     }
 
@@ -141,7 +141,6 @@ if(case_design == "rack" && side == "bottom") {
                             rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
                         pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : 
                             rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
-                        pcb_loc_z = rack_bay_xyz_loc[r][2];
 
                         translate([pcb_loc_x,pcb_loc_y,0]) rotate([0,0,rack_bay_rotation[r]]) union() {
                             // pcb standoff holes
@@ -158,22 +157,38 @@ if(case_design == "rack" && side == "bottom") {
 
                                     if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_rear" && 
                                         bottom_rear_left_enable == true && bottom_standoff[6] != "blind") {
-                                            translate([pcbhole_x,pcbhole_y,-adj]) 
-                                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 7 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 15 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_y; 
+                                        translate([ahpx,ahpy,-adj]) 
+                                            cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                                     }
                                     if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_front" && 
                                         bottom_front_left_enable == true && bottom_standoff[6] != "blind") {
-                                            translate([pcbhole_x,pcbhole_y,-adj]) 
-                                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 8 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 75 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 112.75 : pcbhole_y; 
+                                        translate([ahpx,ahpy,-adj]) 
+                                            cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                                     }
                                     if (class == "pcbhole" && id == 0 && pcbhole_pos == "right_rear" && 
                                         bottom_rear_right_enable == true && bottom_standoff[6] != "blind") {
-                                            translate([pcbhole_x,pcbhole_y,-adj]) 
-                                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 82 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 80.75 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 6 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_y; 
+                                        translate([ahpx,ahpy,-adj]) 
+                                            cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                                     }
                                     if (class == "pcbhole" && id == 0 && pcbhole_pos == "right_front" && 
                                         bottom_front_right_enable == true && bottom_standoff[6] != "blind") {
-                                            translate([pcbhole_x,pcbhole_y,-adj]) 
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 82 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 80.75 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 75 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 112.75 : pcbhole_y; 
+                                        translate([ahpx,ahpy,-adj]) 
                                                 cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                                     }
 
@@ -269,17 +284,6 @@ if(case_design == "rack" && side == "bottom") {
                     translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
                         panel_clamp("bottom", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
                 }
-                // case upper panel clamp holes
-                translate([150-gap-wallthick,-gap-adj,case_z-13]) 
-                    panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
-                translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
-                    case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
-                if(rack_width == 19) { 
-                    translate([300-gap-wallthick,-gap-adj,case_z-13]) 
-                        panel_clamp("rear", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
-                    translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
-                        case_z-13]) panel_clamp("front", "m2", "sloped", 6, 18, 5, [true,10,2,"holes"]);
-                }
             }
             // pcb and multi-pcb standoffs
             for(r = [0:len(rack_bay_sbc)-1]) {
@@ -298,7 +302,7 @@ if(case_design == "rack" && side == "bottom") {
                         rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
                     pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : 
                         rack_bay_rotation[r] == 180 ? rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
-                    pcb_loc_z = rack_bay_sbc[r] == "n2" ? rack_bay_xyz_loc[r][2]-6 : 
+                    pcb_loc_z = rack_bay_sbc[r] == "n2" || rack_bay_sbc[r] == "m1" ? rack_bay_xyz_loc[r][2]-6 : 
                         rack_bay_sbc[r] == "n2+" ? rack_bay_xyz_loc[r][2]-4.5 : rack_bay_xyz_loc[r][2];
 
                     translate([pcb_loc_x,pcb_loc_y,0]) rotate([0,0,rack_bay_rotation[r]]) union() {
@@ -313,13 +317,14 @@ if(case_design == "rack" && side == "bottom") {
                                     pcbhole_z = sbc_data[s[0]][i+6];
                                     pcbhole_size = sbc_data[s[0]][i+9][0];
                                     pcbhole_pos = sbc_data[s[0]][i+10][4];
+                                    pcb_bmaxz = sbc_data[s[0]][11][6];
 
                                 if(class == "pcbhole" && id == pcb_id) {
                                     if (pcbhole_pos == "left_rear" && bottom_rear_left_enable == true) {
                                         bottom_support = bottom_sidewall_support == true ? bottom_rear_left_support : "none";
                                         pcb_standoff = [bottom_standoff[0],
                                                             bottom_standoff[1],
-                                                            bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
+                                                            pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z+bottom_rear_left_adjust,
                                                             bottom_standoff[3],
                                                             bottom_standoff[4],
                                                             bottom_standoff[5],
@@ -330,14 +335,18 @@ if(case_design == "rack" && side == "bottom") {
                                                             bottom_standoff[10],
                                                             bottom_standoff[11],
                                                             bottom_standoff[12]];
-                                        translate([pcbhole_x,pcbhole_y,0]) 
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 7 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 15 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r]== "m1" ? 9.25 : pcbhole_y; 
+                                        translate([ahpx,ahpy,0]) 
                                             standoff(pcb_standoff,[false,10,2,"default"]);
                                     }
                                     if (pcbhole_pos == "left_front" && bottom_front_left_enable == true) {
                                         bottom_support = bottom_sidewall_support == true ? bottom_front_left_support : "none";
                                         pcb_standoff = [bottom_standoff[0],
                                                             bottom_standoff[1],
-                                                            bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust,
+                                                            pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z+bottom_front_left_adjust,
                                                             bottom_standoff[3],
                                                             bottom_standoff[4],
                                                             bottom_standoff[5],
@@ -348,14 +357,18 @@ if(case_design == "rack" && side == "bottom") {
                                                             bottom_standoff[10],
                                                             bottom_standoff[11],
                                                             bottom_standoff[12]];
-                                        translate([pcbhole_x,pcbhole_y,0])
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 8 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 75 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 112.75 : pcbhole_y; 
+                                        translate([ahpx,ahpy,0]) 
                                             standoff(pcb_standoff,[false,10,2,"default"]);
                                     }
                                     if (pcbhole_pos == "right_rear" && bottom_rear_right_enable == true) {
                                         bottom_support = bottom_sidewall_support == true ? bottom_rear_right_support : "none";
                                         pcb_standoff = [bottom_standoff[0],
                                                             bottom_standoff[1],
-                                                            bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
+                                                            pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z+bottom_rear_right_adjust,
                                                             bottom_standoff[3],
                                                             bottom_standoff[4],
                                                             bottom_standoff[5],
@@ -366,7 +379,11 @@ if(case_design == "rack" && side == "bottom") {
                                                             bottom_standoff[10],
                                                             bottom_standoff[11],
                                                             bottom_standoff[12]];
-                                        translate([pcbhole_x,pcbhole_y,0])
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 82 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 80.75 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 6 : rack_bay_sbc[r] == "n2+" ? 9.25 : 
+                                            rack_bay_sbc[r] == "m1" ? 9.25 : pcbhole_y; 
+                                        translate([ahpx,ahpy,0]) 
                                             standoff(pcb_standoff,[false,10,2,"default"]);
                                     }
                                     if (pcbhole_pos == "right_front" && bottom_front_right_enable == true) {
@@ -374,7 +391,7 @@ if(case_design == "rack" && side == "bottom") {
                                             bottom_front_right_support : "none";
                                         pcb_standoff = [bottom_standoff[0],
                                                             bottom_standoff[1],
-                                                            bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust,
+                                                            pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z+bottom_front_right_adjust,
                                                             bottom_standoff[3],
                                                             bottom_standoff[4],
                                                             bottom_standoff[5],
@@ -385,7 +402,11 @@ if(case_design == "rack" && side == "bottom") {
                                                             bottom_standoff[10],
                                                             bottom_standoff[11],
                                                             bottom_standoff[12]];
-                                        translate([pcbhole_x,pcbhole_y,0])
+                                        ahpx = rack_bay_sbc[r] == "n2" ? 82 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 80.75 : pcbhole_x; 
+                                        ahpy = rack_bay_sbc[r] == "n2" ? 75 : rack_bay_sbc[r] == "n2+" ? 80.75 : 
+                                            rack_bay_sbc[r] == "m1" ? 112.75 : pcbhole_y; 
+                                        translate([ahpx,ahpy,0]) 
                                             standoff(pcb_standoff,[false,10,2,"default"]);
                                     }
                                 }
@@ -504,7 +525,7 @@ if(case_design == "rack" && side == "bottom") {
         }
         // rear fan, rear conduit and front bay openings
         for(r = [0:len(rack_bay_sbc)-1]) {
-        // rear fan openings
+            // rear fan openings
             fan_offset = -75+(75-rear_fan_size)/2;
             if(rack_bay_rear_fan[r] == true) {
                 translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1)+fan_offset+8,depth-gap-wallthick-adj,
@@ -608,8 +629,6 @@ if(case_design == "rack" && side == "bottom") {
                 pcb_z_orig = sbc_data[s[0]][10][2];
                 pcb_tmaxz = sbc_data[s[0]][11][5];
                 pcb_bmaxz = sbc_data[s[0]][11][6];
-                pcb_color = sbc_data[s[0]][11][1];
-                pcb_radius = sbc_data[s[0]][11][0];
 
                 pcb_loc_x = rack_bay_rotation[r] == 90 ? rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_rotation[r] == 180 ?
                     rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
@@ -619,11 +638,11 @@ if(case_design == "rack" && side == "bottom") {
 
                 // sbc openings
                 if(sbc_highlight == true && rack_bay_sbc[r] != "empty") {
-                    #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) rotate([0,0,rack_bay_rotation[r]])
+                    #translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z-adj]) rotate([0,0,rack_bay_rotation[r]])
                         sbc(rack_bay_sbc[r], cooling, fan_size, gpio_opening, uart_opening, true);
                 }
                 if(sbc_highlight != true && rack_bay_sbc[r] != "empty") {
-                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])  rotate([0,0,rack_bay_rotation[r]])
+                    translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z-adj])  rotate([0,0,rack_bay_rotation[r]])
                         sbc(rack_bay_sbc[r], cooling, fan_size, gpio_opening, uart_opening, true);
                 }
                 // case divide
@@ -639,10 +658,10 @@ if(case_design == "rack" && side == "bottom") {
                             bottom=[edge_fillet,edge_fillet,edge_fillet,edge_fillet,edge_fillet], $fn=90);
         }
         // cleanup for recessed top
-        translate([-gap,-gap,case_z-2*floorthick]) 
-            slab([width-(2*wallthick),depth-(2*wallthick),floorthick+adj],corner_fillet);
-        translate([-gap-wallthick-adj,-gap,case_z-floorthick]) 
-            slab([width,depth-(2*wallthick),20],corner_fillet);
+        translate([-gap,-gap,case_z-floorthick-2]) 
+            slab([width-(2*wallthick),depth-(2*wallthick),2+adj],corner_fillet);
+        translate([-gap-wallthick-adj,-gap-wallthick,case_z-floorthick]) 
+            slab([width,depth+adj,20],corner_fillet);
     }
     // additive accessories
     if(accessory_name != "none") {

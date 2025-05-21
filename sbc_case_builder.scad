@@ -440,7 +440,7 @@ pcb_radius = sbc_data[s[0]][11][0];
 
 pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-itx_thin" || sbc_model == "mini-stx" || sbc_model == "mini-stx_thin" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
 width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+2*(sidethick+gap)+case_offset_x+(101.6-pcb_width) : case_design == "panel_nas" && pcb_width > 100 ? pcb_width+2*(sidethick+gap)+case_offset_x : case_design == "rack" && rack_width == 19 ? 450 : case_design == "rack" && rack_width == 10 ? 221.5 : pcb_width+(2*(wallthick+gap))+case_offset_x;
-depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
+depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : case_design == "rack" ? 100+case_offset_y : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
 case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : case_design == "rack" && rack_size == "1u" ? 44.45+floorthick : case_design == "rack" && rack_size == "1u+" ? 59.26+floorthick : case_design == "rack" && rack_size == "1u++" ? 74.07+floorthick : case_design == "rack" && rack_size == "2u" ? 88.90+floorthick : bottom_height+top_height;
@@ -534,6 +534,7 @@ multipcb_bottom_standoff = [multipcb_bottom_standoff_size,
                    multipcb_bottom_standoff_insert_height];
 
 rack_bay_sbc = [Rack_Bay1,Rack_Bay2,Rack_Bay3,Rack_Bay4,Rack_Bay5,Rack_Bay6];
+
 rack_bay_xyz_loc = [[rack_bay1_xyz_loc[0],rack_bay1_xyz_loc[1],rack_bay1_xyz_loc[2]], 
                     [rack_bay2_xyz_loc[0],rack_bay2_xyz_loc[1],rack_bay2_xyz_loc[2]],
                     [rack_bay3_xyz_loc[0],rack_bay3_xyz_loc[1],rack_bay3_xyz_loc[2]],
@@ -1194,14 +1195,12 @@ if (view == "model") {
                     pcb_z_orig = sbc_data[s[0]][10][2];
                     pcb_tmaxz = sbc_data[s[0]][11][5];
                     pcb_bmaxz = sbc_data[s[0]][11][6];
-                    pcb_color = sbc_data[s[0]][11][1];
-                    pcb_radius = sbc_data[s[0]][11][0];
 
                     pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_xyz_loc[i][0];
                     pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : rack_bay_xyz_loc[i][1];
                     pcb_loc_z = rack_bay_xyz_loc[i][2];
 
-                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj]) 
+                    translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z-adj]) 
                         rotate([0,0,rack_bay_rotation[i]])
                             sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
                 }
@@ -1214,8 +1213,6 @@ if (view == "model") {
                     pcb_z_orig = sbc_data[s[0]][10][2];
                     pcb_tmaxz = sbc_data[s[0]][11][5];
                     pcb_bmaxz = sbc_data[s[0]][11][6];
-                    pcb_color = sbc_data[s[0]][11][1];
-                    pcb_radius = sbc_data[s[0]][11][0];
 
                     pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : 
                         rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : 
