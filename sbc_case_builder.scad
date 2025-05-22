@@ -1200,7 +1200,7 @@ if (view == "model") {
                     pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : rack_bay_xyz_loc[i][1];
                     pcb_loc_z = rack_bay_xyz_loc[i][2];
 
-                    translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z-adj]) 
+                    translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z]) 
                         rotate([0,0,rack_bay_rotation[i]])
                             sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
                 }
@@ -1223,7 +1223,7 @@ if (view == "model") {
                     pcb_loc_z = rack_bay_xyz_loc[i][2];
 
                     translate([pcb_loc_x+bayadj+75*(i+1) ,pcb_loc_y+wallthick+gap, 
-                        bottom_height-pcb_z+pcb_loc_z-adj+floorthick]) rotate([0,0,rack_bay_rotation[i]])
+                        pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z]) rotate([0,0,rack_bay_rotation[i]])
                             sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
                     }
                 }
