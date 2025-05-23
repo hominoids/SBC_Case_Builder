@@ -82,6 +82,9 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     if(type == "feet") {
         translate([loc_x,loc_y,loc_z])  rotate(rotation) feet(size_x, size_z);
     }
+    if(type == "grommet") {
+        translate([loc_x,loc_y,loc_z])  rotate(rotation) grommet(data[0], data[1], size_x, size_y, size_z, data[2], mask);
+    }
     if(type == "hd_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) hd_mount(data[0],data[1],data[2],data[3]); 
     }
@@ -111,6 +114,9 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     }
     if(type == "nut_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) nut_holder(data[0], data[1], size_x, size_y, size_z, mask); 
+    }
+    if(type == "panel_clamp") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) panel_clamp(data[0], data[1], data[2], size_x, size_y, size_z, mask);
     }
     if(type == "pcb_holder") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) pcb_holder([size_x,size_y,size_z],data[0]);

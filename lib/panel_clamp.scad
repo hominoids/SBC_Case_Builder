@@ -3,23 +3,23 @@
     DESCRIPTION: creates various clamps to join two panels
            TODO: none
 
-          USAGE: panel_clamp(face, screw, style, dia_x, dia_y, height, mask)
+          USAGE: panel_clamp(face, style, screw, dia_x, dia_y, height, mask)
 
-                           face = "top","bottom","rear","front","left","right"
-                          screw = "m2", "m2.5", "m3", "m4"
-                          style = "sloped"
-                          dia_x = top diameter or x size in mm
-                          dia_y = bottom diameter or y size in mm
-                         height = holder height in mm
+                        data[0] = "top","bottom","rear","front","left","right"
+                        data[1] = "sloped"
+                        data[2] = "m2", "m2.5", "m3", "m4"
+                         size_x = top diameter or x size in mm
+                         size_y = bottom diameter or y size in mm
+                         size_z = clamp height in mm
                         mask[0] = true enables component mask
                         mask[1] = mask length
                         mask[2] = mask setback
-                        mask[3] = mstyle "default"
+                        mask[3] = mstyle "default", "holes"
 
 */
 
 
-module panel_clamp(face, screw, style, dia_x, dia_y, height, mask) {
+module panel_clamp(face, style, screw, dia_x, dia_y, height, mask) {
 
     nuts = [[2,4,1.6],         // m2 size, diameter, height
             [2.5,5,2],         // m2.5 size, diameter, height

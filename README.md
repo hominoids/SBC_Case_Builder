@@ -56,14 +56,15 @@ NOTE: The submodule *SBC Model Framework* needs to be updated anytime SBC Case B
 - Paper, Folded - complete
 - Standard MB SBC Adapters & io plates - completed
 	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-Itx, Mini-ITX Thin, Mini-STX, Mini-STX Thin
-- Standard MB Cases - completed
+- Standard MB Cases - complete
 	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-ITX, Mini-ITX Thin, Mini-STX, Mini-STX Thin, Nano-ITX, NUC, Pico-ITX
-- Sheet Metal, Folded
+- NAS - panel_nas complete
+- Rack - 1U and 2U complete
+- Stacked Levels
 - Sliding
 - Cylinder
 - Free Form
-- NAS
-- Rack
+- Sheet Metal, Folded
 - CNC Cases
 
 All case data is stored in the json file sbc_case_builder.json with the accessory data stored in a separate file structure in sbc_case_builder_accessories.cfg.  An accessory group name for a given case is stored as part of the case data in the json file.  This allows for the reuse or sharing of an accessory set by different cases and can be used to manage groups of accessories.
@@ -86,6 +87,10 @@ This tab exclusively deals with folded cases.  At this time the bend allowance e
 
 ### Standard Motherboard Case Adjustments Tab
 Both standard motherboard adapters and cases can be generated with SBC Case Builder and this tab controls the specific settings. Since it is not possible to know the motherboard thickness it is set to 2mm and the *standard motherboard thickness* setting is used to add or subtract thickness for an accurate representation of the user provided PCB.  The *rear io shield* setting is only used when generating full cases and is not needed when generating adapters and io shields.  Most of the adjustments in the *3D Case Adjustments* tab also work for motherboard adapters which allows for the SBC or other device to be repositioned on the adapter while providing the full use of the accessory subsystem. Any accessory entries in the sbc_case_builder_accessories.cfg file should reference the bottom face. The *bottom cover pattern* in the *Fan and Vent Openings* tab and the *SBC Bottom Standoff* tabs also apply to motherboard adapters.  There are predefined example cases and adapters available in the GUI for further reference.
+
+
+### Rack Mount Case Adjustments Tab
+Both 1U and 2U, 10" and 19", rack cases are configured in this tab.  The first entry *rack width* selects if 10" or 19" rack cases are being created.  The *rack size* sets wether 1U or 2U.  The remaining tab is divided into six groups of settings each representing a virtual bay.  Each bay group specifies the SBC thru the pickbox *Rack Bay1* respectively. With *rack bay1 xyz loc* and *rack bay1 rotation determining the position and z-axis rotation.  The type of bay is set in the *rack bay1 face* pickbox followed by two checkboxes for the internal dividing wall, rear fan and a bay conduit selection pickbox. 
 
 
 ### 3D Case Adjustments Tab
@@ -214,12 +219,12 @@ Multi-associative parametric positioning of accessories is implemented and allow
 
 ### classes: add1, sub, suball, add2, model, platter
 
-Class *add1* and *add2* are used to add geometry to the case. The difference is when the addition occurs. *add1* happens at the beginning when the core case geometry is created before any subtractions and *add2* happens at the end after all subtractions have occurred. *suball* is used to affect all faces of a case, not just a single face. The “face” is the case piece that will be effected by the addition or subtraction. The *model* class is for placing supporting accessories in the model view. e.g. hard drives, fans. The *platter* class is for adding supporting accessories, that are not part of the core case geometry, to the print platter for printing e.g. an access panel cover.
+Class *add1* and *add2* are used to add geometry to the case. The difference is when the addition occurs. *add1* happens at the beginning when the core case geometry is created before any subtractions and *add2* happens at the end after all subtractions have occurred. *suball* is used to affect all faces of a case, not just a single face. The “face” is the case piece that will be effected by the addition or subtraction. The *model* class is for placing supporting accessories in the model view. e.g. hard drives, fans. The *platter* class is for adding supporting accessories, that are not part of the core case geometry, to the print platter for printing e.g. a fan cover or access panel cover.
 
 
 **additive type:**
 
-art, access_panel, batt_holder, button, button_assembly, fan_cover, feet, hd_holder, hk_boom_grill, hk_boom_speaker_holder, hk_boom_vring, hk_h3_port_extender_holder, hk_hc4_oled_holder, hk_uart_holder, hk_uart_strap, keyhole, nut_holder, pcb_holder, rectangle, round, slot, sphere, standoff, text, vent_panel_hex, uart_holder, hc4_oled_holder, button, pcb_holder
+art, access_panel, batt_holder, button, button_assembly, fan_cover, feet, grommet, hd_holder, hk_boom_grill, hk_boom_speaker_holder, hk_boom_vring, hk_h3_port_extender_holder, hk_hc4_oled_holder, hk_uart_holder, hk_uart_strap, keyhole, nut_holder, panel_clamp, pcb_holder, rectangle, round, slot, sphere, standoff, text, vent_panel_hex, uart_holder, hc4_oled_holder, button, pcb_holder
 
 
 **subtractive type:**
@@ -234,7 +239,7 @@ access_cover, adafruit_lcd, dsub, fan, hd25, hd35, hk_boom, hk_boom_speaker, hk_
 
 **platter type:**
 
-access_cover, button_assembly, fan_cover, feet, hk_boom_vring, hk_h3_port_extender_holder, hk_uart_strap, vent_panel_hex
+access_cover, button_assembly, fan_cover, feet, grommet, hk_boom_vring, hk_h3_port_extender_holder, hk_uart_strap, vent_panel_hex
 
 
 ## Accessory Reference Manual
@@ -455,6 +460,35 @@ DESCRIPTION: creates case feet.
             mask[0] = false, not used
             mask[1] = length
             mask[2] = set back
+            mask[3] = mstyle "default"
+```
+
+
+### grommet
+
+```
+    CLASSES: add1, add2, platter
+DESCRIPTION: creates different groumet styles.
+       MASK: yes
+      USAGE: "class", "grommet", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+
+              class = "add1", "add2", "platter"
+               type = "grommet"
+              loc_x = x location placement
+              loc_y = y location placement
+              loc_z = z location placement
+               face = "top", "bottom", "right", "left", "front", "rear"
+         rotation[] = object rotation
+       parametric[] = "case", "sbc", "sbc-case_z"
+            size[0] = od outside diameter of grommet body
+            size[1] = id inside hole diameter of grommet body
+            size[2] = wall thickness of installation
+            data[0] = "top","bottom","front","rear","left","right"
+            data[1] = "sleeve"
+            data[2] = assembled true, false 
+            mask[0] = true enables component mask
+            mask[1] = mask length
+            mask[2] = mask setback
             mask[3] = mstyle "default"
 ```
 
@@ -768,6 +802,35 @@ DESCRIPTION: creates nut holder of various styles.
             mask[1] = length
             mask[2] = set back
             mask[3] = mstyle "default"
+```
+
+
+### panel_clamp
+
+```
+    CLASSES: add1, add2
+DESCRIPTION: creates clamps to join two panels.
+       MASK: yes
+      USAGE: "class", "panel_clamp", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+
+              class = "add1", "add2"
+               type = "panel_clamp"
+              loc_x = x location placement
+              loc_y = y location placement
+              loc_z = z location placement
+               face = "top", "bottom", "right", "left", "front", "rear"
+         rotation[] = object rotation
+       parametric[] = "case", "sbc", "sbc-case_z"
+            size[0] = top diameter or x size in mm
+            size[1] = bottom diameter or y size in mm
+            size[2] = clamp height in mm
+            data[0] = orientation "top","bottom","rear","front","left","right"
+            data[1] = "sloped"
+            data[2] = "m2", "m2.5", "m3", "m4"
+            mask[0] = false
+            mask[1] = length
+            mask[2] = set back
+            mask[3] = mstyle "default", "holes"
 ```
 
 
@@ -2088,6 +2151,35 @@ DESCRIPTION: creates case feet.
 ```
 
 
+### grommet
+
+```
+    CLASSES: add1, add2, platter
+DESCRIPTION: creates different groumet styles.
+       MASK: yes
+      USAGE: "class", "grommet", loc_x, loc_y, loc_z, face, rotation[], parametric[], size[], data[], mask[]
+
+              class = "add1", "add2", "platter"
+               type = "grommet"
+              loc_x = x location placement
+              loc_y = y location placement
+              loc_z = z location placement
+               face = "top", "bottom", "right", "left", "front", "rear"
+         rotation[] = object rotation
+       parametric[] = "case", "sbc", "sbc-case_z"
+            size[0] = od outside diameter of grommet body
+            size[1] = id inside hole diameter of grommet body
+            size[2] = wall thickness of installation
+            data[0] = "top","bottom","front","rear","left","right"
+            data[1] = "sleeve"
+            data[2] = assembled true, false 
+            mask[0] = true enables component mask
+            mask[1] = mask length
+            mask[2] = mask setback
+            mask[3] = mstyle "default"
+```
+
+
 ### hk_boom_speaker_holder
 
 ```
@@ -2218,6 +2310,16 @@ DESCRIPTION: creates hex pattern covers for vent openings.
             mask[2] = set back
             mask[3] = mstyle "default"
 ```
+
+
+## Case Build Notes
+This area covers specific build notes for specific cases.  Hardware used or other relavent information is list by case design name.
+
+### panel_nas Case Design
+The panel_nas design can be CNC cut or 3D printed.  By changing the top and bottom standoff type to "none" in the *SBC Standoff Global Settings* tabs respectively, only a hole is generated for CNC cutting support.  Panels can be exported in DXF or SVG by selecting the *part" view under the *view* tab, then the indivual part and select the *section part* checkbox. After the projection has been generated render it by pressing F7 or by selecting render from the user interface.  Exported DXF and SVG file formats are available under the File->Export menu.
+
+### rack Case Design
+This case is divided into 3 pieces for the 19" cases and 2 pieces for the 10" cases.  They can be selected in the *part* view for STL export under the *view* tab by selecting the left, bottom or right individual part.  The peices are held together using M2x8mm screws and nuts.  The 10 inch cases requires 5 sets of screws and nuts and the 19" rack case takes 10 sets. 
 
 
 ## Accuracy

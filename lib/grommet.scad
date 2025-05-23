@@ -28,12 +28,12 @@
 
           USAGE: grommet(face, style, od, id, wall, assembly, mask)
 
-                         face = "top","bottom","front","rear","left","right"
-                        style = "sleeve"
+                      data[0] = "top","bottom","front","rear","left","right"
+                      data[1] = "sleeve"
                       size[0] = od outside diameter of grommet body
                       size[1] = id inside hole diameter of grommet body
                       size[2] = wall thickness of installation
-                     assembly = false
+                      data[3] = assembled true, false
                       mask[0] = true enables component mask
                       mask[1] = mask length
                       mask[2] = mask setback
