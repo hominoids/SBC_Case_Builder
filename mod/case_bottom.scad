@@ -408,19 +408,39 @@ echo(pcb_depth+case_offset_y-10);
 
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_rear" && 
                             bottom_rear_left_enable == true && bottom_standoff[6] != "blind") {
-                                translate([pcbhole_x,pcbhole_y,-adj]) cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                            ahpx = sbc_model == "n2" ? 7 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 15 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_y; 
+                            translate([ahpx,ahpy,-adj]) 
+                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "left_front" && 
                             bottom_front_left_enable == true && bottom_standoff[6] != "blind") {
-                                translate([pcbhole_x,pcbhole_y,-adj]) cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                            ahpx = sbc_model == "n2" ? 8 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 75 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 112.75 : pcbhole_y; 
+                            translate([ahpx,ahpy,-adj]) 
+                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "right_rear" && 
                             bottom_rear_right_enable == true && bottom_standoff[6] != "blind") {
-                                translate([pcbhole_x,pcbhole_y,-adj]) cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                            ahpx = sbc_model == "n2" ? 82 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 80.75 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 6 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_y; 
+                            translate([ahpx,ahpy,-adj]) 
+                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                         }
                         if (class == "pcbhole" && id == 0 && pcbhole_pos == "right_front" && 
                             bottom_front_right_enable == true && bottom_standoff[6] != "blind") {
-                                translate([pcbhole_x,pcbhole_y,-adj]) cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
+                            ahpx = sbc_model == "n2" ? 82 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 80.75 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 75 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 112.75 : pcbhole_y; 
+                            translate([ahpx,ahpy,-adj]) 
+                                cylinder(d=bottom_standoff[4]-.2, h=floorthick+(2*adj));
                         }
 
                     }
@@ -445,6 +465,7 @@ echo(pcb_depth+case_offset_y-10);
                                 pcbhole_size = sbc_data[s[0]][i+9][0];
                                 pcbhole_state = sbc_data[s[0]][i+10][0];
                                 pcbhole_pos = sbc_data[s[0]][i+10][4];
+
                                 if(id == pcbid && id != 0 && pcbclass == "pcbhole") {
                                     if (pcbclass == "pcbhole" && pcbhole_pos == "left_rear" && 
                                         multipcb_bottom_rear_left_enable == true && 
@@ -599,13 +620,15 @@ echo(pcb_depth+case_offset_y-10);
                         pcbhole_z = sbc_data[s[0]][i+6];
                         pcbhole_size = sbc_data[s[0]][i+9][0];
                         pcbhole_pos = sbc_data[s[0]][i+10][4];
+                        pcbadj_z = sbc_model == "n2" || sbc_model == "m1" ? -6 : 
+                            sbc_model == "n2+" ? -4.5 : 0;
 
                     if(class == "pcbhole" && id == pcb_id) {
                         if (pcbhole_pos == "left_rear" && bottom_rear_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_left_support : "none";
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust+pcbadj_z,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -616,13 +639,18 @@ echo(pcb_depth+case_offset_y-10);
                                                 bottom_standoff[10],
                                                 bottom_standoff[11],
                                                 bottom_standoff[12]];
-                            translate([pcbhole_x,pcbhole_y,0]) standoff(pcb_standoff,[false,10,2,"default"]);
+                            ahpx = sbc_model == "n2" ? 7 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 15 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_y; 
+                            translate([ahpx,ahpy,0]) 
+                                standoff(pcb_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "left_front" && bottom_front_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_left_support : "none";
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust+pcbadj_z,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -633,13 +661,18 @@ echo(pcb_depth+case_offset_y-10);
                                                 bottom_standoff[10],
                                                 bottom_standoff[11],
                                                 bottom_standoff[12]];
-                            translate([pcbhole_x,pcbhole_y,0]) standoff(pcb_standoff,[false,10,2,"default"]);
+                            ahpx = sbc_model == "n2" ? 8 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 75 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 112.75 : pcbhole_y; 
+                            translate([ahpx,ahpy,0]) 
+                                standoff(pcb_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "right_rear" && bottom_rear_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_right_support : "none";
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust+pcbadj_z,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -650,13 +683,18 @@ echo(pcb_depth+case_offset_y-10);
                                                 bottom_standoff[10],
                                                 bottom_standoff[11],
                                                 bottom_standoff[12]];
-                            translate([pcbhole_x,pcbhole_y,0]) standoff(pcb_standoff,[false,10,2,"default"]);
+                            ahpx = sbc_model == "n2" ? 82 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 80.75 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 6 : sbc_model == "n2+" ? 9.25 : 
+                                sbc_model == "m1" ? 9.25 : pcbhole_y; 
+                            translate([ahpx,ahpy,0]) 
+                                standoff(pcb_standoff,[false,10,2,"default"]);
                         }
                         if (pcbhole_pos == "right_front" && bottom_front_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_right_support : "none";
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust,
+                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust+pcbadj_z,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -667,7 +705,12 @@ echo(pcb_depth+case_offset_y-10);
                                                 bottom_standoff[10],
                                                 bottom_standoff[11],
                                                 bottom_standoff[12]];
-                            translate([pcbhole_x,pcbhole_y,0]) standoff(pcb_standoff,[false,10,2,"default"]);
+                            ahpx = sbc_model == "n2" ? 82 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 80.75 : pcbhole_x; 
+                            ahpy = sbc_model == "n2" ? 75 : sbc_model == "n2+" ? 80.75 : 
+                                sbc_model == "m1" ? 112.75 : pcbhole_y; 
+                            translate([ahpx,ahpy,0]) 
+                                standoff(pcb_standoff,[false,10,2,"default"]);
                         }
                     }
                 }

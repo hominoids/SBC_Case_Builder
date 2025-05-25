@@ -31,7 +31,7 @@ individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_shield
 // section individual parts for panel cases
 section_part = false; // [true,false]
 // single board computer model
-sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "mini-stx_thin", "nano-itx", "nuc", "pico-itx"]
+sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express", "ssi-eeb", "ssi-ceb", "atx", "micro-atx", "dtx", "flex-atx", "mini-dtx", "mini-itx", "mini-itx_thin", "mini-stx", "mini-stx_thin", "nano-itx", "nuc", "pico-itx"]
 
 // sbc off in model view
 sbc_off = false;
@@ -42,7 +42,7 @@ sbc_highlight = false;
 // enable highlight for accessory subtractive geometry
 accessory_highlight = false;
 // base case design
-case_design = "shell"; // [shell,panel,panel_nas,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
+case_design = "shell"; // [shell,panel,panel_nas,stacked,tray,tray_sides,tray_vu5,tray_vu7,round,hex,snap,fitted,rack,paper_split-top,paper_full-top,adapter_ssi-eeb,adapter_ssi-ceb,adapter_atx,adapter_micro-atx,adapter_dtx,adapter_flex-atx,adapter_mini-dtx,adapter_mini-itx,adapter_mini-itx_thin,adapter_mini-stx,adapter_mini-stx_thin]
 
 // raises top mm in model view or < 0 = off
 raise_top = 0; // [-1:100]
@@ -72,6 +72,59 @@ flat_blank_section =  false;
 standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
 rear_io_shield = false;
+
+/* [Rack Mount Case Adjustments] */
+// size of rack 10" or 19" //
+rack_width =  19; //[10,19]
+// size of rack mount cases 1U or 2U //
+rack_size =  "1u"; //["1u","1u+","1u++","2u"]
+// enable rack io plate opening for sbc
+Rack_Bay1 = "none"; //  ["none", "c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay1_xyz_loc = [0,0,0]; // [0:.5:450]
+rack_bay1_rotation = 0; // [0:90:270]
+rack_bay1_face = "fixed"; //["open","fixed","removable","vent"]
+rack_bay1_wall = false; // [true,false]
+rack_bay1_rear_fan = false; //[true,false]
+rack_bay1_rear_conduit = "none"; //["none","conduit","grommet","grommets-vertical"]
+
+Rack_Bay2 = "none"; //  ["none", "c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay2_xyz_loc = [0,0,0]; // [0:.5:450]
+rack_bay2_rotation = 0; // [0:90:270]
+rack_bay2_face = "fixed"; //["open","fixed","removable","vent"]
+rack_bay2_wall = false; // [true,false]
+rack_bay2_rear_fan = false; //[true,false]
+rack_bay2_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
+
+Rack_Bay3 = "none"; //  ["none", "c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay3_xyz_loc = [0,0,0]; // [0:.5:450]
+rack_bay3_rotation = 0; // [0:90:270]
+rack_bay3_face = "fixed"; //["open","fixed","removable","vent"]
+rack_bay3_wall = false; // [true,false]
+rack_bay3_rear_fan = false; //[true,false]
+rack_bay3_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
+
+Rack_Bay4 = "none"; //  ["none", "c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay4_xyz_loc = [0,0,0]; // [0:.5:450]
+rack_bay4_rotation = 0; // [0:90:270]
+rack_bay4_face = "fixed"; //["open","fixed","removable","vent"]
+rack_bay4_wall = false; // [true,false]
+rack_bay4_rear_fan = false; //[true,false]
+rack_bay4_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
+
+Rack_Bay5 = "none"; //  ["none", "c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay5_xyz_loc = [0,0,0]; // [0:.5:450]
+rack_bay5_rotation = 0; // [0:90:270]
+rack_bay5_face = "fixed"; //["open","fixed","removable","vent"]
+rack_bay5_wall = false; // [true,false]
+rack_bay5_rear_fan = false; //[true,false]
+rack_bay5_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
+
+Rack_Bay6 = "none"; //  ["none", "c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "hc1", "n1", "n2", "n2+", "n2l", "n2lq", "m1", "m1s", "m2", "h2", "h2+", "h3", "h3+", "h4", "h4+", "h4_ultra", "show2", "rpipico", "rpipicow", "rpicm4+ioboard", "rpicm1", "rpicm3", "rpicm3l", "rpicm3+", "rpicm4s", "rpicm4", "rpicm4l", "rpizero", "rpizerow", "rpizero2w", "rpi1a+", "rpi1b+", "rpi2b", "rpi3a+", "rpi3b", "rpi3b+", "rpi4b", "rpi5", "a64", "a64lts", "rock64", "rockpro64", "quartz64a", "quartz64b", "h64b", "star64", "soedge_a-baseboard", "soedge_rk1808", "rock4a", "rock4b", "rock4a+", "rock4b+", "rock4c", "rock4c+", "rock5b-v1.3", "rock5b", "rock5bq", "rock5b+", "nio12l", "vim1", "vim2", "vim3", "vim3l", "vim4", "tinkerboard", "tinkerboard-s", "tinkerboard-2", "tinkerboard-2s", "tinkerboard-r2", "tinkerboard-r2s", "opizero", "opizero2", "opir1plus_lts", "opir1", "opi5", "opi5max", "jetsonnano", "lepotato", "sweetpotato", "tritium-h2+", "tritium-h3", "tritium-h5", "solitude", "alta", "atomicpi", "visionfive2", "visionfive2q", "bpif3", "milk-v_duos", "licheerv+dock", "rak19007", "cnano-avr128da48", "nodemcu-32s", "cs-solarmeter", "feather-m0_express", "feather-m0_wifi", "feather-m4_express"]
+rack_bay6_xyz_loc = [0,0,0]; // [0:.5:450]
+rack_bay6_rotation = 0; // [0:90:270]
+rack_bay6_face = "fixed"; //["open","fixed","removable","vent"]
+rack_bay6_rear_fan = false; //[true,false]
+rack_bay6_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
 
 /* [3D Case Adjustments] */
 // sbc location x axis
@@ -153,7 +206,7 @@ hd_y_position = 25; // [0:300]
 hd_z_position = 40; // [0:300]
 
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "h4_panel_nas-bottom_sbc", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
+accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "n-series_rack19-1u", "n1_rack10-1u", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
 
 // sbc information text color
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
@@ -372,6 +425,7 @@ multipcb_bottom_front_right_enable = true;
 multipcb_bottom_front_right_adjust = 0; //[-20:.01:20]
 multipcb_bottom_front_right_support = "front"; //[none,left,rear,front,right]
 
+/* [Hidden] */
 a = search([accessory_name],accessory_data);
 s = search([sbc_model],sbc_data);
 
@@ -385,19 +439,16 @@ pcb_color = sbc_data[s[0]][11][1];
 pcb_radius = sbc_data[s[0]][11][0];
 
 pcb_z = sbc_model == "ssi-eeb" || sbc_model == "ssi-ceb" || sbc_model == "atx" || sbc_model == "micro-atx" || sbc_model == "dtx" || sbc_model == "flex-atx" || sbc_model == "mini-dtx" || sbc_model == "mini-itx" || sbc_model == "mini-itx_thin" || sbc_model == "mini-stx" || sbc_model == "mini-stx_thin" || sbc_model == "nano-itx" || sbc_model == "nuc" || sbc_model == "pico-itx" ? pcb_z_orig + standard_motherboard_thickness : pcb_z_orig;
-width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+2*(sidethick+gap)+case_offset_x+(101.6-pcb_width) : case_design == "panel_nas" && pcb_width > 100 ? pcb_width+2*(sidethick+gap)+case_offset_x : pcb_width+(2*(wallthick+gap))+case_offset_x;
-depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : pcb_depth+2*(wallthick+gap)+case_offset_y;
+width = case_design == "panel_nas" && pcb_width <= 100 ? pcb_width+2*(sidethick+gap)+case_offset_x+(101.6-pcb_width) : case_design == "panel_nas" && pcb_width > 100 ? pcb_width+2*(sidethick+gap)+case_offset_x : case_design == "rack" && rack_width == 19 ? 450 : case_design == "rack" && rack_width == 10 ? 221.5 : pcb_width+(2*(wallthick+gap))+case_offset_x;
+depth = case_design == "panel_nas" ? pcb_depth+2*(wallthick+gap)+case_offset_y + 147-pcb_depth+hd_y_position : case_design == "rack" ? 100+case_offset_y : pcb_depth+2*(wallthick+gap)+case_offset_y;
 top_height = pcb_tmaxz+floorthick+case_offset_tz+pcb_loc_z;
 bottom_height = (case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") ? pcb_z+pcb_bmaxz+floorthick+case_offset_bz+4 : pcb_z+pcb_bmaxz+floorthick+case_offset_bz;
-case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : bottom_height+top_height;
+case_z = case_design == "panel_nas" ? bottom_height+top_height+hd_z_position+(hd_bays * (hd_space + 26.1)) : case_design == "rack" && rack_size == "1u" ? 44.45+floorthick : case_design == "rack" && rack_size == "1u+" ? 59.26+floorthick : case_design == "rack" && rack_size == "1u++" ? 74.07+floorthick : case_design == "rack" && rack_size == "2u" ? 88.90+floorthick : bottom_height+top_height;
 case_diameter = sqrt(pow(width-wallthick-gap,2)+pow(depth-wallthick-gap,2));
 hex_diameter = sqrt(pow(width+2*(wallthick+gap),2)+pow(depth+2*(wallthick+gap),2));
-//hd_spacer = case_design == "panel_nas" && pcb_width > 100 ? (pcb_width+case_offset_x+2*gap)-101.6 : 
-//    case_design == "panel_nas" && pcb_width <= 100 ? (width-2*(sidethick+gap)-101.6) : 0;
 hd_spacer = case_design == "panel_nas" && pcb_width > 100 ? (pcb_width+case_offset_x+2*gap)-101.6 : 
     case_design == "panel_nas" && pcb_width <= 100 ? (width-2*(sidethick+gap)-101.6) : 0;
 
-/* [Hidden] */
 top_standoff = [top_standoff_size,
                 top_standoff_diameter,
                 18,
@@ -482,6 +533,25 @@ multipcb_bottom_standoff = [multipcb_bottom_standoff_size,
                    multipcb_bottom_standoff_insert_dia,
                    multipcb_bottom_standoff_insert_height];
 
+rack_bay_sbc = [Rack_Bay1,Rack_Bay2,Rack_Bay3,Rack_Bay4,Rack_Bay5,Rack_Bay6];
+
+rack_bay_xyz_loc = [[rack_bay1_xyz_loc[0],rack_bay1_xyz_loc[1],rack_bay1_xyz_loc[2]], 
+                    [rack_bay2_xyz_loc[0],rack_bay2_xyz_loc[1],rack_bay2_xyz_loc[2]],
+                    [rack_bay3_xyz_loc[0],rack_bay3_xyz_loc[1],rack_bay3_xyz_loc[2]],
+                    [rack_bay4_xyz_loc[0],rack_bay4_xyz_loc[1],rack_bay4_xyz_loc[2]],
+                    [rack_bay5_xyz_loc[0],rack_bay5_xyz_loc[1],rack_bay5_xyz_loc[2]],
+                    [rack_bay6_xyz_loc[0],rack_bay6_xyz_loc[1],rack_bay6_xyz_loc[2]]];
+
+rack_bay_rotation = [rack_bay1_rotation, rack_bay2_rotation, rack_bay3_rotation, rack_bay4_rotation, rack_bay5_rotation, rack_bay6_rotation];
+rack_bay_face = [rack_bay1_face, rack_bay2_face, rack_bay3_face, rack_bay4_face, rack_bay5_face, rack_bay6_face];
+rack_bay_wall = [rack_bay1_wall, rack_bay2_wall, rack_bay3_wall, rack_bay4_wall, rack_bay5_wall, false];
+rack_bay_rear_fan = [rack_bay1_rear_fan, rack_bay2_rear_fan, rack_bay3_rear_fan, rack_bay4_rear_fan, rack_bay5_rear_fan, rack_bay6_rear_fan];
+rack_bay_rear_conduit = [rack_bay1_rear_conduit, rack_bay2_rear_conduit, rack_bay3_rear_conduit, rack_bay4_rear_conduit, rack_bay5_rear_conduit, rack_bay6_rear_conduit];
+baysize = (450-(2*wallthick))/6;
+bay_height = rack_size == "1u" ? 44.45-floorthick : 
+            rack_size == "1u+" ? (44.45/3)+44.45-floorthick : 
+            rack_size == "1u++" ? 2*(44.45/3)+44.45-floorthick : (2 * 44.45)-floorthick;
+
 adj = .01;
 $fn=90;
 
@@ -540,6 +610,43 @@ if (view == "platter") {
     if(case_design == "fitted") {
         case_bottom(case_design);
         translate([0,(2*depth)+20,case_z+floorthick]) rotate([180,0,0]) case_top(case_design);
+    }
+    if(case_design == "rack") {
+        case_rack(case_design,"bottom");
+        translate([0,(2*depth)+20,case_z+floorthick]) rotate([180,0,0]) case_rack(case_design,"top");
+        // rear fan covers
+        ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
+        for(r = [0:ucount-1]) {
+            fan_offset = -75+(75-rear_fan_size)/2;
+            if(rack_bay_rear_fan[r] == true) {
+                translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,
+                    -80,(case_z-rear_fan_size)/2])
+                        fan_cover(rear_fan_size, wallthick, rear_cooling);
+            }
+        }
+        // rear grommets
+        for(r = [0:len(rack_bay_sbc)-1]) {
+            grommet_offset = -75+11;
+            if(rack_bay_rear_conduit[r] == "grommet") {
+                translate([0,-50,0]) rotate([270,0,0]) difference() {
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                    grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                }
+                translate([0,-30,0]) rotate([270,0,0]) difference() {
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                    grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                }
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,-70,0])
+                    grommet_clip("sleeve", 10, r+2, wallthick);
+            }
+        }
+        for(r = [0:ucount-1]) {
+            if(rack_bay_face[r] == "removable") {
+                translate([-gap-wallthick-1+(75*(r))+8,-300,0]) bay_tray(depth, r);
+            }
+        }
     }
     if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
         color("dimgrey",1) case_adapter(case_design);
@@ -1011,6 +1118,125 @@ if (view == "model") {
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
         }
+        if(case_design == "rack") {
+            if(lower_bottom >= 0) {
+                difference() {
+                    color("dimgrey",1) translate([0,0,-lower_bottom]) case_rack(case_design,"bottom");
+                    if(move_rear < 0) {
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                    }
+                    if(move_front < 0) {
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
+                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                    }
+                    if(move_leftside < 0) {
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+1.01,depth+2,case_z+2]);
+                    }
+                    if(move_rightside < 0) {
+                        translate([width-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+1,depth+2,case_z+2]);
+                    }
+                }
+            }
+            if(raise_top >= 0) {
+                difference() {
+                    color("dimgrey",1) translate([0,0,raise_top]) case_rack(case_design,"top");
+                    if(move_rear < 0) {
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                    }
+                    if(move_front < 0) {
+                        translate([-gap-wallthick-1,depth-2*(gap+wallthick),-lower_bottom-1]) 
+                            cube([width+2,gap+wallthick+1.01,case_z+2]);
+                    }
+                    if(move_leftside < 0) {
+                        translate([-gap-wallthick-1,-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+1.01,depth+2,case_z+2]);
+                    }
+                    if(move_rightside < 0) {
+                        translate([width-2*(gap+wallthick),-gap-wallthick-1,-lower_bottom-1]) 
+                            cube([gap+wallthick+1,depth+2,case_z+2]);
+                    }
+                }
+            } 
+            ucount = rack_width == 10 ? 2 : len(rack_bay_sbc)-1;
+            // rear fan covers
+            for(r = [0:ucount]) {
+                fan_offset = -75+(75-rear_fan_size)/2;
+                if(rack_bay_rear_fan[r] == true) {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,
+                        depth-gap,(case_z-rear_fan_size)/2])
+                            rotate([90,0,0]) fan_cover(rear_fan_size, wallthick, rear_cooling);
+                }
+            // rear grommets
+            grommet_offset = -75+11;
+            if(rack_bay_rear_conduit[r] == "grommet" || rack_bay_rear_conduit[r] == "grommets-vertical") {
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,13])
+                    color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
+            }
+            if(rack_bay_rear_conduit[r] == "grommets-vertical") {
+                translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset+4,depth-wallthick-gap,30])
+                    color("lightgrey") grommet("front", "sleeve", 10, 4, wallthick, true, [false,10,0,"default"]);
+            }
+            
+            // bay inserts
+            bayadj = r == 0 ? -75.5 : r == 5 ? -74.75: -75;
+            if(rack_bay_face[r] == "removable" && r ==0 && rack_bay_sbc[r] != "none") {
+                color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
+                    bay_tray(depth-2*wallthick-gap-.5-tol,r);
+            }
+            if(rack_bay_face[r] == "removable" && r !=0 && rack_bay_sbc[r] != "none") {
+                color("gray") translate([bayadj+75*(r+1),0,floorthick]) 
+                    bay_tray(depth-2*wallthick-gap-.5-tol,r);
+            }
+        }
+        // sbc placement
+        if(sbc_off == false) {
+            for(i = [0:len(rack_bay_sbc)-1]) {
+                if(rack_bay_sbc[i] != "none" && rack_bay_face[i] != "removable") {
+                    s = search([rack_bay_sbc[i]],sbc_data);
+                    pcb_id = sbc_data[s[0]][4];
+                    pcb_width = sbc_data[s[0]][10][0];
+                    pcb_depth = sbc_data[s[0]][10][1];
+                    pcb_z_orig = sbc_data[s[0]][10][2];
+                    pcb_tmaxz = sbc_data[s[0]][11][5];
+                    pcb_bmaxz = sbc_data[s[0]][11][6];
+
+                    pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_xyz_loc[i][0];
+                    pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : rack_bay_xyz_loc[i][1];
+                    pcb_loc_z = rack_bay_sbc[i] == "n2+" ? rack_bay_xyz_loc[i][2]+1.5 : rack_bay_xyz_loc[i][2];
+
+                    translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z]) 
+                        rotate([0,0,rack_bay_rotation[i]])
+                            sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                if(rack_bay_sbc[i] != "none" && rack_bay_face[i] == "removable") {
+                    bayadj = i == 0 ? -75.5 : i == 5 ? -74.75: -75;
+                    s = search([rack_bay_sbc[i]],sbc_data);
+                    pcb_id = sbc_data[s[0]][4];
+                    pcb_width = sbc_data[s[0]][10][0];
+                    pcb_depth = sbc_data[s[0]][10][1];
+                    pcb_z_orig = sbc_data[s[0]][10][2];
+                    pcb_tmaxz = sbc_data[s[0]][11][5];
+                    pcb_bmaxz = sbc_data[s[0]][11][6];
+
+                    pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : 
+                        rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : 
+                        rack_bay_xyz_loc[i][0];
+                    pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : 
+                        rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : 
+                        rack_bay_xyz_loc[i][1];
+                    pcb_loc_z = rack_bay_xyz_loc[i][2];
+
+                    translate([pcb_loc_x+bayadj+75*(i+1) ,pcb_loc_y+wallthick+gap, 
+                        pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z+1]) rotate([0,0,rack_bay_rotation[i]])
+                            sbc(rack_bay_sbc[i], cooling, fan_size, gpio_opening, uart_opening, false);
+                    }
+                }
+            }
+        }
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             color("dimgrey",1) case_adapter(case_design);
             if(sbc_off == false) {
@@ -1118,11 +1344,25 @@ if (view == "part") {
         }
     }
     if(individual_part == "bottom") {
+        if(case_design == "shell" || case_design == "stacked" || case_design == "round" || case_design == "hex"
+             || case_design == "round" || case_design == "snap" || case_design == "fitted") {
+                case_bottom(case_design);
+        }
+        if(case_design == "tray" || case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
+            translate([0,depth,case_z]) rotate([180,0,0]) case_top(case_design);
+        }
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             case_adapter(case_design);
         }
-        else {
-            if(section_part == false) {
+        if(case_design == "rack") {
+            difference() {
+                translate([-150,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+                translate([150-gap-wallthick,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+            }
+        }
+        if(case_design == "panel" || case_design == "panel_nas") {
+             if(section_part == false) {
                 case_bottom(case_design);
             }
             else {
@@ -1167,6 +1407,18 @@ if (view == "part") {
         if(case_design == "tray_vu5" || case_design == "tray_vu7" || case_design == "tray_sides") {
             translate([depth,0,width-gap]) rotate([0,90,90]) case_side(case_design,"right");
         }
+        if(case_design == "rack" && rack_width == 19) {
+            difference() {
+                translate([-300,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+            }
+        }
+        if(case_design == "rack" && rack_width == 10) {
+            difference() {
+                translate([-150,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([-gap-wallthick-450,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+            }
+        }
     }
     if(individual_part == "left") {
         if(case_design == "panel" || case_design == "panel_nas") {
@@ -1184,6 +1436,13 @@ if (view == "part") {
             translate([gap,0,2*sidethick+gap]) rotate([0,-90,-90]) 
                 case_side(case_design,"left");
         }
+        if(case_design == "rack") {
+            difference() {
+                translate([0,0,-lower_bottom]) case_rack(case_design,"bottom");
+                translate([150-gap-wallthick,-gap-wallthick-1,-adj]) cube([450,depth+2,case_z+2*adj]);
+
+            }
+        }
     }
     if(individual_part == "io_shield") {
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
@@ -1195,7 +1454,41 @@ if (view == "part") {
         if(case_design == "panel_nas" && (pcb_width > 100 || width > 101.6)) {
             rotate([270,0,0]) cableholder_spacer(hd_spacer-9.4);
         }
-        // ui access panel
+        if(case_design == "rack") {
+            // rear fan covers
+            ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
+            for(r = [0:ucount-1]) {
+                fan_offset = -75+(75-rear_fan_size)/2;
+                if(rack_bay_rear_fan[r] == true) {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+fan_offset+8,0,0])
+                            fan_cover(rear_fan_size, wallthick, rear_cooling);
+                }
+            }
+            // rear grommets
+            for(r = [0:len(rack_bay_sbc)-1]) {
+                grommet_offset = -75+11;
+                if(rack_bay_rear_conduit[r] == "grommet") {
+                    translate([0,0,0]) rotate([270,0,0]) difference() {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                    }
+                    translate([0,20,0]) rotate([270,0,0]) difference() {
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
+                    }
+                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,-20,0])
+                        grommet_clip("sleeve", 10, r+2, wallthick);
+                }
+            }
+            for(r = [0:ucount-1]) {
+                if(rack_bay_face[r] == "removable") {
+                    translate([-gap-wallthick-1+(75*(r))+8,-300,0]) bay_tray(depth, r);
+                }
+            }
+        }
+       // ui access panel
         if(bottom_access_panel_enable == true) {
             if(access_panel_rotation == 0) {
                 translate([access_panel_location[0],-access_panel_location[1], 0]) rotate([0,0,access_panel_rotation]) 
