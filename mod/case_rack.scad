@@ -633,7 +633,7 @@ if(case_design == "rack" && side == "bottom") {
                     rack_bay_xyz_loc[r][0] + pcb_width : rack_bay_xyz_loc[r][0];
                 pcb_loc_y = rack_bay_rotation[r] == 270 ? rack_bay_xyz_loc[r][1]+pcb_width : rack_bay_rotation[r] == 180 ?
                     rack_bay_xyz_loc[r][1]+pcb_depth : rack_bay_xyz_loc[r][1];
-                pcb_loc_z = rack_bay_xyz_loc[r][2];
+                pcb_loc_z = rack_bay_sbc[r] == "n2+" ? rack_bay_xyz_loc[r][2]+1.5 : rack_bay_xyz_loc[r][2];
 
                 // sbc openings
                 if(sbc_highlight == true && rack_bay_sbc[r] != "none") {

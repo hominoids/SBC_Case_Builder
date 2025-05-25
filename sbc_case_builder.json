@@ -5812,7 +5812,7 @@
             "rack_bay5_rear_fan": "true",
             "rack_bay5_rotation": "0",
             "rack_bay5_wall": "false",
-            "rack_bay5_xyz_loc": "[345, 0, 0]",
+            "rack_bay5_xyz_loc": "[345, 0, 1.5]",
             "rack_bay6_face": "fixed",
             "rack_bay6_rear_conduit": "grommet",
             "rack_bay6_rear_fan": "true",

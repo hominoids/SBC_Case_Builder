@@ -1192,6 +1192,7 @@ if (view == "model") {
                     bay_tray(depth-2*wallthick-gap-.5-tol,r);
             }
         }
+        // sbc placement
         if(sbc_off == false) {
             for(i = [0:len(rack_bay_sbc)-1]) {
                 if(rack_bay_sbc[i] != "none" && rack_bay_face[i] != "removable") {
@@ -1205,7 +1206,8 @@ if (view == "model") {
 
                     pcb_loc_x = rack_bay_rotation[i] == 90 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][0] + pcb_width : rack_bay_xyz_loc[i][0];
                     pcb_loc_y = rack_bay_rotation[i] == 270 ? rack_bay_xyz_loc[i][1]+pcb_width : rack_bay_rotation[i] == 180 ? rack_bay_xyz_loc[i][1]+pcb_depth : rack_bay_xyz_loc[i][1];
-                    pcb_loc_z = rack_bay_xyz_loc[i][2];
+                    pcb_loc_z = rack_bay_sbc[i] == "n2+" ? rack_bay_xyz_loc[i][2]+1.5 : rack_bay_xyz_loc[i][2];
+//                    pcb_loc_z = rack_bay_xyz_loc[i][2];
 
                     translate([pcb_loc_x ,pcb_loc_y,pcb_bmaxz+floorthick+case_offset_bz+pcb_loc_z]) 
                         rotate([0,0,rack_bay_rotation[i]])
