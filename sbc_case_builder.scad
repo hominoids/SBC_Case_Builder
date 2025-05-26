@@ -206,7 +206,7 @@ hd_y_position = 25; // [0:300]
 hd_z_position = 40; // [0:300]
 
 // case accessory group to load
-accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "n-series_rack19-1u", "n1_rack10-1u", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
+accessory_name = "none"; // ["none", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "c-series_rack19-1u", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "n-series_rack19-1u", "n1_rack10-1u", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "adafruit_solar_charger"]
 
 // sbc information text color
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
@@ -1456,7 +1456,7 @@ if (view == "part") {
         }
         if(case_design == "rack") {
             // rear fan covers
-            ucount = rack_width == 10 ? 3 : len(rack_bay_sbc)-1;
+            ucount = rack_width == 10 ? 3 : len(rack_bay_sbc);
             for(r = [0:ucount-1]) {
                 fan_offset = -75+(75-rear_fan_size)/2;
                 if(rack_bay_rear_fan[r] == true) {
@@ -1465,17 +1465,17 @@ if (view == "part") {
                 }
             }
             // rear grommets
-            for(r = [0:len(rack_bay_sbc)-1]) {
+            for(r = [0:ucount-1]) {
                 grommet_offset = -75+11;
                 if(rack_bay_rear_conduit[r] == "grommet") {
                     translate([0,0,0]) rotate([270,0,0]) difference() {
                     translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
-                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        grommet("bottom", "sleeve", 10, r+1, wallthick, false, [false,10,0,"default"]);
                         translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
                     }
                     translate([0,20,0]) rotate([270,0,0]) difference() {
-                    translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
-                        grommet("bottom", "sleeve", 10, r+2, wallthick, false, [false,10,0,"default"]);
+                        translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,0,0])
+                            grommet("bottom", "sleeve", 10, r+1, wallthick, false, [false,10,0,"default"]);
                         translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset-10,-.125,-3]) cube([20,10,20]);
                     }
                     translate([-gap-wallthick-1+.125+75*(r+1)+grommet_offset,-20,0])

@@ -78,7 +78,7 @@ module grommet(face = "bottom", style = "sleeve", od, id, wall, assembly, mask) 
                     }
                     translate([0,0,-adj]) cylinder(d=id, h=height+(2*adj));
                     translate([-lip_od/2,-cut/2,-adj]) cube([lip_od+(2*adj),cut,height+(2*adj)]);
-                    translate([0,0,2.5+wall]) grommet_clip(style,od,id,wall);
+                    translate([0,0,2.75+wall]) grommet_clip(style,od,id,wall);
                 }
                 if(assembly == true) {
                     translate([0,0,2.5+wall]) grommet_clip(style,od,id,wall);
@@ -99,11 +99,11 @@ module grommet_clip(style,od,id,wall) {
         difference() {
             cylinder(d=lip_od, h=2.5);
             difference() {
-                translate([0,0,-adj]) cylinder(d=od, h=wall+2*adj);
+                translate([0,0,-adj]) cylinder(d=od, h=wall+2.5);
                 translate([-lip_od/2,-od/2,-adj]) cube([lip_od+(2*adj),2,height-2]);
                 translate([-lip_od/2,-2+od/2,-adj]) cube([lip_od+(2*adj),2,height-2]);
             }
-            translate([-lip_od,-(od-6)/2,-adj]) cube([lip_od+(2*adj),od-6,wall+(2*adj)]);
+            translate([-lip_od,-(od-6)/2,-adj]) cube([lip_od+(2*adj),od-6,wall+2.5]);
         }
     }
 }

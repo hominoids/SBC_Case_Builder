@@ -19,7 +19,7 @@
     hd25_tab(side)
     hd25_vtab(side)
     hd35(orientation, mask)
-    hdd35_25holder(length)
+    hd35_25holder(length,width)
     hd35_tab(side)
     hd35_vtab(side)
     hd_bottom_holes(hd, orientation, side, thick, holetype)

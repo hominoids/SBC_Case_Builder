@@ -285,7 +285,69 @@ if(case_design == "rack" && side == "bottom") {
                     translate([300-gap-wallthick,(depth/2)-gap-wallthick,floorthick-adj-.5]) 
                         panel_clamp("bottom", "sloped", "m2", 6, 18, 5, [true,10,2,"holes"]);
                 }
+                // case upper panel clamp holes
+                translate([150-gap-wallthick,-gap-adj,case_z-13+4]) 
+                    panel_clamp("rear", "sloped", "m2", 6, 18, 5, [true,10,2,"holes"]);
+                translate([150-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                    case_z-13+4]) panel_clamp("front", "sloped", "m2", 6, 18, 5, [true,10,2,"holes"]);
+                if(rack_width == 19) { 
+                    translate([300-gap-wallthick,-gap-adj,case_z-13+4]) 
+                        panel_clamp("rear", "sloped", "m2", 6, 18, 5, [true,10,2,"holes"]);
+                    translate([300-gap-wallthick,depth-gap-(2*wallthick)+adj,
+                        case_z-13+4]) panel_clamp("front", "sloped", "m2", 6, 18, 5, [true,10,2,"holes"]);
+                }
+
+                // case lower block assembly holes
+                // rear left
+                translate([150-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+                // rear left nut
+                translate([150-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+                // rear left recess
+                translate([150-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,-gap-adj+(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2);
+                // rear right
+                translate([300-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+                // rear right nut
+                translate([300-gap-wallthick-rack_asm_size-adj,-gap-adj+(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+                // rear right recess
+                translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,-gap-adj+(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2);
+                // front left
+                translate([150-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+                // front left nut
+                translate([150-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+                // front left recess
+                translate([150-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2);
+                // front right
+                translate([300-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)+adj-(rack_asm_size/2),
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=rack_asm_hole, h=rack_asm_gap+(2*rack_asm_size)+(2*adj));
+                // front right nut
+                translate([300-gap-wallthick-rack_asm_size-adj,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2, $fn=6);
+                // front right recess
+                translate([300-gap-wallthick+rack_asm_size+adj+rack_asm_gap-2,depth-gap-(2*wallthick)-(rack_asm_size/2)+adj,
+                    floorthick-adj+(rack_asm_size/2)]) rotate([0,90,0]) 
+                        cylinder(d=4*2/sqrt(3), h=2);
             }
+
             // pcb and multi-pcb standoffs
             for(r = [0:len(rack_bay_sbc)-1]) {
                 if(rack_bay_sbc[r] != "none" && rack_bay_face[r] != "removable") {
