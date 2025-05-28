@@ -12499,7 +12499,7 @@
             "ext_top_standoffs": "false",
             "fan_size": "0",
             "flat_blank_section": "false",
-            "floorthick": "2",
+            "floorthick": "3",
             "front_cover_pattern": "solid",
             "gap": "2",
             "gpio_opening": "default",

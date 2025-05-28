@@ -69,7 +69,7 @@ if(case_design == "rack" && side == "bottom") {
                     for(r = [0:len(rack_bay_sbc)-1]) {
                         if(rack_bay_wall[r] == true) {
                             translate([-gap-wallthick-1+rack_asm_gap/2+75*(r+1),-gap-wallthick-adj,0]) 
-                                cube([2,depth,case_z-2*floorthick]);
+                                cube([2,depth,case_z-floorthick-2]);
                         }
                     }
                     // case upper panel clamps
@@ -1004,7 +1004,7 @@ module bay_tray(depth, bay) {
         union() {
                 slab([reminsert-wallthick-gap-2,depth-.5,1],.5);
                 translate([0, 1.5, 0]) rotate([90,0,0]) 
-                    slab([reminsert-wallthick-gap-2,bay_height-floorthick-1,1.5],.5);
+                    slab([reminsert-wallthick-gap-2,bay_height-3,1.5],.5);
         }
         // case floor panel clamp holes
         translate([baysize-2.5,(depth/2)-gap-wallthick+3,-adj]) 
