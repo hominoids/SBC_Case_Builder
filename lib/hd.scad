@@ -366,7 +366,7 @@ module hd35(orientation, mask) {
     DESCRIPTION: 3.5" hdd to 2.5" hdd holder
            TODO: none
 
-          USAGE: hdd35_25holder(length, width=101.6)
+          USAGE: hd35_25holder(length, width=101.6)
 
                       length = length of holder min. 145mm for 3.5" drive
 */

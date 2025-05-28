@@ -1,5 +1,5 @@
 /*
-    SBC Case Builder Copyright 2022, 2023, 2024 Edward A. Kisiel hominoid@cablemi.com
+    SBC Case Builder Copyright 2022, 2023, 2024, 2025 Edward A. Kisiel hominoid@cablemi.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -644,7 +644,7 @@ if (view == "platter") {
         }
         for(r = [0:ucount-1]) {
             if(rack_bay_face[r] == "removable") {
-                translate([-gap-wallthick-1+(75*(r))+8,-300,0]) bay_tray(depth, r);
+                translate([-gap-wallthick-1+(75*(r))+8,-300,0]) bay_tray(depth-2*wallthick-gap-.5-tol,r);
             }
         }
     }
@@ -1484,7 +1484,7 @@ if (view == "part") {
             }
             for(r = [0:ucount-1]) {
                 if(rack_bay_face[r] == "removable") {
-                    translate([-gap-wallthick-1+(75*(r))+8,-300,0]) bay_tray(depth, r);
+                    translate([-gap-wallthick-1+(75*(r))+8,-300,0]) bay_tray(depth-2*wallthick-gap-.5-tol,r);
                 }
             }
         }

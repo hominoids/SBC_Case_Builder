@@ -1007,35 +1007,41 @@ module bay_tray(depth, bay) {
                     slab([reminsert-wallthick-gap-2,bay_height-floorthick-1,1.5],.5);
         }
         // case floor panel clamp holes
-        translate([baysize-2.5,(depth/2)-gap-wallthick+3.75,-adj]) 
+        translate([baysize-2.5,(depth/2)-gap-wallthick+3,-adj]) 
             cylinder(d=20, h=7);
-        translate([-gap-wallthick+.5,(depth/2)-gap-wallthick+3.75,-adj]) 
+        translate([-gap-wallthick+.5,(depth/2)-gap-wallthick+3,-adj]) 
             cylinder(d=20, h=7);
         if(reminsert/9 > 10) {
-            translate([reminsert-4,(depth/2)-gap-wallthick+3.75,-adj]) 
+            translate([reminsert-4,(depth/2)-gap-wallthick+3,-adj]) 
                 cylinder(d=20, h=7);
         }
         // rear assembly block opening
         // rear left
-        translate([2-2*rack_asm_size,depth-wallthick-1.25,-adj]) 
+        translate([-rack_asm_size,depth-wallthick-gap-1.25,-adj]) 
             cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
         // rear middle
-        translate([2+baysize-2*rack_asm_size,depth-wallthick-1.25,-adj]) 
-            cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
+        translate([1+baysize-2*rack_asm_size,depth-wallthick-gap-1.25,-adj]) 
+            cube([.125+(2*rack_asm_size)+2,rack_asm_size,rack_asm_size+.25]);
         // rear right
-        translate([2+2*baysize-2*rack_asm_size+1.25-.25,depth-wallthick-1.25,-adj]) 
+        translate([2*baysize-2*rack_asm_size-1.25,depth-wallthick-gap-1.25,-adj]) 
             cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
         // front assembly block opening
         // front left
-        translate([2-(2*rack_asm_size)-.25,-gap,-adj]) 
+        translate([-rack_asm_size,-adj,-adj]) 
             cube([.25+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
         // front middle
-        if((bay == 1 || bay) == 3 && reminsert/9 > 10)
-            translate([2+baysize-2*rack_asm_size,-gap,-adj]) 
-                cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
+        if((bay == 1 || bay == 3) && reminsert/9 > 10)
+            translate([1+baysize-2*rack_asm_size,-gap,-adj]) 
+                cube([.125+(2*rack_asm_size)+2,rack_asm_size,rack_asm_size+1.25]);
         // front right
-        translate([2*baysize-2*rack_asm_size+1.25-.25,-gap,-adj]) 
-            cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
+        if(reminsert/9 > 10) {
+            translate([2*baysize-2*rack_asm_size-1.25,-adj,-adj]) 
+                cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+.25]);
+        }
+         else {
+            translate([baysize-2*rack_asm_size,-gap,-adj]) 
+                cube([.125+(2*rack_asm_size),rack_asm_size,rack_asm_size+1.25]);
+        }
 
         // front vent
         if(rack_bay_face[bay] == "removable") {
