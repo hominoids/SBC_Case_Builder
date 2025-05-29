@@ -90,7 +90,7 @@ Both standard motherboard adapters and cases can be generated with SBC Case Buil
 
 
 ### Rack Mount Case Adjustments Tab
-Both 1U and 2U, 10" and 19", rack cases are configured in this tab.  The first entry *rack width* selects if 10" or 19" rack cases are being created.  The *rack size* sets wether 1U or 2U.  The remaining tab is divided into six groups of settings each representing a virtual bay.  Each bay group specifies the SBC thru the pickbox *Rack Bay1* respectively. With *rack bay1 xyz loc* and *rack bay1 rotation determining the position and z-axis rotation.  The type of bay is set in the *rack bay1 face* pickbox followed by two checkboxes for the internal dividing wall, rear fan and a bay conduit selection pickbox. 
+Both 1U and 2U, 10" and 19", rack cases are configured in this tab.  The first entry *rack width* selects if 10" or 19" rack cases are being created.  The *rack size* sets wether 1U or 2U.  There is a 2mm wall in front of every removable bay. *removable bay height* allows the tray height to be reduced to form an opening which allows for tray removal and venting when installed with other rack cases above.  The remaining tab is divided into six groups of settings each representing a virtual bay.  Each bay group specifies the SBC thru the pickbox *Rack Bay1* respectively. With *rack bay1 xyz loc* and *rack bay1 rotation determining the position and z-axis rotation.  The type of bay is set in the *rack bay1 face* pickbox followed by two checkboxes for the internal dividing wall, rear fan and a bay conduit selection pickbox. 
 
 
 ### 3D Case Adjustments Tab
@@ -796,7 +796,7 @@ DESCRIPTION: creates nut holder of various styles.
             size[0] = top diameter or x size in mm
             size[1] = bottom diameter or y size in mm
             size[2] = holder height in mm
-            data[0] = "m2", "m2.5", "m3", "m4"
+            data[0] = "m2", "m2.5", "m3", "m4", "m3-insert"
             data[1] = "default", "sloped", "trap"
             mask[0] = true
             mask[1] = length

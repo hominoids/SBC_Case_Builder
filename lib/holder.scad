@@ -29,7 +29,7 @@
 
           USAGE: nut_holder(nut, style, dia_x, dia_y, height, mask)
 
-                            nut = "m2", "m2.5", "m3", "m4"
+                            nut = "m2", "m2.5", "m3", "m4", "m3-insert"
                           style = "default", "sloped", "trap"
                           dia_x = top diameter or x size in mm
                           dia_y = bottom diameter or y size in mm
@@ -87,6 +87,10 @@ module nut_holder(nut, style, dia_x, dia_y, height, mask) {
                     translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
                     translate([0, 0, 2]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height, $fn=6);
                 }
+                if(nut == "m3-insert") {
+                    translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
+                    translate([0, 0, 0]) cylinder(d=4.2, h=5.1);
+                }
                 if(nut == "m4") {
                     translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);
                     translate([0, 0, 2]) cylinder(d=nuts[3][1]*2/sqrt(3), h=height, $fn=6);
@@ -106,7 +110,11 @@ module nut_holder(nut, style, dia_x, dia_y, height, mask) {
                 }
                 if(nut == "m3") {
                     translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
-                    translate([0, 0, 2]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height, $fn=6);
+                    translate([0, 0, 0]) cylinder(d=nuts[2][1]*2/sqrt(3), h=height+5, $fn=6);
+                }
+                if(nut == "m3-insert") {
+                    translate([0, 0, -1]) cylinder(d=nuts[2][0]+.5, h=height+2);
+                    translate([0, 0, 0]) cylinder(d=4.2, h=5.1);
                 }
                 if(nut == "m4") {
                     translate([0, 0, -1]) cylinder(d=nuts[3][0]+.5, h=height+2);

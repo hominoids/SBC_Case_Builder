@@ -1004,7 +1004,7 @@ module bay_tray(depth, bay) {
         union() {
                 slab([reminsert-wallthick-gap-2,depth-.5,1],.5);
                 translate([0, 1.5, 0]) rotate([90,0,0]) 
-                    slab([reminsert-wallthick-gap-2,bay_height-3,1.5],.5);
+                    slab([reminsert-wallthick-gap-2,bay_height-3+removable_bay_height,1.5],.5);
         }
         // case floor panel clamp holes
         translate([baysize-2.5,(depth/2)-gap-wallthick+3,-adj]) 
