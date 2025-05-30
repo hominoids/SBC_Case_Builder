@@ -166,7 +166,7 @@ module rack_stand(rack_1u) {
     c_fillet = 9;
     rail_offset = 87.5;
     foot_length = 175;
-    foot_thick = thick;
+    foot_thick = 4;
     $fn=180;
 
     // vertical rack rails
@@ -190,7 +190,7 @@ module rack_stand(rack_1u) {
             translate([0,(height/2)-5*thick,ext_adj])  rotate([0,90,0]) {
                 difference() {
                     translate([0,0,0]) cylinder(d=(2*height)+(3*thick), h=mount_rail);
-                    translate([0,0,-adj]) cylinder(d=(2*height)+thick, h=mount_rail+(2*adj));
+                    translate([0,0,-adj]) cylinder(d=(2*height)+thick+4, h=mount_rail+(2*adj));
                 }
             }
             // top trim

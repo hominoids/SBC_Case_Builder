@@ -46,12 +46,12 @@
     /* [1U Rack Stand] */
     rack_width = 19; // [10, 19]
     rack_1u = 4; // [1 : 4]
-    rack_depth = 150; // [25 : 200]
     rack_fasteners = "nut"; // ["none", "nut", "insert"]
 
     /* [Hidden] */
     mask = [true, 10, 2, "default"];
     nmask = [false, 10, 2, "default"];
+    rack_depth = 150;
 
     adj = .01;
     $fn = 90;
