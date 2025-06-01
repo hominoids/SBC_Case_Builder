@@ -723,7 +723,16 @@ if(case_design == "rack" && side == "bottom") {
             slab([width-(2*wallthick),depth-(2*wallthick),2+adj],corner_fillet);
         translate([-gap-wallthick-adj,-gap-wallthick,case_z-floorthick]) 
             slab([width,depth+adj,20],corner_fillet);
+
+        // case exterior support holes
+        translate([-gap-wallthick+10,depth-2*(wallthick+gap)-5,-adj]) cylinder(d=3, h=floorthick+(2*adj));
+        translate([450/2-gap-wallthick,depth-2*(wallthick+gap)-5,-adj]) cylinder(d=3, h=floorthick+(2*adj));
+        translate([450-gap-wallthick-10,depth-2*(wallthick+gap)-5,-adj]) cylinder(d=3, h=floorthick+(2*adj));
+        translate([-gap-wallthick+10,5,-adj]) cylinder(d=3, h=floorthick+(2*adj));
+        translate([450/2-gap-wallthick,5,-adj]) cylinder(d=3, h=floorthick+(2*adj));
+        translate([450-gap-wallthick-10,5,-adj]) cylinder(d=3, h=floorthick+(2*adj));
     }
+
     // additive accessories
     if(accessory_name != "none") {
         for (i=[1:11:len(accessory_data[a[0]])-1]) {

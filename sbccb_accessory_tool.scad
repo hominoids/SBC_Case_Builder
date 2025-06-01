@@ -26,9 +26,18 @@
     individual_part = "bottom"; // [top, bottom, right, left, front, rear, io_shield, accessories]
     // section individual parts for panel cases
     section_part = false; // [true,false]
-    accessory = "grommet"; // ["fan cover", "grommet", "hd25 holder", "1u rack stand"]
+    accessory = "grommet"; // ["1u rack stand", "2.5 drive holder", "fan cover", "grommet", "washer"]
 
-    /* [Fan Cover] */
+    /* [1U Rack Stand] */
+    rack_width = 19; // [10, 19]
+    rack_1u = 4; // [1 : 4]
+    rack_fasteners = "nut"; // ["none", "nut", "insert"]
+
+    /* [2.5" Drive Holder] */
+    holder_length = 110; // [110, 145]
+    holder_width = 101.6; // [101.6 : .1 : 150]
+
+   /* [Fan Cover] */
     fan_style = "fan_hex"; // ["fan_open", "fan_1", "fan_2", "fan_hex"]
     fan_size = 40; // [25, 30, 40, 50, 60, 80, 92, 120]
     fan_cover_thickness = 2; // [2 : .25 : 5]
@@ -39,14 +48,13 @@
     grommet_id = 6; // [2 : .25 : 20]
     installation_wall_thickness = 2; // [2 : .25 : 5]
 
-    /* [2.5" HD Holder] */
-    holder_length = 110; // [110, 145]
-    holder_width = 101.6; // [101.6 : .1 : 150]
-
-    /* [1U Rack Stand] */
-    rack_width = 19; // [10, 19]
-    rack_1u = 4; // [1 : 4]
-    rack_fasteners = "nut"; // ["none", "nut", "insert"]
+    /* [Washer] */
+    washer_style = "flat"; // ["flat", "shouldered"]
+    washer_od = 5; // [3 : .25 : 20]
+    washer_id = 3; // [2 : .25 : 20]
+    washer_thickness = 2; // [1 : .25 : 8]
+    shoulder_height = 3; // [1 : .25 : 4]
+    shoulder_countersunk = false; // [true,false]
 
     /* [Hidden] */
     mask = [true, 10, 2, "default"];
@@ -58,23 +66,32 @@
 
     // model view
     if (view == "model") {    
+        if(accessory == "1u rack stand") {
+            rack_stand(rack_1u);
+        }
+        if(accessory == "2.5 drive holder") {
+            hd35_25holder(holder_length, holder_width);
+        }
         if(accessory == "fan cover") {
             fan_cover(fan_size, fan_cover_thickness, fan_style);
         }
         if(accessory == "grommet") {
             grommet("front", grommet_style, grommet_od, grommet_id, installation_wall_thickness, true, nmask);
         }
-        if(accessory == "hd25 holder") {
-            hd35_25holder(holder_length, holder_width);
-        }
-        if(accessory == "1u rack stand") {
-            rack_stand(rack_1u);
+        if(accessory == "washer") {
+            washer(washer_style, washer_id, washer_od, washer_thickness, shoulder_height, shoulder_countersunk, "silver");;
         }
     }
 
 
     // platter view
     if (view == "platter") {
+        if(accessory == "1u rack stand") {
+            rotate([0,270,0]) rack_stand(rack_1u);
+        }
+        if(accessory == "2.5 drive holder") {
+            hd35_25holder(holder_length, holder_width);
+        }
         if(accessory == "fan cover") {
             fan_cover(fan_size, fan_cover_thickness, fan_style);
         }
@@ -90,10 +107,8 @@
             translate([0,-20,0])
                 grommet_clip(grommet_style, grommet_od, grommet_id, installation_wall_thickness);
         }
-        if(accessory == "hd25 holder") {
-            hd35_25holder(holder_length, holder_width);
-        }
-        if(accessory == "1u rack stand") {
-            rotate([0,270,0]) rack_stand(rack_1u);
+        if(accessory == "washer") {
+            washer(washer_style, washer_id, washer_od, washer_thickness, 
+                shoulder_height, shoulder_countersunk, "silver");
         }
     }

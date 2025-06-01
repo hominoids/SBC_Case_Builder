@@ -2319,7 +2319,21 @@ This area covers specific build notes for specific cases.  Hardware used or othe
 The panel_nas design can be CNC cut or 3D printed.  By changing the top and bottom standoff type to "none" in the *SBC Standoff Global Settings* tabs respectively, only a hole is generated for CNC cutting support.  Panels can be exported in DXF or SVG by selecting the *part" view under the *view* tab, then the indivual part and select the *section part* checkbox. After the projection has been generated render it by pressing F7 or by selecting render from the user interface.  Exported DXF and SVG file formats are available under the File->Export menu.
 
 ### rack Case Design
-This case is divided into 3 pieces for the 19" cases and 2 pieces for the 10" cases.  They can be selected in the *part* view for STL export under the *view* tab by selecting the left, bottom or right individual part.  The peices are held together using M2x8mm screws and nuts.  The 10 inch cases requires 5 sets of screws and nuts and the 19" rack case takes 10 sets. 
+This case is divided into 3 pieces for the 19" cases and 2 pieces for the 10" cases.  They can be selected in the *part* view for STL export under the *view* tab by selecting the left, bottom or right individual part.  The peices are held together using M2x8mm screws and nuts.
+
+10” rack case Qty 5 - M2x8mm screws cap or countersunk with nuts.
+19” rack case Qty 10 - M2x8mm screws cap or countersunk with nuts.
+Appropriate fasteners for all SBC.
+
+For a better fit, prep the edges of the case pieces prior to assembly.  Use sand paper or a file to remove any imperfections and true the edge.
+
+Using 2mm thickness for the floor and walls provides for an adequate case in most enclosed applications but a 3mm floor  or better is recommended for removable and open front cases.
+
+There are 3mm holes on the left, center and right, both front and rear, to use for feet when deployed as a single bench top case.  If using the rack stands, the holes can be used to mount an external standoff to support the rear of a heavy case.
+
+All case bodies can be printed without the use of support.  Only the removable bay tray needs support for printing.  SBC placement so as to bisect a SBC opening with a case divide, will require print supports.
+
+Varies accessories (1u rack stand, grommets, fan covers, 2.5” drive holder, washers, etc) are available from sbccb_accessory_tool.scad.  The table top rack stand is comprised of two interchangeable brackets that can hold 1U-4U rack cases.
 
 
 ## Accuracy
