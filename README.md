@@ -2318,6 +2318,18 @@ This area covers specific build notes for specific cases.  Hardware used or othe
 ### panel_nas Case Design
 The panel_nas design can be CNC cut or 3D printed.  By changing the top and bottom standoff type to "none" in the *SBC Standoff Global Settings* tabs respectively, only a hole is generated for CNC cutting support.  Panels can be exported in DXF or SVG by selecting the *part" view under the *view* tab, then the indivual part and select the *section part* checkbox. After the projection has been generated render it by pressing F7 or by selecting render from the user interface.  Exported DXF and SVG file formats are available under the File->Export menu.
 
+Normally the top and bottom height added together is the overall case height for other cases.  But with hard drives involved there is additional height which is represented in its total by the height value.  In the example, the top is 41mm tall from the outside of the case to the top of the PCB.  In a bottom mounted case, 22.25mm measurement would be from the bottom of the case to the top of the PCB, which is sunk by it’s thickness so that the PCB top is even with the top edge of the bottom case piece normally.  So the equations for the standoff lengths would be:
+
+Top standoff length = top height – floor thickness
+38mm = 41mm – 3mm
+
+Bottom standoff height = bottom height – floor thickness – PCB thickness
+17mm = 22.25mm – 3mm – 2.25mm
+
+2.5” drives are supported using a 3.5” holder adapter.  There is one in SBCCB that can be accessed using a new program, sbccb_accessory_tool.scad.  The holder can also be wider then a 3.5” drive (101.6mm) for an exact case fit.
+
+For internal mounted rear fans, room above the rear fans equal to the 10mm tab size is required to remove the rear piece.
+
 ### rack Case Design
 This case is divided into 3 pieces for the 19" cases and 2 pieces for the 10" cases.  They can be selected in the *part* view for STL export under the *view* tab by selecting the left, bottom or right individual part.  The peices are held together using M2x8mm screws and nuts.
 
