@@ -236,7 +236,7 @@ module case_side(case_design, side) {
                                         (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
                                 translate([wallthick+gap,depth-3*(wallthick)+gap,
                                     case_z-(top_height+bottom_height+4*floorthick)-20]) 
-                                        vent(width-4*(sidethick+gap),,wallthick,floorthick+4,2,
+                                        vent(width-4*(sidethick+gap),wallthick,floorthick+4,2,
                                             (case_z-2*(wallthick+gap)-20)/20,1,"vertical");
                             }
                             if(front_cover_pattern == "astroid") {
