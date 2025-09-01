@@ -498,8 +498,8 @@ echo(pcb_depth+case_offset_y-10);
                     if(((width-pcb_loc_x-pcb_width-(gap+2*wallthick) >= ext_bottom_standoff_support_size 
                         || pcb_loc_y >= ext_bottom_standoff_support_size)) && 
                             ext_bottom_rear_right_enable == true && ext_bottom_standoff[6] != "blind") {
-                        translate([width-ext_bottom_standoff_support_size/4-(2*(wallthick+gap)),
-                            ext_bottom_standoff_support_size/4,-adj]) 
+                        translate([width-ext_bottom_standoff_support_size/2.5-(2*(wallthick+gap)),
+                            ext_bottom_standoff_support_size/2.5,-adj]) 
                                 cylinder(d=ext_bottom_standoff[4]-.2, h=floorthick+(2+adj));
                     }
                     // right-front standoff
@@ -510,15 +510,15 @@ echo(pcb_depth+case_offset_y-10);
                                     (width-pcb_loc_x-pcb_width-(gap+2*wallthick) <= ext_bottom_standoff_support_size && 
                                         depth-pcb_loc_y-pcb_depth >= ext_bottom_standoff_support_size)) &&
                                             ext_bottom_front_right_enable == true && ext_bottom_standoff[6] != "blind") {
-                        translate([width-ext_bottom_standoff_support_size/4-(2*(wallthick+gap)),
-                            depth-ext_bottom_standoff_support_size/4-(2*(wallthick+gap)),-adj]) 
+                        translate([width-ext_bottom_standoff_support_size/2.5-(2*(wallthick+gap)),
+                            depth-ext_bottom_standoff_support_size/2.5-(2*(wallthick+gap)),-adj]) 
                                 cylinder(d=ext_bottom_standoff[4]-.2, h=floorthick+(2*adj));
                     }
                     // left-rear standoff
                     if((pcb_loc_x >= ext_bottom_standoff_support_size || pcb_loc_y >= ext_bottom_standoff_support_size) &&
                         ext_bottom_rear_left_enable == true && ext_bottom_standoff[6] != "blind") {
-                        translate([ext_bottom_standoff_support_size/4,
-                            ext_bottom_standoff_support_size/4,-adj]) 
+                        translate([ext_bottom_standoff_support_size/2.5,
+                            ext_bottom_standoff_support_size/2.5,-adj]) 
                                 cylinder(d=ext_bottom_standoff[4]-.2, h=floorthick+(2*adj));
                     }
                     // left-front standoff
@@ -529,8 +529,8 @@ echo(pcb_depth+case_offset_y-10);
                                     (pcb_loc_x >= ext_bottom_standoff_support_size && 
                                         (depth-(pcb_loc_y+pcb_depth)) <= ext_bottom_standoff_support_size)) &&
                                             ext_bottom_front_left_enable == true && ext_bottom_standoff[6] != "blind") {
-                        translate([ext_bottom_standoff_support_size/4,
-                            depth-(ext_bottom_standoff_support_size/4)-(2*(wallthick+gap)),-adj]) 
+                        translate([ext_bottom_standoff_support_size/2.5,
+                            depth-(ext_bottom_standoff_support_size/2.5)-(2*(wallthick+gap)),-adj]) 
                                 cylinder(d=ext_bottom_standoff[4]-.2, h=floorthick+(2*adj));
                     }
                 }
@@ -832,8 +832,8 @@ echo(pcb_depth+case_offset_y-10);
                                         ext_bottom_standoff[10],
                                         ext_bottom_standoff[11],
                                         ext_bottom_standoff[12]];
-                    translate([width-ext_bottom_standoff_support_size/4-(2*(wallthick+gap)),
-                        ext_bottom_standoff_support_size/4,0]) 
+                    translate([width-ext_bottom_standoff_support_size/2.5-(2*(wallthick+gap)),
+                        ext_bottom_standoff_support_size/2.5,0]) 
                             standoff(extended_standoff,[false,10,2,"default"]);
                 }
                 // extended right-front standoff
@@ -857,8 +857,8 @@ echo(pcb_depth+case_offset_y-10);
                                         ext_bottom_standoff[10],
                                         ext_bottom_standoff[11],
                                         ext_bottom_standoff[12]];
-                    translate([width-ext_bottom_standoff_support_size/4-(2*(wallthick+gap)),
-                        depth-ext_bottom_standoff_support_size/4-(2*(wallthick+gap)),0]) 
+                    translate([width-ext_bottom_standoff_support_size/2.5-(2*(wallthick+gap)),
+                        depth-ext_bottom_standoff_support_size/2.5-(2*(wallthick+gap)),0]) 
                             standoff(extended_standoff,[false,10,2,"default"]);
                 }
                 // extended left-rear standoff
@@ -877,7 +877,7 @@ echo(pcb_depth+case_offset_y-10);
                                         ext_bottom_standoff[10],
                                         ext_bottom_standoff[11],
                                         ext_bottom_standoff[12]];
-                    translate([ext_bottom_standoff_support_size/4, ext_bottom_standoff_support_size/4,0]) 
+                    translate([ext_bottom_standoff_support_size/2.5, ext_bottom_standoff_support_size/2.5,0]) 
                             standoff(extended_standoff,[false,10,2,"default"]);
                 }
                 // extended left-front standoff
@@ -901,8 +901,8 @@ echo(pcb_depth+case_offset_y-10);
                                         ext_bottom_standoff[10],
                                         ext_bottom_standoff[11],
                                         ext_bottom_standoff[12]];
-                    translate([ext_bottom_standoff_support_size/4,
-                        depth-(ext_bottom_standoff_support_size/4)-(2*(wallthick+gap)),0]) 
+                    translate([ext_bottom_standoff_support_size/2.5,
+                        depth-(ext_bottom_standoff_support_size/2.5)-(2*(wallthick+gap)),0]) 
                             standoff(extended_standoff,[false,10,2,"default"]);
                 }
             }
