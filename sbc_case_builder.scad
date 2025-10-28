@@ -35,6 +35,8 @@ sbc_model = "c1+"; //  ["c1+", "c2", "c4", "hc4", "c5", "xu4", "xu4q", "mc1", "h
 
 // sbc off in model view
 sbc_off = false;
+// flip sbc upside down (bottom side on top)
+sbc_flip = false;
 // sbc information display
 sbc_information = false;
 // enable highlight for sbc component subtractive geometry
@@ -752,8 +754,17 @@ if (view == "model") {
                 }
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
         }
         if(case_design == "panel") {
@@ -776,8 +787,17 @@ if (view == "model") {
                 color("grey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
         }
         if(case_design == "panel_nas") {
@@ -800,12 +820,30 @@ if (view == "model") {
                 color("dimgrey",1) translate([-move_leftside,0,0]) case_side(case_design,"left");
             }
             if(sbc_off == false && nas_sbc_location == "bottom") {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
             if(sbc_off == false && nas_sbc_location == "top") {
-                translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))+.5])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))+.5])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Rotate around center to keep SBC in same position, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, case_z-(top_height+pcb_loc_z+(2*floorthick))+.5 + (pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, -(pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
             for( i=[0:1:hd_bays-1]) {
                 if(hd_reverse == false) {
@@ -963,8 +1001,17 @@ if (view == "model") {
                 color("grey",1) translate([0,0,raise_top]) case_top(case_design);
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
         }
         if(case_design == "tray" || case_design == "tray_sides" || case_design == "tray_vu5" || case_design == "tray_vu7") {
@@ -1055,8 +1102,17 @@ if (view == "model") {
                     case_z+27]) rotate([-15,0,180]) hk_speaker();
             }
             if(sbc_off == false) {
-                translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Rotate around center to keep SBC in same position, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, bottom_height-pcb_z+pcb_loc_z-adj + (pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, -(pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
         } 
         if(case_design == "round" || case_design == "hex") {
@@ -1067,8 +1123,17 @@ if (view == "model") {
                 color("grey",1) translate([0,0,raise_top]) case_top(case_design);
             }        
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Rotate around center to keep SBC in same position, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, bottom_height-pcb_z+pcb_loc_z-adj + (pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, -(pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
         }
         if(case_design == "snap" || case_design == "fitted") {
@@ -1115,8 +1180,17 @@ if (view == "model") {
                 }
             }        
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Rotate around center to keep SBC in same position, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, bottom_height-pcb_z+pcb_loc_z-adj + (pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, -(pcb_z+pcb_tmaxz+pcb_bmaxz)/2])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
         }
         if(case_design == "rack") {
@@ -1241,8 +1315,17 @@ if (view == "model") {
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             color("dimgrey",1) case_adapter(case_design);
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                if(sbc_flip == false) {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
+                else {
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
+                }
             }
             if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx") {
                 color("dimgrey",1) translate([-1.2,-4.5,-2]) io_shield();

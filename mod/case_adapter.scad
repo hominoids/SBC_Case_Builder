@@ -246,9 +246,11 @@ mb_adapters=[
                         (pcbhole_pos == "left_rear" || pcbhole_pos == "left_front" || pcbhole_pos == "right_rear" || pcbhole_pos == "right_front")) {
                         if (pcbhole_pos == "left_rear" && bottom_rear_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_left_support : "none";
+                            standoff_height = sbc_flip == false ? bottom_height-pcb_z+pcb_loc_z :
+                                bottom_height-pcb_bmaxz+pcb_tmaxz+pcb_loc_z;
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_left_adjust,
+                                                standoff_height+bottom_rear_left_adjust,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -263,9 +265,11 @@ mb_adapters=[
                         }
                         if (pcbhole_pos == "left_front" && bottom_front_left_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_left_support : "none";
+                            standoff_height = sbc_flip == false ? bottom_height-pcb_z+pcb_loc_z :
+                                bottom_height-pcb_bmaxz+pcb_tmaxz+pcb_loc_z;
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_left_adjust,
+                                                standoff_height+bottom_front_left_adjust,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -280,9 +284,11 @@ mb_adapters=[
                         }
                         if (pcbhole_pos == "right_rear" && bottom_rear_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_rear_right_support : "none";
+                            standoff_height = sbc_flip == false ? bottom_height-pcb_z+pcb_loc_z :
+                                bottom_height-pcb_bmaxz+pcb_tmaxz+pcb_loc_z;
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_rear_right_adjust,
+                                                standoff_height+bottom_rear_right_adjust,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -297,9 +303,11 @@ mb_adapters=[
                         }
                         if (pcbhole_pos == "right_front" && bottom_front_right_enable == true) {
                             bottom_support = bottom_sidewall_support == true ? bottom_front_right_support : "none";
+                            standoff_height = sbc_flip == false ? bottom_height-pcb_z+pcb_loc_z :
+                                bottom_height-pcb_bmaxz+pcb_tmaxz+pcb_loc_z;
                             pcb_standoff = [bottom_standoff[0],
                                                 bottom_standoff[1],
-                                                bottom_height-pcb_z+pcb_loc_z+bottom_front_right_adjust,
+                                                standoff_height+bottom_front_right_adjust,
                                                 bottom_standoff[3],
                                                 bottom_standoff[4],
                                                 bottom_standoff[5],
@@ -381,8 +389,17 @@ module io_shield() {
             cube([io_window_x,4,io_window_z]);
         }
         translate([2,-2,2]) cube([io_window_x-4,5,io_window_z-4]);
-        translate([io_offset+pcb_loc_x,6+pcb_loc_y,bottom_height-pcb_z+pcb_loc_z+2]) 
-            sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+        if(sbc_flip == false) {
+            translate([io_offset+pcb_loc_x,6+pcb_loc_y,bottom_height-pcb_z+pcb_loc_z+2]) 
+                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+        }
+        else {
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    translate([io_offset+pcb_loc_x + pcb_width/2, 6+pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z+2])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+        }
         // subtractive accessories
         if(accessory_name != "none") {
             for (i=[1:11:len(accessory_data[a[0]])-1]) {

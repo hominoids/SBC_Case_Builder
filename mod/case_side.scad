@@ -568,34 +568,85 @@ module case_side(case_design, side) {
         }
         // sbc openings
         if(case_design != "panel_nas") {
-            if(sbc_highlight == true) {
-                #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+            if(sbc_flip == false) {
+                if(sbc_highlight == true) {
+                    #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
+                else {
+                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
+                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
             }
             else {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z-adj-adj]) 
-                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                // Flip SBC - match display geometry Z position exactly for proper alignment
+                if(sbc_highlight == true) {
+                    #translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
+                else {
+                    translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_z+pcb_tmaxz+pcb_loc_z])
+                        rotate([180,0,180])
+                            translate([-pcb_width/2, -pcb_depth/2, 0])
+                                sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                }
             }
         }
         else {
             if(nas_sbc_location == "top") {
-                if(sbc_highlight == true) {
-                    #translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))]) 
-                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                if(sbc_flip == false) {
+                    if(sbc_highlight == true) {
+                        #translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))]) 
+                            sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
+                    else {
+                        translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))]) 
+                            sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
                 }
                 else {
-                    translate([pcb_loc_x ,pcb_loc_y,case_z-(top_height+pcb_loc_z+(2*floorthick))]) 
-                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    if(sbc_highlight == true) {
+                        #translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_tmaxz+pcb_loc_z])
+                            rotate([180,0,180])
+                                translate([-pcb_width/2, -pcb_depth/2, 0])
+                                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
+                    else {
+                        translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_tmaxz+pcb_loc_z])
+                            rotate([180,0,180])
+                                translate([-pcb_width/2, -pcb_depth/2, 0])
+                                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
                 }
             }
             if(nas_sbc_location == "bottom") {
-                if(sbc_highlight == true) {
-                    #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) 
-                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                if(sbc_flip == false) {
+                    if(sbc_highlight == true) {
+                        #translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) 
+                            sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
+                    else {
+                        translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) 
+                            sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
                 }
                 else {
-                    translate([pcb_loc_x ,pcb_loc_y,bottom_height-pcb_z+pcb_loc_z]) 
-                        sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    // Flip SBC - position PCB bottom at correct height, with 180° Z rotation to keep ports on same side
+                    if(sbc_highlight == true) {
+                        #translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_tmaxz+pcb_loc_z])
+                            rotate([180,0,180])
+                                translate([-pcb_width/2, -pcb_depth/2, 0])
+                                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
+                    else {
+                        translate([pcb_loc_x + pcb_width/2, pcb_loc_y + pcb_depth/2, floorthick+case_offset_bz+pcb_tmaxz+pcb_loc_z])
+                            rotate([180,0,180])
+                                translate([-pcb_width/2, -pcb_depth/2, 0])
+                                    sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, true);
+                    }
                 }
             }
         }
