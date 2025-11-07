@@ -469,7 +469,7 @@ module case_top(case_design) {
                                 vent_hex((width-10)/3.75,(depth-10)/7,floorthick+4,5,1.5,"horizontal");
                         }
                         else {
-                            translate([1,0,case_z-(2*floorthick)]) vent_hex(width/3.75,depth/6,floorthick+4,5,1.5,"horizontal");
+                            translate([1,0,case_z-(2*floorthick)]) vent_hex(width/3.75,depth/6,floorthick+8,5,1.5,"horizontal");
                         }
                     }
                     if(top_cover_pattern == "hex_8mm") { 
@@ -477,7 +477,7 @@ module case_top(case_design) {
                             translate([-gap+5,6,case_z-(2*floorthick)]) vent_hex(xvent8_adj,depth/9.5,floorthick+4,8,1.5,"horizontal");
                         }
                         else {
-                            translate([1,2,case_z-(2*floorthick)]) vent_hex(width/5.5,depth/9.5,floorthick+4,8,1.5,"horizontal");
+                            translate([1,2,case_z-(2*floorthick)]) vent_hex(width/5.5,depth/9.5,floorthick+8,8,1.5,"horizontal");
                         }
                     }
                     if(top_cover_pattern == "linear_vertical") {
@@ -487,7 +487,7 @@ module case_top(case_design) {
                         }
                         else {
                             translate([0,-gap,case_z-(2*floorthick)]) 
-                                vent(wallthick,depth-2*wallthick-gap,floorthick+4,1,1,(width-2*wallthick-gap)/4,"horizontal");
+                                vent(wallthick,depth-2*wallthick-gap,floorthick+8,1,1,(width-2*wallthick-gap)/4,"horizontal");
                         }
                     }
                     if(top_cover_pattern == "linear_horizontal") {
@@ -498,7 +498,7 @@ module case_top(case_design) {
                         }
                         else {
                             translate([-gap,-gap,case_z-(2*floorthick)]) 
-                                vent(width-2*wallthick-gap,wallthick,floorthick+4,1,(depth-2*wallthick-gap)/3,1,"horizontal");
+                                vent(width-2*wallthick-gap,wallthick,floorthick+8,1,(depth-2*wallthick-gap)/3,1,"horizontal");
                         }
                     }
                     if(top_cover_pattern == "astroid") {
@@ -507,7 +507,7 @@ module case_top(case_design) {
                             for(c=[xast_adj:12:depth-16]) {
                                 for(r=[8:12:width-16]) {
                                     translate([r,c,case_z-(2*floorthick)-adj]) 
-                                        linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                        linear_extrude(floorthick+8) import("./dxf/astroid_8mm.dxf");
                                 }
                             }
                         }
@@ -515,7 +515,7 @@ module case_top(case_design) {
                             for(c=[3:12:depth-8]) {
                                 for(r=[4:12:width-8]) {
                                     translate([r,c,case_z-(2*floorthick)-adj]) 
-                                        linear_extrude(floorthick+5) import("./dxf/astroid_8mm.dxf");
+                                        linear_extrude(floorthick+8) import("./dxf/astroid_8mm.dxf");
                                 }
                             }
                         }
