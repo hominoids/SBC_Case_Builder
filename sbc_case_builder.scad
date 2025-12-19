@@ -72,6 +72,8 @@ flat_blank_section =  false;
 standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
 rear_io_shield = false;
+// sbc rotation on the adapter
+adapter_sbc_rotation = 0; //[0:90:270]
 
 /* [Rack Mount Case Adjustments] */
 // size of rack 10" or 19" //
@@ -1241,14 +1243,22 @@ if (view == "model") {
         if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx" || case_design == "adapter_mini-itx_thin" || case_design == "adapter_mini-itx" || case_design == "adapter_flex-atx" || case_design == "adapter_mini-dtx" || case_design == "adapter_dtx" || case_design == "adapter_micro-atx" || case_design == "adapter_atx" || case_design == "adapter_ssi-ceb" || case_design == "adapter_ssi-eeb") {
             color("dimgrey",1) case_adapter(case_design);
             if(sbc_off == false) {
-                translate([pcb_loc_x ,pcb_loc_y,bottom_height-case_offset_bz-pcb_z+pcb_loc_z])
+                pcbloc_x = adapter_sbc_rotation == 90 ? pcb_loc_x + pcb_depth : 
+                    adapter_sbc_rotation == 180 ? pcb_loc_x + pcb_width : pcb_loc_x;
+                pcbloc_y = adapter_sbc_rotation == 270 ? pcb_loc_y+pcb_width : 
+                    adapter_sbc_rotation == 180 ? pcb_loc_y+pcb_depth : pcb_loc_y;
+                pcbloc_z = sbc_model == "n2" || sbc_model == "m1" ? pcb_loc_z-6 : 
+                    sbc_model == "n2+" ? pcb_loc_z-4.5 : pcb_loc_z;
+                translate([pcbloc_x ,pcbloc_y,bottom_height-case_offset_bz-pcb_z+pcbloc_z]) rotate([0,0,adapter_sbc_rotation])
                     sbc(sbc_model, cooling, fan_size, gpio_opening, uart_opening, false);
             }
-            if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx") {
-                color("dimgrey",1) translate([-1.2,-4.5,-2]) io_shield();
-            }
-            else {
-                color("dimgrey",1) translate([-10.79,-4.5,-2]) io_shield();
+            if(rear_io_shield == true) {
+                if(case_design == "adapter_mini-stx_thin" || case_design == "adapter_mini-stx") {
+                    color("dimgrey",1) translate([-1.2,-4.5,-2]) io_shield();
+                }
+                else {
+                    color("dimgrey",1) translate([-10.79,-4.5,-2]) io_shield();
+                }
             }
         }
         // ui access panel
