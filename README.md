@@ -55,9 +55,9 @@ NOTE: The submodule *SBC Model Framework* needs to be updated anytime SBC Case B
 - Fitted - complete
 - Paper, Folded - complete
 - Standard MB SBC Adapters & io plates - completed
-	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-Itx, Mini-ITX Thin, Mini-STX, Mini-STX Thin
+	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, EBX, Mini-ITX, Mini-ITX Thin, Mini-STX, Mini-STX Thin
 - Standard MB Cases - complete
-	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, Mini-ITX, Mini-ITX Thin, Mini-STX, Mini-STX Thin, Nano-ITX, NUC, Pico-ITX
+	+ SSI-EEB, SSI-CEB, ATX, Micro-ATX, DTX, Flex-ATX, Mini-DTX, EBX, Mini-ITX, Mini-ITX Thin, Mini-STX, Mini-STX Thin, Nano-ITX, NUC, Pico-ITX
 - NAS - panel_nas complete
 - Rack - 1U and 2U complete
 - Stacked Levels

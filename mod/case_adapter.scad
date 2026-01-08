@@ -50,6 +50,8 @@ mb_adapters=[
                                                ["right_front", 209.55, 165.1]],
             ["adapter_mini-dtx", 203.2, 170.18, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
                                                 ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]], 
+            ["adapter_ebx", 203.2, 146.05, ["left_rear", 5.08, 5.08], ["right_rear", 198.12, 5.08], 
+                                                ["left_front", 5.08, 140.97], ["right_front", 198.12, 140.97]], 
             ["adapter_mini-itx", 170, 170, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
                                            ["left_front", 6.35, 165.1], ["right_front", 163.83, 165.1]],
             ["adapter_mini-itx_thin", 170, 170, ["left_rear", 6.35, 33.02], ["right_rear", 163.83, 10.16], 
@@ -149,16 +151,16 @@ mb_adapters=[
                 // bottom cover pattern
                 if(bottom_cover_pattern != "solid") {
                     if(bottom_cover_pattern == "hex_5mm") {
-                        translate([1,0,-2]) vent_hex(mba_x/3.75,mba_y/6,floorthick+4,5,1.5,"horizontal");
+                        translate([1,3,-2]) vent_hex(mba_x/3.75,mba_y/6,floorthick+4,5,1.5,"horizontal");
                     }
                     if(bottom_cover_pattern == "hex_8mm") {
-                        translate([1,2,-2]) vent_hex(mba_x/5.5,mba_y/9.5,floorthick+4,8,1.5,"horizontal");
+                        translate([1,3,-2]) vent_hex(mba_x/5.5,mba_y/9.5,floorthick+4,8,1.5,"horizontal");
                     }
                     if(bottom_cover_pattern == "linear_vertical") {
-                        translate([0,-gap,-2]) vent(wallthick,mba_y-2*wallthick-gap,floorthick+4,1,1,(mba_x-2*wallthick-gap)/4,"horizontal");
+                        translate([0,5,-2]) vent(wallthick,mba_y-2*wallthick-gap-9,floorthick+4,1,1,(mba_x-2*wallthick-gap-12)/4,"horizontal");
                     }
                     if(bottom_cover_pattern == "linear_horizontal") {
-                        translate([-gap,-gap,-2]) vent(mba_x-2*wallthick-gap,wallthick,floorthick+4,1,(mba_y-2*wallthick-gap)/3,1,"horizontal");
+                        translate([0,6,-2]) vent(mba_x-2*wallthick-gap-12,wallthick,floorthick+4,1,(mba_y-2*wallthick-gap-6)/3,1,"horizontal");
                     }
                     if(bottom_cover_pattern == "astroid") {
                         for(c=[3:12:mba_y-8]) {
