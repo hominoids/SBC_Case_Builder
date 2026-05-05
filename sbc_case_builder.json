@@ -7261,7 +7261,7 @@
             "bottom_standoff_type": "countersunk",
             "case_design": "panel_nas",
             "case_offset_bz": "0",
-            "case_offset_tz": "-45",
+            "case_offset_tz": "-38",
             "case_offset_x": "0",
             "case_offset_y": "20",
             "cooling": "fan_hex",

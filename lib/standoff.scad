@@ -79,10 +79,10 @@ module standoff(stand_off, mask){
             size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 5.375 : 
                 size == "m3_tap" || size == "m3" || size == "m3+" ? 6.72 : 
                     size == "m4_tap" || size == "m4" || size == "m4+" ? 8.96 : (2*holesize)+.5;
-    ds = size == "m2_tap" || size == "m2" || size == "m2+" ? 1.2 : 
-            size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 1.5 : 
-                size == "m3_tap" || size == "m3" || size == "m3+" ? 1.86 : 
-                    size == "m4_tap" || size == "m4" || size == "m4+" ? 2.48 : holesize*.465;
+    ds = size == "m2_tap" || size == "m2" || size == "m2+" ? 1.4 : 
+            size == "m2.5_tap" || size == "m2.5" || size == "m2.5+" ? 1.75 : 
+                size == "m3_tap" || size == "m3" || size == "m3+" ? 2.4 : 
+                    size == "m4_tap" || size == "m4" || size == "m4+" ? 2.75 : holesize*.465;
 
     adj = 0.1;
     $fn = 90;
