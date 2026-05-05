@@ -782,11 +782,11 @@ module hd_holes(hd=3.5, orientation="portrait", side="all", thick=2, holetype="s
                     translate([118.5,-thick,6.35]) rotate([270,0,0])  cylinder(d=3.7,h=thick);
                 }
                 if(holetype == "slot") {
-                    translate([16.9-(1.5*hole_size),-thick,6.35]) rotate([270,0,0]) 
+                    translate([16.9-(1.5*hole_6_32),-thick,6.35]) rotate([270,0,0])
                         slot(hole_6_32, hole_len, thick);
-                    translate([76.6-(1.5*hole_size),-thick,6.35]) rotate([270,0,0]) 
+                    translate([76.6-(1.5*hole_6_32),-thick,6.35]) rotate([270,0,0])
                         slot(hole_6_32, hole_len, thick);
-                    translate([118.5-(1.5*hole_size),-thick,6.35]) rotate([270,0,0]) 
+                    translate([118.5-(1.5*hole_6_32),-thick,6.35]) rotate([270,0,0])
                         slot(hole_6_32, hole_len, thick);
                 }
             }
@@ -797,11 +797,11 @@ module hd_holes(hd=3.5, orientation="portrait", side="all", thick=2, holetype="s
                     translate([16.9,hd35_y+thick,6.35]) rotate([90,0,0]) cylinder(d=3.7,h=thick);
                 }
                 if(holetype == "slot") {
-                    translate([118.5-(1.5*hole_size),hd35_y+thick,6.35]) rotate([90,0,0]) 
+                    translate([118.5-(1.5*hole_6_32),hd35_y+thick,6.35]) rotate([90,0,0])
                         slot(hole_6_32, hole_len, thick);
-                    translate([76.6-(1.5*hole_size),hd35_y+thick,6.35]) rotate([90,0,0]) 
+                    translate([76.6-(1.5*hole_6_32),hd35_y+thick,6.35]) rotate([90,0,0])
                         slot(hole_6_32, hole_len, thick);
-                    translate([16.9-(1.5*hole_size),hd35_y+thick,6.35]) rotate([90,0,0]) 
+                    translate([16.9-(1.5*hole_6_32),hd35_y+thick,6.35]) rotate([90,0,0])
                         slot(hole_6_32, hole_len, thick);
                 }
             }
@@ -815,12 +815,12 @@ module hd_holes(hd=3.5, orientation="portrait", side="all", thick=2, holetype="s
                     translate([105.72,98.43,-thick]) cylinder(d=3.7,h=thick);
                 }
                 if(holetype == "slot") {
-                    translate([29.52-(1.5*hole_size),3.18,-thick]) slot(hole_6_32, hole_len, thick);
-                    translate([61.27-(1.5*hole_size),3.18,-thick]) slot(hole_6_32, hole_len, thick);
-                    translate([105.72-(1.5*hole_size),3.18,-thick]) slot(hole_6_32, hole_len, thick);
-                    translate([29.52-(1.5*hole_size),98.43,-thick]) slot(hole_6_32, hole_len, thick);
-                    translate([61.27-(1.5*hole_size),98.43,-thick]) slot(hole_6_32, hole_len, thick);
-                    translate([105.72-(1.5*hole_size),98.43,-thick]) slot(hole_6_32, hole_len, thick);
+                    translate([29.52-(1.5*hole_6_32),3.18,-thick]) slot(hole_6_32, hole_len, thick);
+                    translate([61.27-(1.5*hole_6_32),3.18,-thick]) slot(hole_6_32, hole_len, thick);
+                    translate([105.72-(1.5*hole_6_32),3.18,-thick]) slot(hole_6_32, hole_len, thick);
+                    translate([29.52-(1.5*hole_6_32),98.43,-thick]) slot(hole_6_32, hole_len, thick);
+                    translate([61.27-(1.5*hole_6_32),98.43,-thick]) slot(hole_6_32, hole_len, thick);
+                    translate([105.72-(1.5*hole_6_32),98.43,-thick]) slot(hole_6_32, hole_len, thick);
                 }
             }
         }
