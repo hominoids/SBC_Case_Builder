@@ -38,7 +38,7 @@
 
 module fans(style, mask) {
 
-    // size, thick, hole-spacing, hole-size, hub-size
+    // name, size, thick, hole-spacing, hole-size, hub-size, color
     fan_data = [
                 ["box140x25", 140, 25, 124.5, 4.3, 40, "#353535"],
                 ["box120x25", 120, 25, 105, 4.3, 40, "#353535"],
