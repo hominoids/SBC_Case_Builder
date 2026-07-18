@@ -57,7 +57,37 @@ move_front = 0; // [-1:100]
 // move rear mm in model view or < 0 = off
 move_rear = 0; // [-1:100]
 
-/* [Folded Case Adjustments] */
+/* [3D Case Adjustments] */
+// sbc location x axis
+pcb_loc_x = 0; //[0:.01:300]
+// sbc location y axis
+pcb_loc_y = 0; //[0:.01:300]
+// sbc location z axis
+pcb_loc_z = 0; //[0:.01:100]
+// additional x axis case size
+case_offset_x = 0; //[0:.01:300]
+// additional y axis case size
+case_offset_y = 0; //[0:.01:300]
+// additional z axis case top size
+case_offset_tz = 0; //[-50:.01:300]
+// additional z axis case bottom size
+case_offset_bz = 0; //[-50:.01:300]
+// case wall thickness
+wallthick = 2; //[1:.25:5]
+// case floor and ceiling thickness
+floorthick = 2; //[1:.25:5]
+// side wall thickness for tray_side and panel_nas cases only
+sidethick = 2; //[1:.25:5]
+// distance between pcb and case
+gap = 1; //[.5:.25:5]
+// corner fillets
+corner_fillet = 3; //[0:.5:9]
+// edge fillets
+edge_fillet = 0; //[0:.5:6]
+// tolerance for fitted surfaces
+tol = .25; //[-.5:.0625:.5]
+
+/* [    Folded Case Adjustments] */
 // material thickness in mm
 material_thickness = .5; //[.1:.01:3]
 // bend allowance
@@ -67,7 +97,7 @@ bottom_clearence = 3.5; //[-10:.01:10]
 // enable flat blank section for export
 flat_blank_section =  false;
 
-/* [Standard Motherboard Case Adjustments] */
+/* [    Standard Motherboard Case Adjustments] */
 // adjustment for ssi-eeb, ssi-ceb, atx, micro-atx, dtx, flex-atx, mini-dtx, mini-itx, mini-stx, nano-itx,nuc, pico-itx PCB thickness from 2mm default//
 standard_motherboard_thickness =  0; //[-3:.01:3]
 // rear io plate opening for standard form motherboards
@@ -75,7 +105,7 @@ rear_io_shield = false;
 // sbc rotation on the adapter
 adapter_sbc_rotation = 0; //[0:90:270]
 
-/* [Rack Mount Case Adjustments] */
+/* [    Rack Mount Case Adjustments] */
 // size of rack 10" or 19" //
 rack_width =  19; //[10,19]
 // size of rack mount cases 1U or 2U //
@@ -129,65 +159,6 @@ rack_bay6_face = "fixed"; //["open","fixed","removable","vent"]
 rack_bay6_rear_fan = false; //[true,false]
 rack_bay6_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
 
-/* [3D Case Adjustments] */
-// sbc location x axis
-pcb_loc_x = 0; //[0:.01:300]
-// sbc location y axis
-pcb_loc_y = 0; //[0:.01:300]
-// sbc location z axis
-pcb_loc_z = 0; //[0:.01:100]
-// additional x axis case size
-case_offset_x = 0; //[0:.01:300]
-// additional y axis case size
-case_offset_y = 0; //[0:.01:300]
-// additional z axis case top size
-case_offset_tz = 0; //[-50:.01:300]
-// additional z axis case bottom size
-case_offset_bz = 0; //[-50:.01:300]
-// case wall thickness
-wallthick = 2; //[1:.25:5]
-// case floor and ceiling thickness
-floorthick = 2; //[1:.25:5]
-// side wall thickness for tray_side and panel_nas cases only
-sidethick = 2; //[1:.25:5]
-// distance between pcb and case
-gap = 1; //[.5:.25:5]
-// corner fillets
-corner_fillet = 3; //[0:.5:9]
-// edge fillets
-edge_fillet = 0; //[0:.5:6]
-// tolerance for fitted surfaces
-tol = .25; //[-.5:.0625:.5]
-
-/* [Fan and Vent Openings] */
-// top cover pattern
-top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
-// front cover pattern for nas cases
-front_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
-// bottom cover pattern
-bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
-// heatsink opening
-cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
-fan_size = 0; // [0,25,30,40,50,60,70,80,92]
-// number of rear fans for nas cases
-rear_fan = 1; // [1:2]
-// rear fan x-axis center
-rear_fan_center = false; // [true,false]
-// rear fan opening
-rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
-rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
-// rear fan z-axis position
-rear_fan_position = 0; // [0:1:300]
-// space between dual rear fans
-rear_dualfan_spacing = 6; // [0:1:50]
-
-/* [Bottom Access Panel] */
-bottom_access_panel_enable = false;
-access_panel_size = [70,30]; //[10:.01:120]
-access_panel_orientation = "landscape"; //[landscape,portrait]
-access_panel_location = [10,15]; //[-10:.01:200]
-access_panel_rotation = 0; //[0:90:270]
-
 /* [Options and Accessories] */
 // gpio opening
 gpio_opening = "default"; // [default,none,open,block,knockout,vent]
@@ -215,6 +186,35 @@ accessory_name = "none"; // ["none", "custom", "hk_uart", "c4_shell_boombox", "c
 text_color = "Green"; // [Green, Black, Dimgrey, White, Yellow, Orange, Red, DarkbBlue]
 // sbc information text font
 text_font = "Nimbus Mono PS"; // [Nimbus Mono PS, Liberation Mono, Noto Sans Mono]
+
+/* [    Fan and Vent Openings] */
+// top cover pattern
+top_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
+// front cover pattern for nas cases
+front_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
+// bottom cover pattern
+bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_horizontal,astroid]
+// heatsink opening
+cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
+fan_size = 0; // [0,25,30,40,50,60,70,80,92]
+// number of rear fans for nas cases
+rear_fan = 1; // [1:2]
+// rear fan x-axis center
+rear_fan_center = false; // [true,false]
+// rear fan opening
+rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
+rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
+// rear fan z-axis position
+rear_fan_position = 0; // [0:1:300]
+// space between dual rear fans
+rear_dualfan_spacing = 6; // [0:1:50]
+
+/* [    Bottom Access Panel] */
+bottom_access_panel_enable = false;
+access_panel_size = [70,30]; //[10:.01:120]
+access_panel_orientation = "landscape"; //[landscape,portrait]
+access_panel_location = [10,15]; //[-10:.01:200]
+access_panel_rotation = 0; //[0:90:270]
 
 /* [SBC Top Standoff Global Settings] */
 // enable case top standoffs
