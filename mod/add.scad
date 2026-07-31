@@ -145,6 +145,9 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     }
 
     // models
+    if(type == "adafruit_938_oled") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_938_oled(mask); 
+    }
     if(type == "adafruit_2030_powerboost") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_2030_powerboost(mask); 
     }
@@ -153,6 +156,9 @@ module add(type, loc_x, loc_y, loc_z, face, rotation, size, data, mask) {
     }
     if(type == "adafruit_4755_solar_charger") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_4755_solar_charger(mask); 
+    }
+    if(type == "adafruit_5297_oled") {
+        translate([loc_x,loc_y,loc_z]) rotate(rotation) adafruit_5297_oled(mask); 
     }
     if(type == "dsub") {
         translate([loc_x,loc_y,loc_z]) rotate(rotation) dsub(data[0], data[1], mask); 

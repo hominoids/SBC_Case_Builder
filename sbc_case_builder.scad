@@ -159,13 +159,7 @@ rack_bay6_face = "fixed"; //["open","fixed","removable","vent"]
 rack_bay6_rear_fan = false; //[true,false]
 rack_bay6_rear_conduit =  "none"; //["none","conduit","grommet","grommets-vertical"]
 
-/* [Options and Accessories] */
-// gpio opening
-gpio_opening = "default"; // [default,none,open,block,knockout,vent]
-// uart opening
-uart_opening = "default"; // [default,none,open,knockout]
-// enable indentations around io openings
-indents = true;
+/* [    NAS Case Adjustments] */
 // nas sbc location
 nas_sbc_location = "top"; // ["top","bottom"]
 // number of nas drive bays
@@ -178,6 +172,26 @@ hd_center = false; // [true, false]
 hd_space = 10; // [1:50]
 hd_y_position = 25; // [0:300]
 hd_z_position = 40; // [0:300]
+
+// number of rear fans for nas cases
+rear_fan = 1; // [1:2]
+// rear fan x-axis center
+rear_fan_center = false; // [true,false]
+// rear fan opening
+rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
+rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
+// rear fan z-axis position
+rear_fan_position = 0; // [0:1:300]
+// space between dual rear fans
+rear_dualfan_spacing = 6; // [0:1:50]
+
+/* [Options and Accessories] */
+// gpio opening
+gpio_opening = "default"; // [default,none,open,block,knockout,vent]
+// uart opening
+uart_opening = "default"; // [default,none,open,knockout]
+// enable indentations around io openings
+indents = true;
 
 // case accessory group to load
 accessory_name = "none"; // ["none", "custom", "hk_uart", "c4_shell_boombox", "c4_desktop_lcd3.5", "c4_deskboom_lcd3.5", "c4_panel_boombox", "c4_panel_lcd3.5", "c4_tray_boombox", "c4_round", "c4_hex", "c-series_rack19-1u", "xu4_shifter_shield", "xu4_keyhole", "hc4_panel_nas", "hc4_shell_drivebox2.5", "hc4_shell_drivebox2.5v", "hc4_shell_drivebox3.5", "hc4_tray_drivebox2.5", "n-series_rack19-1u", "n1_rack10-1u", "m2_shell", "m2_eyespi_eink1.54", "m2_eyespi_lcd2.8", "m1s_shell_nvme", "m1s_shell_ups", "m1s_tray_nvme", "m1_tray_ssd", "m1_fitted_pizzabox2.5", "m1_fitted_pizzabox3.5", "h3_shell", "h3_shell_router", "h3_lowboy", "h3_lowboy_router", "h3_panel_nas", "h3_ultimate", "h3_ultimate2", "h4_panel_nas", "h4_rack_nas", "show2_shell", "rpi5_m2hat", "rpi5_bottom_m2hat", "rock5b", "adapter_mini-stx_m1s", "nas", "cs_solarmeter", "n2l_env_sensors", "avr_env_sensors", "env_sensors", "adafruit_solar_charger"]
@@ -197,17 +211,6 @@ bottom_cover_pattern = "solid"; //[solid,hex_5mm,hex_8mm,linear_vertical,linear_
 // heatsink opening
 cooling = "default"; // [default,none,open,fan_open,fan_1,fan_2,fan_hex,vent,vent_hex_5mm,vent_hex_8mm,custom]
 fan_size = 0; // [0,25,30,40,50,60,70,80,92]
-// number of rear fans for nas cases
-rear_fan = 1; // [1:2]
-// rear fan x-axis center
-rear_fan_center = false; // [true,false]
-// rear fan opening
-rear_cooling = "fan_hex"; // [fan_open,fan_1,fan_2,fan_hex,custom]
-rear_fan_size = 80; // [0,25,30,40,50,60,70,80,92]
-// rear fan z-axis position
-rear_fan_position = 0; // [0:1:300]
-// space between dual rear fans
-rear_dualfan_spacing = 6; // [0:1:50]
 
 /* [    Bottom Access Panel] */
 bottom_access_panel_enable = false;

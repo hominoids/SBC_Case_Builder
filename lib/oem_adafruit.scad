@@ -15,11 +15,82 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
     Code released under GPLv3: http://www.gnu.org/licenses/gpl.html
 
+    adafruit_938_oled(mask)
     adafruit_2030_powerboost(mask)
     adafruit_4311_lcd(mask)
     adafruit_4755_solar_charger(mask)
+    adafruit_5297_oled(mask)
 
 */
+
+
+/*
+           NAME: adafruit_938_oled
+    DESCRIPTION: 938 Monochrome 1.3" 128x64 OLED graphic display SSD1306 Model
+           TODO: none
+
+          USAGE: adafruit_938_oled(mask[])
+
+                              mask[0] = true enables mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
+
+*/
+
+module adafruit_938_oled(mask) {
+
+    size_x = 35.75;
+    size_y = 33;
+    size_z = 1.6;
+    size_xm = 25.75;
+    size_ym = 25.75;
+    lcd_size = [34,23,2.5];
+    corner_radius = 2;
+    hole_size = 2.5;
+    enablemask = mask[0];
+    mlen = mask[1];
+    back = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true && mstyle == "default") {
+        translate([((size_x-lcd_size[0])/2), size_y-lcd_size[1], size_z+2.5-back-adj]) cube([lcd_size[0], 18, mlen]);    }
+    if(enablemask == false) {
+        difference() {
+            union() {
+                color("#252525") slab([size_x, size_y, size_z], corner_radius);
+                color("black",1) translate([(size_x-lcd_size[0])/2, size_y-lcd_size[1]-5, size_z-adj]) cube([lcd_size[0], lcd_size[1], lcd_size[2]]);
+                color("#353535",1) translate([(size_x-lcd_size[0])/2, size_y-lcd_size[1], size_z+2.5-adj]) cube([lcd_size[0], lcd_size[1]-5, .1]);
+                color("dimgrey",1) translate([((size_x-lcd_size[0])/2), size_y-lcd_size[1], size_z+2.5-adj]) cube([lcd_size[0], 18, .2]);
+            }
+            color("#252525",1) translate([(size_x-25.5)/2, -adj, -1]) cube([25.5, 5, size_z+(2+adj)]);
+            color("#252525") translate([hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([size_x-hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size, h=4);
+            color("#252525") translate([hole_size, hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([size_x-hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+            for(i=[8.75:2.54:27]) {
+                color("#fee5a6",1) translate([i, size_y-2.75, -adj]) cylinder(d=.8, h=6);
+            }
+        }
+        jst("ph",0,13,0,"bottom",270,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        jst("ph",size_x-4.5,13,0,"bottom",90,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+
+        for(i=[8.75:2.54:27]) {
+            pcbpad("round", i, size_y-2.75, 0, "top", 0, [1, 1, 0], [.8, "#fee5a6", 1.2], size_z, enablemask, [false, 20, 0, "default"]);
+        }
+        pcbpad("round", hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+    }
+}
 
 
 /*
@@ -81,8 +152,8 @@ module adafruit_2030_powerboost(mask) {
 
 
 /*
-           NAME: adafruit_lcd
-    DESCRIPTION: adafruit 4311 2in TFT IPS Display model
+           NAME: adafruit_4311_lcd
+    DESCRIPTION: 4311 Adafruit 2.0" 320x240 Color IPS TFT Display with microSD Card - ST7789
            TODO: none
 
           USAGE: adafruit_4311_lcd(mask[])
@@ -212,3 +283,70 @@ module adafruit_4755_solar_charger(mask) {
 }
 
 
+/*
+           NAME: adafruit_5297_oled
+    DESCRIPTION: 5297 Monochrome 1.12" 128x128 OLED Graphic Display SH1107 model
+           TODO: none
+
+          USAGE: adafruit_5297_oled(mask[])
+
+                              mask[0] = true enables mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
+
+*/
+
+module adafruit_5297_oled(mask) {
+
+    size_x = 30.75;
+    size_y = 40.75;
+    size_z = 1.6;
+    size_xm = 25.75;
+    size_ym = 25.75;
+    lcd_size = [26,26,2.5];
+    corner_radius = 2;
+    hole_size = 2.5;
+    enablemask = mask[0];
+    mlen = mask[1];
+    back = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true && mstyle == "default") {
+        translate([((size_x-lcd_size[0])/2)+1.5, size_y-lcd_size[1]+.5, size_z+2.5-back-adj]) cube([lcd_size[0]-3, 20, mlen]);    }
+    if(enablemask == false) {
+        difference() {
+            union() {
+                color("#252525") slab([size_x, size_y, size_z], corner_radius);
+                color("black",1) translate([(size_x-lcd_size[0])/2, size_y-lcd_size[1]-5, size_z-adj]) cube([lcd_size[0], lcd_size[1]+1, lcd_size[2]]);
+                color("#353535",1) translate([(size_x-lcd_size[0])/2, size_y-lcd_size[1]-1, size_z+2.5-adj]) cube([lcd_size[0], lcd_size[1]-4, .1]);
+                color("dimgrey",1) translate([((size_x-lcd_size[0])/2)+2, size_y-lcd_size[1]+1, size_z+2.5-adj]) cube([lcd_size[0]-4, 20, .2]);
+            }
+            color("#252525",1) translate([(size_x-20.4)/2, -adj, -1]) cube([20.4, 5, size_z+(2+adj)]);
+            color("#252525") translate([hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([size_x-hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size, h=4);
+            color("#252525") translate([hole_size, hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([size_x-hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+            for(i=[6.5:2.54:24.75]) {
+                color("#fee5a6",1) translate([i, size_y-2.75, -adj]) cylinder(d=.8, h=6);
+            }
+        }
+        jst("ph",0,18,0,"bottom",270,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+        jst("ph",size_x-4.5,18,0,"bottom",90,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
+
+        for(i=[6.5:2.54:24.75]) {
+            pcbpad("round", i, size_y-2.75, 0, "top", 0, [1, 1, 0], [.8, "#fee5a6", 1.2], size_z, enablemask, [false, 20, 0, "default"]);
+        }
+        pcbpad("round", hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, hole_size, 0, "top", 0, [1, 1, 0], 
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+    }
+}
