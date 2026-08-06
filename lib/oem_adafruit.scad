@@ -316,7 +316,18 @@ module adafruit_5297_oled(mask) {
     $fn = 90;
 
     if(enablemask == true && mstyle == "default") {
-        translate([((size_x-lcd_size[0])/2)+1.5, size_y-lcd_size[1]+.5, size_z+2.5-back-adj]) cube([lcd_size[0]-3, 20, mlen]);    }
+        translate([((size_x-lcd_size[0])/2)+1.5, size_y-lcd_size[1]-1.5, size_z+2.5-back-adj]) cube([lcd_size[0]-3, 23, mlen]);
+    }
+    if(enablemask == true && mstyle == "bezel") {
+        translate([((size_x-lcd_size[0])/2)+1.5, size_y-lcd_size[1]-1.5, size_z+2.5-back-adj]) cube([lcd_size[0]-3, 23, mlen]);
+        translate([((size_x-lcd_size[0])/2)-2.5, size_y-lcd_size[1]-5.5, size_z+5.5-adj]) 
+        polyhedron(
+          points=[ [lcd_size[0]+5,31,0],[lcd_size[0]+5,0,0],[0,0,0],[0,31,0], // the four points at base
+                   [(lcd_size[0]+5)/2,31/2,-12]  ],                                 // the apex point 
+          faces=[ [0,1,4],[1,2,4],[2,3,4],[3,0,4],              // each triangle side
+                      [1,0,3],[2,1,3] ]                         // two triangles for square base
+         );
+    }
     if(enablemask == false) {
         difference() {
             union() {
