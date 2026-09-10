@@ -17,6 +17,7 @@
 
     adafruit_938_oled(mask)
     adafruit_2030_powerboost(mask)
+    adafruit_4297_ultimate_gps(mask)
     adafruit_4311_lcd(mask)
     adafruit_4755_solar_charger(mask)
     adafruit_5297_oled(mask)
@@ -147,6 +148,71 @@ module adafruit_2030_powerboost(mask) {
         ic("generic", 13.5, 5, 0, "top", 0, [4, 4, .8], ["dimgrey"], size_z, enablemask, [false, 20, 0, "default"]);
         jst("ph",0,8.5,0,"top",90,[2,0,0],["thruhole","side","white"], size_z, enablemask, [true,10,2,"default"]);
         usb2("single_horizontal_a",23,4.5,0,"top",270,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+    }
+}
+
+
+/*
+           NAME: adafruit_4297_ultimate_gps
+    DESCRIPTION: 4279 Ultimate GPS Breakout with GLONASS + GPS - PA1616D - 99 channel w/10 Hz updates
+           TODO: none
+
+          USAGE: adafruit_4297_ultimate_gps(mask[])
+
+                              mask[0] = true enables mask
+                              mask[1] = mask length
+                              mask[2] = mask setback
+                              mask[3] = mstyle "default"
+
+*/
+
+module adafruit_4297_ultimate_gps(mask) {
+
+    size_x = 39.624;
+    size_y = 25.4;
+    size_z = 1.6;
+    corner_radius = 2;
+    hole_size = 2.54;
+    enablemask = mask[0];
+    mlen = mask[1];
+    back = mask[2];
+    mstyle = mask[3];
+
+    adj = .01;
+    $fn = 90;
+
+    if(enablemask == true && mstyle == "default") {
+        usbc("single_horizontal",-2,8,0,"top",90,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
+    }
+     if(enablemask == false) {
+        difference() {
+            color("#252525") slab([size_x, size_y, size_z], corner_radius);
+            color("#252525") translate([hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+            color("#252525") translate([size_x-hole_size, size_y-hole_size, -adj]) cylinder(d=hole_size,h=6);
+            color("#252525") translate([size_x-hole_size, hole_size, -adj]) cylinder(d=hole_size, h=4);
+
+            for(i=[6:2.54:15]) {
+                color("#fee5a6",1) translate([i, 2.54, -adj]) cylinder(d=.8, h=6);
+            }
+        }
+        pcbpad("round", 6, 2.54, 0, "top", 0, [4, 1, 0], [.8, "#fee5a6", 1.2], size_z, enablemask, [false, 20, 0, "default"]);
+
+        pcbpad("round", hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0],
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", hole_size, hole_size, 0, "top", 0, [1, 1, 0],
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, size_y-hole_size, 0, "top", 0, [1, 1, 0],
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        pcbpad("round", size_x-hole_size, hole_size, 0, "top", 0, [1, 1, 0],
+                [hole_size, "#fee5a6", hole_size+1], size_z, enablemask, [false, 20, 0, "default"]);
+        ic("generic", 8.75, 11, 0, "top", 0, [4, 4, .8], ["gray"], size_z, enablemask, [false, 20, 0, "default"]);
+        ic("generic", 15.75, 6, 0, "top", 0, [15, 15, 6.4], ["#fcddaf"], size_z, enablemask, [false, 20, 0, "default"]);
+        antenna("ipex", 33, 6, 0, "top", 0, [0, 0, 0], [0], size_z, enablemask, [false, 20, 0, "default"]);
+        smd("led", 17.75, .75, 0, "top", 90, [3,1,.5], ["DodgerBlue"], size_z, enablemask, [false,10,2,"default"]);
+        smd("led", 23, .75, 0, "top", 90, [3,1,.5], ["Green"], size_z, enablemask, [false,10,2,"default"]);
+        smd("led", 28, .75, 0, "top", 90, [3,1,.5], ["Red"], size_z, enablemask, [false,10,2,"default"]);
+        usbc("single_horizontal",-2,8.15,0,"top",90,[0,13,0],[0], size_z, enablemask, [true,10,2,"default"]);
     }
 }
 
