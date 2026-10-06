@@ -357,7 +357,6 @@ module case_bottom(case_design) {
                                     rotate([90,0,90]) cylinder(d=6.6, h=3.5, $fn=6);
                             }
                             else {
-echo(pcb_depth+case_offset_y-10);
                                 translate([-wallthick-gap-adj-6,wallthick+gap+pcb_depth+case_offset_y-8,
                                     floorthick+3.4]) rotate([0,90,0]) cylinder(d=3, h=10+sidethick+(2*adj));
                                 translate([-gap+.6,wallthick+gap+pcb_depth+case_offset_y-8,floorthick+3.4]) 
